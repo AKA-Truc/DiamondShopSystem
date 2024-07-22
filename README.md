@@ -1,7 +1,9 @@
 I.	Giới thiệu chung
  Diamond shop system là hệ thống quản lý công việc kinh doanh kim cương và trang sức kim cương trực tuyến của công ty. Thông qua website application, khách hàng có thể xem thông tin về cửa hàng, sản phẩm, Quản lý và nhân viên có thể thực hiện các thao tác để quản lý sản phẩm, các đơn đặt hàng hiệu quả hơn.
+ 
 II.	Phạm vi sản phẩm
 Hệ thống Cửa hàng Kim cương hoạt động như một kênh quan trọng để kết nối với khách hàng từ khắp nơi thông qua Internet. Mục tiêu là quảng bá hình ảnh và sản phẩm của Công ty, đồng thời góp phần xây dựng thương hiệu. Thông qua trang web này, Công ty cũng có thể thu thập dữ liệu phản hồi của khách hàng về sản phẩm và chất lượng dịch vụ, từ đó điều chỉnh chiến lược và mục tiêu kinh doanh của mình.
+
 III.	Chức năng
 1.	Chức năng cho Guest (khách vãng lai):
 •	Tìm kiếm sản phẩm: Cho phép tìm kiếm sản phẩm dựa trên các tiêu chí như tên sản phẩm, loại sản phẩm, giá, v.v.
