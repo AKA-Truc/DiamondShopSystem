@@ -14,7 +14,7 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "CartID", nullable = false)
-    private Cart CartID;
+    private Cart cart;
 
     @ManyToOne
     @JoinColumn(name = "ProductID", nullable = false)
@@ -28,7 +28,7 @@ public class CartItem {
     }
 
     public CartItem(Cart cartID, Product product, int quantity) {
-        CartID = cartID;
+        cart = cartID;
         Product = product;
         Quantity = quantity;
     }
@@ -41,19 +41,19 @@ public class CartItem {
         CartItemID = cartItemID;
     }
 
-    public Cart getCartID() {
-        return CartID;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setCartID(Cart cartID) {
-        CartID = cartID;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public Product getProduct() {
+    public goldiounes.com.vn.models.Product getProduct() {
         return Product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(goldiounes.com.vn.models.Product product) {
         Product = product;
     }
 

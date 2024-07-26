@@ -29,19 +29,14 @@ public class User {
     @Column(name = "Role", nullable = false)
     private String Role;
 
-    @OneToOne
-    @JoinColumn(name = "PointID", nullable = false)
-    private Point Point;
-
-    @OneToOne
-    @JoinColumn(name = "CartID", nullable = false)
-    private Cart Cart;
-
     @OneToMany(mappedBy = "User")
     private List<Warranty> Warranties;
 
     @OneToMany(mappedBy = "User")
     private List<Order> Orders;
+
+    @OneToOne(mappedBy = "User")
+    private Cart Carts;
 
     public User() {
         //cstor
@@ -103,22 +98,6 @@ public class User {
         Role = role;
     }
 
-    public Point getPoint() {
-        return Point;
-    }
-
-    public void setPoint(Point point) {
-        Point = point;
-    }
-
-    public Cart getCart() {
-        return Cart;
-    }
-
-    public void setCart(Cart cart) {
-        Cart = cart;
-    }
-
     public List<Warranty> getWarranties() {
         return Warranties;
     }
@@ -133,5 +112,13 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         Orders = orders;
+    }
+
+    public Cart getCarts() {
+        return Carts;
+    }
+
+    public void setCarts(Cart carts) {
+        Carts = carts;
     }
 }

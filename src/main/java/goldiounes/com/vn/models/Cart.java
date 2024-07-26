@@ -25,7 +25,7 @@ public class Cart {
     @OneToMany(mappedBy = "Cart")
     private List<Order> Orders;
 
-    @OneToMany(mappedBy = "Cart")
+    @OneToMany(mappedBy = "cart")
     private List<CartItem> CartItems;
 
     public Cart() {

@@ -21,14 +21,6 @@ public class Product {
     @Column(name = "ProductName", nullable = false, unique = false)
     private String ProductName;
 
-    @ManyToOne
-    @JoinColumn(name = "SettingID", nullable = false)
-    private Setting Setting;
-
-    @ManyToOne
-    @JoinColumn(name = "ReceiptID", nullable = false)
-    private Receipt Receipt;
-
     @Column(name = "ImageURL")
     private String ImageURL;
 
@@ -47,7 +39,7 @@ public class Product {
     @Column(name = "Inventory", nullable = false)
     private int Inventory;
 
-    @OneToMany(mappedBy = "Product")
+    @OneToMany(mappedBy = "product")
     private List<ProductDetail> ProductDetails;
 
     @OneToMany(mappedBy = "Product")
@@ -56,15 +48,16 @@ public class Product {
     @OneToMany(mappedBy = "Product")
     private List<OrderDetail> OrderDetails;
 
+    @OneToMany(mappedBy = "Product")
+    private List<Receipt> Receipt;
+
     public Product() {
         //cstor
     }
 
-    public Product(Category category, String productName, Setting setting, Receipt receipt, String imageURL, double markupRate, double laborCost, double sellingPrice, double warrantyPeriod, int inventory) {
+    public Product(Category category, String productName, String imageURL, double markupRate, double laborCost, double sellingPrice, double warrantyPeriod, int inventory) {
         Category = category;
         ProductName = productName;
-        Setting = setting;
-        Receipt = receipt;
         ImageURL = imageURL;
         MarkupRate = markupRate;
         LaborCost = laborCost;
@@ -95,22 +88,6 @@ public class Product {
 
     public void setProductName(String productName) {
         ProductName = productName;
-    }
-
-    public Setting getSetting() {
-        return Setting;
-    }
-
-    public void setSetting(Setting setting) {
-        Setting = setting;
-    }
-
-    public Receipt getReceipt() {
-        return Receipt;
-    }
-
-    public void setReceipt(Receipt receipt) {
-        Receipt = receipt;
     }
 
     public String getImageURL() {

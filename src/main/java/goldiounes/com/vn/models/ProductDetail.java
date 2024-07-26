@@ -15,27 +15,28 @@ public class ProductDetail {
     @Column(name = "ProductDetailID")
     private int ProductDetailID;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ProductID", nullable = false)
-    private Product ProductID;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "SettingID", nullable = false)
-    private Setting SettingID;
+    private Setting setting;
 
     @Column(name = "LoborCost", nullable = false)
     private int LaborCost;
 
-    @OneToMany(mappedBy = "productDetail")
+    @OneToMany(mappedBy = "ProductDetail")
     private List<DiamondDetail> DiamondDetails;
+
 
     public ProductDetail() {
         //cstor
     }
 
-    public ProductDetail(Product ProductID, Setting SettingID, int LaborCost) {
-        this.ProductID = ProductID;
-        this.SettingID = SettingID;
+    public ProductDetail(Product ProductID, Setting setting, int LaborCost) {
+        this.product = ProductID;
+        this.setting = setting;
         this.LaborCost = LaborCost;
     }
 
@@ -47,20 +48,20 @@ public class ProductDetail {
         ProductDetailID = productDetailID;
     }
 
-    public Product getProductID() {
-        return ProductID;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductID(Product productID) {
-        ProductID = productID;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Setting getSettingID() {
-        return SettingID;
+    public Setting getSetting() {
+        return setting;
     }
 
-    public void setSettingID(Setting settingID) {
-        SettingID = settingID;
+    public void setSetting(Setting setting) {
+        this.setting = setting;
     }
 
     public int getLaborCost() {
@@ -69,5 +70,13 @@ public class ProductDetail {
 
     public void setLaborCost(int laborCost) {
         LaborCost = laborCost;
+    }
+
+    public List<DiamondDetail> getDiamondDetails() {
+        return DiamondDetails;
+    }
+
+    public void setDiamondDetails(List<DiamondDetail> diamondDetails) {
+        DiamondDetails = diamondDetails;
     }
 }
