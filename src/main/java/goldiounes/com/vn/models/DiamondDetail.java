@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "DETAILDETAILS")
+@Table(name = "DIAMONDDETAILS")
 public class DiamondDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,12 +41,20 @@ public class DiamondDetail {
         DiamondDetailID = diamondDetailID;
     }
 
-    public Diamond getDiamond() {
+    public goldiounes.com.vn.models.Diamond getDiamond() {
         return Diamond;
     }
 
-    public void setDiamond(Diamond diamond) {
+    public void setDiamond(goldiounes.com.vn.models.Diamond diamond) {
         Diamond = diamond;
+    }
+
+    public goldiounes.com.vn.models.ProductDetail getProductDetail() {
+        return ProductDetail;
+    }
+
+    public void setProductDetail(goldiounes.com.vn.models.ProductDetail productDetail) {
+        ProductDetail = productDetail;
     }
 
     public int getQuantity() {
@@ -55,13 +63,5 @@ public class DiamondDetail {
 
     public void setQuantity(int quantity) {
         Quantity = quantity;
-    }
-
-    public ProductDetail getProductDetail() {
-        return ProductDetail;
-    }
-
-    public void setProductDetail(ProductDetail productDetail) {
-        ProductDetail = productDetail;
     }
 }

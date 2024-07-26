@@ -32,20 +32,23 @@ public class Diamond {
     @Column(name = "Origin", nullable = false)
     private String Origin;
 
-    @OneToMany(mappedBy = "diamond")
+    @OneToMany(mappedBy = "Diamond")
     private List<DiamondDetail> diamondDetails;
+
+    @OneToOne(mappedBy = "Diamond")
+    private Certificate certificate;
 
     public Diamond() {
         //cstor
     }
 
-    public Diamond(int weight, int carat, String color, int clariry, String cut, String origin) {
-        this.Weight = weight;
-        this.Carat = carat;
-        this.Color = color;
-        this.Clariry = clariry;
-        this.Cut = cut;
-        this.Origin = origin;
+    public Diamond( int weight, int carat, String color, int clariry, String cut, String origin) {
+        Weight = weight;
+        Carat = carat;
+        Color = color;
+        Clariry = clariry;
+        Cut = cut;
+        Origin = origin;
     }
 
     public int getDiamondID() {
@@ -102,6 +105,14 @@ public class Diamond {
 
     public void setOrigin(String origin) {
         Origin = origin;
+    }
+
+    public Certificate getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(Certificate certificate) {
+        this.certificate = certificate;
     }
 
     public List<DiamondDetail> getDiamondDetails() {

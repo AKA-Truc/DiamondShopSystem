@@ -3,8 +3,6 @@ package goldiounes.com.vn.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Entity
 @Table(name = "RECEIPTS")
@@ -16,20 +14,17 @@ public class Receipt {
 
     @ManyToOne
     @JoinColumn(name = "ProductID", nullable = false)
-    private Product ProductID;
+    private Product Product;
 
     @Column(name = "Quantity", nullable = false)
     private int Quantity;
-
-    @OneToMany(mappedBy = "Receipt")
-    private List<Product> Products;
 
     public Receipt() {
         //cstor
     }
 
     public Receipt(Product ProductID, int Quantity) {
-        this.ProductID = ProductID;
+        this.Product = ProductID;
         this.Quantity = Quantity;
     }
 
@@ -41,12 +36,12 @@ public class Receipt {
         ReceiptID = receiptID;
     }
 
-    public Product getProductID() {
-        return ProductID;
+    public goldiounes.com.vn.models.Product getProduct() {
+        return Product;
     }
 
-    public void setProductID(Product productID) {
-        ProductID = productID;
+    public void setProduct(goldiounes.com.vn.models.Product product) {
+        Product = product;
     }
 
     public int getQuantity() {
@@ -55,13 +50,5 @@ public class Receipt {
 
     public void setQuantity(int quantity) {
         Quantity = quantity;
-    }
-
-    public List<Product> getProducts() {
-        return Products;
-    }
-
-    public void setProducts(List<Product> products) {
-        Products = products;
     }
 }
