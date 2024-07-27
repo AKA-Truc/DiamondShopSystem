@@ -15,19 +15,23 @@ public class ProductService {
     public List<Product> findAll() {
         return productRepo.findAll();
     }
+
     public Product findById(int id) {
         return productRepo.findById(id).get();
     }
+
     public Product save(Product product) {
         return productRepo.save(product);
     }
     public void delete(Product product) {
         productRepo.delete(product);
     }
+
+    public List<Product> findByName(String name) {
+        return productRepo.findByProductName(name);
+    }
+
     public void deleteById(int id) {
         productRepo.deleteById(id);
-    }
-    public Product findByName(String name) {
-        return productRepo.findByName(name);
     }
 }
