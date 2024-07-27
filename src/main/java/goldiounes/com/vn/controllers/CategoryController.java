@@ -15,7 +15,7 @@ public class CategoryController {
 
     @PostMapping("/create")
     private Category createCategory (@RequestBody Category category) {
-        Category existingCategory = categoryService.findbyName(category.getCategoryName());
+        Category existingCategory = categoryService.findByName(category.getCategoryName());
         if (existingCategory != null) {
             throw new RuntimeException("Category already exists");
         }
