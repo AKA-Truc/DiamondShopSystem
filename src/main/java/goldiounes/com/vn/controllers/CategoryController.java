@@ -14,48 +14,48 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/create")
-    public Category createCategory(@RequestBody Category category) {
-        Category existingCategory = categoryService.findByName(category.getCategoryName());
-        if (existingCategory == null) {
-            return categoryService.save(category);
+    private Category createCategory (@RequestBody Category category) {
+        Category existingCategory = categoryService.findbyName(category.getCategoryName());
+        if (existingCategory != null) {
+            throw new RuntimeException("Category already exists");
         }
-        throw new RuntimeException("Category already exists");
-    }
-
-    @GetMapping("/get/{id}")
-    public Category getCategoryById(@PathVariable("id") Integer id) {
-        Category category = categoryService.findById(id);
-        if (category == null) {
-            throw new RuntimeException("Category not found");
-        }
-        return category;
+        return categoryService.save(category);
     }
 
     @GetMapping("/getAll")
-    public List<Category> getAllCategories() {
-        List<Category> categories = categoryService.findAll();
-        if (categories == null || categories.isEmpty()) {
-            throw new RuntimeException("List categories is empty");
+    private List<Category> getAllCategories () {
+        List<Category> Categories = categoryService.findAll();
+        if (Categories.isEmpty()) {
+            throw new RuntimeException("Categories list is empty");
         }
-        return categories;
+        return Categories;
+    }
+
+    @GetMapping("/get/{id}")
+    private Category getCategoryById(@PathVariable int id) {
+        Category existingCategory = categoryService.findById(id);
+        if (existingCategory == null) {
+            throw new RuntimeException("Category not found");
+        }
+        return existingCategory;
+    }
+
+    @DeleteMapping("delete/{id}")
+    private void deleteCategory(@PathVariable int id) {
+        Category existingCategory = categoryService.findById(id);
+        if (existingCategory != null) {
+            categoryService.deleteById(id);
+        }
+        throw new RuntimeException("Category not found");
     }
 
     @PutMapping("/update/{id}")
-    public Category updateCategory(@PathVariable("id") Integer id, @RequestBody Category category) {
+    private Category updateCategory(@PathVariable int id, @RequestBody Category category) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory == null) {
             throw new RuntimeException("Category not found");
         }
         existingCategory.setCategoryName(category.getCategoryName());
         return categoryService.save(existingCategory);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteCategoryById(@PathVariable("id") Integer id) {
-        Category category = categoryService.findById(id);
-        if (category == null) {
-            throw new RuntimeException("Category not found");
-        }
-        categoryService.delete(category);
     }
 }
