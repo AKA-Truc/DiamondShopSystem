@@ -55,5 +55,5 @@ Website Application được xây dựng trên:
 -	IDE: IntelliJ IDE
 -	Cơ sở dữ liệu: PostgreSQL
 -	Ngôn ngữ lập trình: Java
--	Framework: Spring Boot, Hibernate
+-	Framework: Spring Boot, Hibernate,...
 -	Giao diện người dùng: Website Application
