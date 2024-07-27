@@ -7,7 +7,7 @@ Hệ thống Cửa hàng Kim cương hoạt động như một kênh quan trọn
 III.	Chức năng
 
 1.	Chức năng cho Guest (khách vãng lai):
-2.	
+   
 •	Tìm kiếm sản phẩm: Cho phép tìm kiếm sản phẩm dựa trên các tiêu chí như tên sản phẩm, loại sản phẩm, giá, v.v.
 •	Xem thông tin sản phẩm: Xem chi tiết sản phẩm bao gồm mô tả, hình ảnh, giá cả, và các chứng nhận liên quan.
 •	Đăng ký tài khoản: Tạo tài khoản mới để trở thành Customer.
