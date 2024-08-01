@@ -66,6 +66,7 @@ public class OrderController {
         return orderDetailService.findByOrderId(orderId);
     }
 
+    @DeleteMapping("/orders/{orderId}/details/{id}")
     public void deleteOrderDetail(@RequestBody OrderDetail orderDetail) {
         OrderDetail existingOrderDetail = orderDetailService.findById(orderDetail.getOrderDetailID());
         if (existingOrderDetail != null) {
@@ -74,6 +75,7 @@ public class OrderController {
         orderDetailService.deleteById(orderDetail.getOrderDetailID());
     }
 
+    @PutMapping("/orders/{orderId}/details/{id}")
     public void updateOrderDetail(@RequestBody OrderDetail orderDetail) {
         OrderDetail existingOrderDetail = orderDetailService.findById(orderDetail.getOrderDetailID());
         if (existingOrderDetail != null) {
