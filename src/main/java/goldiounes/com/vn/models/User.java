@@ -36,7 +36,7 @@ public class User {
     private List<Order> Orders;
 
     @OneToOne(mappedBy = "User")
-    private Cart Carts;
+    private Cart Cart;
 
     public User() {
         //cstor
@@ -114,11 +114,11 @@ public class User {
         Orders = orders;
     }
 
-    public Cart getCarts() {
-        return Carts;
+    public Cart getCart() {
+        return Cart;
     }
 
-    public void setCarts(Cart carts) {
-        Carts = carts;
+    public void setCarts(Cart cart) {
+        Cart = cart;
     }
 }

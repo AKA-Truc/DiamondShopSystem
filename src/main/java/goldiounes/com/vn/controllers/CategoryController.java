@@ -8,54 +8,54 @@ import goldiounes.com.vn.models.Category;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/category-management")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/create")
-    private Category createCategory (@RequestBody Category category) {
+    @PostMapping("/categories")
+    public Category createCategory(@RequestBody Category category) {
         Category existingCategory = categoryService.findByName(category.getCategoryName());
-        if (existingCategory != null) {
-            throw new RuntimeException("Category already exists");
-        }
-        return categoryService.save(category);
-    }
-
-    @GetMapping("/getAll")
-    private List<Category> getAllCategories () {
-        List<Category> Categories = categoryService.findAll();
-        if (Categories.isEmpty()) {
-            throw new RuntimeException("Categories list is empty");
-        }
-        return Categories;
-    }
-
-    @GetMapping("/get/{id}")
-    private Category getCategoryById(@PathVariable int id) {
-        Category existingCategory = categoryService.findById(id);
         if (existingCategory == null) {
+            return categoryService.save(category);
+        }
+        throw new RuntimeException("Category already exists");
+    }
+
+    @GetMapping("/categories/{id}")
+    public Category getCategory(@PathVariable("id") Integer id) {
+        Category category = categoryService.findById(id);
+        if (category == null) {
             throw new RuntimeException("Category not found");
         }
-        return existingCategory;
+        return category;
     }
 
-    @DeleteMapping("delete/{id}")
-    private void deleteCategory(@PathVariable int id) {
-        Category existingCategory = categoryService.findById(id);
-        if (existingCategory != null) {
-            categoryService.deleteById(id);
+    @GetMapping("/categories")
+    public List<Category> getAllCategories() {
+        List<Category> categories = categoryService.findAll();
+        if (categories == null || categories.isEmpty()) {
+            throw new RuntimeException("List categories is empty");
         }
-        throw new RuntimeException("Category not found");
+        return categories;
     }
 
-    @PutMapping("/update/{id}")
-    private Category updateCategory(@PathVariable int id, @RequestBody Category category) {
+    @PutMapping("/categories/{id}")
+    public Category updateCategory(@PathVariable("id") Integer id, @RequestBody Category category) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory == null) {
             throw new RuntimeException("Category not found");
         }
         existingCategory.setCategoryName(category.getCategoryName());
         return categoryService.save(existingCategory);
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public void deleteCategoryById(@PathVariable("id") Integer id) {
+        Category category = categoryService.findById(id);
+        if (category == null) {
+            throw new RuntimeException("Category not found");
+        }
+        categoryService.delete(category);
     }
 }

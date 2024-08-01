@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/product-management")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/create")
+    @PostMapping("/products")
     public Product createProduct(@RequestBody Product product) {
         List<Product> Products = productService.findByName(product.getProductName());
         if(Products.isEmpty()) {
@@ -22,7 +22,7 @@ public class ProductController {
         throw new RuntimeException("Đã Tồn Tại");
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/products")
     public List<Product> getAllProduct() {
         List<Product> Products = productService.findAll();
         if(Products.isEmpty()) {
@@ -32,7 +32,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/products/{id}")
     public Product getProduct(@PathVariable int id) {
         Product existingProduct = productService.findById(id);
         if(existingProduct == null) {
@@ -41,7 +41,7 @@ public class ProductController {
         return existingProduct;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/products/{id}")
     public void deleteProduct(@PathVariable int id) {
         Product existingProduct = productService.findById(id);
         if(existingProduct == null) {
@@ -50,24 +50,24 @@ public class ProductController {
         productService.delete(existingProduct);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/products/{id}")
     public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
         Product existingProduct = productService.findById(id);
         if (existingProduct == null) {
             throw new RuntimeException("Product not found");
         }
-        existingProduct.setProductName(existingProduct.getProductName());
-        existingProduct.setCategory(existingProduct.getCategory());
-        existingProduct.setCartItems(existingProduct.getCartItems());
-        existingProduct.setImageURL(existingProduct.getImageURL());
-        existingProduct.setInventory(existingProduct.getInventory());
-        existingProduct.setLaborCost(existingProduct.getLaborCost());
-        existingProduct.setMarkupRate(existingProduct.getMarkupRate());
-        existingProduct.setOrderDetails(existingProduct.getOrderDetails());
-        existingProduct.setProductDetails(existingProduct.getProductDetails());
-        existingProduct.setReceipt(existingProduct.getReceipt());
-        existingProduct.setSellingPrice(existingProduct.getSellingPrice());
-        existingProduct.setWarrantyPeriod(existingProduct.getWarrantyPeriod());
+        existingProduct.setProductName(product.getProductName());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setCartItems(product.getCartItems());
+        existingProduct.setImageURL(product.getImageURL());
+        existingProduct.setInventory(product.getInventory());
+        existingProduct.setLaborCost(product.getLaborCost());
+        existingProduct.setMarkupRate(product.getMarkupRate());
+        existingProduct.setOrderDetails(product.getOrderDetails());
+        existingProduct.setProductDetails(product.getProductDetails());
+        existingProduct.setReceipt(product.getReceipt());
+        existingProduct.setSellingPrice(product.getSellingPrice());
+        existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
         return productService.save(existingProduct);
     }
 }
