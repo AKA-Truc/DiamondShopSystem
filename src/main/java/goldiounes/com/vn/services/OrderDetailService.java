@@ -12,6 +12,9 @@ public class OrderDetailService {
     @Autowired
     private OrderDetailRepo orderDetailRepo;
 
+    public List<OrderDetail> findByOrderId(int orderId) {
+        return orderDetailRepo.findByOrderId(orderId);
+    }
     public List<OrderDetail> findAll() {
         return orderDetailRepo.findAll();
     }
