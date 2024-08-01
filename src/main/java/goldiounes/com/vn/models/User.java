@@ -23,7 +23,7 @@ public class User {
     @Column(name = "Email", nullable = false)
     private String Email;
 
-    @Column(name = "Address", nullable = false)
+    @Column(name = "Address")
     private String Address;
 
     @Column(name = "Role", nullable = false)
@@ -98,9 +98,7 @@ public class User {
         Role = role;
     }
 
-    public List<Warranty> getWarranties() {
-        return Warranties;
-    }
+    public List<Warranty> getWarranties() { return Warranties; }
 
     public void setWarranties(List<Warranty> warranties) {
         Warranties = warranties;
@@ -114,11 +112,7 @@ public class User {
         Orders = orders;
     }
 
-    public Cart getCart() {
-        return Cart;
-    }
+    public Cart getCart() { return Cart; }
 
-    public void setCarts(Cart cart) {
-        Cart = cart;
-    }
+    public void setCart(Cart cart) { Cart = cart; }
 }
