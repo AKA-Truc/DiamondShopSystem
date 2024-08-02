@@ -9,6 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CartRepo extends JpaRepository<Cart, Integer> {
 
-    @Query("select c from Cart c where c.Status=:status")
-    Cart findByStatus(@Param("status") String status);
 }
