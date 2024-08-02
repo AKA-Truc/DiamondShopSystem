@@ -24,4 +24,8 @@ public class WarrantyService {
     public void deleteById(int id) {
         warrantyRepo.deleteById(id);
     }
+
+    public List<Warranty> findByUserId(int userId) {
+        return warrantyRepo.findByUserID(userId);
+    }
 }
