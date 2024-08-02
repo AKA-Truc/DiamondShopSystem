@@ -59,11 +59,15 @@ public class WarrantyController {
         if (existingProduct == null) {
             throw new RuntimeException("Product not found");
         }
+
+        // Lấy ngày bắt đầu bảo hành từ yêu cầu (do người dùng nhập vào)
         Date startDate = warranty.getStartDate();
 
         // Tạo Calendar instance và set thời gian bảo hành vào
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
+
+        // Cộng thêm thời hạn bảo hành vào ngày bắt đầu
         calendar.add(Calendar.MONTH, (int) existingProduct.getWarrantyPeriod());
 
         // Lấy ngày kết thúc bảo hành từ Calendar
