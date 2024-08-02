@@ -13,6 +13,7 @@ public class CartService {
     @Autowired
     private CartRepo cartRepo;
 
+
     public List<Cart> findAll() {
         return cartRepo.findAll();
     }
@@ -25,7 +26,7 @@ public class CartService {
     public void deleteById(int id) {
         cartRepo.deleteById(id);
     }
-    public Cart findByName(String status) {
+    public Cart findByStatus(String status) {
         return cartRepo.findByStatus(status);
     }
 }

@@ -12,5 +12,4 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
     @Query("select c from Category c where c.CategoryName=:CategoryName")
     Category findByName(@Param("CategoryName") String CategoryName);
 
-
 }
