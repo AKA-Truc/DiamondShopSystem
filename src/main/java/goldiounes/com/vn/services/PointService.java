@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PointService {
@@ -24,11 +25,11 @@ public class PointService {
         return pointRepo.findById(id).get();
     }
     public Point createPoint(Point point) {
-        User user = userRepo.findById(point.getUser().getUserID()).get();
-        if (user == null) {
+        Optional<User> userOptional = userRepo.findById(point.getUser().getUserID());
+        if (!userOptional.isPresent()) {
             throw new RuntimeException("User not found");
         }
-        point.setUser(user);
+        point.setUser(userOptional.get());
         return pointRepo.save(point);
     }
     public void deleteById(int id) {
