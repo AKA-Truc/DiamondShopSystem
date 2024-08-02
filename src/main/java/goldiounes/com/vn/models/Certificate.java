@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "CERTIFICATES")
-public class Certificate {
+public class  Certificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
