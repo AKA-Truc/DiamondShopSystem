@@ -8,12 +8,12 @@ import goldiounes.com.vn.models.Category;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/category-management")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/create")
+    @PostMapping("/categories")
     private Category createCategory (@RequestBody Category category) {
         Category existingCategory = categoryService.findByName(category.getCategoryName());
         if (existingCategory != null) {
@@ -22,7 +22,7 @@ public class CategoryController {
         return categoryService.save(category);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/categories")
     private List<Category> getAllCategories () {
         List<Category> Categories = categoryService.findAll();
         if (Categories.isEmpty()) {
@@ -31,7 +31,7 @@ public class CategoryController {
         return Categories;
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/categories/{id}")
     private Category getCategoryById(@PathVariable int id) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory == null) {
@@ -40,7 +40,7 @@ public class CategoryController {
         return existingCategory;
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/categories/{id}")
     private void deleteCategory(@PathVariable int id) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory != null) {
@@ -49,7 +49,7 @@ public class CategoryController {
         throw new RuntimeException("Category not found");
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/categories/{id}")
     private Category updateCategory(@PathVariable int id, @RequestBody Category category) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory == null) {
