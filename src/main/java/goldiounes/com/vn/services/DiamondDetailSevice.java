@@ -24,4 +24,12 @@ public class DiamondDetailSevice {
     public void deleteById(int id) {
         diamondDetailRepo.deleteById(id);
     }
+
+    public void delete(DiamondDetail existingDiamondDetail) {
+
+    }
+
+    public List<DiamondDetail> findByDiamondId(int diamondId) {
+        return null;
+    }
 }

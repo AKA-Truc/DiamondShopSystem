@@ -25,4 +25,7 @@ public class PromotionService {
     public void deleteById(int id) {
         promotionRepo.deleteById(id);
     }
+
+    public void delete(Promotion existingPromotion) {
+    }
 }
