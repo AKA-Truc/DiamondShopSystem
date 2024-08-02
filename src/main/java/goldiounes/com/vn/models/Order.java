@@ -43,11 +43,9 @@ public class Order {
         //cstor
     }
 
-    public Order(User user, int totalPrice, Cart cart, String status, Promotion promotion, String shippingAddress) {
+    public Order(User user, Cart cart, Promotion promotion, String shippingAddress) {
         User = user;
-        TotalPrice = totalPrice;
         Cart = cart;
-        Status = status;
         Promotion = promotion;
         ShippingAddress = shippingAddress;
     }
