@@ -19,9 +19,6 @@ public class Cart {
     @JoinColumn(name = "UserID", nullable = false)
     private User User;
 
-    @Column(name = "Status", nullable = false)
-    private String Status;
-
     @OneToMany(mappedBy = "Cart")
     private List<Order> Orders;
 
@@ -32,9 +29,8 @@ public class Cart {
         //Cstor
     }
 
-    public Cart(User user, String status) {
+    public Cart(User user) {
         this.User = user;
-        this.Status = status;
     }
 
     public User getUser() {
@@ -51,14 +47,6 @@ public class Cart {
 
     public void setCartID(int cartID) {
         CartID = cartID;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
     }
 
     public List<Order> getOrders() {

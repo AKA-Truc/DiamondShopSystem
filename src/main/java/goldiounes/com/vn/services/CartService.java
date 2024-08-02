@@ -26,7 +26,4 @@ public class CartService {
     public void deleteById(int id) {
         cartRepo.deleteById(id);
     }
-    public Cart findByStatus(String status) {
-        return cartRepo.findByStatus(status);
-    }
 }
