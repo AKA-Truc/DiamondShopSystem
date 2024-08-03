@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("Receipt")
+@RequestMapping("receipt-management")
 public class ReceiptController {
     @Autowired
     private ReceiptService receiptService;
