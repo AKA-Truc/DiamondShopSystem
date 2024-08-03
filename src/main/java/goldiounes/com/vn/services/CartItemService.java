@@ -15,12 +15,15 @@ public class CartItemService {
     public List<CartItem> findAll() {
         return cartItemRepo.findAll();
     }
+
     public CartItem findById(int id) {
-        return cartItemRepo.findById(id).get();
+        return cartItemRepo.findById(id).orElse(null);
     }
+
     public CartItem save(CartItem cartItem) {
         return cartItemRepo.save(cartItem);
     }
+
     public void deleteById(int id) {
         cartItemRepo.deleteById(id);
     }

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CertificateRepo extends JpaRepository<Certificate, Integer> {
-
+    Certificate findByGIACode(String GIAcode);
 }
