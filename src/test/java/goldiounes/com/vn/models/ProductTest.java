@@ -27,7 +27,7 @@ public class ProductTest {
     void testConstructor(){
         Category category = new Category("AAA");
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
 
         assertNotNull(product);
     }
@@ -37,7 +37,7 @@ public class ProductTest {
         Category category = new Category("AAA");
 
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
 
 
         assertNotNull(product.getCategory());
@@ -56,7 +56,7 @@ public class ProductTest {
         product.setImageURL("url");
         product.setMarkupRate(2.1);
         product.setLaborCost(5000);
-        product.setSellingPrice(6000);
+        product.setSellingPrice(product.getMarkupRate()*product.getLaborCost());
         product.setWarrantyPeriod(240);
         product.setInventory(1);
 
@@ -66,7 +66,7 @@ public class ProductTest {
         assertEquals("url",product.getImageURL());
         assertEquals(2.1,product.getMarkupRate());
         assertEquals(5000,product.getLaborCost());
-        assertEquals(6000,product.getSellingPrice());
+        assertEquals(2.1*5000,product.getSellingPrice());
         assertEquals(240,product.getWarrantyPeriod());
         assertEquals(1, product.getInventory());
     }

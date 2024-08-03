@@ -15,7 +15,7 @@ public class ReceiptTest {
 
         Category category = new Category("AAA");
         Product product1 = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
         receipt.setProduct(product1);
         receipt.setQuantity(100);
 
@@ -36,7 +36,7 @@ public class ReceiptTest {
     void testConstructor(){
         Category category = new Category("AAA");
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
         Receipt receipt = new Receipt(product,10);
 
         assertNotNull(receipt);

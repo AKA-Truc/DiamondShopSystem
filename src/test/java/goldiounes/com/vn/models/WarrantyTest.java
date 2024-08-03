@@ -10,7 +10,7 @@ public class WarrantyTest {
     void testGetterAndSetter(){
         Category category = new Category("AAA");
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
         User u = new User();
 
         Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
@@ -40,7 +40,7 @@ public class WarrantyTest {
         User u1=new User();
         Category category1 = new Category("aaa");
         Product product1 = new Product(category,"bbb","url",
-                1.4,600,840,25,11);
+                1.4,600,25,11);
         Date startDate1 = new Date(2024 - 1900, Calendar.MAY, 2);//2024/5/2
 
         // Tạo Calendar instance và set thời gian bảo hành vào
@@ -72,7 +72,7 @@ public class WarrantyTest {
     void testConstructor(){
         Category category = new Category("AAA");
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
         User u = new User();
 
         Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1

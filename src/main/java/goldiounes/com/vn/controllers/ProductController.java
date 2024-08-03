@@ -66,7 +66,7 @@ public class ProductController {
         existingProduct.setOrderDetails(product.getOrderDetails());
         existingProduct.setProductDetails(product.getProductDetails());
         existingProduct.setReceipt(product.getReceipt());
-        existingProduct.setSellingPrice(product.getSellingPrice());
+        existingProduct.setSellingPrice(product.getMarkupRate()*product.getLaborCost());
         existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
         return productService.save(existingProduct);
     }

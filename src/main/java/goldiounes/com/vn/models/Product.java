@@ -55,13 +55,13 @@ public class Product {
         //cstor
     }
 
-    public Product(Category category, String productName, String imageURL, double markupRate, double laborCost, double sellingPrice, double warrantyPeriod, int inventory) {
+    public Product(Category category, String productName, String imageURL, double markupRate, double laborCost, double warrantyPeriod, int inventory) {
         Category = category;
         ProductName = productName;
         ImageURL = imageURL;
         MarkupRate = markupRate;
         LaborCost = laborCost;
-        SellingPrice = sellingPrice;
+        SellingPrice = laborCost*markupRate;
         WarrantyPeriod = warrantyPeriod;
         Inventory = inventory;
     }
@@ -74,11 +74,11 @@ public class Product {
         ProductID = productID;
     }
 
-    public Category getCategory() {
+    public goldiounes.com.vn.models.Category getCategory() {
         return Category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(goldiounes.com.vn.models.Category category) {
         Category = category;
     }
 
@@ -114,20 +114,20 @@ public class Product {
         LaborCost = laborCost;
     }
 
-    public double getSellingPrice() {
-        return SellingPrice;
-    }
-
-    public void setSellingPrice(double sellingPrice) {
-        SellingPrice = sellingPrice;
-    }
-
     public double getWarrantyPeriod() {
         return WarrantyPeriod;
     }
 
     public void setWarrantyPeriod(double warrantyPeriod) {
         WarrantyPeriod = warrantyPeriod;
+    }
+
+    public double getSellingPrice() {
+        return SellingPrice;
+    }
+
+    public void setSellingPrice(double sellingPrice) {
+        SellingPrice = sellingPrice;
     }
 
     public int getInventory() {
@@ -160,5 +160,13 @@ public class Product {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         OrderDetails = orderDetails;
+    }
+
+    public List<goldiounes.com.vn.models.Receipt> getReceipt() {
+        return Receipt;
+    }
+
+    public void setReceipt(List<goldiounes.com.vn.models.Receipt> receipt) {
+        Receipt = receipt;
     }
 }
