@@ -54,36 +54,33 @@ public class WarrantyController {
         return warranties;
     }
     @PostMapping("/warranties")
-    public Warranty createWarranty(Warranty warranty) {
-        User existingUser = userService.findByEmail(warranty.getUser().getEmail());
-        if (existingUser == null) {
-            throw new RuntimeException("User not found");
-        }
+    public Warranty createWarranty(@RequestBody Warranty warranty) {
         Product existingProduct = productService.findById(warranty.getProduct().getProductID());
         if (existingProduct == null) {
             throw new RuntimeException("Product not found");
         }
 
-        // Lấy ngày bắt đầu bảo hành từ yêu cầu (do người dùng nhập vào)
-        Date startDate = warranty.getStartDate();
+        User existingUser = userService.findById(warranty.getUser().getUserID());
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
+        }
 
-        // Tạo Calendar instance và set thời gian bảo hành vào
+        // Calculate the end date based on the product's warranty period
+        Date startDate = warranty.getStartDate();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
-
-        // Cộng thêm thời hạn bảo hành vào ngày bắt đầu
         calendar.add(Calendar.MONTH, (int) existingProduct.getWarrantyPeriod());
-
-        // Lấy ngày kết thúc bảo hành từ Calendar
         Date endDate = calendar.getTime();
 
-        // Đặt ngày kết thúc bảo hành
         warranty.setEndDate(endDate);
+        warranty.setProduct(existingProduct);
+        warranty.setUser(existingUser);
 
         return warrantyService.save(warranty);
     }
+
     @DeleteMapping("/warranties/{id}")
-    public void deleteWarranty(int id) {
+    public void deleteWarranty(@PathVariable int id) {
         Warranty existingWarranty = warrantyService.findById(id);
         if (existingWarranty == null) {
             throw new RuntimeException("Warranty not found");
