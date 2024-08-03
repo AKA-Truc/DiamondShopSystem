@@ -16,8 +16,8 @@ public class Category {
     @Column(name = "CategoryName", nullable = false, unique = false)
     private String CategoryName;
 
-    @OneToMany(mappedBy = "Category")
-    private List<Product> products;
+//    @OneToMany(mappedBy = "Category")
+//    private List<Product> products;
 
     public Category() {
         //cstor
@@ -41,13 +41,5 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 }

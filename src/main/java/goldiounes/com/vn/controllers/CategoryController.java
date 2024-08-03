@@ -23,12 +23,12 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    private List<Category> getAllCategories () {
-        List<Category> Categories = categoryService.findAll();
-        if (Categories.isEmpty()) {
-            throw new RuntimeException("Categories list is empty");
+    public List<Category> getCategoryByKeyword (@RequestParam String keyword) {
+        List<Category> existingCategory = categoryService.findCategoryByKeyword(keyword);
+        if (existingCategory == null) {
+            throw new RuntimeException("Category not found");
         }
-        return Categories;
+        return existingCategory;
     }
 
     @GetMapping("/categories/{id}")

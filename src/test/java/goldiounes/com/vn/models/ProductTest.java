@@ -39,7 +39,6 @@ public class ProductTest {
         Product product = new Product(category,"BBB","URL",
                 1.2,500,24,10);
 
-
         assertNotNull(product.getCategory());
         assertEquals("AAA",product.getCategory().getCategoryName());
         assertEquals("BBB",product.getProductName());
