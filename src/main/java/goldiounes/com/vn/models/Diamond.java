@@ -14,6 +14,9 @@ public class Diamond {
     @Column(name = "DiamondID")
     private int DiamondID;
 
+    @Column(name = "Weight", nullable = false)
+    private int Weight;
+
     @Column(name = "Carat", nullable = false)
     private int Carat;
 
@@ -39,7 +42,8 @@ public class Diamond {
         //cstor
     }
 
-    public Diamond( int carat, String color, int clariry, String cut, String origin) {
+    public Diamond( int weight, int carat, String color, int clariry, String cut, String origin) {
+        Weight = weight;
         Carat = carat;
         Color = color;
         Clariry = clariry;
@@ -53,6 +57,14 @@ public class Diamond {
 
     public void setDiamondID(int diamondID) {
         DiamondID = diamondID;
+    }
+
+    public int getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(int weight) {
+        Weight = weight;
     }
 
     public int getCarat() {
