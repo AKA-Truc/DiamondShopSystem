@@ -23,8 +23,8 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public List<Category> getCategoryByKeyword (@RequestParam String keyword) {
-        List<Category> existingCategory = categoryService.findCategoryByKeyword(keyword);
+    public List<Category> getAll() {
+        List<Category> existingCategory = categoryService.findAll();
         if (existingCategory == null) {
             throw new RuntimeException("Category not found");
         }
