@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("Warranty")
+@RequestMapping("warranty-management")
 public class WarrantyController {
     @Autowired
     private WarrantyService  warrantyService;

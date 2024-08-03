@@ -61,9 +61,9 @@ public class Product {
         ImageURL = imageURL;
         MarkupRate = markupRate;
         LaborCost = laborCost;
-        SellingPrice = laborCost*markupRate;
         WarrantyPeriod = warrantyPeriod;
         Inventory = inventory;
+        this.SellingPrice =  markupRate * laborCost;
     }
 
     public int getProductID() {
