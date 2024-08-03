@@ -18,6 +18,10 @@ public class DiamondSevice {
     @Autowired
     private DiamondDetailRepo diamondDetailRepo;
 
+    public Diamond findDiamond(Double carat, String clarity, String color, String cut, String origin) {
+        return diamondRepo.findDiamond(carat, clarity, color, cut, origin);
+    }
+
     public Diamond createDiamond(Diamond diamond) {
         Optional<Diamond> existingDiamond = diamondRepo.findById(diamond.getDiamondID());
         if (existingDiamond.isPresent()) {
