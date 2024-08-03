@@ -21,7 +21,7 @@ public class DiamondController {
 
     @PostMapping("/diamonds")
     public Diamond createDiamond(@RequestBody Diamond diamond) {
-        Diamond existingDiamond = diamondService.findById(diamond.getDiamondID());
+        Diamond existingDiamond = diamondService.findDiamond(diamond.getCarat(),diamond.getClarity(),diamond.getColor(),diamond.getCut(),diamond.getOrigin());
         if (existingDiamond != null) {
             throw new RuntimeException("Diamond already exists");
         }
