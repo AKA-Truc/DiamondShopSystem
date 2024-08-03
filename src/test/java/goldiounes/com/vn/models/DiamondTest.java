@@ -11,7 +11,6 @@ class DiamondTest {
         Diamond diamond = new Diamond();
 
         diamond.setDiamondID(17);
-        diamond.setWeight(100);
         diamond.setCarat(50);
         diamond.setColor("D");
         diamond.setClariry(10);
@@ -19,7 +18,6 @@ class DiamondTest {
         diamond.setOrigin("Africa");
 
         assertEquals(17, diamond.getDiamondID());
-        assertEquals(100, diamond.getWeight());
         assertEquals(50, diamond.getCarat());
         assertEquals("D", diamond.getColor());
         assertEquals(10, diamond.getClariry());
@@ -29,9 +27,8 @@ class DiamondTest {
 
     @Test
     void testDiamondConstructor() {
-        Diamond diamond = new Diamond(100, 50, "D", 10, "Excellent", "Africa");
+        Diamond diamond = new Diamond(50, "D", 10, "Excellent", "Africa");
 
-        assertEquals(100, diamond.getWeight());
         assertEquals(50, diamond.getCarat());
         assertEquals("D", diamond.getColor());
         assertEquals(10, diamond.getClariry());
