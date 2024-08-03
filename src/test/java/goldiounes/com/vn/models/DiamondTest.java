@@ -36,21 +36,4 @@ class DiamondTest {
         assertEquals("Africa", diamond.getOrigin());
     }
 
-    @Test
-    void testDiamondRelationships() {
-        Diamond diamond = new Diamond();
-
-        DiamondDetail detail1 = new DiamondDetail();
-        DiamondDetail detail2 = new DiamondDetail();
-        List<DiamondDetail> diamondDetails = Arrays.asList(detail1, detail2);
-
-        diamond.setDiamondDetails(diamondDetails);
-        assertEquals(2, diamond.getDiamondDetails().size());
-
-        Certificate certificate = new Certificate();
-        diamond.setCertificate(certificate);
-        assertEquals(certificate, diamond.getCertificate());
-    }
-
-
 }

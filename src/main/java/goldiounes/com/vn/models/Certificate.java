@@ -51,4 +51,6 @@ public class  Certificate {
     public void setGIACode(String GIACode) {
         this.GIACode = GIACode;
     }
+
+    public String setGIACode() { return GIACode; }
 }

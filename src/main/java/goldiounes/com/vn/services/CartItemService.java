@@ -27,4 +27,12 @@ public class CartItemService {
     public void deleteById(int id) {
         cartItemRepo.deleteById(id);
     }
+
+    public List<CartItem> findByCarId(int id) {
+        return cartItemRepo.findByCartID(id);
+    }
+
+    public void deleteByCarId(int id) {
+        cartItemRepo.deleteByCartID(id);
+    }
 }

@@ -1,6 +1,7 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.Certificate;
+import goldiounes.com.vn.models.Diamond;
 import goldiounes.com.vn.repositories.CertificateRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,12 @@ public class CertificateService {
     @Autowired
     private DiamondRepo diamondRepo;
 
-    public Certificate createCertificate(Certificate certificate) {
-        if (isGIACodeUnique(certificate.getGIACode())) {
-            return certificateRepo.save(certificate);
-        } else {
-            throw new IllegalArgumentException("GIA Code is not unique.");
-        }
-    }
-
     public List<Certificate> findAll() {
         return certificateRepo.findAll();
     }
 
     public Certificate findById(int id) {
-        Optional<Certificate> result = certificateRepo.findById(id);
-        return result.orElse(null);
+        return certificateRepo.findById(id).get();
     }
 
     public Certificate save(Certificate certificate) {
@@ -42,17 +34,16 @@ public class CertificateService {
         certificateRepo.deleteById(id);
     }
 
-    private boolean isGIACodeUnique(String GIACode) {
-        return certificateRepo.findByGIACode(GIACode) == null;
+    public Certificate createCertificate(Certificate certificate) {
+        Diamond diamond = diamondRepo.findById(certificate.getDiamond().getDiamondID()).get();
+        if (diamond == null) {
+            throw new IllegalArgumentException("Diamond not found with ID: " + certificate.getDiamond().getDiamondID());
+        }
+        certificate.setDiamond(diamond);
+        return certificateRepo.save(certificate);
     }
 
-    public Certificate createCertificateWithDiamond(int diamondId, String GIACode) {
-        Optional<goldiounes.com.vn.models.Diamond> diamond = diamondRepo.findById(diamondId);
-        if (diamond.isPresent()) {
-            Certificate certificate = new Certificate(diamond.get(), GIACode);
-            return certificateRepo.save(certificate);
-        } else {
-            throw new IllegalArgumentException("Diamond not found with ID: " + diamondId);
-        }
+    public Certificate findByGIACode(String giaCode) {
+        return certificateRepo.findByGIACode(giaCode);
     }
 }

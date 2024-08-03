@@ -32,8 +32,8 @@ public class Diamond {
     @OneToMany(mappedBy = "Diamond")
     private List<DiamondDetail> diamondDetails;
 
-    @OneToOne(mappedBy = "Diamond")
-    private Certificate certificate;
+//    @OneToOne(mappedBy = "Diamond")
+//    private Certificate certificate;
 
     public Diamond() {
         //cstor
@@ -95,14 +95,6 @@ public class Diamond {
         Origin = origin;
     }
 
-    public Certificate getCertificate() {
-        return certificate;
-    }
-
-    public void setCertificate(Certificate certificate) {
-        this.certificate = certificate;
-    }
-
     public List<DiamondDetail> getDiamondDetails() {
         return diamondDetails;
     }
@@ -110,4 +102,5 @@ public class Diamond {
     public void setDiamondDetails(List<DiamondDetail> diamondDetails) {
         this.diamondDetails = diamondDetails;
     }
+
 }
