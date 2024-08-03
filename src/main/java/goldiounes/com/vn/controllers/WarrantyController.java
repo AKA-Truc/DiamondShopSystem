@@ -55,6 +55,10 @@ public class WarrantyController {
     }
     @PostMapping("/warranties")
     public Warranty createWarranty(Warranty warranty) {
+        User existingUser = userService.findByEmail(warranty.getUser().getEmail());
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
+        }
         Product existingProduct = productService.findById(warranty.getProduct().getProductID());
         if (existingProduct == null) {
             throw new RuntimeException("Product not found");
