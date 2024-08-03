@@ -1,5 +1,7 @@
 package goldiounes.com.vn.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -16,8 +18,6 @@ public class Category {
     @Column(name = "CategoryName", nullable = false, unique = false)
     private String CategoryName;
 
-//    @OneToMany(mappedBy = "Category")
-//    private List<Product> products;
 
     public Category() {
         //cstor
@@ -34,6 +34,7 @@ public class Category {
     public void setCategoryID(int categoryID) {
         CategoryID = categoryID;
     }
+
 
     public String getCategoryName() {
         return CategoryName;

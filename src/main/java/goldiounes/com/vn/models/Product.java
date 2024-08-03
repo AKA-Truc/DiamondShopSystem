@@ -1,5 +1,8 @@
 package goldiounes.com.vn.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -42,14 +45,11 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<ProductDetail> ProductDetails;
 
-    @OneToMany(mappedBy = "Product")
-    private List<CartItem> CartItems;
+    @OneToMany(mappedBy = "product")
+    private List<Warranty> Warranties;
 
     @OneToMany(mappedBy = "Product")
-    private List<OrderDetail> OrderDetails;
-
-    @OneToMany(mappedBy = "Product")
-    private List<Receipt> Receipt;
+    private List<Receipt> Receipts;
 
     public Product() {
         //cstor
@@ -114,20 +114,20 @@ public class Product {
         LaborCost = laborCost;
     }
 
-    public double getWarrantyPeriod() {
-        return WarrantyPeriod;
-    }
-
-    public void setWarrantyPeriod(double warrantyPeriod) {
-        WarrantyPeriod = warrantyPeriod;
-    }
-
     public double getSellingPrice() {
         return SellingPrice;
     }
 
     public void setSellingPrice(double sellingPrice) {
         SellingPrice = sellingPrice;
+    }
+
+    public double getWarrantyPeriod() {
+        return WarrantyPeriod;
+    }
+
+    public void setWarrantyPeriod(double warrantyPeriod) {
+        WarrantyPeriod = warrantyPeriod;
     }
 
     public int getInventory() {
@@ -146,27 +146,19 @@ public class Product {
         ProductDetails = productDetails;
     }
 
-    public List<CartItem> getCartItems() {
-        return CartItems;
+    public List<Receipt> getReceipts() {
+        return Receipts;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        CartItems = cartItems;
+    public void setReceipts(List<Receipt> receipts) {
+        Receipts = receipts;
     }
 
-    public List<OrderDetail> getOrderDetails() {
-        return OrderDetails;
+    public List<Warranty> getWarranties() {
+        return Warranties;
     }
 
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        OrderDetails = orderDetails;
-    }
-
-    public List<goldiounes.com.vn.models.Receipt> getReceipt() {
-        return Receipt;
-    }
-
-    public void setReceipt(List<goldiounes.com.vn.models.Receipt> receipt) {
-        Receipt = receipt;
+    public void setWarranties(List<Warranty> warranties) {
+        Warranties = warranties;
     }
 }

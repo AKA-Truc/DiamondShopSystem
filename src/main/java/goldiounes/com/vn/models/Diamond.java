@@ -32,8 +32,8 @@ public class Diamond {
     @OneToMany(mappedBy = "Diamond")
     private List<DiamondDetail> diamondDetails;
 
-//    @OneToOne(mappedBy = "Diamond")
-//    private Certificate certificate;
+    @OneToOne(mappedBy = "Diamond")
+    private Certificate certificate;
 
     public Diamond() {
         //cstor
