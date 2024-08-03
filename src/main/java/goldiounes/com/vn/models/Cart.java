@@ -11,7 +11,7 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)//auto_increment
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CartID")
     private int CartID;
 
@@ -26,42 +26,9 @@ public class Cart {
     private List<CartItem> CartItems;
 
     public Cart() {
-        //Cstor
     }
 
     public Cart(User user) {
         this.User = user;
-    }
-
-    public User getUser() {
-        return User;
-    }
-
-    public void setUser(User user) {
-        User = user;
-    }
-
-    public int getCartID() {
-        return CartID;
-    }
-
-    public void setCartID(int cartID) {
-        CartID = cartID;
-    }
-
-    public List<Order> getOrders() {
-        return Orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        Orders = orders;
-    }
-
-    public List<CartItem> getCartItems() {
-        return CartItems;
-    }
-
-    public void setCartItems(List<CartItem> cartItems) {
-        CartItems = cartItems;
     }
 }

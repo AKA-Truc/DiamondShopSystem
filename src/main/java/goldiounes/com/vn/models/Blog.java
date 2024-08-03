@@ -12,10 +12,10 @@ public class Blog {
     @Column(name = "BlogID")
     private int BlogID;
 
-    @Column(name = "Title")
+    @Column(name = "Title", nullable = false)
     private String Title;
 
-    @Column(name = "Content")
+    @Column(name = "Content", nullable = false)
     private String Content;
 
     public Blog() {
