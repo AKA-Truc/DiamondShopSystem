@@ -20,8 +20,8 @@ public class Diamond {
     @Column(name = "Color", nullable = false)
     private String Color;
 
-    @Column(name = "Clariry", nullable = false)
-    private String Clariry;
+    @Column(name = "Clarity", nullable = false)
+    private String Clarity;
 
     @Column(name = "Cut", nullable = false)
     private String Cut;
@@ -39,10 +39,10 @@ public class Diamond {
         //cstor
     }
 
-    public Diamond( float carat, String color, String clariry, String cut, String origin) {
+    public Diamond( float carat, String color, String clarity, String cut, String origin) {
         Carat = carat;
         Color = color;
-        Clariry = clariry;
+        Clarity = clarity;
         Cut = cut;
         Origin = origin;
     }
@@ -71,12 +71,12 @@ public class Diamond {
         Color = color;
     }
 
-    public String getClariry() {
-        return Clariry;
+    public String getClarity() {
+        return Clarity;
     }
 
-    public void setClariry(String clariry) {
-        Clariry = clariry;
+    public void setClarity(String clarity) {
+        Clarity = clarity;
     }
 
     public String getCut() {
