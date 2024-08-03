@@ -49,10 +49,9 @@ public class DiamondSevice {
     public Diamond updateDiamond(int id, Diamond diamond) {
         Diamond existingDiamond = findById(id);
 
-        existingDiamond.setWeight(diamond.getWeight());
         existingDiamond.setCarat(diamond.getCarat());
         existingDiamond.setColor(diamond.getColor());
-        existingDiamond.setClariry(diamond.getClariry());
+        existingDiamond.setClarity(diamond.getClarity());
         existingDiamond.setCut(diamond.getCut());
         existingDiamond.setOrigin(diamond.getOrigin());
 
