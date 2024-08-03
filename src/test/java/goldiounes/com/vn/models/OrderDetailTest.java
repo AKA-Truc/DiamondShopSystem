@@ -23,7 +23,7 @@ public class OrderDetailTest {
         Category category = new Category("AAA");
 
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
 
         OrderDetail orderDetail = new OrderDetail(order, product, 20, 30);
 
@@ -49,7 +49,7 @@ public class OrderDetailTest {
         Category category = new Category("AAA");
 
         Product product = new Product(category,"BBB","URL",
-                1.2,500,600,24,10);
+                1.2,500,24,10);
 
         OrderDetail orderDetail = new OrderDetail(order, product, 20, 30);
 
@@ -69,7 +69,7 @@ public class OrderDetailTest {
 
         assertNull(orderDetail.getOrder());
         assertNull(orderDetail.getProduct());
-        assertNull(orderDetail.getQuantity());
-        assertNull(orderDetail.getPrice());
+        assertEquals(0, orderDetail.getQuantity());
+        assertEquals(0, orderDetail.getPrice());
     }
 }
