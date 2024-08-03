@@ -18,9 +18,6 @@ public class ProductTest {
         assertEquals(0.0, product.getSellingPrice());
         assertEquals(0.0, product.getWarrantyPeriod());
         assertEquals(0, product.getInventory());
-        assertNull(product.getProductDetails());
-        assertNull(product.getCartItems());
-        assertNull(product.getOrderDetails());
     }
 
     @Test

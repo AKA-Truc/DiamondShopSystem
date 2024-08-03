@@ -92,14 +92,13 @@ public class ProductController {
         }
         existingProduct.setProductName(product.getProductName());
         existingProduct.setCategory(product.getCategory());
-        existingProduct.setCartItems(product.getCartItems());
+        existingProduct.setWarranties(product.getWarranties());
         existingProduct.setImageURL(product.getImageURL());
         existingProduct.setInventory(product.getInventory());
         existingProduct.setLaborCost(product.getLaborCost());
         existingProduct.setMarkupRate(product.getMarkupRate());
-        existingProduct.setOrderDetails(product.getOrderDetails());
         existingProduct.setProductDetails(product.getProductDetails());
-        existingProduct.setReceipt(product.getReceipt());
+        existingProduct.setReceipts(product.getReceipts());
         existingProduct.setSellingPrice(product.getMarkupRate()*product.getLaborCost());
         existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
         return productService.save(existingProduct);

@@ -15,7 +15,7 @@ public class Warranty {
 
     @ManyToOne()
     @JoinColumn(name = "ProductID", nullable = false)
-    private Product Product;
+    private Product product;
 
     @ManyToOne()
     @JoinColumn(name = "UserID", nullable = false)
@@ -35,7 +35,7 @@ public class Warranty {
     }
 
     public Warranty(Product product, User user, String warrantyDetails, Date startDate, Date endDate) {
-        Product = product;
+        this.product = product;
         User = user;
         WarrantyDetails = warrantyDetails;
         StartDate = startDate;
@@ -51,11 +51,11 @@ public class Warranty {
     }
 
     public goldiounes.com.vn.models.Product getProduct() {
-        return Product;
+        return product;
     }
 
     public void setProduct(goldiounes.com.vn.models.Product product) {
-        Product = product;
+        this.product = product;
     }
 
     public goldiounes.com.vn.models.User getUser() {
