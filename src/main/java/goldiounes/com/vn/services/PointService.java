@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 PointService {
+public class PointService {
     @Autowired
     private PointRepo pointRepo;
 
@@ -32,6 +32,7 @@ public class                                                                    
         point.setUser(userOptional.get());
         return pointRepo.save(point);
     }
+
     public void deleteById(int id) {
         pointRepo.deleteById(id);
     }

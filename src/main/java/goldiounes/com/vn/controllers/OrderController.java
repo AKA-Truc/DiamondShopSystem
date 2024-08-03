@@ -76,7 +76,7 @@ public class OrderController {
     }
 
     @PutMapping("/orders/{orderId}/details/{id}")
-    public void updateOrderDetail(@RequestBody OrderDetail orderDetail) {
+    public OrderDetail updateOrderDetail(@RequestBody OrderDetail orderDetail) {
         OrderDetail existingOrderDetail = orderDetailService.findById(orderDetail.getOrderDetailID());
         if (existingOrderDetail != null) {
             throw new RuntimeException("OrderDetail already exists");
@@ -85,6 +85,6 @@ public class OrderController {
         existingOrderDetail.setProduct(orderDetail.getProduct());
         existingOrderDetail.setQuantity(orderDetail.getQuantity());
         existingOrderDetail.setPrice(orderDetail.getPrice());
-        orderDetailService.save(orderDetail);
+        return orderDetailService.save(orderDetail);
     }
 }
