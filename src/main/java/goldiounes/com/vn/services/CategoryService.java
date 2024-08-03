@@ -20,13 +20,14 @@ public class CategoryService {
     public Category save(Category category) {
         return categoryRepo.save(category);
     }
-    public void delete(Category category) {
-        categoryRepo.delete(category);
-    }
     public void deleteById(int id) {
         categoryRepo.deleteById(id);
     }
     public Category findByName(String name) {
         return categoryRepo.findByName(name);
+    }
+
+    public List<Category> findCategoryByKeyword(String KeyWord) {
+        return categoryRepo.findCategoryByKeyword(KeyWord);
     }
 }
