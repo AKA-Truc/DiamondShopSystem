@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("Setting")
+@RequestMapping("setting-management")
 public class SettingController {
     @Autowired
     private SettingService settingService;
