@@ -14,17 +14,14 @@ public class Diamond {
     @Column(name = "DiamondID")
     private int DiamondID;
 
-    @Column(name = "Weight", nullable = false)
-    private int Weight;
-
     @Column(name = "Carat", nullable = false)
-    private int Carat;
+    private Double Carat;
 
     @Column(name = "Color", nullable = false)
     private String Color;
 
-    @Column(name = "Clariry", nullable = false)
-    private int Clariry;
+    @Column(name = "Clarity", nullable = false)
+    private String Clarity;
 
     @Column(name = "Cut", nullable = false)
     private String Cut;
@@ -42,11 +39,10 @@ public class Diamond {
         //cstor
     }
 
-    public Diamond( int weight, int carat, String color, int clariry, String cut, String origin) {
-        Weight = weight;
+    public Diamond( Double carat, String color, String clarity, String cut, String origin) {
         Carat = carat;
         Color = color;
-        Clariry = clariry;
+        Clarity = clarity;
         Cut = cut;
         Origin = origin;
     }
@@ -59,19 +55,11 @@ public class Diamond {
         DiamondID = diamondID;
     }
 
-    public int getWeight() {
-        return Weight;
-    }
-
-    public void setWeight(int weight) {
-        Weight = weight;
-    }
-
-    public int getCarat() {
+    public Double getCarat() {
         return Carat;
     }
 
-    public void setCarat(int carat) {
+    public void setCarat(Double carat) {
         Carat = carat;
     }
 
@@ -83,12 +71,12 @@ public class Diamond {
         Color = color;
     }
 
-    public int getClariry() {
-        return Clariry;
+    public String getClarity() {
+        return Clarity;
     }
 
-    public void setClariry(int clariry) {
-        Clariry = clariry;
+    public void setClarity(String clarity) {
+        Clarity = clarity;
     }
 
     public String getCut() {
