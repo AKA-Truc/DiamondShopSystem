@@ -11,30 +11,27 @@ class DiamondTest {
         Diamond diamond = new Diamond();
 
         diamond.setDiamondID(17);
-        diamond.setWeight(100);
-        diamond.setCarat(50);
+        diamond.setCarat(0.5);
         diamond.setColor("D");
-        diamond.setClariry(10);
+        diamond.setClarity("IF");
         diamond.setCut("Excellent");
         diamond.setOrigin("Africa");
 
         assertEquals(17, diamond.getDiamondID());
-        assertEquals(100, diamond.getWeight());
-        assertEquals(50, diamond.getCarat());
+        assertEquals(0.5, diamond.getCarat());
         assertEquals("D", diamond.getColor());
-        assertEquals(10, diamond.getClariry());
+        assertEquals("IF", diamond.getClarity());
         assertEquals("Excellent", diamond.getCut());
         assertEquals("Africa", diamond.getOrigin());
     }
 
     @Test
     void testDiamondConstructor() {
-        Diamond diamond = new Diamond(100, 50, "D", 10, "Excellent", "Africa");
+        Diamond diamond = new Diamond( 0.5, "D", "IF", "Excellent", "Africa");
 
-        assertEquals(100, diamond.getWeight());
-        assertEquals(50, diamond.getCarat());
+        assertEquals(0.5, diamond.getCarat());
         assertEquals("D", diamond.getColor());
-        assertEquals(10, diamond.getClariry());
+        assertEquals("IF", diamond.getClarity());
         assertEquals("Excellent", diamond.getCut());
         assertEquals("Africa", diamond.getOrigin());
     }

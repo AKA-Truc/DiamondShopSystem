@@ -21,7 +21,7 @@ public class DiamondController {
 
     @PostMapping("/diamonds")
     public Diamond createDiamond(@RequestBody Diamond diamond) {
-        Diamond existingDiamond = diamondService.findById(diamond.getDiamondID());
+        Diamond existingDiamond = diamondService.findDiamond(diamond.getCarat(),diamond.getClarity(),diamond.getColor(),diamond.getCut(),diamond.getOrigin());
         if (existingDiamond != null) {
             throw new RuntimeException("Diamond already exists");
         }
@@ -68,7 +68,7 @@ public class DiamondController {
     }
 
     @DeleteMapping("/diamonds/{diamondId}/details/{id}")
-    public void deleteDiamondDetail(@PathVariable int diamondId, @PathVariable int id) {
+    public void deleteDiamondDetail(@PathVariable int id) {
         DiamondDetail existingDiamondDetail = diamondDetailService.findById(id);
         if (existingDiamondDetail == null) {
             throw new RuntimeException("DiamondDetail not found");
@@ -77,13 +77,12 @@ public class DiamondController {
     }
 
     @PutMapping("/diamonds/{diamondId}/details/{id}")
-    public void updateDiamondDetail(@PathVariable int diamondId, @PathVariable int id, @RequestBody DiamondDetail diamondDetail) {
+    public void updateDiamondDetail(@PathVariable int id, @RequestBody DiamondDetail diamondDetail) {
         DiamondDetail existingDiamondDetail = diamondDetailService.findById(id);
         if (existingDiamondDetail == null) {
             throw new RuntimeException("DiamondDetail not found");
         }
         existingDiamondDetail.setDiamond(diamondDetail.getDiamond());
-//        existingDiamondDetail.setDetail(diamondDetail.getDetail());
         diamondDetailService.save(existingDiamondDetail);
     }
 }
