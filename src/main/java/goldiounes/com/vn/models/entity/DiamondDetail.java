@@ -1,4 +1,4 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -41,19 +41,19 @@ public class DiamondDetail {
         DiamondDetailID = diamondDetailID;
     }
 
-    public goldiounes.com.vn.models.Diamond getDiamond() {
+    public goldiounes.com.vn.models.entity.Diamond getDiamond() {
         return Diamond;
     }
 
-    public void setDiamond(goldiounes.com.vn.models.Diamond diamond) {
+    public void setDiamond(goldiounes.com.vn.models.entity.Diamond diamond) {
         Diamond = diamond;
     }
 
-    public goldiounes.com.vn.models.ProductDetail getProductDetail() {
+    public goldiounes.com.vn.models.entity.ProductDetail getProductDetail() {
         return ProductDetail;
     }
 
-    public void setProductDetail(goldiounes.com.vn.models.ProductDetail productDetail) {
+    public void setProductDetail(goldiounes.com.vn.models.entity.ProductDetail productDetail) {
         ProductDetail = productDetail;
     }
 

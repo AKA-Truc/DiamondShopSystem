@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.Point;
-import goldiounes.com.vn.models.User;
+import goldiounes.com.vn.models.entity.Point;
+import goldiounes.com.vn.models.entity.User;
 import goldiounes.com.vn.repositories.PointRepo;
 import goldiounes.com.vn.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

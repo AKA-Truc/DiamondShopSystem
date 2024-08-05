@@ -1,4 +1,4 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

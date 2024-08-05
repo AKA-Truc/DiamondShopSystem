@@ -1,4 +1,4 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -50,19 +50,19 @@ public class Warranty {
         WarrantyID = warrantyID;
     }
 
-    public goldiounes.com.vn.models.Product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(goldiounes.com.vn.models.Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public goldiounes.com.vn.models.User getUser() {
+    public goldiounes.com.vn.models.entity.User getUser() {
         return User;
     }
 
-    public void setUser(goldiounes.com.vn.models.User user) {
+    public void setUser(goldiounes.com.vn.models.entity.User user) {
         User = user;
     }
 

@@ -1,6 +1,6 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.Promotion;
+import goldiounes.com.vn.models.entity.Promotion;
 import goldiounes.com.vn.repositories.PromotionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

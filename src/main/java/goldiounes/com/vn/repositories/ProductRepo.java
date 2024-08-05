@@ -1,6 +1,6 @@
 package goldiounes.com.vn.repositories;
 
-import goldiounes.com.vn.models.Product;
+import goldiounes.com.vn.models.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +15,5 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     List<Product> findByProductName(@Param("ProductName") String ProductName);
 
     @Query("select p from Product p where  p.Category.CategoryName Like %:KeyWord%")
-    List<Product> findByCategoryId(@Param("KeyWord") String KeyWord);
+    List<Product> findByCategoryKeyWord(@Param("KeyWord") String KeyWord);
 }

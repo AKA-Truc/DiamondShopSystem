@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models;
 
+import goldiounes.com.vn.models.entity.Setting;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class SettingTest {

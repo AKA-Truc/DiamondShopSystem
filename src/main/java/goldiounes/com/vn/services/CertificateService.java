@@ -1,14 +1,13 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.Certificate;
-import goldiounes.com.vn.models.Diamond;
+import goldiounes.com.vn.models.entity.Certificate;
+import goldiounes.com.vn.models.entity.Diamond;
 import goldiounes.com.vn.repositories.CertificateRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CertificateService {

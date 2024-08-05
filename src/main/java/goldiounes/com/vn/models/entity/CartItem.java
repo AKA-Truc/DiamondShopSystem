@@ -1,4 +1,4 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -49,11 +49,11 @@ public class CartItem {
         this.cart = cart;
     }
 
-    public goldiounes.com.vn.models.Product getProduct() {
+    public goldiounes.com.vn.models.entity.Product getProduct() {
         return Product;
     }
 
-    public void setProduct(goldiounes.com.vn.models.Product product) {
+    public void setProduct(goldiounes.com.vn.models.entity.Product product) {
         Product = product;
     }
 

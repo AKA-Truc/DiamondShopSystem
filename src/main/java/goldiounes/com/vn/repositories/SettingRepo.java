@@ -1,6 +1,6 @@
 package goldiounes.com.vn.repositories;
 
-import goldiounes.com.vn.models.Setting;
+import goldiounes.com.vn.models.entity.Setting;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,7 @@
 package goldiounes.com.vn.models;
 
+import goldiounes.com.vn.models.entity.Category;
+import goldiounes.com.vn.models.entity.Product;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
