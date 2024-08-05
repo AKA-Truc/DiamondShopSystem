@@ -28,7 +28,6 @@ public class CartItem {
     }
 
     public CartItem(Cart cartID, Product product, int quantity) {
-        cart = cartID;
         Product = product;
         Quantity = quantity;
     }

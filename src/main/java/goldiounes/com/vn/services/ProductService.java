@@ -52,8 +52,9 @@ public class ProductService {
         }
         Product product = modelMapper.map(productDTO, Product.class);
         product.setCategory(category);
+        product.setSellingPrice(productDTO.getLaborCost()*productDTO.getMarkupRate());
         productRepo.save(product);
-        return modelMapper.map(product, ProductDTO.class);
+        return modelMapper.map(product,new TypeToken<ProductDTO>() {}.getType());
     }
 
     public void deleteProduct(int id) {
@@ -66,6 +67,9 @@ public class ProductService {
 
     public List<ProductDTO> findByName(String name) {
         List<Product> products = productRepo.findByProductName(name);
+        if (products.isEmpty()) {
+            throw new RuntimeException("No products found");
+        }
         return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
@@ -84,11 +88,19 @@ public class ProductService {
         return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
-    public ProductDTO updateProduct(int id, ProductDTO productDTO) {
+    public ProductDTO updateProduct(int id,ProductDTO productDTO) {
         Product existingProduct = productRepo.findById(id).get();
         if (existingProduct == null) {
             throw new RuntimeException("Product not found");
         }
+        existingProduct.setProductName(productDTO.getProductName());
+        existingProduct.setInventory(productDTO.getInventory());
+        existingProduct.setWarrantyPeriod(productDTO.getWarrantyPeriod());
+        existingProduct.setImageURL(productDTO.getImageURL());
+        existingProduct.setLaborCost(productDTO.getLaborCost());
+        existingProduct.setMarkupRate(productDTO.getMarkupRate());
+        existingProduct.setSellingPrice(productDTO.getLaborCost()*productDTO.getMarkupRate());
+        productRepo.save(existingProduct);
         return modelMapper.map(productRepo.save(existingProduct), ProductDTO.class);
     }
 
