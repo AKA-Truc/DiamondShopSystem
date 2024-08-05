@@ -1,4 +1,4 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class  Certificate {
         //default constructor
     }
 
-    public Certificate(goldiounes.com.vn.models.Diamond diamond, String GIACode) {
+    public Certificate(goldiounes.com.vn.models.entity.Diamond diamond, String GIACode) {
         this.Diamond = diamond;
         this.GIACode = GIACode;
     }
@@ -36,11 +36,11 @@ public class  Certificate {
         CertificateID = certificateID;
     }
 
-    public goldiounes.com.vn.models.Diamond getDiamond() {
+    public goldiounes.com.vn.models.entity.Diamond getDiamond() {
         return Diamond;
     }
 
-    public void setDiamond(goldiounes.com.vn.models.Diamond diamond) {
+    public void setDiamond(goldiounes.com.vn.models.entity.Diamond diamond) {
         this.Diamond = diamond;
     }
 

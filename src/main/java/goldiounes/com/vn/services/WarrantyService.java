@@ -1,6 +1,6 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.Warranty;
+import goldiounes.com.vn.models.entity.Warranty;
 import goldiounes.com.vn.repositories.WarrantyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.CartItem;
+import goldiounes.com.vn.models.entity.CartItem;
 import goldiounes.com.vn.repositories.CartItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

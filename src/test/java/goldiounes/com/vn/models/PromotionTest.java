@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models;
 
+import goldiounes.com.vn.models.entity.Promotion;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;

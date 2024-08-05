@@ -1,4 +1,8 @@
 package goldiounes.com.vn.models;
+import goldiounes.com.vn.models.entity.Category;
+import goldiounes.com.vn.models.entity.Product;
+import goldiounes.com.vn.models.entity.User;
+import goldiounes.com.vn.models.entity.Warranty;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;

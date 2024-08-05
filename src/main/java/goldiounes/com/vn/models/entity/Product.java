@@ -1,8 +1,5 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +14,7 @@ public class Product {
     @Column(name = "ProductID")
     private int ProductID;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", nullable = false)
     private Category Category;
 
@@ -45,11 +42,14 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<ProductDetail> ProductDetails;
 
-    @OneToMany(mappedBy = "product")
-    private List<Warranty> Warranties;
+    @OneToMany(mappedBy = "Product")
+    private List<CartItem> CartItems;
 
     @OneToMany(mappedBy = "Product")
-    private List<Receipt> Receipts;
+    private List<OrderDetail> OrderDetails;
+
+    @OneToMany(mappedBy = "Product")
+    private List<Receipt> Receipt;
 
     public Product() {
         //cstor
@@ -74,11 +74,11 @@ public class Product {
         ProductID = productID;
     }
 
-    public goldiounes.com.vn.models.Category getCategory() {
+    public goldiounes.com.vn.models.entity.Category getCategory() {
         return Category;
     }
 
-    public void setCategory(goldiounes.com.vn.models.Category category) {
+    public void setCategory(goldiounes.com.vn.models.entity.Category category) {
         Category = category;
     }
 
@@ -114,20 +114,20 @@ public class Product {
         LaborCost = laborCost;
     }
 
-    public double getSellingPrice() {
-        return SellingPrice;
-    }
-
-    public void setSellingPrice(double sellingPrice) {
-        SellingPrice = sellingPrice;
-    }
-
     public double getWarrantyPeriod() {
         return WarrantyPeriod;
     }
 
     public void setWarrantyPeriod(double warrantyPeriod) {
         WarrantyPeriod = warrantyPeriod;
+    }
+
+    public double getSellingPrice() {
+        return SellingPrice;
+    }
+
+    public void setSellingPrice(double sellingPrice) {
+        SellingPrice = sellingPrice;
     }
 
     public int getInventory() {
@@ -146,19 +146,27 @@ public class Product {
         ProductDetails = productDetails;
     }
 
-    public List<Receipt> getReceipts() {
-        return Receipts;
+    public List<CartItem> getCartItems() {
+        return CartItems;
     }
 
-    public void setReceipts(List<Receipt> receipts) {
-        Receipts = receipts;
+    public void setCartItems(List<CartItem> cartItems) {
+        CartItems = cartItems;
     }
 
-    public List<Warranty> getWarranties() {
-        return Warranties;
+    public List<OrderDetail> getOrderDetails() {
+        return OrderDetails;
     }
 
-    public void setWarranties(List<Warranty> warranties) {
-        Warranties = warranties;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        OrderDetails = orderDetails;
+    }
+
+    public List<goldiounes.com.vn.models.entity.Receipt> getReceipt() {
+        return Receipt;
+    }
+
+    public void setReceipt(List<goldiounes.com.vn.models.entity.Receipt> receipt) {
+        Receipt = receipt;
     }
 }

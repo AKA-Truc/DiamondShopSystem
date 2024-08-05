@@ -1,14 +1,13 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.Cart;
-import goldiounes.com.vn.models.User;
+import goldiounes.com.vn.models.entity.Cart;
+import goldiounes.com.vn.models.entity.User;
 import goldiounes.com.vn.repositories.CartRepo;
 import goldiounes.com.vn.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartService {

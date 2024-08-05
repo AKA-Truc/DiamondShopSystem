@@ -1,4 +1,4 @@
-package goldiounes.com.vn.models;
+package goldiounes.com.vn.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -31,7 +31,7 @@ public class OrderDetail {
         //cstor
     }
 
-    public OrderDetail(goldiounes.com.vn.models.Order order, goldiounes.com.vn.models.Product product, int quantity, double price) {
+    public OrderDetail(goldiounes.com.vn.models.entity.Order order, goldiounes.com.vn.models.entity.Product product, int quantity, double price) {
         Order = order;
         Product = product;
         Quantity = quantity;
