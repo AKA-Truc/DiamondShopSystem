@@ -1,7 +1,6 @@
 package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.models.dto.UserDTO;
-import goldiounes.com.vn.models.entity.User;
 import goldiounes.com.vn.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -41,6 +41,7 @@ public class ProductDTO {
         this.imageURL = imageURL;
         this.markupRate = markupRate;
         this.laborCost = laborCost;
+        this.sellingPrice = sellingPrice;
         this.warrantyPeriod = warrantyPeriod;
         this.inventory = inventory;
         this.category = category;

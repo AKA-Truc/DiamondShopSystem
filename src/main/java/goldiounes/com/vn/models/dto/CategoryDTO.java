@@ -11,15 +11,6 @@ public class CategoryDTO {
     @JsonIgnoreProperties("category")
     private List<ProductDTO> products;
 
-    public CategoryDTO() {
-        //default
-    }
-
-    public CategoryDTO(int categoryID, String categoryName, List<ProductDTO> products) {
-        this.categoryID = categoryID;
-        this.categoryName = categoryName;
-        this.products = products;
-    }
 
     // Getters và setters
     public int getCategoryID() {
