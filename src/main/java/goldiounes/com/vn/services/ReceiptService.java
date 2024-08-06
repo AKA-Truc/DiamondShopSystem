@@ -1,28 +1,77 @@
 package goldiounes.com.vn.services;
 
+import goldiounes.com.vn.models.dto.ReceiptDTO;
+import goldiounes.com.vn.models.entity.Product;
 import goldiounes.com.vn.models.entity.Receipt;
 import goldiounes.com.vn.repositories.ReceiptRepo;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReceiptService {
 
     @Autowired
     private ReceiptRepo receiptRepo;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public List<Receipt> findAll() {
-        return receiptRepo.findAll();
+    public List<ReceiptDTO> getAllReceipts() {
+        List<Receipt> receipts = receiptRepo.findAll();
+        if (receipts.isEmpty()) {
+            throw new RuntimeException("No receipts found");
+        }
+        return modelMapper.map(receipts, new TypeToken<List<ReceiptDTO>>() {}.getType());
     }
-    public Receipt findById(int id) {
-        return receiptRepo.findById(id).get();
+
+    public ReceiptDTO getReceipt(int id) {
+        Optional<Receipt> existingReceipt = receiptRepo.findById(id);
+        if (existingReceipt.isEmpty()) {
+            throw new RuntimeException("No receipt found ");
+        }
+        return modelMapper.map(existingReceipt, new TypeToken<ReceiptDTO>() {}.getType());
     }
-    public Receipt save(Receipt receipt) {
-        return receiptRepo.save(receipt);
+
+    public ReceiptDTO createReceipt(ReceiptDTO receiptDTO) {
+        Product existingProduct = productService.getProduct(receiptDTO.getProduct().getProductID());
+        if (existingProduct == null) {
+            throw new RuntimeException("Product not found");
+        }
+        Optional<Receipt> existingReceipt = receiptRepo.findById(receiptDTO.getReceiptID());
+        if (existingReceipt.isEmpty()) {
+            throw new RuntimeException("No receipt found ");
+        }
+        Receipt receipt = modelMapper.map(receiptDTO, Receipt.class);
+        receiptRepo.save(receipt);
+        return modelMapper.map(receipt, new TypeToken<ReceiptDTO>() {}.getType());
     }
-    public void deleteById(int id) {
+
+    public void deleteReceipt(int id) {
+        Receipt existingreceipt = receiptRepo.findById(id).get();
+        if (existingreceipt == null) {
+            throw new RuntimeException("No receipt found ");
+        }
         receiptRepo.deleteById(id);
     }
+
+    public ReceiptDTO updateReceipt(int id, ReceiptDTO receiptDTO) {
+        Receipt existingReceipt = receiptRepo.findById(receiptDTO.getReceiptID()).get();
+        if (existingReceipt == null) {
+            throw new RuntimeException("No receipt found ");
+        }
+        existingReceipt.setQuantity(receiptDTO.getQuantity());
+        if (receiptDTO.getProduct() != null && receiptDTO.getProduct().getProductID() > 0) {
+            Product existingProduct = productService.getProduct(receiptDTO.getProduct().getProductID());
+            existingReceipt.setProduct(existingProduct);
+        }
+        receiptRepo.save(existingReceipt);
+        return modelMapper.map(existingReceipt, new TypeToken<ReceiptDTO>() {}.getType());
+}
+
 }
