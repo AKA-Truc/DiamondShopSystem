@@ -59,3 +59,52 @@
 //        return categoryService.save(existingCategory);
 //    }
 //}
+
+package goldiounes.com.vn.controllers;
+
+import goldiounes.com.vn.models.entity.Category;
+import goldiounes.com.vn.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/category-management")
+public class CategoryController {
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping("/categories")
+    public List<Category> getAllCategories() {
+        return categoryService.findAll();
+    }
+
+    @GetMapping("/categories/{id}")
+    public Category getCategoryById(@PathVariable int id) {
+        return categoryService.findById(id);
+    }
+
+    @PostMapping("/categories")
+    public Category createCategory(@RequestBody Category category) {
+        return categoryService.save(category);
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public void deleteCategory(@PathVariable int id) {
+        categoryService.deleteById(id);
+    }
+
+    @PutMapping("/categories/{id}")
+    public Category updateCategory(@PathVariable int id, @RequestBody Category category) {
+        category.setCategoryID(id);
+        return categoryService.save(category);
+    }
+
+    @GetMapping("/categories/search")
+    public List<Category> searchCategories(@RequestParam String keyword) {
+        return categoryService.findCategoryByKeyword(keyword);
+    }
+}
+
