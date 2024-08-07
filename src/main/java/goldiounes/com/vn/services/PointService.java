@@ -24,6 +24,13 @@ public class PointService {
     public Point findById(int id) {
         return pointRepo.findById(id).get();
     }
+    public Point findById(int id) {
+        Optional<Point> optionalPoint = pointRepo.findById(id);
+        if (!optionalPoint.isPresent()) {
+            throw new RuntimeException("Point with ID not found");
+        }
+        return optionalPoint.get();
+    }
     public Point createPoint(Point point) {
         Optional<User> userOptional = userRepo.findById(point.getUser().getUserID());
         if (!userOptional.isPresent()) {
@@ -34,10 +41,21 @@ public class PointService {
     }
 
     public void deleteById(int id) {
+        if (!pointRepo.existsById(id)) {
+            throw new RuntimeException("Point not found");
+        }
         pointRepo.deleteById(id);
     }
 
-    public Point save(Point point) {
+    public Point updatePoint(Point point) {
+        if (!pointRepo.existsById(point.getPointID())) {
+            throw new RuntimeException("Point not found");
+        }
         return pointRepo.save(point);
     }
 }
+
+
+
+
+
