@@ -41,6 +41,9 @@ public class WarrantyService {
 
     public WarrantyDTO getWarranty(int id) {
         Warranty existingWarranty = warrantyRepo.findById(id).get();
+        if (existingWarranty == null) {
+            throw new RuntimeException("Warranty not found");
+        }
         return modelMapper.map(existingWarranty, WarrantyDTO.class);
     }
 
