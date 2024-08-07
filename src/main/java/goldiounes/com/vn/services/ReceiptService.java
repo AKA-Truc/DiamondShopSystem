@@ -3,6 +3,7 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dto.ReceiptDTO;
 import goldiounes.com.vn.models.entity.Product;
 import goldiounes.com.vn.models.entity.Receipt;
+import goldiounes.com.vn.repositories.ProductRepo;
 import goldiounes.com.vn.repositories.ReceiptRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -18,7 +19,7 @@ public class ReceiptService {
     @Autowired
     private ReceiptRepo receiptRepo;
     @Autowired
-    private ProductService productService;
+    private ProductRepo productRepo;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -39,7 +40,7 @@ public class ReceiptService {
     }
 
     public ReceiptDTO createReceipt(ReceiptDTO receiptDTO) {
-        Product existingProduct = productService.getProduct(receiptDTO.getProduct().getProductID());
+        Product existingProduct = productRepo.findById(receiptDTO.getProduct().getProductID()).get();
         if (existingProduct == null) {
             throw new RuntimeException("Product not found");
         }
@@ -67,7 +68,7 @@ public class ReceiptService {
         }
         existingReceipt.setQuantity(receiptDTO.getQuantity());
         if (receiptDTO.getProduct() != null && receiptDTO.getProduct().getProductID() > 0) {
-            Product existingProduct = productService.getProduct(receiptDTO.getProduct().getProductID());
+            Product existingProduct = productRepo.findById(receiptDTO.getProduct().getProductID()).get();
             existingReceipt.setProduct(existingProduct);
         }
         receiptRepo.save(existingReceipt);
