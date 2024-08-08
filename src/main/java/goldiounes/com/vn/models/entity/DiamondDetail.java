@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models.entity;
 
+import goldiounes.com.vn.models.dto.ProductDetailDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -64,4 +65,5 @@ public class DiamondDetail {
     public void setQuantity(int quantity) {
         Quantity = quantity;
     }
+
 }

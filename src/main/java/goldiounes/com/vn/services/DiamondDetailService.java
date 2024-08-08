@@ -1,8 +1,8 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.dto.DiamondDetailDTO;
-import goldiounes.com.vn.models.entity.DiamondDetail;
 import goldiounes.com.vn.models.entity.Diamond;
+import goldiounes.com.vn.models.entity.DiamondDetail;
 import goldiounes.com.vn.models.entity.ProductDetail;
 import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
@@ -52,12 +52,9 @@ public class DiamondDetailService {
     public DiamondDetailDTO save(DiamondDetailDTO diamondDetailDTO) {
         Diamond diamond = diamondRepo.findById(diamondDetailDTO.getDiamond().getDiamondID())
                 .orElseThrow(() -> new RuntimeException("Diamond not found"));
-        ProductDetail productDetail = productDetailRepo.findById(diamondDetailDTO.getProductDetail().getProductDetailID())
-                .orElseThrow(() -> new RuntimeException("ProductDetail not found"));
 
         DiamondDetail diamondDetail = modelMapper.map(diamondDetailDTO, DiamondDetail.class);
         diamondDetail.setDiamond(diamond);
-        diamondDetail.setProductDetail(productDetail);
 
         DiamondDetail savedDiamondDetail = diamondDetailRepo.save(diamondDetail);
         return modelMapper.map(savedDiamondDetail, DiamondDetailDTO.class);
@@ -76,12 +73,10 @@ public class DiamondDetailService {
 
         Diamond diamond = diamondRepo.findById(diamondDetailDTO.getDiamond().getDiamondID())
                 .orElseThrow(() -> new RuntimeException("Diamond not found"));
-        ProductDetail productDetail = productDetailRepo.findById(diamondDetailDTO.getProductDetail().getProductDetailID())
-                .orElseThrow(() -> new RuntimeException("ProductDetail not found"));
 
         existingDiamondDetail.setDiamond(diamond);
-        existingDiamondDetail.setProductDetail(productDetail);
         existingDiamondDetail.setQuantity(diamondDetailDTO.getQuantity());
+//        existingDiamondDetail.setProductDetail(diamondDetailDTO.getProductDetail());
 
         DiamondDetail savedDiamondDetail = diamondDetailRepo.save(existingDiamondDetail);
         return modelMapper.map(savedDiamondDetail, DiamondDetailDTO.class);
