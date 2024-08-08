@@ -8,11 +8,11 @@ import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import goldiounes.com.vn.repositories.ProductDetailRepo;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DiamondDetailService {
@@ -29,56 +29,47 @@ public class DiamondDetailService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<DiamondDetailDTO> findByDiamondId(int diamondId) {
-        List<DiamondDetail> diamondDetails = diamondDetailRepo.findByDiamondId(diamondId);
-        return diamondDetails.stream()
-                .map(diamondDetail -> modelMapper.map(diamondDetail, DiamondDetailDTO.class))
-                .collect(Collectors.toList());
-    }
 
     public List<DiamondDetailDTO> findAll() {
         List<DiamondDetail> diamondDetails = diamondDetailRepo.findAll();
-        return diamondDetails.stream()
-                .map(diamondDetail -> modelMapper.map(diamondDetail, DiamondDetailDTO.class))
-                .collect(Collectors.toList());
+        if (diamondDetails.isEmpty()) {
+            throw new RuntimeException("Diamond Details List is empty");
+        }
+        return modelMapper.map(diamondDetails,new TypeToken<List<DiamondDetailDTO>>(){}.getType());
     }
 
     public DiamondDetailDTO findById(int id) {
-        DiamondDetail diamondDetail = diamondDetailRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("DiamondDetail not found"));
+        DiamondDetail diamondDetail = diamondDetailRepo.findById(id).orElseThrow(() -> new RuntimeException("DiamondDetail not found"));
         return modelMapper.map(diamondDetail, DiamondDetailDTO.class);
     }
 
-    public DiamondDetailDTO save(DiamondDetailDTO diamondDetailDTO) {
-        Diamond diamond = diamondRepo.findById(diamondDetailDTO.getDiamond().getDiamondID())
+    public DiamondDetailDTO createDiamondDetail(DiamondDetailDTO diamondDetailDTO) {
+        Diamond existingDiamond = diamondRepo.findById(diamondDetailDTO.getDiamond().getDiamondID())
                 .orElseThrow(() -> new RuntimeException("Diamond not found"));
-
+        ProductDetail existingProductDetail = productDetailRepo.findById(diamondDetailDTO.getProductDetail().getProductDetailID())
+                .orElseThrow(() -> new RuntimeException("ProductDetail not found"));
         DiamondDetail diamondDetail = modelMapper.map(diamondDetailDTO, DiamondDetail.class);
-        diamondDetail.setDiamond(diamond);
-
-        DiamondDetail savedDiamondDetail = diamondDetailRepo.save(diamondDetail);
-        return modelMapper.map(savedDiamondDetail, DiamondDetailDTO.class);
+        diamondDetailRepo.save(diamondDetail);
+        return modelMapper.map(diamondDetail, DiamondDetailDTO.class);
     }
 
     public void deleteById(int id) {
-        if (!diamondDetailRepo.existsById(id)) {
-            throw new RuntimeException("DiamondDetail not found");
-        }
-        diamondDetailRepo.deleteById(id);
+        DiamondDetail existingDiamondDetail = diamondDetailRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("DiamondDetail not found"));
+        diamondDetailRepo.delete(existingDiamondDetail);
     }
 
     public DiamondDetailDTO update(int id, DiamondDetailDTO diamondDetailDTO) {
-        DiamondDetail existingDiamondDetail = diamondDetailRepo.findById(id)
+        DiamondDetail diamondDetail = diamondDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("DiamondDetail not found"));
-
-        Diamond diamond = diamondRepo.findById(diamondDetailDTO.getDiamond().getDiamondID())
+        Diamond existingDiamond = diamondRepo.findById(diamondDetailDTO.getDiamond().getDiamondID())
                 .orElseThrow(() -> new RuntimeException("Diamond not found"));
-
-        existingDiamondDetail.setDiamond(diamond);
-        existingDiamondDetail.setQuantity(diamondDetailDTO.getQuantity());
-//        existingDiamondDetail.setProductDetail(diamondDetailDTO.getProductDetail());
-
-        DiamondDetail savedDiamondDetail = diamondDetailRepo.save(existingDiamondDetail);
-        return modelMapper.map(savedDiamondDetail, DiamondDetailDTO.class);
+        ProductDetail existingProductDetail = productDetailRepo.findById(diamondDetailDTO.getProductDetail().getProductID())
+                .orElseThrow(() -> new RuntimeException("ProductDetail not found"));
+        diamondDetail.setProductDetail(existingProductDetail);
+        diamondDetail.setDiamond(existingDiamond);
+        diamondDetail.setQuantity(diamondDetailDTO.getQuantity());
+        diamondDetailRepo.save(diamondDetail);
+        return modelMapper.map(diamondDetail, DiamondDetailDTO.class);
     }
 }

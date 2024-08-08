@@ -19,6 +19,7 @@ public class SettingService {
 
     @Autowired
     private ProductDetailService productDetailService;
+
     @Autowired
     private ModelMapper modelMapper;
 

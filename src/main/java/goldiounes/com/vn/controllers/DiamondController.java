@@ -2,8 +2,6 @@ package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.models.dto.DiamondDTO;
 import goldiounes.com.vn.models.dto.DiamondDetailDTO;
-import goldiounes.com.vn.models.entity.Diamond;
-import goldiounes.com.vn.models.entity.DiamondDetail;
 import goldiounes.com.vn.services.DiamondDetailService;
 import goldiounes.com.vn.services.DiamondService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +35,8 @@ public class DiamondController {
     }
 
     @PutMapping("/diamonds/{id}")
-    public void updateDiamond(@PathVariable int id, @RequestBody DiamondDTO diamondDTO) {
-        diamondService.updateDiamond(id, diamondDTO);
+    public DiamondDTO updateDiamond(@PathVariable int id, @RequestBody DiamondDTO diamondDTO) {
+        return diamondService.updateDiamond(id, diamondDTO);
     }
 
     @DeleteMapping("/diamonds/{id}")
@@ -46,23 +44,27 @@ public class DiamondController {
         diamondService.deleteDiamond(id);
     }
 
-    @PostMapping("/diamonds/{diamondId}/details")
-    public DiamondDetailDTO createDiamondDetail(@PathVariable int diamondId, @RequestBody DiamondDetailDTO diamondDetailDTO) {
-        diamondDetailDTO.setDiamond(diamondService.findById(diamondId));
-        return diamondDetailService.save(diamondDetailDTO);
+    @PostMapping("/diamond-details")
+    public DiamondDetailDTO createDiamondDetail(@RequestBody DiamondDetailDTO diamondDetailDTO) {
+        return diamondDetailService.createDiamondDetail(diamondDetailDTO);
     }
 
-    @GetMapping("/diamonds/{diamondId}/details")
-    public List<DiamondDetailDTO> getDiamondDetailsByDiamondId(@PathVariable int diamondId) {
-        return diamondDetailService.findByDiamondId(diamondId);
+    @GetMapping("/diamond-details")
+    public List<DiamondDetailDTO> getAllDiamondDetails() {
+        return diamondDetailService.findAll();
     }
 
-    @DeleteMapping("/diamonds/{diamondId}/details/{id}")
+    @GetMapping("/diamond-details/{id}")
+    public DiamondDetailDTO getDiamondDetail(@PathVariable int id) {
+        return diamondDetailService.findById(id);
+    }
+
+    @DeleteMapping("/diamond-details/{id}")
     public void deleteDiamondDetail(@PathVariable int id) {
         diamondDetailService.deleteById(id);
     }
 
-    @PutMapping("/diamonds/{diamondId}/details/{id}")
+    @PutMapping("/diamonds-details/{id}")
     public DiamondDetailDTO updateDiamondDetail(@PathVariable int id, @RequestBody DiamondDetailDTO diamondDetailDTO) {
         return diamondDetailService.update(id, diamondDetailDTO);
     }

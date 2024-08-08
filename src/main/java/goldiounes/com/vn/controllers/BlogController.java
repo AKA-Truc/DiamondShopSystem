@@ -37,10 +37,8 @@ public class BlogController {
         return blogService.updateBlog(id, blogDTO);
     }
 
-
     @DeleteMapping("/blogs/{id}")
     public void deleteBlog(@PathVariable int id) {
         blogService.deleteBlog(id);
     }
-
 }

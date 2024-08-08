@@ -1,10 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.ProductDetailDTO;
 import goldiounes.com.vn.models.entity.ProductDetail;
 import goldiounes.com.vn.repositories.ProductDetailRepo;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,39 +13,55 @@ public class ProductDetailService {
     @Autowired
     private ProductDetailRepo productDetailRepo;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public List<ProductDetailDTO> findAll() {
-        List<ProductDetail> productDetails = productDetailRepo.findAll();
-        if (productDetails.isEmpty()) {
-            throw new RuntimeException("No products found");
-        } else {
-            return modelMapper.map(productDetails, new TypeToken<List<ProductDetailDTO>>() {
-            }.getType());
-        }
+    public List<ProductDetail> findAll() {
+        return productDetailRepo.findAll();
     }
-
-    public ProductDetailDTO findById(int id) {
-        ProductDetail existingProductDetail = productDetailRepo.findById(id).orElseThrow(() -> new RuntimeException("No productdetail found"));
-        return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {
-        }.getType());
+    public ProductDetail findById(int id) {
+        return productDetailRepo.findById(id).get();
     }
-
-    public ProductDetailDTO createProductDetail(ProductDetail productDetail) {
-        Optional<ProductDetail> existingProduct;
-        existingProduct = productDetailRepo.findById(productDetail.getProductDetailID());
-        if (existingProduct.isPresent()) {
-            throw new RuntimeException("Product already exists");
-        }
-        else {
-            return modelMapper.map(existingProduct, new TypeToken<List<ProductDetailDTO>>() {
-            }.getType());
-        }
+    public ProductDetail save(ProductDetail ProductDetail) {
+        return productDetailRepo.save(ProductDetail);
     }
-
-    public void deleteById( int id){
-        ProductDetail existingProductDetail = productDetailRepo.findById(id).orElseThrow(() -> new RuntimeException("No productdetail found"));
+    public void deleteById(int id) {
         productDetailRepo.deleteById(id);
     }
 }
+
+//package goldiounes.com.vn.services;
+//
+//import goldiounes.com.vn.models.entity.ProductDetail;
+//import goldiounes.com.vn.repositories.ProductDetailRepo;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//@Service
+//public class ProductDetailService {
+//    @Autowired
+//    private ProductDetailRepo productDetailRepo;
+//
+//    public List<ProductDetail> findAll() {
+//        return productDetailRepo.findAll();
+//    }
+//
+//    public ProductDetail findById(int id) {
+//        Optional<ProductDetail> optionalProductDetail = productDetailRepo.findById(id);
+//        if (!optionalProductDetail.isPresent()) {
+//            throw new RuntimeException("ProductDetail not found");
+//        }
+//        return optionalProductDetail.get();
+//    }
+//
+//    public ProductDetail save(ProductDetail productDetail) {
+//        return productDetailRepo.save(productDetail);
+//    }
+//
+//    public void deleteById(int id) {
+//        if (!productDetailRepo.existsById(id)) {
+//            throw new RuntimeException("ProductDetail not found");
+//        }
+//        productDetailRepo.deleteById(id);
+//    }
+//

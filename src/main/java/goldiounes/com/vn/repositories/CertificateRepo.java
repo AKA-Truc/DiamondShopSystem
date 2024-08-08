@@ -13,6 +13,4 @@ public interface CertificateRepo extends JpaRepository<Certificate, Integer> {
 
     @Query("select c from Certificate c where c.GIACode=:giaCode")
     Certificate findByGIACode(@Param("giaCode") String giaCode);
-
-    Optional<Object> findByDiamondId(int diamondId);
 }

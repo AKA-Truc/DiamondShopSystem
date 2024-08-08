@@ -1,42 +1,40 @@
 package goldiounes.com.vn.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class PointDTO {
+    private int PointID;
+    private int Points;
+    @JsonIgnoreProperties("users")
+    private UserDTO user;
 
-    private int pointID;
-    private int value;
-    private String description;
-    private int userID;
+    //constructor
+    public PointDTO() {
 
+    }
+    public PointDTO(int PointID, int Points, UserDTO user) {
+        this.PointID = PointID;
+        this.Points = Points;
+        this.user = user;
+    }
+
+    //getter and setter
     public int getPointID() {
-        return pointID;
+        return PointID;
     }
-
     public void setPointID(int pointID) {
-        this.pointID = pointID;
+        PointID = pointID;
     }
-
-    public int getValue() {
-        return value;
+    public int getPoints() {
+        return Points;
     }
-
-    public void setValue(int value) {
-        this.value = value;
+    public void setPoints(int points) {
+        Points = points;
     }
-
-    public String getDescription() {
-        return description;
+    public UserDTO getUser() {
+        return user;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }
 

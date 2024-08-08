@@ -17,7 +17,6 @@ public class CartDTO {
     private List<CartItemDTO> CartItems;
 
     public CartDTO() {
-
     }
 
     public CartDTO(int cartID, UserDTO users) {
