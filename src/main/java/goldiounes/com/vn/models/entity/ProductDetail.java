@@ -23,7 +23,7 @@ public class ProductDetail {
     @JoinColumn(name = "SettingID", nullable = false)
     private Setting setting;
 
-    @Column(name = "LoborCost", nullable = false)
+    @Column(name = "LaborCost", nullable = false)
     private int LaborCost;
 
     @OneToMany(mappedBy = "ProductDetail")

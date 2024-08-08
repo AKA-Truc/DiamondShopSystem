@@ -1,57 +1,38 @@
-//package goldiounes.com.vn.models;
-//
-//import goldiounes.com.vn.controllers.BlogController;
-//import goldiounes.com.vn.services.BlogService;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.mockito.Mockito.*;
-//
-//public class BlogTest {
-//
-//    @Mock
-//    private BlogService blogService;
-//
-//    @InjectMocks
-//    private BlogController blogController;
-//
-//    public BlogTest() {
-//        MockitoAnnotations.openMocks(this);
-//    }
-//
-//    @Test
-//    public void testCreateBlog_Conflict() {
-//        Blog blog = new Blog("Test Title", "Test Content");
-//        when(blogService.findByName(blog.getTitle())).thenReturn(blog);
-//
-//        ResponseEntity<Blog> response = blogController.createBlog(blog);
-//
-//        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
-//        assertEquals(null, response.getBody());
-//    }
-//
-//    @Test
-//    public void testGetBlogById_Success() {
-//        Blog blog = new Blog("Test Title", "Test Content");
-//        when(blogService.findById(1)).thenReturn(blog);
-//
-//        ResponseEntity<Blog> response = blogController.getBlogById(1);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(blog, response.getBody());
-//    }
-//
-//    @Test
-//    public void testDeleteBlog_NotFound() {
-//        when(blogService.findById(1)).thenReturn(null);
-//
-//        ResponseEntity<HttpStatus> response = blogController.deleteBlog(1);
-//
-//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-//    }
-//}
+package goldiounes.com.vn.models;
+
+import goldiounes.com.vn.models.entity.Blog;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+public class BlogTest {
+    @Test
+    void testGetterAndSetter() {
+        Blog blog = new Blog("Java","Web");
+
+        assertEquals("Javascript", blog.getTitle());
+        assertEquals("Laptrinhweb", blog.getContent());
+
+        blog.setTitle("Javasrc");
+        assertEquals("Javasrc", blog.getTitle());
+        blog.setContent("Laptrinh");
+        assertEquals("Laptrinh", blog.getContent());
+    }
+
+    @Test
+    void testConstructor() {
+        Blog blog = new Blog("Script","Lapweb");
+        assertNotNull(blog);
+        assertEquals("Script", blog.getTitle());
+        assertEquals("Lapweb", blog.getContent());
+    }
+
+    @Test
+    void testDefaultConstructor() {
+        Blog blog = new Blog();
+        assertNotNull(blog);
+        assertEquals("", blog.getTitle());
+        assertEquals("", blog.getContent());
+    }
+}
