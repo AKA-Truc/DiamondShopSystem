@@ -10,6 +10,7 @@ public class DiamondDetailDTO {
     private int quantity;
 
 
+
     public int getDiamondDetailID() {
         return diamondDetailID;
     }

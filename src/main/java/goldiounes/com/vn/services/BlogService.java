@@ -66,6 +66,4 @@ public class BlogService {
         blogRepo.save(existingBlog);
         return modelMapper.map(existingBlog, new TypeToken<BlogDTO>() {}.getType());
     }
-
-
 }
