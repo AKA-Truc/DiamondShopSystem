@@ -22,12 +22,9 @@ public class PointService {
         return pointRepo.findAll();
     }
     public Point findById(int id) {
-        return pointRepo.findById(id).get();
-    }
-    public Point findById(int id) {
         Optional<Point> optionalPoint = pointRepo.findById(id);
         if (!optionalPoint.isPresent()) {
-            throw new RuntimeException("Point with ID not found");
+            throw new RuntimeException("Point with ID: " + id + " not found");
         }
         return optionalPoint.get();
     }
