@@ -39,3 +39,4 @@ public class PointDTO {
         this.userID = userID;
     }
 }
+
