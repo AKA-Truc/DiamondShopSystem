@@ -20,19 +20,19 @@ public class PointController {
         return pointService.findAll();
     }
 
-    @GetMapping("/points/{id}")
+    @GetMapping("/points")
     public PointDTO getPointById(@PathVariable int id) {
         return pointService.findById(id);
     }
 
     @PostMapping("/points")
     public PointDTO createPoint(@RequestBody Point point) {
-        return pointService.createPoint(point);
+        return pointService.createpoint(point);
     }
 
     @PutMapping("/points/{id}")
-    public PointDTO updatePoint(@PathVariable int id, @RequestBody Point point) {
-        return pointService.updatePoint(point);
+    public PointDTO updatePoint(@PathVariable int id, @RequestBody PointDTO pointDTO) {
+        return pointService.updatePoint(id,pointDTO);
     }
 
     @DeleteMapping("/points/{id}")
