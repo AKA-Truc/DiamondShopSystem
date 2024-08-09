@@ -30,12 +30,6 @@ public class ProductDetailController {
         return productDetailService.createProductDetail(productDetail);
     }
 
-//    @PutMapping("/productdetails/{id}")
-//    public ProductDetailDTO updateProductDetail(@PathVariable int id, @RequestBody ProductDetail productDetail) {
-//        productDetail.setProductDetailID(id);
-//        return productDetailService.save(productDetail);
-//    }
-
     @DeleteMapping("/productdetails/{id}")
     public void deleteProductDetail(@PathVariable int id) {
         productDetailService.deleteById(id);
