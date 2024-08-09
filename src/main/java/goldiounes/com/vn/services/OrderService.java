@@ -93,14 +93,9 @@ public class OrderService {
             orderDetail.setQuantity(orderDetailDTO.getQuantity());
             orderDetail.setOrder(existingOrder);
             updatedOrderDetails.add(orderDetail);
-
-            double originalPrice = product.getSellingPrice();
-            double discountedPrice = promotion != null ?
-                    originalPrice - (originalPrice * promotion.getDiscountPercent() / 100) :
-                    originalPrice;
-            totalPrice += discountedPrice * orderDetail.getQuantity();
+            totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
         }
-
+        totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
         existingOrder.setOrderDetails(updatedOrderDetails);
         existingOrder.setPromotion(promotion);
         existingOrder.setTotalPrice(totalPrice);

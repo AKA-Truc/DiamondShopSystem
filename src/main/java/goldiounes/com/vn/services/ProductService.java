@@ -96,6 +96,7 @@ public class ProductService {
         existingProduct.setProductName(productDTO.getProductName());
         existingProduct.setInventory(productDTO.getInventory());
         existingProduct.setWarrantyPeriod(productDTO.getWarrantyPeriod());
+        existingProduct.setSize(productDTO.getSize());
         existingProduct.setImageURL(productDTO.getImageURL());
         existingProduct.setLaborCost(productDTO.getLaborCost());
         existingProduct.setMarkupRate(productDTO.getMarkupRate());
