@@ -1,23 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Trang chủ</title>
-        <link rel="stylesheet" href="/static/css/about_us.css">
-    </head>
-    <body>
-        <div class="header">
-            <a href="index.html"><img src="/static/images/logo.jpg" alt="logo"></a>
-            <nav class="navbar">
-                <a href="">VỀ CHÚNG TÔI</a>
-                <a href="">TRANG SỨC KIM CƯƠNG</a>
-                <a href="">BẢNG GIÁ</a>
-                <a href="">KHUYẾN MÃI</a>
-                <a href="">TIN TỨC</a>
-                <a href="">LIÊN HỆ</a>
-            </nav>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về chúng tôi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/css/about_us.css">
+</head>
+<body>
+<div class="header1">
+    <p class="phone">Phone: (+84) 123 2345 123</p>
+    <p class="center" id="center-text">hello</p>
+    <p class="address">Liên hệ </p>
+</div>
+<div class="header">
+    <div class="header-content">
+        <div class="icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="./login.html"><i style="color: rgb(43, 43, 108);" class="fa-regular fa-user"></i></a>
+            <i class="fa-regular fa-heart"></i>
+            <a href="./haha.html"><i style="color: rgb(43, 43, 108);" class="fa-solid fa-cart-shopping"></i></a>
         </div>
-    <script src="/static/js/index.js"></script>
-    </body>
+        <a href="index.html" class="logo"><img src="/classes/static/images/logo.jpg" alt="logo"></a>
+    </div>
+</div>
+<ul id="main-menu">
+    <li><a href="./about_us.html">Về chúng tôi </a></li>
+    <li><a href="../thucdon/thucdon.html">Trang sức kim cương </a>
+        <ul class="sub-menu">
+            <li class="has-child"><a href="">NHẪN KIM CƯƠNG</a>
+                <ul class="sub-menu">
+                    <li><a href="">NHẪN KIM CƯƠNG NAM</a></li>
+                    <li><a href="">NHẪN KIM CƯƠNG NỮ</a></li>
+                </ul>
+            </li>
+            <li><a href="">BÔNG TAI KIM CƯƠNG</a></li>
+            <li><a href="">LẮC/VÒNG TAY KIM CƯƠNG</a></li>
+            <li><a href="">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>
+            <li class="has-child"><a href="">BỘ TRANG SỨC KIM CƯƠNG</a>
+                <ul class="sub-menu">
+                    <li><a href="">TRANG SỨC VỎ</a></li>
+                    <li><a href="">TRANG SỨC HOÀN CHỈNH</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><a href="../thucdon/thucdon.html">Bảng giá</a>
+        <ul class="sub-menu">
+            <li><a href="">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="../tintuc/tintuc.html">Khuyến mãi</a></li>
+    <li><a href="../lienhe/lienhe.html">Tin tức</a></li>
+    <li><a href="../lienhe/lienhe.html">Liên hệ</a></li>
+</ul>
+<script src="/static/js/about_us.js"></script>
+</body>
 </html>
