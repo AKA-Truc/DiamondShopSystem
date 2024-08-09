@@ -29,7 +29,7 @@ public class CertificateService {
         if (!existingDiamond.isPresent()) {
             throw new RuntimeException("Diamond not found");
         }
-        Optional<Object> existingCertificate = certificateRepo.findByDiamondId(diamondId);
+        Optional<Certificate> existingCertificate = certificateRepo.findByDiamondId(diamondId);
         if (!existingCertificate.isPresent()) {
             throw new RuntimeException("Certificate not found");
         }
