@@ -3,16 +3,15 @@ package goldiounes.com.vn.models;
 import goldiounes.com.vn.models.entity.Blog;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BlogTest {
     @Test
     void testGetterAndSetter() {
         Blog blog = new Blog("Java","Web");
 
-        assertEquals("Javascript", blog.getTitle());
-        assertEquals("Laptrinhweb", blog.getContent());
+        assertEquals("Java", blog.getTitle());
+        assertEquals("Web", blog.getContent());
 
         blog.setTitle("Javasrc");
         assertEquals("Javasrc", blog.getTitle());
@@ -32,7 +31,7 @@ public class BlogTest {
     void testDefaultConstructor() {
         Blog blog = new Blog();
         assertNotNull(blog);
-        assertEquals("", blog.getTitle());
-        assertEquals("", blog.getContent());
+        assertNull(blog.getTitle());
+        assertNull(blog.getContent());
     }
 }

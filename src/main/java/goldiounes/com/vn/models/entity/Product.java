@@ -24,6 +24,9 @@ public class Product {
     @Column(name = "ImageURL")
     private String ImageURL;
 
+    @Column(name = "size", nullable = true)
+    private int Size;
+
     @Column(name = "MarkupRate",nullable = false)
     private double MarkupRate;
 
@@ -98,6 +101,14 @@ public class Product {
         ImageURL = imageURL;
     }
 
+    public int getSize() {
+        return Size;
+    }
+
+    public void setSize(int size) {
+        Size = size;
+    }
+
     public double getMarkupRate() {
         return MarkupRate;
     }
@@ -114,20 +125,20 @@ public class Product {
         LaborCost = laborCost;
     }
 
-    public double getWarrantyPeriod() {
-        return WarrantyPeriod;
-    }
-
-    public void setWarrantyPeriod(double warrantyPeriod) {
-        WarrantyPeriod = warrantyPeriod;
-    }
-
     public double getSellingPrice() {
         return SellingPrice;
     }
 
     public void setSellingPrice(double sellingPrice) {
         SellingPrice = sellingPrice;
+    }
+
+    public double getWarrantyPeriod() {
+        return WarrantyPeriod;
+    }
+
+    public void setWarrantyPeriod(double warrantyPeriod) {
+        WarrantyPeriod = warrantyPeriod;
     }
 
     public int getInventory() {

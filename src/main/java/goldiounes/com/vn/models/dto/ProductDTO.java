@@ -9,6 +9,7 @@ public class ProductDTO {
     private int productID;
     private String productName;
     private String imageURL;
+    private int size;
     private double markupRate;
     private double laborCost;
     private double sellingPrice;
@@ -35,10 +36,11 @@ public class ProductDTO {
         //default
     }
 
-    public ProductDTO(int productID, String productName, String imageURL, double markupRate, double laborCost, double sellingPrice, double warrantyPeriod, int inventory, CategoryDTO category) {
+    public ProductDTO(int productID, String productName, String imageURL, int size,double markupRate, double laborCost, double sellingPrice, double warrantyPeriod, int inventory, CategoryDTO category) {
         this.productID = productID;
         this.productName = productName;
         this.imageURL = imageURL;
+        this.size = size;
         this.markupRate = markupRate;
         this.laborCost = laborCost;
         this.sellingPrice = sellingPrice;
@@ -71,6 +73,14 @@ public class ProductDTO {
         this.imageURL = imageURL;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public double getMarkupRate() {
         return markupRate;
     }
@@ -79,20 +89,20 @@ public class ProductDTO {
         this.markupRate = markupRate;
     }
 
-    public double getLaborCost() {
-        return laborCost;
-    }
-
-    public void setLaborCost(double laborCost) {
-        this.laborCost = laborCost;
-    }
-
     public double getSellingPrice() {
         return sellingPrice;
     }
 
     public void setSellingPrice(double sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public double getLaborCost() {
+        return laborCost;
+    }
+
+    public void setLaborCost(double laborCost) {
+        this.laborCost = laborCost;
     }
 
     public double getWarrantyPeriod() {
