@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.BlogDTO;
-import goldiounes.com.vn.models.entity.Blog;
+import goldiounes.com.vn.models.dtos.BlogDTO;
+import goldiounes.com.vn.models.entities.Blog;
 import goldiounes.com.vn.repositories.BlogRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -48,12 +48,13 @@ public class BlogService {
         return modelMapper.map(blog, new TypeToken<BlogDTO>() {}.getType());
     }
 
-    public void deleteBlog(int id) {
+    public boolean deleteBlog(int id) {
         Blog existingBlog = blogRepo.findById(id).get();
         if (existingBlog == null) {
             throw new RuntimeException("No blog not found");
         }
         blogRepo.deleteById(id);
+        return false;
     }
 
     public BlogDTO updateBlog(int id, BlogDTO blogDTO) {

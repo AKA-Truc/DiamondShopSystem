@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.CategoryDTO;
-import goldiounes.com.vn.models.entity.Category;
+import goldiounes.com.vn.models.dtos.CategoryDTO;
+import goldiounes.com.vn.models.entities.Category;
 import goldiounes.com.vn.repositories.CategoryRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -35,9 +35,13 @@ public class CategoryService {
         }.getType());
     }
 
-    public CategoryDTO createCategory(Category category) {
-        Category newCategory = modelMapper.map(categoryRepo.saveAndFlush(category), Category.class);
-        return modelMapper.map(category, new TypeToken<CategoryDTO>(){}.getType());
+    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        Category newCategory = modelMapper.map(categoryDTO, Category.class);
+        if(categoryRepo.findByName(categoryDTO.getCategoryName()) != null){
+            throw new RuntimeException("Category name already exists");
+        }
+        categoryRepo.save(newCategory);
+        return modelMapper.map(newCategory, new TypeToken<CategoryDTO>(){}.getType());
     }
 
     public void deleteById ( int id){

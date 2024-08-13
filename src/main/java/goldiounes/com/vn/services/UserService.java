@@ -1,11 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.UserDTO;
-import goldiounes.com.vn.models.entity.User;
+import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.entities.Point;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.UserRepo;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,9 @@ public class UserService {
     private CartService cartService;
 
     @Autowired
+    private PointService pointService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public List<UserDTO> getAllUsers() {
@@ -33,10 +34,8 @@ public class UserService {
     }
 
     public UserDTO getUser(int id) {
-        User existingUser = userRepo.findById(id).get();
-        if (existingUser == null) {
-            throw new RuntimeException("No user found");
-        }
+        User existingUser = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found"));
         return modelMapper.map(existingUser,new TypeToken<UserDTO>(){}.getType());
     }
 
@@ -48,15 +47,18 @@ public class UserService {
         return modelMapper.map(existingUser,new TypeToken<UserDTO>(){}.getType());
     }
 
-    public UserDTO createUser(UserDTO userDTO) {
-        User existingUser = userRepo.findByEmail(userDTO.getEmail());
+    public UserDTO createUser(User user) {
+        User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser != null) {
             throw new RuntimeException("User already exists");
         }
-        User user = modelMapper.map(userDTO,User.class);
-        userRepo.save(user);
-        cartService.createCart(user);
-        return modelMapper.map(user,new TypeToken<UserDTO>(){}.getType());
+        User newUser =  userRepo.save(user);
+        cartService.createCart(newUser);
+        Point existingPoint = new Point();
+        existingPoint.setUser(user);
+//        existingPoint.setPoints(0);
+//        pointService.createPoint(existingPoint);
+        return modelMapper.map(newUser,new TypeToken<UserDTO>(){}.getType());
     }
 
     public void deleteUser(int id) {

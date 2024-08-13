@@ -1,6 +1,6 @@
 package goldiounes.com.vn.models;
 
-import goldiounes.com.vn.models.entity.*;
+import goldiounes.com.vn.models.entities.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -26,12 +26,11 @@ public class OrderDetailTest {
         Product product = new Product(category,"BBB","URL",
                 1.2,500,24,10);
 
-        OrderDetail orderDetail = new OrderDetail(order, product, 20, 30);
+        OrderDetail orderDetail = new OrderDetail(order, product, 20);
 
         assertEquals(order, orderDetail.getOrder());
         assertEquals(product, orderDetail.getProduct());
         assertEquals(20, orderDetail.getQuantity());
-        assertEquals(30, orderDetail.getPrice());
     }
 
     @Test
@@ -52,14 +51,13 @@ public class OrderDetailTest {
         Product product = new Product(category,"BBB","URL",
                 1.2,500,24,10);
 
-        OrderDetail orderDetail = new OrderDetail(order, product, 20, 30);
+        OrderDetail orderDetail = new OrderDetail(order, product, 20);
 
         assertNotNull(orderDetail);
 
         assertEquals(order, orderDetail.getOrder());
         assertEquals(product, orderDetail.getProduct());
         assertEquals(20, orderDetail.getQuantity());
-        assertEquals(30, orderDetail.getPrice());
     }
 
     @Test
@@ -71,6 +69,5 @@ public class OrderDetailTest {
         assertNull(orderDetail.getOrder());
         assertNull(orderDetail.getProduct());
         assertEquals(0, orderDetail.getQuantity());
-        assertEquals(0, orderDetail.getPrice());
     }
 }

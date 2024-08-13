@@ -1,9 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.WarrantyDTO;
-import goldiounes.com.vn.models.entity.Product;
-import goldiounes.com.vn.models.entity.User;
-import goldiounes.com.vn.models.entity.Warranty;
+import goldiounes.com.vn.models.dtos.WarrantyDTO;
+import goldiounes.com.vn.models.entities.Product;
+import goldiounes.com.vn.models.entities.User;
+import goldiounes.com.vn.models.entities.Warranty;
 import goldiounes.com.vn.repositories.WarrantyRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import goldiounes.com.vn.repositories.UserRepo;

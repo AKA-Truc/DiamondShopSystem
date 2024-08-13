@@ -1,6 +1,6 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.ReceiptDTO;
+import goldiounes.com.vn.models.dtos.ReceiptDTO;
 import goldiounes.com.vn.services.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

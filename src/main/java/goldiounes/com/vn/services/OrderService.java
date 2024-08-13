@@ -1,9 +1,10 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.OrderDTO;
-import goldiounes.com.vn.models.dto.OrderDetailDTO;
-import goldiounes.com.vn.models.entity.*;
+import goldiounes.com.vn.models.dtos.OrderDTO;
+import goldiounes.com.vn.models.dtos.OrderDetailDTO;
+import goldiounes.com.vn.models.entities.*;
 import goldiounes.com.vn.repositories.*;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,17 +34,27 @@ public class OrderService {
     private CartItemRepo cartItemRepo;
 
     @Autowired
+    private OrderDetailService orderDetailService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
+    @Transactional
     public OrderDTO createOrder(Order order) {
         User user = userRepo.findById(order.getUser().getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         order.setUser(user);
-        Cart cart = cartRepo.findCartByUserId(order.getUser().getUserID());
+
+        Cart cart = cartRepo.findCartByUserId(user.getUserID());
         if (cart == null) {
             throw new RuntimeException("Cart not found");
         }
+
         List<OrderDetail> orderDetails = order.getOrderDetails();
+        if (orderDetails.isEmpty()) {
+            throw new RuntimeException("OrderDetail not found");
+        }
+
         for (CartItem cartItem : cart.getCartItems()) {
             for (OrderDetail orderDetail : orderDetails) {
                 if (orderDetail.getProduct().getProductID() == cartItem.getProduct().getProductID()) {
@@ -51,6 +62,7 @@ public class OrderService {
                 }
             }
         }
+
         order.setCart(cart);
         order.setStatus("New");
 
@@ -59,19 +71,29 @@ public class OrderService {
             Product product = productRepo.findById(orderDetail.getProduct().getProductID())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
             orderDetail.setProduct(product);
-            orderDetail.setOrder(order);
+            orderDetail.setOrder(order); // Set the order for each order detail
             totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
         }
 
-        Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
-                .orElseThrow(() -> new RuntimeException("Promotion not found"));
-        order.setPromotion(promotion);
-        totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
+        if (order.getPromotion() != null) {
+            Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
+                    .orElseThrow(() -> new RuntimeException("Promotion not found"));
+            order.setPromotion(promotion);
+            totalPrice -= (promotion.getDiscountPercent() * totalPrice) / 100;
+        }
+
         order.setTotalPrice(totalPrice);
 
-        Order savedOrder = orderRepo.save(order);
+        Order savedOrder = orderRepo.save(order); // Save the order first
+
+        for (OrderDetail orderDetail : orderDetails) {
+            orderDetail.setOrder(savedOrder); // Ensure orderDetail references the saved order
+            orderDetailService.save(orderDetail,savedOrder.getOrderID()); // Save each orderDetail
+        }
+
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
+
 
     public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
         Order existingOrder = orderRepo.findById(id)

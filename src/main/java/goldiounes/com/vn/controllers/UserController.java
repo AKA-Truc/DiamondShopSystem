@@ -1,6 +1,7 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.UserDTO;
+import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public UserDTO createUser(@RequestBody UserDTO user) {
+    public UserDTO createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 

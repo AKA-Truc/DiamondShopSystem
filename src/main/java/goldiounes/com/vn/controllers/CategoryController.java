@@ -1,7 +1,7 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.CategoryDTO;
-import goldiounes.com.vn.models.entity.Category;
+import goldiounes.com.vn.models.dtos.CategoryDTO;
+import goldiounes.com.vn.models.entities.Category;
 import goldiounes.com.vn.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public CategoryDTO createCategory(@RequestBody Category category) {
+    public CategoryDTO createCategory(@RequestBody CategoryDTO category) {
         return categoryService.createCategory(category);
     }
 
@@ -35,11 +35,11 @@ public class CategoryController {
         categoryService.deleteById(id);
     }
 
-    @PutMapping("/categories/{id}")
-    public CategoryDTO updateCategory(@PathVariable int id, @RequestBody Category category) {
-        category.setCategoryID(id);
-        return categoryService.createCategory(category);
-    }
+//    @PutMapping("/categories/{id}")
+//    public CategoryDTO updateCategory(@PathVariable int id, @RequestBody Category category) {
+//        category.setCategoryID(id);
+//        return categoryService.createCategory(category);
+//    }
 
     @GetMapping("/categories/search")
     public List<CategoryDTO> searchCategories(@RequestParam String keyword) {

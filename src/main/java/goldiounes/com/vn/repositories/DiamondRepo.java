@@ -1,6 +1,6 @@
 package goldiounes.com.vn.repositories;
 
-import goldiounes.com.vn.models.entity.Diamond;
+import goldiounes.com.vn.models.entities.Diamond;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

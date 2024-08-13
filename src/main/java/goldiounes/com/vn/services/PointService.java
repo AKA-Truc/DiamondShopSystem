@@ -1,7 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.PointDTO;
-import goldiounes.com.vn.models.entity.Point;
+import goldiounes.com.vn.models.dtos.PointDTO;
+import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.entities.Point;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.PointRepo;
 import goldiounes.com.vn.repositories.UserRepo;
 import org.modelmapper.ModelMapper;
@@ -27,8 +29,7 @@ public class PointService {
         if (points.isEmpty()) {
             throw new RuntimeException("No points found");
         } else {
-            return modelMapper.map(points, new TypeToken<List<PointDTO>>() {
-            }.getType());
+            return modelMapper.map(points, new TypeToken<List<PointDTO>>() {}.getType());
         }
     }
 
@@ -37,23 +38,25 @@ public class PointService {
         return modelMapper.map(existingPoint, new TypeToken<PointDTO>() {}.getType());
     }
 
-    public PointDTO createpoint(Point point) {
+    public PointDTO createPoint(Point point) {
+        User existingUser = userRepo.findById(point.getUser().getUserID())
+                .orElseThrow(() -> new RuntimeException("No User found"));
         Point newpoint = modelMapper.map(pointRepo.saveAndFlush(point), Point.class);
-        return modelMapper.map(point, new TypeToken<PointDTO>() {
-        }.getType());
+        newpoint.setUser(existingUser);
+        return modelMapper.map(point, new TypeToken<PointDTO>() {}.getType());
     }
 
     public void deleteById(int id) {
         Point existingPoint = pointRepo.findById(id).orElseThrow(() -> new RuntimeException("No points found"));
-        pointRepo.deleteById(id);
+        pointRepo.deleteById(existingPoint.getUser().getUserID());
     }
 
     public PointDTO updatePoint(int id, PointDTO pointDTO) {
-        Point existingPoint = pointRepo.findById(id).get();
-        if (existingPoint == null) {
-            throw new RuntimeException("Point not found");
-        }
-        pointRepo.save(existingPoint);
+        Point existingPoint = pointRepo.findById(id).orElseThrow(() -> new RuntimeException("No point found"));
+        User existingUser = userRepo.findById(existingPoint.getUser().getUserID())
+                .orElseThrow(() -> new RuntimeException("No User found"));
+        existingPoint.setUser(existingUser);
+        existingPoint.setPoints(pointDTO.getPoints());
         return modelMapper.map(pointRepo.save(existingPoint), PointDTO.class);
     }
 }

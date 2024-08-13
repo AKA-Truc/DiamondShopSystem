@@ -1,9 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.DiamondDetailDTO;
-import goldiounes.com.vn.models.entity.Diamond;
-import goldiounes.com.vn.models.entity.DiamondDetail;
-import goldiounes.com.vn.models.entity.ProductDetail;
+import goldiounes.com.vn.models.dtos.DiamondDetailDTO;
+import goldiounes.com.vn.models.entities.Diamond;
+import goldiounes.com.vn.models.entities.DiamondDetail;
+import goldiounes.com.vn.models.entities.ProductDetail;
 import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import goldiounes.com.vn.repositories.ProductDetailRepo;

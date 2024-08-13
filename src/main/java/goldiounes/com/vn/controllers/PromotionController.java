@@ -1,7 +1,7 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.PromotionDTO;
-import goldiounes.com.vn.models.entity.Promotion;
+import goldiounes.com.vn.models.dtos.PromotionDTO;
+import goldiounes.com.vn.models.entities.Promotion;
 import goldiounes.com.vn.services.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

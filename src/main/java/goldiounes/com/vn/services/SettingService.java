@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.SettingDTO;
-import goldiounes.com.vn.models.entity.Setting;
+import goldiounes.com.vn.models.dtos.SettingDTO;
+import goldiounes.com.vn.models.entities.Setting;
 import goldiounes.com.vn.repositories.SettingRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

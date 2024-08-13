@@ -1,9 +1,9 @@
 package goldiounes.com.vn.models;
 
-import goldiounes.com.vn.models.entity.Cart;
-import goldiounes.com.vn.models.entity.Order;
-import goldiounes.com.vn.models.entity.Promotion;
-import goldiounes.com.vn.models.entity.User;
+import goldiounes.com.vn.models.entities.Cart;
+import goldiounes.com.vn.models.entities.Order;
+import goldiounes.com.vn.models.entities.Promotion;
+import goldiounes.com.vn.models.entities.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;

@@ -1,7 +1,7 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.DiamondDTO;
-import goldiounes.com.vn.models.dto.DiamondDetailDTO;
+import goldiounes.com.vn.models.dtos.DiamondDTO;
+import goldiounes.com.vn.models.dtos.DiamondDetailDTO;
 import goldiounes.com.vn.services.DiamondDetailService;
 import goldiounes.com.vn.services.DiamondService;
 import org.springframework.beans.factory.annotation.Autowired;

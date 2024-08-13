@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.DiamondDTO;
-import goldiounes.com.vn.models.entity.Diamond;
+import goldiounes.com.vn.models.dtos.DiamondDTO;
+import goldiounes.com.vn.models.entities.Diamond;
 import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import org.modelmapper.ModelMapper;
@@ -36,13 +36,15 @@ public class DiamondService {
     }
 
     public DiamondDTO createDiamond(DiamondDTO diamondDTO) {
+        Diamond diamond = modelMapper.map(diamondDTO, Diamond.class);
         Diamond existingDiamond = diamondRepo.findDiamond(diamondDTO.getCarat(),diamondDTO.getClarity(),diamondDTO.getColor()
                                                  ,diamondDTO.getCut(),diamondDTO.getOrigin());
-        if (existingDiamond.getDiamondDetails() == null) {
-            throw new RuntimeException("Diamond Details not found");
+        if (existingDiamond != null) {
+            throw new RuntimeException("Diamond already exists");
+        } else {
+            Diamond newDiamond = diamondRepo.save(diamond);
+            return modelMapper.map(newDiamond, DiamondDTO.class);
         }
-        Diamond newDiamond = diamondRepo.save(existingDiamond);
-        return modelMapper.map(newDiamond, DiamondDTO.class);
     }
 
     public DiamondDTO updateDiamond(int id, DiamondDTO diamondDTO) {

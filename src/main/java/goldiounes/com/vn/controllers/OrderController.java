@@ -1,9 +1,9 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.OrderDTO;
-import goldiounes.com.vn.models.dto.OrderDetailDTO;
-import goldiounes.com.vn.models.entity.Order;
-import goldiounes.com.vn.models.entity.OrderDetail;
+import goldiounes.com.vn.models.dtos.OrderDTO;
+import goldiounes.com.vn.models.dtos.OrderDetailDTO;
+import goldiounes.com.vn.models.entities.Order;
+import goldiounes.com.vn.models.entities.OrderDetail;
 import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class OrderController {
 
     @PostMapping("/orders/{orderId}/details")
     public OrderDetailDTO createOrderDetail(@PathVariable int orderId, @RequestBody OrderDetail orderDetail) {
-        return orderDetailService.save(orderDetail);
+        return orderDetailService.save(orderDetail,orderId);
     }
 
     @GetMapping("/orders/{orderId}/details")
@@ -61,7 +61,7 @@ public class OrderController {
     }
 
     @PutMapping("/orders/{orderId}/details/{id}")
-    public OrderDetailDTO updateOrderDetail(@RequestBody OrderDetail orderDetail) {
-        return orderDetailService.save(orderDetail);
+    public OrderDetailDTO updateOrderDetail(@PathVariable int orderId ,@RequestBody OrderDetail orderDetail) {
+        return orderDetailService.save(orderDetail,orderId);
     }
 }
