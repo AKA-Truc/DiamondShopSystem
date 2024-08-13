@@ -1,8 +1,12 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.OrderDetailDTO;
-import goldiounes.com.vn.models.entity.OrderDetail;
+import goldiounes.com.vn.models.dtos.OrderDetailDTO;
+import goldiounes.com.vn.models.entities.Order;
+import goldiounes.com.vn.models.entities.OrderDetail;
+import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.repositories.OrderDetailRepo;
+import goldiounes.com.vn.repositories.OrderRepo;
+import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,12 @@ public class OrderDetailService {
 
     @Autowired
     private OrderDetailRepo orderDetailRepo;
+
+    @Autowired
+    private OrderRepo orderRepo;
+
+    @Autowired
+    private ProductRepo productRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -39,7 +49,13 @@ public class OrderDetailService {
         return modelMapper.map(orderDetail, OrderDetailDTO.class);
     }
 
-    public OrderDetailDTO save(OrderDetail orderDetail) {
+    public OrderDetailDTO save(OrderDetail orderDetail,int orderID) {
+        Order existingOrder = orderRepo.findById(orderID)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        orderDetail.setOrder(existingOrder);
+        Product existingProduct = productRepo.findById(orderDetail.getProduct().getProductID())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        orderDetail.setProduct(existingProduct);
         OrderDetail savedOrderDetail = orderDetailRepo.save(orderDetail);
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);
     }
@@ -56,7 +72,6 @@ public class OrderDetailService {
         existingOderDetail.setOrderDetailID(orderDetail.getOrderDetailID());
         existingOderDetail.setOrder(orderDetail.getOrder());
         existingOderDetail.setQuantity(orderDetail.getQuantity());
-        existingOderDetail.setPrice(orderDetail.getPrice());
         existingOderDetail.setProduct(orderDetail.getProduct());
         OrderDetail savedOrderDetail = orderDetailRepo.save(existingOderDetail);
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);

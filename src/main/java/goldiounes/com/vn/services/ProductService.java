@@ -1,8 +1,8 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.ProductDTO;
-import goldiounes.com.vn.models.entity.Category;
-import goldiounes.com.vn.models.entity.Product;
+import goldiounes.com.vn.models.dtos.ProductDTO;
+import goldiounes.com.vn.models.entities.Category;
+import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.repositories.CategoryRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;

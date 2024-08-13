@@ -1,6 +1,6 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.ProductDTO;
+import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

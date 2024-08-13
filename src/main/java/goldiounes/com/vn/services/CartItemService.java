@@ -1,9 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.CartItemDTO;
-import goldiounes.com.vn.models.entity.Cart;
-import goldiounes.com.vn.models.entity.CartItem;
-import goldiounes.com.vn.models.entity.Product;
+import goldiounes.com.vn.models.dtos.CartItemDTO;
+import goldiounes.com.vn.models.entities.Cart;
+import goldiounes.com.vn.models.entities.CartItem;
+import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.repositories.CartItemRepo;
 import goldiounes.com.vn.repositories.CartRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartItemService {
@@ -75,21 +74,23 @@ public class CartItemService {
     }
 
 
-    public void removeCartItem(int id) {
+    public boolean removeCartItem(int id) {
         CartItem existingCartItem = cartItemRepo.findById(id).get();
         if (existingCartItem == null) {
             throw new RuntimeException("Cart item not found");
         }
         cartItemRepo.delete(existingCartItem);
+        return false;
     }
 
     @Transactional
-    public void removeAllCartItems(int id) {
+    public boolean removeAllCartItems(int id) {
         Cart existingCart = cartRepo.findById(id).get();
         if (existingCart == null) {
             throw new RuntimeException("Cart not found");
         }
         cartItemRepo.deleteByCartID(id);
+        return false;
     }
 
     public List<CartItemDTO> findByCarId(int id) {

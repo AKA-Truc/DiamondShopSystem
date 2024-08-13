@@ -1,7 +1,7 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.PointDTO;
-import goldiounes.com.vn.models.entity.Point;
+import goldiounes.com.vn.models.dtos.PointDTO;
+import goldiounes.com.vn.models.entities.Point;
 import goldiounes.com.vn.services.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ public class PointController {
 
     @PostMapping("/points")
     public PointDTO createPoint(@RequestBody Point point) {
-        return pointService.createpoint(point);
+        return pointService.createPoint(point);
     }
 
     @PutMapping("/points/{id}")
