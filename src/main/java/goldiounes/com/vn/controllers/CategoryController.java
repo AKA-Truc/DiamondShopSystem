@@ -35,11 +35,10 @@ public class CategoryController {
         categoryService.deleteById(id);
     }
 
-//    @PutMapping("/categories/{id}")
-//    public CategoryDTO updateCategory(@PathVariable int id, @RequestBody Category category) {
-//        category.setCategoryID(id);
-//        return categoryService.createCategory(category);
-//    }
+    @PutMapping("/categories/{id}")
+    public CategoryDTO updateCategory(@PathVariable int id, @RequestBody CategoryDTO categoryDTO) {
+        return categoryService.updateCategory(id, categoryDTO);
+    }
 
     @GetMapping("/categories/search")
     public List<CategoryDTO> searchCategories(@RequestParam String keyword) {
