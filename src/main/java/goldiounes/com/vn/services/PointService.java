@@ -38,11 +38,12 @@ public class PointService {
         return modelMapper.map(existingPoint, new TypeToken<PointDTO>() {}.getType());
     }
 
-    public PointDTO createPoint(Point point) {
+    public PointDTO createPoint(PointDTO pointDTO) {
+        Point point = modelMapper.map(pointDTO, Point.class);
         User existingUser = userRepo.findById(point.getUser().getUserID())
                 .orElseThrow(() -> new RuntimeException("No User found"));
-        Point newpoint = modelMapper.map(pointRepo.saveAndFlush(point), Point.class);
-        newpoint.setUser(existingUser);
+        point.setUser(existingUser);
+        pointRepo.save(point);
         return modelMapper.map(point, new TypeToken<PointDTO>() {}.getType());
     }
 
