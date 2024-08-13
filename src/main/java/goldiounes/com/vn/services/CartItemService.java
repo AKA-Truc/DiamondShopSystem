@@ -38,18 +38,16 @@ public class CartItemService {
         return modelMapper.map(cartItems,new TypeToken<List<CartItemDTO>>(){}.getType());
     }
 
-    public CartItem findById(int id) {
-        return cartItemRepo.findById(id).orElse(null);
-    }
-
     public CartItemDTO addItem(CartItemDTO cartItemDTO) {
-        Cart existingCart = cartRepo.findById(cartItemDTO.getCart().getCartID())
+        CartItem cartItem = modelMapper.map(cartItemDTO, CartItem.class);
+        Cart existingCart = cartRepo.findById(cartItem.getCart().getCartID())
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
 
-        Product existingProduct = productRepo.findById(cartItemDTO.getProduct().getProductID())
+        Product existingProduct = productRepo.findById(cartItem.getProduct().getProductID())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         List<CartItem> cartItems = cartItemRepo.findByCartID(existingCart.getCartID());
+
         CartItem updatedCartItem = null;
         boolean itemExists = false;
 
@@ -63,41 +61,35 @@ public class CartItemService {
             }
         }
         if (!itemExists) {
-            CartItem cartItem = new CartItem();
-            cartItem.setCart(existingCart);
-            cartItem.setProduct(existingProduct);
-            cartItem.setQuantity(cartItemDTO.getQuantity());
-            cartItemRepo.save(cartItem);
-            updatedCartItem = cartItem;
+            CartItem newCartItem = new CartItem();
+            newCartItem.setCart(existingCart);
+            newCartItem.setProduct(existingProduct);
+            newCartItem.setQuantity(cartItemDTO.getQuantity());
+            cartItemRepo.save(newCartItem);
+            updatedCartItem = newCartItem;
         }
         return modelMapper.map(updatedCartItem, CartItemDTO.class);
     }
 
 
     public boolean removeCartItem(int id) {
-        CartItem existingCartItem = cartItemRepo.findById(id).get();
-        if (existingCartItem == null) {
-            throw new RuntimeException("Cart item not found");
-        }
+        CartItem existingCartItem = cartItemRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cart item not found"));
         cartItemRepo.delete(existingCartItem);
         return false;
     }
 
     @Transactional
     public boolean removeAllCartItems(int id) {
-        Cart existingCart = cartRepo.findById(id).get();
-        if (existingCart == null) {
-            throw new RuntimeException("Cart not found");
-        }
-        cartItemRepo.deleteByCartID(id);
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+        cartItemRepo.deleteByCartID(existingCart.getCartID());
         return false;
     }
 
     public List<CartItemDTO> findByCarId(int id) {
-        Cart existingCart = cartRepo.findById(id).get();
-        if (existingCart == null) {
-            throw new RuntimeException("Cart not found");
-        }
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
         List<CartItem> cartItems = cartItemRepo.findByCartID(id);
         if (cartItems.isEmpty()) {
             throw new RuntimeException("No cart items found");
@@ -106,15 +98,12 @@ public class CartItemService {
     }
 
     public CartItemDTO updateQuantity(int id,CartItemDTO cartItemDTO) {
-        Cart existingCart = cartRepo.findById(id).get();
-        if (existingCart == null) {
-            throw new RuntimeException("Cart not found");
-        }
-        CartItem existingCartItem = cartItemRepo.findById(cartItemDTO.getCart().getCartID()).get();
-        if (existingCartItem == null) {
-            throw new RuntimeException("Cart item not found");
-        }
-        existingCartItem.setQuantity(cartItemDTO.getQuantity());
+        CartItem cartItem = modelMapper.map(cartItemDTO, CartItem.class);
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+        CartItem existingCartItem = cartItemRepo.findById(cartItem.getCart().getCartID())
+                .orElseThrow(() -> new RuntimeException("Cart item not found"));
+        existingCartItem.setQuantity(cartItem.getQuantity());
         cartItemRepo.save(existingCartItem);
         return modelMapper.map(existingCartItem, new TypeToken<CartItemDTO>(){}.getType());
     }

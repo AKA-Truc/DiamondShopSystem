@@ -32,40 +32,31 @@ public class SettingService {
     }
 
     public SettingDTO getSetting(int id) {
-        Setting existingSetting = settingRepo.findById(id).get();
-        if (existingSetting == null) {
-            throw new RuntimeException("No setting found ");
-        }
-        return modelMapper.map(existingSetting,new TypeToken<SettingDTO>() {}.getType());
+        Setting existingSetting = settingRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("No setting found"));
+        return modelMapper.map(existingSetting,SettingDTO.class);
     }
 
     public SettingDTO createSetting(SettingDTO settingDTO) {
-        Optional<Setting> existingSetting = settingRepo.findById(settingDTO.getSettingID());
-        if (existingSetting.isPresent()) {
-            throw new RuntimeException("Setting already exists");
-        }
         Setting setting = modelMapper.map(settingDTO, Setting.class);
         settingRepo.save(setting);
-        return modelMapper.map(existingSetting, SettingDTO.class);
+        return modelMapper.map(setting, SettingDTO.class);
     }
 
     public SettingDTO updateSetting(int id, SettingDTO settingDTO) {
-        Setting existingSetting = settingRepo.findById(id).get();
-        if (existingSetting == null) {
-            throw new RuntimeException("No setting found ");
-        }
+        Setting setting = modelMapper.map(settingDTO, Setting.class);
+        Setting existingSetting = settingRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("No setting found"));
 
-        existingSetting.setMaterial(settingDTO.getMaterial());
-        existingSetting.setPrice(settingDTO.getPrice());
+        existingSetting.setMaterial(setting.getMaterial());
+        existingSetting.setPrice(setting.getPrice());
         settingRepo.save(existingSetting);
         return modelMapper.map(existingSetting, SettingDTO.class);
     }
 
     public void deleteSetting(int id) {
-        Setting existingSetting = settingRepo.findById(id).get();
-        if (existingSetting == null) {
-            throw new RuntimeException("No setting found ");
-        }
-        settingRepo.delete(existingSetting);
+        Setting existingSetting = settingRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("No setting found"));
+        settingRepo.deleteById(existingSetting.getSettingID());
     }
 }

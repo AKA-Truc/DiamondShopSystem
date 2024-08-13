@@ -55,33 +55,31 @@ public class UserService {
             throw new RuntimeException("User already exists");
         }
         User newUser =  userRepo.save(user);
-        cartService.createCart(newUser);
-        Point existingPoint = new Point();
-        existingPoint.setUser(user);
-        existingPoint.setPoints(0);
-        pointService.createPoint(modelMapper.map(existingPoint, PointDTO.class));
-        return modelMapper.map(newUser,new TypeToken<UserDTO>(){}.getType());
+        UserDTO indexUser = modelMapper.map(newUser,UserDTO.class);
+        cartService.createCart(indexUser);
+        Point newPoint = new Point();
+        newPoint.setUser(user);
+        newPoint.setPoints(0);
+        pointService.createPoint(modelMapper.map(newPoint, PointDTO.class));
+        return modelMapper.map(newUser,UserDTO.class);
     }
 
     public void deleteUser(int id) {
-        User existingUser = userRepo.findById(id).get();
-        if (existingUser == null) {
-            throw new RuntimeException("No user found");
-        }
-        userRepo.delete(existingUser);
+        User existingUser = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found"));
+        userRepo.deleteById(existingUser.getUserID());
     }
 
     public UserDTO updateUser(int id, UserDTO userDTO) {
-        User existingUser = userRepo.findById(id).get();
-        if (existingUser == null) {
-            throw new RuntimeException("No user found");
-        }
-        existingUser.setEmail(userDTO.getEmail());
-        existingUser.setUserName(userDTO.getUserName());
-        existingUser.setPassword(userDTO.getPassword());
-        existingUser.setRole(userDTO.getRole());
-        existingUser.setAddress(userDTO.getAddress());
+        User user = modelMapper.map(userDTO,User.class);
+        User existingUser = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found"));
+        existingUser.setEmail(user.getEmail());
+        existingUser.setUserName(user.getUserName());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setRole(user.getRole());
+        existingUser.setAddress(user.getAddress());
         userRepo.save(existingUser);
-        return modelMapper.map(existingUser,new TypeToken<UserDTO>(){}.getType());
+        return modelMapper.map(existingUser,UserDTO.class);
     }
 }

@@ -40,7 +40,8 @@ public class OrderService {
     private ModelMapper modelMapper;
 
     @Transactional
-    public OrderDTO createOrder(Order order) {
+    public OrderDTO createOrder(OrderDTO orderDTO) {
+        Order order = modelMapper.map(orderDTO, Order.class);
         User user = userRepo.findById(order.getUser().getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         order.setUser(user);
@@ -71,7 +72,7 @@ public class OrderService {
             Product product = productRepo.findById(orderDetail.getProduct().getProductID())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
             orderDetail.setProduct(product);
-            orderDetail.setOrder(order); // Set the order for each order detail
+            orderDetail.setOrder(order);
             totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
         }
 
@@ -84,13 +85,12 @@ public class OrderService {
 
         order.setTotalPrice(totalPrice);
 
-        Order savedOrder = orderRepo.save(order); // Save the order first
+        Order savedOrder = orderRepo.save(order);
 
         for (OrderDetail orderDetail : orderDetails) {
-            orderDetail.setOrder(savedOrder); // Ensure orderDetail references the saved order
-            orderDetailService.save(orderDetail,savedOrder.getOrderID()); // Save each orderDetail
+            orderDetail.setOrder(savedOrder);
+            orderDetailService.save(modelMapper.map(orderDetail,OrderDetailDTO.class));
         }
-
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
@@ -99,23 +99,25 @@ public class OrderService {
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
-        existingOrder.setStatus(orderDTO.getStatus());
-        existingOrder.setShippingAddress(orderDTO.getShippingAddress());
+        Order order = modelMapper.map(orderDTO, Order.class);
+
+        existingOrder.setStatus(order.getStatus());
+        existingOrder.setShippingAddress(order.getShippingAddress());
 
         List<OrderDetail> updatedOrderDetails = new ArrayList<>();
         int totalPrice = 0;
-        Promotion promotion = promotionRepo.findById(orderDTO.getPromotion().getPromotionID())
+        Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
                 .orElseThrow(() -> new RuntimeException("Promotion not found"));
 
-        for (OrderDetailDTO orderDetailDTO : orderDTO.getOrderDetails()) {
-            Product product = productRepo.findById(orderDetailDTO.getProduct().getProductID())
+        for (OrderDetail orderDetail : order.getOrderDetails()) {
+            Product product = productRepo.findById(orderDetail.getProduct().getProductID())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setProduct(product);
-            orderDetail.setQuantity(orderDetailDTO.getQuantity());
-            orderDetail.setOrder(existingOrder);
-            updatedOrderDetails.add(orderDetail);
-            totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
+            OrderDetail orderDetailIndex = new OrderDetail();
+            orderDetailIndex.setProduct(product);
+            orderDetailIndex.setQuantity(orderDetailIndex.getQuantity());
+            orderDetailIndex.setOrder(existingOrder);
+            updatedOrderDetails.add(orderDetailIndex);
+            totalPrice += product.getSellingPrice() * orderDetailIndex.getQuantity();
         }
         totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
         existingOrder.setOrderDetails(updatedOrderDetails);
@@ -132,7 +134,7 @@ public class OrderService {
         if (!existingOrder.getStatus().equals("NEW")) {
             throw new RuntimeException("Cannot delete order that is not in 'NEW' status");
         }
-        orderRepo.delete(existingOrder);
+        orderRepo.deleteById(existingOrder.getOrderID());
     }
 
     public OrderDTO getOrderById(int id) {
@@ -143,6 +145,9 @@ public class OrderService {
 
     public List<OrderDTO> getAllOrders() {
         List<Order> orders = orderRepo.findAll();
+        if (orders.isEmpty()) {
+            throw new RuntimeException("Order not found");
+        }
         return orders.stream()
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());

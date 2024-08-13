@@ -21,8 +21,8 @@ public class OrderController {
     private OrderDetailService orderDetailService;
 
     @PostMapping("/orders")
-    public OrderDTO createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public OrderDTO createOrder(@RequestBody OrderDTO orderDTO) {
+        return orderService.createOrder(orderDTO);
     }
 
     @GetMapping("/orders")
@@ -46,8 +46,8 @@ public class OrderController {
     }
 
     @PostMapping("/orders/{orderId}/details")
-    public OrderDetailDTO createOrderDetail(@PathVariable int orderId, @RequestBody OrderDetail orderDetail) {
-        return orderDetailService.save(orderDetail,orderId);
+    public OrderDetailDTO createOrderDetail(@PathVariable int orderId, @RequestBody OrderDetailDTO orderDetailDTO) {
+        return orderDetailService.save(orderDetailDTO);
     }
 
     @GetMapping("/orders/{orderId}/details")
@@ -61,7 +61,7 @@ public class OrderController {
     }
 
     @PutMapping("/orders/{orderId}/details/{id}")
-    public OrderDetailDTO updateOrderDetail(@PathVariable int orderId ,@RequestBody OrderDetail orderDetail) {
-        return orderDetailService.save(orderDetail,orderId);
+    public OrderDetailDTO updateOrderDetail(@PathVariable int orderId ,@RequestBody OrderDetailDTO orderDetailDTO) {
+        return orderDetailService.update(orderId,orderDetailDTO);
     }
 }

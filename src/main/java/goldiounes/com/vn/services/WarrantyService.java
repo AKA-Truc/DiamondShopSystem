@@ -40,7 +40,8 @@ public class WarrantyService {
     }
 
     public WarrantyDTO getWarranty(int id) {
-        Warranty existingWarranty = warrantyRepo.findById(id).get();
+        Warranty existingWarranty = warrantyRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Warranty not found"));
         return modelMapper.map(existingWarranty, WarrantyDTO.class);
     }
 
@@ -57,51 +58,42 @@ public class WarrantyService {
     }
 
     public WarrantyDTO createWarranty(WarrantyDTO warrantyDTO) {
-        Product existingProduct = productRepo.findById(warrantyDTO.getProduct().getProductID()).get();
-        if (existingProduct == null) {
-            throw new RuntimeException("Product not found");
-        }
-        User existingUser = userRepo.findById(warrantyDTO.getUser().getUserID()).get();
-        if (existingUser == null) {
-            throw new RuntimeException("User not found");
-        }
-        Date startDate = warrantyDTO.getStartDate();
+        Warranty warranty = modelMapper.map(warrantyDTO, Warranty.class);
+        Product existingProduct = productRepo.findById(warranty.getProduct().getProductID())
+                .orElseThrow(()-> new RuntimeException("Product not found"));
+        User existingUser = userRepo.findById(warranty.getUser().getUserID())
+                .orElseThrow(()-> new RuntimeException("User not found"));
+        Date startDate = warranty.getStartDate();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDate);
         calendar.add(Calendar.MONTH, (int) existingProduct.getWarrantyPeriod());
         Date endDate = calendar.getTime();
 
-        Warranty warranty = modelMapper.map(warrantyDTO, Warranty.class);
         warranty.setStartDate(endDate);
         warranty.setProduct(existingProduct);
         warranty.setUser(existingUser);
         warrantyRepo.save(warranty);
-        return modelMapper.map(warranty, new TypeToken<WarrantyDTO>() {}.getType() );
+        return modelMapper.map(warranty, WarrantyDTO.class );
     }
 
     public WarrantyDTO updateWarranty(int id, WarrantyDTO warrantyDTO) {
-        Warranty existingWarranty = warrantyRepo.findById(id).get();
-        if (existingWarranty == null) {
-            throw new RuntimeException("Warranty not found");
-        }
+        Warranty warranty = modelMapper.map(warrantyDTO, Warranty.class);
+        Warranty existingWarranty = warrantyRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Warranty not found"));
 
-        existingWarranty.setWarrantyDetails(warrantyDTO.getWarrantyDetails());
-        existingWarranty.setStartDate(warrantyDTO.getStartDate());
-        existingWarranty.setEndDate(warrantyDTO.getEndDate());
+        existingWarranty.setWarrantyDetails(warranty.getWarrantyDetails());
+        existingWarranty.setStartDate(warranty.getStartDate());
+        existingWarranty.setEndDate(warranty.getEndDate());
 
-        if (warrantyDTO.getProduct() != null) {
-            Product existingProduct = productRepo.findById(warrantyDTO.getProduct().getProductID()).get();
-            if (existingProduct == null) {
-                throw new RuntimeException("Product not found");
-            }
+        if (warranty.getProduct() != null) {
+            Product existingProduct = productRepo.findById(warranty.getProduct().getProductID())
+                    .orElseThrow(()-> new RuntimeException("Product not found"));
             existingWarranty.setProduct(existingProduct);
         }
 
-        if (warrantyDTO.getUser() != null) {
-            User existingUser = userRepo.findById(warrantyDTO.getUser().getUserID()).get();
-            if (existingUser == null) {
-                throw new RuntimeException("User not found");
-            }
+        if (warranty.getUser() != null) {
+            User existingUser = userRepo.findById(warranty.getUser().getUserID())
+                    .orElseThrow(()-> new RuntimeException("User not found"));
             existingWarranty.setUser(existingUser);
         }
 

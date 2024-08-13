@@ -48,16 +48,18 @@ public class PointService {
     }
 
     public void deleteById(int id) {
-        Point existingPoint = pointRepo.findById(id).orElseThrow(() -> new RuntimeException("No points found"));
+        Point existingPoint = pointRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No points found"));
         pointRepo.deleteById(existingPoint.getUser().getUserID());
     }
 
     public PointDTO updatePoint(int id, PointDTO pointDTO) {
+        Point point = modelMapper.map(pointDTO, Point.class);
         Point existingPoint = pointRepo.findById(id).orElseThrow(() -> new RuntimeException("No point found"));
         User existingUser = userRepo.findById(existingPoint.getUser().getUserID())
                 .orElseThrow(() -> new RuntimeException("No User found"));
         existingPoint.setUser(existingUser);
-        existingPoint.setPoints(pointDTO.getPoints());
+        existingPoint.setPoints(point.getPoints());
         return modelMapper.map(pointRepo.save(existingPoint), PointDTO.class);
     }
 }
