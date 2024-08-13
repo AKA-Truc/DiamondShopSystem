@@ -72,7 +72,6 @@ public class CategoryService {
         Category existingCategory = categoryRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No category found"));
         existingCategory.setCategoryName(category.getCategoryName());
-        existingCategory.setCategoryID(category.getCategoryID());
         categoryRepo.save(existingCategory);
         return modelMapper.map(existingCategory, CategoryDTO.class);
     }
