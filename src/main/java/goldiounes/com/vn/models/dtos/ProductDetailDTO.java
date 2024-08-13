@@ -5,9 +5,10 @@ public class ProductDetailDTO {
     private int productDetailID;
     private String description;
     private String specifications;
-    private int productID;
+    private ProductDTO product;
 
     // Getter và Setter
+
     public int getProductDetailID() {
         return productDetailID;
     }
@@ -32,11 +33,11 @@ public class ProductDetailDTO {
         this.specifications = specifications;
     }
 
-    public int getProductID() {
-        return productID;
+    public ProductDTO getProduct() {
+        return product;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 }

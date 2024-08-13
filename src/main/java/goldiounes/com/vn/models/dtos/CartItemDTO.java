@@ -1,16 +1,18 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class CartItemDTO {
 
     private int CartItemID;
     private int Quantity;
 
-    @JsonIgnoreProperties("cartItems")
+    @JsonBackReference
     private CartDTO cart;
 
-    @JsonIgnoreProperties("cartItems")
+    @JsonManagedReference
     private ProductDTO product;
 
     public CartItemDTO() {

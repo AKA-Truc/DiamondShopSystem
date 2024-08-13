@@ -1,6 +1,8 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
@@ -13,10 +15,10 @@ public class DiamondDTO {
     private String cut;
     private String origin;
 
-    @JsonIgnoreProperties("diamonds")
+    @JsonBackReference
     private List<DiamondDetailDTO> diamondDetails;
 
-    @JsonIgnoreProperties("diamond")
+    @JsonManagedReference
     private CertificateDTO certificate;
 
     public DiamondDTO() {

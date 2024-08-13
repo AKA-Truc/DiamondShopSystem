@@ -23,9 +23,9 @@ public class CartController {
     @Autowired
     private CartItemService cartItemService;
 
-    @GetMapping("/carts/{id}")
-    public ResponseEntity<Map<String, Object>> getCarts(@PathVariable int id) {
-        CartDTO cart = cartService.getCart(id);
+    @GetMapping("/carts/{cartId}")
+    public ResponseEntity<Map<String, Object>> getCarts(@PathVariable int cartId) {
+        CartDTO cart = cartService.getCart(cartId);
         if (cart != null) {
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Cart retrieved successfully");
@@ -38,9 +38,9 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/carts/{id}")
-    public ResponseEntity<Map<String, Object>> removeAllCartItems(@PathVariable int id) {
-        boolean removed = cartItemService.removeAllCartItems(id);
+    @DeleteMapping("/carts/{cartId}")
+    public ResponseEntity<Map<String, Object>> removeAllCartItems(@PathVariable int cartId) {
+        boolean removed = cartItemService.removeAllCartItems(cartId);
         Map<String, Object> response = new HashMap<>();
         if (removed) {
             response.put("message", "All items removed from cart successfully");
@@ -51,9 +51,9 @@ public class CartController {
         }
     }
 
-    @GetMapping("/cart-items/{id}")
-    public ResponseEntity<Map<String, Object>> getAllCartItems(@PathVariable int id) {
-        List<CartItemDTO> items = cartItemService.getAllCartItems(id);
+    @GetMapping("/cart-items/{cartId}")
+    public ResponseEntity<Map<String, Object>> getAllCartItems(@PathVariable int cartId) {
+        List<CartItemDTO> items = cartItemService.getAllCartItems(cartId);
         Map<String, Object> response = new HashMap<>();
         if (items != null && !items.isEmpty()) {
             response.put("message", "Cart items retrieved successfully");
@@ -79,9 +79,9 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/cart-items/{id}")
-    public ResponseEntity<Map<String, Object>> removeCartItem(@PathVariable int id) {
-        boolean removed = cartItemService.removeCartItem(id);
+    @DeleteMapping("/cart-items/{cartItemId}")
+    public ResponseEntity<Map<String, Object>> removeCartItem(@PathVariable int cartItemId) {
+        boolean removed = cartItemService.removeCartItem(cartItemId);
         Map<String, Object> response = new HashMap<>();
         if (removed) {
             response.put("message", "Item removed from cart successfully");

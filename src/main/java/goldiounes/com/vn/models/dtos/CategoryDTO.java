@@ -1,6 +1,7 @@
 package goldiounes.com.vn.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class CategoryDTO {
     private int categoryID;
     private String categoryName;
 
-    @JsonIgnoreProperties("category")
+    @JsonManagedReference
     private List<ProductDTO> products;
 
     // Getters và setters
