@@ -26,20 +26,4 @@ public class Category {
     public Category(String categoryName) {
         this.CategoryName = categoryName;
     }
-
-    public int getCategoryID() {
-        return CategoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        CategoryID = categoryID;
-    }
-
-    public String getCategoryName() {
-        return CategoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        CategoryName = categoryName;
-    }
 }
