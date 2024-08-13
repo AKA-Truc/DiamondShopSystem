@@ -1,5 +1,6 @@
 package goldiounes.com.vn.services;
 
+import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.models.entities.Point;
 import goldiounes.com.vn.models.entities.User;
@@ -47,7 +48,8 @@ public class UserService {
         return modelMapper.map(existingUser,new TypeToken<UserDTO>(){}.getType());
     }
 
-    public UserDTO createUser(User user) {
+    public UserDTO createUser(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO,User.class);
         User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser != null) {
             throw new RuntimeException("User already exists");
@@ -56,8 +58,8 @@ public class UserService {
         cartService.createCart(newUser);
         Point existingPoint = new Point();
         existingPoint.setUser(user);
-//        existingPoint.setPoints(0);
-//        pointService.createPoint(existingPoint);
+        existingPoint.setPoints(0);
+        pointService.createPoint(modelMapper.map(existingPoint, PointDTO.class));
         return modelMapper.map(newUser,new TypeToken<UserDTO>(){}.getType());
     }
 

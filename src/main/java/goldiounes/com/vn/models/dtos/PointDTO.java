@@ -1,9 +1,13 @@
 package goldiounes.com.vn.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class PointDTO {
     private int PointID;
     private int Points;
+
+    @JsonIgnoreProperties("point")
+    private UserDTO user;
 
     //constructor
     public PointDTO() {
@@ -26,6 +30,12 @@ public class PointDTO {
     }
     public void setPoints(int points) {
         Points = points;
+    }
+    public UserDTO getUser() {
+        return user;
+    }
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }
 

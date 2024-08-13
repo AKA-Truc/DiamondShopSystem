@@ -26,8 +26,8 @@ public class PointController {
     }
 
     @PostMapping("/points")
-    public PointDTO createPoint(@RequestBody Point point) {
-        return pointService.createPoint(point);
+    public PointDTO createPoint(@RequestBody PointDTO pointDTO) {
+        return pointService.createPoint(pointDTO);
     }
 
     @PutMapping("/points/{id}")
