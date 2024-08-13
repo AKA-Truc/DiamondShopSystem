@@ -36,9 +36,8 @@ public class CategoryController {
     }
 
     @PutMapping("/categories/{id}")
-    public CategoryDTO updateCategory(@PathVariable int id, @RequestBody Category category) {
-        category.setCategoryID(id);
-        return categoryService.createCategory(category);
+    public CategoryDTO updateCategory(@PathVariable int id, @RequestBody CategoryDTO categoryDTO) {
+        return categoryService.updateCategory(id,categoryDTO);
     }
 
     @GetMapping("/categories/search")
