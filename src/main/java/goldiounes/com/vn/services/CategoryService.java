@@ -68,4 +68,15 @@ public class CategoryService {
         return modelMapper.map(categories,new TypeToken<List<CategoryDTO>>() {}.getType());
     }
 
+    public CategoryDTO updateCategory (int id,CategoryDTO categoryDTO) {
+        Category existingCategory = categoryRepo.findById(id).get();
+        if (existingCategory == null) {
+            throw new RuntimeException("Category not found");
+        }
+        existingCategory.setCategoryName(categoryDTO.getCategoryName());
+        existingCategory.setCategoryID(categoryDTO.getCategoryID());
+        categoryRepo.save(existingCategory);
+        return modelMapper.map(existingCategory, new TypeToken<CategoryDTO>(){}.getType());
+    }
+
 }
