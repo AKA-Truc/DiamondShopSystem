@@ -1,11 +1,12 @@
 package goldiounes.com.vn.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import goldiounes.com.vn.models.entities.Cart;
-import goldiounes.com.vn.models.entities.Point;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class UserDTO {
     private int UserID;
     private String UserName;
@@ -14,19 +15,17 @@ public class UserDTO {
     private String Address;
     private String Role;
 
-    @JsonIgnoreProperties("users")
-    private List<WarrantyDTO> Warranties;
 
-    @JsonIgnoreProperties("users")
-    private List<OrderDTO> Orders;
+    @JsonManagedReference
+    private List<WarrantyDTO> warranties;
 
-    @JsonIgnoreProperties("users")
-    private List<ProductDTO> Products;
+    @JsonManagedReference
+    private List<OrderDTO> orders;
 
-    @JsonIgnoreProperties("users")
+    @JsonBackReference
     private PointDTO point;
 
-    @JsonIgnoreProperties("users")
+    @JsonBackReference
     private CartDTO cart;
 
     public UserDTO(){
@@ -91,28 +90,22 @@ public class UserDTO {
     }
 
     public List<WarrantyDTO> getWarranties() {
-        return Warranties;
+        return warranties;
     }
 
     public void setWarranties(List<WarrantyDTO> warranties) {
-        Warranties = warranties;
+        this.warranties = warranties;
     }
 
     public List<OrderDTO> getOrders() {
-        return Orders;
+        return orders;
     }
 
     public void setOrders(List<OrderDTO> orders) {
-        Orders = orders;
+        this.orders = orders;
     }
 
-    public List<ProductDTO> getProducts() {
-        return Products;
-    }
 
-    public void setProducts(List<ProductDTO> products) {
-        Products = products;
-    }
 
     public PointDTO getPoint() {
         return point;

@@ -1,6 +1,8 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
@@ -16,19 +18,13 @@ public class ProductDTO {
     private double warrantyPeriod;
     private int inventory;
 
-    @JsonIgnoreProperties("products")
+    @JsonBackReference
     private CategoryDTO category;
 
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private List<ProductDetailDTO> ProductDetails;
 
-    @JsonIgnoreProperties("products")
-    private List<CartItemDTO> CartItems;
-
-    @JsonIgnoreProperties("products")
-    private List<OrderDetailDTO> OrderDetails;
-
-    @JsonIgnoreProperties("products")
+    @JsonManagedReference
     private List<ReceiptDTO> Receipt;
 
 
@@ -77,8 +73,8 @@ public class ProductDTO {
         return Size;
     }
 
-    public void setSize(int size) {
-        this.Size = size;
+    public void setSize(Integer size) {
+        Size = size;
     }
 
     public double getMarkupRate() {
@@ -89,20 +85,20 @@ public class ProductDTO {
         this.markupRate = markupRate;
     }
 
-    public double getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(double sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
     public double getLaborCost() {
         return laborCost;
     }
 
     public void setLaborCost(double laborCost) {
         this.laborCost = laborCost;
+    }
+
+    public double getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(double sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
 
     public double getWarrantyPeriod() {
@@ -135,22 +131,6 @@ public class ProductDTO {
 
     public void setProductDetails(List<ProductDetailDTO> productDetails) {
         ProductDetails = productDetails;
-    }
-
-    public List<CartItemDTO> getCartItems() {
-        return CartItems;
-    }
-
-    public void setCartItems(List<CartItemDTO> cartItems) {
-        CartItems = cartItems;
-    }
-
-    public List<OrderDetailDTO> getOrderDetails() {
-        return OrderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetailDTO> orderDetails) {
-        OrderDetails = orderDetails;
     }
 
     public List<ReceiptDTO> getReceipt() {

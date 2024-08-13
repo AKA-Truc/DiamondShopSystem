@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class ReceiptDTO {
@@ -8,7 +9,7 @@ public class ReceiptDTO {
 
     private int Quantity;
 
-    @JsonIgnoreProperties("receipts")
+    @JsonBackReference
     private ProductDTO product;
 
     public ReceiptDTO() {

@@ -1,6 +1,8 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import java.util.List;
@@ -8,16 +10,18 @@ import java.util.List;
 @Data
 public class OrderDTO {
     private int orderID;
-    @JsonIgnoreProperties("orders")
+
+    @JsonBackReference
     private UserDTO user;
-    @JsonIgnoreProperties("orders")
+
+    @JsonBackReference
     private CartDTO cart;
     private int totalPrice;
     private String status;
-    @JsonIgnoreProperties("orders")
+    @JsonManagedReference
     private PromotionDTO promotion;
     private String shippingAddress;
-    @JsonIgnoreProperties("orders")
+    @JsonManagedReference
     private List<OrderDetailDTO> orderDetails;
 
     public int getOrderID() {

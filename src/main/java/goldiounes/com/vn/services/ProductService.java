@@ -47,10 +47,8 @@ public class ProductService {
         if (existingProduct != null) {
             throw new RuntimeException("Product already exists");
         }
-        Category existingCategory = categoryRepo.findByName(product.getCategory().getCategoryName());
-        if (existingCategory == null) {
-            throw new RuntimeException("Category not found");
-        }
+        Category existingCategory = categoryRepo.findById(product.getCategory()
+                .getCategoryID()).orElseThrow(() -> new RuntimeException("Category not found"));
         product.setCategory(existingCategory);
         product.setSellingPrice(product.getLaborCost() * productDTO.getMarkupRate());
         productRepo.save(product);
