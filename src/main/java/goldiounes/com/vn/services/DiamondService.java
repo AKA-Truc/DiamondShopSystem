@@ -31,7 +31,8 @@ public class DiamondService {
     }
 
     public DiamondDTO findById(int id) {
-        Diamond diamond = diamondRepo.findById(id).orElseThrow(() -> new RuntimeException("Diamond not found"));
+        Diamond diamond = diamondRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Diamond not found"));
         return modelMapper.map(diamond, DiamondDTO.class);
     }
 
@@ -48,19 +49,21 @@ public class DiamondService {
     }
 
     public DiamondDTO updateDiamond(int id, DiamondDTO diamondDTO) {
-        Diamond diamond = diamondRepo.findById(id).orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
-        diamond.setCarat(diamondDTO.getCarat());
-        diamond.setColor(diamondDTO.getColor());
-        diamond.setClarity(diamondDTO.getClarity());
-        diamond.setCut(diamondDTO.getCut());
-        diamond.setOrigin(diamondDTO.getOrigin());
-        diamondRepo.save(diamond);
-        return modelMapper.map(diamond, DiamondDTO.class);
+        Diamond diamond = modelMapper.map(diamondDTO, Diamond.class);
+        Diamond existingDiamond = diamondRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
+        existingDiamond.setCarat(diamond.getCarat());
+        existingDiamond.setColor(diamond.getColor());
+        existingDiamond.setClarity(diamond.getClarity());
+        existingDiamond.setCut(diamond.getCut());
+        existingDiamond.setOrigin(diamond.getOrigin());
+        diamondRepo.save(existingDiamond);
+        return modelMapper.map(existingDiamond, DiamondDTO.class);
     }
 
     public void deleteDiamond(int id) {
         Diamond existingDiamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
-        diamondRepo.deleteById(id);
+        diamondRepo.deleteById(existingDiamond.getDiamondID());
     }
 }

@@ -31,6 +31,9 @@ public class OrderDetailService {
 
     public List<OrderDetailDTO> findByOrderId(int orderId) {
         List<OrderDetail> orderDetails = orderDetailRepo.findByOrderId(orderId);
+        if (orderDetails.isEmpty()) {
+            throw new RuntimeException("No order found with order id " + orderId);
+        }
         return orderDetails.stream()
                 .map(orderDetail -> modelMapper.map(orderDetail, OrderDetailDTO.class))
                 .collect(Collectors.toList());
@@ -38,6 +41,9 @@ public class OrderDetailService {
 
     public List<OrderDetailDTO> findAll() {
         List<OrderDetail> orderDetails = orderDetailRepo.findAll();
+        if (orderDetails.isEmpty()) {
+            throw new RuntimeException("No order found");
+        }
         return orderDetails.stream()
                 .map(orderDetail -> modelMapper.map(orderDetail, OrderDetailDTO.class))
                 .collect(Collectors.toList());
@@ -49,8 +55,9 @@ public class OrderDetailService {
         return modelMapper.map(orderDetail, OrderDetailDTO.class);
     }
 
-    public OrderDetailDTO save(OrderDetail orderDetail,int orderID) {
-        Order existingOrder = orderRepo.findById(orderID)
+    public OrderDetailDTO save(OrderDetailDTO orderDetailDTO) {
+        OrderDetail orderDetail = modelMapper.map(orderDetailDTO, OrderDetail.class);
+        Order existingOrder = orderRepo.findById(orderDetail.getOrder().getOrderID())
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         orderDetail.setOrder(existingOrder);
         Product existingProduct = productRepo.findById(orderDetail.getProduct().getProductID())
@@ -67,7 +74,8 @@ public class OrderDetailService {
         orderDetailRepo.deleteById(id);
     }
 
-    public OrderDetailDTO update(int id, OrderDetail orderDetail) {
+    public OrderDetailDTO update(int id, OrderDetailDTO orderDetailDTO) {
+        OrderDetail orderDetail = modelMapper.map(orderDetailDTO, OrderDetail.class);
         OrderDetail existingOderDetail = orderDetailRepo.findById(orderDetail.getOrderDetailID()).orElseThrow(() -> new RuntimeException("OrderDetail not found"));
         existingOderDetail.setOrderDetailID(orderDetail.getOrderDetailID());
         existingOderDetail.setOrder(orderDetail.getOrder());

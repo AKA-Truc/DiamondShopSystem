@@ -33,37 +33,35 @@ public class CartService {
         return modelMapper.map(existingCart,new TypeToken<CartDTO>(){}.getType());
     }
 
-    public CartDTO createCart(User user) {
+    public CartDTO createCart(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO,User.class);
         User existingUser = userRepo.findById(user.getUserID())
                 .orElseThrow(()-> new RuntimeException("User not found"));
         Cart cart = new Cart();
         cart.setUser(existingUser);
         Cart saveCart = cartRepo.save(cart);
-        return modelMapper.map(saveCart,new TypeToken<CartDTO>(){}.getType());
+        return modelMapper.map(saveCart,CartDTO.class);
     }
 
     public void deleteCart(int id) {
-        Cart existingCart = cartRepo.findById(id).get();
-        if (existingCart == null) {
-            throw new RuntimeException("Cart not found");
-        }
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cart not found"));
         cartRepo.delete(existingCart);
     }
 
-//    public CartDTO updateCart(int id,CartDTO cartDTO) {
-//        Cart existingCart = cartRepo.findById(id).get();
-//        if (existingCart == null) {
-//            throw new RuntimeException("Cart not found");
-//        }
-//        existingCart.setUser(cartDTO.getUsers());
-//        cartRepo.save(existingCart);
-//        return modelMapper.map(existingCart,new TypeToken<CartDTO>(){}.getType());
-//    }
+    public CartDTO updateCart(int id,CartDTO cartDTO) {
+        Cart cart = modelMapper.map(cartDTO,Cart.class);
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cart not found"));
+        existingCart.setUser(cart.getUser());
+        cartRepo.save(existingCart);
+        return modelMapper.map(existingCart,CartDTO.class);
+    }
 
     public List<CartDTO> getAllCarts() {
         List<Cart> carts = cartRepo.findAll();
-        if (carts == null) {
-            throw new RuntimeException("Cart not found");
+        if (carts.isEmpty()) {
+            throw new RuntimeException("List Cart is empty");
         }
         return modelMapper.map(carts,new TypeToken<List<CartDTO>>(){}.getType());
     }

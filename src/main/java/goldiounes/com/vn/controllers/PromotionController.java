@@ -16,8 +16,8 @@ public class PromotionController {
     private PromotionService promotionService;
 
     @PostMapping("/promotions")
-    public PromotionDTO createPromotion(@RequestBody Promotion promotion) {
-        return promotionService.save(promotion);
+    public PromotionDTO createPromotion(@RequestBody PromotionDTO promotionDTO) {
+        return promotionService.save(promotionDTO);
     }
 
     @GetMapping("/promotions")
@@ -36,7 +36,7 @@ public class PromotionController {
     }
 
     @PutMapping("/promotions/{id}")
-    public PromotionDTO updatePromotion(@PathVariable int id, @RequestBody Promotion promotion) {
-        return promotionService.save(promotion);
+    public PromotionDTO updatePromotion(@PathVariable int id, @RequestBody PromotionDTO promotionDTO) {
+        return promotionService.save(promotionDTO);
     }
 }

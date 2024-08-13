@@ -40,39 +40,36 @@ public class ReceiptService {
     }
 
     public ReceiptDTO createReceipt(ReceiptDTO receiptDTO) {
-        Product existingProduct = productRepo.findById(receiptDTO.getProduct().getProductID()).get();
-        if (existingProduct == null) {
-            throw new RuntimeException("Product not found");
-        }
-        Optional<Receipt> existingReceipt = receiptRepo.findById(receiptDTO.getReceiptID());
+        Receipt receipt = modelMapper.map(receiptDTO, Receipt.class);
+        Product existingProduct = productRepo.findById(receipt.getProduct().getProductID())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        Optional<Receipt> existingReceipt = receiptRepo.findById(receipt.getReceiptID());
         if (existingReceipt.isEmpty()) {
             throw new RuntimeException("No receipt found ");
         }
-        Receipt receipt = modelMapper.map(receiptDTO, Receipt.class);
+        receipt.setProduct(existingProduct);
         receiptRepo.save(receipt);
-        return modelMapper.map(receipt, new TypeToken<ReceiptDTO>() {}.getType());
+        return modelMapper.map(receipt, ReceiptDTO.class);
     }
 
     public void deleteReceipt(int id) {
-        Receipt existingreceipt = receiptRepo.findById(id).get();
-        if (existingreceipt == null) {
-            throw new RuntimeException("No receipt found ");
-        }
-        receiptRepo.deleteById(id);
+        Receipt existingreceipt = receiptRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Receipt not found"));
+        receiptRepo.deleteById(existingreceipt.getReceiptID());
     }
 
     public ReceiptDTO updateReceipt(int id, ReceiptDTO receiptDTO) {
-        Receipt existingReceipt = receiptRepo.findById(receiptDTO.getReceiptID()).get();
-        if (existingReceipt == null) {
-            throw new RuntimeException("No receipt found ");
-        }
-        existingReceipt.setQuantity(receiptDTO.getQuantity());
-        if (receiptDTO.getProduct() != null && receiptDTO.getProduct().getProductID() > 0) {
-            Product existingProduct = productRepo.findById(receiptDTO.getProduct().getProductID()).get();
+        Receipt receipt = modelMapper.map(receiptDTO, Receipt.class);
+        Receipt existingReceipt = receiptRepo.findById(receipt.getReceiptID())
+                .orElseThrow(() -> new RuntimeException("Receipt not found"));
+        existingReceipt.setQuantity(receipt.getQuantity());
+        if (receipt.getProduct() != null && receipt.getProduct().getProductID() > 0) {
+            Product existingProduct = productRepo.findById(receipt.getProduct().getProductID())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
             existingReceipt.setProduct(existingProduct);
         }
         receiptRepo.save(existingReceipt);
-        return modelMapper.map(existingReceipt, new TypeToken<ReceiptDTO>() {}.getType());
+        return modelMapper.map(existingReceipt, ReceiptDTO.class);
 }
 
 }

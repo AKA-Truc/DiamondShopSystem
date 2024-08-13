@@ -26,8 +26,8 @@ public class ProductDetailController {
     }
 
     @PostMapping("/productdetails/{id}")
-    public ProductDetailDTO createProductDetail(@RequestBody ProductDetail productDetail) {
-        return productDetailService.createProductDetail(productDetail);
+    public ProductDetailDTO createProductDetail(@RequestBody ProductDetailDTO productDetailDTO) {
+        return productDetailService.createProductDetail(productDetailDTO);
     }
 
     @DeleteMapping("/productdetails/{id}")
