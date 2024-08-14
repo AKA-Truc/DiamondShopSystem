@@ -33,4 +33,36 @@ public class OrderDetail {
         Product = product;
         Quantity = quantity;
     }
+
+    public int getOrderDetailID() {
+        return OrderDetailID;
+    }
+
+    public void setOrderDetailID(int orderDetailID) {
+        OrderDetailID = orderDetailID;
+    }
+
+    public Order getOrder() {
+        return Order;
+    }
+
+    public void setOrder(Order order) {
+        Order = order;
+    }
+
+    public Product getProduct() {
+        return Product;
+    }
+
+    public void setProduct(Product product) {
+        Product = product;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
 }

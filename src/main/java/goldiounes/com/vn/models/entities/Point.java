@@ -31,4 +31,28 @@ public class Point {
         this.Points = Points;
         this.User = User;
     }
+
+    public int getPointID() {
+        return PointID;
+    }
+
+    public void setPointID(int pointID) {
+        PointID = pointID;
+    }
+
+    public User getUser() {
+        return User;
+    }
+
+    public void setUser(User user) {
+        User = user;
+    }
+
+    public int getPoints() {
+        return Points;
+    }
+
+    public void setPoints(int points) {
+        Points = points;
+    }
 }

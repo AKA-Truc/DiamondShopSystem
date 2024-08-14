@@ -52,7 +52,7 @@ public class CartItemService {
         boolean itemExists = false;
 
         for (CartItem cartItem1 : cartItems) {
-            if (cartItem1.getProduct().getProductID() == cartItemDTO.getProduct().getProductId()) {
+            if (cartItem1.getProduct().getProductID() == cartItem.getProduct().getProductID()) {
                 cartItem1.setQuantity(cartItemDTO.getQuantity() + cartItem1.getQuantity());
                 cartItemRepo.save(cartItem1);
                 itemExists = true;

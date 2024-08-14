@@ -44,4 +44,60 @@ public class Promotion {
         this.EndDate = endDate;
         this.DiscountPercent = discountPercent;
     }
+
+    public int getPromotionID() {
+        return PromotionID;
+    }
+
+    public void setPromotionID(int promotionID) {
+        PromotionID = promotionID;
+    }
+
+    public String getPromotionName() {
+        return PromotionName;
+    }
+
+    public void setPromotionName(String promotionName) {
+        PromotionName = promotionName;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public Date getEndDate() {
+        return EndDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        EndDate = endDate;
+    }
+
+    public Date getStartDate() {
+        return StartDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        StartDate = startDate;
+    }
+
+    public int getDiscountPercent() {
+        return DiscountPercent;
+    }
+
+    public void setDiscountPercent(int discountPercent) {
+        DiscountPercent = discountPercent;
+    }
+
+    public List<Order> getOrders() {
+        return Orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        Orders = orders;
+    }
 }

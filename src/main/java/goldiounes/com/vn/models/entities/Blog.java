@@ -19,11 +19,35 @@ public class Blog {
     private String Content;
 
     public Blog() {
-        //constructor
+        //cstor
     }
 
     public Blog(String Title, String Content) {
         this.Title = Title;
         this.Content = Content;
+    }
+
+    public int getBlogID() {
+        return BlogID;
+    }
+
+    public void setBlogID(int blogID) {
+        BlogID = blogID;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
     }
 }

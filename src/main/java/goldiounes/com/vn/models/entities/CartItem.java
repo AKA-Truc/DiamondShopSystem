@@ -31,4 +31,36 @@ public class CartItem {
         Product = product;
         Quantity = quantity;
     }
+
+    public int getCartItemID() {
+        return CartItemID;
+    }
+
+    public void setCartItemID(int cartItemID) {
+        CartItemID = cartItemID;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public goldiounes.com.vn.models.entities.Product getProduct() {
+        return Product;
+    }
+
+    public void setProduct(goldiounes.com.vn.models.entities.Product product) {
+        Product = product;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
 }
