@@ -40,43 +40,4 @@ public class ProductDetail {
         this.LaborCost = LaborCost;
     }
 
-    public int getProductDetailID() {
-        return ProductDetailID;
-    }
-
-    public void setProductDetailID(int productDetailID) {
-        ProductDetailID = productDetailID;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Setting getSetting() {
-        return setting;
-    }
-
-    public void setSetting(Setting setting) {
-        this.setting = setting;
-    }
-
-    public int getLaborCost() {
-        return LaborCost;
-    }
-
-    public void setLaborCost(int laborCost) {
-        LaborCost = laborCost;
-    }
-
-    public List<DiamondDetail> getDiamondDetails() {
-        return DiamondDetails;
-    }
-
-    public void setDiamondDetails(List<DiamondDetail> diamondDetails) {
-        DiamondDetails = diamondDetails;
-    }
 }
