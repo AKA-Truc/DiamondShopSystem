@@ -1,6 +1,7 @@
 package goldiounes.com.vn.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -24,8 +25,10 @@ public class ProductDTO {
     private List<ProductDetailDTO> productDetails;
 
     //@JsonBackReference
+    @JsonIgnore
     private OrderDetailDTO orderDetail;
 
     //@JsonManagedReference
+    @JsonIgnore
     private List<ReceiptDTO> receipts;
 }
