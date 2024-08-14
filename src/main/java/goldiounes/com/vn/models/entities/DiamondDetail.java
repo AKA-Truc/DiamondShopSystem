@@ -33,4 +33,36 @@ public class DiamondDetail {
         Quantity = quantity;
     }
 
+    public int getDiamondDetailID() {
+        return DiamondDetailID;
+    }
+
+    public void setDiamondDetailID(int diamondDetailID) {
+        DiamondDetailID = diamondDetailID;
+    }
+
+    public goldiounes.com.vn.models.entities.Diamond getDiamond() {
+        return Diamond;
+    }
+
+    public void setDiamond(goldiounes.com.vn.models.entities.Diamond diamond) {
+        Diamond = diamond;
+    }
+
+    public goldiounes.com.vn.models.entities.ProductDetail getProductDetail() {
+        return ProductDetail;
+    }
+
+    public void setProductDetail(goldiounes.com.vn.models.entities.ProductDetail productDetail) {
+        ProductDetail = productDetail;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
 }

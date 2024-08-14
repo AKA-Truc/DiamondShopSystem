@@ -31,7 +31,7 @@ public class Warranty {
     private Date EndDate;
 
     public Warranty() {
-        //Constructor
+        //cstor
     }
 
     public Warranty(Product product, User user, String warrantyDetails, Date startDate, Date endDate) {
@@ -39,6 +39,54 @@ public class Warranty {
         User = user;
         WarrantyDetails = warrantyDetails;
         StartDate = startDate;
+        EndDate = endDate;
+    }
+
+    public int getWarrantyID() {
+        return WarrantyID;
+    }
+
+    public void setWarrantyID(int warrantyID) {
+        WarrantyID = warrantyID;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public goldiounes.com.vn.models.entities.User getUser() {
+        return User;
+    }
+
+    public void setUser(goldiounes.com.vn.models.entities.User user) {
+        User = user;
+    }
+
+    public String getWarrantyDetails() {
+        return WarrantyDetails;
+    }
+
+    public void setWarrantyDetails(String warrantyDetails) {
+        WarrantyDetails = warrantyDetails;
+    }
+
+    public Date getStartDate() {
+        return StartDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        StartDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return EndDate;
+    }
+
+    public void setEndDate(Date endDate) {
         EndDate = endDate;
     }
 }

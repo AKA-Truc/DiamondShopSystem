@@ -48,4 +48,68 @@ public class Order {
         Promotion = promotion;
         ShippingAddress = shippingAddress;
     }
+
+    public int getOrderID() {
+        return OrderID;
+    }
+
+    public void setOrderID(int orderID) {
+        OrderID = orderID;
+    }
+
+    public User getUser() {
+        return User;
+    }
+
+    public void setUser(User user) {
+        User = user;
+    }
+
+    public Cart getCart() {
+        return Cart;
+    }
+
+    public void setCart(Cart cart) {
+        Cart = cart;
+    }
+
+    public int getTotalPrice() {
+        return TotalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        TotalPrice = totalPrice;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public Promotion getPromotion() {
+        return Promotion;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        Promotion = promotion;
+    }
+
+    public String getShippingAddress() {
+        return ShippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        ShippingAddress = shippingAddress;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return OrderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        OrderDetails = orderDetails;
+    }
 }

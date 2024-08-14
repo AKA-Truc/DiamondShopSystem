@@ -1,18 +1,59 @@
 package goldiounes.com.vn.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Data
 public class CartItemDTO {
-    private int cartItemId;
-    private int quantity;
 
-    //JsonBackReference
-    @JsonIgnore
+    private int CartItemID;
+    private int Quantity;
+
+    @JsonBackReference
     private CartDTO cart;
 
-    //@JsonBackReference
+    @JsonManagedReference
     private ProductDTO product;
+
+    public CartItemDTO() {
+    }
+
+    public CartItemDTO(int cartItemID, int quantity, CartDTO cart, ProductDTO product) {
+        CartItemID = cartItemID;
+        Quantity = quantity;
+        this.cart = cart;
+        this.product = product;
+    }
+
+    public int getCartItemID() {
+        return CartItemID;
+    }
+
+    public void setCartItemID(int cartItemID) {
+        CartItemID = cartItemID;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
+    public CartDTO getCart() {
+        return cart;
+    }
+
+    public void setCart(CartDTO cart) {
+        this.cart = cart;
+    }
+
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
+    }
 }

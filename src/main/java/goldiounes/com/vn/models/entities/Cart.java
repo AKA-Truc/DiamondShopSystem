@@ -31,4 +31,36 @@ public class Cart {
     public Cart(User user) {
         this.User = user;
     }
+
+    public int getCartID() {
+        return CartID;
+    }
+
+    public void setCartID(int cartID) {
+        CartID = cartID;
+    }
+
+    public goldiounes.com.vn.models.entities.User getUser() {
+        return User;
+    }
+
+    public void setUser(goldiounes.com.vn.models.entities.User user) {
+        User = user;
+    }
+
+    public List<Order> getOrders() {
+        return Orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        Orders = orders;
+    }
+
+    public List<CartItem> getCartItems() {
+        return CartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        CartItems = cartItems;
+    }
 }
