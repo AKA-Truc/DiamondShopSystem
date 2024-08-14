@@ -1,6 +1,7 @@
 package goldiounes.com.vn.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -16,14 +17,17 @@ public class UserDTO {
     private String role;
 
     //@JsonManagedReference
+    @JsonIgnore
     private List<WarrantyDTO> warranties;
 
     //@JsonBackReference
+    @JsonIgnore
     private List<OrderDTO> orders;
 
     //@JsonManagedReference
     private PointDTO point;
 
     //@JsonBackReference
+    @JsonIgnore
     private CartDTO cart;
 }
