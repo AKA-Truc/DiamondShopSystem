@@ -1,43 +1,20 @@
 package goldiounes.com.vn.models.dtos;
 
-public class ProductDetailDTO {
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 
-    private int productDetailID;
+@Data
+public class ProductDetailDTO {
+    private int productDetailId;
     private String description;
     private String specifications;
+
+    //@JsonManagedReference
+    private SettingDTO setting;
+
+    //@JsonBackReference
+    @JsonIgnore
     private ProductDTO product;
-
-    // Getter và Setter
-
-    public int getProductDetailID() {
-        return productDetailID;
-    }
-
-    public void setProductDetailID(int productDetailID) {
-        this.productDetailID = productDetailID;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getSpecifications() {
-        return specifications;
-    }
-
-    public void setSpecifications(String specifications) {
-        this.specifications = specifications;
-    }
-
-    public ProductDTO getProduct() {
-        return product;
-    }
-
-    public void setProduct(ProductDTO product) {
-        this.product = product;
-    }
 }

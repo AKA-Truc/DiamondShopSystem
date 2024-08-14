@@ -1,59 +1,21 @@
 package goldiounes.com.vn.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class CartDTO {
-    private int CartID;
+    private int cartId;
 
-    @JsonBackReference
-    private UserDTO users;
+    //@JsonManagedReference
+    private UserDTO user;
 
-    @JsonManagedReference
-    private List<OrderDTO> Orders;
+    //@JsonManagedReference
+    @JsonIgnore
+    private List<OrderDTO> orders;
 
-    @JsonManagedReference
-    private List<CartItemDTO> CartItems;
-
-    public CartDTO() {
-    }
-
-    public CartDTO( UserDTO users) {
-        this.users = users;
-    }
-
-    public int getCartID() {
-        return CartID;
-    }
-
-    public void setCartID(int cartID) {
-        CartID = cartID;
-    }
-
-    public UserDTO getUsers() {
-        return users;
-    }
-
-    public void setUsers(UserDTO users) {
-        this.users = users;
-    }
-
-    public List<OrderDTO> getOrders() {
-        return Orders;
-    }
-
-    public void setOrders(List<OrderDTO> orders) {
-        Orders = orders;
-    }
-
-    public List<CartItemDTO> getCartItems() {
-        return CartItems;
-    }
-
-    public void setCartItems(List<CartItemDTO> cartItems) {
-        CartItems = cartItems;
-    }
+    //@JsonManagedReference
+    private List<CartItemDTO> cartItems;
 }

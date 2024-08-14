@@ -27,28 +27,4 @@ public class Receipt {
         this.Product = ProductID;
         this.Quantity = Quantity;
     }
-
-    public int getReceiptID() {
-        return ReceiptID;
-    }
-
-    public void setReceiptID(int receiptID) {
-        ReceiptID = receiptID;
-    }
-
-    public goldiounes.com.vn.models.entities.Product getProduct() {
-        return Product;
-    }
-
-    public void setProduct(goldiounes.com.vn.models.entities.Product product) {
-        Product = product;
-    }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        Quantity = quantity;
-    }
 }
