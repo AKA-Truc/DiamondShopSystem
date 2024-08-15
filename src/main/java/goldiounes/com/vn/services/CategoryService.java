@@ -43,10 +43,11 @@ public class CategoryService {
         return modelMapper.map(newCategory, new TypeToken<CategoryDTO>(){}.getType());
     }
 
-    public void deleteById ( int id){
+    public boolean deleteById (int id){
         Category existingCategory = categoryRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No category found"));
         categoryRepo.deleteById(existingCategory.getCategoryID());
+        return true;
     }
 
     public CategoryDTO findByName (String name){

@@ -1,7 +1,6 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.dtos.PointDTO;
-import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.models.entities.Point;
 import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.PointRepo;
@@ -47,10 +46,11 @@ public class PointService {
         return modelMapper.map(point, new TypeToken<PointDTO>() {}.getType());
     }
 
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         Point existingPoint = pointRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No points found"));
         pointRepo.deleteById(existingPoint.getUser().getUserID());
+        return true;
     }
 
     public PointDTO updatePoint(int id, PointDTO pointDTO) {

@@ -2,6 +2,7 @@ package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.models.dtos.CartDTO;
 import goldiounes.com.vn.models.dtos.CartItemDTO;
+import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.CartService;
 import goldiounes.com.vn.services.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/cart-management")
@@ -24,84 +23,73 @@ public class CartController {
     private CartItemService cartItemService;
 
     @GetMapping("/carts/{cartId}")
-    public ResponseEntity<Map<String, Object>> getCarts(@PathVariable int cartId) {
+    public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId) {
         CartDTO cart = cartService.getCart(cartId);
         if (cart != null) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "Cart retrieved successfully");
-            response.put("cart", cart);
+            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart created successfully", cart);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "Cart not found");
+            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart not found", cart);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/carts/{cartId}")
-    public ResponseEntity<Map<String, Object>> removeAllCartItems(@PathVariable int cartId) {
+    public ResponseEntity<ResponseWrapper<Void>> removeAllCartItems(@PathVariable int cartId) {
         boolean removed = cartItemService.removeAllCartItems(cartId);
-        Map<String, Object> response = new HashMap<>();
         if (removed) {
-            response.put("message", "All items removed from cart successfully");
+            ResponseWrapper<Void> response = new ResponseWrapper<>("All items are deleted", null);
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         } else {
-            response.put("message", "Failed to remove items or cart not found");
+            ResponseWrapper<Void> response = new ResponseWrapper<>("Item not found or failed to remove", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/cart-items/{cartId}")
-    public ResponseEntity<Map<String, Object>> getAllCartItems(@PathVariable int cartId) {
+    public ResponseEntity<ResponseWrapper<List<CartItemDTO>>> getAllCartItems(@PathVariable int cartId) {
         List<CartItemDTO> items = cartItemService.getAllCartItems(cartId);
-        Map<String, Object> response = new HashMap<>();
         if (items != null && !items.isEmpty()) {
-            response.put("message", "Cart items retrieved successfully");
-            response.put("items", items);
+            ResponseWrapper<List<CartItemDTO>> response = new ResponseWrapper<>("Cart items found", items);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            response.put("message", "No items found in cart");
+            ResponseWrapper<List<CartItemDTO>> response =  new ResponseWrapper<>("Cart items not found", items);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/cart-items")
-    public ResponseEntity<Map<String, Object>> addItem(@RequestBody CartItemDTO cartItemDTO) {
+    public ResponseEntity<ResponseWrapper<CartItemDTO>> addItem(@RequestBody CartItemDTO cartItemDTO) {
         CartItemDTO addedItem = cartItemService.addItem(cartItemDTO);
-        Map<String, Object> response = new HashMap<>();
         if (addedItem != null) {
-            response.put("message", "Item added to cart successfully");
-            response.put("item", addedItem);
+            ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item added successfully", addedItem);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } else {
-            response.put("message", "Failed to add item to cart");
+            ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item not found", cartItemDTO);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/cart-items/{cartItemId}")
-    public ResponseEntity<Map<String, Object>> removeCartItem(@PathVariable int cartItemId) {
+    public ResponseEntity<ResponseWrapper<Void>> removeCartItem(@PathVariable int cartItemId) {
         boolean removed = cartItemService.removeCartItem(cartItemId);
-        Map<String, Object> response = new HashMap<>();
         if (removed) {
-            response.put("message", "Item removed from cart successfully");
+            ResponseWrapper<Void> response = new ResponseWrapper<>("Item removed successfully", null);
             return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         } else {
-            response.put("message", "Item not found or failed to remove");
+            ResponseWrapper<Void> response = new ResponseWrapper<>("Item not found or failed to remove", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/cart-items/{id}")
-    public ResponseEntity<Map<String, Object>> updateQuantity(@PathVariable int id, @RequestBody CartItemDTO cartItemDTO) {
+    public ResponseEntity<ResponseWrapper<CartItemDTO>> updateQuantity(@PathVariable int id, @RequestBody CartItemDTO cartItemDTO) {
         CartItemDTO updatedItem = cartItemService.updateQuantity(id, cartItemDTO);
-        Map<String, Object> response = new HashMap<>();
         if (updatedItem != null) {
-            response.put("message", "Item quantity updated successfully");
-            response.put("item", updatedItem);
+            ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item updated successfully", updatedItem);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            response.put("message", "Failed to update item quantity");
+            ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item not found or failed to update", null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }

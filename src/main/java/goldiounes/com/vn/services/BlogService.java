@@ -52,7 +52,7 @@ public class BlogService {
         Blog existingBlog = blogRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No blog found"));
         blogRepo.deleteById(existingBlog.getBlogID());
-        return false;
+        return true;
     }
 
     public BlogDTO updateBlog(int id, BlogDTO blogDTO) {

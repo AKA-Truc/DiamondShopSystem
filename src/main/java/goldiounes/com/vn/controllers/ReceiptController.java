@@ -1,8 +1,11 @@
 package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.models.dtos.ReceiptDTO;
+import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,27 +18,54 @@ public class ReceiptController {
     private ReceiptService receiptService;
 
     @PostMapping("/receipts")
-    public ReceiptDTO createReceipt(@RequestBody ReceiptDTO receipt) {
-        return receiptService.createReceipt(receipt);
+    public ResponseEntity<ResponseWrapper<ReceiptDTO>> createReceipt(@RequestBody ReceiptDTO receipt) {
+        ReceiptDTO createdReceipt = receiptService.createReceipt(receipt);
+        ResponseWrapper<ReceiptDTO> response = new ResponseWrapper<>("Receipt created successfully", createdReceipt);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/receipts/{id}")
-    public ReceiptDTO getReceipt(@PathVariable int id) {
-        return receiptService.getReceipt(id);
+    public ResponseEntity<ResponseWrapper<ReceiptDTO>> getReceipt(@PathVariable int id) {
+        ReceiptDTO receipt = receiptService.getReceipt(id);
+        if (receipt != null) {
+            ResponseWrapper<ReceiptDTO> response = new ResponseWrapper<>("Receipt retrieved successfully", receipt);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<ReceiptDTO> response = new ResponseWrapper<>("Receipt not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/receipts")
-    public List<ReceiptDTO> getAllReceipts() {
-        return receiptService.getAllReceipts();
+    public ResponseEntity<ResponseWrapper<List<ReceiptDTO>>> getAllReceipts() {
+        List<ReceiptDTO> receipts = receiptService.getAllReceipts();
+        ResponseWrapper<List<ReceiptDTO>> response = new ResponseWrapper<>("Receipts retrieved successfully", receipts);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/receipts/{id}")
-    public ReceiptDTO updateReceipt(@PathVariable int id, @RequestBody ReceiptDTO receiptDTO) {
-        return receiptService.updateReceipt(id, receiptDTO);
+    public ResponseEntity<ResponseWrapper<ReceiptDTO>> updateReceipt(@PathVariable int id, @RequestBody ReceiptDTO receiptDTO) {
+        ReceiptDTO updatedReceipt = receiptService.updateReceipt(id, receiptDTO);
+        if (updatedReceipt != null) {
+            ResponseWrapper<ReceiptDTO> response = new ResponseWrapper<>("Receipt updated successfully", updatedReceipt);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<ReceiptDTO> response = new ResponseWrapper<>("Receipt not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/receipts/{id}")
-    public void deleteReceipt(@PathVariable int id) {
-        receiptService.deleteReceipt(id);
+    public ResponseEntity<ResponseWrapper<Void>> deleteReceipt(@PathVariable int id) {
+        boolean isDeleted = receiptService.deleteReceipt(id);
+        ResponseWrapper<Void> response;
+
+        if (isDeleted) {
+            response = new ResponseWrapper<>("Receipt deleted successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        } else {
+            response = new ResponseWrapper<>("Receipt not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -61,9 +61,10 @@ public class DiamondService {
         return modelMapper.map(existingDiamond, DiamondDTO.class);
     }
 
-    public void deleteDiamond(int id) {
+    public boolean deleteDiamond(int id) {
         Diamond existingDiamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
         diamondRepo.deleteById(existingDiamond.getDiamondID());
+        return true;
     }
 }

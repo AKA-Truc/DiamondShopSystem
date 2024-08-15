@@ -47,20 +47,21 @@ public class ProductService {
         if (existingProduct != null) {
             throw new RuntimeException("Product already exists");
         }
-        Category existingCategory = categoryRepo.findById(product.getCategory()
-                .getCategoryID()).orElseThrow(() -> new RuntimeException("Category not found"));
+        Category existingCategory = categoryRepo.findById(product.getCategory().getCategoryID())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
         product.setCategory(existingCategory);
         product.setSellingPrice(product.getLaborCost() * productDTO.getMarkupRate());
         productRepo.save(product);
         return modelMapper.map(product,ProductDTO.class);
     }
 
-    public void deleteProduct(int id) {
+    public boolean deleteProduct(int id) {
         Optional<Product> existingProduct = productRepo.findById(id);
         if (existingProduct.isEmpty()) {
             throw new RuntimeException("Product not found");
         }
         productRepo.delete(existingProduct.get());
+        return true;
     }
 
     public void deleteById(int id) {
@@ -84,9 +85,7 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         existingProduct.setProductName(product.getProductName());
-        existingProduct.setInventory(product.getInventory());
         existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
-        existingProduct.setSize(product.getSize());
         existingProduct.setImageURL(product.getImageURL());
         existingProduct.setLaborCost(product.getLaborCost());
         existingProduct.setMarkupRate(product.getMarkupRate());
@@ -94,5 +93,6 @@ public class ProductService {
         productRepo.save(existingProduct);
         return modelMapper.map(existingProduct, ProductDTO.class);
     }
+
 
 }

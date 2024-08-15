@@ -1,17 +1,21 @@
 package goldiounes.com.vn.services;
 
+import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.models.dtos.ProductDetailDTO;
 import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.models.entities.ProductDetail;
+import goldiounes.com.vn.models.entities.Setting;
 import goldiounes.com.vn.repositories.ProductDetailRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
+import goldiounes.com.vn.repositories.SettingRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductDetailService {
@@ -22,10 +26,13 @@ public class ProductDetailService {
     private ProductRepo productRepo;
 
     @Autowired
+    private SettingRepo settingRepo;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    public List<ProductDetailDTO> findAll() {
-        List<ProductDetail> productDetails = productDetailRepo.findAll();
+    public List<ProductDetailDTO> findAllByProductId(int productId) {
+        List<ProductDetail> productDetails = productDetailRepo.findByProductId(productId);
         if (productDetails.isEmpty()) {
             throw new RuntimeException("No products found");
         } else {
@@ -45,13 +52,26 @@ public class ProductDetailService {
         Product existingProduct = productRepo.findById(productDetail.getProduct().getProductID())
                 .orElseThrow(() -> new RuntimeException("No Product found"));
         productDetail.setProduct(existingProduct);
+        Setting existingSetting = settingRepo.findById(productDetail.getSetting().getSettingID())
+                .orElseThrow(() -> new RuntimeException("No Setting found"));
+        productDetail.setSetting(existingSetting);
         productDetailRepo.save(productDetail);
         return modelMapper.map(productDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }
 
-    public void deleteById( int id){
+    public boolean deleteById(int id){
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No productdetail found"));
         productDetailRepo.deleteById(existingProductDetail.getProductDetailID());
+        return true;
+    }
+
+    public ProductDetailDTO getProductDetailBySize(Integer size, ProductDTO productDTO){
+        Product  product = modelMapper.map(productDTO, Product.class);
+        ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(size, product.getProductID());
+        if (existingProductDetail == null) {
+            throw new RuntimeException("No ProductDetail found");
+        }
+        return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }
 }

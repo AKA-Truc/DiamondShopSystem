@@ -2,6 +2,7 @@ package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import goldiounes.com.vn.models.entities.Point;
 import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.UserRepo;
@@ -54,6 +55,8 @@ public class UserService {
         if (existingUser != null) {
             throw new RuntimeException("User already exists");
         }
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser =  userRepo.save(user);
         UserDTO indexUser = modelMapper.map(newUser,UserDTO.class);
         cartService.createCart(indexUser);
@@ -64,10 +67,11 @@ public class UserService {
         return modelMapper.map(newUser,UserDTO.class);
     }
 
-    public void deleteUser(int id) {
+    public boolean deleteUser(int id) {
         User existingUser = userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found"));
         userRepo.deleteById(existingUser.getUserID());
+        return true;
     }
 
     public UserDTO updateUser(int id, UserDTO userDTO) {

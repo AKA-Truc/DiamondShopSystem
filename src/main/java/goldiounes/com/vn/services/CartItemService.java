@@ -84,7 +84,7 @@ public class CartItemService {
         Cart existingCart = cartRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
         cartItemRepo.deleteByCartID(existingCart.getCartID());
-        return false;
+        return true;
     }
 
     public List<CartItemDTO> findByCarId(int id) {

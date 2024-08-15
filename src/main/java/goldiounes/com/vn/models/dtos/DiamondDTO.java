@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public class DiamondDTO {
     private String origin;
 
     // @JsonManagedReference
+    @JsonIgnore
     private List<DiamondDetailDTO> diamondDetails;
 
     //@JsonManagedReference
