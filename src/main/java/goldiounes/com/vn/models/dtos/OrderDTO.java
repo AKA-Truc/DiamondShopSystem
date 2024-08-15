@@ -18,12 +18,12 @@ public class OrderDTO {
     private UserDTO user;
 
     //@JsonBackReference
+    @JsonIgnore
     private CartDTO cart;
 
     //@JsonManagedReference
     private PromotionDTO promotion;
 
     //@JsonManagedReference
-    @JsonIgnore
     private List<OrderDetailDTO> orderDetails;
 }

@@ -12,8 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -73,5 +71,19 @@ public class ProductDetailService {
             throw new RuntimeException("No ProductDetail found");
         }
         return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
+    }
+
+    public ProductDetailDTO updateProduct(int productDetailID, ProductDetailDTO productDetailDTO) {
+        ProductDetail productDetail = modelMapper.map(productDetailDTO, ProductDetail.class);
+        ProductDetail productDetailUpdate = productDetailRepo.findById(productDetailID)
+                .orElseThrow(() -> new RuntimeException("No ProductDetail found"));
+        Product product = productRepo.findById(productDetail.getProductDetailID())
+                .orElseThrow(() -> new RuntimeException("No Product found"));
+        productDetail.setProduct(product);
+        productDetailUpdate.setInventory(productDetail.getInventory());
+        productDetailUpdate.setSize(productDetail.getSize());
+        productDetailUpdate.setLaborCost(productDetail.getLaborCost());
+        productDetailRepo.save(productDetailUpdate);
+        return modelMapper.map(productDetailUpdate, new TypeToken<ProductDetailDTO>() {}.getType());
     }
 }

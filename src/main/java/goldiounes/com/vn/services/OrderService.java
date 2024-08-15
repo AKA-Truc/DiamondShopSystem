@@ -135,8 +135,13 @@ public class OrderService {
     public boolean deleteOrder(int id) {
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-        if (!existingOrder.getStatus().equals("NEW")) {
-            throw new RuntimeException("Cannot delete order that is not in 'NEW' status");
+        if (existingOrder.getStatus().equals("Final")){
+            throw new RuntimeException("Order is Final");
+        }
+        for (OrderDetail orderDetail : existingOrder.getOrderDetails()) {
+            if(!orderDetailService.deleteById(orderDetail.getOrderDetailID())){
+                throw new RuntimeException("Delete OrderDetails Failed");
+            }
         }
         orderRepo.deleteById(existingOrder.getOrderID());
         return true;

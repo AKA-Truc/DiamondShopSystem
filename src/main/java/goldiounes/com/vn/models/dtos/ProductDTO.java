@@ -14,7 +14,6 @@ public class ProductDTO {
     private double laborCost;
     private double sellingPrice;
     private double warrantyPeriod;
-    private int inventory;
 
     private CategoryDTO category;
 

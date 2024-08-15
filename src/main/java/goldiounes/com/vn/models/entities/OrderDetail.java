@@ -24,13 +24,17 @@ public class OrderDetail {
     @Column(name = "Quantity", nullable = false)
     private int Quantity;
 
+    @Column(name = "Size",nullable = false)
+    private Integer Size;
+
     public OrderDetail() {
         //cstor
     }
 
-    public OrderDetail(goldiounes.com.vn.models.entities.Order order, goldiounes.com.vn.models.entities.Product product, int quantity) {
+    public OrderDetail(Order order, Product product, int quantity, Integer size) {
         Order = order;
         Product = product;
         Quantity = quantity;
+        Size = size;
     }
 }
