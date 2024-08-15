@@ -23,8 +23,7 @@ public class OrderDetailTest {
 
         Category category = new Category("AAA");
 
-        Product product = new Product(category,"BBB","URL",
-                1.2,500,24,10);
+        Product product = new Product(category,"BBB","URL", 1.2,500,24,10);
 
         OrderDetail orderDetail = new OrderDetail(order, product, 20);
 
@@ -48,8 +47,7 @@ public class OrderDetailTest {
 
         Category category = new Category("AAA");
 
-        Product product = new Product(category,"BBB","URL",
-                1.2,500,24,10);
+        Product product = new Product(category,"BBB","URL", 1.2,500,24,10);
 
         OrderDetail orderDetail = new OrderDetail(order, product, 20);
 
