@@ -10,11 +10,9 @@ public class DiamondDetailDTO {
     private int quantity;
 
     //@JsonBackReference
-    @JsonIgnore
     private DiamondDTO diamond;
 
     //@JsonBackReference
-    @JsonIgnore
     private ProductDetailDTO productDetail;
 
 }

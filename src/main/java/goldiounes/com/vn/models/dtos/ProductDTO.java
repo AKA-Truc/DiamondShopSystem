@@ -10,7 +10,6 @@ public class ProductDTO {
     private int productId;
     private String productName;
     private String imageURL;
-    private Integer size;
     private double markupRate;
     private double laborCost;
     private double sellingPrice;
@@ -19,6 +18,7 @@ public class ProductDTO {
 
     private CategoryDTO category;
 
+    @JsonIgnore
     private List<ProductDetailDTO> productDetails;
 
     @JsonIgnore

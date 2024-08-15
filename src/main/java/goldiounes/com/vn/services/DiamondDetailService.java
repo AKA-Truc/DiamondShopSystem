@@ -48,16 +48,19 @@ public class DiamondDetailService {
         DiamondDetail diamondDetail = modelMapper.map(diamondDetailDTO, DiamondDetail.class);
         Diamond existingDiamond = diamondRepo.findById(diamondDetail.getDiamond().getDiamondID())
                 .orElseThrow(() -> new RuntimeException("Diamond not found"));
+        diamondDetail.setDiamond(existingDiamond);
         ProductDetail existingProductDetail = productDetailRepo.findById(diamondDetail.getProductDetail().getProductDetailID())
                 .orElseThrow(() -> new RuntimeException("ProductDetail not found"));
+        diamondDetail.setProductDetail(existingProductDetail);
         diamondDetailRepo.save(diamondDetail);
         return modelMapper.map(diamondDetail, DiamondDetailDTO.class);
     }
 
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         DiamondDetail existingDiamondDetail = diamondDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("DiamondDetail not found"));
         diamondDetailRepo.deleteById(existingDiamondDetail.getDiamondDetailID());
+        return true;
     }
 
     public DiamondDetailDTO update(int id, DiamondDetailDTO diamondDetailDTO) {

@@ -39,6 +39,9 @@ public class OrderService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     @Transactional
     public OrderDTO createOrder(OrderDTO orderDTO) {
         Order order = modelMapper.map(orderDTO, Order.class);
@@ -91,6 +94,7 @@ public class OrderService {
             orderDetail.setOrder(savedOrder);
             orderDetailService.save(modelMapper.map(orderDetail,OrderDetailDTO.class));
         }
+//        emailService.sendSizeSelectionEmail(order.getUser().getEmail(), order.getOrderID());
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
@@ -128,13 +132,14 @@ public class OrderService {
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
-    public void deleteOrder(int id) {
+    public boolean deleteOrder(int id) {
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         if (!existingOrder.getStatus().equals("NEW")) {
             throw new RuntimeException("Cannot delete order that is not in 'NEW' status");
         }
         orderRepo.deleteById(existingOrder.getOrderID());
+        return true;
     }
 
     public OrderDTO getOrderById(int id) {

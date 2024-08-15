@@ -41,11 +41,12 @@ public class PromotionService {
         return modelMapper.map(savedPromotion, PromotionDTO.class);
     }
 
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         if (!promotionRepo.existsById(id)) {
             throw new RuntimeException("Promotion not found");
         }
         promotionRepo.deleteById(id);
+        return true;
     }
 
     public PromotionDTO update(PromotionDTO promotionDTO) {

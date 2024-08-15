@@ -11,6 +11,5 @@ public class SettingDTO {
     private int price;
 
     //@JsonBackReference
-    @JsonIgnore
     private ProductDetailDTO productDetails;
 }

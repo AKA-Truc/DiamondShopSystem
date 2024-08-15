@@ -26,6 +26,12 @@ public class ProductDetail {
     @Column(name = "LaborCost", nullable = false)
     private int LaborCost;
 
+    @Column(name = "size", nullable = true)
+    private Integer Size;
+
+    @Column(name = "Inventory", nullable = false)
+    private int Inventory;
+
     @OneToMany(mappedBy = "ProductDetail")
     private List<DiamondDetail> DiamondDetails;
 

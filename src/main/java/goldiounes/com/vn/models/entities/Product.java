@@ -24,9 +24,6 @@ public class Product {
     @Column(name = "ImageURL")
     private String ImageURL;
 
-    @Column(name = "size", nullable = true)
-    private Integer Size;
-
     @Column(name = "MarkupRate",nullable = false)
     private double MarkupRate;
 
@@ -38,9 +35,6 @@ public class Product {
 
     @Column(name = "WarrantyPeriod",nullable = false)
     private double WarrantyPeriod;
-
-    @Column(name = "Inventory", nullable = false)
-    private int Inventory;
 
     @OneToMany(mappedBy = "product")
     private List<ProductDetail> ProductDetails;
@@ -58,14 +52,13 @@ public class Product {
         //cstor
     }
 
-    public Product(Category category, String productName, String imageURL, double markupRate, double laborCost, double warrantyPeriod, int inventory) {
+    public Product(Category category, String productName, String imageURL, double markupRate, double laborCost, double warrantyPeriod) {
         Category = category;
         ProductName = productName;
         ImageURL = imageURL;
         MarkupRate = markupRate;
         LaborCost = laborCost;
         WarrantyPeriod = warrantyPeriod;
-        Inventory = inventory;
         this.SellingPrice =  markupRate * laborCost;
     }
 }

@@ -67,11 +67,12 @@ public class OrderDetailService {
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);
     }
 
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         if (!orderDetailRepo.existsById(id)) {
             throw new RuntimeException("OrderDetail not found");
         }
         orderDetailRepo.deleteById(id);
+        return true;
     }
 
     public OrderDetailDTO update(int id, OrderDetailDTO orderDetailDTO) {

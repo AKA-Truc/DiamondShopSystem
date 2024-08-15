@@ -45,7 +45,7 @@ public class WarrantyService {
         return modelMapper.map(existingWarranty, WarrantyDTO.class);
     }
 
-    public List<Warranty> findByUserEmail( String email) {
+    public List<WarrantyDTO> findByUserEmail( String email) {
         User existingUser = userRepo.findByEmail(email);
         if (existingUser == null) {
             throw new RuntimeException("User not found");
@@ -54,7 +54,7 @@ public class WarrantyService {
         if (warranties.isEmpty()) {
             throw new RuntimeException("Warranty not found");
         }
-        return warranties;
+        return modelMapper.map(warranties, new TypeToken<List<WarrantyDTO>>() {}.getType());
     }
 
     public WarrantyDTO createWarranty(WarrantyDTO warrantyDTO) {
@@ -101,10 +101,11 @@ public class WarrantyService {
         return modelMapper.map(existingWarranty, WarrantyDTO.class);
     }
 
-    public void deleteWarranty(int id) {
+    public boolean deleteWarranty(int id) {
         if (!warrantyRepo.existsById(id)) {
             throw new RuntimeException("No warranty found ");
         }
         warrantyRepo.deleteById(id);
+        return true;
     }
 }

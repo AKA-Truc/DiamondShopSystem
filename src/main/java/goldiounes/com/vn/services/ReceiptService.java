@@ -52,10 +52,11 @@ public class ReceiptService {
         return modelMapper.map(receipt, ReceiptDTO.class);
     }
 
-    public void deleteReceipt(int id) {
+    public boolean deleteReceipt(int id) {
         Receipt existingreceipt = receiptRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Receipt not found"));
         receiptRepo.deleteById(existingreceipt.getReceiptID());
+        return true;
     }
 
     public ReceiptDTO updateReceipt(int id, ReceiptDTO receiptDTO) {

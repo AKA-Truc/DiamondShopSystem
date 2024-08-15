@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SettingService {
@@ -54,9 +53,10 @@ public class SettingService {
         return modelMapper.map(existingSetting, SettingDTO.class);
     }
 
-    public void deleteSetting(int id) {
+    public boolean deleteSetting(int id) {
         Setting existingSetting = settingRepo.findById(id)
                 .orElseThrow(()-> new RuntimeException("No setting found"));
         settingRepo.deleteById(existingSetting.getSettingID());
+        return true;
     }
 }
