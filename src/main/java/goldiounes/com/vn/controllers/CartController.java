@@ -22,14 +22,15 @@ public class CartController {
     @Autowired
     private CartItemService cartItemService;
 
+    //in ra thong tin cua cart
     @GetMapping("/carts/{cartId}")
     public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId) {
         CartDTO cart = cartService.getCart(cartId);
         if (cart != null) {
-            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart created successfully", cart);
+            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart retrieved successfully", cart);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart not found", cart);
+            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart not found", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }

@@ -83,7 +83,6 @@ public class ProductService {
         Product product = modelMapper.map(productDTO, Product.class);
         Product existingProduct = productRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
-
         existingProduct.setProductName(product.getProductName());
         existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
         existingProduct.setImageURL(product.getImageURL());
@@ -93,6 +92,4 @@ public class ProductService {
         productRepo.save(existingProduct);
         return modelMapper.map(existingProduct, ProductDTO.class);
     }
-
-
 }

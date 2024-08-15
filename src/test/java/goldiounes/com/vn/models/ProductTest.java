@@ -19,14 +19,13 @@ public class ProductTest {
         assertEquals(0.0, product.getLaborCost());
         assertEquals(0.0, product.getSellingPrice());
         assertEquals(0.0, product.getWarrantyPeriod());
-        assertEquals(0, product.getInventory());
     }
 
     @Test
     void testConstructor(){
         Category category = new Category("AAA");
         Product product = new Product(category,"BBB","URL",
-                1.2,500,24,10);
+                1.2,500,24);
 
         assertNotNull(product);
     }
@@ -36,7 +35,7 @@ public class ProductTest {
         Category category = new Category("AAA");
 
         Product product = new Product(category,"BBB","URL",
-                1.2,500,24,10);
+                1.2,500,24);
 
         assertNotNull(product.getCategory());
         assertEquals("AAA",product.getCategory().getCategoryName());
@@ -45,8 +44,7 @@ public class ProductTest {
         assertEquals(1.2,product.getMarkupRate());
         assertEquals(500,product.getLaborCost());
         assertEquals(600,product.getSellingPrice());
-        assertEquals(24,product.getWarrantyPeriod());
-        assertEquals(10, product.getInventory());
+        assertEquals(24,product.getWarrantyPeriod());;
 
         Category category1 = new Category("aaa");
         product.setCategory(category1);
@@ -56,7 +54,6 @@ public class ProductTest {
         product.setLaborCost(5000);
         product.setSellingPrice(product.getMarkupRate()*product.getLaborCost());
         product.setWarrantyPeriod(240);
-        product.setInventory(1);
 
         assertNotNull(product.getCategory());
         assertEquals("aaa",product.getCategory().getCategoryName());
@@ -66,6 +63,5 @@ public class ProductTest {
         assertEquals(5000,product.getLaborCost());
         assertEquals(2.1*5000,product.getSellingPrice());
         assertEquals(240,product.getWarrantyPeriod());
-        assertEquals(1, product.getInventory());
     }
 }
