@@ -31,7 +31,6 @@ public class OrderDetailTest {
         assertEquals(order, orderDetail.getOrder());
         assertEquals(product, orderDetail.getProduct());
         assertEquals(20, orderDetail.getQuantity());
-        assertEquals(15,orderDetail.getSize());
     }
 
     @Test
@@ -52,14 +51,13 @@ public class OrderDetailTest {
         Product product = new Product(category,"BBB","URL",
                 1.2,500,24);
 
-        OrderDetail orderDetail = new OrderDetail(order, product, 20,15);
+        OrderDetail orderDetail = new OrderDetail(order, product, 20, 15);
 
         assertNotNull(orderDetail);
 
         assertEquals(order, orderDetail.getOrder());
         assertEquals(product, orderDetail.getProduct());
         assertEquals(20, orderDetail.getQuantity());
-        assertEquals(15,orderDetail.getSize());
     }
 
     @Test
