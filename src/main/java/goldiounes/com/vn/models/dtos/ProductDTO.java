@@ -23,6 +23,4 @@ public class ProductDTO {
     @JsonIgnore
     private OrderDetailDTO orderDetail;
 
-    @JsonIgnore
-    private List<ReceiptDTO> receipts;
 }

@@ -21,12 +21,6 @@ public class Warranty {
     @JoinColumn(name = "UserID", nullable = false)
     private User User;
 
-    @Column(name = "WarrantyDetails", nullable = false)
-    private String WarrantyDetails;
-
-    @Column(name = "StartDate", nullable = false)
-    private Date StartDate;
-
     @Column(name = "EndDate", nullable = false)
     private Date EndDate;
 
@@ -34,11 +28,9 @@ public class Warranty {
         //Constructor
     }
 
-    public Warranty(Product product, User user, String warrantyDetails, Date startDate, Date endDate) {
+    public Warranty(Product product, User user, Date endDate) {
         this.product = product;
         User = user;
-        WarrantyDetails = warrantyDetails;
-        StartDate = startDate;
         EndDate = endDate;
     }
 }

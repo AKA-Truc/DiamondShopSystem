@@ -45,8 +45,6 @@ public class Product {
     @OneToMany(mappedBy = "Product")
     private List<OrderDetail> OrderDetails;
 
-    @OneToMany(mappedBy = "Product")
-    private List<Receipt> Receipt;
 
     public Product() {
         //cstor
