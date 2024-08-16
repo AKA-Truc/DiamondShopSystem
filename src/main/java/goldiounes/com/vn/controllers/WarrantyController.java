@@ -18,8 +18,8 @@ public class WarrantyController {
     private WarrantyService warrantyService;
 
     @PostMapping("/warranties")
-    public ResponseEntity<ResponseWrapper<WarrantyDTO>> createWarranty(@RequestBody WarrantyDTO warrantyDTO) {
-        WarrantyDTO createdWarranty = warrantyService.createWarranty(warrantyDTO);
+    public ResponseEntity<ResponseWrapper<WarrantyDTO>> createWarranty(@PathVariable int orderId, @RequestBody WarrantyDTO warrantyDTO) {
+        WarrantyDTO createdWarranty = warrantyService.createWarranty(orderId, warrantyDTO);
         ResponseWrapper<WarrantyDTO> response = new ResponseWrapper<>("Warranty created successfully", createdWarranty);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

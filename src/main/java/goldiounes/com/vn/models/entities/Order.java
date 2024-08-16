@@ -3,6 +3,7 @@ package goldiounes.com.vn.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -35,6 +36,9 @@ public class Order {
     @Column(name = "ShippingAddress", nullable = false)
     private String ShippingAddress;
 
+    @Column(name = "StartDate", nullable = false)
+    private Date StartDate;
+
     @OneToMany(mappedBy = "Order")
     private List<OrderDetail> OrderDetails;
 
@@ -42,10 +46,11 @@ public class Order {
         //cstor
     }
 
-    public Order(User user, Cart cart, Promotion promotion, String shippingAddress) {
+    public Order(User user, Cart cart, Promotion promotion, String shippingAddress, Date startDate) {
         User = user;
         Cart = cart;
         Promotion = promotion;
         ShippingAddress = shippingAddress;
+        StartDate = startDate;
     }
 }
