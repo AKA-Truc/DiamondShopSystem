@@ -11,53 +11,53 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 public class WarrantyTest {
     @Test
-    void testGetterAndSetter(){
+    void testGetterAndSetter() {
         Category category = new Category("AAA");
-        Product product = new Product(category,"BBB","URL",
-                1.2,500,24);
+        Product product = new Product(category, "BBB", "URL",
+                1.2, 500, 24);
         User u = new User();
 
-
-        // Tạo Calendar instance và set thời gian bảo hành vào
+        // Set the start date for the warranty period (2024/5/1)
         Calendar calendar = Calendar.getInstance();
-        // Cộng thêm thời hạn bảo hành vào ngày bắt đầu
+        calendar.set(2024, Calendar.MAY, 1);
+        // Add the warranty period in months to the start date
         calendar.add(Calendar.MONTH, (int) product.getWarrantyPeriod());
 
-        // Lấy ngày kết thúc bảo hành từ Calendar
-        Date endDate = calendar.getTime();//2026/5/1
+        // Get the warranty end date (2026/5/1)
+        Date endDate = calendar.getTime();
 
         Warranty w = new Warranty(product, u, endDate);
 
-        Date endDateTest = new Date(2026 - 1900, Calendar.MAY, 1);//2026/5/1
+        // Compare using timestamps
+        assertEquals(endDate.getTime(), w.getEndDate().getTime());
+        assertEquals(product, w.getProduct());
+        assertEquals(u, w.getUser());
 
-        assertEquals(endDateTest,w.getEndDate());
-        assertEquals(product,w.getProduct());
-        assertEquals(u,w.getUser());
-
-
+        // Testing setters
         User u1 = new User();
         Category category1 = new Category("aaa");
-        Product product1 = new Product(category,"bbb","url",
-                1.4,600,25);
+        Product product1 = new Product(category1, "bbb", "url",
+                1.4, 600, 25);
 
-        // Tạo Calendar instance và set thời gian bảo hành vào
+        // Reset calendar and set a different warranty period
         Calendar calendar1 = Calendar.getInstance();
-
-        // Cộng thêm thời hạn bảo hành vào ngày bắt đầu
+        calendar1.set(2024, Calendar.MAY, 1);
         calendar1.add(Calendar.MONTH, (int) product1.getWarrantyPeriod());
 
-        // Lấy ngày kết thúc bảo hành từ Calendar
-        Date endDate1 = calendar.getTime();//2026/6/2
+        // Get the new warranty end date
+        Date endDate1 = calendar1.getTime();
 
-    w.setEndDate(endDate1);
-    w.setUser(u1);
-    w.setProduct(product1);
+        // Set new values
+        w.setEndDate(endDate1);
+        w.setUser(u1);
+        w.setProduct(product1);
 
-    assertEquals(endDate1,w.getEndDate());
-    assertEquals(product1,w.getProduct());
-    assertEquals(u1,w.getUser());
-
+        // Assertions using time in milliseconds for comparison
+        assertEquals(endDate1.getTime(), w.getEndDate().getTime());
+        assertEquals(product1, w.getProduct());
+        assertEquals(u1, w.getUser());
     }
+
     @Test
     void testConstructor(){
         Category category = new Category("AAA");

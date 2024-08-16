@@ -86,4 +86,13 @@ public class UserService {
         userRepo.save(existingUser);
         return modelMapper.map(existingUser,UserDTO.class);
     }
+
+    public boolean login(String email, String password) {
+        User existingUser = userRepo.findByEmail(email);
+        if (existingUser == null) {
+            throw new RuntimeException("No user found");
+        }
+        // bam r equals
+        return existingUser.getPassword().equals(password);
+    }
 }
