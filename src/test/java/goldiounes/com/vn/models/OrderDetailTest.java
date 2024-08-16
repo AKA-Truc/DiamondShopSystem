@@ -3,6 +3,7 @@ package goldiounes.com.vn.models;
 import goldiounes.com.vn.models.entities.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,9 @@ public class OrderDetailTest {
         int totalPrice = 100;
         String status = "Pending";
 
-        Order order = new Order(user, cart, promotion, shippingAddress);
+        Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
+
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
@@ -41,8 +44,9 @@ public class OrderDetailTest {
         String shippingAddress = "123 Main St";
         int totalPrice = 100;
         String status = "Pending";
+        Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
 
-        Order order = new Order(user, cart, promotion, shippingAddress);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
