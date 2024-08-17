@@ -1,8 +1,8 @@
-package goldiounes.com.vn.repositories;
+package goldiounes.com.vn.models;
 
-import goldiounes.com.vn.models.entity.CartItem;
-import goldiounes.com.vn.models.entity.Cart;
-import goldiounes.com.vn.models.entity.Product;
+import goldiounes.com.vn.models.entities.Cart;
+import goldiounes.com.vn.models.entities.CartItem;
+import goldiounes.com.vn.models.entities.Product;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
