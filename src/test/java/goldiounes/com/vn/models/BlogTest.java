@@ -1,6 +1,6 @@
 package goldiounes.com.vn.models;
 
-import goldiounes.com.vn.models.entity.Blog;
+import goldiounes.com.vn.models.entities.Blog;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

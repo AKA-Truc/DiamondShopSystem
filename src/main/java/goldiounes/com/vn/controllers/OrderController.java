@@ -1,12 +1,13 @@
 package goldiounes.com.vn.controllers;
 
-import goldiounes.com.vn.models.dto.OrderDTO;
-import goldiounes.com.vn.models.dto.OrderDetailDTO;
-import goldiounes.com.vn.models.entity.Order;
-import goldiounes.com.vn.models.entity.OrderDetail;
+import goldiounes.com.vn.models.dtos.OrderDTO;
+import goldiounes.com.vn.models.dtos.OrderDetailDTO;
+import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/order-management")
 public class OrderController {
+
     @Autowired
     private OrderService orderService;
 
@@ -21,47 +23,113 @@ public class OrderController {
     private OrderDetailService orderDetailService;
 
     @PostMapping("/orders")
-    public OrderDTO createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public ResponseEntity<ResponseWrapper<OrderDTO>> createOrder(@RequestBody OrderDTO orderDTO) {
+        OrderDTO createdOrder = orderService.createOrder(orderDTO);
+        ResponseWrapper<OrderDTO> response = new ResponseWrapper<>("Order created successfully", createdOrder);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/orders")
-    public List<OrderDTO> getAllOrders() {
-        return orderService.getAllOrders();
+    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getAllOrders() {
+        List<OrderDTO> orders = orderService.getAllOrders();
+        ResponseWrapper<List<OrderDTO>> response;
+
+        if (!orders.isEmpty()) {
+            response = new ResponseWrapper<>("Orders retrieved successfully", orders);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("No orders found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/orders/{id}")
-    public OrderDTO getOrder(@PathVariable int id) {
-        return orderService.getOrderById(id);
+    public ResponseEntity<ResponseWrapper<OrderDTO>> getOrder(@PathVariable int id) {
+        OrderDTO order = orderService.getOrderById(id);
+        ResponseWrapper<OrderDTO> response;
+
+        if (order != null) {
+            response = new ResponseWrapper<>("Order retrieved successfully", order);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("Order not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/orders/{id}")
-    public void updateOrder(@PathVariable int id, @RequestBody OrderDTO orderDTO) {
-        orderService.updateOrder(id, orderDTO);
+    public ResponseEntity<ResponseWrapper<OrderDTO>> updateOrder(@PathVariable int id, @RequestBody OrderDTO orderDTO) {
+        OrderDTO isUpdated = orderService.updateOrder(id, orderDTO);
+        ResponseWrapper<OrderDTO> response;
+        if (isUpdated != null) {
+            response = new ResponseWrapper<>("Order updated successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("Order not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/orders/{id}")
-    public void deleteOrder(@PathVariable int id) {
-        orderService.deleteOrder(id);
+    public ResponseEntity<ResponseWrapper<Void>> deleteOrder(@PathVariable int id) {
+        boolean isDeleted = orderService.deleteOrder(id);
+        ResponseWrapper<Void> response;
+
+        if (isDeleted) {
+            response = new ResponseWrapper<>("Order deleted successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        } else {
+            response = new ResponseWrapper<>("Order not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/orders/{orderId}/details")
-    public OrderDetailDTO createOrderDetail(@PathVariable int orderId, @RequestBody OrderDetail orderDetail) {
-        return orderDetailService.save(orderDetail);
+    public ResponseEntity<ResponseWrapper<OrderDetailDTO>> createOrderDetail(@PathVariable int orderId, @RequestBody OrderDetailDTO orderDetailDTO) {
+        OrderDetailDTO createdOrderDetail = orderDetailService.save(orderDetailDTO);
+        ResponseWrapper<OrderDetailDTO> response = new ResponseWrapper<>("Order detail created successfully", createdOrderDetail);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/orders/{orderId}/details")
-    public List<OrderDetailDTO> getOrderDetailByOrderId(@PathVariable int orderId) {
-        return orderDetailService.findByOrderId(orderId);
+    public ResponseEntity<ResponseWrapper<List<OrderDetailDTO>>> getOrderDetailByOrderId(@PathVariable int orderId) {
+        List<OrderDetailDTO> orderDetails = orderDetailService.findByOrderId(orderId);
+        ResponseWrapper<List<OrderDetailDTO>> response;
+
+        if (!orderDetails.isEmpty()) {
+            response = new ResponseWrapper<>("Order details retrieved successfully", orderDetails);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("No order details found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/orders/{orderId}/details/{id}")
-    public void deleteOrderDetail(@RequestBody OrderDetail orderDetail) {
-        orderDetailService.deleteById(orderDetail.getOrderDetailID());
+    public ResponseEntity<ResponseWrapper<Void>> deleteOrderDetail(@PathVariable int orderId, @PathVariable int id) {
+        boolean isDeleted = orderDetailService.deleteById(id);
+        ResponseWrapper<Void> response;
+
+        if (isDeleted) {
+            response = new ResponseWrapper<>("Order detail deleted successfully", null);
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        } else {
+            response = new ResponseWrapper<>("Order detail not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/orders/{orderId}/details/{id}")
-    public OrderDetailDTO updateOrderDetail(@RequestBody OrderDetail orderDetail) {
-        return orderDetailService.save(orderDetail);
+    public ResponseEntity<ResponseWrapper<OrderDetailDTO>> updateOrderDetail(@PathVariable int orderId, @PathVariable int id, @RequestBody OrderDetailDTO orderDetailDTO) {
+        OrderDetailDTO updatedOrderDetail = orderDetailService.update(id, orderDetailDTO);
+        ResponseWrapper<OrderDetailDTO> response;
+
+        if (updatedOrderDetail != null) {
+            response = new ResponseWrapper<>("Order detail updated successfully", updatedOrderDetail);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("Order detail not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -1,8 +1,8 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.ProductDTO;
-import goldiounes.com.vn.models.entity.Category;
-import goldiounes.com.vn.models.entity.Product;
+import goldiounes.com.vn.models.dtos.ProductDTO;
+import goldiounes.com.vn.models.entities.Category;
+import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.repositories.CategoryRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
@@ -42,35 +42,26 @@ public class ProductService {
     }
 
     public ProductDTO createProduct(ProductDTO productDTO) {
-        Optional<Product> existingProduct = productRepo.findById(productDTO.getProductID());
-        if (existingProduct.isPresent()) {
+        Product product = modelMapper.map(productDTO, Product.class);
+        Product existingProduct = productRepo.findByProductName(product.getProductName());
+        if (existingProduct != null) {
             throw new RuntimeException("Product already exists");
         }
-        Category category = categoryRepo.findByName(productDTO.getCategory().getCategoryName());
-        if (category == null) {
-            throw new RuntimeException("Category not found");
-        }
-        Product product = modelMapper.map(productDTO, Product.class);
-        product.setCategory(category);
-        product.setSellingPrice(productDTO.getLaborCost()*productDTO.getMarkupRate());
+        Category existingCategory = categoryRepo.findById(product.getCategory().getCategoryID())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        product.setCategory(existingCategory);
+        product.setSellingPrice(product.getLaborCost() * productDTO.getMarkupRate());
         productRepo.save(product);
-        return modelMapper.map(product,new TypeToken<ProductDTO>() {}.getType());
+        return modelMapper.map(product,ProductDTO.class);
     }
 
-    public void deleteProduct(int id) {
+    public boolean deleteProduct(int id) {
         Optional<Product> existingProduct = productRepo.findById(id);
         if (existingProduct.isEmpty()) {
             throw new RuntimeException("Product not found");
         }
         productRepo.delete(existingProduct.get());
-    }
-
-    public List<ProductDTO> findByName(String name) {
-        List<Product> products = productRepo.findByProductName(name);
-        if (products.isEmpty()) {
-            throw new RuntimeException("No products found");
-        }
-        return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
+        return true;
     }
 
     public void deleteById(int id) {
@@ -89,20 +80,16 @@ public class ProductService {
     }
 
     public ProductDTO updateProduct(int id,ProductDTO productDTO) {
-        Product existingProduct = productRepo.findById(id).get();
-        if (existingProduct == null) {
-            throw new RuntimeException("Product not found");
-        }
-        existingProduct.setProductName(productDTO.getProductName());
-        existingProduct.setInventory(productDTO.getInventory());
-        existingProduct.setWarrantyPeriod(productDTO.getWarrantyPeriod());
-        existingProduct.setSize(productDTO.getSize());
-        existingProduct.setImageURL(productDTO.getImageURL());
-        existingProduct.setLaborCost(productDTO.getLaborCost());
-        existingProduct.setMarkupRate(productDTO.getMarkupRate());
-        existingProduct.setSellingPrice(productDTO.getLaborCost()*productDTO.getMarkupRate());
+        Product product = modelMapper.map(productDTO, Product.class);
+        Product existingProduct = productRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        existingProduct.setProductName(product.getProductName());
+        existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
+        existingProduct.setImageURL(product.getImageURL());
+        existingProduct.setLaborCost(product.getLaborCost());
+        existingProduct.setMarkupRate(product.getMarkupRate());
+        existingProduct.setSellingPrice(product.getLaborCost()*product.getMarkupRate());
         productRepo.save(existingProduct);
-        return modelMapper.map(productRepo.save(existingProduct), ProductDTO.class);
+        return modelMapper.map(existingProduct, ProductDTO.class);
     }
-
 }

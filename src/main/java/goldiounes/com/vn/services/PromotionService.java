@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.PromotionDTO;
-import goldiounes.com.vn.models.entity.Promotion;
+import goldiounes.com.vn.models.dtos.PromotionDTO;
+import goldiounes.com.vn.models.entities.Promotion;
 import goldiounes.com.vn.repositories.PromotionRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,9 @@ public class PromotionService {
 
     public List<PromotionDTO> findAll() {
         List<Promotion> promotions = promotionRepo.findAll();
+        if (promotions.isEmpty()) {
+            throw new RuntimeException("No promotions found");
+        }
         return promotions.stream()
                 .map(promotion -> modelMapper.map(promotion, PromotionDTO.class))
                 .collect(Collectors.toList());
@@ -32,23 +35,24 @@ public class PromotionService {
         return modelMapper.map(promotion, PromotionDTO.class);
     }
 
-    public PromotionDTO save(Promotion promotion) {
+    public PromotionDTO save(PromotionDTO promotionDTO) {
+        Promotion promotion = modelMapper.map(promotionDTO, Promotion.class);
         Promotion savedPromotion = promotionRepo.save(promotion);
         return modelMapper.map(savedPromotion, PromotionDTO.class);
     }
 
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         if (!promotionRepo.existsById(id)) {
             throw new RuntimeException("Promotion not found");
         }
         promotionRepo.deleteById(id);
+        return true;
     }
 
-    public PromotionDTO update(Promotion promotion) {
-        Promotion existingPromotion = promotionRepo.findById(promotion.getPromotionID()).get();
-        if (existingPromotion == null) {
-            throw new RuntimeException("Promotion not found");
-        }
+    public PromotionDTO update(PromotionDTO promotionDTO) {
+        Promotion promotion = modelMapper.map(promotionDTO, Promotion.class);
+        Promotion existingPromotion = promotionRepo.findById(promotion.getPromotionID())
+                .orElseThrow(() -> new RuntimeException("Promotion not found"));
         existingPromotion.setPromotionName(promotion.getPromotionName());
         existingPromotion.setDescription(promotion.getDescription());
         existingPromotion.setStartDate(promotion.getStartDate());

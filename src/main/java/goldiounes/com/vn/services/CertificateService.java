@@ -1,8 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.CertificateDTO;
-import goldiounes.com.vn.models.entity.Certificate;
-import goldiounes.com.vn.models.entity.Diamond;
+import goldiounes.com.vn.models.dtos.CertificateDTO;
+import goldiounes.com.vn.models.dtos.DiamondDTO;
+import goldiounes.com.vn.models.entities.Certificate;
+import goldiounes.com.vn.models.entities.Diamond;
 import goldiounes.com.vn.repositories.CertificateRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import org.modelmapper.ModelMapper;
@@ -25,51 +26,45 @@ public class CertificateService {
     private ModelMapper modelMapper;
 
     public CertificateDTO getCertificateByDiamondId(int diamondId) {
-        Optional<Diamond> existingDiamond = diamondRepo.findById(diamondId);
-        if (!existingDiamond.isPresent()) {
-            throw new RuntimeException("Diamond not found");
-        }
-        Optional<Certificate> existingCertificate = certificateRepo.findByDiamondId(diamondId);
-        if (!existingCertificate.isPresent()) {
-            throw new RuntimeException("Certificate not found");
-        }
-        return modelMapper.map(existingCertificate.get(), CertificateDTO.class);
+        Diamond existingDiamond = diamondRepo.findById(diamondId)
+                .orElseThrow(()->new RuntimeException("Diamond not found"));
+        Certificate existingCertificate = certificateRepo.findByDiamondId(existingDiamond.getDiamondID())
+                .orElseThrow(()->new RuntimeException("Certificate not found"));
+        return modelMapper.map(existingCertificate, CertificateDTO.class);
     }
 
     public CertificateDTO createCertificate(CertificateDTO certificateDTO) {
-        Optional<Diamond> existingDiamond = diamondRepo.findById(certificateDTO.getDiamond().getDiamondID());
-        if (!existingDiamond.isPresent()) {
-            throw new RuntimeException("Diamond not found");
+        Certificate certificate = modelMapper.map(certificateDTO, Certificate.class);
+        Certificate existingCertificate = certificateRepo.findByGIACode(certificate.getGIACode());
+        if (existingCertificate != null) {
+            throw new RuntimeException("Certificate already exists");
         }
-        Certificate certificate = new Certificate();
-        certificate.setDiamond(existingDiamond.get());
-        certificate.setGIACode(certificateDTO.getGIACode());
-        Certificate savedCertificate = certificateRepo.save(certificate);
-        return modelMapper.map(savedCertificate, CertificateDTO.class);
+        else {
+            Diamond existingDiamond = diamondRepo.findById(certificate.getDiamond().getDiamondID())
+                    .orElseThrow(() -> new RuntimeException("Diamond not found"));
+
+            certificate.setDiamond(existingDiamond);
+            Certificate savedCertificate = certificateRepo.save(certificate);
+            return modelMapper.map(savedCertificate, CertificateDTO.class);
+        }
     }
 
     public void deleteCertificate(int id) {
-        Optional<Certificate> existingCertificate = certificateRepo.findById(id);
-        if (!existingCertificate.isPresent()) {
-            throw new RuntimeException("Certificate not found");
-        }
-        certificateRepo.delete(existingCertificate.get());
+        Certificate existingCertificate = certificateRepo.findById(id)
+                .orElseThrow(()->new RuntimeException("Certificate not found"));
+        certificateRepo.delete(existingCertificate);
     }
 
     public CertificateDTO updateCertificate(int id, CertificateDTO certificateDTO) {
-        Optional<Certificate> existingCertificate = certificateRepo.findById(id);
-        if (!existingCertificate.isPresent()) {
-            throw new RuntimeException("Certificate not found");
-        }
+        Certificate certificate = modelMapper.map(certificateDTO, Certificate.class);
+        Certificate existingCertificate = certificateRepo.findById(id)
+                .orElseThrow(()->new RuntimeException("Certificate not found"));
 
-        Optional<Diamond> existingDiamond = diamondRepo.findById(certificateDTO.getDiamond().getDiamondID());
-        if (!existingDiamond.isPresent()) {
-            throw new RuntimeException("Diamond not found");
-        }
+        Diamond existingDiamond = diamondRepo.findById(certificate.getDiamond().getDiamondID())
+                .orElseThrow(()->new RuntimeException("Diamond not found"));
 
-        Certificate certificate = existingCertificate.get();
-        certificate.setDiamond(existingDiamond.get());
-        certificate.setGIACode(certificateDTO.getGIACode());
+        existingCertificate.setDiamond(existingDiamond);
+        existingCertificate.setGIACode(certificate.getGIACode());
 
         Certificate savedCertificate = certificateRepo.save(certificate);
         return modelMapper.map(savedCertificate, CertificateDTO.class);
