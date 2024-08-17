@@ -1,11 +1,12 @@
 package goldiounes.com.vn.models;
 
-import goldiounes.com.vn.models.entity.Cart;
-import goldiounes.com.vn.models.entity.Order;
-import goldiounes.com.vn.models.entity.Promotion;
-import goldiounes.com.vn.models.entity.User;
+import goldiounes.com.vn.models.entities.Cart;
+import goldiounes.com.vn.models.entities.Order;
+import goldiounes.com.vn.models.entities.Promotion;
+import goldiounes.com.vn.models.entities.User;
 import org.junit.jupiter.api.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,9 @@ public class OrderTest {
         String shippingAddress = "123 Main St";
         int totalPrice = 100;
         String status = "Pending";
+        Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
 
-        Order order = new Order(user, cart, promotion, shippingAddress);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
@@ -61,7 +63,8 @@ public class OrderTest {
         Promotion promotion = new Promotion("Summer Sale", "Discount on all summer items", new Date(), new Date(), 20);
         String shippingAddress = "123 Main St";
 
-        Order order = new Order(user, cart, promotion, shippingAddress);
+        Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
 
         assertNotNull(order);
 
@@ -69,6 +72,7 @@ public class OrderTest {
         assertEquals(cart, order.getCart());
         assertEquals(promotion, order.getPromotion());
         assertEquals(shippingAddress, order.getShippingAddress());
+        assertEquals(startDate, order.getStartDate());
     }
 
     @Test
@@ -83,6 +87,7 @@ public class OrderTest {
         assertEquals(0, order.getTotalPrice());
         assertNull(order.getStatus());
         assertNull(order.getOrderDetails());
+        assertNull(order.getStartDate());
     }
 
 

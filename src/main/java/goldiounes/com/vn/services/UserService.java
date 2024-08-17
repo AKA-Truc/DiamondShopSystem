@@ -1,11 +1,11 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.UserDTO;
-import goldiounes.com.vn.models.entity.User;
+import goldiounes.com.vn.models.dtos.PointDTO;
+import goldiounes.com.vn.models.dtos.UserDTO;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import goldiounes.com.vn.models.entities.Point;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.UserRepo;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,9 @@ public class UserService {
     private CartService cartService;
 
     @Autowired
+    private PointService pointService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public List<UserDTO> getAllUsers() {
@@ -33,10 +36,8 @@ public class UserService {
     }
 
     public UserDTO getUser(int id) {
-        User existingUser = userRepo.findById(id).get();
-        if (existingUser == null) {
-            throw new RuntimeException("No user found");
-        }
+        User existingUser = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found"));
         return modelMapper.map(existingUser,new TypeToken<UserDTO>(){}.getType());
     }
 
@@ -49,35 +50,49 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO userDTO) {
-        User existingUser = userRepo.findByEmail(userDTO.getEmail());
+        User user = modelMapper.map(userDTO,User.class);
+        User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser != null) {
             throw new RuntimeException("User already exists");
         }
-        User user = modelMapper.map(userDTO,User.class);
-        userRepo.save(user);
-        cartService.createCart(user);
-        return modelMapper.map(user,new TypeToken<UserDTO>(){}.getType());
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User newUser =  userRepo.save(user);
+        UserDTO indexUser = modelMapper.map(newUser,UserDTO.class);
+        cartService.createCart(indexUser);
+        Point newPoint = new Point();
+        newPoint.setUser(user);
+        newPoint.setPoints(0);
+        pointService.createPoint(modelMapper.map(newPoint, PointDTO.class));
+        return modelMapper.map(newUser,UserDTO.class);
     }
 
-    public void deleteUser(int id) {
-        User existingUser = userRepo.findById(id).get();
-        if (existingUser == null) {
-            throw new RuntimeException("No user found");
-        }
-        userRepo.delete(existingUser);
+    public boolean deleteUser(int id) {
+        User existingUser = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found"));
+        userRepo.deleteById(existingUser.getUserID());
+        return true;
     }
 
     public UserDTO updateUser(int id, UserDTO userDTO) {
-        User existingUser = userRepo.findById(id).get();
+        User user = modelMapper.map(userDTO,User.class);
+        User existingUser = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found"));
+        existingUser.setEmail(user.getEmail());
+        existingUser.setUserName(user.getUserName());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setRole(user.getRole());
+        existingUser.setAddress(user.getAddress());
+        userRepo.save(existingUser);
+        return modelMapper.map(existingUser,UserDTO.class);
+    }
+
+    public boolean login(String email, String password) {
+        User existingUser = userRepo.findByEmail(email);
         if (existingUser == null) {
             throw new RuntimeException("No user found");
         }
-        existingUser.setEmail(userDTO.getEmail());
-        existingUser.setUserName(userDTO.getUserName());
-        existingUser.setPassword(userDTO.getPassword());
-        existingUser.setRole(userDTO.getRole());
-        existingUser.setAddress(userDTO.getAddress());
-        userRepo.save(existingUser);
-        return modelMapper.map(existingUser,new TypeToken<UserDTO>(){}.getType());
+        // bam r equals
+        return existingUser.getPassword().equals(password);
     }
 }

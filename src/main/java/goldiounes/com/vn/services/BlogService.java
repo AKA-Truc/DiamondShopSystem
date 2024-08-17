@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.BlogDTO;
-import goldiounes.com.vn.models.entity.Blog;
+import goldiounes.com.vn.models.dtos.BlogDTO;
+import goldiounes.com.vn.models.entities.Blog;
 import goldiounes.com.vn.repositories.BlogRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -39,30 +39,28 @@ public class BlogService {
     }
 
     public BlogDTO createBlog(BlogDTO blogDTO) {
-        Blog existingBlog = blogRepo.findByTitle(blogDTO.getTitle());
+        Blog blog = modelMapper.map(blogDTO, Blog.class);
+        Blog existingBlog = blogRepo.findByTitle(blog.getTitle());
         if (existingBlog != null) {
             throw new RuntimeException("Blog already exists ");
         }
-        Blog blog = modelMapper.map(blogDTO, Blog.class);
         blogRepo.save(blog);
-        return modelMapper.map(blog, new TypeToken<BlogDTO>() {}.getType());
+        return modelMapper.map(blog, BlogDTO.class);
     }
 
-    public void deleteBlog(int id) {
-        Blog existingBlog = blogRepo.findById(id).get();
-        if (existingBlog == null) {
-            throw new RuntimeException("No blog not found");
-        }
-        blogRepo.deleteById(id);
+    public boolean deleteBlog(int id) {
+        Blog existingBlog = blogRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No blog found"));
+        blogRepo.deleteById(existingBlog.getBlogID());
+        return true;
     }
 
     public BlogDTO updateBlog(int id, BlogDTO blogDTO) {
-        Blog existingBlog = blogRepo.findById(id).get();
-        if (existingBlog == null) {
-            throw new RuntimeException("No blog found ");
-        }
-        existingBlog.setTitle(blogDTO.getTitle());
-        existingBlog.setContent(blogDTO.getContent());
+        Blog blog = modelMapper.map(blogDTO, Blog.class);
+        Blog existingBlog = blogRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No blog found"));
+        existingBlog.setTitle(blog.getTitle());
+        existingBlog.setContent(blog.getContent());
         blogRepo.save(existingBlog);
         return modelMapper.map(existingBlog, new TypeToken<BlogDTO>() {}.getType());
     }

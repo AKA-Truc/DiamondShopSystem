@@ -1,8 +1,16 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.OrderDetailDTO;
-import goldiounes.com.vn.models.entity.OrderDetail;
+import goldiounes.com.vn.models.dtos.OrderDetailDTO;
+import goldiounes.com.vn.models.dtos.ProductDTO;
+import goldiounes.com.vn.models.dtos.ProductDetailDTO;
+import goldiounes.com.vn.models.entities.Order;
+import goldiounes.com.vn.models.entities.OrderDetail;
+import goldiounes.com.vn.models.entities.Product;
+import goldiounes.com.vn.models.entities.ProductDetail;
 import goldiounes.com.vn.repositories.OrderDetailRepo;
+import goldiounes.com.vn.repositories.OrderRepo;
+import goldiounes.com.vn.repositories.ProductDetailRepo;
+import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +25,25 @@ public class OrderDetailService {
     private OrderDetailRepo orderDetailRepo;
 
     @Autowired
+    private ProductDetailService productDetailService;
+
+    @Autowired
+    private ProductDetailRepo productDetailRepo;
+
+    @Autowired
+    private OrderRepo orderRepo;
+
+    @Autowired
+    private ProductRepo productRepo;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public List<OrderDetailDTO> findByOrderId(int orderId) {
         List<OrderDetail> orderDetails = orderDetailRepo.findByOrderId(orderId);
+        if (orderDetails.isEmpty()) {
+            throw new RuntimeException("No order found with order id " + orderId);
+        }
         return orderDetails.stream()
                 .map(orderDetail -> modelMapper.map(orderDetail, OrderDetailDTO.class))
                 .collect(Collectors.toList());
@@ -28,6 +51,9 @@ public class OrderDetailService {
 
     public List<OrderDetailDTO> findAll() {
         List<OrderDetail> orderDetails = orderDetailRepo.findAll();
+        if (orderDetails.isEmpty()) {
+            throw new RuntimeException("No order found");
+        }
         return orderDetails.stream()
                 .map(orderDetail -> modelMapper.map(orderDetail, OrderDetailDTO.class))
                 .collect(Collectors.toList());
@@ -39,24 +65,61 @@ public class OrderDetailService {
         return modelMapper.map(orderDetail, OrderDetailDTO.class);
     }
 
-    public OrderDetailDTO save(OrderDetail orderDetail) {
+    public OrderDetailDTO save(OrderDetailDTO orderDetailDTO) {
+        OrderDetail orderDetail = modelMapper.map(orderDetailDTO, OrderDetail.class);
+
+        Order existingOrder = orderRepo.findById(orderDetail.getOrder().getOrderID())
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+
+        Product existingProduct = productRepo.findById(orderDetail.getProduct().getProductID())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        ProductDTO indexProduct = modelMapper.map(existingProduct, ProductDTO.class);
+        ProductDetailDTO productDetailDTO = productDetailService.getProductDetailBySize(orderDetail.getSize(),indexProduct);
+
+        ProductDetail updateInventory = modelMapper.map(productDetailDTO, ProductDetail.class);
+        if(updateInventory.getInventory() >= orderDetail.getQuantity()){
+            updateInventory.setInventory(updateInventory.getInventory()-orderDetail.getQuantity());
+            productDetailRepo.save(updateInventory);
+        }
+        else{
+            throw new RuntimeException("Not enough inventory");
+        }
+
+        orderDetail.setOrder(existingOrder);
+        orderDetail.setProduct(existingProduct);
         OrderDetail savedOrderDetail = orderDetailRepo.save(orderDetail);
+
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);
     }
 
-    public void deleteById(int id) {
-        if (!orderDetailRepo.existsById(id)) {
-            throw new RuntimeException("OrderDetail not found");
+    public boolean deleteById(int id) {
+        OrderDetail orderDetail = orderDetailRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("OrderDetail not found"));
+        Product product = productRepo.findById(orderDetail.getProduct().getProductID())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        ProductDTO indexProduct = modelMapper.map(product, ProductDTO.class);
+        ProductDetailDTO existingProductDetailsDTO = productDetailService.findById(indexProduct.getProductId());
+        ProductDetail existingProductDetails = modelMapper.map(existingProductDetailsDTO, ProductDetail.class);
+        if (existingProductDetailsDTO == null) {
+            throw new RuntimeException("Product detail not found");
+        }
+        else {
+            ProductDetail updateInventory = modelMapper.map(existingProductDetails, ProductDetail.class);
+            updateInventory.setInventory(existingProductDetails.getInventory()+orderDetail.getQuantity());
+            productDetailRepo.save(updateInventory);
         }
         orderDetailRepo.deleteById(id);
+        return true;
     }
 
-    public OrderDetailDTO update(int id, OrderDetail orderDetail) {
+    public OrderDetailDTO update(int id, OrderDetailDTO orderDetailDTO) {
+        OrderDetail orderDetail = modelMapper.map(orderDetailDTO, OrderDetail.class);
         OrderDetail existingOderDetail = orderDetailRepo.findById(orderDetail.getOrderDetailID()).orElseThrow(() -> new RuntimeException("OrderDetail not found"));
         existingOderDetail.setOrderDetailID(orderDetail.getOrderDetailID());
         existingOderDetail.setOrder(orderDetail.getOrder());
         existingOderDetail.setQuantity(orderDetail.getQuantity());
-        existingOderDetail.setPrice(orderDetail.getPrice());
         existingOderDetail.setProduct(orderDetail.getProduct());
         OrderDetail savedOrderDetail = orderDetailRepo.save(existingOderDetail);
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);

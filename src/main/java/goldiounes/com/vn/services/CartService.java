@@ -1,9 +1,9 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.CartDTO;
-import goldiounes.com.vn.models.dto.UserDTO;
-import goldiounes.com.vn.models.entity.Cart;
-import goldiounes.com.vn.models.entity.User;
+import goldiounes.com.vn.models.dtos.CartDTO;
+import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.entities.Cart;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.CartRepo;
 import goldiounes.com.vn.repositories.UserRepo;
 import org.modelmapper.ModelMapper;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartService {
@@ -25,50 +24,44 @@ public class CartService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public CartDTO getCartByUserId(int id) {
-        User existingUser = userRepo.findById(id).get();
-        if (existingUser == null) {
-            throw new RuntimeException("User not found");
-        }
-        Cart existingCart = cartRepo.findCartByUserId(id);
+    public CartDTO getCart(int id) {
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
         if (existingCart == null) {
             throw new RuntimeException("Cart not found");
         }
         return modelMapper.map(existingCart,new TypeToken<CartDTO>(){}.getType());
     }
 
-    public CartDTO createCart(User user) {
-       Optional<User> existingUser = userRepo.findById(user.getUserID());
-       if (existingUser == null) {
-           throw new RuntimeException("User not found");
-       }
-       Cart cart = new Cart(user);
-       cartRepo.save(cart);
-       return modelMapper.map(cart,new TypeToken<CartDTO>(){}.getType());
+    public CartDTO createCart(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO,User.class);
+        User existingUser = userRepo.findById(user.getUserID())
+                .orElseThrow(()-> new RuntimeException("User not found"));
+        Cart cart = new Cart();
+        cart.setUser(existingUser);
+        Cart saveCart = cartRepo.save(cart);
+        return modelMapper.map(saveCart,CartDTO.class);
     }
 
     public void deleteCart(int id) {
-        Cart existingCart = cartRepo.findById(id).get();
-        if (existingCart == null) {
-            throw new RuntimeException("Cart not found");
-        }
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cart not found"));
         cartRepo.delete(existingCart);
     }
 
-//    public CartDTO updateCart(int id,CartDTO cartDTO) {
-//        Cart existingCart = cartRepo.findById(id).get();
-//        if (existingCart == null) {
-//            throw new RuntimeException("Cart not found");
-//        }
-//        existingCart.setUser(cartDTO.getUsers());
-//        cartRepo.save(existingCart);
-//        return modelMapper.map(existingCart,new TypeToken<CartDTO>(){}.getType());
-//    }
+    public CartDTO updateCart(int id,CartDTO cartDTO) {
+        Cart cart = modelMapper.map(cartDTO,Cart.class);
+        Cart existingCart = cartRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cart not found"));
+        existingCart.setUser(cart.getUser());
+        cartRepo.save(existingCart);
+        return modelMapper.map(existingCart,CartDTO.class);
+    }
 
     public List<CartDTO> getAllCarts() {
         List<Cart> carts = cartRepo.findAll();
-        if (carts == null) {
-            throw new RuntimeException("Cart not found");
+        if (carts.isEmpty()) {
+            throw new RuntimeException("List Cart is empty");
         }
         return modelMapper.map(carts,new TypeToken<List<CartDTO>>(){}.getType());
     }

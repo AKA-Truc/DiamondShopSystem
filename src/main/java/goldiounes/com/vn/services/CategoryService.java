@@ -1,7 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.CategoryDTO;
-import goldiounes.com.vn.models.entity.Category;
+import goldiounes.com.vn.models.dtos.CategoryDTO;
+import goldiounes.com.vn.models.entities.Category;
 import goldiounes.com.vn.repositories.CategoryRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -24,25 +24,30 @@ public class CategoryService {
         if (categories.isEmpty()) {
             throw new RuntimeException("No categories found");
         } else {
-            return modelMapper.map(categories, new TypeToken<List<CategoryDTO>>() {
-            }.getType());
+            return modelMapper.map(categories, new TypeToken<List<CategoryDTO>>() {}.getType());
         }
     }
 
     public CategoryDTO findById ( int id){
-        Category existingCategory = categoryRepo.findById(id).orElseThrow(() -> new RuntimeException("No category found"));
-        return modelMapper.map(existingCategory, new TypeToken<CategoryDTO>() {
-        }.getType());
+        Category existingCategory = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No category found"));
+        return modelMapper.map(existingCategory, new TypeToken<CategoryDTO>() {}.getType());
     }
 
-    public CategoryDTO createCategory(Category category) {
-        Category newCategory = modelMapper.map(categoryRepo.saveAndFlush(category), Category.class);
-        return modelMapper.map(category, new TypeToken<CategoryDTO>(){}.getType());
+    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        Category newCategory = modelMapper.map(categoryDTO, Category.class);
+        if(categoryRepo.findByName(categoryDTO.getCategoryName()) != null){
+            throw new RuntimeException("Category name already exists");
+        }
+        categoryRepo.save(newCategory);
+        return modelMapper.map(newCategory, new TypeToken<CategoryDTO>(){}.getType());
     }
 
-    public void deleteById ( int id){
-        Category existingCategory = categoryRepo.findById(id).orElseThrow(() -> new RuntimeException("No category found"));
-        categoryRepo.deleteById(id);
+    public boolean deleteById (int id){
+        Category existingCategory = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No category found"));
+        categoryRepo.deleteById(existingCategory.getCategoryID());
+        return true;
     }
 
     public CategoryDTO findByName (String name){
@@ -51,8 +56,7 @@ public class CategoryService {
                 throw new RuntimeException("No category found");
             }
             else {
-                return modelMapper.map(existingCategory, new TypeToken<List<CategoryDTO>>() {
-                }.getType());
+                return modelMapper.map(existingCategory, new TypeToken<List<CategoryDTO>>() {}.getType());
             }
     }
 
@@ -62,6 +66,15 @@ public class CategoryService {
             throw new RuntimeException("No category found");
         }
         return modelMapper.map(categories,new TypeToken<List<CategoryDTO>>() {}.getType());
+    }
+
+    public CategoryDTO updateCategory (int id,CategoryDTO categoryDTO) {
+        Category category = modelMapper.map(categoryDTO, Category.class);
+        Category existingCategory = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No category found"));
+        existingCategory.setCategoryName(category.getCategoryName());
+        categoryRepo.save(existingCategory);
+        return modelMapper.map(existingCategory, CategoryDTO.class);
     }
 
 }

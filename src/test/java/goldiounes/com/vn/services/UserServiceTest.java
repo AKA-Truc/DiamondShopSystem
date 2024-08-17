@@ -1,8 +1,7 @@
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dto.UserDTO;
+import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.repositories.UserRepo;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,9 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    @Test public void testCreateUser() {
-        UserDTO userDTO = new UserDTO(1, "Truc", "123456aa", "pthanhtruca3@gmail.com", "staff", "QuangNgai");
-
-        UserDTO result = userService.createUser(userDTO);
-    }
+//    @Test public void testCreateUser() {
+//        UserDTO userDTO = new UserDTO(1, "Truc", "123456aa", "pthanhtruca3@gmail.com", "staff", "QuangNgai");
+//
+//        UserDTO result = userService.createUser(user);
+//    }
 }

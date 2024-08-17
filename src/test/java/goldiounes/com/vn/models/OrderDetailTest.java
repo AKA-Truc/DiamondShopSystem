@@ -1,8 +1,9 @@
 package goldiounes.com.vn.models;
 
-import goldiounes.com.vn.models.entity.*;
+import goldiounes.com.vn.models.entities.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,21 +18,22 @@ public class OrderDetailTest {
         int totalPrice = 100;
         String status = "Pending";
 
-        Order order = new Order(user, cart, promotion, shippingAddress);
+        Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
+
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
         Category category = new Category("AAA");
 
         Product product = new Product(category,"BBB","URL",
-                1.2,500,24,10);
+                1.2,500,24);
 
-        OrderDetail orderDetail = new OrderDetail(order, product, 20, 30);
+        OrderDetail orderDetail = new OrderDetail(order, product, 20, 15);
 
         assertEquals(order, orderDetail.getOrder());
         assertEquals(product, orderDetail.getProduct());
         assertEquals(20, orderDetail.getQuantity());
-        assertEquals(30, orderDetail.getPrice());
     }
 
     @Test
@@ -42,24 +44,24 @@ public class OrderDetailTest {
         String shippingAddress = "123 Main St";
         int totalPrice = 100;
         String status = "Pending";
+        Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
 
-        Order order = new Order(user, cart, promotion, shippingAddress);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
         Category category = new Category("AAA");
 
         Product product = new Product(category,"BBB","URL",
-                1.2,500,24,10);
+                1.2,500,24);
 
-        OrderDetail orderDetail = new OrderDetail(order, product, 20, 30);
+        OrderDetail orderDetail = new OrderDetail(order, product, 20, 15);
 
         assertNotNull(orderDetail);
 
         assertEquals(order, orderDetail.getOrder());
         assertEquals(product, orderDetail.getProduct());
         assertEquals(20, orderDetail.getQuantity());
-        assertEquals(30, orderDetail.getPrice());
     }
 
     @Test
@@ -71,6 +73,5 @@ public class OrderDetailTest {
         assertNull(orderDetail.getOrder());
         assertNull(orderDetail.getProduct());
         assertEquals(0, orderDetail.getQuantity());
-        assertEquals(0, orderDetail.getPrice());
     }
 }
