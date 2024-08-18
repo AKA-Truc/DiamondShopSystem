@@ -53,6 +53,14 @@ public class ProductDetailService {
         Setting existingSetting = settingRepo.findById(productDetail.getSetting().getSettingID())
                 .orElseThrow(() -> new RuntimeException("No Setting found"));
         productDetail.setSetting(existingSetting);
+
+        ProductDetail checkProductDetail = productDetailRepo.findBySizeAndProductId(productDetail.getSize(),existingProduct.getProductID());
+        if (checkProductDetail != null) {
+            checkProductDetail.setInventory(checkProductDetail.getInventory()+productDetail.getInventory());
+            productDetailRepo.save(checkProductDetail);
+            return modelMapper.map(checkProductDetail, ProductDetailDTO.class);
+        }
+
         productDetailRepo.save(productDetail);
         return modelMapper.map(productDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }
