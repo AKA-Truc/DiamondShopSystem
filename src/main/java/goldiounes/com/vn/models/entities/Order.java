@@ -30,7 +30,7 @@ public class Order {
     private String Status;
 
     @ManyToOne
-    @JoinColumn(name = "PromotionID", nullable = false)
+    @JoinColumn(name = "PromotionID")
     private Promotion Promotion;
 
     @Column(name = "ShippingAddress", nullable = false)

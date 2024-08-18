@@ -9,8 +9,7 @@ public class CartItemDTO {
     private int cartItemId;
     private int quantity;
 
-    //JsonBackReference
-    @JsonIgnore
+    @JsonBackReference
     private CartDTO cart;
 
     //@JsonBackReference
