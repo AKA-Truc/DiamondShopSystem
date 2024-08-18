@@ -19,8 +19,7 @@ public class OrderDTO {
     // @JsonManagedReference
     private UserDTO user;
 
-    //@JsonBackReference
-    @JsonIgnore
+    @JsonBackReference
     private CartDTO cart;
 
     //@JsonManagedReference
