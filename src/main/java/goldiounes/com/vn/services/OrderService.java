@@ -34,6 +34,9 @@ public class OrderService {
     private CartItemRepo cartItemRepo;
 
     @Autowired
+    private CartItemService cartItemService;
+
+    @Autowired
     private OrderDetailService orderDetailService;
 
     @Autowired
@@ -53,6 +56,7 @@ public class OrderService {
         if (cart == null) {
             throw new RuntimeException("Cart not found");
         }
+        order.setCart(cart);
 
         List<OrderDetail> orderDetails = order.getOrderDetails();
         if (orderDetails.isEmpty()) {
@@ -62,12 +66,11 @@ public class OrderService {
         for (CartItem cartItem : cart.getCartItems()) {
             for (OrderDetail orderDetail : orderDetails) {
                 if (orderDetail.getProduct().getProductID() == cartItem.getProduct().getProductID()) {
-                    cartItemRepo.delete(cartItem);
+                    cartItemService.removeCartItem(cartItem.getCartItemID());
                 }
             }
         }
 
-        order.setCart(cart);
         order.setStatus("New");
 
         int totalPrice = 0;
@@ -79,12 +82,16 @@ public class OrderService {
             totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
         }
 
-        if (order.getPromotion() != null) {
+        if (order.getPromotion().getPromotionID() != 0) {
             Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
                     .orElseThrow(() -> new RuntimeException("Promotion not found"));
             order.setPromotion(promotion);
             totalPrice -= (promotion.getDiscountPercent() * totalPrice) / 100;
         }
+        else {
+            order.setPromotion(null);
+        }
+
 
         order.setTotalPrice(totalPrice);
 
@@ -110,8 +117,6 @@ public class OrderService {
 
         List<OrderDetail> updatedOrderDetails = new ArrayList<>();
         int totalPrice = 0;
-        Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
-                .orElseThrow(() -> new RuntimeException("Promotion not found"));
 
         for (OrderDetail orderDetail : order.getOrderDetails()) {
             Product product = productRepo.findById(orderDetail.getProduct().getProductID())
@@ -123,9 +128,15 @@ public class OrderService {
             updatedOrderDetails.add(orderDetailIndex);
             totalPrice += product.getSellingPrice() * orderDetailIndex.getQuantity();
         }
-        totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
-        existingOrder.setOrderDetails(updatedOrderDetails);
-        existingOrder.setPromotion(promotion);
+
+        if(order.getPromotion() != null) {
+            Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
+                    .orElseThrow(() -> new RuntimeException("Promotion not found"));
+
+            totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
+            existingOrder.setOrderDetails(updatedOrderDetails);
+            existingOrder.setPromotion(promotion);
+        }
         existingOrder.setTotalPrice(totalPrice);
 
         Order savedOrder = orderRepo.save(existingOrder);
