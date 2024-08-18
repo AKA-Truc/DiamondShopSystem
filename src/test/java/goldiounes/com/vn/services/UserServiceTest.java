@@ -1,30 +1,35 @@
 package goldiounes.com.vn.services;
 
+import goldiounes.com.vn.models.dtos.CartDTO;
+import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.UserRepo;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-
-@SpringBootTest
 public class UserServiceTest {
-    @Autowired
     private UserRepo userRepo;
-
-    @Autowired
     private CartService cartService;
-
-    @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
     private UserService userService;
+    private PointService pointService;
+    private User user;
+    private UserDTO userDTO;
+    private CartDTO cartDTO;
+    private PointDTO pointDTO;
 
-//    @Test public void testCreateUser() {
-//        UserDTO userDTO = new UserDTO(1, "Truc", "123456aa", "pthanhtruca3@gmail.com", "staff", "QuangNgai");
-//
-//        UserDTO result = userService.createUser(user);
-//    }
+    @BeforeEach
+    void setUp() {
+        userRepo = Mockito.mock(UserRepo.class);
+        cartService = Mockito.mock(CartService.class);
+        pointService = Mockito.mock(PointService.class);
+        modelMapper = new ModelMapper();
+
+        userService = new UserService(userRepo, cartService, pointService, modelMapper);
+
+        user = new User();
+
+    }
 }
