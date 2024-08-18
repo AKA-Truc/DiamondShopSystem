@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface CategoryRepo extends JpaRepository<Category, Integer> {
 
-    @Query("select c from Category c where c.CategoryName=:CategoryName")
+    @Query("select c from Category c where c.categoryName=:CategoryName")
     Category findByName(@Param("CategoryName") String CategoryName);
 
-    @Query("SELECT c FROM Category c WHERE c.CategoryName LIKE %:keyword%")
+    @Query("SELECT c FROM Category c WHERE c.categoryName LIKE %:keyword%")
     List<Category> findCategoryByKeyword(@Param("keyword") String keyword);
 }

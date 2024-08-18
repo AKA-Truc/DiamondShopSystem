@@ -27,6 +27,13 @@ public class UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public UserService(UserRepo userRepo, CartService cartService, PointService pointService, ModelMapper modelMapper) {
+        this.userRepo = userRepo;
+        this.cartService = cartService;
+        this.pointService = pointService;
+        this.modelMapper = modelMapper;
+    }
+
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepo.findAll();
         if (users.isEmpty()) {

@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -9,8 +10,7 @@ public class OrderDetailDTO {
     private int quantity;
     private Integer Size;
 
-    //@JsonBackReference
-    @JsonIgnore
+    @JsonBackReference
     private OrderDTO order;
 
     //@JsonManagedReference

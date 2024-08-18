@@ -84,8 +84,8 @@ public class OrderController {
         }
     }
 
-    @PostMapping("/orders/{orderId}/details")
-    public ResponseEntity<ResponseWrapper<OrderDetailDTO>> createOrderDetail(@PathVariable int orderId, @RequestBody OrderDetailDTO orderDetailDTO) {
+    @PostMapping("/orders/details")
+    public ResponseEntity<ResponseWrapper<OrderDetailDTO>> createOrderDetail(@RequestBody OrderDetailDTO orderDetailDTO) {
         OrderDetailDTO createdOrderDetail = orderDetailService.save(orderDetailDTO);
         ResponseWrapper<OrderDetailDTO> response = new ResponseWrapper<>("Order detail created successfully", createdOrderDetail);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

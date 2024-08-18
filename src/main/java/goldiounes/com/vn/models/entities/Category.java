@@ -11,10 +11,10 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)//auto_increment
     @Column(name = "CategoryID")
-    private int CategoryID;
+    private int categoryId;
 
     @Column(name = "CategoryName", nullable = false, unique = false)
-    private String CategoryName;
+    private String categoryName;
 
     @OneToMany(mappedBy = "Category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
@@ -24,6 +24,6 @@ public class Category {
     }
 
     public Category(String categoryName) {
-        this.CategoryName = categoryName;
+        this.categoryName = categoryName;
     }
 }
