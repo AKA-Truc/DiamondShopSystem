@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quên Mật Khẩu</title>
+  <link rel="stylesheet" href="/static/css/remember.css">
+</head>
+
+<body>
+<div class="container">
+  <div class="header">
+    <span class="close-button">&times;</span>
+    <h4>Quên mật khẩu</h4>
+  </div>
+  <hr class="header-line">
+
+  <p>Vui lòng nhập địa chỉ email của bạn dưới đây và nhấp vào "Gửi". Chúng tôi sẽ gửi một email hướng dẫn về cách đặt lại mật khẩu cho bạn.</p>
+  <form action="/forgot-password" method="POST">
+    <label for="email">Email <span>*</span></label>
+    <input type="text" id="email" name="email" placeholder="hello@gmail.com" required>
+    <button type="submit"><b>Gửi Đi</b></button>
+  </form>
+</div>
+
+<script src="/static/js/remember.js"></script>
+</body>
+</html>

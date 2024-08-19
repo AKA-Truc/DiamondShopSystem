@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng giá</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href="/static/css/list_price.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="header1">
+    <p class="phone">Phone: (+84) 123 2345 123</p>
+    <p class="center" id="center-text">hello</p>
+    <p class="address">Liên hệ </p>
+</div>
+<div class="header">
+    <div class="header-content">
+        <div class="icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="./login.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
+            <i class="fa-regular fa-heart"></i>
+            <a href="./cart.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
+    </div>
+</div>
+<ul id="main-menu">
+    <li><a href="./about_us.html">VỀ CHÚNG TÔI </a></li>
+    <li><a href="./diamond_jewelry.html">TRANG SỨC KIM CƯƠNG </a>
+        <ul class="sub-menu">
+            <li class="has-child"><a href="">NHẪN KIM CƯƠNG</a>
+                <ul class="sub-menu">
+                    <li><a href="./men's_diamond.html">NHẪN KIM CƯƠNG NAM</a></li>
+                    <li><a href="./female_diamond.html">NHẪN KIM CƯƠNG NỮ</a></li>
+                </ul>
+            </li>
+            <li><a href="./diamond_earrings.html">BÔNG TAI KIM CƯƠNG</a></li>
+            <li><a href="./diamond_bracelets.html">LẮC/VÒNG TAY KIM CƯƠNG</a></li>
+            <li><a href="./diamond_pendant.html">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="">BẢNG GIÁ</a>
+        <ul class="sub-menu">
+            <li><a href="./list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="./diamond_shell_price_list.html">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="../tintuc/tintuc.html">KHUYẾN MÃI</a></li>
+    <li><a href="../lienhe/lienhe.html">TIN TỨC</a></li>
+    <li><a href="../lienhe/lienhe.html">LIÊN HỆ</a></li>
+</ul>
+
+
+<!--  -->
+<div class="container">
+    <div class="logo1">
+        <img src="/static/images/banggia.jpg" alt="GIA Logo">
+    </div>
+    <h1>BẢNG GIÁ KIM CƯƠNG TỰ NHIÊN KIỂM ĐỊNH GIA – GIÁ TRỊ TOÀN CẦU</h1>
+    <p>(Chính sách <span class="highlight">VIP, VVIP lên tới 105%</span>)</p>
+    <p>Deal HOT mua kim cương giá tốt cập nhật tháng 7 năm 2024</p>
+    <p>Giá kim cương đã bao gồm hóa đơn VAT, đầy đủ chứng từ bảo vệ quyền lợi và tài sản của bạn.</p>
+    <p>Giá bán kim cương có thể thay đổi do thị trường</p>
+    <button>Đặc Quyền Online, Ưu đãi giảm thêm 1.000.000VND cho đơn hàng từ 30 triệu áp dụng cho dòng sản phẩm kim
+        cương viên 4ly5 - 6ly5.</button>
+    <p class="note">Lưu ý: Không áp dụng đồng thời nhiều chương trình ưu đãi. Vui lòng liên hệ chuyên gia Jemmia tư
+        vấn để có giá chính xác và ưu đãi nhất: <span class="contact">083 835 3333</span></p>
+</div>
+
+
+<div class="container">
+    <div class="buttons">
+        <button class="diamond-btn" onclick="changeData('4 Ly')">4 Ly</button>
+        <button class="diamond-btn" onclick="changeData('4 Ly 5')">4 Ly 5</button>
+        <button class="diamond-btn" onclick="changeData('5 Ly')">5 Ly</button>
+        <button class="diamond-btn" onclick="changeData('5 Ly 4')">5 Ly 4</button>
+        <button class="diamond-btn" onclick="changeData('6 Ly')">6 Ly</button>
+        <button class="diamond-btn" onclick="changeData('6 Ly 3')">6 Ly 3</button> <br>
+        <button class="diamond-btn" onclick="changeData('6 Ly 8')">6 Ly 8</button>
+        <button class="diamond-btn" onclick="changeData('7 Ly')">7 Ly</button>
+        <button class="diamond-btn" onclick="changeData('7 Ly 2')">7 Ly 2</button>
+        <button class="diamond-btn" onclick="changeData('8 Ly')">8 Ly</button>
+        <button class="diamond-btn" onclick="changeData('8 Ly 1')">8 Ly 1</button>
+    </div>
+
+    <div id="diamond-info">
+        <h2>Giá lẻ kim cương GIA</h2>
+        <p id="intro-text" style="display: none;"></p>
+        <table id="diamond-table" style="display: none;">
+            <thead>
+            <tr>
+                <th>Ly</th>
+                <th>Nước màu</th>
+                <th>Độ sạch</th>
+                <th>Giá gốc</th>
+                <th>CTKM Đặc Biệt Giảm 8%</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="wpb_wrapper">
+    <p style="padding-left: 40px;"><strong>Jemmia Diamond</strong> là đối tác được <strong>GIA (Viện Ngọc học Hoa
+        Kỳ)</strong> xác nhận trên ba phương diện:</p>
+    <ul>
+        <li style="list-style-type: none;">
+            <ul>
+                <li>Nhà phân phối chính ngạch,</li>
+                <li>Công ty được GIA đào tạo chuẩn hóa kiến thức chuyên gia,</li>
+                <li>Công ty được phân loại và đánh giá kim cương.</li>
+            </ul>
+        </li>
+    </ul>
+    <p style="padding-left: 40px;"><strong>Jemmia</strong> áp dụng quy trình chọn lựa nghiêm ngặt, chỉ tuyển chọn 2%
+        (to be confirmed) số lượng<strong> <a href="https://jemmia.vn/bang-gia-kim-cuong-tu-nhien/">kim
+            cương</a></strong> tinh tuyển nhất trên thế giới đảm bảo tiêu chuẩn khắt khe về 4C:</p>
+    <p style="padding-left: 40px;"><strong>Tiêu chí 1: Giác cắt (Cut)</strong></p>
+    <p style="padding-left: 40px;">Giác cắt là tiêu chuẩn lớn nhất ảnh hưởng trực tiếp đến vẻ đẹp của viên kim cương
+        từ độ sáng, các mặt đối xứng cho đến độ tán sắc. Viên kim cương có rực rỡ hay không là nhờ vào giác cắt.</p>
+    <p style="padding-left: 40px;"><strong>Tiêu chí 2: Color ( Nước kim cương)</strong></p>
+    <p style="padding-left: 40px;">GIA sử dụng bảng chữ cái Latinh bắt đầu từ “D – Z” để phân biệt nước màu kim
+        cương. Cấp độ màu cao nhất là D. Màu sắc càng tinh khiết thì giá trị của viên kim cương càng cao.</p>
+    <p style="padding-left: 40px;"><strong>Tiêu chí 3: Độ tinh khiết (Clarity)</strong></p>
+    <p style="padding-left: 40px;">Clarity biểu thị mức độ các tạp chất có bên trong và tì vết bên ngoài của một
+        viên kim cương dưới độ phóng đại 10 lần của kính lúp. Viên kim cương hoàn hảo là không lẫn tạp chất cả bên
+        trong và bên ngoài.</p>
+    <p style="padding-left: 40px;"><strong>Tiêu chí 4: Carat (Trọng lượng kim cương)</strong></p>
+    <p style="padding-left: 40px;">Carat là đơn vị tiêu chuẩn quốc tế để đo trọng lượng của kim cương. Bên cạnh
+        trọng lượng, đơn vị dùng đơn vị để đo kích thước kim cương là milimet (mm), còn được gọi là ly.</p>
+    <p style="padding-left: 40px;"><img loading="lazy" decoding="async" class=" wp-image-97901"
+                                        src="https://jemmia.vn/wp-content/uploads/2020/07/tieu-chuan-4c-cua-kim-cuong-3-300x169.jpg"
+                                        alt="7 thành phần tạo thành giác cắt kim cương" width="776" height="438"
+                                        srcset="https://jemmia.vn/wp-content/uploads/2020/07/tieu-chuan-4c-cua-kim-cuong-3-300x169.jpg 300w, https://jemmia.vn/wp-content/uploads/2020/07/tieu-chuan-4c-cua-kim-cuong-3-600x338.jpg 600w, https://jemmia.vn/wp-content/uploads/2020/07/tieu-chuan-4c-cua-kim-cuong-3-150x84.jpg 150w, https://jemmia.vn/wp-content/uploads/2020/07/tieu-chuan-4c-cua-kim-cuong-3-64x36.jpg 64w, https://jemmia.vn/wp-content/uploads/2020/07/tieu-chuan-4c-cua-kim-cuong-3.jpg 700w"
+                                        sizes="(max-width: 776px) 100vw, 776px"></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Tại <strong>Jemmia Diamond</strong>, mỗi viên
+                <span style="color: #ff0000;"><strong>kim cương</strong></span> trước khi được trưng bày đều trải qua
+                quy trình tuyển chọn gắt gao và kiểm định nghiêm ngặt, nhập khẩu hải quan chính ngạch, được kiểm định và
+                có giấy chứng nhận GIA Hoa Kỳ. Tất cả <strong>kim cương</strong> tại chúng tôi đều được cấp giấy chứng
+                nhận GIA đầy đủ minh bạch về nguồn gốc, có VAT đầy đủ, chuẩn bị sẵn sàng cho việc lựa chọn của quý
+                khách.</span></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Quý khách sẽ được tận hưởng dịch vụ tư vấn chuyên
+                nghiệp ngay khi bước chân vào Showroom của Jemmia Diamond. Đội ngũ nhân viên tư vấn tận tụy của chúng
+                tôi sẽ cung cấp <span style="color: #ff0000;"><strong>bảng giá kim cương thiên nhiên GIA</strong></span>
+                cập nhật và cạnh tranh, cũng như các thông tin cần thiết để Quý khách lựa chọn sản phẩm phù hợp
+                nhất.&nbsp;</span></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Đặc biệt với dịch vụ thiết kế trang sức theo yêu
+                cầu, quy trình từ thiết kế đến chế tác sản phẩm sẽ tuân thủ chặt chẽ theo các tiêu chuẩn mà quý khách đề
+                ra, đồng thời hoàn thành trong thời gian nhanh nhất.</span></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Mọi thông tin chi tiết về các loại<span
+            style="color: #ff0000;"><strong> kim cương</strong></span> có chất lượng 3EX-NONE, kim cương có nước
+                G, độ sạch SI trở xuống, <strong>kim cương Fancy Shape</strong> hoặc kim cương có trọng lượng từ 7ly trở
+                lên, xin quý khách vui lòng liên hệ để được hỗ trợ và báo giá cụ thể. Tại Jemmia có đa dạng size viên
+                kim cương để quý khách hàng có thể thoải mái lựa chọn</span></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Chúng tôi hiểu rằng quý khách xứng đáng nhận được
+                <span style="color: #ff0000;"><strong>viên kim cương thiên nhiên</strong></span> tuyệt vời nhất, phù hợp
+                với mọi phân khúc ngân sách đầu tư. Với những viên <span style="color: #ff0000;"><strong>kim cương thiên
+                        nhiên</strong> <strong>đã được kiểm định bởi GIA</strong></span>, chúng tôi mang đến bảng giá
+                tham khảo chi tiết dựa trên các yếu tố <span style="color: #ff0000;"><strong>Clarity (Độ sạch), Color
+                        (Nước), Fluorescence và None Fluorescence</strong></span> cho từng kích thước viên kim cương phổ
+                biến.</span></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Nổi bật với chính sách phục vụ ưu tiên sự hài
+                lòng của quý khách, dịch vụ tư vấn 1-1, phòng VIP sang trọng riêng tư, chúng tôi luôn sẵn sàng hỗ trợ
+                quý khách tìm kiếm<span style="color: #ff0000;"><strong> kim cương viên</strong></span> thiên nhiên ưng
+                ý nhất, tuân thủ chuẩn mực 4Cs và tiêu chí chuyên sâu như Triple X hay Fluorescence và None
+                Fluorescence.&nbsp;</span></p>
+    <p style="padding-left: 40px;"><span style="font-weight: 400;">Chúng tôi mời quý khách liên hệ hotline <a
+            href="tel:0838 353 333"><span style="color: #ff0000;"><strong>0838 353 333</strong></span></a> và
+                đến trải nghiệm dịch vụ để sở hữu những viên kim cương đẳng cấp, là biểu tượng của vẻ đẹp và giá trị –
+                đặc biệt dành riêng cho quý khách.</span></p>
+</div>
+<script src="/static/js/list_price.js"></script>
+
+<!-- footer  -->
+
+<footer class="footer">
+    <div class="grid">
+        <div class="grid_row">
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Danh mục</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="../html/BongTai.html">Hoa tai kim cương</a>
+                        <a href="../html/LacVong.html">Lắc tay kim cương</a>
+                        <a href="">Nhẫn kim cương</a>
+                        <a href="">Dây chuyền kim cương</a>
+                        <a href="../html/MatDay.html">Mặt dây chuyền kim cương</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Liên hệ </h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="">Về chúng tôi</a>
+                        <a href="">Tuyển dụng</a>
+                        <a href="">Chính sách đổi trả</a>
+                        <a href="">Chính sách bảo hành</a>
+                        <a href="">Chính sách vận chuyển</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Đăng ký ngay</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
+                        <form action="">
+                            <input type="text" id="email" name="email" placeholder="Email">
+                            <input type="submit" value="ĐĂNG KÝ NGAY">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>
