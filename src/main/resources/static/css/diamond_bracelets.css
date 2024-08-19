@@ -10,8 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-/* header 1 */
-
 .header1 {
     display: flex;
     align-items: center;
@@ -45,14 +43,12 @@ body {
     flex: 2;
     text-align: center;
     opacity: 0;
-    color: rgba(255, 215, 0, 0.81);
+    color: gold;
     transition: opacity 1s ease-in-out;
 }
 .header1 .visible {
     opacity: 1;
 }
-
-/*  */
 
 
 .header {
@@ -103,9 +99,9 @@ body {
     width: 100%;
     align-items: center; /* Căn giữa theo chiều dọc */
     justify-content: center; /* Căn giữa theo chiều ngang */
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     gap: 50px;
-    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
+    z-index: 1000;
     position: relative;
     text-transform: uppercase;
 }
@@ -136,13 +132,13 @@ body {
     box-sizing: border-box;
 }
 
-/* xuất hiện những menu con */
 #main-menu li:hover > ul.sub-menu {
     display: block;
 }
 
 #main-menu ul.sub-menu a {
     padding: 12px 20px;
+    /* border-bottom: 1px solid #94968f; */
     left: 0;
 }
 
@@ -199,170 +195,144 @@ body {
     transform: translateY(-50%);
 }
 
-/*  */
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
+/**/
+.wrapper {
+    position: relative;
+    text-align: left;
+    margin-top: 45px;
+    z-index: 1;
 }
 
-.left-column {
-    width: 30%;
-    padding-right: 10px;
-    margin-top: 11%;
-    margin-left: 10%;
-}
-
-.middle-column {
-    width: 30%;
-    text-align: center;
-}
-
-.middle-column img {
-    width: 100%;
+.headline img {
+    width: 90%;
     height: auto;
-    object-fit: cover;
-    border-radius: 6%;
-    width: 400px;
-    height: 400px;
-    margin-top: 22%;
-    margin-left: -30%;
+    margin: 0 auto;
+    display: block;
 }
 
-.right-column {
-    width: 30%;
-    padding-left: 10px;
-    margin-top: 7%;
+.overlay-text {
+    position: absolute;
+    top: 60%;
+    left: 12%;
+    transform: translateY(-50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.right-column h3 {
-    font-size: 1.5em;
-    margin: 20px 0 10px;
-}
-
-.quality-section {
-    text-align: center;
-    margin-top: 160px;
-}
-
-.quality-section h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.quality-features {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.feature-item {
-    width: 30%;
-    text-align: center;
-}
-
-.feature-item .icon {
-    font-size: 2em;
+.overlay-text h2 {
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.feature-item h3 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
+.overlay-text h4 {
+    font-size: 1.2rem;
+    font-weight: normal;
 }
 
-.feature-item p {
-    font-size: 1em;
-    color: #555;
-}
+#body1{
+    max-width: 1170px;
+    margin: 0 auto;
 
-/* review */
-.main-container {
-    margin-top: 90px;
 }
-
-.row {
+.body-text{
+    text-align: center;
+    margin: 40px 0;
+}
+.body-text>h2{
+    font-size: 18px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000 ;
+    display: inline-block;
+}
+ul.products{
+    list-style: none;
     display: flex;
-    gap: 10px;
+    flex-wrap:wrap;
     justify-content: space-between;
 }
-
-.column {
-    flex: 1;
-    box-sizing: border-box;
+ul.products li{
+    flex-basis: 33%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 40px;
+}
+u.products li img {
+    max-width: 100%;
+    height: auto;
+}
+ul.products li .product-item{
     text-align: center;
-    padding: -500px;
 }
-
-.img-container {
-    overflow: hidden;
-    flex-basis: 100%;
-}
-
-.img-container img {
-    width:410px;
-    height: 500px;
-    transition: transform 0.3s ease-in-out;
-
-}
-
-.img-container img:hover {
-    transform: scale(1.1);
-}
-
-.reviews {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 100px;
-}
-
-.reviews-wrapper {
+ul.products li .product-info{
     display: flex;
-    transition: transform 0.3s ease-in-out;
-    width: 100%;
-    gap: 15px;
-    margin-left: 10px;
+    flex-direction:column;
+    align-items: center;
+}
+ul.products li .product-top{
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+
+}
+ul.products li:hover a.buy-now{
+    bottom: 30px;
+}
+ul.products li .product-top .product-thumb{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul.products li .product-top .product-thumb img{
+    display: block;
 
 }
 
-.review-item {
-    min-width: calc(33.333% - 15px);
-    box-sizing: border-box;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-
-button {
+ul.products li .product-top a.buy-now{
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color:#000000;
+    padding: 10px 0;
     position: absolute;
-    top: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 18px;
-    transform: translateY(-50%);
+    left: 30%;
+    opacity: 0.75;
+    border:1px solid #373737;
+    border-radius: 20px;
+    width: 40%;
+    font-size: 13px;
 }
-
-.prev {
-    left: 0;
+ul.products li a.buy-now:hover {
+    background-color: rgb(52, 52, 51);
+    color:#ffffff
 }
+ul.products li .product-info a{
+    display: block;
+    text-decoration: none;
 
-.next {
-    right: 0;
 }
+ul.products li .product-info a.product-cart{
+    text-transform: uppercase;
+    color: rgb(0, 71, 0);
+    font-size: 14px;
+    padding: 3px 0px;
 
-@media (max-width: 768px) {
-    .reviews {
-        width: 95%;
-    }
+}
+ul.products li .product-info a.product-name{
+    padding: 3px 0px;
+    color:#000;
+}
+ul.products li .product-info .product-price{
+    margin-top: 5px;
+    display: flex;
+    gap: 30px;
 }
 
 /**/
@@ -373,7 +343,6 @@ button {
     margin-top: 60px;
     font-family: Arial, sans-serif;
     width: 100%;
-    bottom: 0;
 }
 
 .grid {
@@ -451,4 +420,47 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
     background-color: #cfb0b0;
+}
+
+
+/* hover */
+.card img {
+    object-fit: contain;
+}
+
+.card {
+    width: 180px;
+    height: 195px;
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Ẩn ảnh gốc, hiện ảnh hover */
+    transition: opacity 0.7s ease;
+}
+
+.card img:first-child {
+    opacity: 1; /* ban đầu */
+}
+
+.card img:last-child {
+    opacity: 0; /* ẩn ban đầu */
+}
+
+
+.card:hover img:first-child {
+    opacity: 0; /* Ẩn hình ảnh đầu tiên khi hover */
+}
+
+.card:hover img:last-child {
+    opacity: 1; /* Hiện hình ảnh thứ hai khi hover */
 }
