@@ -50,7 +50,6 @@ body {
     opacity: 1;
 }
 
-
 .header {
     display: flex;
     align-items: center;
@@ -196,7 +195,6 @@ body {
 }
 
 
-/**/
 .wrapper {
     position: relative;
     text-align: left;

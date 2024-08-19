@@ -8,6 +8,52 @@ body {
     margin: 0;
 }
 
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.header1 {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(10, 25, 56);
+    border-bottom: 1px solid #ddd;
+    justify-content: space-between;
+    color: #d5d9de;
+}
+
+.header1 p {
+    margin: 0;
+}
+
+.header1 .phone,
+.header1 .address {
+    flex: 1;
+}
+
+.header1 .phone {
+    text-align: left;
+    margin-left: 150px;
+}
+
+.header1 .address {
+    text-align: right;
+    margin-right: 150px;
+}
+
+.header1 .center {
+    flex: 2;
+    text-align: center;
+    opacity: 0;
+    color: gold;
+    transition: opacity 1s ease-in-out;
+}
+.header1 .visible {
+    opacity: 1;
+}
+
 .registration-container {
     background-color: #fff;
     padding: 20px;
@@ -65,5 +111,5 @@ input {
     font-size: 12px;
     margin-top: -10px;
     margin-bottom: 10px;
-    display: none; /* Ẩn thông báo lỗi mặc định */
+    display: none;
 }

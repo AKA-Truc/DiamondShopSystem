@@ -10,8 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-/* header 1 */
-
 .header1 {
     display: flex;
     align-items: center;
@@ -45,15 +43,12 @@ body {
     flex: 2;
     text-align: center;
     opacity: 0;
-    color: rgba(255, 215, 0, 0.81);
+    color: gold;
     transition: opacity 1s ease-in-out;
 }
 .header1 .visible {
     opacity: 1;
 }
-
-/*  */
-
 
 .header {
     display: flex;
@@ -101,11 +96,11 @@ body {
     height: 40px;
     display: inline-flex;
     width: 100%;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center;
+    justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     gap: 50px;
-    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
+    z-index: 1000;
     position: relative;
     text-transform: uppercase;
 }
@@ -136,7 +131,6 @@ body {
     box-sizing: border-box;
 }
 
-/* xuất hiện những menu con */
 #main-menu li:hover > ul.sub-menu {
     display: block;
 }
@@ -160,7 +154,6 @@ body {
     top: 0;
 }
 
-/* Thiết lập border khi hover */
 #main-menu > li > a {
     position: relative;
 }
@@ -198,9 +191,6 @@ body {
     right: 5px;
     transform: translateY(-50%);
 }
-
-/*  */
-
 .container {
     display: flex;
     justify-content: space-between;
