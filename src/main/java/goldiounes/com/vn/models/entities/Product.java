@@ -24,14 +24,8 @@ public class Product {
     @Column(name = "ImageURL")
     private String ImageURL;
 
-    @Column(name = "MarkupRate",nullable = false)
-    private double MarkupRate;
-
-    @Column(name = "LaborCost",nullable = false)
-    private double LaborCost;
-
-    @Column(name = "SellingPrice",nullable = false)
-    private double SellingPrice;
+    @Column(name = "SubImageURL")
+    private String SubImageURL;
 
     @Column(name = "WarrantyPeriod",nullable = false)
     private double WarrantyPeriod;
@@ -50,13 +44,11 @@ public class Product {
         //cstor
     }
 
-    public Product(Category category, String productName, String imageURL, double markupRate, double laborCost, double warrantyPeriod) {
+    public Product(goldiounes.com.vn.models.entities.Category category, String productName, String imageURL, String subImageURL, double warrantyPeriod) {
         Category = category;
         ProductName = productName;
         ImageURL = imageURL;
-        MarkupRate = markupRate;
-        LaborCost = laborCost;
+        SubImageURL = subImageURL;
         WarrantyPeriod = warrantyPeriod;
-        this.SellingPrice =  markupRate * laborCost;
     }
 }

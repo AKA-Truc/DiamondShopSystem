@@ -25,6 +25,6 @@ public class OrderDTO {
     //@JsonManagedReference
     private PromotionDTO promotion;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "order-detail")
     private List<OrderDetailDTO> orderDetails;
 }
