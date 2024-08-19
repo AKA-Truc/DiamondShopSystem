@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,16 +30,19 @@ public class OrderService {
     private ProductRepo productRepo;
 
     @Autowired
-    private CartItemRepo cartItemRepo;
-
-    @Autowired
     private CartItemService cartItemService;
 
     @Autowired
     private OrderDetailService orderDetailService;
 
     @Autowired
+    private ProductDetailRepo productDetailRepo;
+
+    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PointRepo pointRepo;
 
     @Autowired
     private EmailService emailService;
@@ -73,27 +75,27 @@ public class OrderService {
 
         order.setStatus("New");
 
-        int totalPrice = 0;
+//        int totalPrice = 0;
         for (OrderDetail orderDetail : orderDetails) {
             Product product = productRepo.findById(orderDetail.getProduct().getProductID())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
             orderDetail.setProduct(product);
             orderDetail.setOrder(order);
-            totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
+//            totalPrice += product.getSellingPrice() * orderDetail.getQuantity();
         }
-
-        if (order.getPromotion().getPromotionID() != 0) {
-            Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
-                    .orElseThrow(() -> new RuntimeException("Promotion not found"));
-            order.setPromotion(promotion);
-            totalPrice -= (promotion.getDiscountPercent() * totalPrice) / 100;
-        }
-        else {
-            order.setPromotion(null);
-        }
-
-
-        order.setTotalPrice(totalPrice);
+//
+//        if (order.getPromotion().getPromotionID() != 0) {
+//            Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
+//                    .orElseThrow(() -> new RuntimeException("Promotion not found"));
+//            order.setPromotion(promotion);
+//            totalPrice -= (promotion.getDiscountPercent() * totalPrice) / 100;
+//        }
+//        else {
+//            order.setPromotion(null);
+//        }
+//
+//
+//        order.setTotalPrice(totalPrice);
 
         Order savedOrder = orderRepo.save(order);
 
@@ -107,38 +109,54 @@ public class OrderService {
 
 
     public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
+        Order order = modelMapper.map(orderDTO, Order.class);
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-
-        Order order = modelMapper.map(orderDTO, Order.class);
 
         existingOrder.setStatus(order.getStatus());
         existingOrder.setShippingAddress(order.getShippingAddress());
 
-        List<OrderDetail> updatedOrderDetails = new ArrayList<>();
         int totalPrice = 0;
 
-        for (OrderDetail orderDetail : order.getOrderDetails()) {
-            Product product = productRepo.findById(orderDetail.getProduct().getProductID())
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
-            OrderDetail orderDetailIndex = new OrderDetail();
-            orderDetailIndex.setProduct(product);
-            orderDetailIndex.setQuantity(orderDetailIndex.getQuantity());
-            orderDetailIndex.setOrder(existingOrder);
-            updatedOrderDetails.add(orderDetailIndex);
-            totalPrice += product.getSellingPrice() * orderDetailIndex.getQuantity();
-        }
 
-        if(order.getPromotion() != null) {
-            Promotion promotion = promotionRepo.findById(order.getPromotion().getPromotionID())
+
+        for (OrderDetail orderDetail : order.getOrderDetails()) {
+            OrderDetail existingOrderDetail = existingOrder.getOrderDetails().stream()
+                    .filter(od -> od.getOrderDetailID() == orderDetail.getOrderDetailID())
+                    .findFirst()
+                    .orElse(null);
+
+            if (existingOrderDetail == null) {
+                throw new RuntimeException("OrderDetail not found");
+            }
+            existingOrderDetail.setSize(orderDetail.getSize());
+            existingOrderDetail.setQuantity(orderDetail.getQuantity());
+
+            OrderDetailDTO updatedOrderDetailDTO = orderDetailService.update(
+                    existingOrderDetail.getOrderDetailID(),
+                    modelMapper.map(existingOrderDetail, OrderDetailDTO.class)
+            );
+
+            Product product = orderDetail.getProduct();
+            ProductDetail productDetail = productDetailRepo.findBySizeAndProductId(orderDetail.getSize(), product.getProductID());
+            totalPrice += productDetail.getSellingPrice() * orderDetail.getQuantity();
+        }
+        if (orderDTO.getPromotion() != null) {
+            Promotion promotion = promotionRepo.findById(orderDTO.getPromotion().getPromotionId())
                     .orElseThrow(() -> new RuntimeException("Promotion not found"));
 
             totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
-            existingOrder.setOrderDetails(updatedOrderDetails);
             existingOrder.setPromotion(promotion);
         }
         existingOrder.setTotalPrice(totalPrice);
-
+        User existingUser = existingOrder.getUser();
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
+        }
+        Point point = existingUser.getPoint();
+        point.setPoints(point.getPoints() + totalPrice/10000);
+        pointRepo.save(point);
+        existingOrder.setUser(existingUser);
         Order savedOrder = orderRepo.save(existingOrder);
         return modelMapper.map(savedOrder, OrderDTO.class);
     }

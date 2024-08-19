@@ -75,18 +75,18 @@ public class OrderDetailService {
         Product existingProduct = productRepo.findById(orderDetail.getProduct().getProductID())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        ProductDTO indexProduct = modelMapper.map(existingProduct, ProductDTO.class);
-        ProductDetailDTO productDetailDTO = productDetailService.getProductDetailBySize(orderDetail.getSize(),indexProduct);
-
-        ProductDetail updateInventory = modelMapper.map(productDetailDTO, ProductDetail.class);
-        if(updateInventory.getInventory() >= orderDetail.getQuantity()){
-            updateInventory.setInventory(updateInventory.getInventory()-orderDetail.getQuantity());
-            productDetailRepo.save(updateInventory);
-        }
-        else{
-            throw new RuntimeException("Not enough inventory");
-        }
-
+//        ProductDTO indexProduct = modelMapper.map(existingProduct, ProductDTO.class);
+//        ProductDetailDTO productDetailDTO = productDetailService.getProductDetailBySize(orderDetail.getSize(),indexProduct);
+//
+//        ProductDetail updateInventory = modelMapper.map(productDetailDTO, ProductDetail.class);
+//        if(updateInventory.getInventory() >= orderDetail.getQuantity()){
+//            updateInventory.setInventory(updateInventory.getInventory()-orderDetail.getQuantity());
+//            productDetailRepo.save(updateInventory);
+//        }
+//        else{
+//            throw new RuntimeException("Not enough inventory");
+//        }
+        orderDetail.setSize(0);
         orderDetail.setOrder(existingOrder);
         orderDetail.setProduct(existingProduct);
         OrderDetail savedOrderDetail = orderDetailRepo.save(orderDetail);
@@ -115,13 +115,25 @@ public class OrderDetailService {
     }
 
     public OrderDetailDTO update(int id, OrderDetailDTO orderDetailDTO) {
-        OrderDetail orderDetail = modelMapper.map(orderDetailDTO, OrderDetail.class);
-        OrderDetail existingOderDetail = orderDetailRepo.findById(orderDetail.getOrderDetailID()).orElseThrow(() -> new RuntimeException("OrderDetail not found"));
-        existingOderDetail.setOrderDetailID(orderDetail.getOrderDetailID());
-        existingOderDetail.setOrder(orderDetail.getOrder());
-        existingOderDetail.setQuantity(orderDetail.getQuantity());
-        existingOderDetail.setProduct(orderDetail.getProduct());
-        OrderDetail savedOrderDetail = orderDetailRepo.save(existingOderDetail);
+        OrderDetail existingOrderDetail = orderDetailRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("OrderDetail not found"));
+
+        existingOrderDetail.setSize(orderDetailDTO.getSize());
+
+        ProductDetailDTO productDetailDTO = productDetailService.getProductDetailBySize(
+                orderDetailDTO.getSize(),
+                modelMapper.map(existingOrderDetail.getProduct(), ProductDTO.class)
+        );
+
+        ProductDetail updateInventory = modelMapper.map(productDetailDTO, ProductDetail.class);
+        if(updateInventory.getInventory() >= existingOrderDetail.getQuantity()) {
+            updateInventory.setInventory(updateInventory.getInventory() - existingOrderDetail.getQuantity());
+            productDetailRepo.save(updateInventory);
+        } else {
+            throw new RuntimeException("Not enough inventory");
+        }
+
+        OrderDetail savedOrderDetail = orderDetailRepo.save(existingOrderDetail);
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);
     }
 }

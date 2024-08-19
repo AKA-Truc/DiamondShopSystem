@@ -16,7 +16,7 @@ public class OrderDTO {
     private String shippingAddress;
     private Date startDate;
 
-    // @JsonManagedReference
+    // @JsonBackReference
     private UserDTO user;
 
     @JsonBackReference
@@ -25,6 +25,6 @@ public class OrderDTO {
     //@JsonManagedReference
     private PromotionDTO promotion;
 
-    //@JsonManagedReference
+    @JsonManagedReference(value = "order-detail")
     private List<OrderDetailDTO> orderDetails;
 }

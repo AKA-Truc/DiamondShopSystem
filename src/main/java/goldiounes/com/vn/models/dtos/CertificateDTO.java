@@ -10,6 +10,5 @@ public class CertificateDTO {
     private String GIACode;
 
     //@JsonBackReference
-    @JsonIgnore
     private DiamondDTO diamond;
 }
