@@ -105,8 +105,8 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping("/orders/{orderId}/details/{id}")
-    public ResponseEntity<ResponseWrapper<Void>> deleteOrderDetail(@PathVariable int orderId, @PathVariable int id) {
+    @DeleteMapping("/orders/details/{id}")
+    public ResponseEntity<ResponseWrapper<Void>> deleteOrderDetail(@PathVariable int id) {
         boolean isDeleted = orderDetailService.deleteById(id);
         ResponseWrapper<Void> response;
 
@@ -119,8 +119,8 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/orders/{orderId}/details/{id}")
-    public ResponseEntity<ResponseWrapper<OrderDetailDTO>> updateOrderDetail(@PathVariable int orderId, @PathVariable int id, @RequestBody OrderDetailDTO orderDetailDTO) {
+    @PutMapping("/orders/details/{id}")
+    public ResponseEntity<ResponseWrapper<OrderDetailDTO>> updateOrderDetail(@PathVariable int id, @RequestBody OrderDetailDTO orderDetailDTO) {
         OrderDetailDTO updatedOrderDetail = orderDetailService.update(id, orderDetailDTO);
         ResponseWrapper<OrderDetailDTO> response;
 

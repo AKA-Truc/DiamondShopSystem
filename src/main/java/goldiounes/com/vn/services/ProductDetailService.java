@@ -60,7 +60,7 @@ public class ProductDetailService {
             productDetailRepo.save(checkProductDetail);
             return modelMapper.map(checkProductDetail, ProductDetailDTO.class);
         }
-
+        productDetail.setSellingPrice(productDetail.getLaborCost() * productDetail.getMarkupRate());
         productDetailRepo.save(productDetail);
         return modelMapper.map(productDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }
@@ -76,7 +76,7 @@ public class ProductDetailService {
         Product  product = modelMapper.map(productDTO, Product.class);
         ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(size, product.getProductID());
         if (existingProductDetail == null) {
-            throw new RuntimeException("No ProductDetail found");
+            throw new RuntimeException("No ProductDetail foundhahahahhh");
         }
         return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }
@@ -91,6 +91,8 @@ public class ProductDetailService {
         productDetailUpdate.setInventory(productDetail.getInventory());
         productDetailUpdate.setSize(productDetail.getSize());
         productDetailUpdate.setLaborCost(productDetail.getLaborCost());
+        productDetailUpdate.setMarkupRate(productDetail.getMarkupRate());
+        productDetailUpdate.setSellingPrice(productDetail.getLaborCost() * productDetail.getMarkupRate());
         productDetailRepo.save(productDetailUpdate);
         return modelMapper.map(productDetailUpdate, new TypeToken<ProductDetailDTO>() {}.getType());
     }
