@@ -45,7 +45,7 @@ body {
     flex: 2;
     text-align: center;
     opacity: 0;
-    color: gold;
+    color: rgba(255, 215, 0, 0.81);
     transition: opacity 1s ease-in-out;
 }
 .header1 .visible {
@@ -58,7 +58,6 @@ body {
 .header {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
     background-color: white;
     border-bottom: 0.5px solid #ddd;
     flex-direction: column;
@@ -89,7 +88,7 @@ body {
 }
 
 .header>.header-content>.logo img {
-    width: 78px;
+    width: 120px;
     height: auto;
 }
 
@@ -104,8 +103,11 @@ body {
     width: 100%;
     align-items: center; /* Căn giữa theo chiều dọc */
     justify-content: center; /* Căn giữa theo chiều ngang */
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    gap: 100px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    gap: 50px;
+    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
+    position: relative;
+    text-transform: uppercase;
 }
 
 #main-menu li {
@@ -127,7 +129,6 @@ body {
     padding: 0;
     list-style: none;
     width: 300px;
-    /* border: 0.5px solid ; */
     display: none;
     top: 80%;
     left: 0;
@@ -142,7 +143,6 @@ body {
 
 #main-menu ul.sub-menu a {
     padding: 12px 20px;
-    /* border-bottom: 1px solid #94968f; */
     left: 0;
 }
 
@@ -156,7 +156,7 @@ body {
 
 #main-menu ul.sub-menu ul.sub-menu {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    left: 300px; /*chỉnh menu*/
+    left: 300px;
     top: 0;
 }
 
@@ -182,9 +182,9 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
     content: "\f107";
 }
 
@@ -194,8 +194,261 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
 }
 
+/*  */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.left-column {
+    width: 30%;
+    padding-right: 10px;
+    margin-top: 11%;
+    margin-left: 10%;
+}
+
+.middle-column {
+    width: 30%;
+    text-align: center;
+}
+
+.middle-column img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6%;
+    width: 400px;
+    height: 400px;
+    margin-top: 22%;
+    margin-left: -30%;
+}
+
+.right-column {
+    width: 30%;
+    padding-left: 10px;
+    margin-top: 7%;
+}
+
+.right-column h3 {
+    font-size: 1.5em;
+    margin: 20px 0 10px;
+}
+
+.quality-section {
+    text-align: center;
+    margin-top: 160px;
+}
+
+.quality-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.quality-features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.feature-item {
+    width: 30%;
+    text-align: center;
+}
+
+.feature-item .icon {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.feature-item h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* review */
+.main-container {
+    margin-top: 90px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    box-sizing: border-box;
+    text-align: center;
+    padding: -500px;
+}
+
+.img-container {
+    overflow: hidden;
+    flex-basis: 100%;
+}
+
+.img-container img {
+    width:410px;
+    height: 500px;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.img-container img:hover {
+    transform: scale(1.1);
+}
+
+.reviews {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 100px;
+}
+
+.reviews-wrapper {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    gap: 15px;
+    margin-left: 10px;
+
+}
+
+.review-item {
+    min-width: calc(33.333% - 15px);
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+button {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+    transform: translateY(-50%);
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+@media (max-width: 768px) {
+    .reviews {
+        width: 95%;
+    }
+}
+
+/**/
+.footer {
+    background-color: #1A1919;
+    color: #d3cece;
+    padding: 20px 0;
+    margin-top: 60px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    bottom: 0;
+}
+
+.grid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.grid__column-2-4 {
+    width: 30%;
+}
+
+.footer-heading {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer__list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer__list li {
+    margin-bottom: 10px;
+}
+
+.footer__list a {
+    color: #d3cece;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.footer__list a:hover {
+    text-decoration: underline;
+}
+
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+form input[type="text"] {
+    padding: 8px ;
+    width: 70%;
+    margin-right: 10px;
+    background-color: #dbdbdb;
+    border: 1px solid #ffffff;
+    color: #000000;
+    box-sizing: border-box;
+}
+
+form input[type="text"]::placeholder {
+    color: #000000;
+    opacity: 1;
+}
+
+form input[type="submit"] {
+    background-color: #888;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+form input[type="submit"]:hover {
+    background-color: #cfb0b0;
+}

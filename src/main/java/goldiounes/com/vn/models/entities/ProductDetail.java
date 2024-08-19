@@ -26,6 +26,12 @@ public class ProductDetail {
     @Column(name = "LaborCost", nullable = false)
     private int LaborCost;
 
+    @Column(name = "MarkupRate",nullable = false)
+    private double MarkupRate;
+
+    @Column(name = "SellingPrice",nullable = false)
+    private double SellingPrice;
+
     @Column(name = "size", nullable = true)
     private Integer Size;
 
@@ -40,10 +46,14 @@ public class ProductDetail {
         //cstor
     }
 
-    public ProductDetail(Product ProductID, Setting setting, int LaborCost) {
-        this.product = ProductID;
+    public ProductDetail(Product product, Setting setting, int laborCost, double markupRate, Integer size, int inventory) {
+        this.product = product;
         this.setting = setting;
-        this.LaborCost = LaborCost;
+        LaborCost = laborCost;
+        MarkupRate = markupRate;
+        SellingPrice = MarkupRate * LaborCost;
+        Size = size;
+        Inventory = inventory;
     }
 
 }

@@ -6,6 +6,8 @@ import lombok.Data;
 public class ProductDetailDTO {
     private int productDetailId;
     private int LaborCost;
+    private double markupRate;
+    private double sellingPrice;
     private Integer Size;
     private int inventory;
 

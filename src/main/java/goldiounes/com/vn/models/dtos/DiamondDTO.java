@@ -15,8 +15,7 @@ public class DiamondDTO {
     private String cut;
     private String origin;
 
-    // @JsonManagedReference
-    @JsonIgnore
+    @JsonManagedReference
     private List<DiamondDetailDTO> diamondDetails;
 
     //@JsonManagedReference

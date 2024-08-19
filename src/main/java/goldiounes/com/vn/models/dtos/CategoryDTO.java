@@ -14,5 +14,4 @@ public class CategoryDTO {
     //@JsonBackReference
     @JsonIgnore
     private List<ProductDTO> products;
-
 }
