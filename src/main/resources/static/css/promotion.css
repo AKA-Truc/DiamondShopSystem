@@ -10,7 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-/* header 1 */
 
 .header1 {
     display: flex;
@@ -51,8 +50,6 @@ body {
 .header1 .visible {
     opacity: 1;
 }
-
-/*  */
 
 
 .header {
@@ -101,12 +98,12 @@ body {
     height: 40px;
     display: inline-flex;
     width: 100%;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center;
+    justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     gap: 50px;
-    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
-    position: relative; /* Để sử dụng z-index */
+    z-index: 1000;
+    position: relative;
     text-transform: uppercase;
 }
 
@@ -183,9 +180,9 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
     content: "\f107";
 }
 
@@ -195,9 +192,9 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
 }
 
 /**/
@@ -209,10 +206,10 @@ body {
 }
 
 .headline img {
-    width: 90%; /* Thu nhỏ chiều rộng xuống 80% của container */
-    height: auto; /* Đảm bảo tỉ lệ khung hình của ảnh */
-    margin: 0 auto; /* Căn giữa ảnh trong container */
-    display: block; /* Đảm bảo ảnh là khối và margin auto hoạt động */
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
 }
 
 

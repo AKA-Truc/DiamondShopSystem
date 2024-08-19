@@ -10,8 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-/* header 1 */
-
 .header1 {
     display: flex;
     align-items: center;
@@ -51,9 +49,6 @@ body {
 .header1 .visible {
     opacity: 1;
 }
-
-/*  */
-
 
 .header {
     display: flex;
@@ -101,12 +96,12 @@ body {
     height: 40px;
     display: inline-flex;
     width: 100%;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center;
+    justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     gap: 50px;
-    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
-    position: relative; /* Để sử dụng z-index */
+    z-index: 1000;
+    position: relative;
     text-transform: uppercase;
 }
 
@@ -183,9 +178,9 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
     content: "\f107";
 }
 
@@ -195,12 +190,10 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
 }
-
-/*  */
 
 .container {
     max-width: 1200px;
@@ -386,10 +379,7 @@ th {
         padding-left: 20px;
     }
 }
-/*  */
 
-
-/* footer */
 .footer {
     background-color: #1A1919;
     color: #d3cece;

@@ -10,8 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-/* header 1 */
-
 .header1 {
     display: flex;
     align-items: center;
@@ -51,9 +49,6 @@ body {
 .header1 .visible {
     opacity: 1;
 }
-
-/*  */
-
 
 .header {
     display: flex;
@@ -183,9 +178,9 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
     content: "\f107";
 }
 
@@ -195,9 +190,9 @@ body {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    top: 50%; /* Căn giữa theo chiều dọc */
-    right: 5px; /* Điều chỉnh khoảng cách từ cạnh phải */
-    transform: translateY(-50%); /* Điều chỉnh để icon nằm chính giữa */
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
 }
 
 /* slideshow */
@@ -251,7 +246,6 @@ img {
 .next {
     right: 0;
 }
-/*  */
 
 * {
     margin: 0;
@@ -323,7 +317,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease-in-out; /* Smooth transition effect */
+    transition: opacity 0.3s ease-in-out;
 }
 
 .badge {
@@ -373,10 +367,8 @@ body {
     background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1_cam_01-3-1-600x600.jpg');
 }
 
-/* earrings section */
-/* Specific Hover Effect for Earrings Section */
 .earrings-section .item-small:hover img {
-    transform: scale(1.1); /* Subtle zoom on hover */
+    transform: scale(1.1);
     opacity: 0.7;
 }
 
@@ -389,13 +381,12 @@ body {
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: 0.9; /* Slightly different opacity */
+    opacity: 0.9;
     z-index: 1;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    transform: scale(1.05); /* Slightly zoomed background image */
+    transform: scale(1.05);
 }
 
-/* Different images for earrings section */
 .earrings-section .item-small:nth-child(1):hover::before {
     background-image: url('https://jemmia.vn/wp-content/uploads/2024/05/1-600x600.jpg');
 }
@@ -412,8 +403,6 @@ body {
     background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1-2-600x600.jpg');
 }
 
-/*  */
-
 @media (max-width: 768px) {
     .banner-section, .section-content {
         flex-direction: column;
@@ -424,7 +413,6 @@ body {
     }
 }
 
-/* bracelets Section */
 .bracelets-section {
     margin: 40px 0;
     text-align: center;
@@ -457,7 +445,7 @@ body {
 .bracelets-text {
     flex: 1;
     padding: 40px;
-    background-color: #fce4ec; /* Light pink background */
+    background-color: #fce4ec;
     border-radius: 8px;
     text-align: left;
 }
@@ -514,10 +502,6 @@ body {
 }
 
 
-/* list img */
-/* Existing CSS Here */
-
-/* Jewelry Showcase Section */
 .jewelry-showcase {
     margin: 20px;
     text-align: center;
@@ -586,11 +570,6 @@ body {
     }
 }
 
-
-/* Choose me */
-/* Existing CSS Here */
-
-/* Services Section */
 .services {
     padding: 40px 20px;
     text-align: center;
