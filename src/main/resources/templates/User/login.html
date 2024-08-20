@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập / Đăng Ký</title>
-    <link rel="stylesheet" href="/css/User/login.css">
+    <link rel="stylesheet" href="/static/css/User/login.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         <h2>Tôi Đã Có Tài Khoản</h2>
         <p><b>Vui lòng nhập email và mật khẩu của bạn</b></p>
 
-        <form action="./login1.html" method="POST">
+        <form action="/templates/User/login.html" method="POST">
             <label for="email">Email <span>*</span></label>
             <input type="email" id="email" name="email" placeholder="hello@gmail.com" required>
 
@@ -25,7 +25,7 @@
             <input type="password" id="password" name="password" required>
 
             <div class="forgot-password">
-                <a href="../login/quenmk.html"><b>Quên mật khẩu?</b></a>
+                <a href="/templates/User/remember.html"><b>Quên mật khẩu?</b></a>
             </div>
             <button type="submit"><b>Đăng Nhập</b></button>
         </form>
@@ -34,11 +34,11 @@
     <div class="register-section">
         <h2>Tôi Chưa Có Tài Khoản</h2>
         <p>Tạo một tài khoản cá nhân để tận hưởng những lợi ích bổ sung <br> và có trải nghiệm phong phú.</p>
-        <a href="./taotk.html" class="register-button"><b>Tạo Tài Khoản Của Tôi</b></a>
+        <a href="/templates/User/create_account.html" class="register-button"><b>Tạo Tài Khoản Của Tôi</b></a>
     </div>
 </div>
 
-<script src="/js/User/login.js"></script>
+<script src="/static/js/User/login.js"></script>
 </body>
 </html>
 
