@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loại Hàng</title>
-    <link rel="stylesheet" href="../css/Loaihang.css">
-</head>
-
-<body>
-<!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng giá kim cương gia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="../css/Banggia.css">
+    <title>Chi tiết</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/css/User/detail.css">
 </head>
 
 <body>
@@ -32,39 +19,42 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <a href="login.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
             <i class="fa-regular fa-heart"></i>
-            <a href="./haha.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
+            <a href="cart.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
         </div>
-        <a href="index.html" class="logo"><img src="../images/logo.jpg" alt="logo"></a>
+        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
     </div>
 </div>
 <ul id="main-menu">
-    <li><a href="../html/Vechungtoi.html">VỀ CHÚNG TÔI </a></li>
+    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
     <li><a href="">TRANG SỨC KIM CƯƠNG </a>
         <ul class="sub-menu">
             <li class="has-child"><a href="">NHẪN KIM CƯƠNG</a>
                 <ul class="sub-menu">
-                    <li><a href="../html/NhanNam.html">NHẪN KIM CƯƠNG NAM</a></li>
-                    <li><a href="../html/NhanNu.html">NHẪN KIM CƯƠNG NỮ</a></li>
+                    <li><a href="men's_diamond.html">NHẪN KIM CƯƠNG NAM</a></li>
+                    <li><a href="female_diamond.html">NHẪN KIM CƯƠNG NỮ</a></li>
                 </ul>
             </li>
-            <li><a href="../html/BongTai.html">BÔNG TAI KIM CƯƠNG</a></li>
-            <li><a href="../html/LacVong.html">LẮC/VÒNG TAY KIM CƯƠNG</a></li>
-            <li><a href="../html/MatDay.html">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>
+            <li><a href="diamond_earrings.html">BÔNG TAI KIM CƯƠNG</a></li>
+            <li><a href="diamond_bracelets.html">LẮC/VÒNG TAY KIM CƯƠNG</a></li>
+            <li><a href="diamond_pendant.html">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>
         </ul>
     </li>
-    <li><a href="../thucdon/thucdon.html">BẢNG GIÁ</a>
+    <li><a href="">BẢNG GIÁ</a>
         <ul class="sub-menu">
-            <li><a href="../html/Banggia.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="diamond_shell_price_list.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
             <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
         </ul>
     </li>
-    <li><a href="../html/KhuyenMai.html">KHUYẾN MÃI</a></li>
-    <li><a href="../lienhe/lienhe.html">TIN TỨC</a></li>
-    <li><a href="../html/LienHe.html">LIÊN HỆ</a></li>
+    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
+    <li><a href="news.html">TIN TỨC</a></li>
+    <li><a href="contact.html">LIÊN HỆ</a></li>
 </ul>
+
+<!---->
+
 <div class="product-container">
     <div class="image-section">
-        <img src="diamond-ring.png" alt="Diamond Ring">
+        <img src="/static/images/bong1.png" alt="Diamond Ring">
     </div>
     <div class="details-section">
         <h2>NHẪN KIM CƯƠNG NỮ 18K WRA00198</h2>
@@ -282,7 +272,9 @@
     </div>
 </div>
 
-<!-- footer -->
+<script src="/static/js/User/about_us.js"></script>
+
+<!-- footer  -->
 
 <footer class="footer">
     <div class="grid">
@@ -291,11 +283,11 @@
                 <h3 class="footer-heading">Danh mục</h3>
                 <ul class="footer__list">
                     <li>
-                        <a href="../html/BongTai.html">Hoa tai kim cương</a>
-                        <a href="../html/LacVong.html">Lắc tay kim cương</a>
-                        <a href="">Nhẫn kim cương</a>
+                        <a href="/templates/User/diamond_earrings.html">Hoa tai kim cương</a>
+                        <a href="/templates/User/diamond_bracelets.html">Lắc tay kim cương</a>
+                        <a href="/templates/User/men's_diamond.html">Nhẫn kim cương</a>
                         <a href="">Dây chuyền kim cương</a>
-                        <a href="../html/MatDay.html">Mặt dây chuyền kim cương</a>
+                        <a href="/templates/User/diamond_pendant.html">Mặt dây chuyền kim cương</a>
                     </li>
                 </ul>
             </div>
@@ -326,6 +318,8 @@
         </div>
     </div>
 </footer>
+<!--  -->
+
 </body>
 
 </html>
