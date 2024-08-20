@@ -12,7 +12,7 @@ public class DiamondDetailDTO {
     @JsonBackReference
     private DiamondDTO diamond;
 
-    //@JsonBackReference
+    @JsonBackReference(value = "diamond_Product_Detail")
     private ProductDetailDTO productDetail;
 
 }

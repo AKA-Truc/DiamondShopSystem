@@ -1,6 +1,9 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class ProductDetailDTO {
@@ -16,4 +19,7 @@ public class ProductDetailDTO {
 
     //@JsonBackReference
     private ProductDTO product;
+
+    @JsonManagedReference(value = "diamond_Product_Detail")
+    private List<DiamondDetailDTO> diamondDetails;
 }

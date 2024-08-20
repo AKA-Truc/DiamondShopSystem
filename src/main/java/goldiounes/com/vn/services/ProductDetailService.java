@@ -2,17 +2,16 @@ package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.models.dtos.ProductDetailDTO;
-import goldiounes.com.vn.models.entities.Product;
-import goldiounes.com.vn.models.entities.ProductDetail;
-import goldiounes.com.vn.models.entities.Setting;
-import goldiounes.com.vn.repositories.ProductDetailRepo;
-import goldiounes.com.vn.repositories.ProductRepo;
-import goldiounes.com.vn.repositories.SettingRepo;
+import goldiounes.com.vn.models.entities.*;
+import goldiounes.com.vn.repositories.*;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +24,12 @@ public class ProductDetailService {
 
     @Autowired
     private SettingRepo settingRepo;
+
+    @Autowired
+    private DiamondRepo diamondRepo;
+
+    @Autowired
+    private DiamondDetailRepo diamondDetailRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -45,24 +50,56 @@ public class ProductDetailService {
         }.getType());
     }
 
+    @Transactional
     public ProductDetailDTO createProductDetail(ProductDetailDTO productDetailDTO) {
         ProductDetail productDetail = modelMapper.map(productDetailDTO, ProductDetail.class);
+
+        // Fetch and set the existing Product
         Product existingProduct = productRepo.findById(productDetail.getProduct().getProductID())
-                .orElseThrow(() -> new RuntimeException("No Product found"));
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with ID: " + productDetail.getProduct().getProductID()));
         productDetail.setProduct(existingProduct);
+
+        // Fetch and set the existing Setting
         Setting existingSetting = settingRepo.findById(productDetail.getSetting().getSettingID())
-                .orElseThrow(() -> new RuntimeException("No Setting found"));
+                .orElseThrow(() -> new EntityNotFoundException("Setting not found with ID: " + productDetail.getSetting().getSettingID()));
         productDetail.setSetting(existingSetting);
 
-        ProductDetail checkProductDetail = productDetailRepo.findBySizeAndProductId(productDetail.getSize(),existingProduct.getProductID());
-        if (checkProductDetail != null) {
-            checkProductDetail.setInventory(checkProductDetail.getInventory()+productDetail.getInventory());
-            productDetailRepo.save(checkProductDetail);
-            return modelMapper.map(checkProductDetail, ProductDetailDTO.class);
+        // Check if ProductDetail already exists
+        ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(productDetail.getSize(), existingProduct.getProductID());
+        if (existingProductDetail != null) {
+            existingProductDetail.setInventory(existingProductDetail.getInventory() + productDetail.getInventory());
+            ProductDetail updatedProductDetail = productDetailRepo.save(existingProductDetail);
+            return modelMapper.map(updatedProductDetail, ProductDetailDTO.class);
         }
-        productDetail.setSellingPrice(productDetail.getLaborCost() * productDetail.getMarkupRate());
+
         productDetailRepo.save(productDetail);
-        return modelMapper.map(productDetail, new TypeToken<ProductDetailDTO>() {}.getType());
+
+        // Process DiamondDetails and calculate price
+        List<DiamondDetail> newDiamondDetails = new ArrayList<>();
+        double totalCost = 0;
+
+        for (DiamondDetail diamondDetail : productDetail.getDiamondDetails()) {
+            diamondDetail.setProductDetail(productDetail);
+            Diamond diamond = diamondRepo.findById(diamondDetail.getDiamond().getDiamondID())
+                    .orElseThrow(() -> new EntityNotFoundException("Diamond not found with ID: " + diamondDetail.getDiamond().getDiamondID()));
+            diamondDetail.setDiamond(diamond);
+
+            DiamondDetail createdDiamondDetail = diamondDetailRepo.save(diamondDetail);
+            newDiamondDetails.add(createdDiamondDetail);
+            totalCost += diamond.getPrice() * createdDiamondDetail.getQuantity();
+        }
+
+        productDetail.setDiamondDetails(newDiamondDetails);
+
+        // Add setting price and labor cost to total cost
+        totalCost += existingSetting.getPrice() + productDetail.getLaborCost();
+
+        // Calculate and set selling price
+        productDetail.setSellingPrice(totalCost * productDetail.getMarkupRate());
+
+        // Save and return the new ProductDetail
+        ProductDetail savedProductDetail = productDetailRepo.save(productDetail);
+        return modelMapper.map(savedProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }
 
     public boolean deleteById(int id){
@@ -76,7 +113,7 @@ public class ProductDetailService {
         Product  product = modelMapper.map(productDTO, Product.class);
         ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(size, product.getProductID());
         if (existingProductDetail == null) {
-            throw new RuntimeException("No ProductDetail foundhahahahhh");
+            throw new RuntimeException("No ProductDetail found");
         }
         return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
     }

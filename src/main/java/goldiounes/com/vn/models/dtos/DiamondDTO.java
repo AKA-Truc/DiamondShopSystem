@@ -14,6 +14,7 @@ public class DiamondDTO {
     private String clarity;
     private String cut;
     private String origin;
+    private int price;
 
     @JsonManagedReference
     private List<DiamondDetailDTO> diamondDetails;

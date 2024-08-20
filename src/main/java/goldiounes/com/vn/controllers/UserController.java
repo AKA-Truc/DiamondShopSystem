@@ -68,4 +68,16 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+    
+    @GetMapping("/users/{role}")
+    public ResponseEntity<ResponseWrapper<UserDTO>> getUserByRole(@PathVariable String role) {
+        UserDTO userDTO = userService.getUserByRole(role);
+        if (userDTO != null) {
+            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User found", userDTO);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
 }

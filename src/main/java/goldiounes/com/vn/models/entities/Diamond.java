@@ -29,6 +29,9 @@ public class Diamond {
     @Column(name = "Origin", nullable = false)
     private String Origin;
 
+    @Column(name = "Price", nullable = false)
+    private int Price;
+
     @OneToMany(mappedBy = "Diamond")
     private List<DiamondDetail> diamondDetails;
 
@@ -39,12 +42,13 @@ public class Diamond {
         //constructor
     }
 
-    public Diamond( Double carat, String color, String clarity, String cut, String origin) {
+    public Diamond( Double carat, String color, String clarity, String cut, String origin, int Price) {
         Carat = carat;
         Color = color;
         Clarity = clarity;
         Cut = cut;
         Origin = origin;
+        this.Price = Price;
     }
 
 }
