@@ -59,12 +59,12 @@ public class CategoryService {
 
     public CategoryDTO findByName (String name){
         Category existingCategory = categoryRepo.findByName(name);
-            if(existingCategory == null) {
-                throw new RuntimeException("No category found");
-            }
-            else {
-                return modelMapper.map(existingCategory, new TypeToken<CategoryDTO>() {}.getType());
-            }
+        if(existingCategory == null) {
+            throw new RuntimeException("No category found");
+        }
+        else {
+            return modelMapper.map(existingCategory, new TypeToken<CategoryDTO>() {}.getType());
+        }
     }
 
     public List<CategoryDTO> findCategoryByKeyword (String KeyWord) {
