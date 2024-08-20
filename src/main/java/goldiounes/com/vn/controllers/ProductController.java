@@ -87,7 +87,7 @@ public class ProductController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("productdetail/min/{id}")
+    @GetMapping("productdetails/min/{id}")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetail(@PathVariable int id) {
         ProductDetailDTO productDetailDTO = productDetailService.getMinProductDetailByProductId(id);
         if (productDetailDTO != null) {
