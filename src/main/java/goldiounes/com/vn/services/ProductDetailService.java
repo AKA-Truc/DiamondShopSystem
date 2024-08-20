@@ -133,4 +133,26 @@ public class ProductDetailService {
         productDetailRepo.save(productDetailUpdate);
         return modelMapper.map(productDetailUpdate, new TypeToken<ProductDetailDTO>() {}.getType());
     }
+
+    public ProductDetailDTO getMinProductDetailByProductId(int productID) {
+        List<ProductDetail> productDetails = productDetailRepo.findByProductId(productID);
+        if (productDetails.isEmpty()) {
+            throw new RuntimeException("No ProductDetail found");
+        }
+
+        int MinID = 0;
+        double MinPrice = productDetails.get(0).getSellingPrice();
+
+        for (ProductDetail productDetail1 : productDetails) {
+            if(MinPrice >= productDetail1.getSellingPrice()) {
+                MinID = productDetail1.getProductDetailID();
+                MinPrice = productDetail1.getSellingPrice();
+            }
+        }
+
+        ProductDetail returnProductDetail = productDetailRepo.findById(MinID)
+                .orElseThrow(() -> new RuntimeException("No ProductDetail found"));
+
+        return modelMapper.map(returnProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
+    }
 }
