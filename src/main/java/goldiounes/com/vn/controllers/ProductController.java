@@ -1,5 +1,6 @@
 package goldiounes.com.vn.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.models.dtos.ProductDetailDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,12 +24,26 @@ public class ProductController {
     @Autowired
     private ProductDetailService productDetailService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @PostMapping("/products")
-    public ResponseEntity<ResponseWrapper<ProductDTO>> createProduct(@RequestBody ProductDTO productDTO) {
-        ProductDTO createdProduct = productService.createProduct(productDTO);
-        ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product created successfully", createdProduct);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ResponseEntity<ResponseWrapper<ProductDTO>> createProduct(
+            @RequestParam("productDTO") String productDTOJson,
+            @RequestParam("imageFile") MultipartFile imageFile,
+            @RequestParam("subImageURL") MultipartFile subImageURL) {
+
+        try {
+            ProductDTO productDTO = objectMapper.readValue(productDTOJson, ProductDTO.class);
+            ProductDTO createdProduct = productService.createProduct(productDTO, imageFile,subImageURL);
+            ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product created successfully", createdProduct);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (IOException e) {
+            ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Error creating product: " + e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping("/products/category/{keyword}")
     public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getProductsByKeyword(@PathVariable String keyword) {
