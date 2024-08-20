@@ -27,7 +27,8 @@ public class CartItem {
         //cstor
     }
 
-    public CartItem(Cart cartID, Product product, int quantity) {
+    public CartItem(Cart cart, goldiounes.com.vn.models.entities.Product product, int quantity) {
+        this.cart = cart;
         Product = product;
         Quantity = quantity;
     }
