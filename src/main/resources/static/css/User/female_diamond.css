@@ -43,7 +43,7 @@ body {
     flex: 2;
     text-align: center;
     opacity: 0;
-    color: gold;
+    color: rgba(255, 215, 0, 0.81);
     transition: opacity 1s ease-in-out;
 }
 .header1 .visible {
