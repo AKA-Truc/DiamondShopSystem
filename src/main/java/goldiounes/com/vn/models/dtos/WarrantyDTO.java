@@ -1,5 +1,6 @@
 package goldiounes.com.vn.models.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,7 +10,7 @@ public class WarrantyDTO {
     private int warrantyId;
     private Date endDate;
 
-    //@JsonBackReference
+    @JsonBackReference(value = "product-warranty")
     private ProductDTO product;
 
     //@JsonBackReference

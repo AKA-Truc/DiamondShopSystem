@@ -13,7 +13,7 @@ public class Warranty {
     @Column(name = "WarrantyID")
     private int WarrantyID;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ProductID", nullable = false)
     private Product product;
 

@@ -39,6 +39,9 @@ public class Product {
     @OneToMany(mappedBy = "Product")
     private List<OrderDetail> OrderDetails;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Warranty> warranties;
+
 
     public Product() {
         //cstor

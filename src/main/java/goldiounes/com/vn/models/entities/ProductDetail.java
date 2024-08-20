@@ -30,7 +30,7 @@ public class ProductDetail {
     private double MarkupRate;
 
     @Column(name = "SellingPrice",nullable = false)
-    private double SellingPrice;
+    private double sellingPrice;
 
     @Column(name = "size", nullable = true)
     private Integer Size;
@@ -51,7 +51,6 @@ public class ProductDetail {
         this.setting = setting;
         LaborCost = laborCost;
         MarkupRate = markupRate;
-        SellingPrice = MarkupRate * LaborCost;
         Size = size;
         Inventory = inventory;
     }

@@ -57,6 +57,7 @@ public class DiamondService {
         existingDiamond.setClarity(diamond.getClarity());
         existingDiamond.setCut(diamond.getCut());
         existingDiamond.setOrigin(diamond.getOrigin());
+        existingDiamond.setPrice(diamond.getPrice());
         diamondRepo.save(existingDiamond);
         return modelMapper.map(existingDiamond, DiamondDTO.class);
     }
