@@ -9,7 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class ProductService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepo.findAll();
@@ -41,18 +46,27 @@ public class ProductService {
         return modelMapper.map(existingProduct.get(), ProductDTO.class);
     }
 
-    public ProductDTO createProduct(ProductDTO productDTO) {
+    public ProductDTO createProduct(ProductDTO productDTO, MultipartFile imageFile,MultipartFile subImageURL) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
-        Product existingProduct = productRepo.findByProductName(product.getProductName());
-        if (existingProduct != null) {
-            throw new RuntimeException("Product already exists");
-        }
-        Category existingCategory = categoryRepo.findById(product.getCategory().getCategoryId())
+
+        Category existingCategory = categoryRepo.findById(productDTO.getCategory().getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
         product.setCategory(existingCategory);
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageURL = fileUploadService.uploadImage(imageFile);
+            product.setImageURL(imageURL);
+        }
+
+        if (subImageURL != null && !subImageURL.isEmpty()) {
+            String imageURL = fileUploadService.uploadImage(subImageURL);
+            product.setSubImageURL(imageURL);
+        }
+
         productRepo.save(product);
-        return modelMapper.map(product,ProductDTO.class);
+        return modelMapper.map(product, ProductDTO.class);
     }
+
 
     public boolean deleteProduct(int id) {
         Optional<Product> existingProduct = productRepo.findById(id);
