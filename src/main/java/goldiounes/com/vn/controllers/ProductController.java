@@ -87,6 +87,18 @@ public class ProductController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("productdetail/min/{id}")
+    public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetail(@PathVariable int id) {
+        ProductDetailDTO productDetailDTO = productDetailService.getMinProductDetailByProductId(id);
+        if (productDetailDTO != null) {
+            ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail retrieved successfully", productDetailDTO);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }else{
+            ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/productdetails/{id}")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetailById(@PathVariable int id) {
         ProductDetailDTO productDetail = productDetailService.findById(id);
