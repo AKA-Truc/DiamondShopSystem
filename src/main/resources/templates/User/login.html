@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="/css/User/login.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <span class="close-button">&times;</span>
+    </div>
+
+    <div class="login-section">
+        <h2>Tôi Đã Có Tài Khoản</h2>
+        <p><b>Vui lòng nhập email và mật khẩu của bạn</b></p>
+
+        <form action="./login1.html" method="POST">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" id="email" name="email" placeholder="hello@gmail.com" required>
+
+            <label for="password">Mật khẩu <span>*</span></label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="forgot-password">
+                <a href="../login/quenmk.html"><b>Quên mật khẩu?</b></a>
+            </div>
+            <button type="submit"><b>Đăng Nhập</b></button>
+        </form>
+    </div>
+
+    <div class="register-section">
+        <h2>Tôi Chưa Có Tài Khoản</h2>
+        <p>Tạo một tài khoản cá nhân để tận hưởng những lợi ích bổ sung <br> và có trải nghiệm phong phú.</p>
+        <a href="./taotk.html" class="register-button"><b>Tạo Tài Khoản Của Tôi</b></a>
+    </div>
+</div>
+
+<script src="/js/User/login.js"></script>
+</body>
+</html>
+
+

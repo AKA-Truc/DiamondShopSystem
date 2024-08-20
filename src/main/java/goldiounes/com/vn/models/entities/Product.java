@@ -44,7 +44,7 @@ public class Product {
         //cstor
     }
 
-    public Product(goldiounes.com.vn.models.entities.Category category, String productName, String imageURL, String subImageURL, double warrantyPeriod) {
+    public Product(Category category, String productName, String imageURL, String subImageURL, double warrantyPeriod) {
         Category = category;
         ProductName = productName;
         ImageURL = imageURL;

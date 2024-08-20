@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.header1 {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(10, 25, 56);
+    border-bottom: 1px solid #ddd;
+    justify-content: space-between;
+    color: #d5d9de;
+}
+
+.header1 p {
+    margin: 0;
+}
+
+.header1 .phone,
+.header1 .address {
+    flex: 1;
+}
+
+.header1 .phone {
+    text-align: left;
+    margin-left: 150px;
+}
+
+.header1 .address {
+    text-align: right;
+    margin-right: 150px;
+}
+
+.header1 .center {
+    flex: 2;
+    text-align: center;
+    opacity: 0;
+    color: gold;
+    transition: opacity 1s ease-in-out;
+}
+.header1 .visible {
+    opacity: 1;
+}
+
+.registration-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+.registration-container h2 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.required {
+    color: red;
+}
+
+input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-register {
+    background-color: #d80000;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-register:hover {
+    background-color: #770e48;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: none;
+}
