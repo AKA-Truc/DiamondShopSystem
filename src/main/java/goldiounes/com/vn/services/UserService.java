@@ -103,11 +103,11 @@ public class UserService {
         return existingUser.getPassword().equals(password);
     }
 
-    public UserDTO getUserByRole(String Role) {
-        User existingUser = userRepo.findByRole(Role);
+    public List<UserDTO> getUserByRole(String Role) {
+        List<User> existingUser = userRepo.findByRole(Role);
         if (existingUser == null) {
             throw new RuntimeException("No user found");
         }
-        return modelMapper.map(existingUser,UserDTO.class);
+        return modelMapper.map(existingUser,new TypeToken<List<UserDTO>>(){}.getType());
     }
 }

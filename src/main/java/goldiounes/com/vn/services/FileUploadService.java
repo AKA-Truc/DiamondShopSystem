@@ -1,3 +1,4 @@
+
 package goldiounes.com.vn.services;
 
 import com.cloudinary.Cloudinary;
@@ -14,9 +15,9 @@ public class FileUploadService {
 
     private final Cloudinary cloudinary;
 
-    public FileUploadService(@Value("${cloudinary.cloud.name}") String cloudName,
-                             @Value("${cloudinary.api.key}") String apiKey,
-                             @Value("${cloudinary.api.secret}") String apiSecret) {
+    public FileUploadService(@Value("${cloudinary.cloud_name}") String cloudName,
+                             @Value("${cloudinary.api_key}") String apiKey,
+                             @Value("${cloudinary.api_secret}") String apiSecret) {
         this.cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", cloudName,
                 "api_key", apiKey,
@@ -32,4 +33,3 @@ public class FileUploadService {
         return (String) uploadResult.get("secure_url"); // Trả về URL của ảnh đã được upload
     }
 }
-

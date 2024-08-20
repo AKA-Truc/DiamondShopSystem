@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const fetch_Female_Diamond = () => {
-        const keyword = "Nhẫn%20Nam";
+        const keyword = "NHẪN KIM CƯƠNG NỮ";
         fetch(`http://localhost:8080/product-management/products/category/${keyword}`)
             .then(response => {
                 if (!response.ok) {
@@ -33,17 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="product-top">
                                 <a href="#" class="product-thumb">
                                     <div class="card">
-                                        <img src="/static/images/${product.imageURL || 'default.jpg'}" alt="font">
-                                        <img src="/static/images/${product.subImageURL || 'default.jpg'}" alt="back">
+                                        <img src="${product.imageURL || 'https://via.placeholder.com/150'}" alt="font">
+                                        <img src="${product.subImageURL || 'https://via.placeholder.com/150'}" alt="back">
                                     </div>
                                 </a>
                                 <a href="#" class="buy-now">Xem chi tiết</a>
                             </div>
                             <div class="product-info">
                                 <a href="#" class="product-name">${product.productName || 'Tên sản phẩm'}</a>
-<!--                                <a href="#" class="product-cart">${product.productId || 'Mã sản phẩm'}</a>-->
                                 <div class="product-price" id="price-${product.productId}">
-                                    <!-- Giá sẽ được cập nhật tại đây -->
                                 </div>
                             </div>
                         </div>
@@ -90,8 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error fetching product detail:', error);
             });
     };
-
-
 
     fetch_Female_Diamond();
 });

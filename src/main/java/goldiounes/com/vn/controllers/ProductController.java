@@ -1,3 +1,4 @@
+
 package goldiounes.com.vn.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,7 @@ public class ProductController {
 
         try {
             ProductDTO productDTO = objectMapper.readValue(productDTOJson, ProductDTO.class);
-            ProductDTO createdProduct = productService.createProduct(productDTO, imageFile,subImageURL);
+            ProductDTO createdProduct = productService.createProduct(productDTO, imageFile, subImageURL);
             ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product created successfully", createdProduct);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (IOException e) {
