@@ -10,8 +10,7 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-
-.header1 {
+ .header1 {
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -50,7 +49,6 @@ body {
 .header1 .visible {
     opacity: 1;
 }
-
 
 .header {
     display: flex;
@@ -98,12 +96,12 @@ body {
     height: 40px;
     display: inline-flex;
     width: 100%;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     gap: 50px;
-    z-index: 1000;
-    position: relative;
+    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
+    position: relative; /* Để sử dụng z-index */
     text-transform: uppercase;
 }
 
@@ -133,14 +131,12 @@ body {
     box-sizing: border-box;
 }
 
-/* xuất hiện những menu con */
 #main-menu li:hover > ul.sub-menu {
     display: block;
 }
 
 #main-menu ul.sub-menu a {
     padding: 12px 20px;
-    /* border-bottom: 1px solid #94968f; */
     left: 0;
 }
 
@@ -158,7 +154,6 @@ body {
     top: 0;
 }
 
-/* Thiết lập border khi hover */
 #main-menu > li > a {
     position: relative;
 }
@@ -197,7 +192,6 @@ body {
     transform: translateY(-50%);
 }
 
-/**/
 .wrapper {
     position: relative;
     text-align: left;
@@ -213,7 +207,7 @@ body {
 }
 
 
-#body1{
+#body2 #body3 #body4{
     max-width: 1170px;
     margin: 0 auto;
 
@@ -226,8 +220,8 @@ body {
     margin: 40px 0;
 }
 .body-text1>h2{
-    font-size: 20px;
-    padding: 10px 20px;
+    font-size: 30px;
+    padding: 10px 70px;
 }
 .body-text>h1{
     font-size: 40px;
@@ -409,4 +403,41 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
     background-color: #cfb0b0;
+}
+
+/* hover */
+.card {
+    width: 170px;
+    height: 195px;
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Ẩn ảnh gốc, hiện ảnh hover */
+    transition: opacity 0.7s ease;
+}
+
+.card img:first-child {
+    opacity: 1; /* ban đầu */
+}
+
+.card img:last-child {
+    opacity: 0; /* ẩn ban đầu */
+}
+
+.card:hover img:first-child {
+    opacity: 0; /* Ẩn hình ảnh đầu tiên khi hover */
+}
+
+.card:hover img:last-child {
+    opacity: 1; /* Hiện hình ảnh thứ hai khi hover */
 }
