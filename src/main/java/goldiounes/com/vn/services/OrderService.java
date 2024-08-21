@@ -102,7 +102,7 @@ public class OrderService {
             // Lưu warranty
             warrantyService.createWarranty(savedOrder.getOrderID(), warrantyDTO);
         }
-//        emailService.sendSizeSelectionEmail(order.getUser().getEmail(), order.getOrderID());
+        emailService.sendSizeSelectionEmail(order.getUser().getEmail(), order.getOrderID());
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 

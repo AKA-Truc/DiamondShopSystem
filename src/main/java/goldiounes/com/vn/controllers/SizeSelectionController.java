@@ -1,5 +1,6 @@
 package goldiounes.com.vn.controllers;
 
+import goldiounes.com.vn.models.dtos.OrderDTO;
 import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
@@ -17,17 +18,17 @@ public class SizeSelectionController {
     private ProductService productService;
 
     @Autowired
-    private OrderDetailService orderDetailService;
+    private OrderService orderService;
 
     @GetMapping
     public String showSizeSelectionForm(@RequestParam String orderId, Model model) {
         model.addAttribute("orderId", orderId);
-        return "sizeSelectionForm"; // Tên của trang HTML hiển thị biểu mẫu chọn kích cỡ
+        return "size_selection.html"; // Tên của trang HTML hiển thị biểu mẫu chọn kích cỡ
     }
 
-//    @PostMapping
-//    public String submitSizeSelection(@RequestParam int orderId, @RequestBody ProductDTO productDTO) {
-//        orderDetailService.update()
-//        return "redirect:/success"; // Trang thông báo thành công
-//    }
+    @PostMapping
+    public String submitSizeSelection(@RequestParam int orderId, @RequestBody OrderDTO orderDTO) {
+        orderService.updateOrder(orderId, orderDTO);
+        return "Xác nhận đơn hàng thành công";
+    }
 }
