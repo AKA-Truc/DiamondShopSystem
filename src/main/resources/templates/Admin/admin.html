@@ -1,10 +1,219 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/Admin/admin.css">
+    <script>
+        function alertFeature() {
+            alert('Tính năng đang được được phát triển');
+        }
+    </script>
 </head>
 <body>
 
+<div class="sidebar">
+    <h2>GOLDIOUNES SHOP</h2>
+    <ul class="main-menu">
+        <li><a href="admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
+        <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
+            <ul>
+                <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
+                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm khách hàng mới </a></li>
+                <li><a href="./edit_customer.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
+                <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
+                <li><a href="./personnel_editing.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
+                <li><a href="./add_new_employees.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
+            <ul>
+                <li><a href="./product.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý sản phẩm</a></li>
+                <li><a href="./edit_product.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa sản phẩm</a></li>
+                <li><a href="./add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
+            <ul>
+                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
+                <li><a href="./edit_discount.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa mã giảm giá</a></li>
+                <li><a href="./add_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Thêm mã giảm giá</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
+            <ul>
+                <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
+                <li><a href="./detail.html"><ion-icon name="add-circle-outline"></ion-icon> Chi tiết đơn hàng</a></li>
+                <li><a href="./edit_order.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa đơn hàng</a></li>
+                <li><a href="./bill.html"><ion-icon name="receipt-outline"></ion-icon> Hóa đơn</a></li>
+                <li><a href="./add_order.html"><ion-icon name="bag-add-outline"></ion-icon>Tạo đơn hàng</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
+            <ul>
+                <li><a href="./feedback.html"><ion-icon name="receipt-outline"></ion-icon> Phản hồi khách hàng</a></li>
+            </ul>
+        </li>
+        <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
+        <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="person-circle-outline"></ion-icon> Tài khoản</a>
+            <ul>
+
+                <li><a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
+                <script>
+                    function logout() {
+                        // Xóa token từ sessionStorage
+                        sessionStorage.removeItem('accessToken');
+
+                        // Chuyển hướng người dùng về trang đăng nhập
+                        window.location.href = './login1.html';
+                    }
+                </script>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="navbar">
+    <div class="navbar__info">
+        <p>Admin Thùy Trang</p>
+    </div>
+    <div class="navbar__cta">
+        <div class="navbar__hello">
+            <ion-icon name="notifications-outline"></ion-icon> 5 Notifications
+        </div>
+        <div class="navbar__hello">
+            <ion-icon name="settings-outline"></ion-icon> Settings
+        </div>
+        <div class="navbar__background-icon">
+            <img src="/static/Adimages/account.svg" alt="" />
+        </div>
+        <div class="navbar__hello">
+            <p>Xin chào, Admin</p>
+        </div>
+    </div>
+</div>
+<div class="navbar-separator"></div>
+<div class="main">
+    <!-- Content goes here -->
+</div>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!--  -->
+
+<!-- main content -->
+<div class="main-content">
+    <div class="customer-management">
+
+        <!-- Ô tìm kiếm -->
+        <input type="text" placeholder="Nhập họ tên để tìm kiếm..." class="search-bar">
+        <h2>Đơn hàng cần xác nhận </h2>
+        <!-- Bảng danh sách khách hàng -->
+        <div class="table-wrapper">
+            <table id="requests-table">
+                <thead>
+                <tr>
+                    <th class="center-heading">STT</th>
+                    <th class="center-heading">Mã Đơn Hàng</th>
+                    <th class="center-heading">Khách hàng</th>
+                    <th class="center-heading">Ngày đặt hàng</th>
+                    <th class="center-heading">Trạng thái</th>
+                    <th class="center-heading">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody id="order-List">
+                <!-- Các dòng đơn hàng sẽ được thêm bởi JavaScript -->
+                </tbody>
+            </table>
+
+            <!-- Popup xác nhận xóa khách hàng -->
+            <div id="popup" class="popup-overlay">
+                <div class="popup-content">
+                    <p>Bạn có chắc chắn muốn xóa đơn hàng này?</p>
+                    <button id="popupOk" class="okbtn">Ok</button>
+                    <button id="popupCancel" class="cancelbtn">Hủy</button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* Notification (popup) */
+            .popup {
+                display: none; /* Ẩn ban đầu */
+                position: fixed; /* Giữ nguyên ở vị trí */
+                z-index: 1000; /* Hiển thị lớn hơn */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                background-color: rgba(0, 0, 0, 0.4); /* Đen với độ trong suốt */
+            }
+
+            /* Nội dung của Popup */
+            .popup-content {
+                background-color: #fefefe;
+                margin: 15% auto; /* 15% từ phía trên và căn giữa */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 300px; /* Chiều rộng */
+                text-align: center;
+                border-radius: 10px;
+            }
+
+            /* Nút OK */
+            .okbtn {
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            .okbtn:hover {
+                background-color: #45a049;
+            }
+
+            /* Nút Hủy */
+            .cancelbtn {
+                background-color: #f44336;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .cancelbtn:hover {
+                background-color: #da190b;
+            }
+        </style>
+        <!-- Thêm đoạn mã JavaScript trước thẻ đóng body -->
+        <script src="menu.js"></script>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="/static/css/Admin/admin.css">
+</head>
 </body>
 </html>
