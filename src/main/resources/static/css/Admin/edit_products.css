@@ -1,0 +1,274 @@
+/* Điều chỉnh cơ bản cho body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f3ef
+}
+
+/* Thanh sidebar với gradient và bóng đổ */
+.sidebar {
+    height: 100%;
+    width: 280px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+}
+
+/* Tiêu đề sidebar */
+.sidebar h2 {
+    color: #141E0C;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar ul li a ion-icon{
+    font-size: 26px;
+    color: #141E0C;
+}
+
+/* Menu chính - Loại bỏ bullet */
+.main-menu {
+    list-style-type: none; /* Loại bỏ bullet */
+    padding: 0;
+}
+
+.main-menu li a {
+    font-size: 16px;
+    display: block;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: #000000;
+    transition: background-color 0.3s ease;
+    line-height: 1.5px;
+}
+
+.main-menu li a:hover {
+    background-color: #EDEFE4;
+}
+
+/* Submenu sổ xuống */
+.submenu {
+    position: relative;
+    display: block; /* Hiển thị submenu dưới dạng block */
+}
+
+/* Submenu list - Loại bỏ bullet */
+.submenu ul {
+    position: absolute;
+    top: 100%; /* Bắt đầu từ dưới cùng của item menu */
+    left: 0;
+    width: 100%; /* Chiều rộng bằng với menu cha */
+    background-color: #f2f4ef;
+    list-style-type: none; /* Loại bỏ bullet */
+    padding: 0; /* Loại bỏ padding mặc định */
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* Di chuyển nhẹ xuống dưới */
+    z-index: 1000; /* Đảm bảo submenu nằm trên các phần tử khác */
+}
+
+.submenu:hover ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Khi hover, submenu di chuyển về vị trí ban đầu */
+}
+
+/* Submenu link */
+.submenu ul li a {
+    padding: 15px 25px;
+    color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: block; /* Đảm bảo liên kết chiếm toàn bộ chiều rộng */
+}
+
+.submenu ul li a:hover {
+    background-color: #dee0d3;
+}
+
+ion-icon {
+    font-size: 20px;
+    line-height: 1.5px;
+    vertical-align: middle; /* Cân đối chữ */
+}
+
+.navbar {
+    margin-left: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 58px;
+    color: #000000;
+    background-color: #f4f3ef;
+    padding: 0 20px;
+}
+
+.navbar__info {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #000000;
+}
+
+.navbar__cta {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.navbar__background-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+.navbar__hello {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.navbar__show {
+    cursor: pointer;
+}
+
+/* Horizontal line below navbar */
+.navbar-separator {
+    width: calc(100% - 280px); /* Full width minus sidebar */
+    margin-left: 280px;
+    height: 1px;
+    background-color: #819c71e7;
+}
+
+
+select {
+    font-size: 18px; /* Tăng kích thước phông chữ */
+    padding: 10px; /* Tăng khoảng cách bên trong */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Thay đổi kích thước và kiểu các tùy chọn */
+option {
+    font-size: 18px; /* Tăng kích thước phông chữ */
+    padding: 10px; /* Tăng khoảng cách bên trong */
+}
+
+
+.body1 {
+    display: flex;
+    margin: 70px;
+    height: 40vh;
+    align-items: center; /* Căn giữa khung theo chiều dọc */
+    margin-left: 160px;
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 9000px;
+    height: 315px;
+    padding: 120px;
+    margin-left: 370px;
+    align-items: center; /* Căn giữa khung theo chiều dọc */
+}
+.form {
+    display: flex;
+}
+.field {
+    margin: 20px;
+
+}
+.form {
+    display: flex;
+}
+.field {
+    flex: 1;
+    margin: 10px;
+    position: relative;
+}
+.top-fields, .middle-fields, .form-row {
+    display: flex;
+    justify-content:space-around;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
+}
+.field input:focus {
+    border-color: #000; /* Đổi màu viền khi focus */
+    outline: none; /* Bỏ viền outline mặc định */
+}
+
+#CategoryID{
+    font-size: 14px;
+}
+
+.styled-select {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Thay đổi font chữ */
+    font-size: 14px;
+}
+.button {
+    display: flex;
+    justify-content: flex-start;
+    margin: 8px 8px;
+}
+.button input {
+    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    border: none;
+    border-radius: 5px;
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    cursor: pointer;
+    margin-right: 700px; /* Khoảng cách giữa các nút */
+}
+.button-group input{
+    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    border: none;
+    border-radius: 5px;
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    cursor: pointer;
+    margin: 8px 8px;
+}
+.button input.save  {
+    background-color:#476730;
+    color: #fff;
+}
+.button-group input.save  {
+    background-color:#476730;
+    color: #fff;
+}
+.button-group input.cancel  {
+    background-color: #cdccc2;
+    color: #395327;
+    font-weight: 600;
+}
+.button input.save:hover {
+    background-color:#eae9e0;
+}
+.button-group input.save:hover {
+    background-color:#395327;
+}
+.button-group input.cancel:hover {
+    background-color: #c1c0b7;
+}
