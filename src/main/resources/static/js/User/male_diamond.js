@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const fetch_Female_Diamond = () => {
-        const keyword = "Nhẫn Nữ";
+        const keyword = "Nhẫn Nam";
         fetch(`http://localhost:8080/product-management/products/category/${keyword}`)
             .then(response => {
                 if (!response.ok) {
