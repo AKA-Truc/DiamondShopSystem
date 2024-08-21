@@ -1,9 +1,48 @@
 /* Điều chỉnh cơ bản cho body */
 body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(../menu/img/menu.jpg); /* Thay thế bằng đường dẫn thực tế của file PNG */
+    background-size: cover; /* Đảm bảo hình ảnh bao phủ toàn bộ khu vực */
+}
+.button-container {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    margin-top: 20px; /* Khoảng cách từ top, có thể điều chỉnh theo ý muốn */
+}
+
+.confirm-btn, .back-btn {
+    background-color: #476730;
+    font-size: 17px;
+    padding: 9px 19px; /* Khoảng cách giữa nút button và padding bên trong */
+    margin: 0 10px; /* Khoảng cách giữa hai nút button */
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 10px;
+}
+select {
+    font-size: 14px; /* Tăng kích thước phông chữ */
+    padding: 6px; /* Tăng khoảng cách bên trong */
+    width: 20%;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+/* Thay đổi kích thước và kiểu các tùy chọn */
+option {
+    font-size: 18px; /* Tăng kích thước phông chữ */
+    padding: 10px; /* Tăng khoảng cách bên trong */
+}
+/* Thanh sidebar với gradient và bóng đổ */
+/* Điều chỉnh cơ bản cho body */
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f3ef;
+    overflow-x:hidden
 }
 
 /* Thanh sidebar với gradient và bóng đổ */
@@ -152,152 +191,87 @@ ion-icon {
 }
 
 
-/* main */
-
-.main-content {
+.body1 {
+    font-family: Arial, sans-serif;
     margin-left: 280px;
-    padding: 20px;
-    width: calc(100% - 280px);
-}
-.customer-management {
-    margin-top: 20px;
+    margin-top: 2%;
 }
 
-.customer-management h3 {
-    margin: 0 0 20px 0;
-    color: #000;
+.contain {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    border-radius:2% 2%;
+    border: #000000 solid 0.5px;
+}
+
+.header{
+    background: #fff;
+    color: #333;
+    padding-top: 3px;
+    min-height: 70px;
+    border-bottom: #264d27 3px solid;
+}
+
+.header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 5px;
     font-size: 24px;
 }
 
-.add-customer-btn {
-    background-color: #476730;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
+.main-content {
+    padding: 20px;
+    background: #f4f4f4;
 }
 
-.add-customer-btn i {
-    margin-left: 10px;
+.main-content h2 {
+    text-align: center;
 }
 
-.search-bar {
-    padding: 10px;
-    width: calc(50% - 280px);
-    margin-bottom: 20px;
-    border-radius: 20px;
+.order-info, .product-info {
+    background: #fff;
+    padding: 20px;
+    margin: 20px 0;
     border: 1px solid #ddd;
-    margin-left: 790px
 }
 
-/* table */
-.table-wrapper {
-    width: 94%;
-    padding: 16px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    background-color: #EDEFE4;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.order-info h3, .product-info h3 {
+    margin: 0 0 10px;
 }
+
+.order-info p, .product-info p {
+    margin: 5px 0;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
 }
 
 th, td {
-    padding: 23px;
+    padding: 10px;
     text-align: left;
 }
 
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
 th {
-    background-color: #f9f9f9;
-    color: black;
+    background: #f4f4f4;
 }
 
-/*  */
-
-.edit-btn,
-.delete-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.edit-btn i {
-    color: #0d62fc;
-}
-
-.delete-btn i {
-    color: #d92e3e;
-}
-
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.page-btn {
-    background-color: #476730;
-    color: #fff;
-    border: none;
+.status {
+    color: white;
+    background-color: #007bff;
+    padding: 5px 10px;
     border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
 }
 
-/* popup */
-/* Popup styles */
-.popup-overlay {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+.form-role {
+    display: grid;
+    justify-content: left;
+    height: 10vh; /* Chiều cao của form, có thể sửa đổi theo ý muốn */
 }
-
-.popup-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.popup-btn {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#yes-btn {
-    background-color: #d92e3e;
-    color: #fff;
-}
-
-#no-btn {
-    background-color: #ddd;
-}
-
-
 

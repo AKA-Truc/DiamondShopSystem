@@ -1,10 +1,229 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/Admin/detail.css">
+    <script>
+        function alertFeature() {
+            alert('Tính năng đang được được phát triển');
+        }
+    </script>
 </head>
 <body>
 
+<div class="sidebar">
+    <h2>GOLDIOUNES SHOP</h2>
+    <ul class="main-menu">
+        <li><a href="admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
+        <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
+            <ul>
+                <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
+                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm khách hàng mới </a></li>
+                <li><a href="./edit_customer.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
+                <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
+                <li><a href="./personnel_editing.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
+                <li><a href="./add_new_employees.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
+            <ul>
+                <li><a href="./product.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý sản phẩm</a></li>
+                <li><a href="./edit_product.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa sản phẩm</a></li>
+                <li><a href="./add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
+            <ul>
+                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
+                <li><a href="./edit_discount.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa mã giảm giá</a></li>
+                <li><a href="./add_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Thêm mã giảm giá</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
+            <ul>
+                <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
+                <li><a href="./detail.html"><ion-icon name="add-circle-outline"></ion-icon> Chi tiết đơn hàng</a></li>
+                <li><a href="./edit_order.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa đơn hàng</a></li>
+                <li><a href="./bill.html"><ion-icon name="receipt-outline"></ion-icon> Hóa đơn</a></li>
+                <li><a href="./add_order.html"><ion-icon name="bag-add-outline"></ion-icon>Tạo đơn hàng</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
+            <ul>
+                <li><a href="./feedback.html"><ion-icon name="receipt-outline"></ion-icon> Phản hồi khách hàng</a></li>
+            </ul>
+        </li>
+        <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
+        <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="person-circle-outline"></ion-icon> Tài khoản</a>
+            <ul>
+
+                <li><a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
+                <script>
+                    function logout() {
+                        // Xóa token từ sessionStorage
+                        sessionStorage.removeItem('accessToken');
+
+                        // Chuyển hướng người dùng về trang đăng nhập
+                        window.location.href = './login1.html';
+                    }
+                </script>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="navbar">
+    <div class="navbar__info">
+        <p>Admin Thùy Trang</p>
+    </div>
+    <div class="navbar__cta">
+        <div class="navbar__hello">
+            <ion-icon name="notifications-outline"></ion-icon> 5 Notifications
+        </div>
+        <div class="navbar__hello">
+            <ion-icon name="settings-outline"></ion-icon> Settings
+        </div>
+        <div class="navbar__background-icon">
+            <img src="/static/Adimages/account.svg" alt="" />
+        </div>
+        <div class="navbar__hello">
+            <p>Xin chào, Admin</p>
+        </div>
+    </div>
+</div>
+<div class="navbar-separator"></div>
+<div class="main">
+    <!-- Content goes here -->
+</div>
 </body>
-</html>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+<div class="body1">
+    <div class="contain">
+        <div class="header">
+            <h1>Thông Tin Đơn Hàng</h1>
+        </div>
+        <div class="main-content">
+            <div class="order-info">
+                <h3>Thông Tin Khách Hàng</h3>
+                <p><strong>Tên: </strong><span id="customerName"></span></p>
+                <p><strong>Số Điện Thoại: </strong><span id="customerPhone"></span></p>
+                <p><strong>Mã Đơn Hàng: </strong><span id="orderID"></span></p>
+                <p><strong>Ngày Đặt Hàng: </strong><span id="orderDate"></span></p>
+                <p><strong>Trạng Thái Đơn Hàng: </strong><span id="orderStatus"></span></p>
+            </div>
+
+            <div class="field input">
+                <label for="VoucherID" style="font-size: 14px; padding-left: 10px; font-weight:bold;">Mã Giảm Giá</label>
+                <select id="VoucherID" name="VoucherID">
+                    <option value="None">-----None-----</option>
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                </select>
+            </div>
+            <div class="product-info">
+                <h3>Thông Tin Sản Phẩm</h3>
+                <table id="product-table">
+                    <thead>
+                    <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Giá</th>
+                        <th>Số Lượng</th>
+                    </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                    <!-- Dữ liệu sản phẩm sẽ được thêm vào đây -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="button-container">
+                <button class="confirm-btn" id="confirm-btn">Xác Nhận Đơn Hàng</button>
+                <button class="back-btn" id="back-btn">Quay Lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->
+<style>
+    .popup-overlay {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 300px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .popup-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 400px;
+        max-height: 80%; /* Make sure it fits within the viewport height */
+        overflow-y: auto; /* Add scroll if content overflows */
+        margin: auto;
+    }
+    .popup-content p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+    .popup-btn {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        color: #fff;
+        background-color: #0056b3;
+    }
+    .popup-btn:hover {
+        background-color:#4da81b;
+    }
+</style>
+<div id="popup" class="popup-overlay">
+    <div class="popup-content">
+        <p id="popup-message"></p>
+        <button id="popup-ok" class="popup-btn">OK</button>
+    </div>
+</div>
+<!--  -->
+
+<script src="/static/js/Admin/detail.js"></script>
+
+<script>
+    document.getElementById('download').addEventListener('click', function() {
+        var element = document.getElementById('content');
+        html2pdf(element, {
+            margin: 1,
+            filename: 'myfile.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        });
+    });
+</script>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Đơn Hàng</title>
+    <link rel="stylesheet" href="/static/css/Admin/detail.css">
+</head>
