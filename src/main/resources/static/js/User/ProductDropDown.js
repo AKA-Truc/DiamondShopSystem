@@ -1,30 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const fetch_Female_Diamond = () => {
-        const keyword = "Nhẫn Nữ";
-        fetch(`http://localhost:8080/product-management/products/category/${keyword}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(responseData => {
-                console.log("Raw response data fetched: ", responseData);
+    const categoryButtons = document.querySelectorAll('.category-btn');
 
+    const fetchProductsByCategory = (keyword) => {
+        fetch(`http://localhost:8080/product-management/products/category/${keyword}`)
+            .then(response => response.json())
+            .then(responseData => {
                 if (!responseData || !responseData.data || !Array.isArray(responseData.data)) {
-                    console.error('Expected an object with a "data" array but received:', responseData);
+                    console.error('Expected an array of products but received:', responseData);
                     throw new Error('Expected an array of products');
                 }
 
                 const products = responseData.data;
+                const productList = document.getElementById('product-list');
 
-                let productList = document.getElementById('product-list');
-
-                if (!productList) {
-                    productList = document.createElement('ul');
-                    productList.id = 'product-list';
-                    document.body.appendChild(productList);
-                }
+                // Clear existing products
+                productList.innerHTML = '';
 
                 products.forEach(product => {
                     const listItem = document.createElement('li');
@@ -41,46 +31,34 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <div class="product-info">
                                 <a href="#" class="product-name">${product.productName || 'Tên sản phẩm'}</a>
-                                <div class="product-price" id="price-${product.productId}">
-                                </div>
+                                <div class="product-price" id="price-${product.productId}"></div>
                             </div>
                         </div>
                     `;
                     productList.appendChild(listItem);
 
                     // Gọi hàm minPrice để lấy giá tối thiểu và hiển thị
-                    minPrice(product.productId);
+                    fetchMinPrice(product.productId);
                 });
             })
             .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
+                console.error('Error fetching products:', error);
             });
     };
 
-    const minPrice = (id) => {
+    const fetchMinPrice = (id) => {
         fetch(`http://localhost:8080/product-management/productdetails/min/${id}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(responseData => {
-                console.log('Data Detail fetched:', responseData);
-
                 const priceElement = document.getElementById(`price-${id}`);
-
-                // Check and extract sellingPrice from responseData
                 if (priceElement && responseData.data && responseData.data.hasOwnProperty('sellingPrice')) {
-                    // Format the price with toLocaleString
                     const formattedPrice = responseData.data.sellingPrice.toLocaleString('vi-VN', {
                         style: 'currency',
                         currency: 'VND',
-                    }).replace('₫', 'vnđ'); // Replace the default "₫" symbol with "đ"
+                    }).replace('₫', 'vnđ');
 
                     priceElement.innerHTML = formattedPrice;
                 } else {
-                    console.warn(`No sellingPrice found for product detail ID: ${id}`);
                     priceElement.innerHTML = 'Giá không có sẵn';
                 }
             })
@@ -89,5 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    fetch_Female_Diamond();
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.getAttribute('data-category');
+            fetchProductsByCategory(category);
+        });
+    });
+
+    fetchProductsByCategory('Bông Tai');
 });
