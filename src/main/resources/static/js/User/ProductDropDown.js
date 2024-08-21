@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateContentAndFetchProducts = (category, title) => {
         //console.log("category: ",category);
 
-        // Cập nhật tiêu đề sản phẩm
+        // Cap Nhat Tieu De (h2 id = content-product>
         const contentProduct = document.getElementById('content-product');
         if (contentProduct) {
             contentProduct.textContent = title;
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         productList.innerHTML = '';
 
-        // Gọi API để lấy sản phẩm theo danh mục
+        // fetch API
         fetch(`http://localhost:8080/product-management/products/category/${categoryIndex}`)
             .then(response => {
                 if (!response.ok) {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         `;
                         productList.appendChild(listItem);
 
-                        // Gọi hàm minPrice để lấy giá tối thiểu và hiển thị
+                        // Tim Min price
                         fetchMinPrice(product.productId);
                     });
                 }
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    // Xử lý sự kiện khi chọn danh mục từ thẻ select
+    // event select
     const categorySelector = document.getElementById('category-selector');
     categorySelector.addEventListener('change', (event) => {
         const selectedOption = event.target.options[event.target.selectedIndex];
@@ -127,6 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateContentAndFetchProducts(category, title);
     });
 
-    // Fetch mặc định cho danh mục đầu tiên
+    // fetch default
     updateContentAndFetchProducts("None", 'Trang sức kim cương tự nhiên');
 });
