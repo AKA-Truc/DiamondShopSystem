@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vòng tay kim cương</title>
+    <title>Mặt dây chuyền kim cương</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/static/css/User/diamond_bracelets.css">
+    <link rel="stylesheet" href="/static/css/User/diamond_pendant.css">
 </head>
 
 <body>
@@ -14,6 +15,7 @@
     <p class="center" id="center-text">hello</p>
     <p class="address">Liên hệ </p>
 </div>
+
 <div class="header">
     <div class="header-content">
         <div class="icons">
@@ -25,20 +27,21 @@
         <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
     </div>
 </div>
+
 <ul id="main-menu">
     <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
     <li><a href="">TRANG SỨC KIM CƯƠNG </a>
-        <ul class="sub-menu">
-            <li class="has-child"><a href="">NHẪN KIM CƯƠNG</a>
-                <ul class="sub-menu">
-                    <li><a href="men's_diamond.html">NHẪN KIM CƯƠNG NAM</a></li>
-                    <li><a href="female_diamond.html">NHẪN KIM CƯƠNG NỮ</a></li>
-                </ul>
-            </li>
-            <li><a href="diamond_earrings.html">BÔNG TAI KIM CƯƠNG</a></li>
-            <li><a href="diamond_bracelets.html">LẮC/VÒNG TAY KIM CƯƠNG</a></li>
-            <li><a href="diamond_pendant.html">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>
-        </ul>
+<!--        <ul class="sub-menu Product_Drop">-->
+<!--            <li class="has-child"><a href="#" data-category="NHẪN KIM CƯƠNG" data-title="NHẪN KIM CƯƠNG">NHẪN KIM CƯƠNG</a>-->
+<!--                <ul class="sub-menu">-->
+<!--                    <li><a href="#" data-category="Nhẫn Kim Cương Nam" data-title="Nhẫn Kim Cương Nam">NHẪN KIM CƯƠNG NAM</a></li>-->
+<!--                    <li><a href="#" data-category="Nhẫn Kim Cương Nữ" data-title="Nhẫn Kim Cương Nữ">NHẪN KIM CƯƠNG NỮ</a></li>-->
+<!--                </ul>-->
+<!--            </li>-->
+<!--            <li><a href="#" data-category="Bông Tai" data-title="Bông Tai Kim Cương">BÔNG TAI KIM CƯƠNG</a></li>-->
+<!--            <li><a href="#" data-category="Lắc/Vòng" data-title="Lắc/Vòng Tay Kim Cương">LẮC/VÒNG TAY KIM CƯƠNG</a></li>-->
+<!--            <li><a href="#" data-category="Mặt Dây Chuyền" data-title="Mặt Dây Chuyền Kim Cương">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>-->
+<!--        </ul>-->
     </li>
     <li><a href="">BẢNG GIÁ</a>
         <ul class="sub-menu">
@@ -51,25 +54,43 @@
     <li><a href="contact.html">LIÊN HỆ</a></li>
 </ul>
 
-<!---->
-
 <div class="wrapper">
     <div class="headline">
-        <img src="/static/images/VONG-TAY-KCTN-qq4mhewgfl0pws7r40dw60mtbjdcxd22dog9ei9zsg%201.png" alt="">
+        <img src="/static/images/TrangSucKC.png"
+             alt="">
     </div>
 </div>
+
+<div class="category-select">
+    <select id="category-selector">
+        <option value="None" data-title="Danh mục sản phẩm">DANH MỤC SẢN PHẨM</option>
+        <option value="Nhẫn Kim Cương" data-title="Nhẫn Kim Cương">NHẪN KIM CƯƠNG</option>
+        <option value="Nhẫn Kim Cương Nam" data-title="Nhẫn Kim Cương Nam">NHẪN KIM CƯƠNG NAM</option>
+        <option value="Nhẫn Kim Cương Nữ" data-title="Nhẫn Kim Cương Nữ">NHẪN KIM CƯƠNG NỮ</option>
+        <option value="Bông Tai Kim Cương" data-title="Bông Tai Kim Cương">BÔNG TAI KIM CƯƠNG</option>
+        <option value="Lắc/Vòng Kim Cương" data-title="Lắc/Vòng Kim Cương">LẮC/VÒNG TAY KIM CƯƠNG</option>
+        <option value="Mặt Dây Chuyền Kim Cương" data-title="Mặt Dây Chuyền Kim Cương">MẶT DÂY CHUYỀN KIM CƯƠNG</option>
+    </select>
+</div>
+
+<div class="category-price">
+<!--chưa biết giá ra sao-->
+</div>
+
 
 <div id="body1">
     <div class="body-top">
         <div class="body-text">
-            <h2>Lắc/Vòng tay kim cương</h2>
+            <h2 id = "content-product">Mặt dây chuyền kim cương</h2>
         </div>
     </div>
 
-    <ul class="products" id = "product-list">
-        <!--   Product    -->
+
+    <ul class="products" id="product-list">
+        <!--  Product    -->
     </ul>
 </div>
+
 
 <footer class="footer">
     <div class="grid">
@@ -115,6 +136,8 @@
 </footer>
 
 <script src="/static/js/User/about_us.js"></script>
+<script src="/static/js/User/ProductDropDown.js"></script>
 
 </body>
+
 </html>
