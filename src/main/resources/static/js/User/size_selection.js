@@ -1,8 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Function to fetch order details by ID
     const fetchOrder = () => {
-        // Get the order ID from a hidden input field or URL parameter
-        const id = document.getElementById("id").value;
+        // Extract orderId from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('orderId');
+
+        if (!id) {
+            console.error("Order ID is missing from the URL");
+            return;
+        }
+
         fetch(`http://localhost:8080/order-management/orders/${id}`)
             .then(response => {
                 if (!response.ok) {
@@ -13,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(responseData => {
                 console.log("Raw response data fetched: ", responseData);
 
-                // Check if the response data is in the expected format
                 if (!responseData || !responseData.data) {
                     console.error('Expected an object with a "data" property but received:', responseData);
                     return;
@@ -32,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => {
                 console.error("Error fetching order:", error);
-                // Optionally display an error message to the user
             });
     };
 

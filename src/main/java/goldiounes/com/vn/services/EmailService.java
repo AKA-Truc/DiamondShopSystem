@@ -13,7 +13,7 @@ public class EmailService {
     private JavaMailSender emailSender;
 
     public void sendSizeSelectionEmail(String to, int orderId) {
-        String url = "http://localhost:63342/DiamondShopSystem/src/main/resources/templates/User/size_selection.html?_ijt=gasdkjuu0algrmfuoknpg60h88&_ij_reload=RELOAD_ON_SAVE";
+        String url = "http://localhost:63342/DiamondShopSystem/src/main/resources/templates/User/size_selection.html?orderId=" + orderId;;
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
