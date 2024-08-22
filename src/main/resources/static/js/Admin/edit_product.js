@@ -1,6 +1,6 @@
 async function fetchCategories() {
     try {
-        const response = await fetch('http://localhost:8080/api/category/getAllcategory'); // Adjust the URL to your actual endpoint
+        const response = await fetch('http://localhost:8080/api/category/getAllcategory');
         if (!response.ok) {
             throw new Error('Failed to fetch categories');
         }
@@ -108,7 +108,7 @@ async function handleProductFormSubmit(event) {
 
         const data = await response.json();
         alert('Product updated successfully!');
-        window.location.href = '../sanpham/sp.html'; // Chuyển hướng sau khi cập nhật thành công
+        window.location.href = '../sanpham/sp.html';
     } catch (error) {
         console.error('Error updating product:', error);
         alert('Failed to update product');
