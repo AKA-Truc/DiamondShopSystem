@@ -26,7 +26,7 @@ public class OrderDetailTest {
 
         Category category = new Category("AAA");
 
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
 
         OrderDetail orderDetail = new OrderDetail(order, product, 20, 15);
 
@@ -51,7 +51,7 @@ public class OrderDetailTest {
 
         Category category = new Category("AAA");
 
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
 
         OrderDetail orderDetail = new OrderDetail(order, product, 20, 15);
 

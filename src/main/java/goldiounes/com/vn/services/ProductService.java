@@ -1,8 +1,11 @@
 
 package goldiounes.com.vn.services;
 
+import goldiounes.com.vn.models.dtos.OrderDTO;
+import goldiounes.com.vn.models.dtos.OrderDetailDTO;
 import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.models.entities.Category;
+import goldiounes.com.vn.models.entities.Order;
 import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.models.entities.ProductDetail;
 import goldiounes.com.vn.repositories.CategoryRepo;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,22 +38,29 @@ public class ProductService {
     private FileUploadService fileUploadService;
 
     @Autowired
-    private ProductDetailService productDetailService;
+    private OrderDetailService orderDetailService;
 
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepo.findAll();
         if (products.isEmpty()) {
             throw new RuntimeException("No products found");
         }
-        return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
+        List<Product> activeProduct = new ArrayList<>();
+        for (Product product : products) {
+            if(product.getStatus().equals("active")){
+                activeProduct.add(product);
+            }
+        }
+        return modelMapper.map(activeProduct, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
     public ProductDTO getProduct(int id) {
-        Optional<Product> existingProduct = productRepo.findById(id);
-        if (existingProduct.isEmpty()) {
-            throw new RuntimeException("Product not found");
+        Product existingProduct = productRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("No product found"));
+        if(existingProduct.getStatus().equals("inactive")){
+            throw new RuntimeException("Product is already inactive");
         }
-        return modelMapper.map(existingProduct.get(), ProductDTO.class);
+        return modelMapper.map(existingProduct, ProductDTO.class);
     }
 
     public ProductDTO createProduct(ProductDTO productDTO, MultipartFile imageFile,MultipartFile subImageURL) throws IOException {
@@ -69,6 +80,8 @@ public class ProductService {
             product.setSubImageURL(imageURL);
         }
 
+        product.setStatus("active");
+
         productRepo.save(product);
         return modelMapper.map(product, ProductDTO.class);
     }
@@ -77,14 +90,24 @@ public class ProductService {
     public boolean deleteProduct(int id) {
         Product existingProduct = productRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
-        for (ProductDetail productDetail : existingProduct.getProductDetails()) {
-            if(productDetailService.findById(productDetail.getProductDetailID()) == null){
-                throw new RuntimeException("Product detail not found");
-            }
-            productDetailService.deleteById(productDetail.getProductDetailID());
+        List<OrderDetailDTO> orderDetailDTOS = orderDetailService.findByProductId(existingProduct.getProductID());
+        if (orderDetailDTOS.isEmpty()) {
+            existingProduct.setStatus("inactive");
+            productRepo.save(existingProduct);
+            return true;
         }
-        productRepo.deleteById(existingProduct.getProductID());
-        return true;
+        else{
+            for (OrderDetailDTO orderDetailDTO : orderDetailDTOS) {
+                OrderDTO orderDTO = orderDetailDTO.getOrder();
+                if(orderDTO != null && !orderDTO.getStatus().equals("Final")){
+                    existingProduct.setStatus("inactive");
+                    productRepo.save(existingProduct);
+                    return true;
+                }
+
+            }
+            return false;
+        }
     }
 
     public void deleteById(int id) {
@@ -99,7 +122,13 @@ public class ProductService {
         if (products.isEmpty()) {
             throw new RuntimeException("No products found");
         }
-        return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
+        List<Product> activeProduct = new ArrayList<>();
+        for (Product product : products) {
+            if(product.getStatus().equals("active")){
+                activeProduct.add(product);
+            }
+        }
+        return modelMapper.map(activeProduct, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
     public ProductDTO updateProduct(int id, ProductDTO productDTO, MultipartFile imageFile, MultipartFile subImageURL) throws IOException {

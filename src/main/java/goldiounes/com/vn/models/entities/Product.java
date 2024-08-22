@@ -21,6 +21,9 @@ public class Product {
     @Column(name = "ProductName", nullable = false, unique = false)
     private String ProductName;
 
+    @Column(name = "Status", nullable = false)
+    private String Status;
+
     @Column(name = "ImageURL")
     private String ImageURL;
 
@@ -47,11 +50,12 @@ public class Product {
         //cstor
     }
 
-    public Product(Category category, String productName, String imageURL, String subImageURL, double warrantyPeriod) {
+    public Product(Category category, String productName, String imageURL, String subImageURL, double warrantyPeriod,String status) {
         Category = category;
         ProductName = productName;
         ImageURL = imageURL;
         SubImageURL = subImageURL;
         WarrantyPeriod = warrantyPeriod;
+        Status = status;
     }
 }

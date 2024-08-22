@@ -12,7 +12,7 @@ public class CartItemTest {
         User user = new User("Nhi", "098", "len@gmail.com", "527 dbp", "nhan vien");
         Cart cart = new Cart(user);
         Category category = new Category("AAA");
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
         CartItem cartItem = new CartItem(cart, product, 2);
 
         assertEquals(cart, cartItem.getCart());
@@ -22,7 +22,7 @@ public class CartItemTest {
         User user1 = new User("Nhi", "098", "len@gmail.com", "527 dbp", "nhan vien");
         Cart cart1 = new Cart(user1);
         Category category1 = new Category("AAA");
-        Product product1 = new Product(category1,"BBB","URL","SubURL",24);
+        Product product1 = new Product(category1,"BBB","URL","SubURL",24,"active");
         cartItem.setCart(cart1);
         cartItem.setProduct(product1);
         cartItem.setQuantity(5);

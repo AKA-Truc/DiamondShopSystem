@@ -11,9 +11,11 @@ import java.util.List;
 public class ProductDTO {
     private int productId;
     private String productName;
+    private String Status;
     private String imageURL;
     private String SubImageURL;
     private double warrantyPeriod;
+
 
     private CategoryDTO category;
 
