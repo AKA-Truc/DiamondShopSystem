@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('Error fetching products:', error);
                 const errorMessage = document.createElement('li');
+                errorMessage.textContent = "Không Tìm Thấy Sản Phẩm";
                 productList.appendChild(errorMessage);
             });
     };

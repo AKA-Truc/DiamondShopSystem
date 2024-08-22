@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhẫn kim cương nữ</title>
+    <title>Trang Sức Kim Cương</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/static/css/User/female_diamond.css">
+    <link rel="stylesheet" href="/static/css/User/products.css">
 </head>
 
 <body>
@@ -14,32 +15,22 @@
     <p class="center" id="center-text">hello</p>
     <p class="address">Liên hệ </p>
 </div>
+
 <div class="header">
     <div class="header-content">
         <div class="icons">
             <i class="fa-solid fa-magnifying-glass"></i>
             <a href="login.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
             <i class="fa-regular fa-heart"></i>
-            <a href="./cart.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
+            <a href="cart.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
         </div>
         <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
     </div>
 </div>
+
 <ul id="main-menu">
     <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
-    <li><a href="">TRANG SỨC KIM CƯƠNG </a>
-        <ul class="sub-menu">
-            <li class="has-child"><a href="">NHẪN KIM CƯƠNG</a>
-                <ul class="sub-menu">
-                    <li><a href="men's_diamond.html">NHẪN KIM CƯƠNG NAM</a></li>
-                    <li><a href="female_diamond.html">NHẪN KIM CƯƠNG NỮ</a></li>
-                </ul>
-            </li>
-            <li><a href="diamond_earrings.html">BÔNG TAI KIM CƯƠNG</a></li>
-            <li><a href="diamond_bracelets.html">LẮC/VÒNG TAY KIM CƯƠNG</a></li>
-            <li><a href="diamond_pendant.html">MẶT DÂY CHUYỀN KIM CƯƠNG</a></li>
-        </ul>
-    </li>
+    <li><a href="./products.html">TRANG SỨC KIM CƯƠNG </a></li>
     <li><a href="">BẢNG GIÁ</a>
         <ul class="sub-menu">
             <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
@@ -53,21 +44,41 @@
 
 <div class="wrapper">
     <div class="headline">
-        <img src="/static/images/NHAN-KIM-CUONG-NU-qq4mh7dqwwqfbwiobx4vm2j4kgef7s87on8dkal568 1.png" alt="">
+        <img src="#"
+             alt="">
     </div>
 </div>
+
+<div class="category-select">
+    <select id="category-selector">
+        <option value="None" data-title="Trang sức kim cương tự nhiên">DANH MỤC SẢN PHẨM</option>
+        <option value="Nhẫn Kim Cương" data-title="Nhẫn Kim Cương">NHẪN KIM CƯƠNG</option>
+        <option value="Nhẫn Kim Cương Nam" data-title="Nhẫn Kim Cương Nam">NHẪN KIM CƯƠNG NAM</option>
+        <option value="Nhẫn Kim Cương Nữ" data-title="Nhẫn Kim Cương Nữ">NHẪN KIM CƯƠNG NỮ</option>
+        <option value="Bông Tai Kim Cương" data-title="Bông Tai Kim Cương">BÔNG TAI KIM CƯƠNG</option>
+        <option value="Lắc/Vòng Kim Cương" data-title="Lắc/Vòng Kim Cương">LẮC/VÒNG TAY KIM CƯƠNG</option>
+        <option value="Mặt Dây Chuyền Kim Cương" data-title="Mặt Dây Chuyền Kim Cương">MẶT DÂY CHUYỀN KIM CƯƠNG</option>
+    </select>
+</div>
+
+<div class="category-price">
+<!--chưa biết giá ra sao-->
+</div>
+
 
 <div id="body1">
     <div class="body-top">
         <div class="body-text">
-            <h2>Nhẫn kim cương nữ</h2>
+            <h2 id = "content-product"></h2>
         </div>
     </div>
 
-    <ul class="products" id = "product-list">
-        <!--   product    -->
+
+    <ul class="products" id="product-list">
+        <!--  Product    -->
     </ul>
 </div>
+
 
 <footer class="footer">
     <div class="grid">
@@ -113,7 +124,8 @@
 </footer>
 
 <script src="/static/js/User/about_us.js"></script>
-<script src="/static/js/User/female_diamond.js"></script>
+<script src="/static/js/User/ProductDropDown.js"></script>
+
 </body>
 
 </html>
