@@ -4,7 +4,9 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.models.entities.Category;
 import goldiounes.com.vn.models.entities.Product;
+import goldiounes.com.vn.models.entities.ProductDetail;
 import goldiounes.com.vn.repositories.CategoryRepo;
+import goldiounes.com.vn.repositories.ProductDetailRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -30,6 +32,9 @@ public class ProductService {
 
     @Autowired
     private FileUploadService fileUploadService;
+
+    @Autowired
+    private ProductDetailService productDetailService;
 
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepo.findAll();
@@ -70,11 +75,15 @@ public class ProductService {
 
 
     public boolean deleteProduct(int id) {
-        Optional<Product> existingProduct = productRepo.findById(id);
-        if (existingProduct.isEmpty()) {
-            throw new RuntimeException("Product not found");
+        Product existingProduct = productRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        for (ProductDetail productDetail : existingProduct.getProductDetails()) {
+            if(productDetailService.findById(productDetail.getProductDetailID()) == null){
+                throw new RuntimeException("Product detail not found");
+            }
+            productDetailService.deleteById(productDetail.getProductDetailID());
         }
-        productRepo.delete(existingProduct.get());
+        productRepo.deleteById(existingProduct.getProductID());
         return true;
     }
 
@@ -93,14 +102,35 @@ public class ProductService {
         return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
-    public ProductDTO updateProduct(int id,ProductDTO productDTO) {
-        Product product = modelMapper.map(productDTO, Product.class);
+    public ProductDTO updateProduct(int id, ProductDTO productDTO, MultipartFile imageFile, MultipartFile subImageURL) throws IOException {
         Product existingProduct = productRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Ánh xạ các trường từ DTO sang entity nhưng không ghi đè các trường imageURL và subImageURL
+        Product product = modelMapper.map(productDTO, Product.class);
+
+        // Cập nhật category
+        Category existingCategory = categoryRepo.findById(product.getCategory().getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        existingProduct.setCategory(existingCategory);
+
+        // Chỉ cập nhật imageURL nếu ảnh mới được truyền vào
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageURL = fileUploadService.uploadImage(imageFile);
+            existingProduct.setImageURL(imageURL);
+        }
+
+        // Chỉ cập nhật subImageURL nếu ảnh mới được truyền vào
+        if (subImageURL != null && !subImageURL.isEmpty()) {
+            String subImageUrl = fileUploadService.uploadImage(subImageURL);
+            existingProduct.setSubImageURL(subImageUrl);
+        }
+
         existingProduct.setProductName(product.getProductName());
         existingProduct.setWarrantyPeriod(product.getWarrantyPeriod());
-        existingProduct.setImageURL(product.getImageURL());
         productRepo.save(existingProduct);
+
         return modelMapper.map(existingProduct, ProductDTO.class);
     }
+
 }
