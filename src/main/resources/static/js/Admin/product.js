@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Document is ready.');
 
-    // Function to fetch and display products
     const fetchAndDisplayProducts = () => {
         fetch('http://localhost:8080/api/product/getAllProduct')
             .then(response => {
@@ -93,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching products:', error));
     };
 
-    // Initial fetch and display
     fetchAndDisplayProducts();
 
     // Search functionality
