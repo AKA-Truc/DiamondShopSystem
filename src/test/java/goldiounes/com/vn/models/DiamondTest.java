@@ -35,7 +35,7 @@ class DiamondTest {
         assertEquals("IF", diamond.getClarity());
         assertEquals("Excellent", diamond.getCut());
         assertEquals("Africa", diamond.getOrigin());
-        assertEquals(10000000, diamond.getDiamondID());
+        assertEquals(10000000, diamond.getPrice());
     }
 
 }

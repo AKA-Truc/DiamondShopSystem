@@ -12,6 +12,7 @@ import goldiounes.com.vn.repositories.OrderRepo;
 import goldiounes.com.vn.repositories.ProductDetailRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,17 +76,6 @@ public class OrderDetailService {
         Product existingProduct = productRepo.findById(orderDetail.getProduct().getProductID())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-//        ProductDTO indexProduct = modelMapper.map(existingProduct, ProductDTO.class);
-//        ProductDetailDTO productDetailDTO = productDetailService.getProductDetailBySize(orderDetail.getSize(),indexProduct);
-//
-//        ProductDetail updateInventory = modelMapper.map(productDetailDTO, ProductDetail.class);
-//        if(updateInventory.getInventory() >= orderDetail.getQuantity()){
-//            updateInventory.setInventory(updateInventory.getInventory()-orderDetail.getQuantity());
-//            productDetailRepo.save(updateInventory);
-//        }
-//        else{
-//            throw new RuntimeException("Not enough inventory");
-//        }
         orderDetail.setSize(0);
         orderDetail.setOrder(existingOrder);
         orderDetail.setProduct(existingProduct);
@@ -135,5 +125,12 @@ public class OrderDetailService {
 
         OrderDetail savedOrderDetail = orderDetailRepo.save(existingOrderDetail);
         return modelMapper.map(savedOrderDetail, OrderDetailDTO.class);
+    }
+    public List<OrderDetailDTO> findByProductId(int productId) {
+        List<OrderDetail> orderDetails = orderDetailRepo.findByProductId(productId);
+        if (!orderDetails.isEmpty()) {
+            throw new RuntimeException("No order found with product id " + productId);
+        }
+        return modelMapper.map(orderDetails, new TypeToken<List<OrderDetailDTO>>() {}.getType());
     }
 }

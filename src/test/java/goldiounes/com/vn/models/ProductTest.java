@@ -22,7 +22,7 @@ public class ProductTest {
     @Test
     void testConstructor(){
         Category category = new Category("AAA");
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
 
         assertNotNull(product);
     }
@@ -31,7 +31,7 @@ public class ProductTest {
     void testGettersAndSetters() {
         Category category = new Category("AAA");
 
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
 
         assertNotNull(product.getCategory());
         assertEquals("AAA",product.getCategory().getCategoryName());

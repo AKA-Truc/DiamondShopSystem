@@ -13,7 +13,7 @@ public class WarrantyTest {
     @Test
     void testGetterAndSetter() {
         Category category = new Category("AAA");
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
         User u = new User();
 
         // Set the start date for the warranty period (2024/5/1)
@@ -35,7 +35,7 @@ public class WarrantyTest {
         // Testing setters
         User u1 = new User();
         Category category1 = new Category("aaa");
-        Product product1 = new Product(category,"BBB","URL","SubURL",24);
+        Product product1 = new Product(category1,"BBB","URL","SubURL",24,"active");
 
         // Reset calendar and set a different warranty period
         Calendar calendar1 = Calendar.getInstance();
@@ -59,7 +59,7 @@ public class WarrantyTest {
     @Test
     void testConstructor(){
         Category category = new Category("AAA");
-        Product product = new Product(category,"BBB","URL","SubURL",24);
+        Product product = new Product(category,"BBB","URL","SubURL",24,"active");
         User u = new User();
 
         Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
