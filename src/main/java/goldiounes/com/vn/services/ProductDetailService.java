@@ -32,6 +32,9 @@ public class ProductDetailService {
     private DiamondDetailRepo diamondDetailRepo;
 
     @Autowired
+    private DiamondDetailService diamondDetailService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public List<ProductDetailDTO> findAllByProductId(int productId) {
@@ -105,6 +108,9 @@ public class ProductDetailService {
     public boolean deleteById(int id){
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No productdetail found"));
+        for (DiamondDetail diamondDetail : existingProductDetail.getDiamondDetails()){
+            diamondDetailService.deleteById(diamondDetail.getDiamond().getDiamondID());
+        }
         productDetailRepo.deleteById(existingProductDetail.getProductDetailID());
         return true;
     }

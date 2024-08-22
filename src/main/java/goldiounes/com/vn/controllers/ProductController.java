@@ -30,8 +30,8 @@ public class ProductController {
 
     @PostMapping("/products")
     public ResponseEntity<ResponseWrapper<ProductDTO>> createProduct(
-            @RequestParam("productDTO") String productDTOJson,
-            @RequestParam("imageFile") MultipartFile imageFile,
+            @RequestParam("product") String productDTOJson,
+            @RequestParam("imageURL") MultipartFile imageFile,
             @RequestParam("subImageURL") MultipartFile subImageURL) {
 
         try {
@@ -84,19 +84,31 @@ public class ProductController {
             response = new ResponseWrapper<>("Product not found", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-    }
 
+    }
     @PutMapping("/products/{id}")
-    public ResponseEntity<ResponseWrapper<ProductDTO>> updateProduct(@PathVariable int id, @RequestBody ProductDTO productDTO) {
-        ProductDTO updatedProduct = productService.updateProduct(id, productDTO);
-        if (updatedProduct != null) {
-            ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product updated successfully", updatedProduct);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ResponseWrapper<ProductDTO>> updateProduct(
+            @PathVariable int id,
+            @RequestParam("product") String productDTOJson,
+            @RequestParam("imageURL") MultipartFile imageFile,
+            @RequestParam("subImageURL") MultipartFile subImageURL) {
+
+        try {
+            ProductDTO productDTO = objectMapper.readValue(productDTOJson, ProductDTO.class);
+            ProductDTO updatedProduct = productService.updateProduct(id, productDTO, imageFile, subImageURL);
+            if (updatedProduct != null) {
+                ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product updated successfully", updatedProduct);
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Product not found", null);
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            ResponseWrapper<ProductDTO> response = new ResponseWrapper<>("Error updating product: " + e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("products/{id}/productdetails")
     public ResponseEntity<ResponseWrapper<List<ProductDetailDTO>>> getAllProductDetails(@PathVariable int id) {
