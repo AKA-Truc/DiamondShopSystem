@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Sản Phẩm Mới</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="/static/css/Admin/add_product.css">
     <script>
         function alertFeature() {
@@ -27,16 +27,14 @@
                 <li><a href="./add_new_employees.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
             </ul>
         </li>
-
         <li class="submenu">
             <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
             <ul>
                 <li><a href="./product.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý sản phẩm</a></li>
                 <li><a href="./edit_product.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa sản phẩm</a></li>
-                <li><a href="./add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
+                <li><a href="add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
             </ul>
         </li>
-
         <li class="submenu">
             <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
             <ul>
@@ -45,7 +43,6 @@
                 <li><a href="./add_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Thêm mã giảm giá</a></li>
             </ul>
         </li>
-
         <li class="submenu">
             <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
             <ul>
@@ -56,7 +53,6 @@
                 <li><a href="./add_order.html"><ion-icon name="bag-add-outline"></ion-icon>Tạo đơn hàng</a></li>
             </ul>
         </li>
-
         <li class="submenu">
             <a href="#"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
             <ul>
@@ -68,6 +64,7 @@
         <li class="submenu">
             <a href="#"><ion-icon name="person-circle-outline"></ion-icon> Tài khoản</a>
             <ul>
+
                 <li><a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
                 <script>
                     function logout() {
@@ -102,12 +99,11 @@
         </div>
     </div>
 </div>
-
 <div class="navbar-separator"></div>
 <div class="main">
     <!-- Content goes here -->
 </div>
-
+<!---->
 <div class="body1">
     <div class="wrapper">
         <form id="myForm" enctype="multipart/form-data">
@@ -165,6 +161,9 @@
         </form>
     </div>
 </div>
+<!---->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script src="/static/js/Admin/add_product.js"></script>
 </body>
