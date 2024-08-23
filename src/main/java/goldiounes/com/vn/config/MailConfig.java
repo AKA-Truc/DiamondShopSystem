@@ -10,6 +10,7 @@ import java.util.Properties;
 
 @Configuration
 public class MailConfig {
+
     @Value("${mailServer.host}")
     private String host;
 
@@ -23,7 +24,7 @@ public class MailConfig {
     private String password;
 
     @Value("${mailServer.isSSL}")
-    private String isSSL;
+    private boolean isSSL;
 
     @Bean
     public JavaMailSender getJavaMailSender() {
@@ -39,7 +40,7 @@ public class MailConfig {
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.ssl.enable", isSSL);
+        props.put("mail.smtp.ssl.enable", String.valueOf(isSSL));
         props.put("mail.smtp.from", email);
         props.put("mail.debug", "true");
         props.put("mail.smtp.ssl.trust", "*");
