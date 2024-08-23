@@ -46,6 +46,14 @@ public class ProductDetailService {
         }
     }
 
+    public boolean checkProductDetail(int productId) {
+        List<ProductDetail> productDetails = productDetailRepo.findByProductId(productId);
+        if (productDetails.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     public ProductDetailDTO findById(int id) {
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No ProductDetail found"));

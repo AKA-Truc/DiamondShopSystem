@@ -4,12 +4,10 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dtos.OrderDTO;
 import goldiounes.com.vn.models.dtos.OrderDetailDTO;
 import goldiounes.com.vn.models.dtos.ProductDTO;
+import goldiounes.com.vn.models.dtos.ProductDetailDTO;
 import goldiounes.com.vn.models.entities.Category;
-import goldiounes.com.vn.models.entities.Order;
 import goldiounes.com.vn.models.entities.Product;
-import goldiounes.com.vn.models.entities.ProductDetail;
 import goldiounes.com.vn.repositories.CategoryRepo;
-import goldiounes.com.vn.repositories.ProductDetailRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -20,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -36,6 +33,9 @@ public class ProductService {
 
     @Autowired
     private FileUploadService fileUploadService;
+
+    @Autowired
+    private ProductDetailService productDetailService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -117,7 +117,7 @@ public class ProductService {
         productRepo.deleteById(id);
     }
 
-    public List<ProductDTO> findByCategory(String keyWord) {
+    public List<ProductDTO> findByCategoryAndPrice(String keyWord, double minPrice, double maxPrice) {
         List<Product> products = productRepo.findByCategoryKeyWord(keyWord);
         if (products.isEmpty()) {
             throw new RuntimeException("No products found");
@@ -125,7 +125,12 @@ public class ProductService {
         List<Product> activeProduct = new ArrayList<>();
         for (Product product : products) {
             if(product.getStatus().equals("active")){
-                activeProduct.add(product);
+                if(productDetailService.checkProductDetail(product.getProductID())){
+                    ProductDetailDTO productDetailDTO = productDetailService.getMinProductDetailByProductId(product.getProductID());
+                    if(minPrice <= productDetailDTO.getSellingPrice() && productDetailDTO.getSellingPrice() <= maxPrice){
+                        activeProduct.add(product);
+                    }
+                }
             }
         }
         return modelMapper.map(activeProduct, new TypeToken<List<ProductDTO>>() {}.getType());

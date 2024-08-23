@@ -46,9 +46,13 @@ public class ProductController {
     }
 
 
-    @GetMapping("/products/category/{keyword}")
-    public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getProductsByKeyword(@PathVariable String keyword) {
-        List<ProductDTO> products = productService.findByCategory(keyword);
+    @GetMapping("products/category/{keyword}/{minPrice}/{maxPrice}")
+    public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getProductsByKeyword(
+            @PathVariable String keyword,
+            @PathVariable double minPrice,
+            @PathVariable double maxPrice
+    ) {
+        List<ProductDTO> products = productService.findByCategoryAndPrice(keyword, minPrice, maxPrice);
         ResponseWrapper<List<ProductDTO>> response = new ResponseWrapper<>("Products retrieved successfully", products);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
