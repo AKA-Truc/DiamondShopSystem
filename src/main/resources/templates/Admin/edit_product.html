@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm sản phẩm</title>
+    <title>Chỉnh sửa sản phẩm</title>
     <link rel="stylesheet" href="/static/css/Admin/edit_product.css">
     <script>
         function alertFeature() {
@@ -103,23 +103,13 @@
 <div class="main">
     <!-- Content goes here -->
 </div>
-
+<!---->
 <div class="body1">
-    <div class="wrapper" >
-        <!-- ảnh -->
-        <div class="image-form" style="margin-left: -280px; margin-bottom: -303px; ">
-            <form id="imageForm">
-                <div class="field input">
-                    <label for="image">Ảnh sản phẩm</label>
-                    <img id="productImage" src="" alt="Product Image" style="max-width: 250px; max-height: 250px; ">
-                </div>
-            </form>
-        </div>
-        <!-- ảnh -->
+    <div class="wrapper">
         <form id="myForm" enctype="multipart/form-data">
             <div class="top-fields">
                 <div class="field input">
-                    <label for="CategoryID">Loại Kim Cương</label>
+                    <label for="CategoryID">Loại Sản Phẩm</label>
                     <select id="CategoryID" name="CategoryID" class="styled-select">
                         <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
                     </select>
@@ -131,31 +121,36 @@
             </div>
 
             <div class="middle-fields">
-<!--                <div class="field input">-->
-<!--                    <label for="Brand">Thương Hiệu</label>-->
-<!--                    <input type="text" id="Brand" name="Brand" placeholder="Nhập Tên Thương Hiệu" required>-->
-<!--                </div>-->
+                <!--                <div class="field input">-->
+                <!--                    <label for="Brand">Thương Hiệu</label>-->
+                <!--                    <input type="text" id="Brand" name="Brand" placeholder="Nhập Tên Thương Hiệu" required>-->
+                <!--                </div>-->
 
                 <div class="field input">
                     <label for="Price">Giá</label>
                     <input type="number" id="Price" name="Price" placeholder="Nhập Giá Tiền" required>
                 </div>
 
-<!--                <div class="field input">-->
-<!--                    <label for="Inventory">Số Lượng Tồn Kho</label>-->
-<!--                    <input type="number" id="Inventory" name="Inventory" placeholder="Nhập Số Lượng" required>-->
-<!--                </div>-->
+                                <div class="field input">
+                                    <label for="Inventory">Số Lượng Tồn Kho</label>
+                                    <input type="number" id="Inventory" name="Inventory" placeholder="Nhập Số Lượng" required>
+                                </div>
             </div>
 
-<!--            <div class="form-row">-->
-<!--                <div class="field input">-->
-<!--                    <label for="Volume">Dung Tích</label>-->
-<!--                    <input type="number" id="Volume" name="Volume" placeholder="Nhập Dung Tích" required>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="form-row">
+                <div class="field input">
+                    <label for="Warranty">Thời hạn bảo hành</label>
+                    <input type="date" id="Warranty" name="Warranty" required>
+                </div>
+            </div>
 
             <div class="field input">
-                <label for="image">Ảnh Sản Phẩm</label>
+                <label for="image">Ảnh sản phẩm</label>
+                <input type="file" id="image" name="image">
+            </div>
+
+            <div class="field input">
+                <label for="image">Ảnh sản phẩm 2</label>
                 <input type="file" id="image" name="image">
             </div>
 
@@ -170,11 +165,12 @@
             </div>
         </form>
     </div>
-</div>
 
+</div>
+<!---->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src = "/static/js/Admin/edit_product.js"></script>
+<script src="/static/js/Admin/edit_product.js"></script>
 
 </body>
 </html>
