@@ -28,6 +28,9 @@ public class User {
     @Column(name = "Address")
     private String Address;
 
+    @Column(name = "Gender")
+    private String Gender;
+
     @Column(name = "Role", nullable = false)
     private String Role;
 
@@ -51,11 +54,12 @@ public class User {
         //Constructor
     }
 
-    public User(String userName, String password, String email, String address, String role) {
+    public User(String userName, String password, String email, String address, String role, String gender) {
         UserName = userName;
         Password = password;
         Email = email;
         Address = address;
         Role = role;
+        Gender = gender;
     }
 }

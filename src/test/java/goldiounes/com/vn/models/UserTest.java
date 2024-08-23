@@ -9,30 +9,33 @@ public class UserTest {
 
     @Test
     void testGetterAndSetters() {
-        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer");
+        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer","female");
 
         assertEquals("John", user.getUserName());
         assertEquals("12345", user.getPassword());
         assertEquals("abc@gmail.com", user.getEmail());
         assertEquals("New York", user.getAddress());
         assertEquals("Customer", user.getRole());
+        assertEquals("female", user.getGender());
 
         user.setUserName("Lisa");
         user.setPassword("54321");
         user.setEmail("Lisa@gmail.com");
         user.setAddress("Paris");
         user.setRole("Sale Staff");
+        user.setGender("Male");
 
         assertEquals("Lisa", user.getUserName());
         assertEquals("54321", user.getPassword());
         assertEquals("Lisa@gmail.com", user.getEmail());
         assertEquals("Paris", user.getAddress());
         assertEquals("Sale Staff", user.getRole());
+        assertEquals("Male", user.getGender());
 
     }
 
     void testConstructor() {
-        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer");
+        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female");
 
         assertNotNull(user);
 
@@ -41,6 +44,7 @@ public class UserTest {
         assertEquals("abc@gmail.com", user.getEmail());
         assertEquals("New York", user.getAddress());
         assertEquals("Customer", user.getRole());
+        assertEquals("Female", user.getGender());
     }
 
     void testDefaultConstructor() {
@@ -52,5 +56,6 @@ public class UserTest {
         assertNull(user.getEmail());
         assertNull(user.getAddress());
         assertNull(user.getRole());
+        assertNull(user.getGender());
     }
 }

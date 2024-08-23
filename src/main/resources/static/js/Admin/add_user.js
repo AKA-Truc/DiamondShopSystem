@@ -8,7 +8,7 @@ async function submitForm(event) {
     const formData = new FormData(form);
 
     try {
-        const response = await fetch('http://localhost:8080/api/customer/createCustomer', {
+        const response = await fetch('http://localhost:8080/user-management/users', {
             method: 'POST',
             body: formData,
             mode: 'cors',
@@ -21,7 +21,7 @@ async function submitForm(event) {
         const result = await response.json();
         console.log('Server response:', result);
         alert('Khách hàng đã được thêm thành công.');
-        window.location.href = '../quanly/QLKH.html';
+        window.location.href = '/templates/Admin/human_resource_management.html';
     } catch (error) {
         console.error('Error saving data:', error);
         alert('Đã xảy ra lỗi khi thêm khách hàng: ' + error.message);
@@ -32,7 +32,7 @@ async function submitForm(event) {
 function cancelForm(event) {
     event.preventDefault(); // Prevent the default form cancellation action
     if (confirm('Bạn có chắc muốn hủy không?')) {
-        window.location.href = '../quanly/QLKH.html'; // Change to your desired redirect URL
+        window.location.href = '/templates/Admin/human_resource_management.html'; // Change to your desired redirect URL
     }
 }
 
