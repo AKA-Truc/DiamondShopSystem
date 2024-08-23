@@ -180,15 +180,14 @@ option {
     display: flex;
 }
 .field {
-    margin: 20px;
-
+    margin: 25px;
 }
 .form {
     display: flex;
 }
 .field {
-    flex: 1;
-    margin: 10px;
+    flex: 1px;
+    margin: 50px;
     position: relative;
 }
 .top-fields, .middle-fields, .form-row {
@@ -198,7 +197,7 @@ option {
 
 .field label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 28px;
     font-weight: bold;
 }
 .field input {
