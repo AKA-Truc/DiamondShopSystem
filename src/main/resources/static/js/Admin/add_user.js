@@ -4,16 +4,26 @@ let addedRows = [];
 async function submitForm(event) {
     event.preventDefault(); // Prevent the default form submission action
 
-    const form = document.getElementById('customerForm');
+    const form = document.getElementById('userform');
     const formData = new FormData(form);
 
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);  // Kiểm tra xem email có giá trị hay không
+        jsonData[key] = value;
+    });
+    console.log('Final JSON Data:', jsonData);
+
+    console.log(jsonData);
     try {
         const response = await fetch('http://localhost:8080/user-management/users', {
             method: 'POST',
-            body: formData,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData),
             mode: 'cors',
         });
-
         if (!response.ok) {
             throw new Error('Failed to save data');
         }
@@ -38,7 +48,7 @@ function cancelForm(event) {
 
 // Attach event listeners to the buttons once the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('customerForm').addEventListener('submit', submitForm);
+    document.getElementById('userform').addEventListener('submit', submitForm);
     document.getElementById('cancelButton').addEventListener('click', cancelForm);
 });
 //ràng buộc token
