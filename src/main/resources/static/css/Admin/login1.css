@@ -16,11 +16,19 @@ a{
     width: 100%; padding: 8px;
 }
 
+/*.left-col{*/
+/*    flex: 1;*/
+/*    background: url('/static/Adimages/nuoc_hoa1.jpeg')center/cover no-repeat;*/
+/*    width: 100%;*/
+/*    height: 98vh;*/
+/*    box-shadow: 0px 0px 17px 15px #F4FFF3;*/
+/*}*/
+
 #wrapper{
     min-height: 95vh;
     display: flex;
     justify-content: right;
-    /*align-items: right;*/
+    align-items: right;
 }
 
 #form-login{
@@ -109,39 +117,41 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10vh;
+    height: 10vh; /* Chiều cao của form, có thể sửa đổi theo ý muốn */
 }
 
+/* Thiết lập các kiểu cho phần chọn và nhãn */
 .form-role label {
     margin-top: 10px;
     margin-bottom: 1px;
     font-weight: bold;
     font-size: 20px;
     text-align: center;
-    display: block;
+    display: block; /* Hiển thị nhãn dưới dạng block để xuống dòng */
     position: relative;
     margin-right: 20px;
 }
 
 
 .form-role select {
-    padding: 10px 0px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 40%;
+    padding: 10px 0px; /* Tạo khoảng cách giữa viền và văn bản bên trong */
+    border-radius: 4px; /* Bo tròn góc */
+    border: 1px solid #ccc; /* Viền xám nhạt */
+    width: 40%; /* Độ rộng 100% của phần chọn */
     font-size: 20px;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
 
+/* Tạo hiệu ứng focus cho phần chọn */
 .form-role select:focus {
-    outline: none;
-    border-color: #0487f3;
-    box-shadow: 0 0 5px rgba(103, 178, 248, 0.5);
+    outline: none; /* Loại bỏ đường viền xung quanh khi focus */
+    border-color: #0487f3; /* Thay đổi màu viền khi focus */
+    box-shadow: 0 0 5px rgba(103, 178, 248, 0.5); /* Hiển thị shadow khi focus */
 }
 
 .border {
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* 1px là độ dày của đường, solid là kiểu đường, #000 là màu sắc của đường (mã màu đen) */
     margin-top: 20px;
 }
