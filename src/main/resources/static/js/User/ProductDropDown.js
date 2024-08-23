@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <img src="${product.subImageURL || 'https://via.placeholder.com/150'}" alt="back">
                                         </div>
                                     </a>
-                                    <a href="#" class="buy-now">Xem chi tiết</a>
+                                    <a href="/static/templates/User/detail.html/${product.productId}" class="buy-now">Xem chi tiết</a>
                                 </div>
                                 <div class="product-info">
                                     <a href="#" class="product-name">${product.productName || 'Tên sản phẩm'}</a>
