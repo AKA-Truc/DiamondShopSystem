@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Khách Hàng</title>
+    <title>Thêm Người Dùng</title>
     <link rel="stylesheet" href="/static/css/Admin/add_user.css">
     <script>
         function alertFeature() {
             alert('Tính năng đang được được phát triển');
         }
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectElement = document.getElementById('genderSelect');
+            const hiddenInputElement = document.getElementById('Gender');
+
+            selectElement.addEventListener('change', function() {
+                hiddenInputElement.value = this.value;
+            });
+        });
     </script>
 </head>
 <body>
@@ -16,15 +27,15 @@
 <div class="sidebar">
     <h2>GOLDIOUNES SHOP</h2>
     <ul class="main-menu">
-        <li><a href="./menu.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
+        <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
         <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
             <ul>
                 <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
                 <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm khách hàng mới </a></li>
                 <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
                 <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
-                <li><a href="./personnel_editing.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
-                <li><a href="./add_new_employees.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
+                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
+                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
             </ul>
         </li>
         <li class="submenu">
@@ -103,15 +114,13 @@
 <div class="main">
     <!-- Content goes here -->
 </div>
-
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</div>
 
 <!--  -->
 
 <div class="body1">
     <div class="wrapper">
-        <form id="customerForm">
+        <form id="userform">
             <div class="top-fields">
                 <div class="field input">
                     <label for="Name">Họ và Tên</label>
@@ -119,20 +128,38 @@
                 </div>
             </div>
             <div class="field input">
-                <label for="Phone">Số Điện Thoại</label>
-                <input type="tel" id="Phone" name="Phone" placeholder="Vui lòng nhập Số Điện Thoại" required>
+                <label for="Email">Email</label>
+                <input type="tel" id="Email" name="Email" placeholder="Vui lòng nhập Email" required>
             </div>
-            <label for="Gender" style="display: -ms-flexbox; padding-left: 10px;" >Giới Tính</label>
+            <div class="field input">
+                <label for="Address">Địa chỉ</label>
+                <input type="tel" id="Address" name="Address" placeholder="Vui lòng nhập địa chỉ" required>
+            </div>
+            <div class="field input" style="margin-bottom: 20px;">
+                <label for="Role" style="display: inline-block;">Chức Vụ</label>
+                <select id="Role" style="margin-left:2%;" name="Role">
+                    <option value="Customer">Khách Hàng</option>
+                    <option value="Manager">Quản Lý Cửa Hàng</option>
+                    <option value="Sale Staff">Nhân Viên Bán Hàng</option>
+                    <option value="Delivery Staff">Nhân Viên Vận Chuyển</option>
+                </select>
+            </div>
+            <label for="Gender" style="margin-left: 10px; font-weight: bold;">Giới Tính</label>
             <input type="radio" name="Gender" id = "Gender" value="Nam" > Nam
             <input type="radio" name="Gender" id = "Gender1" value="Nữ"> Nữ
+            </select>
             <div class="button">
-                <input type="submit" value="Thêm " class="save">
-                <input type="button" id="cancelButton" value="Hủy" class="cancel">
+                <input type="submit" value="Thêm nhân viên" class="save">
+                <input type="button" value="Hủy" class="cancel">
             </div>
         </form>
     </div>
 </div>
 
-<script src="/static/js/Admin/add_user.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src = "/static/js/Admin/add_user.js"></script>
 </body>
 </html>
+
+

@@ -153,75 +153,31 @@ ion-icon {
 }
 
 .body1 {
-    display: flex;
-    justify-content: center; /* Đẩy khung về phía bên phải */
-    margin: 80px;
+    display: flex; /* Đẩy khung về phía bên phải */
+    margin: 75px;
+    margin-left: 435px;
     height: 80vh;
-    margin-left: 362px;
     align-items: center; /* Căn giữa khung theo chiều dọc */
 }
 .wrapper {
-    width: 60%; /* Chiều rộng của khung */
-    max-width: 1000px; /* Giới hạn chiều rộng tối đa của khung */
-    height:250px;
+    width: 120%; /* Chiều rộng của khung */
+    max-width: 900px; /* Giới hạn chiều rộng tối đa của khung */
+    height:420px;
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff; /* Màu nền của khung */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng */
-    margin-bottom: 135px;
+    margin-bottom: 100px;
+
 }
 
-.profile-picture {
-    display: flex;
-    flex-direction:column;
-    width: 20%;
-    max-width: 160px;
-    padding: 30px;
-    height:150px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-right: 10px;
-    margin-left: auto;
-    margin-bottom: 385px;
-    justify-content:center;
-    align-items: center;
-}
-.profile-picture img {
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    margin-bottom: 9px;
-    align-items: center;
-}
-input[type="file"] {
-    display: none;
-}
-.upload-btn {
-    padding: 10px 30px; /* Tăng kích thước của nút */
-    font-size: 14px; /* Tăng kích thước chữ */
-    text-align: center;
-    border: 1px solid #89948a;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #080808;
-}
-
-.upload-btn:hover {
-    background-color: #89948a;
-}
-
-.form {
-    display: flex;
-}
 .field {
     flex: 1;
     margin: 10px;
     position: relative;
 }
-.top-fields, .middle-fields {
+.top-fields {
     display: flex;
     justify-content:space-around;
 }
@@ -239,6 +195,18 @@ input[type="file"] {
     box-sizing: border-box;
     transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
 }
+
+.field.input select {
+    width: 25%;
+    padding: 8px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px;
+    background-color: #fff; /* White background */
+    font-size: 14px;
+    color: #333; /* Dark gray text color */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+
+}
 .field input:focus {
     border-color: #000; /* Đổi màu viền khi focus */
     outline: none; /* Bỏ viền outline mặc định */
@@ -246,7 +214,7 @@ input[type="file"] {
 .button {
     display: flex;
     justify-content: flex-start;
-    margin: 20px 10px;
+    margin: 30px 10px;
 }
 .button input {
     padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
@@ -261,14 +229,11 @@ input[type="file"] {
     color: #fff;
 }
 .button input.cancel  {
-    background-color: #eae9e0;
-    color: #476730;
-    font-weight: 600;
+    background-color: #9d9495;
+    color: #fff;
 }
-.button input.save:hover {
-    background-color: #324922;
-}
+.button input.save:hover,
 .button input.cancel:hover {
-    background-color: #d4d3c9;
+    background-color: #89948a;
 }
 

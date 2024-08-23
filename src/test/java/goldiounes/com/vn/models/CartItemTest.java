@@ -9,7 +9,7 @@ public class CartItemTest {
 
     @Test
     void testGetterAndSetter() {
-        User user = new User("Nhi", "098", "len@gmail.com", "527 dbp", "nhan vien");
+        User user = new User("Nhi", "098", "len@gmail.com", "527 dbp", "nhan vien", "Female");
         Cart cart = new Cart(user);
         Category category = new Category("AAA");
         Product product = new Product(category,"BBB","URL","SubURL",24,"active");
@@ -19,7 +19,7 @@ public class CartItemTest {
         assertEquals(product, cartItem.getProduct());
         assertEquals(2, cartItem.getQuantity());
 
-        User user1 = new User("Nhi", "098", "len@gmail.com", "527 dbp", "nhan vien");
+        User user1 = new User("Nhi", "098", "len@gmail.com", "527 dbp", "nhan vien", "Female");
         Cart cart1 = new Cart(user1);
         Category category1 = new Category("AAA");
         Product product1 = new Product(category1,"BBB","URL","SubURL",24,"active");
