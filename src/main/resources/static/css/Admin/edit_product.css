@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f3ef
+    background-color: #f4f3ef;
 }
 
 .sidebar {
@@ -30,7 +30,7 @@ body {
 }
 
 .main-menu {
-    list-style-type: none; /* Loại bỏ bullet */
+    list-style-type: none;
     padding: 0;
 }
 
@@ -51,29 +51,30 @@ body {
 /* Submenu sổ xuống */
 .submenu {
     position: relative;
-    display: block;
+    display: block; /* Hiển thị submenu dưới dạng block */
 }
 
+/* Submenu list - Loại bỏ bullet */
 .submenu ul {
     position: absolute;
-    top: 100%;
+    top: 100%; /* Bắt đầu từ dưới cùng của item menu */
     left: 0;
-    width: 100%;
+    width: 100%; /* Chiều rộng bằng với menu cha */
     background-color: #f2f4ef;
-    list-style-type: none;
-    padding: 0;
+    list-style-type: none; /* Loại bỏ bullet */
+    padding: 0; /* Loại bỏ padding mặc định */
     transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
-    z-index: 1000;
+    transform: translateY(10px); /* Di chuyển nhẹ xuống dưới */
+    z-index: 1000; /* Đảm bảo submenu nằm trên các phần tử khác */
 }
 
 .submenu:hover ul {
     display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(0); /* Khi hover, submenu di chuyển về vị trí ban đầu */
 }
 
 /* Submenu link */
@@ -81,7 +82,7 @@ body {
     padding: 15px 25px;
     color: #000000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: block;
+    display: block; /* Đảm bảo liên kết chiếm toàn bộ chiều rộng */
 }
 
 .submenu ul li a:hover {
@@ -140,7 +141,7 @@ ion-icon {
 
 /* Horizontal line below navbar */
 .navbar-separator {
-    width: calc(100% - 280px);
+    width: calc(100% - 280px); /* Full width minus sidebar */
     margin-left: 280px;
     height: 1px;
     background-color: #819c71e7;
@@ -148,46 +149,49 @@ ion-icon {
 
 
 select {
-    font-size: 18px;
-    padding: 10px;
+    font-size: 18px; /* Tăng kích thước phông chữ */
+    padding: 10px; /* Tăng khoảng cách bên trong */
     width: 100%;
     box-sizing: border-box;
 }
 
+/* Thay đổi kích thước và kiểu các tùy chọn */
 option {
-    font-size: 18px;
-    padding: 10px;
+    font-size: 18px; /* Tăng kích thước phông chữ */
+    padding: 10px; /* Tăng khoảng cách bên trong */
 }
 
 
 .body1 {
     display: flex;
+    justify-content:flex-start; /* Đẩy khung về phía bên phải */
     margin: 70px;
     height: 40vh;
-    align-items: center;
+    align-items: center; /* Căn giữa khung theo chiều dọc */
     margin-left: 160px;
 }
 
 .wrapper {
-    width: 90%;
+    width: 80%;
     max-width: 9000px;
     height: 315px;
-    padding: 120px;
-    margin-left: 370px;
-    align-items: center;
+    padding: 250px;
+    margin-left: 160px;
+    align-items: center; /* Căn giữa khung theo chiều dọc */
 }
 .form {
     display: flex;
 }
 .field {
-    margin: 25px;
+    margin: 20px;
+
 }
 .form {
     display: flex;
 }
 .field {
-    flex: 1px;
-    margin: 50px;
+    flex: 1;
+    margin: 10px;
     position: relative;
 }
 .top-fields, .middle-fields, .form-row {
@@ -197,7 +201,7 @@ option {
 
 .field label {
     display: block;
-    margin-bottom: 28px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 .field input {
@@ -207,11 +211,11 @@ option {
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
 }
 .field input:focus {
-    border-color: #000;
-    outline: none;
+    border-color: #000; /* Đổi màu viền khi focus */
+    outline: none; /* Bỏ viền outline mặc định */
 }
 
 #CategoryID{
@@ -219,7 +223,7 @@ option {
 }
 
 .styled-select {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Thay đổi font chữ */
     font-size: 14px;
 }
 .button {
@@ -228,18 +232,18 @@ option {
     margin: 8px 8px;
 }
 .button input {
-    padding: 10px 30px;
+    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
     border: none;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
     cursor: pointer;
-    margin-right: 700px;
+    margin-right: 700px; /* Khoảng cách giữa các nút */
 }
 .button-group input{
-    padding: 10px 30px;
+    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
     border: none;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
     cursor: pointer;
     margin: 8px 8px;
 }
@@ -265,3 +269,4 @@ option {
 .button-group input.cancel:hover {
     background-color: #c1c0b7;
 }
+

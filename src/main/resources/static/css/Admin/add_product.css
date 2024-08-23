@@ -162,7 +162,7 @@ option {
 }
 
 
-.body1 {
+.body1, .body2 {
     display: flex;
     justify-content:flex-start; /* Đẩy khung về phía bên phải */
     margin: 70px;
@@ -268,5 +268,12 @@ option {
 }
 .button-group input.cancel:hover {
     background-color: #c1c0b7;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 110px 0;
 }
 
