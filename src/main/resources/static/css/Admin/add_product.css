@@ -272,8 +272,8 @@ option {
 
 .divider {
     border: none;
-    height: 1px;
-    background-color: #ccc;
+    height: 1.1px;
+    background-color: #4CAF50;
     margin: 110px 0;
 }
 
