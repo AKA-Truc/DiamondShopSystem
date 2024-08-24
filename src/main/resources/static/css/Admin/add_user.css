@@ -162,14 +162,13 @@ ion-icon {
 .wrapper {
     width: 120%; /* Chiều rộng của khung */
     max-width: 900px; /* Giới hạn chiều rộng tối đa của khung */
-    height:420px;
+    height: 490px;
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff; /* Màu nền của khung */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng */
     margin-bottom: 100px;
-
 }
 
 .field {

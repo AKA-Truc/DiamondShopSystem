@@ -31,7 +31,6 @@
         <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
             <ul>
                 <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
-                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm khách hàng mới </a></li>
                 <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
                 <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
                 <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
@@ -114,7 +113,6 @@
 <div class="main">
     <!-- Content goes here -->
 </div>
-</div>
 
 <!--  -->
 
@@ -127,14 +125,22 @@
                     <input type="text" id="userName" name="userName" placeholder="Vui lòng nhập họ và tên" required>
                 </div>
             </div>
+
             <div class="field input">
                 <label for="email">Email</label>
                 <input type="tel" id="email" name="email" placeholder="Vui lòng nhập Email" required>
             </div>
+
+            <div class="field input">
+                <label for="password">Password</label>
+                <input type="tel" id="password" name="password" placeholder="Vui lòng nhập Password" required>
+            </div>
+
             <div class="field input">
                 <label for="address">Địa chỉ</label>
                 <input type="tel" id="address" name="address" placeholder="Vui lòng nhập địa chỉ" required>
             </div>
+
             <div class="field input" style="margin-bottom: 20px;">
                 <label for="role" style="display: inline-block;">Chức Vụ</label>
                 <select id="role" style="margin-left:2%;" name="Role">
@@ -144,10 +150,11 @@
                     <option value="Delivery Staff">Nhân Viên Vận Chuyển</option>
                 </select>
             </div>
+
             <label for="gender" style="margin-left: 10px; font-weight: bold;">Giới Tính</label>
             <input type="radio" name="gender" id = "gender" value="Nam" > Nam
             <input type="radio" name="gender" id = "gender1" value="Nữ"> Nữ
-            </select>
+
             <div class="button">
                 <input type="submit" value="Thêm nhân viên" class="save">
                 <input type="button" value="Hủy" class="cancel">
