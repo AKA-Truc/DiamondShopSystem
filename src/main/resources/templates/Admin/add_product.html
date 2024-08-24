@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,12 +108,17 @@ html
     <div class="wrapper">
         <form id="myForm" enctype="multipart/form-data">
             <div class="top-fields">
-                <div class="field input">
-                    <label for="CategoryID">Loại Sản Phẩm</label>
-                    <select id="CategoryID" name="CategoryID" class="styled-select">
-                        <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                <div class="field">
+                    <label for="loaiSanPham">Loại Sản Phẩm</label>
+                    <select id="loaiSanPham" name="loaiSanPham">
+                        <option value="sanPham1">Nhẫn kim cương nam</option>
+                        <option value="sanPham2">Nhẫn kim cương nữ</option>
+                        <option value="sanPham3">Bông tai kim cương</option>
+                        <option value="sanPham4">Lắc/Vòng tay kim cương</option>
+                        <option value="sanPham5">Mặt dây chuyền kim cương</option>
                     </select>
                 </div>
+
                 <div class="field input">
                     <label for="Name">Tên Sản Phẩm</label>
                     <input type="text" id="Name" name="Name" placeholder="Nhập Tên Sản Phẩm" required>
@@ -122,10 +126,6 @@ html
             </div>
 
             <div class="middle-fields">
-                <!--                <div class="field input">-->
-                <!--                    <label for="Brand">Thương Hiệu</label>-->
-                <!--                    <input type="text" id="Brand" name="Brand" placeholder="Nhập Tên Thương Hiệu" required>-->
-                <!--                </div>-->
 
                 <div class="field input">
                     <label for="Price">Giá</label>
@@ -152,7 +152,7 @@ html
 
             <div class="field input">
                 <label for="image">Ảnh sản phẩm 2</label>
-                <input type="file" id="image" name="image">
+                <input type="file" id="image1" name="image">
             </div>
 
             <div class="field input">
@@ -172,67 +172,95 @@ html
 
 <div class="body2">
     <div class="wrapper">
-        <form id="anotherForm" enctype="multipart/form-data">
+        <form id="myFormother" enctype="multipart/form-data">
             <div class="top-fields">
-                <div class="field input">
-                    <label for="CategoryID">Loại Sản Phẩm</label>
-                    <select id="CategoryID" name="CategoryID" class="styled-select">
-                        <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+
+                <div class="field">
+                    <label for="Chatlieu">Chất liệu</label>
+                    <select id="Chatlieu" name="chấtLiệu">
+                        <option value="sanPham1">Vàng</option>
+                        <option value="sanPham2">Bạc</option>
                     </select>
                 </div>
-                <div class="field input">
-                    <label for="Name">Tên Sản Phẩm</label>
-                    <input type="text" id="Name" name="Name" placeholder="Nhập Tên Sản Phẩm" required>
+
+                <div class="field">
+                    <label for="Vokimcuong">Vỏ Kim Cương</label>
+                    <select id="Vokimcuong" name="voKimCuong">
+                        <option value="sanPham1">Select 1</option>
+                        <option value="sanPham2">Select 2</option>
+                        <option value="sanPham3">Select 3</option>
+                        <option value="sanPham4">Select 4</option>
+                        <option value="sanPham5">Select 5</option>
+                    </select>
                 </div>
             </div>
 
             <div class="middle-fields">
-                <!--                <div class="field input">-->
-                <!--                    <label for="Brand">Thương Hiệu</label>-->
-                <!--                    <input type="text" id="Brand" name="Brand" placeholder="Nhập Tên Thương Hiệu" required>-->
-                <!--                </div>-->
 
                 <div class="field input">
                     <label for="Price">Giá</label>
-                    <input type="number" id="Price" name="Price" placeholder="Nhập Giá Tiền" required>
+                    <input type="number" id="Price1" name="Price" placeholder="Nhập Giá Tiền" required>
                 </div>
 
                 <div class="field input">
                     <label for="Inventory">Số Lượng Tồn Kho</label>
-                    <input type="number" id="Inventory" name="Inventory" placeholder="Nhập Số Lượng" required>
+                    <input type="number" id="Inventory1" name="Inventory" placeholder="Nhập Số Lượng" required>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="field input">
-                    <label for="Warranty">Thời hạn bảo hành</label>
-                    <input type="date" id="Warranty" name="Warranty" required>
-                </div>
+            <div class="field">
+                <label for="Tenkimcuong">Tên kim cương</label>
+                <select id="Tenkimcuong" name="tênKimCương">
+                    <option value="sanPham1">Tên 1</option>
+                    <option value="sanPham2">Tên 2</option>
+                </select>
+            </div>
+
+            <div class="middle-fields">
+            <div class="field input">
+                <label for="Inventory">Số Lượng</label>
+                <input type="number" id="Amount" name="Amount" placeholder="Nhập Số Lượng" required>
             </div>
 
             <div class="field input">
-                <label for="image">Ảnh sản phẩm</label>
-                <input type="file" id="image" name="image">
+                <label for="Price">Tỉ Lệ Áp Giá</label>
+                <input type="number" id="Price2" name="Price" placeholder="Nhập Tỉ Lệ" required>
             </div>
 
             <div class="field input">
-                <label for="image">Ảnh sản phẩm 2</label>
-                <input type="file" id="image" name="image">
+                <label for="Price">Tiền Gia Công</label>
+                <input type="number" id="Price3" name="Price" placeholder="Nhập Tiền Gia Công" required>
+            </div>
+            </div>
+
+            <div class="field">
+                <label for="Size">Size</label>
+                <select id="Size" name="size">
+                    <option value="sanPham1">Size 1</option>
+                    <option value="sanPham2">Size 2</option>
+                    <option value="sanPham3">Size 3</option>
+                </select>
             </div>
 
             <div class="field input">
-                <label for="Description">Mô Tả</label>
-                <input type="text" id="Description" name="Description" placeholder="Nhập Mô Tả Của Sản Phẩm" required>
+                <label for="Inventory">Số Lượng Tồn Kho</label>
+                <input type="number" id="Inventory2" name="Inventory" placeholder="Nhập Số Lượng" required>
             </div>
 
             <div class="button-group">
                 <input type="submit" value="Thêm Sản Phẩm" class="save">
                 <input type="button" value="Hủy" class="cancel">
             </div>
+
+
+
+
+
         </form>
     </div>
 </div>
-<!---->
+
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/static/js/Admin/add_product.js"></script>
