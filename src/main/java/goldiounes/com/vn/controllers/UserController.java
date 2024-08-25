@@ -1,23 +1,36 @@
 package goldiounes.com.vn.controllers;
 
+import goldiounes.com.vn.components.JwtTokenUtils;
 import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/user-management")
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtTokenUtils jwtTokenUtils;
+
+    @GetMapping("/generate-secret-key")
+    public ResponseEntity<String> generateSecretKey(){
+        return ResponseEntity.ok(jwtTokenUtils.generateSecretKey());
+    }
+
     @PostMapping("/users")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<UserDTO>> createUser(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = userService.createUser(userDTO);
         ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User created successfully", createdUser);
@@ -79,5 +92,9 @@ public class UserController {
             ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("User not found", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("Server is working");
     }
 }
