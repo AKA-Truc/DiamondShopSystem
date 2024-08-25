@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/css/User/cart.css">
+</head>
+
+<body>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Giá Kim Cương Gia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="/static/css/User/list_price.css">
+</head>
+
+<body>
+<div class="header1">
+    <p class="phone">Phone: (+84) 123 2345 123</p>
+    <p class="center" id="center-text">hello</p>
+    <p class="address">Liên hệ </p>
+</div>
+<div class="header">
+    <div class="header-content">
+        <div class="icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="login.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
+            <i class="fa-regular fa-heart"></i>
+            <a href="cart.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
+    </div>
+</div>
+<ul id="main-menu">
+    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
+    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
+    <li><a href="">BẢNG GIÁ</a>
+        <ul class="sub-menu">
+            <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
+    <li><a href="news.html">TIN TỨC</a></li>
+    <li><a href="contact.html">LIÊN HỆ</a></li>
+</ul>
+
+<div class="cart-container">
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>SẢN PHẨM</th>
+            <th style="text-align: center;">SỐ LƯỢNG</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><button class="remove-btn">×</button></td>
+            <td>
+                <div class="product-info">
+                    <img src="https://jemmia.vn/wp-content/uploads/2024/07/1_cam_03-2-768x768.jpg"
+                         alt="Nhẫn Kim Cương" class="product-image">
+                    <span>NHẪN KIM CƯƠNG NỮ 18K WRA00293</span>
+                </div>
+            </td>
+            <td style="text-align: center;vertical-align: middle;"><input type="number" value="1"
+                                                                          class="quantity-input"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="update-cart-container">
+        <button class="update-cart-btn">Cập nhật giỏ hàng</button>
+    </div>
+</div>
+<button class="order-btn">Đặt hàng</button>
+
+<script src="/static/js/User/cart.js"></script>
+</body>
+
+</html>
