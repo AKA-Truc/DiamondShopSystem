@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //danh mục các link ảnh
+    // danh mục các link ảnh
     const categoryImages = {
         "NONE": "/static/images/TrangSucKC.png",
         "NHẪN KIM CƯƠNG": "/static/images/NHAN-KIM-CUONG-TU-NHIEN.png",
@@ -26,15 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const formattedCategory = category.toUpperCase();
             wrapperImage.src = categoryImages[formattedCategory] || categoryImages['DEFAULT'];
 
-            //console.log(wrapperImage);
-            //cập nhật lại tên loại hàng để đưa vào link
-            if(category === "None"){
+            // cập nhật lại tên loại hàng để đưa vào link
+            if (category === "None") {
                 categoryIndex = "Kim Cương";
-            }
-            else {
+            } else {
                 categoryIndex = category;
             }
-            //console.log(categoryIndex);
         } else {
             console.error('Wrapper image element not found');
         }
@@ -58,15 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
             maxPrice = max ? parseFloat(max) : Number.MAX_SAFE_INTEGER;
         }
 
-        // Fetch API với các giá trị đã xử lý ở bên trên
-        fetch(`http://localhost:8080/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(responseData => {
+        // AJAX request với các giá trị đã xử lý ở bên trên
+        $.ajax({
+            url: '/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}',
+            method: 'GET',
+            dataType: 'json',
+            success: function(responseData) {
                 if (!responseData || !responseData.data || !Array.isArray(responseData.data)) {
                     console.error('Expected an array of products but received:', responseData);
                     throw new Error('Expected an array of products');
@@ -104,20 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         fetchMinPrice(product.productId);
                     });
                 }
-            })
-            .catch(error => {
+            },
+            error: function(error) {
                 console.error('Error fetching products:', error);
                 const errorMessage = document.createElement('li');
                 errorMessage.textContent = "Không Tìm Thấy Sản Phẩm";
                 productList.appendChild(errorMessage);
-            });
+            }
+        });
     };
 
-    //fetch để tìm giá nhỏ nhất của 1 sản phẩm nào đó
+    // AJAX request để tìm giá nhỏ nhất của một sản phẩm
     const fetchMinPrice = (id) => {
-        fetch(`http://localhost:8080/product-management/productdetails/min/${id}`)
-            .then(response => response.json())
-            .then(responseData => {
+        $.ajax({
+            url: `/product-management/productdetails/min/${id}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function(responseData) {
                 const priceElement = document.getElementById(`price-${id}`);
                 if (priceElement && responseData.data && responseData.data.hasOwnProperty('sellingPrice')) {
                     const formattedPrice = responseData.data.sellingPrice.toLocaleString('vi-VN', {
@@ -129,13 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     priceElement.innerHTML = 'Giá không có sẵn';
                 }
-            })
-            .catch(error => {
+            },
+            error: function(error) {
                 console.error('Error fetching product detail:', error);
-            });
+            }
+        });
     };
 
-    //cập nhật giá trị của loại hàng khi thay đổi
+    // Cập nhật giá trị của loại hàng khi thay đổi
     const categorySelector = document.getElementById('category-selector');
     categorySelector.addEventListener('change', (event) => {
         const selectedOption = event.target.options[event.target.selectedIndex];
@@ -144,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateContentAndFetchProducts(category, title);
     });
 
-    //Cập nhật giá trị max min khi thay đổi
+    // Cập nhật giá trị min và max khi thay đổi
     const priceSelector = document.getElementById('price-selector');
     priceSelector.addEventListener('change', () => {
         const selectedOption = categorySelector.options[categorySelector.selectedIndex];
@@ -153,6 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateContentAndFetchProducts(category, title);
     });
 
-    //mặc định giá trị none và min = 0, max là giá trị lớn nhất của kiểu dữ liệu
+    // Mặc định giá trị là None và min = 0, max là giá trị lớn nhất của kiểu dữ liệu
     updateContentAndFetchProducts("None", 'Trang sức kim cương tự nhiên');
 });
