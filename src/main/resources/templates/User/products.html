@@ -15,22 +15,20 @@
     <p class="center" id="center-text">hello</p>
     <p class="address">Liên hệ </p>
 </div>
-
 <div class="header">
     <div class="header-content">
         <div class="icons">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <a href="login.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
+            <a href="./login.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
             <i class="fa-regular fa-heart"></i>
-            <a href="cart.html"><i style="color: black;" class="fa-solid fa-cart-shopping"></i></a>
+            <i style="color: black;" class="fa-solid fa-cart-shopping"></i>
         </div>
         <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
     </div>
 </div>
-
 <ul id="main-menu">
     <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
-    <li><a href="./products.html">TRANG SỨC KIM CƯƠNG </a></li>
+    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
     <li><a href="">BẢNG GIÁ</a>
         <ul class="sub-menu">
             <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
@@ -41,6 +39,26 @@
     <li><a href="news.html">TIN TỨC</a></li>
     <li><a href="contact.html">LIÊN HỆ</a></li>
 </ul>
+<!-- search -->
+<div id="search-overlay" class="search-overlay">
+    <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+</div>
+<!--  -->
+<!-- cart -->
+<div id="cart-overlay" class="cart-overlay">
+    <div class="cart-box">
+        <h2>Your Shopping Cart</h2>
+        <p>No items in the cart.</p>
+        <button>
+            <a href="./" style="text-decoration: none; color: inherit;">Xem giỏ hàng</a>
+        </button>
+    </div>
+</div>
+
+<!---->
 
 <div class="wrapper">
     <div class="headline">
@@ -60,7 +78,7 @@
         <option value="Mặt Dây Chuyền Kim Cương" data-title="Mặt Dây Chuyền Kim Cương">MẶT DÂY CHUYỀN KIM CƯƠNG</option>
     </select>
 </div>
-
+<hr style="width: 400px; margin-top: 50px; ">
 <div class="product-price">
     <select id="price-selector">
         <option value="None">Không</option>

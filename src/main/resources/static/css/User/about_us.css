@@ -131,8 +131,6 @@ body {
     box-sizing: border-box;
 }
 
-
-
 #main-menu li:hover > ul.sub-menu {
     display: block;
 }
@@ -193,8 +191,6 @@ body {
     right: 5px;
     transform: translateY(-50%);
 }
-
-
 .container {
     display: flex;
     justify-content: space-between;
