@@ -1,9 +1,8 @@
-/* Điều chỉnh cơ bản cho body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f3ef;
+    background-color: #f4f7fb;
 }
 
 
@@ -18,9 +17,9 @@ body {
     padding-top: 20px;
 }
 
-
+/* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #141E0C;
+    color: #0d0e1c; /*chỉnh chữ*/
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -32,7 +31,7 @@ body {
     color: #141E0C;
 }
 
-
+/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -49,22 +48,21 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #EDEFE4;
+    background-color: #cbd0dd; /*click menu*/
 }
 
-
+/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
 }
-
 
 .submenu ul {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #f2f4ef;
+    background-color: #ebf0f8;  /*comment* menu con*/
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -81,7 +79,7 @@ body {
     transform: translateY(0);
 }
 
-
+/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -90,7 +88,7 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #dee0d3;
+    background-color: #cbd0dd;/* comment*/
 }
 
 ion-icon {
@@ -106,7 +104,7 @@ ion-icon {
     align-items: center;
     height: 58px;
     color: #000000;
-    background-color: #f4f3ef;
+    background-color: #f4f7fb;
     padding: 0 20px;
 }
 
@@ -143,12 +141,11 @@ ion-icon {
     cursor: pointer;
 }
 
-
 .navbar-separator {
     width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #819c71e7;
+    background-color: #162165e7; /*thanh br*/
 }
 
 
@@ -213,17 +210,17 @@ ion-icon {
     margin-right: 10px;
 }
 .button input.save  {
-    background-color: #476730;
+    background-color: #304067;
     color: #fff;
 }
 .button input.cancel  {
-    background-color: #eae9e0;
-    color: #476730;
+    background-color: #e0e6ea;
+    color: #304c67;
     font-weight: 600;
 }
 .button input.save:hover {
-    background-color: #324922;
+    background-color: #223449;
 }
 .button input.cancel:hover {
-    background-color: #d4d3c9;
+    background-color: #bfc5d3;
 }

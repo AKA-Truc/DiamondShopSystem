@@ -1,12 +1,11 @@
-/* Điều chỉnh cơ bản cho body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f3ef;
+    background-color: #f4f7fb;
 }
 
-/* Thanh sidebar với gradient và bóng đổ */
+
 .sidebar {
     height: 100%;
     width: 280px;
@@ -20,7 +19,7 @@ body {
 
 /* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #141E0C;
+    color: #0d0e1c; /*chỉnh chữ*/
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -34,7 +33,7 @@ body {
 
 /* Menu chính - Loại bỏ bullet */
 .main-menu {
-    list-style-type: none; /* Loại bỏ bullet */
+    list-style-type: none;
     padding: 0;
 }
 
@@ -49,36 +48,35 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #EDEFE4;
+    background-color: #cbd0dd; /*click menu*/
 }
 
 /* Submenu sổ xuống */
 .submenu {
     position: relative;
-    display: block; /* Hiển thị submenu dưới dạng block */
+    display: block;
 }
 
-/* Submenu list - Loại bỏ bullet */
 .submenu ul {
     position: absolute;
-    top: 100%; /* Bắt đầu từ dưới cùng của item menu */
+    top: 100%;
     left: 0;
-    width: 100%; /* Chiều rộng bằng với menu cha */
-    background-color: #f2f4ef;
-    list-style-type: none; /* Loại bỏ bullet */
-    padding: 0; /* Loại bỏ padding mặc định */
+    width: 100%;
+    background-color: #ebf0f8;  /*comment* menu con*/
+    list-style-type: none;
+    padding: 0;
     transition: all 0.3s ease;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px); /* Di chuyển nhẹ xuống dưới */
-    z-index: 1000; /* Đảm bảo submenu nằm trên các phần tử khác */
+    transform: translateY(10px);
+    z-index: 1000;
 }
 
 .submenu:hover ul {
     display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0); /* Khi hover, submenu di chuyển về vị trí ban đầu */
+    transform: translateY(0);
 }
 
 /* Submenu link */
@@ -86,17 +84,17 @@ body {
     padding: 15px 25px;
     color: #000000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: block; /* Đảm bảo liên kết chiếm toàn bộ chiều rộng */
+    display: block;
 }
 
 .submenu ul li a:hover {
-    background-color: #dee0d3;
+    background-color: #cbd0dd;/* comment*/
 }
 
 ion-icon {
     font-size: 20px;
     line-height: 1.5px;
-    vertical-align: middle; /* Cân đối chữ */
+    vertical-align: middle;
 }
 
 .navbar {
@@ -106,7 +104,7 @@ ion-icon {
     align-items: center;
     height: 58px;
     color: #000000;
-    background-color: #f4f3ef;
+    background-color: #f4f7fb;
     padding: 0 20px;
 }
 
@@ -143,13 +141,13 @@ ion-icon {
     cursor: pointer;
 }
 
-/* Horizontal line below navbar */
 .navbar-separator {
-    width: calc(100% - 280px); /* Full width minus sidebar */
+    width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #819c71e7;
+    background-color: #162165e7;
 }
+
 
 
 .body1 {
@@ -193,11 +191,11 @@ ion-icon {
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
+    transition: border-color 0.3s ease;
 }
 .field input:focus {
-    border-color: #000; /* Đổi màu viền khi focus */
-    outline: none; /* Bỏ viền outline mặc định */
+    border-color: #000;
+    outline: none;
 }
 .button {
     display: flex;
@@ -205,24 +203,24 @@ ion-icon {
     margin: 20px 20px;
 }
 .button input {
-    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    font-size: 14px;
     cursor: pointer;
-    margin-right: 10px; /* Khoảng cách giữa các nút */
+    margin-right: 10px;
 }
 .button input.save  {
-    background-color: #476730;
+    background-color: #304067;
     color: #fff;
 }
 .button input.cancel  {
     background-color: #eae9e0;
-    color: #476730;
+    color: #303d67;
     font-weight: 600;
 }
 .button input.save:hover {
-    background-color: #324922;
+    background-color: #222849;
 }
 .button input.cancel:hover {
     background-color: #d4d3c9;

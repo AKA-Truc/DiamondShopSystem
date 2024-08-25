@@ -2,8 +2,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f3ef;
+    background-color: #f4f7fb;
 }
+
 
 .sidebar {
     height: 100%;
@@ -16,8 +17,9 @@ body {
     padding-top: 20px;
 }
 
+/* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #141E0C;
+    color: #0d0e1c; /*chỉnh chữ*/
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -29,6 +31,7 @@ body {
     color: #141E0C;
 }
 
+/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -45,9 +48,10 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #EDEFE4;
+    background-color: #cbd0dd; /*click menu*/
 }
 
+/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -58,7 +62,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #f2f4ef;
+    background-color: #ebf0f8;  /*comment* menu con*/
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -75,6 +79,7 @@ body {
     transform: translateY(0);
 }
 
+/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -83,13 +88,13 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #dee0d3;
+    background-color: #cbd0dd;/* comment*/
 }
 
 ion-icon {
     font-size: 20px;
     line-height: 1.5px;
-    vertical-align: middle; /* Cân đối chữ */
+    vertical-align: middle;
 }
 
 .navbar {
@@ -99,7 +104,7 @@ ion-icon {
     align-items: center;
     height: 58px;
     color: #000000;
-    background-color: #f4f3ef;
+    background-color: #f4f7fb;
     padding: 0 20px;
 }
 
@@ -140,5 +145,5 @@ ion-icon {
     width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #819c71e7;
+    background-color: #162165e7; /*thanh br*/
 }
