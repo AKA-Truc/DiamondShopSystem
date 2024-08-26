@@ -89,6 +89,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
+
     public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id) {
         UserDTO user = userService.getUser(id);
         if (user != null) {
