@@ -40,4 +40,3 @@ public class Token {
     @JoinColumn(name = "user_id")
     private User user;
 }
-
