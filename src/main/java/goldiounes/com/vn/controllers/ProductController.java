@@ -28,7 +28,7 @@ public class ProductController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @PostMapping("/products")
+    @PostMapping("/product")
     public ResponseEntity<ResponseWrapper<ProductDTO>> createProduct(
             @RequestParam("product") String productDTOJson,
             @RequestParam("imageURL") MultipartFile imageFile,
