@@ -47,7 +47,9 @@ public class WebSecurityConfig {
                                 "/user-management/test",
                                 "/user-management/register",
                                 "/user-management/login",
-                                "/user-management/update_password/**"
+                                "/user-management/update_password/**",
+                                "/product-management/products/**",
+                                "/product-management/products"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
