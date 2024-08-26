@@ -2,16 +2,25 @@ package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.components.JwtTokenUtils;
 import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.dtos.UserLoginDTO;
+import goldiounes.com.vn.models.entities.Token;
+import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.responses.ResponseWrapper;
+import goldiounes.com.vn.services.TokenService;
 import goldiounes.com.vn.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user-management")
@@ -22,6 +31,9 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private TokenService tokenService;
+
+    @Autowired
     private JwtTokenUtils jwtTokenUtils;
 
     @GetMapping("/generate-secret-key")
@@ -29,8 +41,47 @@ public class UserController {
         return ResponseEntity.ok(jwtTokenUtils.generateSecretKey());
     }
 
-    @PostMapping("/users")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER', 'ROLE_CUSTOMER')")
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(
+            @Valid @RequestBody UserLoginDTO userLoginDTO,
+            HttpServletRequest request
+    ) {
+        try {
+            // Authenticate user and generate JWT token
+            String token = userService.login(
+                    userLoginDTO.getEmail(),
+                    userLoginDTO.getPassword(),
+                    userLoginDTO.getRole() == null ? "Customer" : userLoginDTO.getRole()
+            );
+
+            // Retrieve user details from the token
+            User userDetail = userService.getUserDetailsFromToken(token);
+
+            // Generate refresh token
+            Token jwt = tokenService.addToken(userDetail, token);
+
+            // Create the response map
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login successfully");
+            response.put("token", jwt.getToken());
+            response.put("tokenType", jwt.getTokenType());
+            response.put("refreshToken", jwt.getRefreshToken());
+            response.put("name", userDetail.getUserName());
+            response.put("email", userDetail.getEmail());
+            response.put("roles", userDetail.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+            response.put("id", userDetail.getUserID());
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "FAIL");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+
+    @PostMapping("/register")
     public ResponseEntity<ResponseWrapper<UserDTO>> createUser(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = userService.createUser(userDTO);
         ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User created successfully", createdUser);

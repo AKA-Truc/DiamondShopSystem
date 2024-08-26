@@ -1,5 +1,6 @@
 package goldiounes.com.vn.services;
 
+import goldiounes.com.vn.components.JwtTokenUtils;
 import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,9 +10,14 @@ import goldiounes.com.vn.repositories.UserRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,6 +32,15 @@ public class UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtTokenUtils jwtTokenUtils;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public UserService(UserRepo userRepo, CartService cartService, PointService pointService, ModelMapper modelMapper) {
         this.userRepo = userRepo;
@@ -62,8 +77,8 @@ public class UserService {
         if (existingUser != null) {
             throw new RuntimeException("User already exists");
         }
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser =  userRepo.save(user);
         UserDTO indexUser = modelMapper.map(newUser,UserDTO.class);
         cartService.createCart(indexUser);
@@ -94,13 +109,35 @@ public class UserService {
         return modelMapper.map(existingUser,UserDTO.class);
     }
 
-    public boolean login(String email, String password) {
+    public String login(String email, String password, String Role) throws Exception {
         User existingUser = userRepo.findByEmail(email);
-        if (existingUser == null) {
-            throw new RuntimeException("No user found");
+        if(existingUser == null){
+            throw new RuntimeException("Invalid user account / password");
         }
-        // bam r equals
-        return existingUser.getPassword().equals(password);
+
+        if (!passwordEncoder.matches(password, existingUser.getPassword())) {
+            throw new RuntimeException("INVALID EMAIL OR PASSWORD");
+
+        }
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                email, password,
+                existingUser.getAuthorities()
+        );
+        authenticationManager.authenticate(authenticationToken);
+        return jwtTokenUtils.generateToken(existingUser);
+    }
+
+    public User getUserDetailsFromToken(String token) throws Exception {
+        if (jwtTokenUtils.isTokenExpired(token)) {
+            throw new RuntimeException("Token is expired");
+        }
+        String email = jwtTokenUtils.extractEmail(token);
+        User user = userRepo.findByEmail(email);
+        if (user != null) {
+            return user;
+        } else {
+            throw new Exception("User not found");
+        }
     }
 
     public List<UserDTO> getUserByRole(String Role) {
