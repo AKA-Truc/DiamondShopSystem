@@ -132,7 +132,7 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
-    
+
     @GetMapping("/users/role/{role}")
     public ResponseEntity<ResponseWrapper<List<UserDTO>>> getUserByRole(@PathVariable String role) {
         List<UserDTO> userDTO = userService.getUserByRole(role);
