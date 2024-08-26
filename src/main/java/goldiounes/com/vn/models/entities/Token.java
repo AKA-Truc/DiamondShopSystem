@@ -32,13 +32,11 @@ public class Token {
     @Column(name = "refresh_expiration_date")
     private LocalDateTime refreshExpirationDate;
 
-    @Column(name = "is_mobile")
-    private boolean isMobile;
 
     private boolean revoked;
     private boolean expired;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }
