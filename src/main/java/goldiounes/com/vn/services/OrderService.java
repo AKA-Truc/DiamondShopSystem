@@ -5,12 +5,15 @@ import goldiounes.com.vn.models.entities.*;
 import goldiounes.com.vn.repositories.*;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -195,6 +198,14 @@ public class OrderService {
         return modelMapper.map(order, OrderDTO.class);
     }
 
+    public List<OrderDTO> getOrderByUserId(int id) {
+        List<Order> order = orderRepo.findByUserId(id);
+        if (order.isEmpty()) {
+            throw new RuntimeException("Order not found");
+        }
+        return modelMapper.map(order, new TypeToken<List<OrderDTO>>() {}.getType());
+    }
+
     public List<OrderDTO> getAllOrders() {
         List<Order> orders = orderRepo.findAll();
         if (orders.isEmpty()) {
@@ -204,4 +215,15 @@ public class OrderService {
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());
     }
+
+    public boolean isOrderBelongsToCustomer(int orderId, String username) {
+        Optional<Order> orderOptional = orderRepo.findById(orderId);
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+            User user = order.getUser(); // Giả sử Order có một trường User
+            return user != null && user.getUserName().equals(username);
+        }
+        return false;
+    }
+
 }
