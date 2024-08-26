@@ -3,6 +3,7 @@ package goldiounes.com.vn.controllers;
 import goldiounes.com.vn.models.dtos.PromotionDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.PromotionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/promotion-management")
+@RequiredArgsConstructor
 public class PromotionController {
 
     @Autowired
