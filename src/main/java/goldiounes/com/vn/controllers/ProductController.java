@@ -51,6 +51,7 @@ public class ProductController {
 
 
     @GetMapping("products/category/{keyword}/{minPrice}/{maxPrice}")
+    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getProductsByKeyword(
             @PathVariable String keyword,
             @PathVariable double minPrice,
@@ -62,6 +63,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
+    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getAllProducts() {
         List<ProductDTO> products = productService.getAllProducts();
         ResponseWrapper<List<ProductDTO>> response = new ResponseWrapper<>("Products retrieved successfully", products);
@@ -69,6 +71,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDTO>> getProduct(@PathVariable int id) {
         ProductDTO product = productService.getProduct(id);
         if (product != null) {
@@ -81,6 +84,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<Void>> deleteProduct(@PathVariable int id) {
         boolean isDeleted = productService.deleteProduct(id);
         ResponseWrapper<Void> response;
@@ -94,7 +98,9 @@ public class ProductController {
         }
 
     }
+
     @PutMapping("/products/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDTO>> updateProduct(
             @PathVariable int id,
             @RequestParam("product") String productDTOJson,
@@ -117,8 +123,8 @@ public class ProductController {
         }
     }
 
-
     @GetMapping("products/{id}/productdetails")
+    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF', 'ROLE_DELIVERY_STAFF')")
     public ResponseEntity<ResponseWrapper<List<ProductDetailDTO>>> getAllProductDetails(@PathVariable int id) {
         List<ProductDetailDTO> productDetails = productDetailService.findAllByProductId(id);
         ResponseWrapper<List<ProductDetailDTO>> response = new ResponseWrapper<>("Product details retrieved successfully", productDetails);
@@ -126,6 +132,7 @@ public class ProductController {
     }
 
     @GetMapping("productdetails/min/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetail(@PathVariable int id) {
         ProductDetailDTO productDetailDTO = productDetailService.getMinProductDetailByProductId(id);
         if (productDetailDTO != null) {
@@ -138,6 +145,7 @@ public class ProductController {
     }
 
     @GetMapping("/productdetails/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetailById(@PathVariable int id) {
         ProductDetailDTO productDetail = productDetailService.findById(id);
         if (productDetail != null) {
@@ -150,6 +158,7 @@ public class ProductController {
     }
 
     @PostMapping("/productdetails")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> createProductDetail(@RequestBody ProductDetailDTO productDetailDTO) {
         ProductDetailDTO createdProductDetail = productDetailService.createProductDetail(productDetailDTO);
         ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail created successfully", createdProductDetail);
@@ -157,6 +166,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/productdetails/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<Void>> deleteProductDetail(@PathVariable int id) {
         boolean isDeleted = productDetailService.deleteById(id);
         ResponseWrapper<Void> response;

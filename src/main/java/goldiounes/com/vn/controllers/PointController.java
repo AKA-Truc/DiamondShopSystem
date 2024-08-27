@@ -6,6 +6,7 @@ import goldiounes.com.vn.services.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class PointController {
     private PointService pointService;
 
     @GetMapping("/points")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<List<PointDTO>>> getAllPoints() {
         List<PointDTO> points = pointService.findAll();
         ResponseWrapper<List<PointDTO>> response = new ResponseWrapper<>("Points retrieved successfully", points);
@@ -25,6 +27,7 @@ public class PointController {
     }
 
     @GetMapping("/points/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<PointDTO>> getPointById(@PathVariable int id) {
         PointDTO point = pointService.findById(id);
         if (point != null) {
@@ -37,6 +40,7 @@ public class PointController {
     }
 
     @PostMapping("/points")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<PointDTO>> createPoint(@RequestBody PointDTO pointDTO) {
         PointDTO createdPoint = pointService.createPoint(pointDTO);
         ResponseWrapper<PointDTO> response = new ResponseWrapper<>("Point created successfully", createdPoint);
@@ -44,6 +48,7 @@ public class PointController {
     }
 
     @PutMapping("/points/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<PointDTO>> updatePoint(@PathVariable int id, @RequestBody PointDTO pointDTO) {
         PointDTO updatedPoint = pointService.updatePoint(id, pointDTO);
         if (updatedPoint != null) {
@@ -56,6 +61,7 @@ public class PointController {
     }
 
     @DeleteMapping("/points/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deletePoint(@PathVariable int id) {
         boolean isDeleted = pointService.deleteById(id);
         ResponseWrapper<Void> response;
