@@ -107,4 +107,23 @@ public class CartItemService {
         cartItemRepo.save(existingCartItem);
         return modelMapper.map(existingCartItem, new TypeToken<CartItemDTO>(){}.getType());
     }
+
+
+    public List<CartItemDTO> findByProductId(int id) {
+        List<CartItem> cartItems = cartItemRepo.findByProductID(id);
+        if (cartItems.isEmpty()) {
+            throw new RuntimeException("No cart items found");
+        }
+        return modelMapper.map(cartItems,new TypeToken<List<CartItemDTO>>(){}.getType());
+    }
+
+    public boolean deleteByID(int id) {
+        if (cartItemRepo.existsById(id)) {
+            cartItemRepo.deleteById(id);
+            return true;
+        } else {
+            throw new RuntimeException("Cart item not found");
+        }
+    }
+
 }

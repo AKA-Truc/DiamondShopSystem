@@ -89,7 +89,8 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER') " +
+            "or (hasAuthority('ROLE_CUSTOMER'))")
     public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id) {
         UserDTO user = userService.getUser(id);
         if (user != null) {
@@ -102,6 +103,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<List<UserDTO>>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
         ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("Users retrieved successfully", users);
@@ -109,6 +111,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER') or (hasAuthority('ROLE_CUSTOMER'))")
     public ResponseEntity<ResponseWrapper<UserDTO>> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
         UserDTO updatedUser = userService.updateUser(id, userDTO);
         if (updatedUser != null) {
@@ -121,6 +124,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deleteUser(@PathVariable int id) {
         boolean isDeleted = userService.deleteUser(id);
         ResponseWrapper<Void> response;
@@ -135,6 +139,7 @@ public class UserController {
     }
 
     @GetMapping("/users/role/{role}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<List<UserDTO>>> getUserByRole(@PathVariable String role) {
         List<UserDTO> userDTO = userService.getUserByRole(role);
         if (userDTO != null) {

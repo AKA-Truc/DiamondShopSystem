@@ -1,10 +1,8 @@
 
 package goldiounes.com.vn.services;
 
-import goldiounes.com.vn.models.dtos.OrderDTO;
-import goldiounes.com.vn.models.dtos.OrderDetailDTO;
-import goldiounes.com.vn.models.dtos.ProductDTO;
-import goldiounes.com.vn.models.dtos.ProductDetailDTO;
+import goldiounes.com.vn.models.dtos.*;
+import goldiounes.com.vn.models.entities.CartItem;
 import goldiounes.com.vn.models.entities.Category;
 import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.repositories.CategoryRepo;
@@ -39,6 +37,9 @@ public class ProductService {
 
     @Autowired
     private OrderDetailService orderDetailService;
+
+    @Autowired
+    private CartItemService cartItemService;
 
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepo.findAll();
@@ -100,14 +101,26 @@ public class ProductService {
             for (OrderDetailDTO orderDetailDTO : orderDetailDTOS) {
                 OrderDTO orderDTO = orderDetailDTO.getOrder();
                 if(orderDTO != null && !orderDTO.getStatus().equals("Final")){
-                    existingProduct.setStatus("inactive");
-                    productRepo.save(existingProduct);
-                    return true;
+                   return false;
                 }
-
             }
-            return false;
         }
+        List<CartItemDTO> cartItems = cartItemService.findByProductId(existingProduct.getProductID());
+        if (cartItems.isEmpty()) {
+            existingProduct.setStatus("inactive");
+            productRepo.save(existingProduct);
+            return true;
+        }
+        else {
+            for (CartItemDTO cartItemDTO : cartItems) {
+                if(!cartItemService.deleteByID(cartItemDTO.getCartItemId())){
+                    return false;
+                }
+            }
+        }
+        existingProduct.setStatus("inactive");
+        productRepo.save(existingProduct);
+        return true;
     }
 
     public void deleteById(int id) {
