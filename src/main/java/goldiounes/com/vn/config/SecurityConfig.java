@@ -8,10 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Configuration
 public class SecurityConfig {
@@ -36,12 +41,17 @@ public class SecurityConfig {
     }
 
     private UserDetails convertToUserDetails(User user) {
+        Collection<GrantedAuthority> authorities = user.getAuthorities().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+                .collect(Collectors.toList());
+
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUserName())
+                .username(user.getEmail())
                 .password(user.getPassword())
-                .roles(user.getRole())
+                .authorities(authorities)  // Sử dụng authorities thay vì .roles()
                 .build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

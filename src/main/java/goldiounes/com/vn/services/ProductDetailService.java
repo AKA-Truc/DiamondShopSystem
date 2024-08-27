@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductDetailService {
@@ -37,55 +39,54 @@ public class ProductDetailService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public ProductDetailService(ProductDetailRepo productDetailRepo, ProductRepo productRepo, SettingRepo settingRepo, DiamondRepo diamondRepo, DiamondDetailRepo diamondDetailRepo, DiamondDetailService diamondDetailService, ModelMapper modelMapper) {
+        this.productDetailRepo = productDetailRepo;
+        this.productRepo = productRepo;
+        this.settingRepo = settingRepo;
+        this.diamondRepo = diamondRepo;
+        this.diamondDetailRepo = diamondDetailRepo;
+        this.diamondDetailService = diamondDetailService;
+        this.modelMapper = modelMapper;
+    }
+
     public List<ProductDetailDTO> findAllByProductId(int productId) {
         List<ProductDetail> productDetails = productDetailRepo.findByProductId(productId);
         if (productDetails.isEmpty()) {
-            throw new RuntimeException("No products found");
-        } else {
-            return modelMapper.map(productDetails, new TypeToken<List<ProductDetailDTO>>() {}.getType());
+            throw new RuntimeException("No ProductDetail found for the given product ID");
         }
+        return modelMapper.map(productDetails, new TypeToken<List<ProductDetailDTO>>() {}.getType());
     }
 
     public boolean checkProductDetail(int productId) {
-        List<ProductDetail> productDetails = productDetailRepo.findByProductId(productId);
-        if (productDetails.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !productDetailRepo.findByProductId(productId).isEmpty();
     }
 
     public ProductDetailDTO findById(int id) {
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("No ProductDetail found"));
-        return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {
-        }.getType());
+                .orElseThrow(() -> new RuntimeException("No ProductDetail found with ID: " + id));
+        return modelMapper.map(existingProductDetail, ProductDetailDTO.class);
     }
 
     @Transactional
     public ProductDetailDTO createProductDetail(ProductDetailDTO productDetailDTO) {
         ProductDetail productDetail = modelMapper.map(productDetailDTO, ProductDetail.class);
 
-        // Fetch and set the existing Product
         Product existingProduct = productRepo.findById(productDetail.getProduct().getProductID())
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with ID: " + productDetail.getProduct().getProductID()));
         productDetail.setProduct(existingProduct);
 
-        // Fetch and set the existing Setting
         Setting existingSetting = settingRepo.findById(productDetail.getSetting().getSettingID())
                 .orElseThrow(() -> new EntityNotFoundException("Setting not found with ID: " + productDetail.getSetting().getSettingID()));
         productDetail.setSetting(existingSetting);
 
-        // Check if ProductDetail already exists
         ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(productDetail.getSize(), existingProduct.getProductID());
         if (existingProductDetail != null) {
             existingProductDetail.setInventory(existingProductDetail.getInventory() + productDetail.getInventory());
-            ProductDetail updatedProductDetail = productDetailRepo.save(existingProductDetail);
-            return modelMapper.map(updatedProductDetail, ProductDetailDTO.class);
+            return modelMapper.map(productDetailRepo.save(existingProductDetail), ProductDetailDTO.class);
         }
 
         productDetailRepo.save(productDetail);
 
-        // Process DiamondDetails and calculate price
         List<DiamondDetail> newDiamondDetails = new ArrayList<>();
         double totalCost = 0;
 
@@ -95,78 +96,64 @@ public class ProductDetailService {
                     .orElseThrow(() -> new EntityNotFoundException("Diamond not found with ID: " + diamondDetail.getDiamond().getDiamondID()));
             diamondDetail.setDiamond(diamond);
 
-            DiamondDetail createdDiamondDetail = diamondDetailRepo.save(diamondDetail);
-            newDiamondDetails.add(createdDiamondDetail);
-            totalCost += diamond.getPrice() * createdDiamondDetail.getQuantity();
+            newDiamondDetails.add(diamondDetailRepo.save(diamondDetail));
+            totalCost += diamond.getPrice() * diamondDetail.getQuantity();
         }
 
         productDetail.setDiamondDetails(newDiamondDetails);
-
-        // Add setting price and labor cost to total cost
         totalCost += existingSetting.getPrice() + productDetail.getLaborCost();
-
-        // Calculate and set selling price
         productDetail.setSellingPrice(totalCost * productDetail.getMarkupRate());
 
-        // Save and return the new ProductDetail
-        ProductDetail savedProductDetail = productDetailRepo.save(productDetail);
-        return modelMapper.map(savedProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
+        return modelMapper.map(productDetailRepo.save(productDetail), ProductDetailDTO.class);
     }
 
-    public boolean deleteById(int id){
+    public boolean deleteById(int id) {
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("No productdetail found"));
-        for (DiamondDetail diamondDetail : existingProductDetail.getDiamondDetails()){
-            diamondDetailService.deleteById(diamondDetail.getDiamond().getDiamondID());
-        }
-        productDetailRepo.deleteById(existingProductDetail.getProductDetailID());
+                .orElseThrow(() -> new RuntimeException("No ProductDetail found with ID: " + id));
+        existingProductDetail.getDiamondDetails().forEach(diamondDetail ->
+                diamondDetailService.deleteById(diamondDetail.getDiamond().getDiamondID())
+        );
+        productDetailRepo.deleteById(id);
         return true;
     }
 
-    public ProductDetailDTO getProductDetailBySize(Integer size, ProductDTO productDTO){
-        Product  product = modelMapper.map(productDTO, Product.class);
+    public ProductDetailDTO getProductDetailBySize(Integer size, ProductDTO productDTO) {
+        Product product = modelMapper.map(productDTO, Product.class);
         ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(size, product.getProductID());
         if (existingProductDetail == null) {
-            throw new RuntimeException("No ProductDetail found");
+            throw new RuntimeException("No ProductDetail found with size: " + size);
         }
-        return modelMapper.map(existingProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
+        return modelMapper.map(existingProductDetail, ProductDetailDTO.class);
     }
 
     public ProductDetailDTO updateProduct(int productDetailID, ProductDetailDTO productDetailDTO) {
-        ProductDetail productDetail = modelMapper.map(productDetailDTO, ProductDetail.class);
         ProductDetail productDetailUpdate = productDetailRepo.findById(productDetailID)
-                .orElseThrow(() -> new RuntimeException("No ProductDetail found"));
-        Product product = productRepo.findById(productDetail.getProductDetailID())
-                .orElseThrow(() -> new RuntimeException("No Product found"));
-        productDetail.setProduct(product);
+                .orElseThrow(() -> new RuntimeException("No ProductDetail found with ID: " + productDetailID));
+
+        ProductDetail productDetail = modelMapper.map(productDetailDTO, ProductDetail.class);
+        Product product = productRepo.findById(productDetail.getProduct().getProductID())
+                .orElseThrow(() -> new RuntimeException("No Product found with ID: " + productDetail.getProduct().getProductID()));
+
+        productDetailUpdate.setProduct(product);
         productDetailUpdate.setInventory(productDetail.getInventory());
         productDetailUpdate.setSize(productDetail.getSize());
         productDetailUpdate.setLaborCost(productDetail.getLaborCost());
         productDetailUpdate.setMarkupRate(productDetail.getMarkupRate());
         productDetailUpdate.setSellingPrice(productDetail.getLaborCost() * productDetail.getMarkupRate());
-        productDetailRepo.save(productDetailUpdate);
-        return modelMapper.map(productDetailUpdate, new TypeToken<ProductDetailDTO>() {}.getType());
+
+        return modelMapper.map(productDetailRepo.save(productDetailUpdate), ProductDetailDTO.class);
     }
 
     public ProductDetailDTO getMinProductDetailByProductId(int productID) {
         List<ProductDetail> productDetails = productDetailRepo.findByProductId(productID);
         if (productDetails.isEmpty()) {
-            throw new RuntimeException("No ProductDetail found");
+            throw new RuntimeException("No ProductDetail found for the given product ID");
         }
 
-        int MinID = 0;
-        double MinPrice = productDetails.get(0).getSellingPrice();
+        ProductDetail minProductDetail = productDetails.stream()
+                .min(Comparator.comparingDouble(ProductDetail::getSellingPrice))
+                .orElseThrow(() -> new RuntimeException("No ProductDetail found with minimum selling price"));
 
-        for (ProductDetail productDetail1 : productDetails) {
-            if(MinPrice >= productDetail1.getSellingPrice()) {
-                MinID = productDetail1.getProductDetailID();
-                MinPrice = productDetail1.getSellingPrice();
-            }
-        }
-
-        ProductDetail returnProductDetail = productDetailRepo.findById(MinID)
-                .orElseThrow(() -> new RuntimeException("No ProductDetail found"));
-
-        return modelMapper.map(returnProductDetail, new TypeToken<ProductDetailDTO>() {}.getType());
+        return modelMapper.map(minProductDetail, ProductDetailDTO.class);
     }
 }

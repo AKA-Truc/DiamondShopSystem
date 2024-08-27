@@ -48,8 +48,9 @@ public class WebSecurityConfig {
                                 "/user-management/register",
                                 "/user-management/login",
                                 "/user-management/update_password/**",
-                                "/product-management/products/**",
-                                "/product-management/products"
+                                "/product-management/products",
+                                "/product-management/products/category/{keyword}/{minPrice}/{maxPrice}",
+                                "/product-management/products/{id}"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

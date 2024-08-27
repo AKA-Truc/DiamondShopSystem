@@ -65,8 +65,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{uid}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_MANAGER','ROLE_CUSTOMER')")
-    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getOrderByUserID(@PathVariable int uid, Authentication authentication) {
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_MANAGER') or (hasAuthority('ROLE_SALE STAFF') or " +
+            "(hasAuthority('ROLE_CUSTOMER') and #uid == principal.id))")
+    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getOrderByUserID(@PathVariable int uid) {
         List<OrderDTO> order = orderService.getOrderByUserId(uid);
         ResponseWrapper<List<OrderDTO>> response;
         if (!order.isEmpty()) {
@@ -77,6 +78,7 @@ public class OrderController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
 
     @PutMapping("/orders/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_DELIVERY STAFF')")

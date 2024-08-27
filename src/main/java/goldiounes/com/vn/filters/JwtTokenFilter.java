@@ -30,21 +30,22 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private final JwtTokenUtils jwtTokenUtil;
     private final Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
 
+    // Đoạn mã trong JwtTokenFilter, method doFilterInternal
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            // Check if the request is for a bypassed resource
             if (isBypassToken(request)) {
                 logger.info("Bypassing token for request path: {}", request.getServletPath());
                 filterChain.doFilter(request, response);
                 return;
             }
 
-            // Validate the JWT token
             final String authHeader = request.getHeader("Authorization");
+            logger.debug("Authorization Header: {}", authHeader);
+
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 logger.debug("No Authorization header or invalid format. Proceeding without authentication.");
                 filterChain.doFilter(request, response);
@@ -53,14 +54,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             final String token = authHeader.substring(7);
             final String email = jwtTokenUtil.extractEmail(token);
+            logger.debug("Extracted Email from Token: {}", email);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                logger.debug("Loaded UserDetails: {}", userDetails.getUsername());
+
                 if (jwtTokenUtil.validateToken(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    logger.debug("Authentication successful. User authenticated: {}", userDetails.getUsername());
+                } else {
+                    logger.debug("Token validation failed for user: {}", email);
                 }
             }
 
@@ -71,6 +78,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             response.getWriter().write("Unauthorized: " + e.getMessage());
         }
     }
+
 
     private boolean isBypassToken(@NonNull HttpServletRequest request) {
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
