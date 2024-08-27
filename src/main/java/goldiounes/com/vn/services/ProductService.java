@@ -41,6 +41,15 @@ public class ProductService {
     @Autowired
     private CartItemService cartItemService;
 
+    public ProductService(ProductRepo productRepo, CategoryRepo categoryRepo, ModelMapper modelMapper, FileUploadService fileUploadService, ProductDetailService productDetailService, OrderDetailService orderDetailService) {
+        this.productRepo = productRepo;
+        this.categoryRepo = categoryRepo;
+        this.modelMapper = modelMapper;
+        this.fileUploadService = fileUploadService;
+        this.productDetailService = productDetailService;
+        this.orderDetailService = orderDetailService;
+    }
+
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepo.findAll();
         if (products.isEmpty()) {
