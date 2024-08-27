@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // AJAX request với các giá trị đã xử lý ở bên trên
         $.ajax({
-            url: '/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}',
+            url: `/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}`,
             method: 'GET',
             dataType: 'json',
             success: function(responseData) {
