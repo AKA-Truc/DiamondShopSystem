@@ -8,56 +8,11 @@ function rotateText() {
         centerText.textContent = textOptions[textIndex];
         centerText.classList.add('visible');
         textIndex = (textIndex + 1) % textOptions.length;
-    }, 1000); // Wait for the fade-out effect before changing text
+    }, 1000);
 }
 
 setInterval(rotateText, 3000);
-rotateText();
-function calculateCartTotal() {
-    const cartRows = document.querySelectorAll('.cart-table tbody tr');
-    let subtotal = 0;
-
-
-    cartRows.forEach(row => {
-        const priceElement = row.querySelector('#price');
-        const quantityInput = row.querySelector('.quantity-input');
-        const price = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''));
-        const quantity = parseInt(quantityInput.value);
-
-
-        const total = price * quantity;
-
-
-        subtotal += total;
-
-
-        const totalElement = row.querySelector('td:last-child');
-        totalElement.textContent = new Intl.NumberFormat('vi-VN', {
-            style: 'currency',
-            currency: 'VND'
-        }).format(total);
-    });
-
-    // Cập nhật phần "Tạm tính" và "Tổng" trong giỏ hàng
-    document.getElementById('PriceName').textContent = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    }).format(subtotal);
-
-    const grandTotalElement = document.querySelector('.cart-summary-row:last-child span:last-child');
-    grandTotalElement.textContent = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    }).format(subtotal);
-}
-
-
-calculateCartTotal();
-
-
-document.querySelectorAll('.quantity-input').forEach(input => {
-    input.addEventListener('change', calculateCartTotal);
-});
+rotateText(); // Initialize text
 
 // icon click
 document.addEventListener("DOMContentLoaded", function () {
@@ -112,4 +67,44 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 200);
         }
     });
+});
+//
+document.getElementById("kienthuc-link").addEventListener("click", function () {
+    document.getElementById("dautu-content").classList.remove("active");
+    document.getElementById("sukien-content").classList.remove("active");
+    document.getElementById("thongtin-content").classList.remove("active");
+    document.getElementById("khuyenmai-content").classList.remove("active");
+    document.getElementById("kienthuc-content").classList.add("active");
+});
+
+document.getElementById("dautu-link").addEventListener("click", function () {
+    document.getElementById("kienthuc-content").classList.remove("active");
+    document.getElementById("sukien-content").classList.remove("active");
+    document.getElementById("thongtin-content").classList.remove("active");
+    document.getElementById("khuyenmai-content").classList.remove("active");
+    document.getElementById("dautu-content").classList.add("active");
+});
+
+document.getElementById("sukien-link").addEventListener("click", function () {
+    document.getElementById("dautu-content").classList.remove("active");
+    document.getElementById("kienthuc-content").classList.remove("active");
+    document.getElementById("thongtin-content").classList.remove("active");
+    document.getElementById("khuyenmai-content").classList.remove("active");
+    document.getElementById("sukien-content").classList.add("active");
+});
+
+document.getElementById("thongtin-link").addEventListener("click", function () {
+    document.getElementById("dautu-content").classList.remove("active");
+    document.getElementById("kienthuc-content").classList.remove("active");
+    document.getElementById("sukien-content").classList.remove("active");
+    document.getElementById("khuyenmai-content").classList.remove("active");
+    document.getElementById("thongtin-content").classList.add("active");
+});
+
+document.getElementById("khuyenmai-link").addEventListener("click", function () {
+    document.getElementById("dautu-content").classList.remove("active");
+    document.getElementById("kienthuc-content").classList.remove("active");
+    document.getElementById("sukien-content").classList.remove("active");
+    document.getElementById("thongtin-content").classList.remove("active");
+    document.getElementById("khuyenmai-content").classList.add("active");
 });

@@ -47,15 +47,13 @@
 <!--  -->
 <!-- cart -->
 <div id="cart-overlay" class="cart-overlay">
-    <div class="cart-box">
+    <div id="cart-box" class="cart-box">
         <h2>Your Shopping Cart</h2>
         <p>No items in the cart.</p>
-        <button>Checkout</button>
+        <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
     </div>
 </div>
-
-<!---->
-
+<!--  -->
 <div class="product-container">
     <div class="image-section">
         <img src="/static/images/bong1.png" alt="Diamond Ring">
@@ -283,15 +281,13 @@
         <div class="grid_row">
             <div class="grid__column-2-4">
                 <h3 class="footer-heading">Danh mục</h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="/templates/User/diamond_earrings.html">Bông tai kim cương</a>
-                        <a href="/templates/User/diamond_bracelets.html">Lắc tay kim cương</a>
-                        <a href="/templates/User/men's_diamond.html">Nhẫn kim cương</a>
-                        <a href="">Dây chuyền kim cương</a>
-                        <a href="/templates/User/diamond_pendant.html">Mặt dây chuyền kim cương</a>
-                    </li>
-                </ul>
+                <li>
+                    <a href="products.html">Bông tai kim cương</a>
+                    <a href="products.html">Lắc tay kim cương</a>
+                    <a href="products.html">Nhẫn kim cương</a>
+                    <a href="products.html">Dây chuyền kim cương</a>
+                    <a href="products.html">Mặt dây chuyền kim cương</a>
+                </li>
             </div>
             <div class="grid__column-2-4">
                 <h3 class="footer-heading">Liên hệ </h3>
@@ -321,7 +317,7 @@
     </div>
 </footer>
 <!--  -->
-
+<script src="/static/js/User/detail.js"></script>
 </body>
 
 </html>

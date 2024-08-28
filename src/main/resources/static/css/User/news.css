@@ -195,53 +195,7 @@ body {
     transform: translateY(-50%);
 }
 
-/**/
-.search-overlay {
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(195, 194, 196);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-/* The search box */
-.search-box {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.search-box input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    width: 100%;
-}
-
-.search-box button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 90px;
-}
-
-.search-box button:hover {
-    background-color: #f6f6f6;
-}
-
-/* cart */
+/* Begin update code for search and cart */
 .search-overlay {
     display: none;
     position: fixed;
@@ -249,6 +203,7 @@ body {
     top: -33.33%;
     width: 100%;
     height: 33.33%;
+    background-color: rgba(99, 95, 95, 0.9);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -258,6 +213,8 @@ body {
 .search-overlay.active {
     top: 0;
 }
+
+/* The search box */
 .search-box {
     width: 50%;
     background: white;
@@ -280,43 +237,38 @@ body {
 .search-box button {
     padding: 10px 20px;
     font-size: 16px;
+    background-color: black;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 90px;
+    position: absolute;
+    top: 50%;
 }
 
 .search-box button:hover {
-    background-color: #dddada;
+    background-color: #444;
 }
-
 
 /* The cart box */
-/* The cart overlay */
-.cart-overlay {
-    display: none;
-    position: fixed;
-    right: -100%;
-    top: 0;
-    width: 25%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-    padding: 20px;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: right 0.5s ease;
-}
-
-.cart-overlay.active {
-    right: 0;
-}
-/* The cart content */
 .cart-box {
     height: 100%;
-    display: flex;
+    width: 25%;
+    margin-left: 75%;
+    background-color: white;  /* Đổi màu cho background của cart */
+    display: none;
+    position: fixed;
     flex-direction: column;
     justify-content: space-between;
-    color: white;
+    right: -100%;
+    z-index: 1000;
+    transition: right 0.5s ease;
+    color: rgb(0, 0, 0);
+}
+
+.cart-box.active {
+    right: 0;
 }
 
 .cart-box h2 {
@@ -334,276 +286,182 @@ body {
 .cart-box button {
     padding: 15px;
     font-size: 18px;
-    background-color: white;
+    background-color: rgb(166, 168, 174);
     color: black;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 350px;
+    margin-top: 20px;
+    width: 70%;
+    margin-left: 70px;
+    position: absolute;
+    top: 50%;
 }
 
 .cart-box button:hover {
     background-color: #ddd;
 }
 
-/**/
-.wrapper {
-    position: relative;
-    text-align: left;
-    margin-top: 45px;
-    z-index: 1;
-}
-
-.headline img {
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
-    display: block;
-}
-#body1{
-    max-width: 1170px;
-    margin: 0 auto;
-}
-.body-text{
-    text-align: center;
-    margin: 40px 0;
-}
-.body-text>h2{
-    font-size: 18px;
-    padding: 10px 20px;
-    text-transform: uppercase;
-    border-bottom: 2px solid #000 ;
-    display: inline-block;
-}
-ul.products{
-    list-style: none;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-}
-ul.products li{
-    flex-basis: 33%;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 40px;
-}
-u.products li img {
-    max-width: 100%;
-    height: auto;
-}
-ul.products li .product-item{
-    text-align: center;
-}
-ul.products li .product-info{
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-}
-ul.products li .product-top{
-    display: block;
-    position: relative;
-    overflow: hidden;
-
-
-}
-ul.products li:hover a.buy-now{
-    bottom: 30px;
-}
-ul.products li .product-top .product-thumb{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-ul.products li .product-top .product-thumb img{
-    display: block;
-
-}
-
-ul.products li .product-top a.buy-now{
-    text-transform: uppercase;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(255, 255, 255);
-    color:#000000;
-    padding: 10px 0;
-    position: absolute;
-    left: 30%;
-    opacity: 0.75;
-    border:1px solid #373737;
-    border-radius: 20px;
-    width: 40%;
-    font-size: 13px;
-}
-ul.products li a.buy-now:hover {
-    background-color: rgb(52, 52, 51);
-    color:#ffffff
-}
-ul.products li .product-info a{
-    display: block;
-    text-decoration: none;
-
-}
-ul.products li .product-info a.product-cart{
-    text-transform: uppercase;
-    color: rgb(0, 71, 0);
-    font-size: 14px;
-    padding: 3px 0px;
-
-}
-ul.products li .product-info a.product-name{
-    padding: 3px 0px;
-    color:#000;
-}
-ul.products li .product-info .product-price{
-    margin-top: 5px;
-    display: flex;
-    gap: 30px;
-}
-
-/**/
-.footer {
-    background-color: #1A1919;
-    color: #d3cece;
-    padding: 20px 0;
-    margin-top: 10px;
-    font-family: Arial, sans-serif;
+/* */
+.cart-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
     width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.grid {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.grid_row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.grid__column-2-4 {
-    width: 30%;
-}
-
-.footer-heading {
-    font-size: 16px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.footer__list {
-    list-style: none;
-    padding: 0;
-}
-
-.footer__list li {
-    margin-bottom: 10px;
-}
-
-.footer__list a {
-    color: #d3cece;
-    text-decoration: none;
+.cart-overlay.active {
     display: block;
-    margin-bottom: 5px;
-}
-
-.footer__list a:hover {
-    text-decoration: underline;
-}
-
-
-form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-form input[type="text"] {
-    padding: 8px ;
-    width: 70%;
-    margin-right: 10px;
-    background-color: #dbdbdb;
-    border: 1px solid #ffffff;
-    color: #000000;
-    box-sizing: border-box;
-}
-
-form input[type="text"]::placeholder {
-    color: #000000;
     opacity: 1;
 }
+/* End update code for search and cart */
+/**/
 
-form input[type="submit"] {
-    background-color: #888;
-    color: #000;
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
-    text-transform: uppercase;
-    flex-shrink: 0;
-}
-
-form input[type="submit"]:hover {
-    background-color: #cfb0b0;
-}
-
-/*  */
-.news-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px; /* Giảm khoảng cách giữa các ô */
-    max-width: 100%; /* Đặt container rộng tối đa */
-    margin: 0 auto;
+.container {
+    display: flex;
+    max-width: 1280px;
+    margin: 90px auto;
     padding: 20px;
-    overflow: hidden;
 }
 
-/* Đảm bảo các phần tử không vượt quá kích thước */
-.news-item {
-    background-color: #fff;
+.main-banner {
+    flex: 1;
+    margin-right: 20px;
+    padding-right: 20px;
+}
+.main-banner:hover{
+    transform: translateY(-5px);
+}
+
+.main-banner img {
+    width: 100%;
+    height: calc(3 * 150px + 2 * 10px);
+    object-fit: cover;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+}
+
+.banner-text {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.side-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 250px; /* Đảm bảo chiều cao tối thiểu */
-    margin: 5px;
+}
+.side-item:hover{
+    transform: translateY(-5px);
+
 }
 
-.news-item:hover {
-    transform: translateY(-10px);
+.side-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-/* Hình ảnh trong tin tức */
-.news-item img {
-    width: 100%;
+.side-item img {
+    margin-top: 15px;
+    width: 200px;
     height: auto;
-    object-fit: cover; /* Đảm bảo hình ảnh bao phủ đều khung hình */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
 }
 
-/* Tiêu đề tin tức */
-.news-item h3 {
-    font-size: 20px;
-    margin: 15px;
-    color: #333;
-    text-align: center; /* Căn giữa tiêu đề */
-}
 
-/* Link xem ngay */
-.news-item a {
-    display: block;
-    margin: 15px;
-    color: #007BFF;
+.side-item-text a {
     text-decoration: none;
+    color: black;
     font-weight: bold;
-    text-align: center; /* Căn giữa liên kết */
+    font-size: 16px;
 }
 
-.news-item a:hover {
+.side-item-text a:hover {
     text-decoration: underline;
+}
+
+.side-item:last-child {
+    margin-bottom: 0;
+}
+
+.container-news {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+}
+
+.nav-bar ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.nav-bar ul li {
+    margin-right: 20px;
+}
+
+.nav-bar ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 10px 0;
+    display: block;
+    cursor: pointer;
+    border-bottom: 3px solid transparent; /* Add this line */
+    transition: border-bottom 0.3s ease; /* Optional: Smooth transition */
+}
+
+.nav-bar ul li a:hover {
+    border-bottom: 3px solid black;
+}
+
+.content {
+    display: none;
+    flex-direction: column;
+}
+
+.content.active {
+    display: flex;
+}
+
+.article {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.article img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.article .text {
+    max-width: 700px;
+}
+
+.article .text h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: black;
+}
+
+.article .text p {
+    margin: 0;
+    color: #555;
 }
