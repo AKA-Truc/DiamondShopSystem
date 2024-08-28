@@ -11,7 +11,7 @@ function rotateText() {
     }, 1000); // Wait for the fade-out effect before changing text
 }
 
-setInterval(rotateText, 3000); // Change text every 3 seconds (1s fade-out + 1s fade-in)
+setInterval(rotateText, 2000); // Change text every 3 seconds (1s fade-out + 1s fade-in)
 rotateText(); // Initialize text
 
 // icon click
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchIcon = document.querySelector(".fa-magnifying-glass");
     const searchOverlay = document.getElementById("search-overlay");
     const cartIcon = document.querySelector(".fa-cart-shopping");
+    const cartBox = document.getElementById("cart-box");
     const cartOverlay = document.getElementById("cart-overlay");
 
     // Show the search overlay with transition
@@ -31,8 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Show the cart overlay with transition
     cartIcon.addEventListener("click", function () {
-        cartOverlay.style.display = "flex";
+        cartBox.style.display = "flex";
+        cartOverlay.style.display = "block"; // Ensure overlay is displayed
         setTimeout(() => {
+            cartBox.classList.add("active");
             cartOverlay.classList.add("active");
         }, 10);
     });
@@ -45,11 +48,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 searchOverlay.style.display = "none";
             }, 500); // Matches the transition duration
         }
-        if (e.target === cartOverlay || !cartOverlay.contains(e.target) && e.target !== cartIcon) {
-            cartOverlay.classList.remove("active");
+        if (e.target === cartBox || !cartBox.contains(e.target) && e.target !== cartIcon) {
+            cartBox.classList.remove("active");
             setTimeout(() => {
+                cartBox.style.display = "none";
                 cartOverlay.style.display = "none";
-            }, 500);
+            }, 200);
         }
     });
 
@@ -57,11 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
             searchOverlay.classList.remove("active");
-            cartOverlay.classList.remove("active");
+            cartBox.classList.remove("active");
             setTimeout(() => {
                 searchOverlay.style.display = "none";
                 cartOverlay.style.display = "none";
-            }, 500);
+                cartBox.style.display = "none";
+            }, 200);
         }
     });
 });

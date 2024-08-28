@@ -8,6 +8,7 @@ import goldiounes.com.vn.services.DiamondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class DiamondController {
     private DiamondDetailService diamondDetailService;
 
     @PostMapping("/diamonds")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<DiamondDTO>> createDiamond(@RequestBody DiamondDTO diamondDTO) {
         DiamondDTO createdDiamond = diamondService.createDiamond(diamondDTO);
         ResponseWrapper<DiamondDTO> response = new ResponseWrapper<>("Diamond created successfully", createdDiamond);
@@ -30,6 +32,7 @@ public class DiamondController {
     }
 
     @GetMapping("/diamonds")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<List<DiamondDTO>>> getAllDiamonds() {
         List<DiamondDTO> diamonds = diamondService.findAll();
         ResponseWrapper<List<DiamondDTO>> response;
@@ -44,6 +47,7 @@ public class DiamondController {
     }
 
     @GetMapping("/diamonds/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<DiamondDTO>> getDiamond(@PathVariable int id) {
         DiamondDTO diamond = diamondService.findById(id);
         ResponseWrapper<DiamondDTO> response;
@@ -58,6 +62,7 @@ public class DiamondController {
     }
 
     @PutMapping("/diamonds/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<DiamondDTO>> updateDiamond(@PathVariable int id, @RequestBody DiamondDTO diamondDTO) {
         DiamondDTO updatedDiamond = diamondService.updateDiamond(id, diamondDTO);
         ResponseWrapper<DiamondDTO> response;
@@ -72,6 +77,7 @@ public class DiamondController {
     }
 
     @DeleteMapping("/diamonds/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deleteDiamond(@PathVariable int id) {
         boolean isDeleted = diamondService.deleteDiamond(id);
         ResponseWrapper<Void> response;
@@ -86,6 +92,7 @@ public class DiamondController {
     }
 
     @PostMapping("/diamond-details")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<DiamondDetailDTO>> createDiamondDetail(@RequestBody DiamondDetailDTO diamondDetailDTO) {
         DiamondDetailDTO createdDetail = diamondDetailService.createDiamondDetail(diamondDetailDTO);
         ResponseWrapper<DiamondDetailDTO> response = new ResponseWrapper<>("Diamond detail created successfully", createdDetail);
@@ -93,6 +100,7 @@ public class DiamondController {
     }
 
     @GetMapping("/diamond-details")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<List<DiamondDetailDTO>>> getAllDiamondDetails() {
         List<DiamondDetailDTO> diamondDetails = diamondDetailService.findAll();
         ResponseWrapper<List<DiamondDetailDTO>> response;
@@ -107,6 +115,7 @@ public class DiamondController {
     }
 
     @GetMapping("/diamond-details/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<DiamondDetailDTO>> getDiamondDetail(@PathVariable int id) {
         DiamondDetailDTO diamondDetail = diamondDetailService.findById(id);
         ResponseWrapper<DiamondDetailDTO> response;
@@ -121,6 +130,7 @@ public class DiamondController {
     }
 
     @PutMapping("/diamond-details/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<DiamondDetailDTO>> updateDiamondDetail(@PathVariable int id, @RequestBody DiamondDetailDTO diamondDetailDTO) {
         DiamondDetailDTO updatedDetail = diamondDetailService.update(id, diamondDetailDTO);
         ResponseWrapper<DiamondDetailDTO> response;
@@ -135,6 +145,7 @@ public class DiamondController {
     }
 
     @DeleteMapping("/diamond-details/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deleteDiamondDetail(@PathVariable int id) {
         boolean isDeleted = diamondDetailService.deleteById(id);
         ResponseWrapper<Void> response;

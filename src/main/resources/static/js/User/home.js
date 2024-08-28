@@ -11,8 +11,8 @@ function rotateText() {
     }, 1000);
 }
 
-setInterval(rotateText, 2000); // Change text every 3 seconds (1s fade-out + 1s fade-in)
-rotateText(); // Initialize text
+setInterval(rotateText, 2000);
+rotateText();
 
 // icon click
 document.addEventListener("DOMContentLoaded", function () {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cartOverlay.classList.add("active");
         }, 10);
     });
-
+    console.log(cartIcon)
     // Hide the overlays when clicking outside the content boxes
     document.addEventListener("click", function (e) {
         if (e.target === searchOverlay || !searchOverlay.contains(e.target) && e.target !== searchIcon) {
@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Hide the overlays when pressing the Escape key
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
             searchOverlay.classList.remove("active");
