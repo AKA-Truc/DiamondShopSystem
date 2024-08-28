@@ -5,7 +5,6 @@ body {
     background-color: #f4f7fb;
 }
 
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -19,7 +18,7 @@ body {
 
 /* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c; /*chỉnh chữ*/
+    color: #0d0e1c;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -31,7 +30,6 @@ body {
     color: #141E0C;
 }
 
-/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -48,7 +46,7 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #cbd0dd; /*click menu*/
+    background-color: #cbd0dd;
 }
 
 /* Submenu sổ xuống */
@@ -62,7 +60,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ebf0f8;  /*comment* menu con*/
+    background-color: #ebf0f8;
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -88,7 +86,7 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #cbd0dd;/* comment*/
+    background-color: #cbd0dd;
 }
 
 ion-icon {
@@ -145,42 +143,44 @@ ion-icon {
     width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #162165e7; /*thanh br*/
+    background-color: #162165e7;
 }
 
-
-
 select {
-    font-size: 18px; /* Tăng kích thước phông chữ */
-    padding: 10px; /* Tăng khoảng cách bên trong */
+    font-size: 18px;
+    padding: 10px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Thay đổi kích thước và kiểu các tùy chọn */
 option {
-    font-size: 18px; /* Tăng kích thước phông chữ */
-    padding: 10px; /* Tăng khoảng cách bên trong */
+    font-size: 18px;
+    padding: 10px;
+}
+/**/
+
+
+
+
+.body1 {
+    margin: 70px auto;
+    width: 90%;
+    max-width: 1200px;
 }
 
-
-.body1, .body2 {
-    display: flex;
-    justify-content:flex-start; /* Đẩy khung về phía bên phải */
-    margin: 70px;
-    height: 40vh;
-    align-items: center; /* Căn giữa khung theo chiều dọc */
-    margin-left: 160px;
+.body2 {
+    display: none;
+    /*margin: 70px auto;*/
+    width: 90%;
+    max-width: 1200px;
 }
 
 .wrapper {
-    width: 80%;
-    max-width: 9000px;
-    height: 315px;
-    padding: 250px;
-    margin-left: 160px;
-    align-items: center; /* Căn giữa khung theo chiều dọc */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
+
 .form {
     display: flex;
 }
@@ -213,11 +213,11 @@ option {
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
+    transition: border-color 0.3s ease;
 }
 .field input:focus {
-    border-color: #000; /* Đổi màu viền khi focus */
-    outline: none; /* Bỏ viền outline mặc định */
+    border-color: #000;
+    outline: none;
 }
 
 #CategoryID{
@@ -225,7 +225,7 @@ option {
 }
 
 .styled-select {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Thay đổi font chữ */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 14px;
 }
 .button {
@@ -234,18 +234,18 @@ option {
     margin: 8px 8px;
 }
 .button input {
-    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    font-size: 14px;
     cursor: pointer;
-    margin-right: 700px; /* Khoảng cách giữa các nút */
+    margin-right: 700px;
 }
 .button-group input{
-    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    font-size: 14px;
     cursor: pointer;
     margin: 8px 8px;
 }
@@ -272,10 +272,22 @@ option {
     background-color: #b7bec1;
 }
 
-.divider {
-    border: none;
-    height: 1.1px;
-    background-color: #4c82af;
-    margin: 110px 0;
+/**/
+
+
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.button-group .add {
+    margin-left: auto;
+}
+
+.button-group input.add  {
+    background-color: #797d97;
+}
+
 

@@ -9,7 +9,26 @@
         function alertFeature() {
             alert('Tính năng đang được được phát triển');
         }
+
+        function addDetails() {
+            // Lấy thẻ body1 và body2
+            var body1 = document.querySelector('.body1');
+            var body2Template = document.querySelector('.body2');
+
+            // Sao chép body2 và thêm vào body1
+            var newBody2 = body2Template.cloneNode(true);
+            newBody2.style.display = "block"; // Đảm bảo hiển thị
+
+            // Thêm bản sao mới vào body1
+            body1.appendChild(newBody2);
+
+        function addDetails() {
+                // Xử lý thêm chi tiết ở đây
+                alert("Nút 'Thêm' đã được nhấn!");
+            }
+        }
     </script>
+
 </head>
 <body>
 
@@ -139,8 +158,8 @@
 
             <div class="form-row">
                 <div class="field input">
-                    <label for="Warranty">Thời hạn bảo hành</label>
-                    <input type="date" id="Warranty" name="Warranty" required>
+                    <label for="Warranty">Thời Hạn Bảo Hành</label>
+                    <input type="month" id="Warranty" name="Warranty" required>
                 </div>
             </div>
 
@@ -161,13 +180,14 @@
 
             <div class="button-group">
                 <input type="submit" value="Thêm Sản Phẩm" class="save">
-                <input type="button" value="Hủy" class="cancel">
+                <input type="button" value="Hủy" class="cancel" onclick="window.location.href='product.html'">
+                <input type="button" value="Thêm" class="add" onclick="addDetails()">
             </div>
         </form>
     </div>
 </div>
 
-<hr>
+<!--<hr>-->
 <div class="body2">
     <div class="wrapper">
         <form id="myFormother" enctype="multipart/form-data">
@@ -206,12 +226,9 @@
                 </div>
             </div>
 
-            <div class="field">
-                <label for="Tenkimcuong">Tên kim cương</label>
-                <select id="Tenkimcuong" name="tênKimCương">
-                    <option value="sanPham1">Tên 1</option>
-                    <option value="sanPham2">Tên 2</option>
-                </select>
+            <div class="field input">
+                <label for="Name">Tên Kim Cương</label>
+                <input type="text" id="Name1" name="Name" placeholder="Nhập Tên Kim Cương" required>
             </div>
 
             <div class="middle-fields">
@@ -246,13 +263,9 @@
             </div>
 
             <div class="button-group">
-                <input type="submit" value="Thêm Sản Phẩm" class="save">
+                <input type="submit" value="Lưu Chi Tiết Sản Phẩm" class="save">
                 <input type="button" value="Hủy" class="cancel">
             </div>
-
-
-
-
 
         </form>
     </div>
