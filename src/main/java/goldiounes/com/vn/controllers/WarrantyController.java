@@ -6,6 +6,7 @@ import goldiounes.com.vn.services.WarrantyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class WarrantyController {
     private WarrantyService warrantyService;
 
     @PostMapping("/warranties")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<WarrantyDTO>> createWarranty(@PathVariable int orderId, @RequestBody WarrantyDTO warrantyDTO) {
         WarrantyDTO createdWarranty = warrantyService.createWarranty(orderId, warrantyDTO);
         ResponseWrapper<WarrantyDTO> response = new ResponseWrapper<>("Warranty created successfully", createdWarranty);
@@ -25,6 +27,7 @@ public class WarrantyController {
     }
 
     @GetMapping("/warranties/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<WarrantyDTO>> getWarranty(@PathVariable int id) {
         WarrantyDTO warranty = warrantyService.getWarranty(id);
         if (warranty != null) {
@@ -37,6 +40,7 @@ public class WarrantyController {
     }
 
     @GetMapping("/warranties")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<List<WarrantyDTO>>> getAllWarranties() {
         List<WarrantyDTO> warranties = warrantyService.getAllWarranties();
         ResponseWrapper<List<WarrantyDTO>> response = new ResponseWrapper<>("Warranties retrieved successfully", warranties);
@@ -44,6 +48,7 @@ public class WarrantyController {
     }
 
     @GetMapping("/warranties/user/{email}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<List<WarrantyDTO>>> getWarrantyByEmail(@PathVariable String email) {
         List<WarrantyDTO> warranty = warrantyService.findByUserEmail(email);
         if (!warranty.isEmpty()) {
@@ -56,6 +61,7 @@ public class WarrantyController {
     }
 
     @PutMapping("/warranties/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<WarrantyDTO>> updateWarranty(@PathVariable int id, @RequestBody WarrantyDTO warrantyDTO) {
         WarrantyDTO updatedWarranty = warrantyService.updateWarranty(id, warrantyDTO);
         if (updatedWarranty != null) {
@@ -68,6 +74,7 @@ public class WarrantyController {
     }
 
     @DeleteMapping("/warranties/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deleteWarranty(@PathVariable int id) {
         boolean isDeleted = warrantyService.deleteWarranty(id);
         ResponseWrapper<Void> response;

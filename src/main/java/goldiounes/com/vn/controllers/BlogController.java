@@ -6,6 +6,7 @@ import goldiounes.com.vn.services.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/blogs")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<BlogDTO>> createBlog(@RequestBody BlogDTO blogDTO) {
         BlogDTO createdBlog = blogService.createBlog(blogDTO);
         ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog created successfully", createdBlog);
@@ -25,6 +27,7 @@ public class BlogController {
     }
 
     @GetMapping("/blogs/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<BlogDTO>> getBlogs(@PathVariable int id) {
         BlogDTO blog = blogService.getBlogs(id);
         if (blog != null) {
@@ -37,6 +40,7 @@ public class BlogController {
     }
 
     @GetMapping("/blogs")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<List<BlogDTO>>> getAllBlogs() {
         List<BlogDTO> blogs = blogService.getAllBlogs();
         if (!blogs.isEmpty()) {
@@ -50,6 +54,7 @@ public class BlogController {
     }
 
     @PutMapping("/blogs/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<BlogDTO>> updateBlog(@PathVariable int id, @RequestBody BlogDTO blogDTO) {
         BlogDTO updatedBlog = blogService.updateBlog(id, blogDTO);
         if (updatedBlog != null) {
@@ -62,6 +67,7 @@ public class BlogController {
     }
 
     @DeleteMapping("/blogs/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deleteBlog(@PathVariable int id) {
         boolean deleted = blogService.deleteBlog(id);
         if (deleted) {

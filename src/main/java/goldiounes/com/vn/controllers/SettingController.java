@@ -6,6 +6,7 @@ import goldiounes.com.vn.services.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class SettingController {
     private SettingService settingService;
 
     @GetMapping("/settings")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<List<SettingDTO>>> getAllSettings() {
         List<SettingDTO> settings = settingService.getAllSettings();
         ResponseWrapper<List<SettingDTO>> response = new ResponseWrapper<>("Settings retrieved successfully", settings);
@@ -25,6 +27,7 @@ public class SettingController {
     }
 
     @GetMapping("/settings/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<SettingDTO>> getSetting(@PathVariable int id) {
         SettingDTO setting = settingService.getSetting(id);
         if (setting != null) {
@@ -37,6 +40,7 @@ public class SettingController {
     }
 
     @PostMapping("/settings")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseWrapper<SettingDTO>> createSetting(@RequestBody SettingDTO setting) {
         SettingDTO createdSetting = settingService.createSetting(setting);
         ResponseWrapper<SettingDTO> response = new ResponseWrapper<>("Setting created successfully", createdSetting);
@@ -44,6 +48,7 @@ public class SettingController {
     }
 
     @PutMapping("/settings/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<SettingDTO>> updateSetting(@PathVariable int id, @RequestBody SettingDTO settingDTO) {
         SettingDTO updatedSetting = settingService.updateSetting(id, settingDTO);
         if (updatedSetting != null) {
@@ -56,6 +61,7 @@ public class SettingController {
     }
 
     @DeleteMapping("/settings/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<Void>> deleteSetting(@PathVariable int id) {
         boolean isDeleted = settingService.deleteSetting(id);
         ResponseWrapper<Void> response;
