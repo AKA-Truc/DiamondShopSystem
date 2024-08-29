@@ -1,6 +1,7 @@
 package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.components.JwtTokenUtils;
+import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.models.dtos.UserLoginDTO;
 import goldiounes.com.vn.models.entities.Token;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,17 +91,26 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER') " +
-            "or (hasAuthority('ROLE_CUSTOMER'))")
-    public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id) {
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+                    "(hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_STAFF') and #id == #authentication.principal.id)"
+    )
+    public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
         UserDTO user = userService.getUser(id);
-        if (user != null) {
-            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User retrieved successfully", user);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+
+        if (user == null) {
+            return new ResponseEntity<>(new ResponseWrapper<>("User not found", null), HttpStatus.NOT_FOUND);
         }
+
+        // Kiểm tra quyền truy cập
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER") || auth.getAuthority().equals("ROLE_STAFF"))) {
+            if (user.getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>("User retrieved successfully", user), HttpStatus.OK);
     }
 
     @GetMapping("/users")
@@ -150,8 +161,5 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("Server is working");
-    }
+
 }

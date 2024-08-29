@@ -45,13 +45,8 @@ public class SecurityConfig {
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());
 
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(user.getPassword())
-                .authorities(authorities)  // Sử dụng authorities thay vì .roles()
-                .build();
+        return new CustomUserDetails(user.getUserID(), user.getEmail(), authorities);
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
