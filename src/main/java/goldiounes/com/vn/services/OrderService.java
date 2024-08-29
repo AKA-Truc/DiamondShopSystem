@@ -221,7 +221,7 @@ public class OrderService {
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
             User user = order.getUser(); // Giả sử Order có một trường User
-            return user != null && user.getUserName().equals(username);
+            return user != null && user.getEmail().equals(username);
         }
         return false;
     }

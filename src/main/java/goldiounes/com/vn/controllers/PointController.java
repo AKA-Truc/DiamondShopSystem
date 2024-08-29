@@ -1,5 +1,6 @@
 package goldiounes.com.vn.controllers;
 
+import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.PointService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,16 +29,25 @@ public class PointController {
     }
 
     @GetMapping("/points/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF', 'ROLE_CUSTOMER')")
-    public ResponseEntity<ResponseWrapper<PointDTO>> getPointById(@PathVariable int id) {
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF') or " +
+                    "(hasAuthority('ROLE_CUSTOMER') and #id == #authentication.principal.id)"
+    )
+    public ResponseEntity<ResponseWrapper<PointDTO>> getPointById(@PathVariable int id, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
         PointDTO point = pointService.findById(id);
-        if (point != null) {
-            ResponseWrapper<PointDTO> response = new ResponseWrapper<>("Point retrieved successfully", point);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ResponseWrapper<PointDTO> response = new ResponseWrapper<>("Point not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+
+        if (point == null) {
+            return new ResponseEntity<>(new ResponseWrapper<>("Point not found", null), HttpStatus.NOT_FOUND);
         }
+
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (point.getUser().getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>("Point retrieved successfully", point), HttpStatus.OK);
     }
 
     @PostMapping("/points")
