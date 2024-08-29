@@ -93,7 +93,7 @@ public class UserController {
     @GetMapping("/users/{id}")
     @PreAuthorize(
             "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-                    "(hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_STAFF') and #id == #authentication.principal.id)"
+                    "(hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_STAFF') and #id == #authentication.principal)"
     )
     public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();

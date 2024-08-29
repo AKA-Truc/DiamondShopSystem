@@ -19,7 +19,7 @@ public class WarrantyController {
     private WarrantyService warrantyService;
 
     @PostMapping("/warranties")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SALE STAFF')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<WarrantyDTO>> createWarranty(@PathVariable int orderId, @RequestBody WarrantyDTO warrantyDTO) {
         WarrantyDTO createdWarranty = warrantyService.createWarranty(orderId, warrantyDTO);
         ResponseWrapper<WarrantyDTO> response = new ResponseWrapper<>("Warranty created successfully", createdWarranty);
@@ -48,7 +48,7 @@ public class WarrantyController {
     }
 
     @GetMapping("/warranties/user/{email}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<List<WarrantyDTO>>> getWarrantyByEmail(@PathVariable String email) {
         List<WarrantyDTO> warranty = warrantyService.findByUserEmail(email);
         if (!warranty.isEmpty()) {
@@ -61,7 +61,7 @@ public class WarrantyController {
     }
 
     @PutMapping("/warranties/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<WarrantyDTO>> updateWarranty(@PathVariable int id, @RequestBody WarrantyDTO warrantyDTO) {
         WarrantyDTO updatedWarranty = warrantyService.updateWarranty(id, warrantyDTO);
         if (updatedWarranty != null) {
@@ -74,7 +74,7 @@ public class WarrantyController {
     }
 
     @DeleteMapping("/warranties/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<Void>> deleteWarranty(@PathVariable int id) {
         boolean isDeleted = warrantyService.deleteWarranty(id);
         ResponseWrapper<Void> response;
