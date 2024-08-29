@@ -188,5 +188,4 @@ public class ProductService {
 
         return modelMapper.map(existingProduct, ProductDTO.class);
     }
-
 }

@@ -1,5 +1,6 @@
 package goldiounes.com.vn.controllers;
 
+import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.CartDTO;
 import goldiounes.com.vn.models.dtos.CartItemDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
@@ -26,7 +27,9 @@ public class CartController {
 
     // Lấy thông tin giỏ hàng dựa vào cartId
     @GetMapping("/carts/{cartId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+            "(hasAuthority('ROLE_CUSTOMER') and " +
+            "@customUserDetailsService.CartID(#authentication.principal.id) == #cartId)")
     public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId) {
         CartDTO cart = cartService.getCart(cartId);
         if (cart != null) {
@@ -40,7 +43,9 @@ public class CartController {
 
     // Xóa toàn bộ các mặt hàng trong giỏ hàng dựa vào cartId
     @DeleteMapping("/carts/{cartId}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+            "(hasAuthority('ROLE_CUSTOMER') and " +
+            "@customUserDetailsService.CartID(#authentication.principal.id) == #cartId)")
     public ResponseEntity<ResponseWrapper<Void>> removeAllCartItems(@PathVariable int cartId) {
         boolean removed = cartItemService.removeAllCartItems(cartId);
         if (removed) {
@@ -54,7 +59,9 @@ public class CartController {
 
     // Lấy tất cả các mặt hàng trong giỏ hàng dựa vào cartId
     @GetMapping("/cart-items/{cartId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+            "(hasAuthority('ROLE_CUSTOMER') and " +
+            "@customUserDetailsService.CartID(#authentication.principal.id) == #cartId)")
     public ResponseEntity<ResponseWrapper<List<CartItemDTO>>> getAllCartItems(@PathVariable int cartId) {
         List<CartItemDTO> items = cartItemService.getAllCartItems(cartId);
         if (items != null && !items.isEmpty()) {
@@ -68,7 +75,7 @@ public class CartController {
 
     // Thêm một mặt hàng vào giỏ hàng
     @PostMapping("/cart-items")
-    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<CartItemDTO>> addItem(@RequestBody CartItemDTO cartItemDTO) {
         CartItemDTO addedItem = cartItemService.addItem(cartItemDTO);
         if (addedItem != null) {
@@ -82,7 +89,9 @@ public class CartController {
 
     // Xóa một mặt hàng trong giỏ hàng dựa vào cartItemId
     @DeleteMapping("/cart-items/{cartItemId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+            "(hasAuthority('ROLE_CUSTOMER') and " +
+            "@customUserDetailsService.CheckCartItem(#authentication.principal.id,#cartItemId))")
     public ResponseEntity<ResponseWrapper<Void>> removeCartItem(@PathVariable int cartItemId) {
         boolean removed = cartItemService.removeCartItem(cartItemId);
         if (removed) {
@@ -95,8 +104,10 @@ public class CartController {
     }
 
     // Cập nhật số lượng của một mặt hàng trong giỏ hàng
-    @PutMapping("/cart-items/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN')")
+    @PutMapping("/cart-items/{cartItemId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+            "(hasAuthority('ROLE_CUSTOMER') and " +
+            "@customUserDetailsService.CheckCartItem(#authentication.principal.id,#cartItemId))")
     public ResponseEntity<ResponseWrapper<CartItemDTO>> updateQuantity(@PathVariable int id, @RequestBody CartItemDTO cartItemDTO) {
         CartItemDTO updatedItem = cartItemService.updateQuantity(id, cartItemDTO);
         if (updatedItem != null) {
