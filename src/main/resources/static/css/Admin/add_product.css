@@ -1,10 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7fb;
-}
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -159,18 +152,8 @@ option {
 }
 /**/
 
-
-
-
 .body1 {
     margin: 70px auto;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.body2 {
-    display: none;
-    /*margin: 70px auto;*/
     width: 90%;
     max-width: 1200px;
 }
@@ -220,14 +203,6 @@ option {
     outline: none;
 }
 
-#CategoryID{
-    font-size: 14px;
-}
-
-.styled-select {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
-}
 .button {
     display: flex;
     justify-content: flex-start;
@@ -249,6 +224,10 @@ option {
     cursor: pointer;
     margin: 8px 8px;
 }
+
+/**/
+
+
 .button input.save  {
     background-color: #304067;
     color: #fff;
@@ -272,22 +251,15 @@ option {
     background-color: #b7bec1;
 }
 
-/**/
-
-
-
 .button-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.button-group .add {
-    margin-left: auto;
-}
 
-.button-group input.add  {
-    background-color: #797d97;
-}
+
+
+
 
 
