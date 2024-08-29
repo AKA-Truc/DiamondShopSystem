@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm</title>
+    <link rel="stylesheet" href="/static/css/Admin/add_product.css">
+    <script>
+        function alertFeature() {
+            alert('Tính năng đang được được phát triển');
+        }
+
+        function addDetails() {
+            // Lấy thẻ body1 và body2
+            var body1 = document.querySelector('.body1');
+            var body2Template = document.querySelector('.body2');
+
+            // Sao chép body2 và thêm vào body1
+            var newBody2 = body2Template.cloneNode(true);
+            newBody2.style.display = "block"; // Đảm bảo hiển thị
+
+            // Thêm bản sao mới vào body1
+            body1.appendChild(newBody2);
+
+            function addDetails() {
+                // Xử lý thêm chi tiết ở đây
+                alert("Nút 'Thêm' đã được nhấn!");
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>GOLDIOUNES SHOP</h2>
+    <ul class="main-menu">
+        <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
+        <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
+            <ul>
+                <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
+                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
+                <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
+                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
+                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
+            <ul>
+                <li><a href="./product.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý sản phẩm</a></li>
+                <li><a href="./edit_product.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa sản phẩm</a></li>
+                <li><a href="add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
+            <ul>
+                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
+                <li><a href="./edit_discount.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa mã giảm giá</a></li>
+                <li><a href="./add_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Thêm mã giảm giá</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
+            <ul>
+                <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
+                <li><a href="./detail.html"><ion-icon name="add-circle-outline"></ion-icon> Chi tiết đơn hàng</a></li>
+                <li><a href="./edit_order.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa đơn hàng</a></li>
+                <li><a href="./bill.html"><ion-icon name="receipt-outline"></ion-icon> Hóa đơn</a></li>
+                <li><a href="./add_order.html"><ion-icon name="bag-add-outline"></ion-icon>Tạo đơn hàng</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
+            <ul>
+                <li><a href="./feedback.html"><ion-icon name="receipt-outline"></ion-icon> Phản hồi khách hàng</a></li>
+            </ul>
+        </li>
+
+        <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
+        <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="person-circle-outline"></ion-icon> Tài khoản</a>
+            <ul>
+
+                <li><a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
+                <script>
+                    function logout() {
+                        // Xóa token từ sessionStorage
+                        sessionStorage.removeItem('accessToken');
+
+                        // Chuyển hướng người dùng về trang đăng nhập
+                        window.location.href = './login1.html';
+                    }
+                </script>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="navbar">
+    <div class="navbar__info">
+        <p>Admin Thùy Trang</p>
+    </div>
+    <div class="navbar__cta">
+        <div class="navbar__hello">
+            <ion-icon name="notifications-outline"></ion-icon> 5 Notifications
+        </div>
+        <div class="navbar__hello">
+            <ion-icon name="settings-outline"></ion-icon> Settings
+        </div>
+        <div class="navbar__background-icon">
+            <img src="/static/Adimages/account.svg" alt="" />
+        </div>
+        <div class="navbar__hello">
+            <p>Xin chào, Admin</p>
+        </div>
+    </div>
+</div>
+<div class="navbar-separator"></div>
+<div class="main">
+    <!-- Content goes here -->
+</div>
+<!---->
+<div class="body1">
+    <div class="wrapper">
+        <form id="myForm" enctype="multipart/form-data">
+            <div class="top-fields">
+                <div class="field">
+                    <label for="loaiSanPham">Loại Sản Phẩm</label>
+                    <select id="loaiSanPham" name="loaiSanPham">
+                        <option value="sanPham1">Nhẫn kim cương nam</option>
+                        <option value="sanPham2">Nhẫn kim cương nữ</option>
+                        <option value="sanPham3">Bông tai kim cương</option>
+                        <option value="sanPham4">Lắc/Vòng tay kim cương</option>
+                        <option value="sanPham5">Mặt dây chuyền kim cương</option>
+                    </select>
+                </div>
+
+                <div class="field input">
+                    <label for="Name">Tên Sản Phẩm</label>
+                    <input type="text" id="Name" name="Name" placeholder="Nhập Tên Sản Phẩm" required>
+                </div>
+            </div>
+
+            <div class="middle-fields">
+
+                <div class="field input">
+                    <label for="Price">Giá</label>
+                    <input type="number" id="Price" name="Price" placeholder="Nhập Giá Tiền" required>
+                </div>
+
+                <div class="field input">
+                    <label for="Inventory">Số Lượng Tồn Kho</label>
+                    <input type="number" id="Inventory" name="Inventory" placeholder="Nhập Số Lượng" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field input">
+                    <label for="Warranty">Thời Hạn Bảo Hành</label>
+                    <input type="month" id="Warranty" name="Warranty" required>
+                </div>
+            </div>
+
+            <div class="field input">
+                <label for="image">Ảnh sản phẩm</label>
+                <input type="file" id="image" name="image">
+            </div>
+
+            <div class="field input">
+                <label for="image">Ảnh sản phẩm 2</label>
+                <input type="file" id="image1" name="image">
+            </div>
+
+            <div class="field input">
+                <label for="Description">Mô Tả</label>
+                <input type="text" id="Description" name="Description" placeholder="Nhập Mô Tả Của Sản Phẩm" required>
+            </div>
+
+            <div class="button-group">
+                <input type="submit" value="Thêm Sản Phẩm" class="save">
+                <input type="button" value="Hủy" class="cancel" onclick="window.location.href='product.html'">
+                <input type="button" value="Thêm" class="add" onclick="addDetails()">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--<hr>-->
+<div class="body2">
+    <div class="wrapper">
+        <form id="myFormother" enctype="multipart/form-data">
+            <div class="top-fields">
+
+                <div class="field">
+                    <label for="Chatlieu">Chất liệu</label>
+                    <select id="Chatlieu" name="chấtLiệu">
+                        <option value="sanPham1">Vàng</option>
+                        <option value="sanPham2">Bạc</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="Vokimcuong">Vỏ Kim Cương</label>
+                    <select id="Vokimcuong" name="voKimCuong">
+                        <option value="sanPham1">Select 1</option>
+                        <option value="sanPham2">Select 2</option>
+                        <option value="sanPham3">Select 3</option>
+                        <option value="sanPham4">Select 4</option>
+                        <option value="sanPham5">Select 5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="middle-fields">
+
+                <div class="field input">
+                    <label for="Price">Giá</label>
+                    <input type="number" id="Price1" name="Price" placeholder="Nhập Giá Tiền" required>
+                </div>
+
+                <div class="field input">
+                    <label for="Inventory">Số Lượng Tồn Kho</label>
+                    <input type="number" id="Inventory1" name="Inventory" placeholder="Nhập Số Lượng" required>
+                </div>
+            </div>
+
+            <div class="field input">
+                <label for="Name">Tên Kim Cương</label>
+                <input type="text" id="Name1" name="Name" placeholder="Nhập Tên Kim Cương" required>
+            </div>
+
+            <div class="middle-fields">
+                <div class="field input">
+                    <label for="Inventory">Số Lượng</label>
+                    <input type="number" id="Amount" name="Amount" placeholder="Nhập Số Lượng" required>
+                </div>
+
+                <div class="field input">
+                    <label for="Price">Tỉ Lệ Áp Giá</label>
+                    <input type="number" id="Price2" name="Price" placeholder="Nhập Tỉ Lệ" required>
+                </div>
+
+                <div class="field input">
+                    <label for="Price">Tiền Gia Công</label>
+                    <input type="number" id="Price3" name="Price" placeholder="Nhập Tiền Gia Công" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="Size">Size</label>
+                <select id="Size" name="size">
+                    <option value="sanPham1">Size 1</option>
+                    <option value="sanPham2">Size 2</option>
+                    <option value="sanPham3">Size 3</option>
+                </select>
+            </div>
+
+            <div class="field input">
+                <label for="Inventory">Số Lượng Tồn Kho</label>
+                <input type="number" id="Inventory2" name="Inventory" placeholder="Nhập Số Lượng" required>
+            </div>
+
+            <div class="button-group">
+                <input type="submit" value="Lưu Chi Tiết Sản Phẩm" class="save">
+                <input type="button" value="Hủy" class="cancel">
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/static/js/Admin/add_product.js"></script>
+
+</body>
+</html>
