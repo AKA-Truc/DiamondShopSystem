@@ -6,6 +6,8 @@ import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
     private final OrderService orderService;
     private final OrderDetailService orderDetailService;
 
@@ -64,14 +67,18 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/orders/{uid}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_MANAGER') or (hasAuthority('ROLE_SALE STAFF') or " +
-            "(hasAuthority('ROLE_CUSTOMER') and #uid == principal.id))")
-    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getOrderByUserID(@PathVariable int uid) {
-        List<OrderDTO> order = orderService.getOrderByUserId(uid);
+
+    @GetMapping("/orders/user/{uid}")
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE_STAFF', 'ROLE_DELIVERY_STAFF') or " +
+                    "(hasAuthority('ROLE_CUSTOMER') and #uid == #authentication.principal.id)"
+    )
+    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getOrderByUserID(@PathVariable int uid, Authentication authentication) {
+        List<OrderDTO> orders = orderService.getOrderByUserId(uid);
         ResponseWrapper<List<OrderDTO>> response;
-        if (!order.isEmpty()) {
-            response = new ResponseWrapper<>("Orders retrieved successfully", order);
+
+        if (!orders.isEmpty()) {
+            response = new ResponseWrapper<>("Orders retrieved successfully", orders);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response = new ResponseWrapper<>("No orders found", null);
@@ -166,6 +173,7 @@ public class OrderController {
     }
 
     private boolean isCustomerOrder(int orderId, Authentication authentication) {
+        log.debug("isCustomerOrder() called with username: " + authentication.getName());
         return orderService.isOrderBelongsToCustomer(orderId, authentication.getName());
     }
 }
