@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập / Đăng Ký</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/static/css/login.css">
 </head>
 
 <body>
@@ -17,15 +17,24 @@
         <h2>Tôi Đã Có Tài Khoản</h2>
         <p><b>Vui lòng nhập email và mật khẩu của bạn</b></p>
 
-        <form action="/login.html" method="POST">
+        <form action="/templates/login.html" method="POST">
             <label for="email">Email <span>*</span></label>
             <input type="email" id="email" name="email" placeholder="hello@gmail.com" required>
 
             <label for="password">Mật khẩu <span>*</span></label>
             <input type="password" id="password" name="password" required>
+            <label for="role">Chọn vai trò của bạn:</label>
+
+            <select id="role" name="role" required>
+                <option value="customer">Khách hàng</option>
+                <option value="admin">Quản trị viên</option>
+                <option value="sale_staff">Nhân viên bán hàng</option>
+                <option value="delivery_staff">Nhân viên giao hàng</option>
+                <option value="manager">Quản lý</option>
+            </select>
 
             <div class="forgot-password">
-                <a href="/templates/User/remember.html"><b>Quên mật khẩu?</b></a>
+                <a href="remember.html"><b>Quên mật khẩu?</b></a>
             </div>
             <button type="submit"><b>Đăng Nhập</b></button>
         </form>
