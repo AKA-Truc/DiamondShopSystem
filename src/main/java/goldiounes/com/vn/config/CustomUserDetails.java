@@ -7,12 +7,14 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
     private final int id; // ID người dùng
-    private final String username; // Email hoặc tên đăng nhập
+    private final String username;
+    private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(int id, String username, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(int id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.password = password;
         this.authorities = authorities;
     }
 
@@ -32,7 +34,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
     }
 
     @Override

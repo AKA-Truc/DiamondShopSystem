@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());
 
-        return new CustomUserDetails(user.getUserID(), user.getEmail(), authorities);
+        return new CustomUserDetails(user.getUserID(), user.getEmail(), user.getPassword(), authorities);
     }
 
     @Bean
