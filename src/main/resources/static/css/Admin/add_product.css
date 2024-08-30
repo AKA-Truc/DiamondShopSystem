@@ -1,3 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+}
+
 .sidebar {
     height: 100%;
     width: 280px;
@@ -155,6 +162,7 @@ option {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
+    margin-left: 150px;
 }
 
 .form {
