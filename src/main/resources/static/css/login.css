@@ -15,7 +15,7 @@
 }
 
 .close-button:hover {
-    color: #770e48;
+    color: #8597b1;
 }
 
 body {
@@ -87,7 +87,7 @@ button {
 }
 
 button:hover {
-    background-color: #770e48;
+    background-color: #8597b1;
 }
 
 .register-section {
@@ -127,7 +127,7 @@ button:hover {
 }
 
 .forgot-password a:hover {
-    color: #bc126f;
+    color: #8597b1;
 }
 
 span {
