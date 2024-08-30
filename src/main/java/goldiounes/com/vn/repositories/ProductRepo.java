@@ -19,4 +19,8 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
 //    @Query("SELECT DISTINCT p FROM Product p JOIN p.ProductDetails pd WHERE p.Category.categoryName Like %:keyWord AND p.Status = 'active' AND pd.sellingPrice BETWEEN :minPrice AND :maxPrice")
 //    List<Product> findActiveProductsByCategoryAndPrice(@Param("keyWord") String keyWord, @Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice);
+
+    @Query("SELECT p FROM Product p JOIN OrderDetail od ON p.ProductID = od.Product.ProductID " +
+            "GROUP BY p.ProductID ORDER BY SUM(od.Quantity) DESC")
+    List<Product> findTopSellingProducts();
 }
