@@ -42,11 +42,15 @@ public class UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public UserService(UserRepo userRepo, CartService cartService, PointService pointService, ModelMapper modelMapper) {
+
+    public UserService(UserRepo userRepo, CartService cartService, PointService pointService, ModelMapper modelMapper, PasswordEncoder passwordEncoder, JwtTokenUtils jwtTokenUtils, AuthenticationManager authenticationManager) {
         this.userRepo = userRepo;
         this.cartService = cartService;
         this.pointService = pointService;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtTokenUtils = jwtTokenUtils;
+        this.authenticationManager = authenticationManager;
     }
 
     public List<UserDTO> getAllUsers() {
