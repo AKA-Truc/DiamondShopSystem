@@ -139,13 +139,6 @@ ion-icon {
     background-color: #162165e7;
 }
 
-select {
-    font-size: 18px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 option {
     font-size: 18px;
     padding: 10px;
@@ -189,15 +182,24 @@ option {
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 .field input {
-    width: 100%;
+    font-size: 18px;
     padding: 10px;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
 }
+
+select {
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .field input:focus {
     border-color: #000;
     outline: none;
@@ -240,13 +242,9 @@ option {
     background-color: #c2c8cd;
     color: #304067;
     font-weight: 600;
+    margin-left: 100px;
 }
-.button input.save:hover {
-    background-color:#eae9e0;
-}
-.button-group input.save:hover {
-    background-color: #304067;
-}
+
 .button-group input.cancel:hover {
     background-color: #b7bec1;
 }
