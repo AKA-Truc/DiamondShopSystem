@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to fetch and display vouchers
     const fetchAndDisplayVouchers = () => {
-        fetch('http://localhost:8080/api/voucher/getAllVouchers')
+        fetch('http://localhost:8080/promotion-management/promotions')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const editBtn = row.querySelector('.edit-btn');
                     editBtn.addEventListener('click', () => {
                         // Redirect to another page with order ID
-                        window.location.href = `../magiamgia/chinhsuamagg.html?id=${voucher.VoucherID}`;
+                        window.location.href = `templates/Admin/edit_discount.html?id=${voucher.VoucherID}`;
                     });
                 });
 
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 yesBtn.addEventListener('click', () => {
                     console.log(voucherIdToDelete);
                     if (currentRow && voucherIdToDelete) {
-                        fetch(`http://localhost:8080/api/voucher/deleteVoucher/${voucherIdToDelete}`, {
+                        fetch(`http://localhost:8080/promotion-management/promotions/${voucherIdToDelete}`, {
                             method: 'DELETE'
                         })
                             .then(response => {
