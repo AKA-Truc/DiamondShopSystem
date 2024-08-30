@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close-button');
     closeButton.addEventListener('click', function() {
-        window.location.href = '../login/login1.html';
+        window.location.href = '/DiamondShopSystem/src/main/resources/login.html';
     });
 
     const form = document.querySelector('form');
