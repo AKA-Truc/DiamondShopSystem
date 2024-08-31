@@ -9,6 +9,9 @@ import goldiounes.com.vn.services.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,19 +30,27 @@ public class CartController {
 
     // Lấy thông tin giỏ hàng dựa vào cartId
     @GetMapping("/carts/{cartId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-            "(hasAuthority('ROLE_CUSTOMER') and " +
-            "@customUserDetailsService.CartID(#authentication.principal.id) == #cartId)")
-    public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId) {
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+                    "(hasAuthority('ROLE_CUSTOMER') and #cartId == #authentication.principal.id)"
+    )
+    public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
         CartDTO cart = cartService.getCart(cartId);
-        if (cart != null) {
-            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart retrieved successfully", cart);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ResponseWrapper<CartDTO> response = new ResponseWrapper<>("Cart not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+
+        if (cart == null) {
+            return new ResponseEntity<>(new ResponseWrapper<>("Cart not found", null), HttpStatus.NOT_FOUND);
         }
+
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cart.getUser().getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>("Cart retrieved successfully", cart), HttpStatus.OK);
     }
+
 
     // Xóa toàn bộ các mặt hàng trong giỏ hàng dựa vào cartId
     @DeleteMapping("/carts/{cartId}")
@@ -76,8 +87,9 @@ public class CartController {
     // Thêm một mặt hàng vào giỏ hàng
     @PostMapping("/cart-items")
     @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<ResponseWrapper<CartItemDTO>> addItem(@RequestBody CartItemDTO cartItemDTO) {
-        CartItemDTO addedItem = cartItemService.addItem(cartItemDTO);
+    public ResponseEntity<ResponseWrapper<CartItemDTO>> addItem(@RequestBody CartItemDTO cartItemDTO, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartItemDTO addedItem = cartItemService.addItem(cartItemDTO, currentUser.getId());
         if (addedItem != null) {
             ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item added successfully", addedItem);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
