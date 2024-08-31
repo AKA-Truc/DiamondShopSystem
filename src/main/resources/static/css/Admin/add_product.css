@@ -1,8 +1,31 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 1000;
     background-color: #f4f7fb;
+}
+
+header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.body1 {
+    margin: auto;
+    width: 90%;
+    max-width: 1200px; // căn lề trái
+}
+
+.wrapper {
+    margin-left: 192px;
+    margin-top: 18px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+* {
+    box-sizing: border-box;
 }
 
 .sidebar {
@@ -152,18 +175,6 @@ option {
 }
 /**/
 
-.body1 {
-    margin: 70px auto;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.wrapper {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-left: 150px;
-}
 
 .form {
     display: flex;
