@@ -38,9 +38,9 @@ public class CartItemService {
         return modelMapper.map(cartItems,new TypeToken<List<CartItemDTO>>(){}.getType());
     }
 
-    public CartItemDTO addItem(CartItemDTO cartItemDTO) {
+    public CartItemDTO addItem(CartItemDTO cartItemDTO, int id) {
         CartItem cartItem = modelMapper.map(cartItemDTO, CartItem.class);
-        Cart existingCart = cartRepo.findById(cartItem.getCart().getCartID())
+        Cart existingCart = cartRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
 
         Product existingProduct = productRepo.findById(cartItem.getProduct().getProductID())
