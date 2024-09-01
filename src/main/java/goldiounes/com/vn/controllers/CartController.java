@@ -3,6 +3,8 @@ package goldiounes.com.vn.controllers;
 import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.CartDTO;
 import goldiounes.com.vn.models.dtos.CartItemDTO;
+import goldiounes.com.vn.models.entities.Cart;
+import goldiounes.com.vn.models.entities.CartItem;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.CartService;
 import goldiounes.com.vn.services.CartItemService;
@@ -36,16 +38,15 @@ public class CartController {
     )
     public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cartId != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         CartDTO cart = cartService.getCart(cartId);
 
         if (cart == null) {
             return new ResponseEntity<>(new ResponseWrapper<>("Cart not found", null), HttpStatus.NOT_FOUND);
-        }
-
-        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
-            if (cart.getUser().getUserId() != currentUser.getId()) {
-                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
-            }
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>("Cart retrieved successfully", cart), HttpStatus.OK);
@@ -54,10 +55,17 @@ public class CartController {
 
     // Xóa toàn bộ các mặt hàng trong giỏ hàng dựa vào cartId
     @DeleteMapping("/carts/{cartId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-            "(hasAuthority('ROLE_CUSTOMER') and " +
-            "@customUserDetailsService.CartID(#authentication.principal.id) == #cartId)")
-    public ResponseEntity<ResponseWrapper<Void>> removeAllCartItems(@PathVariable int cartId) {
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+                    "(hasAuthority('ROLE_CUSTOMER') and #cartId == #authentication.principal.id)"
+    )
+    public ResponseEntity<ResponseWrapper<Void>> removeAllCartItems(@PathVariable int cartId, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cartId != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         boolean removed = cartItemService.removeAllCartItems(cartId);
         if (removed) {
             ResponseWrapper<Void> response = new ResponseWrapper<>("All items are deleted", null);
@@ -70,10 +78,17 @@ public class CartController {
 
     // Lấy tất cả các mặt hàng trong giỏ hàng dựa vào cartId
     @GetMapping("/cart-items/{cartId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-            "(hasAuthority('ROLE_CUSTOMER') and " +
-            "@customUserDetailsService.CartID(#authentication.principal.id) == #cartId)")
-    public ResponseEntity<ResponseWrapper<List<CartItemDTO>>> getAllCartItems(@PathVariable int cartId) {
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
+                    "(hasAuthority('ROLE_CUSTOMER') and #cartId == #authentication.principal.id)"
+    )
+    public ResponseEntity<ResponseWrapper<List<CartItemDTO>>> getAllCartItems(@PathVariable int cartId, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cartId != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         List<CartItemDTO> items = cartItemService.getAllCartItems(cartId);
         if (items != null && !items.isEmpty()) {
             ResponseWrapper<List<CartItemDTO>> response = new ResponseWrapper<>("Cart items found", items);
@@ -101,10 +116,16 @@ public class CartController {
 
     // Xóa một mặt hàng trong giỏ hàng dựa vào cartItemId
     @DeleteMapping("/cart-items/{cartItemId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-            "(hasAuthority('ROLE_CUSTOMER') and " +
-            "@customUserDetailsService.CheckCartItem(#authentication.principal.id,#cartItemId))")
-    public ResponseEntity<ResponseWrapper<Void>> removeCartItem(@PathVariable int cartItemId) {
+    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<Void>> removeCartItem(@PathVariable int cartItemId, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartItemDTO cartItemDTO = cartItemService.GetCartItemById(cartItemId);
+        CartDTO cart = cartItemDTO.getCart();
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cart.getCartId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         boolean removed = cartItemService.removeCartItem(cartItemId);
         if (removed) {
             ResponseWrapper<Void> response = new ResponseWrapper<>("Item removed successfully", null);
@@ -117,11 +138,15 @@ public class CartController {
 
     // Cập nhật số lượng của một mặt hàng trong giỏ hàng
     @PutMapping("/cart-items/{cartItemId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-            "(hasAuthority('ROLE_CUSTOMER') and " +
-            "@customUserDetailsService.CheckCartItem(#authentication.principal.id,#cartItemId))")
-    public ResponseEntity<ResponseWrapper<CartItemDTO>> updateQuantity(@PathVariable int id, @RequestBody CartItemDTO cartItemDTO) {
-        CartItemDTO updatedItem = cartItemService.updateQuantity(id, cartItemDTO);
+    @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<CartItemDTO>> updateQuantity(@PathVariable int cartItemId, @RequestBody CartItemDTO cartItemDTO, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cartItemDTO.getCart().getCartId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+        CartItemDTO updatedItem = cartItemService.updateQuantity(cartItemId, cartItemDTO);
         if (updatedItem != null) {
             ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item updated successfully", updatedItem);
             return new ResponseEntity<>(response, HttpStatus.OK);

@@ -29,6 +29,12 @@ public class CartItemService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public CartItemDTO GetCartItemById(int id) {
+        CartItem cartItem = cartItemRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("CartItem not found"));
+        return modelMapper.map(cartItem, CartItemDTO.class);
+    }
+
     public List<CartItemDTO> getAllCartItems(int id) {
         Cart existingCart = cartRepo.findCartByUserId(id);
         if (existingCart == null) {
@@ -76,7 +82,7 @@ public class CartItemService {
         CartItem existingCartItem = cartItemRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cart item not found"));
         cartItemRepo.delete(existingCartItem);
-        return false;
+        return true;
     }
 
     @Transactional
@@ -99,9 +105,7 @@ public class CartItemService {
 
     public CartItemDTO updateQuantity(int id,CartItemDTO cartItemDTO) {
         CartItem cartItem = modelMapper.map(cartItemDTO, CartItem.class);
-        Cart existingCart = cartRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
-        CartItem existingCartItem = cartItemRepo.findById(cartItem.getCart().getCartID())
+        CartItem existingCartItem = cartItemRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cart item not found"));
         existingCartItem.setQuantity(cartItem.getQuantity());
         cartItemRepo.save(existingCartItem);
