@@ -38,6 +38,7 @@ public class UserController {
     @Autowired
     private JwtTokenUtils jwtTokenUtils;
 
+
     @GetMapping("/generate-secret-key")
     public ResponseEntity<String> generateSecretKey(){
         return ResponseEntity.ok(jwtTokenUtils.generateSecretKey());
@@ -160,6 +161,14 @@ public class UserController {
             ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("User not found", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    @DeleteMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+        // Xóa token khi người dùng đăng xuất
+        tokenService.deleteToken(token);
+        return ResponseEntity.ok("Logout successful");
     }
 
 }

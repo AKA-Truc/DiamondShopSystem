@@ -151,4 +151,5 @@ public class UserService {
         }
         return modelMapper.map(existingUser,new TypeToken<List<UserDTO>>(){}.getType());
     }
+
 }

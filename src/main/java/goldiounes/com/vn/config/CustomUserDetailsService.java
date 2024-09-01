@@ -31,24 +31,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user.getUserID(), user.getUserName(), user.getPassword(), user.getAuthorities());
     }
 
-    public int CartID(int userID){
-        Cart cart = cartRepo.findCartByUserId(userID);
-        if (cart == null) {
-            throw new UsernameNotFoundException("Cart not found");
-        }
-        return cart.getCartID();
-    }
-
-    public boolean CheckCartItem(int userID, int cartItemID){
-        Cart cart = cartRepo.findCartByUserId(userID);
-        if (cart == null) {
-            return false;
-        }
-        for(CartItem cartItem : cart.getCartItems()){
-            if(cartItemID == cartItem.getCartItemID()){
-                return true;
-            }
-        }
-        return false;
-    }
 }
