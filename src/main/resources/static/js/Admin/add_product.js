@@ -1,18 +1,21 @@
 let addedRows = [];
 
+// Hàm xử lý gửi form
 async function submitForm(event) {
-    event.preventDefault();
+    event.preventDefault(); // Ngăn chặn hành động mặc định của form
 
     const form = document.getElementById('myForm');
     const formData = new FormData(form);
 
     try {
+        // Gửi dữ liệu form đến server
         const response = await fetch('http://localhost:8080/api/product/createProduct', {
             method: 'POST',
             body: formData,
             mode: 'cors',
         });
 
+        // Kiểm tra phản hồi từ server
         if (!response.ok) {
             throw new Error('Failed to save data');
         }
@@ -20,7 +23,7 @@ async function submitForm(event) {
         const result = await response.json();
         console.log('Server response:', result);
         alert('Đã thêm sản phẩm.');
-        window.location.href = "../sanpham/sp.html";
+        window.location.href = "../sanpham/sp.html"; // Chuyển hướng sau khi thành công
     } catch (error) {
         console.error('Error saving data:', error);
         alert('Đã xảy ra lỗi khi thêm sản phẩm: ' + error.message);
@@ -28,32 +31,18 @@ async function submitForm(event) {
 }
 
 function cancelForm(event) {
-    event.preventDefault();
+    event.preventDefault(); // Ngăn chặn hành động mặc định của nút hủy
+
+    // Hiển thị hộp thoại xác nhận
     if (confirm('Bạn có chắc muốn hủy không?')) {
-        const formElements = document.querySelectorAll('.wrapper input[type="text"], .wrapper input[type="number"]');
-        formElements.forEach(element => {
-            element.value = '';
-        });
-
-        const fileInput = document.getElementById('image');
-        if (fileInput) fileInput.value = '';
-
-        // Xóa các hàng đã thêm
-        addedRows.forEach(row => {
-            row.remove();
-        });
-        // Làm trống danh sách các hàng đã thêm
-        addedRows = [];
-        window.location.href = "../sanpham/sp.html";
+        // Nếu người dùng bấm "OK", chuyển hướng đến trang sản phẩm
+        window.location.href = "product.html";
     }
+    // Nếu người dùng bấm "Cancel", không làm gì cả và ở lại trang hiện tại
 }
 
-// Gắn sự kiện vào các nút khi DOM đã tải xong
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('myForm').addEventListener('submit', submitForm);
-    document.querySelector('.cancel').addEventListener('click', cancelForm);
-});
 
+// Tải dữ liệu danh mục từ API khi DOM đã tải xong
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await fetch('http://localhost:8080/api/category/getAllcategory');
@@ -81,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching roles:', error);
     }
 });
+
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {
 //     const accessToken = sessionStorage.getItem('accessToken');
@@ -89,4 +79,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 //         window.location.href = '../Login/login.html';
 //     }
 // });
-
