@@ -253,15 +253,26 @@ select {
     background-color: #304067;
     color: #fff;
 }
-.button-group input.save  {
+
+.button-group input.save {
     background-color: #304067;
     color: #fff;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 200px;
+    margin-top: 35px;
 }
+
+
 .button-group input.cancel  {
     background-color: #c2c8cd;
     color: #304067;
     font-weight: 600;
     margin-left: 100px;
+    margin-top: 35px;
 }
 
 .button-group input.cancel:hover {
