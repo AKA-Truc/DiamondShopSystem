@@ -27,7 +27,6 @@ header {
 * {
     box-sizing: border-box;
 }
-
 .sidebar {
     height: 100%;
     width: 280px;
