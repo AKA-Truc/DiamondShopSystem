@@ -55,11 +55,26 @@ body {
 }
 
 .registration-container {
-    background-color: #fff;
+    background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
+    width: 550px;
+}
+
+.btn-register {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-register:hover {
+    background-color: #8597b1;
 }
 
 .registration-container h2 {
@@ -89,21 +104,6 @@ input {
     border: 1px solid #ddd;
     width: 100%;
     box-sizing: border-box;
-}
-
-.btn-register {
-    background-color: #d80000;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.btn-register:hover {
-    background-color: #770e48;
 }
 
 .error-message {
