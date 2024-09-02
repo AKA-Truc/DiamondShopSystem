@@ -71,7 +71,7 @@
                 <p>
                     Khi <b>có 200 triệu nên gửi tiết kiệm hay mua kim cương?</b> 200 triệu là một khoản tiền không nhỏ, và việc quyết định sử dụng nó như thế nào luôn khiến nhiều người băn khoăn. Hai lựa chọn phổ biến nhất là gửi tiết kiệm và mua kim cương. Vậy, đâu là lựa chọn tốt hơn? Cùng tìm hiểu ngay ở bài viết này của chúng tôi để biết được 200 triệu nên mua kim cương hay gửi tiết kiệm nhé!
                 </p>
-                <img src="/static/images/tintuc_1.png" alt="Kim Cương" class="featured-image">
+                <img src="/static/images/tintuc_1.jpg" alt="Kim Cương" class="featured-image">
             </section>
 
             <section class="investment">
@@ -80,7 +80,7 @@
                     Kim cương không chỉ là một món đồ trang sức quý giá mà còn có thể là một khoản đầu tư sinh lời.
                     Tuy nhiên, để đầu tư hiệu quả, bạn cần hiểu rõ về thị trường kim cương và các yếu tố ảnh hưởng đến giá trị của nó.
                 </p>
-                <img src="/static/images/tintuc_2.png" alt="Đầu tư Kim Cương" class="investment-image">
+                <img src="/static/images/tintuc_2.jpg" alt="Đầu tư Kim Cương" class="investment-image">
                 <h3>Các Yếu Tố Ảnh Hưởng Đến Giá Kim Cương</h3>
                 <ul>
                     <li>Chất lượng kim cương: Sự kết hợp giữa độ trong, màu sắc, cắt và carat.</li>
@@ -98,7 +98,7 @@
                     Gửi tiết kiệm là lựa chọn phổ biến cho nhiều người, đặc biệt là những ai ưu tiên sự an toàn và ổn định.
                     Với gửi tiết kiệm, bạn có thể nhận lãi suất hàng năm và bảo vệ vốn của mình khỏi sự biến động của thị trường.
                 </p>
-                <img src="/static/images/tintuc_3.png" alt="Gửi Tiết Kiệm" class="savings-image">
+                <img src="/static/images/tintuc_3.jpg" alt="Gửi Tiết Kiệm" class="savings-image">
                 <h3>Ưu Điểm và Nhược Điểm Của Gửi Tiết Kiệm</h3>
                 <ul>
                     <li>Ưu điểm: An toàn, dễ dàng quản lý, không cần nhiều kiến thức đầu tư.</li>
@@ -173,13 +173,15 @@
         <div class="grid_row">
             <div class="grid__column-2-4">
                 <h3 class="footer-heading">Danh mục</h3>
-                <li>
-                    <a href="products.html">Bông tai kim cương</a>
-                    <a href="products.html">Lắc tay kim cương</a>
-                    <a href="products.html">Nhẫn kim cương</a>
-                    <a href="products.html">Dây chuyền kim cương</a>
-                    <a href="products.html">Mặt dây chuyền kim cương</a>
-                </li>
+                <ul class="footer__list">
+                    <li>
+                        <a href="diamond_earrings.html">Bông tai kim cương</a>
+                        <a href="diamond_bracelets.html">Lắc tay kim cương</a>
+                        <a href="">Nhẫn kim cương</a>
+                        <a href="">Dây chuyền kim cương</a>
+                        <a href="diamond_pendant.html">Mặt dây chuyền kim cương</a>
+                    </li>
+                </ul>
             </div>
             <div class="grid__column-2-4">
                 <h3 class="footer-heading">Liên hệ </h3>
@@ -211,6 +213,24 @@
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    const textOptions = ["Giảm giá đến 16%", "Trang sức kim cương ưu đãi 40%", "Mặt dây chuyền ưu đãi 15%"];
+    const centerText = document.getElementById("center-text");
+    let textIndex = 0;
+
+    function rotateText() {
+        centerText.classList.remove('visible');
+        setTimeout(() => {
+            centerText.textContent = textOptions[textIndex];
+            centerText.classList.add('visible');
+            textIndex = (textIndex + 1) % textOptions.length;
+        }, 1000);
+    }
+
+    setInterval(rotateText, 3000);
+    rotateText(); // Initialize text
+
+</script>
 </body>
 </html>
 
