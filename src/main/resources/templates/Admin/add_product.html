@@ -95,24 +95,25 @@
 
         .table-control {
             width: 100%;
-            padding: 5px;
+            padding: 8px;
             margin: 5px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
-        }
-
-        .hidden {
-            display: none;
+            box-sizing: border-box;
         }
 
         .table-control.item-control {
-            width: 148px;
+            width: 175px; /* chiều dài ô input chi tiết sp*/
             height: auto;
             padding: 5px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-top: 5px;
+        }
+
+        .hidden {
+            display: none;
         }
 
         /**/
@@ -133,7 +134,6 @@
         .field {
             margin-bottom: 20px;
         }
-
 
         @media (max-width: 768px) {
             .h-table th,
@@ -209,8 +209,8 @@
                 </td>
                 <td>
                     <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
-                    <span class="toggle-quantity">+</span>
-                    <input type="text" class="table-control item-control quantity-input hidden" placeholder="Nhập số lượng">
+                    <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                    <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                 </td>
                 <td>
                     <select class="table-control item-control">
@@ -463,9 +463,10 @@
                                 </td>
                                 <td>
                                     <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
-                                    <span class="toggle-quantity">+</span>
-                                    <input type="text" class="table-control item-control quantity-input hidden" placeholder="Nhập số lượng">
+                                    <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                                    <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
+
                                 <td>
                                     <select class="table-control item-control">
                                         <option value="Size1">Size 1</option>
@@ -501,8 +502,8 @@
                                 </td>
                                 <td>
                                     <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
-                                    <span class="toggle-quantity">+</span>
-                                    <input type="text" class="table-control item-control quantity-input hidden" placeholder="Nhập số lượng">
+                                    <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                                    <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
                                 <td>
                                     <select class="table-control item-control">

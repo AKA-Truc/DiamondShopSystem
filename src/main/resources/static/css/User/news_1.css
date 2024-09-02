@@ -49,29 +49,12 @@ h3:not(.footer-heading) {
     color: #ff2600;
 }
 
-.intro .featured-image {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
 
-.investment .investment-image {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
+.intro .featured-image,
+.investment .investment-image,
 .savings .savings-image {
-    width: 100%;
-    max-width: 800px;
+    width: 80%;
+    max-width: 65%;
     height: auto;
     display: block;
     margin: 20px auto;

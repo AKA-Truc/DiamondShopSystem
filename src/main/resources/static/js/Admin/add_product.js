@@ -71,6 +71,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+function addInputFields(buttonElement) {
+    const parentTd = buttonElement.parentElement;
+
+    // Tạo phần tử input mới cho tên kim cương và số lượng
+    const newDiamondInput = document.createElement('input');
+    newDiamondInput.type = 'text';
+    newDiamondInput.className = 'table-control item-control';
+    newDiamondInput.placeholder = 'Nhập tên kim cương';
+
+    const newQuantityInput = document.createElement('input');
+    newQuantityInput.type = 'text';
+    newQuantityInput.className = 'table-control item-control quantity-input';
+    newQuantityInput.placeholder = 'Nhập số lượng';
+
+    // Thêm các input mới vào TD hiện tại (phía dưới các input cũ)
+    parentTd.insertBefore(newDiamondInput, buttonElement);
+    parentTd.insertBefore(newQuantityInput, buttonElement);
+}
+
+// Các hàm khác được giữ nguyên
+
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {
 //     const accessToken = sessionStorage.getItem('accessToken');
