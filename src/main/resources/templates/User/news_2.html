@@ -14,6 +14,325 @@
         margin: 0;
     }
 
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .header1 {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: rgb(10, 25, 56);
+        border-bottom: 1px solid #ddd;
+        justify-content: space-between;
+        color: #d5d9de;
+    }
+
+    .header1 p {
+        margin: 0;
+    }
+
+    .header1 .phone,
+    .header1 .address {
+        flex: 1;
+    }
+
+    .header1 .phone {
+        text-align: left;
+        margin-left: 150px;
+    }
+
+    .header1 .address {
+        text-align: right;
+        margin-right: 150px;
+    }
+
+    .header1 .center {
+        flex: 2;
+        text-align: center;
+        opacity: 0;
+        color: gold;
+        transition: opacity 1s ease-in-out;
+    }
+    .header1 .visible {
+        opacity: 1;
+    }
+
+
+    .header {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-bottom: 0.5px solid #ddd;
+        flex-direction: column;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: relative;
+    }
+
+    .logo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .icons {
+        position: absolute;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 17px;
+        margin-right: 80px;
+        font-size: 20px;
+    }
+
+    .header>.header-content>.logo img {
+        width: 120px;
+        height: auto;
+    }
+
+    #main-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        background-color: white;
+        height: 40px;
+        display: inline-flex;
+        width: 100%;
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        gap: 50px;
+        z-index: 1000;
+        position: relative;
+        text-transform: uppercase;
+    }
+
+    #main-menu li {
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    #main-menu li a {
+        color: #040711;
+        display: block;
+        padding: 20px 20px;
+        text-decoration: none;
+    }
+
+    #main-menu ul.sub-menu {
+        position: absolute;
+        background: #f4f4f4;
+        padding: 0;
+        list-style: none;
+        width: 300px;
+        display: none;
+        top: 80%;
+        left: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #main-menu li:hover > ul.sub-menu {
+        display: block;
+    }
+
+    #main-menu ul.sub-menu a {
+        padding: 12px 20px;
+        /* border-bottom: 1px solid #94968f; */
+        left: 0;
+    }
+
+    #main-menu ul.sub-menu li:hover > a {
+        background-color: #e1e4eb;
+    }
+
+    #main-menu ul.sub-menu li:last-child a {
+        border: none;
+    }
+
+    #main-menu ul.sub-menu ul.sub-menu {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        left: 300px;
+        top: 0;
+    }
+
+    /* Thiết lập border khi hover */
+    #main-menu > li > a {
+        position: relative;
+    }
+
+    #main-menu > li > a:hover {
+        color: rgb(70, 118, 168);
+    }
+
+    #main-menu .sub-menu > li > a:hover {
+        color:   rgb(70, 118, 168);
+    }
+
+    #main-menu > li:hover > a::before {
+        width: 100%;
+    }
+
+    #main-menu > li.has-child::after {
+        color: #040711;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        content: "\f107";
+    }
+
+    #main-menu .sub-menu > li.has-child::after {
+        content: "\f105";
+        color: #040711;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+    }
+
+    /* Begin update code for search and cart */
+    .search-overlay {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: -33.33%;
+        width: 100%;
+        height: 33.33%;
+        background-color: rgba(99, 95, 95, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        transition: top 0.5s ease;
+    }
+
+    .search-overlay.active {
+        top: 0;
+    }
+
+    /* The search box */
+    .search-box {
+        width: 50%;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-box input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-box button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 90px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .search-box button:hover {
+        background-color: #444;
+    }
+
+    /* The cart box */
+    .cart-box {
+        height: 100%;
+        width: 25%;
+        margin-left: 75%;
+        background-color: white;  /* Đổi màu cho background của cart */
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        justify-content: space-between;
+        right: -100%;
+        z-index: 1000;
+        transition: right 0.5s ease;
+        color: rgb(0, 0, 0);
+    }
+
+    .cart-box.active {
+        right: 0;
+    }
+
+    .cart-box h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .cart-box p {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: auto;
+    }
+
+    .cart-box button {
+        padding: 15px;
+        font-size: 18px;
+        background-color: rgb(166, 168, 174);
+        color: black;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 70%;
+        margin-left: 70px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .cart-box button:hover {
+        background-color: #ddd;
+    }
+
+    /* */
+    .cart-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .cart-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    /* End update code for search and cart */
+    /**/
     .content {
         max-width: 800px;
         margin: auto;
@@ -156,6 +475,54 @@
 
 </style>
 <body>
+<div class="header1">
+    <p class="phone">Phone: (+84) 123 2345 123</p>
+    <p class="center" id="center-text">hello</p>
+    <p class="address">
+        <a style="color:white;text-decoration: none" href="../login.html">Đăng nhập</a>
+    </p>
+</div>
+<div class="header">
+    <div class="header-content">
+        <div class="icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="info.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
+            <i class="fa-regular fa-heart"></i>
+            <i style="color: black;" class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
+    </div>
+</div>
+<ul id="main-menu">
+    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
+    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
+    <li><a href="">BẢNG GIÁ</a>
+        <ul class="sub-menu">
+            <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
+    <li><a href="news.html">TIN TỨC</a></li>
+    <li><a href="contact.html">LIÊN HỆ</a></li>
+</ul>
+<!-- search -->
+<div id="search-overlay" class="search-overlay">
+    <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+</div>
+<!--  -->
+<!-- cart -->
+<div id="cart-overlay" class="cart-overlay">
+    <div id="cart-box" class="cart-box">
+        <h2>Your Shopping Cart</h2>
+        <p>No items in the cart.</p>
+        <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
+    </div>
+</div>
+<!--  -->
 <div class="content">
     <h1>Tiêu Chuẩn Tuyển Chọn Kim Cương Chất Lượng Cao Tại Jemmia</h1>
     <p>Tại <strong>Jemmia</strong>, quy trình chọn lựa kim cương chất lượng cao được thực hiện với sự nghiêm ngặt

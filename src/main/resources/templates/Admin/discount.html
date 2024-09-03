@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản Lý Mã Giảm Giá</title>
-    <link rel="stylesheet" href="/static/css/Admin/discount.css">
+    <link rel="stylesheet" href="/static/css/Admin/discount.css" />
     <script>
         function alertFeature() {
-            alert('Tính năng đang được được phát triển');
+            alert("Tính năng đang được được phát triển");
         }
     </script>
 </head>
 <body>
-
 <div class="sidebar">
     <h2>GOLDIOUNES SHOP</h2>
     <ul class="main-menu">
@@ -93,7 +92,7 @@
             <img src="/static/Adimages/account.svg" alt="" />
         </div>
         <div class="navbar__hello">
-            <p>Xin chào</p>
+            <p>Xin chào, Admin</p>
         </div>
     </div>
 </div>
@@ -105,8 +104,15 @@
 <!-- main content -->
 <div class="main-content">
     <div class="customer-management">
-        <button class="add-customer-btn" onclick="window.location.href = './add_discount.html'">Thêm Mã Giảm Giá <i class="fas fa-plus"></i></button>
-        <input type="text" id="search-bar" placeholder="Nhập Tên Mã Giảm Giá..." class="search-bar">
+        <button class="add-customer-btn" id="openpopup1">
+            Thêm Mã Giảm Giá <i class="fas fa-plus"></i>
+        </button>
+        <input
+                type="text"
+                id="search-bar"
+                placeholder="Nhập Tên Mã Giảm Giá..."
+                class="search-bar"
+        />
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -134,16 +140,91 @@
                 </div>
             </div>
         </div>
-        <!-- Add this before the closing body tag -->
-        <script src="/static/js/Admin/discount.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
     </div>
 </div>
+<div class="popup1-overlay" id="popup1Overlay">
+    <div class="popup1-content">
+        <span class="popup1-close" id="closepopup1">&times;</span>
+        <div class="wrapper">
+            <form id="voucherForm" enctype="multipart/form-data">
+                <div class="top-fields">
+                    <div class="field input">
+                        <label for="Name">Tên Chương Trình Khuyến Mãi</label>
+                        <input
+                                type="text"
+                                id="Name"
+                                name="Name"
+                                placeholder=" "
+                                required
+                        />
+                    </div>
+                    <div class="field input">
+                        <label for="Percent">Phần Trăm Giảm</label>
+                        <input
+                                type="number"
+                                id="Percent"
+                                name="Percent"
+                                placeholder=" "
+                                required
+                        />
+                    </div>
+                </div>
+                <div class="middle-fields">
+                    <div class="field input">
+                        <label for="StartDate">Ngày Bắt Đầu</label>
+                        <input
+                                type="datetime-local"
+                                id="StartDate"
+                                name="StartDate"
+                                placeholder=""
+                                required
+                        />
+                    </div>
+                    <div class="field input">
+                        <label for="EXDate">Ngày Kết Thúc</label>
+                        <input
+                                type="datetime-local"
+                                id="EXDate"
+                                name="EXDate"
+                                placeholder=""
+                                required
+                        />
+                    </div>
+                </div>
+                <div class="middle-fields">
+                    <div class="field input">
+                        <label for="Describes">Mô Tả</label>
+                        <input
+                                type="text"
+                                id="Describes"
+                                name="Describes"
+                                placeholder=" "
+                                required
+                        />
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Thêm Mã Giảm Giá" class="save" />
+                    <input
+                            type="button"
+                            value="Hủy"
+                            class="cancel"
+                            id="cancelButton"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Add this before the closing body tag -->
+<script src="/static/js/Admin/discount.js"></script>
+<script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
 </body>
 </html>
-
-
-
-
