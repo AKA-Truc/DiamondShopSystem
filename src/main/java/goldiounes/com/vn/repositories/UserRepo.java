@@ -17,6 +17,16 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.Role=:role")
     List<User> findByRole(@Param("role") String role);
 
-    @Query("SELECT u FROM User u JOIN  Order o ON u.UserID = o.User.UserID GROUP BY u.UserID")
+    @Query("SELECT u " +
+            "FROM User u JOIN u.Orders o " +
+            "GROUP BY u.UserID " +
+            "ORDER BY COUNT(o) DESC")
     List<User> findTopUserBuying();
+
+    @Query("SELECT e.Gender, COUNT(e) FROM User e WHERE e.Gender = 'Admin' AND e.Gender = 'Manager' AND e.Gender = 'Sale Staff' AND e.Gender = 'Delivery Staff' GROUP BY e.Gender")
+    int countEmployeesByGender();
+
+    @Query("SELECT e.Gender, COUNT(e) FROM User e WHERE e.Gender = 'Customer' GROUP BY e.Gender")
+    int countCustomersByGender();
+
 }

@@ -1,6 +1,7 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.components.JwtTokenUtils;
+import goldiounes.com.vn.models.dtos.ChangePasswordDTO;
 import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -152,4 +153,22 @@ public class UserService {
         return modelMapper.map(existingUser,new TypeToken<List<UserDTO>>(){}.getType());
     }
 
+    public boolean changePassword(String username, ChangePasswordDTO changePasswordDTO) {
+        User user = userRepo.findByEmail(username);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        if (!passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+
+        if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getRetypePassword())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+
+        user.setPassword(passwordEncoder.encode(changePasswordDTO.getPassword()));
+        userRepo.save(user);
+        return true;
+    }
 }

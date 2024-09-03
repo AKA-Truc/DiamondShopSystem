@@ -8,9 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.Authentication;
 
-import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -225,6 +223,26 @@ public class OrderService {
             return user != null && user.getEmail().equals(username);
         }
         return false;
+    }
+
+    public int getRevenueBySpecificMonth(int year, int month) {
+        return orderRepo.findRevenueBySpecificMonth(year, month);
+    }
+
+    public int getRevenueBySpecificYear(int year) {
+        return orderRepo.findRevenueBySpecificYear(year);
+    }
+
+    public List<Object[]> getCountOrdersByDate() {
+        return orderRepo.countOrdersByDate();
+    }
+
+    public List<Object[]> getCountOrdersByMonth() {
+        return orderRepo.countOrdersByMonth();
+    }
+
+    public List<Object[]> getCountOrdersByYear() {
+        return orderRepo.countOrdersByYear();
     }
 
 }
