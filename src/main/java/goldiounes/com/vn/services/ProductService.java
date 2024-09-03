@@ -9,6 +9,7 @@ import goldiounes.com.vn.repositories.CategoryRepo;
 import goldiounes.com.vn.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.modelmapper.internal.bytebuddy.description.method.MethodDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -189,7 +190,8 @@ public class ProductService {
         return modelMapper.map(existingProduct, ProductDTO.class);
     }
 
-    public List<Product> getTopSellingProducts() {
-        return productRepo.findTopSellingProducts();
+    public List<ProductDTO> getTopSellingProducts() {
+        List<Product> products = productRepo.findTopSellingProducts();
+        return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 }
