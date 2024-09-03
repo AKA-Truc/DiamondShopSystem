@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Document is ready.');
 
-    // Function to fetch and display vouchers
+
     const fetchAndDisplayVouchers = () => {
-        fetch('http://localhost:8080/promotion-management/promotions')
+        fetch('http://localhost:8080/api/voucher/getAllVouchers')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const editBtn = row.querySelector('.edit-btn');
                     editBtn.addEventListener('click', () => {
                         // Redirect to another page with order ID
-                        window.location.href = `templates/Admin/edit_discount.html?id=${voucher.VoucherID}`;
+                        window.location.href = `../magiamgia/chinhsuamagg.html?id=${voucher.VoucherID}`;
                     });
                 });
 
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 yesBtn.addEventListener('click', () => {
                     console.log(voucherIdToDelete);
                     if (currentRow && voucherIdToDelete) {
-                        fetch(`http://localhost:8080/promotion-management/promotions/${voucherIdToDelete}`, {
+                        fetch(`http://localhost:8080/api/voucher/deleteVoucher/${voucherIdToDelete}`, {
                             method: 'DELETE'
                         })
                             .then(response => {
@@ -93,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching vouchers:', error));
     };
 
-    // Initial fetch and display
+
     fetchAndDisplayVouchers();
 
-    // Search functionality
+
     const searchInput = document.getElementById('search-bar');
     searchInput.addEventListener('input', () => {
         const searchText = searchInput.value.trim().toLowerCase();
@@ -121,3 +121,31 @@ document.addEventListener('DOMContentLoaded', () => {
 //         window.location.href = '../Login/login.html';
 //     }
 // });
+
+
+const openpopup1Button = document.getElementById('openpopup1');
+const closepopup1Button = document.getElementById('closepopup1');
+const cancelButton = document.getElementById('cancelButton');
+const popup1Overlay = document.getElementById('popup1Overlay');
+
+// Show the popup1
+openpopup1Button.addEventListener('click', () => {
+    popup1Overlay.style.display = 'flex';
+});
+
+// Close the popup1 when "X" is clicked
+closepopup1Button.addEventListener('click', () => {
+    popup1Overlay.style.display = 'none';
+});
+
+// Close the popup1 when "Hủy" button is clicked
+cancelButton.addEventListener('click', () => {
+    popup1Overlay.style.display = 'none';
+});
+
+// Close the popup1 when clicking outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === popup1Overlay) {
+        popup1Overlay.style.display = 'none';
+    }
+});
