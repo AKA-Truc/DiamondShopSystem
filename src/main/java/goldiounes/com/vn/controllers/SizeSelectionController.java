@@ -1,14 +1,16 @@
 package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.models.dtos.OrderDTO;
-import goldiounes.com.vn.models.dtos.ProductDTO;
-import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
 import goldiounes.com.vn.services.ProductService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/size-selection")
@@ -27,7 +29,7 @@ public class SizeSelectionController {
     }
 
     @PostMapping
-    public String submitSizeSelection(@RequestParam int orderId, @RequestBody OrderDTO orderDTO) {
+    public String submitSizeSelection(@RequestParam int orderId, @RequestBody OrderDTO orderDTO) throws MessagingException, IOException {
         orderService.updateOrder(orderId, orderDTO);
         return "Xác nhận đơn hàng thành công";
     }

@@ -3,12 +3,16 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dtos.*;
 import goldiounes.com.vn.models.entities.*;
 import goldiounes.com.vn.repositories.*;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -109,7 +113,7 @@ public class OrderService {
     }
 
 
-    public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
+    public OrderDTO updateOrder(int id, OrderDTO orderDTO){
         Order order = modelMapper.map(orderDTO, Order.class);
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -171,6 +175,7 @@ public class OrderService {
         pointRepo.save(point);
         existingOrder.setUser(existingUser);
         Order savedOrder = orderRepo.save(existingOrder);
+        emailService.sendInvoiceEmail(existingUser.getEmail(), savedOrder);
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
