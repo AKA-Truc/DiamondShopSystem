@@ -44,10 +44,12 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/user-management/generate-secret-key",
-                                "/user-management/test",
                                 "/user-management/register",
                                 "/user-management/login",
                                 "/user-management/update_password/**",
+                                "/forgot-password/send-otp",
+                                "/forgot-password/verify-otp",
+                                "/forgot-password/change_password/{email}",
                                 "/product-management/products",
                                 "/product-management/products/category/{keyword}/{minPrice}/{maxPrice}",
                                 "/product-management/products/{id}"
