@@ -54,7 +54,6 @@ public class UserController {
 
            Token jwt = tokenService.addToken(userDetail, token);
 
-
            // Create the response map
            Map<String, Object> response = new HashMap<>();
            response.put("message", "Login successfully");
