@@ -1,10 +1,12 @@
 package goldiounes.com.vn.controllers;
 
+import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.OrderDTO;
 import goldiounes.com.vn.models.dtos.OrderDetailDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,7 +30,15 @@ public class OrderController {
 
     @PostMapping("/orders")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_CUSTOMER')")
-    public ResponseEntity<ResponseWrapper<OrderDTO>> createOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<ResponseWrapper<OrderDTO>> createOrder(@RequestBody OrderDTO orderDTO, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (orderDTO.getUser().getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+
         OrderDTO createdOrder = orderService.createOrder(orderDTO);
         ResponseWrapper<OrderDTO> response = new ResponseWrapper<>("Order created successfully", createdOrder);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -51,7 +62,16 @@ public class OrderController {
     @GetMapping("/orders/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF', 'ROLE_DELIVERY STAFF', 'ROLE_MANAGER', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<OrderDTO>> getOrder(@PathVariable int id, Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+
         OrderDTO order = orderService.getOrderById(id);
+
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (order.getUser().getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+
         ResponseWrapper<OrderDTO> response;
 
         if (order != null) {
@@ -74,9 +94,16 @@ public class OrderController {
                     "(hasAuthority('ROLE_CUSTOMER') and #uid == #authentication.principal.id)"
     )
     public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getOrderByUserID(@PathVariable int uid, Authentication authentication) {
+
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (uid != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         List<OrderDTO> orders = orderService.getOrderByUserId(uid);
         ResponseWrapper<List<OrderDTO>> response;
-
         if (!orders.isEmpty()) {
             response = new ResponseWrapper<>("Orders retrieved successfully", orders);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -88,8 +115,16 @@ public class OrderController {
 
 
     @PutMapping("/orders/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_DELIVERY STAFF')")
-    public ResponseEntity<ResponseWrapper<OrderDTO>> updateOrder(@PathVariable int id, @RequestBody OrderDTO orderDTO) {
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_DELIVERY STAFF', 'ROLE_CUSTOMER')")
+    public ResponseEntity<ResponseWrapper<OrderDTO>> updateOrder(@PathVariable int id, @RequestBody OrderDTO orderDTO, Authentication authentication) throws MessagingException, IOException {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (orderDTO.getUser().getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
+
         OrderDTO updatedOrder = orderService.updateOrder(id, orderDTO);
         ResponseWrapper<OrderDTO> response;
         if (updatedOrder != null) {
@@ -153,8 +188,9 @@ public class OrderController {
     }
 
     @PutMapping("/orders/details/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<OrderDetailDTO>> updateOrderDetail(@PathVariable int id, @RequestBody OrderDetailDTO orderDetailDTO) {
+
         OrderDetailDTO updatedOrderDetail = orderDetailService.update(id, orderDetailDTO);
         ResponseWrapper<OrderDetailDTO> response;
 

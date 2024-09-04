@@ -110,6 +110,7 @@ public class UserService {
         existingUser.setPassword(user.getPassword());
         existingUser.setRole(user.getRole());
         existingUser.setAddress(user.getAddress());
+        existingUser.setGender(user.getGender());
         userRepo.save(existingUser);
         return modelMapper.map(existingUser,UserDTO.class);
     }
