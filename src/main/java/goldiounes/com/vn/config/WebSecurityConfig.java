@@ -46,6 +46,7 @@ public class WebSecurityConfig {
                                 "/user-management/generate-secret-key",
                                 "/user-management/register",
                                 "/user-management/login",
+                                "/user-management/GoogleLogin",
                                 "/user-management/update_password/**",
                                 "/forgot-password/send-otp",
                                 "/forgot-password/verify-otp",
