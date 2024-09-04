@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -154,7 +153,7 @@ public class UserService {
         return modelMapper.map(existingUser,new TypeToken<List<UserDTO>>(){}.getType());
     }
 
-    public boolean changePassword(String username, ChangePasswordDTO changePasswordDTO) {
+    public void changePassword(String username, ChangePasswordDTO changePasswordDTO) {
         User user = userRepo.findByEmail(username);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
@@ -170,6 +169,6 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getPassword()));
         userRepo.save(user);
-        return true;
     }
+
 }
