@@ -1,0 +1,140 @@
+[33me3b1dde[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/HieuNhi[m[33m)[m update html login with gg
+[33mf83d296[m update images, news_1, add_product
+[33m8f7d83a[m Add class ChangePassword and logout
+[33m00b3720[m add header
+[33m66b84c5[m update create, add_product
+[33m4bdd579[m fix
+[33maad50a9[m complete logic, permission Cart
+[33m11348d7[m Merge remote-tracking branch 'feature/HieuNhi/feature/HieuNhi' into feature/HieuNhi
+[33m67f09aa[m Complete permission for add CartItem
+[33m449093d[m fix one few things
+[33mbef7e58[m add DashBoard, add function getRevenue, getTopUser, getTopSellingProduct
+[33mccade0b[m fix addproduct
+[33m24f862a[m fix addproduct
+[33m3c88e41[m update UserServiceTest
+[33m72892b4[m fix link in html
+[33me3bf379[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33mcd219dc[m fix css
+[33me94ef21[m Change position remember
+[33ma3c01b3[m change position of login
+[33maeee5f8[m update customUserDetail for login
+[33m4cc6061[m  add fontend
+[33m9cb6b90[m fix
+[33m810d7b8[m add new2.html
+[33m5402593[m Merge remote-tracking branch 'feature/HieuNhi/feature/HieuNhi' into feature/HieuNhi
+[33m48e9b6b[m update permission for order, point
+[33mb254884[m demo
+[33md0a8ffc[m Update role Cart, add more method in CustomUserDetails
+[33m6f8310a[m add customUserDetail and customUserDetailService, update permission for user controller
+[33m4c49ceb[m fix css,html
+[33m71d2b08[m update role
+[33m949fe61[m  add news and html,css,js of project and phan quyen controller
+[33mb4ff1b5[m update addproduct
+[33m6e43399[m update phân quyền
+[33mea0c7b4[m Update authorities permission
+[33m2739091[m update ProductService,CartItemService and repo, User and Cart Controller
+[33mfa67cf7[m update url IsByPassToken
+[33m1463249[m update promotion controller
+[33m91d87f7[m Delegate permissions to Order Controller and Promotion Controller
+[33m1d58513[m no event
+[33md2fa0fa[m complete token
+[33m131af21[m fix html ,css ,js
+[33m74fda47[m fix news and add news_1
+[33mc2d4a14[m update token but have bug
+[33m48b9b3c[m update all of news
+[33mfbd7d2b[m fix css and html
+[33m7422ff4[m add_product
+[33mb2be597[m add
+[33m4198cdf[m update all
+[33m68090b6[m update add_product
+[33mf305a78[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m6f95470[m update filter by product price
+[33m7a3034c[m update
+[33meacc346[m update add_user.js
+[33mf022248[m update attribute gender of table user
+[33m97cd07e[m edit add_user and delete edit_customer and fix link
+[33md16b895[m Merge remote-tracking branch 'feature/HieuNhi/feature/HieuNhi' into feature/HieuNhi
+[33mfa20e32[m update attribute product.html, discount.html, add_discount.html
+[33m97f30a0[m update update
+[33mfbd6101[m update admin
+[33mdf961d5[m update
+[33m64041fa[m Update OrderDetailService
+[33ma586cd5[m update size_selection.js
+[33md6bc266[m update all product
+[33m6e4719e[m cmt all file Token
+[33m7809588[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m11ceac0[m fix update and delete product, productdetail
+[33mcfd7243[m update html css js admin
+[33mdced328[m JWT
+[33m23c4aa8[m clean code file html css js
+[33md07578e[m next update
+[33mbb18fea[m note cho js
+[33mc2823de[m fix UI html
+[33mf3ce773[m add idea html, js product
+[33m86ec670[m Update HTML, JS
+[33m5acb74e[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m1ddff08[m  add fontend
+[33mcbd10e9[m add html css js (admin)
+[33m11f7f1c[m add folder and fontend ò project
+[33mdaa5d07[m update html and images
+[33m2ee60ac[m add send email automatic when create order, set openAPI
+[33mdeeb70a[m add admin
+[33m7239d60[m Update getUserByRole and upload images
+[33mbe876b2[m upload ảnh
+[33m12b258c[m update famale_diamond js
+[33m5075e57[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m17e46a4[m update productdetail service, controller and female_diamond js
+[33ma66b684[m update html css
+[33ma30c81e[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m09ea3ae[m update female_diamond and promotion
+[33ma952a2e[m update contact
+[33mc25793d[m Merge remote-tracking branch 'feature/HieuNhi/feature/HieuNhi' into feature/HieuNhi
+[33m0a57db0[m fix logic order and warranty
+[33mce7b338[m add js, css, html of project
+[33m959ec1f[m update promotin html and css
+[33m2d729a7[m Merge branch 'feature/HieuNhi' of https://github.com/AKA-Truc/DiamondShopSystem into feature/HieuNhi
+[33m8e85b59[m change cart.hmtl
+[33m6d74920[m Update Test
+[33m03964e2[m update images
+[33m5bb63a3[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33mb38decb[m add html css js
+[33m6c5ad7c[m null admin
+[33m2a9b8f5[m update structure project
+[33m37aea7b[m Update structure project
+[33m7a2954e[m  add html,js,css of diamond_bracelets and home
+[33m828b264[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m4206f46[m fix logic orde
+[33m5c89a9c[m add html, css ,js
+[33m1e6bb63[m update DTO
+[33m528a145[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m1371d1e[m Update Order.java
+[33m1eebda5[m update ProductDetail, fix logic OrderDetail + CartItem and update DTO
+[33m51b76ac[m update ProductDetail, fix logic OrderDetail + CartItem and update DTO
+[33mdbea877[m update ProductDetail, fix logic OrderDetail + CartItem and update DTO
+[33m0666e6e[m update ProductDetail, fix logic OrderDetail + CartItem and update DTO
+[33m750f731[m update ProductDetail, fix logic OrderDetail + CartItem and update DTO
+[33me8d910e[m update ProductDetail, fix logic OrderDetail + CartItem and update DTO
+[33m3b30ab2[m Add CartTest CartItemTest
+[33m14b1c99[m Merge remote-tracking branch 'origin/feature/HieuNhi' into feature/HieuNhi
+[33m81d0b49[m update warranty test
+[33maa15c26[m fix test order and order detail
+[33m56bb0a7[m fix attribute and delete receipt
+[33mf2b1146[m update Order,OrderDetail, Product, ProductDetail
+[33m35a4cb0[m Update
+[33mc4ba525[m add JuniTest Cart and CartItem
+[33m7faf3eb[m add JuniTest Certificate
+[33me33d0f3[m Update controller and fix attribute of product
+[33mbee9919[m Update Models
+[33m83371a6[m Load
+[33ma4510b2[m DTO
+[33m9ef77ce[m update DTO
+[33m54b6ec1[m update models
+[33m9840ec1[m fix
+[33mece34dc[m fix update
+[33m90a8b57[m update category controller
+[33m06e3bb6[m update Service
+[33mebf0b84[m fix user,point
+[33m840f507[m fix'
+[33mc7aa7a6[m fix
+[33m64d468a[m fix Category Service
+[33m59fac91[m Fix attribute of Product
