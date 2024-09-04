@@ -3,8 +3,8 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.components.JwtTokenUtils;
 import goldiounes.com.vn.models.dtos.ChangePasswordDTO;
 import goldiounes.com.vn.models.dtos.PointDTO;
+import goldiounes.com.vn.models.dtos.TokenDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import goldiounes.com.vn.models.entities.Point;
 import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.UserRepo;
@@ -15,9 +15,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -41,6 +44,9 @@ public class UserService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtDecoder jwtDecoder;
 
 
     public UserService(UserRepo userRepo, CartService cartService, PointService pointService, ModelMapper modelMapper, PasswordEncoder passwordEncoder, JwtTokenUtils jwtTokenUtils, AuthenticationManager authenticationManager) {
@@ -114,24 +120,6 @@ public class UserService {
         return modelMapper.map(existingUser,UserDTO.class);
     }
 
-    public String login(String email, String password, String Role) throws Exception {
-        User existingUser = userRepo.findByEmail(email);
-        if(existingUser == null){
-            throw new RuntimeException("Invalid user account / password");
-        }
-
-        if (!passwordEncoder.matches(password, existingUser.getPassword())) {
-            throw new RuntimeException("INVALID EMAIL OR PASSWORD");
-
-        }
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                email, password,
-                existingUser.getAuthorities()
-        );
-        authenticationManager.authenticate(authenticationToken);
-        return jwtTokenUtils.generateToken(existingUser);
-    }
-
     public User getUserDetailsFromToken(String token) throws Exception {
         if (jwtTokenUtils.isTokenExpired(token)) {
             throw new RuntimeException("Token is expired");
@@ -153,7 +141,7 @@ public class UserService {
         return modelMapper.map(existingUser,new TypeToken<List<UserDTO>>(){}.getType());
     }
 
-    public void changePassword(String username, ChangePasswordDTO changePasswordDTO) {
+    public boolean changePassword(String username, ChangePasswordDTO changePasswordDTO) {
         User user = userRepo.findByEmail(username);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
@@ -169,6 +157,51 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getPassword()));
         userRepo.save(user);
+        return true;
     }
 
+    public String login(String email, String password, String Role) throws Exception {
+        User existingUser = userRepo.findByEmail(email);
+        if(existingUser == null){
+            throw new RuntimeException("Invalid user account / password");
+        }
+
+        if (!passwordEncoder.matches(password, existingUser.getPassword())) {
+            throw new RuntimeException("INVALID EMAIL OR PASSWORD");
+
+        }
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                email, password,
+                existingUser.getAuthorities()
+        );
+        authenticationManager.authenticate(authenticationToken);
+        return jwtTokenUtils.generateToken(existingUser);
+    }
+
+    public String GoogleLogin(TokenDTO tokenRequest) {
+        try {
+            String token = tokenRequest.getToken();
+            // Decode JWT token
+            Jwt jwt = jwtDecoder.decode(token);
+            String email = jwt.getClaim("email");
+            String name = jwt.getClaim("name");
+
+            User existingUser = userRepo.findByEmail(email);
+            if (existingUser == null) {
+                UserDTO userDTO = new UserDTO();
+                userDTO.setEmail(email);
+                userDTO.setUserName(name);
+                userDTO.setPassword("GOOGLE_USER"); // You might want to handle this more securely
+                userDTO.setRole("customer"); // Fixed role typo
+
+                UserDTO newUser = createUser(userDTO);
+                return login(newUser.getEmail(), "GOOGLE_USER", newUser.getRole());
+            }
+            return login(existingUser.getEmail(), "GOOGLE_USER", existingUser.getRole());
+        } catch (Exception e) {
+            // Ghi lại thông tin lỗi chi tiết
+            System.err.println("Lỗi khi đăng nhập bằng Google: " + e.getMessage());
+            throw new RuntimeException("Đã xảy ra lỗi trong quá trình đăng nhập bằng Google", e);
+        }
+    }
 }
