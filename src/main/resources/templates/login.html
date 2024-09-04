@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập / Đăng Ký</title>
     <link rel="stylesheet" href="/static/css/login.css">
-    <!-- Thêm Google API script -->
+    <!-- Google API script -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
@@ -19,7 +19,7 @@
         <h2>Tôi Đã Có Tài Khoản</h2>
         <p><b>Vui lòng nhập email và mật khẩu của bạn</b></p>
 
-        <form action="/login.html" method="POST">
+        <form action="#" method="POST" id="loginForm">
             <label for="email">Email <span>*</span></label>
             <input type="email" id="email" name="email" placeholder="hello@gmail.com" required>
 
@@ -34,8 +34,8 @@
 
         <div id="g_id_onload"
              data-client_id="619533343671-0vbjc3umdk8o58ic2i908s0mn7qc9sjt.apps.googleusercontent.com"
-             data-login_uri="/DiamondShopSystem/src/main/resources/templates/User/about_us.html"
-             data-auto_prompt="false">
+             data-auto_prompt="false"
+             data-callback="handleCredentialResponse">
         </div>
         <div class="g_id_signin"
              data-type="standard"
@@ -50,7 +50,9 @@
     <div class="register-section">
         <h2>Tôi Chưa Có Tài Khoản</h2>
         <p>Tạo một tài khoản cá nhân để tận hưởng những lợi ích bổ sung <br> và có trải nghiệm phong phú.</p>
-        <a href="/DiamondShopSystem/src/main/resources/templates/User/create_account.html" class="register-button"><b>Tạo Tài Khoản Của Tôi</b></a>
+        <a href="/DiamondShopSystem/src/main/resources/templates/User/create_account.html" class="register-button">
+            <b>Tạo Tài Khoản Của Tôi</b>
+        </a>
     </div>
 </div>
 
