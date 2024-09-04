@@ -174,41 +174,48 @@ option {
 }
 /**/
 
-
-.form {
-    display: flex;
-}
 .field {
     margin: 20px;
-
 }
+
 .form {
     display: flex;
 }
+
 .field {
     flex: 1;
     margin: 10px;
     position: relative;
 }
+
 .top-fields, .middle-fields, .form-row {
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
 }
 
 .field label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+    color: #000;
 }
 
 .field input {
     font-size: 18px;
     padding: 10px;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    background: #f8f9fa;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.field input:focus {
+    border-color: #004085;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 64, 133, 0.3);
 }
 
 select {
@@ -216,11 +223,6 @@ select {
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
-}
-
-.field input:focus {
-    border-color: #000;
-    outline: none;
 }
 
 .button {
@@ -282,6 +284,48 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.table-control.item-control {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.table-control.item-control:focus {
+    border-color: #004085;
+    box-shadow: 0 0 10px rgba(0, 64, 133, 0.5);
+    outline: none;
+}
+
+.quantity-input {
+    margin-top: 14px;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #fafafa;
+    width: 90%;
+    font-size: 18px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-quantity {
+    font-size: 28px;
+    color: #004085;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-quantity:hover {
+    color: #002752;
+    transform: scale(1.2);
 }
 
 

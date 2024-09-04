@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/User/pay.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="left">
+        <div class="logo">
+            <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
+        </div>
+        <h3>Thông tin giao hàng</h3>
+        <div class="form-group">
+            <label for="name">Họ và Tên</label>
+            <input type="text" id="name" placeholder="Họ và tên">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email1" name="email" placeholder="diamond@gmail.com" required>
+                <span id="email-error" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại</label>
+                <input type="text" id="phone" name="phone" placeholder="0123456789" required>
+                <span id="phone-error" class="error-message"></span>
+            </div>
+        </div>
+        <style>
+            .error-message {
+                color: red;
+                font-size: 0.875em;
+                display: block;
+                margin-top: 0.5em;
+            }
+
+        </style>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="province">Tỉnh/Thành</label>
+                <select id="province" name="province">
+                    <option value="">Chọn Tỉnh/Thành</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="district">Quận/Huyện</label>
+                <select id="district" name="district" disabled>
+                    <option value="">Chọn Quận/Huyện</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ward">Phường/Xã</label>
+                <select id="ward" name="ward" disabled>
+                    <option value="">Chọn Phường/Xã</option>
+                </select>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <h3>Phương thức vận chuyển</h3>
+        <div class="shipping-method">
+            <input type="radio" id="free-shipping" name="shipping" checked>
+            <label for="free-shipping">Miễn phí giao hàng nhanh (Dự kiến nhận hàng: 1 - 7 ngày)</label>
+        </div>
+
+        <hr class="divider">
+
+        <h3>Phương thức thanh toán</h3>
+        <div class="payment-method">
+            <input type="radio" id="cod" name="payment" checked>
+            <p><i class="fas fa-truck"></i> Thanh toán khi giao hàng (không áp dụng cho đơn hàng dưới 1.000.000)</p>
+            <style>
+                .payment-method i.fa-truck {
+                    color: #800080;
+                }
+            </style>
+        </div>
+        <div class="payment-method">
+            <input type="radio" id="credit" name="payment">
+            <p><i class="fas fa-credit-card"></i> Thanh toán chuyển khoản online </p>
+            <style>
+                .payment-method i.fa-credit-card {
+                    color: #8B008B;
+                }
+            </style>
+        </div>
+
+        <a href="success.html"><button class="btn-order">Đặt hàng</button></a>
+        <a href="cart.html" class="back-link">Quay về giỏ hàng</a>
+    </div>
+
+    <div class="right">
+        <h3>Tóm Tắt Đơn Hàng</h3>
+        <div class="product">
+            <img src="ring.png" alt="Ring Image">
+            <div class="product-details">
+                <p>Nhẫn Nam </p>
+                <p>9.180.000đ</p>
+                <p>Số lượng: 1</p>
+            </div>
+        </div>
+        <div class="discount">
+            <input type="text" placeholder="Nhập Mã Giảm Giá">
+            <button class="btn-apply">SỬ DỤNG</button>
+        </div>
+        <div class="summary">
+            <p><b>Tạm Tính</b> <span><b>9.180.000đ</b></span></p>
+            <p><b>Phí Vận Chuyển</b> <span><b>Miễn phí</b></span></p>
+            <p class="total">Tổng Cộng <span><b>9.180.000đ</b></span></p>
+        </div>
+    </div>
+</div>
+
+
+<!---->
+<footer class="footer">
+    <div class="grid">
+        <div class="grid_row">
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Danh mục</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="diamond_earrings.html">Bông tai kim cương</a>
+                        <a href="diamond_bracelets.html">Lắc tay kim cương</a>
+                        <a href="">Nhẫn kim cương</a>
+                        <a href="">Dây chuyền kim cương</a>
+                        <a href="diamond_pendant.html">Mặt dây chuyền kim cương</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Liên hệ </h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="/static/css/User/about_us.css">Về chúng tôi</a>
+                        <a href="">Tuyển dụng</a>
+                        <a href="">Chính sách đổi trả</a>
+                        <a href="">Chính sách bảo hành</a>
+                        <a href="">Chính sách vận chuyển</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Đăng ký ngay</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
+                        <form action="">
+                            <input type="text" id="email" name="email" placeholder="Email">
+                            <input type="submit" value="ĐĂNG KÝ NGAY">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/static/js/User/promotion.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const provinces = [
+            { id: 1, name: 'Hà Nội' },
+            { id: 2, name: 'Hồ Chí Minh' },
+            { id: 3, name: 'Đồng Nai' },
+            { id: 4, name: 'Bình Dương' },
+            { id: 5, name: 'Đà Nẵng' },
+        ];
+
+        const districts = {
+            1: [
+                { id: 101, name: 'Ba Đình' },
+                { id: 102, name: 'Hoàn Kiếm' },
+                { id: 103, name: 'Tây Hồ' },
+            ],
+            2: [
+                { id: 201, name: 'Quận 1' },
+                { id: 202, name: 'Quận Bình Thạnh' },
+                { id: 203, name: 'Quận Tân Phú' },
+            ],
+            3: [
+                { id: 301, name: 'Thành phố Biên Hòa' },
+                { id: 302, name: 'Huyện Định Quán' },
+            ],
+            4: [
+                { id: 401, name: 'Thành phố Dĩ An' },
+                { id: 402, name: 'Thành phố Thủ Dầu Một' },
+            ],
+            5: [
+                { id: 501, name: 'Quận Ngũ Hành Sơn' },
+                { id: 502, name: 'Quận Hải Châu'},
+            ],
+        };
+
+        const wards = {
+            101: [
+                { id: 1001, name: 'Phường Điện Biên' },
+                { id: 1002, name: 'Phường Ngọc Khánh' },
+                { id: 1003, name: 'Phường Đội Cấn' },
+                { id: 1004, name: 'Phường Cống Vị' },
+                { id: 1005, name: 'Phường Giảng Võ' },
+            ],
+
+            102: [
+                { id: 1006, name: 'Phường Đồng Xuân' },
+                { id: 1007, name: 'Phường Hàng Bạc' },
+                { id: 1008, name: 'Phường Hàng Bài' },
+                { id: 1009, name: 'Phường Tràng Tiền' },
+                { id: 1010, name: 'Phường Phúc Tân' },
+            ],
+
+            103: [
+                { id: 1011, name: 'Phường Thụy Khuê' },
+                { id: 1012, name: 'Phường Yên Phụ' },
+                { id: 1013, name: 'Phường Tứ Liên' },
+                { id: 1014, name: 'Phường Nhật Tân' },
+                { id: 1015, name: 'Phường Quảng An' },
+            ],
+
+            201: [
+                { id: 2001, name: 'Phường Bến Nghé' },
+                { id: 2002, name: 'Phường Bến Thành' },
+                { id: 2003, name: 'Phường Tân Định' },
+                { id: 2004, name: 'Phường Nguyễn Cư Trinh' },
+                { id: 2005, name: 'Phường Phạm Ngũ Lão' },
+            ],
+
+            202: [
+                { id: 2006, name: 'Phường 01' },
+                { id: 2007, name: 'Phường 10' },
+                { id: 2008, name: 'Phường 15' },
+                { id: 2009, name: 'Phường 20' },
+                { id: 2010, name: 'Phường 25' },
+            ],
+
+            203: [
+                { id: 2011, name: 'Phường Sơn Kỳ' },
+                { id: 2012, name: 'Phường Tân Qúy' },
+                { id: 2013, name: 'Phường Tân Sơn Nhì' },
+                { id: 2014, name: 'Phường Hoà Thạnh' },
+                { id: 2015, name: 'Phường Tây Thạnh' },
+            ],
+
+            301: [
+                { id: 3001, name: 'Thị trấn Long Giao' },
+                { id: 3002, name: 'Xã Bảo Bình' },
+                { id: 3003, name: 'Xã Nhân Nghĩa' },
+            ],
+
+            302: [
+                { id: 3006, name: 'Thị trấn Định Quán' },
+                { id: 3007, name: 'Xã Gia Canh' },
+                { id: 3008, name: 'Xã La Ngà' },
+            ],
+
+            401: [
+                { id: 4001, name: 'Phường Dĩ An' },
+                { id: 4002, name: 'Phường Tân Đông Hiệp' },
+                { id: 4003, name: 'Phường An Bình' },
+            ],
+
+            402: [
+                { id: 4006, name: 'Xã Chánh Mỹ' },
+                { id: 4007, name: 'Xã Hiệp Thành' },
+                { id: 4008, name: 'Xã Hòa Phú' },
+            ],
+
+            501: [
+                { id: 5001, name: 'Phường Hoà Hải' },
+                { id: 5002, name: 'Phường Mỹ An' },
+                { id: 4003, name: 'Phường Khuê Mỹ' },
+            ],
+
+            502: [
+                { id: 5006, name: 'Phường Hải Châu I' },
+                { id: 5007, name: 'Phường Hải Châu II' },
+                { id: 5008, name: 'Phường Nam Dương' },
+            ],
+        };
+
+        const provinceSelect = document.getElementById('province');
+        provinces.forEach(province => {
+            const option = document.createElement('option');
+            option.value = province.id;
+            option.textContent = province.name;
+            provinceSelect.appendChild(option);
+        });
+
+        provinceSelect.addEventListener('change', () => {
+            const selectedProvince = provinceSelect.value;
+            const districtSelect = document.getElementById('district');
+            const wardSelect = document.getElementById('ward');
+
+            districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+            wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+            districtSelect.disabled = !selectedProvince;
+            wardSelect.disabled = true;
+
+            if (selectedProvince) {
+                districts[selectedProvince].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district.id;
+                    option.textContent = district.name;
+                    districtSelect.appendChild(option);
+                });
+            }
+        });
+
+        document.getElementById('district').addEventListener('change', () => {
+            const selectedDistrict = document.getElementById('district').value;
+            const wardSelect = document.getElementById('ward');
+
+            wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+            wardSelect.disabled = !selectedDistrict;
+
+            if (selectedDistrict) {
+                wards[selectedDistrict].forEach(ward => {
+                    const option = document.createElement('option');
+                    option.value = ward.id;
+                    option.textContent = ward.name;
+                    wardSelect.appendChild(option);
+                });
+            }
+        });
+
+        document.querySelector('.btn-apply').addEventListener('click', function() {
+            const discountCode = document.querySelector('.discount input').value;
+            if (discountCode) {
+                alert('Mã khuyến mãi đã được áp dụng: ' + discountCode);
+            } else {
+                alert('Vui lòng nhập mã khuyến mãi.');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('payment-form');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const emailInput = document.getElementById('email').value;
+                const phoneInput = document.getElementById('phone').value;
+                const emailError = document.getElementById('email-error');
+                const phoneError = document.getElementById('phone-error');
+
+                let isValid = true;
+
+                // Kiểm tra định dạng email
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailInput)) {
+                    emailError.textContent = "Chưa đúng định dạng, ví dụ: diamond@shop.vn";
+                    isValid = false;
+                } else {
+                    emailError.textContent = "";
+                }
+
+                // Kiểm tra số điện thoại
+                const phonePattern = /^0\d{9}$/;
+                if (!phonePattern.test(phoneInput)) {
+                    phoneError.textContent = "Số điện thoại phải bắt đầu bằng 0 và có 10 số";
+                    isValid = false;
+                } else {
+                    phoneError.textContent = "";
+                }
+
+                if (isValid) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
