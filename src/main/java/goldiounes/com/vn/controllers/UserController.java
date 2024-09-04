@@ -1,7 +1,7 @@
 package goldiounes.com.vn.controllers;
-
 import goldiounes.com.vn.components.JwtTokenUtils;
 import goldiounes.com.vn.config.CustomUserDetails;
+import goldiounes.com.vn.models.dtos.TokenDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.models.dtos.UserLoginDTO;
 import goldiounes.com.vn.models.entities.Token;
@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+
 @RequestMapping("/user-management")
 @RequiredArgsConstructor
 public class UserController {
@@ -42,6 +43,38 @@ public class UserController {
     @GetMapping("/generate-secret-key")
     public ResponseEntity<String> generateSecretKey(){
         return ResponseEntity.ok(jwtTokenUtils.generateSecretKey());
+    }
+
+    @PostMapping("/GoogleLogin")
+    public ResponseEntity<Map<String,Object>> GoogleLogin(@RequestBody TokenDTO tokenRequest) {
+       try {
+           String token = userService.GoogleLogin(tokenRequest);
+
+           User userDetail = userService.getUserDetailsFromToken(token);
+
+           Token jwt = tokenService.addToken(userDetail, token);
+
+
+           // Create the response map
+           Map<String, Object> response = new HashMap<>();
+           response.put("message", "Login successfully");
+           response.put("token", jwt.getToken());
+           response.put("tokenType", jwt.getTokenType());
+           response.put("refreshToken", jwt.getRefreshToken());
+           response.put("name", userDetail.getUserName());
+           response.put("email", userDetail.getEmail());
+           response.put("roles", userDetail.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+           response.put("id", userDetail.getUserID());
+
+           return ResponseEntity.ok(response);
+       }
+       catch (Exception e) {
+           e.printStackTrace();
+
+           Map<String, Object> errorResponse = new HashMap<>();
+           errorResponse.put("message", "Login with google failed");
+           return ResponseEntity.badRequest().body(errorResponse);
+       }
     }
 
     @PostMapping("/login")
@@ -162,7 +195,6 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
-
 
     @DeleteMapping("/logout")
     public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
