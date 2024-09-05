@@ -13,7 +13,9 @@ header {
 .body1 {
     margin: auto;
     width: 90%;
+    background-color: #f4f7fb;
     max-width: 1200px; // căn lề trái
+
 }
 
 .wrapper {
