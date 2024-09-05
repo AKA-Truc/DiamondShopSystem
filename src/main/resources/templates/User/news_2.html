@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diamond Quality Standards at Jemmia</title>
-    <link rel="stylesheet" href="test.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <style>
@@ -644,6 +643,22 @@
 </footer>
 <script>
     // scripts.js
+
+    const textOptions = ["Giảm giá đến 16%", "Trang sức kim cương ưu đãi 40%", "Mặt dây chuyền ưu đãi 15%"];
+    const centerText = document.getElementById("center-text");
+    let textIndex = 0;
+
+    function rotateText() {
+        centerText.classList.remove('visible');
+        setTimeout(() => {
+            centerText.textContent = textOptions[textIndex];
+            centerText.classList.add('visible');
+            textIndex = (textIndex + 1) % textOptions.length;
+        }, 1000);
+    }
+
+    setInterval(rotateText, 3000);
+    rotateText(); // Initialize text
 
     document.addEventListener('DOMContentLoaded', function () {
         // Smooth scrolling for TOC links

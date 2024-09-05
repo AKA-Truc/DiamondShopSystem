@@ -24,7 +24,7 @@
 
         .histaff-item-group-header h3 {
             margin-bottom: 20px;
-            color: #CD2626;
+            color: #162165e7;
             font-weight: bold;
             font-size: 24px;
         }
@@ -206,7 +206,12 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
+                    <select class="table-control item-control">
+                        <option value="" disabled selected>Tên kim cương</option>
+                        <option value="diamond1">Kim cương 1</option>
+                        <option value="diamond2">Kim cương 2</option>
+                        <option value="diamond3">Kim cương 3</option>
+                    </select>
                     <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                 </td>
@@ -375,7 +380,6 @@
 </div>
 <!---->
 
-
 <div class="histaff-item-group background-white border-radius-5 active" id="histaff-work-exp" style="background-color: #f4f7fb;">
     <div class="body1">
         <div class="row">
@@ -419,6 +423,7 @@
                     <label for="image">Ảnh sản phẩm 2</label>
                     <input type="file" id="image1" name="image">
                 </div>
+
             </form>
         </div>
 
@@ -458,11 +463,15 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
+                                    <select class="table-control item-control">
+                                        <option value="" disabled selected>Tên kim cương</option>
+                                        <option value="diamond1">Kim cương 1</option>
+                                        <option value="diamond2">Kim cương 2</option>
+                                        <option value="diamond3">Kim cương 3</option>
+                                    </select>
                                     <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
                                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
-
                                 <td>
                                     <select class="table-control item-control">
                                         <option value="Size1">Size 1</option>
@@ -497,7 +506,12 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
+                                    <select class="table-control item-control">
+                                        <option value="" disabled selected>Tên kim cương</option>
+                                        <option value="diamond1">Kim cương 1</option>
+                                        <option value="diamond2">Kim cương 2</option>
+                                        <option value="diamond3">Kim cương 3</option>
+                                    </select>
                                     <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
                                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
@@ -520,7 +534,6 @@
                                 <td>
                                     <ul class="table-action">
                                         <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
-<!--                                        <li class="table-action-control row-edit"><i class="fa-solid fa-pencil" aria-hidden="true"></i></li>-->
                                         <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
                                     </ul>
                                 </td>
