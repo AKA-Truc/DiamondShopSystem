@@ -19,7 +19,7 @@ body {
 
 /* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c; /*chỉnh chữ*/
+    color: #0d0e1c;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -48,7 +48,7 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #cbd0dd; /*click menu*/
+    background-color: #cbd0dd;
 }
 
 /* Submenu sổ xuống */
@@ -150,26 +150,27 @@ ion-icon {
 
 
 select {
-    font-size: 18px; /* Tăng kích thước phông chữ */
-    padding: 10px; /* Tăng khoảng cách bên trong */
+    font-size: 18px;
+    padding: 10px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Thay đổi kích thước và kiểu các tùy chọn */
+
 option {
-    font-size: 18px; /* Tăng kích thước phông chữ */
-    padding: 10px; /* Tăng khoảng cách bên trong */
+    font-size: 18px;
+    padding: 10px;
 }
 
 
 .body1 {
     display: flex;
-    justify-content:flex-start; /* Đẩy khung về phía bên phải */
+    justify-content:flex-start; /
     margin: 70px;
     height: 40vh;
-    align-items: center; /* Căn giữa khung theo chiều dọc */
+    align-items: center;
     margin-left: 160px;
+    margin-top: 50px;
 }
 
 .wrapper {
@@ -178,7 +179,7 @@ option {
     height: 315px;
     padding: 250px;
     margin-left: 160px;
-    align-items: center; /* Căn giữa khung theo chiều dọc */
+    align-items: center;
 }
 .form {
     display: flex;
@@ -212,11 +213,11 @@ option {
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
+    transition: border-color 0.3s ease;
 }
 .field input:focus {
-    border-color: #000; /* Đổi màu viền khi focus */
-    outline: none; /* Bỏ viền outline mặc định */
+    border-color: #000;
+    outline: none;
 }
 
 #CategoryID{
@@ -224,7 +225,7 @@ option {
 }
 
 .styled-select {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Thay đổi font chữ */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 14px;
 }
 .button {
@@ -233,39 +234,39 @@ option {
     margin: 8px 8px;
 }
 .button input {
-    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    font-size: 14px;
     cursor: pointer;
-    margin-right: 700px; /* Khoảng cách giữa các nút */
+    margin-right: 700px;
 }
 .button-group input{
-    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    font-size: 14px;
     cursor: pointer;
     margin: 8px 8px;
 }
 .button input.save  {
-    background-color:#476730;
+    background-color:#304067;
     color: #fff;
 }
 .button-group input.save  {
-    background-color:#476730;
+    background-color:#304067;
     color: #fff;
 }
 .button-group input.cancel  {
     background-color: #cdccc2;
-    color: #395327;
+    color: #272953;
     font-weight: 600;
 }
 .button input.save:hover {
     background-color:#eae9e0;
 }
 .button-group input.save:hover {
-    background-color:#395327;
+    background-color:#304067;
 }
 .button-group input.cancel:hover {
     background-color: #c1c0b7;
