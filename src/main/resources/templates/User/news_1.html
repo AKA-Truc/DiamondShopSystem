@@ -5,11 +5,493 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>200 Triệu - Nên Mua Kim Cương Hay Gửi Tiết Kiệm?</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/static/css/User/news_1.css">
 </head>
 
-<body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+    }
 
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .header1 {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: rgb(10, 25, 56);
+        border-bottom: 1px solid #ddd;
+        justify-content: space-between;
+        color: #d5d9de;
+    }
+
+    .header1 p {
+        margin: 0;
+    }
+
+    .header1 .phone,
+    .header1 .address {
+        flex: 1;
+    }
+
+    .header1 .phone {
+        text-align: left;
+        margin-left: 150px;
+    }
+
+    .header1 .address {
+        text-align: right;
+        margin-right: 150px;
+    }
+
+    .header1 .center {
+        flex: 2;
+        text-align: center;
+        opacity: 0;
+        color: gold;
+        transition: opacity 1s ease-in-out;
+    }
+    .header1 .visible {
+        opacity: 1;
+    }
+
+
+    .header {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-bottom: 0.5px solid #ddd;
+        flex-direction: column;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: relative;
+    }
+
+    .logo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .icons {
+        position: absolute;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 17px;
+        margin-right: 80px;
+        font-size: 20px;
+    }
+
+    .header>.header-content>.logo img {
+        width: 120px;
+        height: auto;
+    }
+
+    #main-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        background-color: white;
+        height: 40px;
+        display: inline-flex;
+        width: 100%;
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        gap: 50px;
+        z-index: 1000;
+        position: relative;
+        text-transform: uppercase;
+    }
+
+    #main-menu li {
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    #main-menu li a {
+        color: #040711;
+        display: block;
+        padding: 20px 20px;
+        text-decoration: none;
+    }
+
+    #main-menu ul.sub-menu {
+        position: absolute;
+        background: #f4f4f4;
+        padding: 0;
+        list-style: none;
+        width: 300px;
+        display: none;
+        top: 80%;
+        left: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #main-menu li:hover > ul.sub-menu {
+        display: block;
+    }
+
+    #main-menu ul.sub-menu a {
+        padding: 12px 20px;
+        /* border-bottom: 1px solid #94968f; */
+        left: 0;
+    }
+
+    #main-menu ul.sub-menu li:hover > a {
+        background-color: #e1e4eb;
+    }
+
+    #main-menu ul.sub-menu li:last-child a {
+        border: none;
+    }
+
+    #main-menu ul.sub-menu ul.sub-menu {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        left: 300px;
+        top: 0;
+    }
+
+    /* Thiết lập border khi hover */
+    #main-menu > li > a {
+        position: relative;
+    }
+
+    #main-menu > li > a:hover {
+        color: rgb(70, 118, 168);
+    }
+
+    #main-menu .sub-menu > li > a:hover {
+        color:   rgb(70, 118, 168);
+    }
+
+    #main-menu > li:hover > a::before {
+        width: 100%;
+    }
+
+    #main-menu > li.has-child::after {
+        color: #040711;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        content: "\f107";
+    }
+
+    #main-menu .sub-menu > li.has-child::after {
+        content: "\f105";
+        color: #040711;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+    }
+
+    /* Begin update code for search and cart */
+    .search-overlay {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: -33.33%;
+        width: 100%;
+        height: 33.33%;
+        background-color: rgba(99, 95, 95, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        transition: top 0.5s ease;
+    }
+
+    .search-overlay.active {
+        top: 0;
+    }
+
+    /* The search box */
+    .search-box {
+        width: 50%;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-box input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-box button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 90px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .search-box button:hover {
+        background-color: #444;
+    }
+
+    /* The cart box */
+    .cart-box {
+        height: 100%;
+        width: 25%;
+        margin-left: 75%;
+        background-color: white;  /* Đổi màu cho background của cart */
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        justify-content: space-between;
+        right: -100%;
+        z-index: 1000;
+        transition: right 0.5s ease;
+        color: rgb(0, 0, 0);
+    }
+
+    .cart-box.active {
+        right: 0;
+    }
+
+    .cart-box h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .cart-box p {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: auto;
+    }
+
+    .cart-box button {
+        padding: 15px;
+        font-size: 18px;
+        background-color: rgb(166, 168, 174);
+        color: black;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 70%;
+        margin-left: 70px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .cart-box button:hover {
+        background-color: #ddd;
+    }
+
+    /* */
+    .cart-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .cart-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    /* End update code for search and cart */
+    /**/
+    .content {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    h1, h2 {
+        color: #333;
+    }
+
+    .comparison table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .comparison th,
+    .comparison td {
+        border: 1.5px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .comparison th {
+        background-color: #E8E8E8;
+        color: #333;
+    }
+
+    .toc-container {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 20px 0;
+        border-radius: 5px;
+        max-width: 380px;
+    }
+
+    .toc-header {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc-list li {
+        margin: 5px 0;
+    }
+
+    .toc-list li a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s;
+    }
+
+    .toc-list li a:hover {
+        color: #0056b3;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .toc-container {
+            max-width: 100%;
+        }
+    }
+    .footer {
+        background-color: #1A1919;
+        color: #d3cece;
+        padding: 20px 0;
+        margin-top: 10px;
+        font-family: Arial, sans-serif;
+        width: 100%;
+    }
+
+    .grid {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .grid_row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .grid__column-2-4 {
+        width: 30%;
+    }
+
+    .footer-heading {
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .footer__list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer__list li {
+        margin-bottom: 10px;
+    }
+
+    .footer__list a {
+        color: #d3cece;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .footer__list a:hover {
+        text-decoration: underline;
+    }
+
+
+    form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    form input[type="text"] {
+        padding: 8px ;
+        width: 70%;
+        margin-right: 10px;
+        background-color: #dbdbdb;
+        border: 1px solid #ffffff;
+        color: #000000;
+        box-sizing: border-box;
+    }
+
+    form input[type="text"]::placeholder {
+        color: #000000;
+        opacity: 1;
+    }
+
+    form input[type="submit"] {
+        background-color: #888;
+        color: #000;
+        border: none;
+        padding: 8px 15px;
+        cursor: pointer;
+        text-transform: uppercase;
+        flex-shrink: 0;
+    }
+
+    form input[type="submit"]:hover {
+        background-color: #cfb0b0;
+    }
+</style>
+
+
+<body>
 <div class="header1">
     <p class="phone">Phone: (+84) 123 2345 123</p>
     <p class="center" id="center-text">hello</p>
@@ -58,32 +540,43 @@
     </div>
 </div>
 
-<header>
-    <div class="container">
+<div class="content">
         <h1>200 Triệu - Nên Mua Kim Cương Hay Gửi Tiết Kiệm?</h1>
-        <p>Ngày đăng: Tháng 08/2024</p>
-    </div>
-</header>
+        <style>
+            .content h1 {
+                white-space: nowrap;
+            }
+        </style>
 
-<main>
-    <div class="container">
-        <article>
-            <section class="intro">
+    <div class="toc-container">
+        <div class="toc-header">
+            <i class="fas fa-list-ul"></i> Mục Lục
+        </div>
+        <ul class="toc-list">
+            <li><a style="color: black" href="#intro">1. Có 200 triệu nên mua kim cương hay gửi tiết kiệm?</a></li>
+            <li><a style="color: black" href="#investment">2. Đầu Tư Kim Cương: Lợi và Hại</a></li>
+            <li><a style="color: black" href="#savings">3. Gửi Tiết Kiệm: An Toàn Nhưng Lãi Suất Thấp</a></li>
+            <li><a style="color: black" href="#comparison">4. So Sánh Nhanh: Kim Cương vs Tiết Kiệm</a></li>
+        </ul>
+    </div>
+
+            <section id="intro">
                 <h2>Có 200 triệu nên mua kim cương hay gửi tiết kiệm?</h2>
                 <p>
                     Khi <b>có 200 triệu nên gửi tiết kiệm hay mua kim cương?</b> 200 triệu là một khoản tiền không nhỏ, và việc quyết định sử dụng nó như thế nào luôn khiến nhiều người băn khoăn. Hai lựa chọn phổ biến nhất là gửi tiết kiệm và mua kim cương. Vậy, đâu là lựa chọn tốt hơn? Cùng tìm hiểu ngay ở bài viết này của chúng tôi để biết được 200 triệu nên mua kim cương hay gửi tiết kiệm nhé!
                 </p>
-                <img src="/static/images/tintuc_1.jpg" alt="Kim Cương" class="featured-image">
+                <img style="display: block;margin-left: auto;margin-right:auto; width: 700px;height: 350px;" src="/static/images/tintuc_1.jpg" alt="Kim Cương" class="featured-image">
             </section>
 
-            <section class="investment">
+            <section id="investment">
                 <h2>Đầu Tư Kim Cương: Lợi và Hại</h2>
                 <p>
                     Kim cương không chỉ là một món đồ trang sức quý giá mà còn có thể là một khoản đầu tư sinh lời.
                     Tuy nhiên, để đầu tư hiệu quả, bạn cần hiểu rõ về thị trường kim cương và các yếu tố ảnh hưởng đến giá trị của nó.
                 </p>
-                <img src="/static/images/tintuc_2.jpg" alt="Đầu tư Kim Cương" class="investment-image">
-                <h3>Các Yếu Tố Ảnh Hưởng Đến Giá Kim Cương</h3>
+                <img style="display: block;margin-left: auto;margin-right:auto; width: 700px;height: 350px;" src="/static/images/tintuc_2.jpg" alt="Đầu tư Kim Cương" class="investment-image">
+
+                <h2>Các Yếu Tố Ảnh Hưởng Đến Giá Kim Cương</h2>
                 <ul>
                     <li>Chất lượng kim cương: Sự kết hợp giữa độ trong, màu sắc, cắt và carat.</li>
                     <li>Thương hiệu và nguồn gốc của kim cương.</li>
@@ -94,14 +587,15 @@
                 </p>
             </section>
 
-            <section class="savings">
+            <section id="savings">
                 <h2>Gửi Tiết Kiệm: An Toàn Nhưng Lãi Suất Thấp</h2>
                 <p>
                     Gửi tiết kiệm là lựa chọn phổ biến cho nhiều người, đặc biệt là những ai ưu tiên sự an toàn và ổn định.
                     Với gửi tiết kiệm, bạn có thể nhận lãi suất hàng năm và bảo vệ vốn của mình khỏi sự biến động của thị trường.
                 </p>
-                <img src="/static/images/tintuc_3.jpg" alt="Gửi Tiết Kiệm" class="savings-image">
-                <h3>Ưu Điểm và Nhược Điểm Của Gửi Tiết Kiệm</h3>
+                <img style="display: block;margin-left: auto;margin-right:auto; width: 700px;height: 350px;" src="/static/images/tintuc_3.jpg" alt="Gửi Tiết Kiệm" class="savings-image">
+
+                <h2>Ưu Điểm và Nhược Điểm Của Gửi Tiết Kiệm</h2>
                 <ul>
                     <li>Ưu điểm: An toàn, dễ dàng quản lý, không cần nhiều kiến thức đầu tư.</li>
                     <li>Nhược điểm: Lãi suất thấp, không thể sinh lời cao như các hình thức đầu tư khác.</li>
@@ -116,7 +610,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Tiêu chí</th>
+                        <th>Tiêu Chí</th>
                         <th>Kim Cương</th>
                         <th>Tiết Kiệm</th>
                     </tr>
@@ -146,7 +640,7 @@
                 </table>
             </section>
 
-            <section class="conclusion">
+            <section id="conclusion">
                 <h2>Kết Luận</h2>
                 <p>
                     Quyết định giữa việc mua kim cương hay gửi tiết kiệm phụ thuộc vào mục tiêu tài chính của bạn và mức độ chấp nhận rủi ro.
@@ -154,21 +648,7 @@
                     Nếu bạn ưu tiên sự an toàn và tính thanh khoản, gửi tiết kiệm là giải pháp hợp lý.
                 </p>
             </section>
-
-        </article>
-
-        <aside>
-            <h3>Bài Viết Liên Quan</h3>
-            <ul>
-                <li><a href="news_2.html">Kim Cương Có Tăng Giá Không, Có Mất Giá Không?</a></li>
-                <li><a href="news_3.html">Giá Kim Cương Tăng Có Nên Mua Không?</a></li>
-                <li><a href="news_4.html">Nên Mua Kim Cương Gì Có Khả Năng Sinh Lời Cao?</a></li>
-                <li><a href="news_5.html">Mua Kim Cương Lời Hay Lỗ? Trước Khi Mua Phải Biết!</a></li>
-                <li><a href="news_6.html">Kim Cương Là Tài Sản An Toàn Trong Lạm Phát</a></li>
-            </ul>
-        </aside>
-    </div>
-</main>
+</div>
 
 <footer class="footer">
     <div class="grid">
@@ -232,6 +712,24 @@
     setInterval(rotateText, 3000);
     rotateText(); // Initialize text
 
+    document.addEventListener('DOMContentLoaded', function () {
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-list a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>
