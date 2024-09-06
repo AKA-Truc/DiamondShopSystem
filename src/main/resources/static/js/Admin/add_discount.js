@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hàm lấy danh sách voucher từ API
     function fetchVouchers() {
-        fetch('http://localhost:8080/promotion-management/promotions', {
+        fetch(`${window.base_url}/promotion-management/promotions`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -58,11 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let method;
 
         if (isEditing === true) {
-            url = `http://localhost:8080/promotion-management/promotions/${editingVoucherId}`;
+            url = `${window.base_url}/promotion-management/promotions/${editingVoucherId}`;
             method = 'PUT';
         }
         else{
-            url = 'http://localhost:8080/promotion-management/promotions';
+            url = `${window.base_url}/promotion-management/promotions`;
             method = 'POST';
         }
 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         yesBtn.addEventListener('click', () => {
             if (currentRow && voucherIdToDelete) {
-                fetch(`http://localhost:8080/promotion-management/promotions/${voucherIdToDelete}`, {
+                fetch(`${window.base_url}/promotion-management/promotions/${voucherIdToDelete}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         editingVoucherId = voucherId;
         console.log(isEditing, editingVoucherId);
 
-        fetch(`http://localhost:8080/promotion-management/promotions/${voucherId}`, {
+        fetch(`${window.base_url}/promotion-management/promotions/${voucherId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

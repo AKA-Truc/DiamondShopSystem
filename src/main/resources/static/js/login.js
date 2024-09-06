@@ -1,5 +1,5 @@
 function handleCredentialResponse(response) {
-    fetch('http://localhost:8080/user-management/GoogleLogin', {
+    fetch(`${window.base_url}/user-management/GoogleLogin`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.querySelector('#password').value;
 
         // Thực hiện yêu cầu fetch
-        fetch('http://localhost:8080/user-management/login', {
+        fetch(`${window.base_url}/user-management/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
