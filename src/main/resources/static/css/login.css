@@ -121,9 +121,10 @@ button:hover {
     color: #fff;
 }
 
-.forgot-password {
-    text-align: right;
-    margin-bottom: 20px;
+.forgot-password-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .forgot-password a {
@@ -131,11 +132,19 @@ button:hover {
     text-decoration: none;
     font-size: 14px;
     transition: color 0.3s ease;
+    margin-left: 257px;
+    margin-bottom: 20px;
+}
+
+.forgot-password input[type="radio"] {
+    margin-right: 5px;
+    margin-bottom: 20px;
 }
 
 .forgot-password a:hover {
     color: #8597b1;
 }
+
 
 span {
     color: red;
