@@ -49,9 +49,9 @@ public class PromotionService {
         return true;
     }
 
-    public PromotionDTO update(PromotionDTO promotionDTO) {
+    public PromotionDTO update(int id,PromotionDTO promotionDTO) {
         Promotion promotion = modelMapper.map(promotionDTO, Promotion.class);
-        Promotion existingPromotion = promotionRepo.findById(promotion.getPromotionID())
+        Promotion existingPromotion = promotionRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Promotion not found"));
         existingPromotion.setPromotionName(promotion.getPromotionName());
         existingPromotion.setDescription(promotion.getDescription());

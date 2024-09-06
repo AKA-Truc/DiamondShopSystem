@@ -1,27 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     const voucherForm = document.getElementById("voucherForm");
     const voucherList = document.getElementById("voucher-List");
-    const token = localStorage.getItem('authToken'); // Lấy token từ localStorage
+    const searchInput = document.getElementById('search-bar');
+    const popup1Overlay = document.getElementById('popup1Overlay');
+    const token = localStorage.getItem('authToken');
+    let isEditing = false;
+    let editingVoucherId = null;
 
-    console.log('Document is ready.');
-    console.log('Token:', token);
-
+    // Hàm lấy danh sách voucher từ API
     function fetchVouchers() {
         fetch('http://localhost:8080/promotion-management/promotions', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,  // Add the token to the header
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         })
             .then(response => {
                 if (response.status === 401) {
                     alert('Your access is denied');
+                    return;
                 }
                 return response.json();
             })
             .then(result => {
-                console.log(result);
                 const data = result.data;
 
                 if (!Array.isArray(data)) {
@@ -32,17 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.forEach((voucher, index) => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${voucher.promotionName}</td>
-                        <td>${voucher.discountPercent}%</td>
-                        <td>${voucher.description}</td>
-                        <td>${new Date(voucher.startDate).toLocaleString()}</td>
-                        <td>${new Date(voucher.endDate).toLocaleString()}</td>
-                        <td>
-                            <button onclick="editVoucher(${voucher.promotionId})">Edit</button>
-                            <button class="delete-btn" data-id="${voucher.promotionId}">Delete</button>
-                        </td>
-                    `;
+                    <td>${index + 1}</td>
+                    <td>${voucher.promotionName}</td>
+                    <td>${voucher.discountPercent}%</td>
+                    <td>${voucher.description}</td>
+                    <td>${new Date(voucher.startDate).toLocaleString()}</td>
+                    <td>${new Date(voucher.endDate).toLocaleString()}</td>
+                    <td>
+                        <button onclick="editVoucher(${voucher.promotionId})">Edit</button>
+                        <button class="delete-btn" data-id="${voucher.promotionId}">Delete</button>
+                    </td>
+                `;
                     voucherList.appendChild(row);
                 });
 
@@ -51,7 +53,44 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error("Error fetching vouchers:", error));
     }
 
-    // Add event listeners for delete buttons
+    function addOrUpdateVoucher(voucherData) {
+        let url ;
+        let method;
+
+        if (isEditing === true) {
+            url = `http://localhost:8080/promotion-management/promotions/${editingVoucherId}`;
+            method = 'PUT';
+        }
+        else{
+            url = 'http://localhost:8080/promotion-management/promotions';
+            method = 'POST';
+        }
+
+        fetch(url, {
+            method: method,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(voucherData)
+        })
+            .then(response => {
+                if (response.status === 401) {
+                    alert('Your access is denied');
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(isEditing ? "Voucher updated successfully!" : "Voucher added successfully!");
+                fetchVouchers();
+                popup1Overlay.style.display = 'none';
+                resetFormState();
+            })
+            .catch(error => console.error("Error adding/updating voucher:", error));
+    }
+
+    // Hàm xử lý sự kiện delete voucher
     function addDeleteEventListeners() {
         const popup = document.getElementById('popup');
         const yesBtn = document.getElementById('yes-btn');
@@ -73,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(`http://localhost:8080/promotion-management/promotions/${voucherIdToDelete}`, {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': `Bearer ${token}`,  // Add the token to the header
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 })
@@ -98,10 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Submit new voucher to API
+    // Hàm xử lý sự kiện submit form
     voucherForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
         const formData = new FormData(voucherForm);
         const voucherData = {
             promotionName: formData.get("Name"),
@@ -110,70 +148,82 @@ document.addEventListener('DOMContentLoaded', () => {
             endDate: formData.get("EXDate"),
             description: formData.get("Describes")
         };
-
-        fetch('http://localhost:8080/promotion-management/promotions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,  // Add token to the header
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(voucherData)
-        })
-            .then(response => {
-                if (response.status === 401) {
-                    alert('Your access is denied');
-                }
-                return response.json();
-            })
-            .then(data => {
-                alert("Voucher added successfully!");
-                fetchVouchers();
-            })
-            .catch(error => console.error("Error adding voucher:", error));
+        addOrUpdateVoucher(voucherData);
     });
 
-    // Search bar filter
-    const searchInput = document.getElementById('search-bar');
+    // Hàm xử lý tìm kiếm
     searchInput.addEventListener('input', () => {
         const searchText = searchInput.value.trim().toLowerCase();
         const rows = document.querySelectorAll('#voucher-List tr');
 
         rows.forEach(row => {
             const voucherName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-            if (voucherName.includes(searchText)) {
-                row.style.display = 'table-row';
-            } else {
-                row.style.display = 'none';
-            }
+            row.style.display = voucherName.includes(searchText) ? 'table-row' : 'none';
         });
     });
 
-    // Fetch the list of vouchers on page load
-    fetchVouchers();
-});
-const openpopup1Button = document.getElementById('openpopup1');
-const closepopup1Button = document.getElementById('closepopup1');
-const cancelButton = document.getElementById('cancelButton');
-const popup1Overlay = document.getElementById('popup1Overlay');
+    // Hàm xử lý chỉnh sửa voucher
+    window.editVoucher = function(voucherId) {
+        isEditing = true;
+        editingVoucherId = voucherId;
+        console.log(isEditing, editingVoucherId);
 
-// Show the popup1
-openpopup1Button.addEventListener('click', () => {
-    popup1Overlay.style.display = 'flex';
-});
+        fetch(`http://localhost:8080/promotion-management/promotions/${voucherId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        alert('Bạn không có quyền truy cập');
+                    }
+                    return Promise.reject(new Error('Phản hồi không hợp lệ'));
+                }
+                return response.json();
+            })
+            .then(voucher => {
+                const data = voucher.data;
+                document.getElementById("Name").value = data.promotionName;
+                document.getElementById("Percent").value = data.discountPercent;
+                document.getElementById("StartDate").value = new Date(data.startDate).toISOString().slice(0, 16);
+                document.getElementById("EXDate").value = new Date(data.endDate).toISOString().slice(0, 16);
+                document.getElementById("Describes").value = data.description;
 
-// Close the popup1 when "X" is clicked
-closepopup1Button.addEventListener('click', () => {
-    popup1Overlay.style.display = 'none';
-});
+                popup1Overlay.style.display = 'flex';
+            })
+            .catch(error => console.error("Lỗi khi lấy chi tiết voucher:", error));
+    };
 
-// Close the popup1 when "Hủy" button is clicked
-cancelButton.addEventListener('click', () => {
-    popup1Overlay.style.display = 'none';
-});
+    // Các sự kiện mở/đóng popup
+    document.getElementById('openpopup1').addEventListener('click', () => {
+        voucherForm.reset();
+        popup1Overlay.style.display = 'flex';
+        resetFormState();
+    });
 
-// Close the popup1 when clicking outside of it
-window.addEventListener('click', (event) => {
-    if (event.target === popup1Overlay) {
+    document.getElementById('closepopup1').addEventListener('click', () => {
         popup1Overlay.style.display = 'none';
+    });
+
+    document.getElementById('cancelButton').addEventListener('click', () => {
+        popup1Overlay.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === popup1Overlay) {
+            popup1Overlay.style.display = 'none';
+        }
+    });
+
+    // Hàm reset trạng thái form
+    function resetFormState() {
+        isEditing = false;
+        editingVoucherId = null;
     }
+
+    // Lấy danh sách voucher khi trang load
+    fetchVouchers();
 });
