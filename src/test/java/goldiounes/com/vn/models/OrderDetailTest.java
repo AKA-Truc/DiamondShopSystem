@@ -19,8 +19,10 @@ public class OrderDetailTest {
         String status = "Pending";
 
         Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
+        String typePayment = "Banking";
 
-        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment);
+
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
@@ -44,8 +46,9 @@ public class OrderDetailTest {
         int totalPrice = 100;
         String status = "Pending";
         Date startDate = new Date(2024 - 1900, Calendar.MAY, 1);//2024/5/1
+        String typePayment = "Banking";
 
-        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 

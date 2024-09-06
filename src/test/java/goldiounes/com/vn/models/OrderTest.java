@@ -23,8 +23,9 @@ public class OrderTest {
         int totalPrice = 100;
         String status = "Pending";
         Date startDate = new GregorianCalendar(2024, Calendar.MAY, 1).getTime(); //2024/5/1
+        String typePayment = "Banking";
 
-        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
@@ -69,7 +70,9 @@ public class OrderTest {
         String shippingAddress = "123 Main St";
 
         Date startDate = new GregorianCalendar(2024, Calendar.MAY, 1).getTime(); //2024/5/1
-        Order order = new Order(user, cart, promotion, shippingAddress, startDate);
+        String typePayment = "Banking";
+
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment);
 
         assertNotNull(order);
 
