@@ -40,18 +40,21 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => {
                 if (response.ok) {
-                    localStorage.setItem('authToken', response.token);
-                    const typeUser = document.getElementById('type-user');
-
-                    if (typeUser.checked) {
-                        if (typeUser.nextSibling.textContent.trim() === 'Admin') {
-                            window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
-                        } else {
-                            window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
-                        }
-                    }
+                    return response.json();
                 } else {
                     return response.text().then(text => { throw new Error(text) });
+                }
+            })
+            .then(data => {
+                localStorage.setItem('authToken', data.token);
+
+                const typeUser = document.getElementById('type-user');
+                if (typeUser.checked) {
+                    if (typeUser.nextSibling.textContent.trim() === 'Admin') {
+                        window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
+                    } else {
+                        window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
+                    }
                 }
             })
             .catch(error => {
@@ -60,3 +63,4 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
