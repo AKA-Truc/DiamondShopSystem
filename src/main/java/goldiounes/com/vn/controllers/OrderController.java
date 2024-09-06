@@ -10,6 +10,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -126,6 +127,20 @@ public class OrderController {
         }
 
         OrderDTO updatedOrder = orderService.updateOrder(id, orderDTO);
+        ResponseWrapper<OrderDTO> response;
+        if (updatedOrder != null) {
+            response = new ResponseWrapper<>("Order updated successfully", updatedOrder);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("Order not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PatchMapping("/orders/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_DELIVERY STAFF')")
+    public ResponseEntity<ResponseWrapper<OrderDTO>> updateStatus(@PathVariable int id, String status) {
+        OrderDTO updatedOrder = orderService.updateStatus(id, status);
         ResponseWrapper<OrderDTO> response;
         if (updatedOrder != null) {
             response = new ResponseWrapper<>("Order updated successfully", updatedOrder);

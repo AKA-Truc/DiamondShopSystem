@@ -29,6 +29,9 @@ public class Order {
     @Column(name = "Status", nullable = false)
     private String Status;
 
+    @Column(name = "TypePayment")
+    private String TypePayment;
+
     @ManyToOne
     @JoinColumn(name = "PromotionID")
     private Promotion Promotion;
@@ -46,11 +49,12 @@ public class Order {
         //cstor
     }
 
-    public Order(User user, Cart cart, Promotion promotion, String shippingAddress, Date startDate) {
+    public Order(User user, Cart cart, Promotion promotion, String shippingAddress, Date startDate, String typePayment) {
         User = user;
         Cart = cart;
         Promotion = promotion;
         ShippingAddress = shippingAddress;
         StartDate = startDate;
+        TypePayment = typePayment;
     }
 }

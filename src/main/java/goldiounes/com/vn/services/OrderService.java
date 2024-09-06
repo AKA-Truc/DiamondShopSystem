@@ -3,16 +3,12 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dtos.*;
 import goldiounes.com.vn.models.entities.*;
 import goldiounes.com.vn.repositories.*;
-import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -120,6 +116,7 @@ public class OrderService {
 
         existingOrder.setStatus(order.getStatus());
         existingOrder.setShippingAddress(order.getShippingAddress());
+        existingOrder.setTypePayment(order.getTypePayment());
 
         int totalPrice = 0;
 
@@ -228,6 +225,13 @@ public class OrderService {
             return user != null && user.getEmail().equals(username);
         }
         return false;
+    }
+
+    public OrderDTO updateStatus(int orderId, String status) {
+        Order existingOrder = orderRepo.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        existingOrder.setStatus(status);
+        return modelMapper.map(existingOrder, OrderDTO.class);
     }
 
     public int getRevenueBySpecificMonth(int year, int month) {
