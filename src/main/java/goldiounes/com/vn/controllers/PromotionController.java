@@ -67,7 +67,7 @@ public class PromotionController {
     @PutMapping("/promotions/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<PromotionDTO>> updatePromotion(@PathVariable int id, @RequestBody PromotionDTO promotionDTO) {
-        PromotionDTO updatedPromotion = promotionService.save(promotionDTO);
+        PromotionDTO updatedPromotion = promotionService.update(id,promotionDTO);
         if (updatedPromotion != null) {
             ResponseWrapper<PromotionDTO> response = new ResponseWrapper<>("Promotion updated successfully", updatedPromotion);
             return new ResponseEntity<>(response, HttpStatus.OK);
