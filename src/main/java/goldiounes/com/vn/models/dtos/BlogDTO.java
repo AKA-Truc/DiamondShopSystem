@@ -6,5 +6,6 @@ import lombok.Data;
 public class BlogDTO {
     private int blogId;
     private String title;
+    private String url;
     private String content;
 }

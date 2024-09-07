@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý bài viết</title>
+    <link rel="stylesheet" href="/static/css/Admin/customer_management.css">
+    <script>
+        function alertFeature() {
+            alert('Tính năng đang được được phát triển');
+        }
+    </script>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>GOLDIOUNES SHOP</h2>
+    <ul class="main-menu">
+        <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
+        <li class="submenu">
+            <a href="customer_management.html"><ion-icon name="people-outline"></ion-icon> Quản lý người dùng</a>
+        </li>
+        <li class="submenu">
+            <a href="product.html"><ion-icon name="server-outline"></ion-icon> Quản lý sản phẩm</a>
+        </li>
+        <li class="submenu">
+            <a href="discount.html"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
+        </li>
+        <li class="submenu">
+            <a href="blog_management.html"><ion-icon name="newspaper-outline"></ion-icon> Quản lý bài viết</a>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
+            <ul>
+                <li><a href="./detail.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý đơn hàng</a></li>
+                <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="./feedback.html"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
+        </li>
+        <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
+        <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
+        <li class="submenu">
+            <a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a>
+        </li>
+    </ul>
+</div>
+
+<div class="navbar">
+    <div class="navbar__info">
+    </div>
+    <div class="navbar__cta">
+        <div class="navbar__hello">
+            <ion-icon name="notifications-outline"></ion-icon> 5 Notifications
+        </div>
+        <div class="navbar__hello">
+            <ion-icon name="settings-outline"></ion-icon> Settings
+        </div>
+        <div class="navbar__background-icon">
+            <img src="/static/Adimages/account.svg" alt="" />
+        </div>
+        <div class="navbar__hello">
+            <p>Xin chào</p>
+        </div>
+    </div>
+</div>
+<div class="navbar-separator"></div>
+<div class="main">
+    <!-- Content goes here -->
+</div>
+</div>
+
+<!-- main content -->
+<div class="main-content">
+    <div class="customer-management">
+        <button class="add-user-btn" id="openpopup1">
+            Thêm Bài Viết Mới <i class="fas fa-plus"></i>
+        </button>
+
+        <input type="text" placeholder="Nhập họ tên để tìm kiếm..." class="search-bar">
+
+        <div class="table-wrapper" >
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                <tr>
+                    <th >STT</th>
+                    <th >Tiêu đề</th>
+                    <th >Nội dung</th>
+                    <th style=" text-align: center;">Lựa Chọn</th> <!-- Align to the right -->
+                </tr>
+                </thead>
+                <tbody id="customer-table-body">
+                <!-- Dữ liệu khách hàng sẽ được thêm bằng JavaScript -->
+                </tbody>
+            </table>
+
+            <div id="popup" class="popup-overlay">
+                <div class="popup-content">
+                    <p>Bạn có chắc chắn muốn xóa khách hàng này?</p>
+                    <button id="yes-btn" class="popup-btn">Có</button>
+                    <button id="no-btn" class="popup-btn">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup1-overlay" id="popup1Overlay">
+    <div class="popup1-content">
+        <span class="popup1-close" id="closepopup1">&times;</span>
+        <div class="wrapper" id = "addUser">
+            <form id="user-form" enctype="multipart/form-data">
+                <div class="top-fields">
+                    <div class="field input">
+                        <label for="Title">Tiêu Đề</label>
+                        <input type="text" id="Title" name="Title" placeholder="Vui lòng nhập tiêu đề" required>
+                    </div>
+                </div>
+
+                <div class="field input">
+                    <label for="image">Tải Ảnh</label>
+                    <input type="file" id="image" accept="image/*">
+                </div>
+
+                <div class="field input">
+                    <label for="content">Nội Dung</label>
+                    <textarea id="content" name="Title" placeholder="Nhập nội dung" required
+                              style="text-align: start;
+                                      width: 100%;
+                                      height: 200px; /* Increase the height to make it look like a larger note */
+                                      padding: 10px;
+                                      font-size: 16px;
+                                      resize: vertical;
+                                      box-sizing: border-box; /* Ensure padding and border are included in the width *">
+                     </textarea>
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Lưu" class="save" id="saveButton">
+                    <input type="button" value="Hủy" class="cancel" id="cancelButton">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to set the form mode
+    function setFormMode(isEditMode) {
+        const passwordField = document.getElementById('password');
+        const togglePasswordCheckbox = document.getElementById('togglePassword');
+
+        if (isEditMode) {
+            // Disable the password field for editing mode
+            passwordField.disabled = true;
+            togglePasswordCheckbox.disabled = true; // Disable the toggle checkbox as well
+        } else {
+            // Enable the password field for adding new user mode
+            passwordField.disabled = false;
+            togglePasswordCheckbox.disabled = false; // Enable the toggle checkbox
+        }
+    }
+
+    const isEditMode = window.location.href.includes('edit');
+
+    // Set the form mode accordingly
+    setFormMode(isEditMode);
+
+    // Toggle Password Visibility
+    document.getElementById('togglePassword').addEventListener('change', function () {
+        const passwordField = document.getElementById('password');
+        passwordField.type = this.checked ? 'text' : 'password';
+    });
+</script>
+
+
+<script src="/static/js/url.js"></script>
+<script src="/static/js/Admin/customer_management.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package goldiounes.com.vn.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import goldiounes.com.vn.models.dtos.BlogDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.BlogService;
@@ -8,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -18,13 +21,28 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @PostMapping("/blogs")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<ResponseWrapper<BlogDTO>> createBlog(@RequestBody BlogDTO blogDTO) {
-        BlogDTO createdBlog = blogService.createBlog(blogDTO);
-        ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog created successfully", createdBlog);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ResponseEntity<ResponseWrapper<BlogDTO>> createBlog(
+            @RequestParam("blog") String blogDTOJson,
+            @RequestParam("imageURL") MultipartFile imageFile) {
+
+        try {
+            BlogDTO blogDTO = objectMapper.readValue(blogDTOJson, BlogDTO.class);
+
+            BlogDTO createdBlog = blogService.createBlog(blogDTO, imageFile);
+
+            ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog created successfully", createdBlog);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (IOException e) {
+            ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Error creating blog: " + e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping("/blogs/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF', 'ROLE_CUSTOMER')")
