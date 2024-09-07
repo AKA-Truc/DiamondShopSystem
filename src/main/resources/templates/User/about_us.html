@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -8,56 +9,8 @@
 </head>
 
 <body>
-<div class="header1">
-    <p class="phone">Phone: (+84) 123 2345 123</p>
-    <p class="center" id="center-text">hello</p>
-    <p class="address">
-        <a style="color:white;text-decoration: none" href="../login.html">Đăng nhập</a>
-    </p>
-</div>
-<div class="header">
-    <div class="header-content">
-        <div class="icons">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <a href="info.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
-            <i class="fa-regular fa-heart"></i>
-            <i style="color: black;" class="fa-solid fa-cart-shopping"></i>
-        </div>
-        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
-    </div>
-</div>
-<ul id="main-menu">
-    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
-    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
-    <li><a href="">BẢNG GIÁ</a>
-        <ul class="sub-menu">
-            <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
-            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
-        </ul>
-    </li>
-    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
-    <li><a href="news.html">TIN TỨC</a></li>
-    <li><a href="contact.html">LIÊN HỆ</a></li>
-</ul>
-<!-- search -->
-<div id="search-overlay" class="search-overlay">
-    <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <button>Search</button>
-    </div>
-</div>
-<!--  -->
-<!-- cart -->
-<div id="cart-overlay" class="cart-overlay">
-    <div id="cart-box" class="cart-box">
-        <h2>Your Shopping Cart</h2>
-        <p>No items in the cart.</p>
-        <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
-    </div>
-</div>
-<!--  -->
-
-<!--container-->
+<script src="/static/js/header.js"></script>
+<script src="/static/js/footer.js"></script>
 
 <div class="container">
     <div class="left-column">
@@ -89,7 +42,6 @@
             tôn vinh vẻ đẹp, vươn tầm thế giới.</p>
     </div>
 </div>
-
 
 <!-- body -->
 <div class="quality-section">
@@ -123,105 +75,23 @@
                 <img src="/static/images/home-1.jpg" alt="Trang Sức Năng Động">
             </div>
             <h3>TRANG SỨC<br> NĂNG ĐỘNG</h3>
-            <p>Dễ dàng kết hợp trong trang phục<br> ngày thường</p>
+            <p>Dễ dàng kết hợp trong trang phục<br> ngày thường và với nhiều sự kiện khác nhau.</p>
         </div>
         <div class="column">
-            <h3 style="padding-top: 100px;">TRANG SỨC<br> THANH LỊCH</h3>
-            <p>Trở thành tâm điểm trong buổi tiệc</p>
-            <div class="img-container" style="padding-top: 80px;">
-                <img src="/static/images/home-2.jpg" alt="Trang Sức Thanh Lịch">
+            <div class="img-container" style="padding-bottom: 50px;">
+                <img src="/static/images/home-2.jpg" alt="Trang Sức Tinh Tế">
             </div>
+            <h3>TRANG SỨC<br> TINH TẾ</h3>
+            <p>Kết hợp giữa sự thanh lịch và<br> sự sáng tạo trong mỗi sản phẩm.</p>
+        </div>
+        <div class="column">
+            <div class="img-container" style="padding-bottom: 50px;">
+                <img src="/static/images/home-3.jpg" alt="Trang Sức Cao Cấp">
+            </div>
+            <h3>TRANG SỨC<br> CAO CẤP</h3>
+            <p>Sản phẩm với chất lượng tốt nhất và thiết kế độc quyền.</p>
         </div>
     </div>
-    <section class="reviews">
-        <h2 style="text-align: center; ">Khách hàng đánh giá</h2>
-        <div class="reviews-wrapper">
-            <div class="review-item">
-                <p><strong>Mona là cửa hàng tôi yêu thích nhất</strong><br>Những sản phẩm với thiết kế đặc sắc, chất
-                    lượng sản phẩm ngoài mong đợi. Tôi đã mua sản phẩm được khoảng 5 năm rồi.</p>
-                <p>★★★★★</p>
-                <p>- Hoài Thương</p>
-            </div>
-            <div class="review-item">
-                <p><strong>Nhân viên xuất sắc</strong><br>Nhân viên nhiệt tình, tôi luôn nhận được nhiều lời tư vấn
-                    bổ ích. Chất lượng tốt và thiết kế cũng đẹp nữa.</p>
-                <p style="color: orange;">★★★★★</p>
-                <p>- Mỹ Phúc</p>
-            </div>
-            <div class="review-item">
-                <p><strong>Sản phẩm đẹp</strong><br>Sự lựa chọn tuyệt vời, những món đồ thích hợp được mua với giá
-                    ưu đãi trong đợt giảm giá. Điểm mười cho chất lượng.</p>
-                <p style="color: orange;">★★★★★</p>
-                <p>- Thanh Thanh</p>
-            </div>
-            <div class="review-item">
-                <p><strong>Sản phẩm ok</strong><br>Lựa chọn vì nó đẹp</p>
-                <p style="color: orange;">★★★★★</p>
-                <p>- HaiME</p>
-            </div>
-            <div class="review-item">
-                <p><strong>Sản phẩm ok</strong><br>Lựa chọn vì nó đẹp</p>
-                <p style="color: orange;">★★★★★</p>
-                <p>- HaiMe</p>
-            </div>
-
-            <div class="review-item">
-                <p><strong>Sản phẩm ok</strong><br>Lựa chọn vì nó đẹp</p>
-                <p style="color: orange;">★★★★★</p>
-                <p>- HaiMe</p>
-            </div>
-        </div>
-    </section>
 </section>
-
-
-<!-- footer  -->
-
-<footer class="footer">
-    <div class="grid">
-        <div class="grid_row">
-            <div class="grid__column-2-4">
-                <h3 class="footer-heading">Danh mục</h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="products.html">Bông tai kim cương</a>
-                        <a href="products.html">Lắc tay kim cương</a>
-                        <a href="products.html">Nhẫn kim cương</a>
-                        <a href="products.html">Dây chuyền kim cương</a>
-                        <a href="products.html">Mặt dây chuyền kim cương</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="grid__column-2-4">
-                <h3 class="footer-heading">Liên hệ </h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="/static/css/User/about_us.css">Về chúng tôi</a>
-                        <a href="#">Tuyển dụng</a>
-                        <a href="#">Chính sách đổi trả</a>
-                        <a href="#">Chính sách bảo hành</a>
-                        <a href="#">Chính sách vận chuyển</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="grid__column-2-4">
-                <h3 class="footer-heading">Đăng ký ngay</h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
-                        <form action="">
-                            <input type="text" id="email" name="email" placeholder="Email">
-                            <input type="submit" value="ĐĂNG KÝ NGAY">
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!--  -->
-<script src="/static/js/User/about_us.js"></script>
 </body>
-
 </html>
