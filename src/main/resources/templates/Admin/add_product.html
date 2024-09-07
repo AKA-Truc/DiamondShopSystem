@@ -19,11 +19,12 @@
             padding: 5px;
             border-radius: 5px;
             background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .histaff-item-group-header h3 {
             margin-bottom: 20px;
-            color: #162165e7;
+            color: #CD2626;
             font-weight: bold;
             font-size: 24px;
         }
@@ -62,8 +63,8 @@
         }
 
         thead th {
-            background-color: #162165e7;
-            color: #ffffff;
+            background-color: #f2f2f2;
+            font-weight: bold;
         }
 
         tbody tr:hover {
@@ -99,8 +100,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
-            background-color: #ffffff;
-            color: #000;
         }
 
         .table-control.item-control {
@@ -111,7 +110,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-top: 5px;
-            background-color: #ffffff;
         }
 
         .hidden {
@@ -208,12 +206,7 @@
                     </select>
                 </td>
                 <td>
-                    <select class="table-control item-control">
-                        <option value="" disabled selected>Tên kim cương</option>
-                        <option value="diamond1">Kim cương 1</option>
-                        <option value="diamond2">Kim cương 2</option>
-                        <option value="diamond3">Kim cương 3</option>
-                    </select>
+                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
                     <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                 </td>
@@ -247,7 +240,6 @@
                     });
                 });
             }
-
 
             function editRow(e) {
                 const row = e.target.closest('tr');
@@ -297,14 +289,8 @@
     <h2>GOLDIOUNES SHOP</h2>
     <ul class="main-menu">
         <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
-        <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
-            <ul>
-                <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
-                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
-                <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
-                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
-                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
-            </ul>
+        <li class="submenu">
+            <a href="customer_management.html"><ion-icon name="people-outline"></ion-icon> Quản lý người dùng</a>
         </li>
         <li class="submenu">
             <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
@@ -315,11 +301,7 @@
             </ul>
         </li>
         <li class="submenu">
-            <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
-            <ul>
-                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
-                <li><a href="./edit_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Chỉnh sửa giảm giá</a></li>
-            </ul>
+            <a href="discount.html"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
         </li>
         <li class="submenu">
             <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
@@ -383,6 +365,7 @@
 </div>
 <!---->
 
+
 <div class="histaff-item-group background-white border-radius-5 active" id="histaff-work-exp" style="background-color: #f4f7fb;">
     <div class="body1">
         <div class="row">
@@ -426,7 +409,6 @@
                     <label for="image">Ảnh sản phẩm 2</label>
                     <input type="file" id="image1" name="image">
                 </div>
-
             </form>
         </div>
 
@@ -466,15 +448,11 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="table-control item-control">
-                                        <option value="" disabled selected>Tên kim cương</option>
-                                        <option value="diamond1">Kim cương 1</option>
-                                        <option value="diamond2">Kim cương 2</option>
-                                        <option value="diamond3">Kim cương 3</option>
-                                    </select>
+                                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
                                     <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
                                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
+
                                 <td>
                                     <select class="table-control item-control">
                                         <option value="Size1">Size 1</option>
@@ -509,12 +487,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select class="table-control item-control">
-                                        <option value="" disabled selected>Tên kim cương</option>
-                                        <option value="diamond1">Kim cương 1</option>
-                                        <option value="diamond2">Kim cương 2</option>
-                                        <option value="diamond3">Kim cương 3</option>
-                                    </select>
+                                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
                                     <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
                                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
@@ -537,6 +510,7 @@
                                 <td>
                                     <ul class="table-action">
                                         <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
+<!--                                        <li class="table-action-control row-edit"><i class="fa-solid fa-pencil" aria-hidden="true"></i></li>-->
                                         <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
                                     </ul>
                                 </td>

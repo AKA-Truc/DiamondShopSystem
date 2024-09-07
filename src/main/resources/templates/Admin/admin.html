@@ -17,14 +17,8 @@
     <h2>GOLDIOUNES SHOP</h2>
     <ul class="main-menu">
         <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
-        <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
-            <ul>
-                <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
-                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
-                <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
-                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
-                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
-            </ul>
+        <li class="submenu">
+            <a href="customer_management.html"><ion-icon name="people-outline"></ion-icon> Quản lý người dùng</a>
         </li>
         <li class="submenu">
             <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
@@ -35,11 +29,7 @@
             </ul>
         </li>
         <li class="submenu">
-            <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
-            <ul>
-                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
-                <li><a href="./edit_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Chỉnh sửa giảm giá</a></li>
-            </ul>
+            <a href="discount.html"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
         </li>
         <li class="submenu">
             <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
@@ -101,97 +91,6 @@
     <!-- Content goes here -->
 </div>
 
-<!-- main content -->
-<div class="main-content">
-    <div class="customer-management">
-
-        <!-- Ô tìm kiếm -->
-        <input type="text" placeholder="Nhập họ tên để tìm kiếm..." class="search-bar">
-        <h2>Đơn hàng cần xác nhận </h2>
-        <!-- Bảng danh sách khách hàng -->
-        <div class="table-wrapper">
-            <table id="requests-table">
-                <thead>
-                <tr>
-                    <th class="center-heading">STT</th>
-                    <th class="center-heading">Mã Đơn Hàng</th>
-                    <th class="center-heading">Khách hàng</th>
-                    <th class="center-heading">Ngày đặt hàng</th>
-                    <th class="center-heading">Trạng thái</th>
-                    <th class="center-heading">Thao tác</th>
-                </tr>
-                </thead>
-                <tbody id="order-List">
-                <!-- Các dòng đơn hàng sẽ được thêm bởi JavaScript -->
-                </tbody>
-            </table>
-
-            <!-- Popup xác nhận xóa khách hàng -->
-            <div id="popup" class="popup-overlay">
-                <div class="popup-content">
-                    <p>Bạn có chắc chắn muốn xóa đơn hàng này?</p>
-                    <button id="popupOk" class="okbtn">Ok</button>
-                    <button id="popupCancel" class="cancelbtn">Hủy</button>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            /* Notification (popup) */
-            .popup {
-                display: none; /* Ẩn ban đầu */
-                position: fixed; /* Giữ nguyên ở vị trí */
-                z-index: 1000; /* Hiển thị lớn hơn */
-                left: 0;
-                top: 0;
-                width: 100%; /* Full width */
-                height: 100%; /* Full height */
-                background-color: rgba(0, 0, 0, 0.4); /* Đen với độ trong suốt */
-            }
-
-            /* Nội dung của Popup */
-            .popup-content {
-                background-color: #fefefe;
-                margin: 15% auto; /* 15% từ phía trên và căn giữa */
-                padding: 20px;
-                border: 1px solid #888;
-                width: 300px; /* Chiều rộng */
-                text-align: center;
-                border-radius: 10px;
-            }
-
-            /* Nút OK */
-            .okbtn {
-                background-color: #4caf50;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-right: 10px;
-            }
-
-            .okbtn:hover {
-                background-color: #45a049;
-            }
-
-            /* Nút Hủy */
-            .cancelbtn {
-                background-color: #f44336;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            .cancelbtn:hover {
-                background-color: #da190b;
-            }
-        </style>
-        <!-- Thêm đoạn mã JavaScript trước thẻ đóng body -->
-    </div>
-</div>
 
 <script src="menu.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
