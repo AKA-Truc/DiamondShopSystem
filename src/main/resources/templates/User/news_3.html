@@ -1,10 +1,611 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldiounes Organizes a Cozy Birthday Party for Customers in a VIP Tea Room Space</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
 </head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .header1 {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: rgb(10, 25, 56);
+        border-bottom: 1px solid #ddd;
+        justify-content: space-between;
+        color: #d5d9de;
+    }
+
+    .header1 p {
+        margin: 0;
+    }
+
+    .header1 .phone,
+    .header1 .address {
+        flex: 1;
+    }
+
+    .header1 .phone {
+        text-align: left;
+        margin-left: 150px;
+    }
+
+    .header1 .address {
+        text-align: right;
+        margin-right: 150px;
+    }
+
+    .header1 .center {
+        flex: 2;
+        text-align: center;
+        opacity: 0;
+        color: gold;
+        transition: opacity 1s ease-in-out;
+    }
+    .header1 .visible {
+        opacity: 1;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-bottom: 0.5px solid #ddd;
+        flex-direction: column;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: relative;
+    }
+
+    .logo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .icons {
+        position: absolute;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 17px;
+        margin-right: 80px;
+        font-size: 20px;
+    }
+
+    .header>.header-content>.logo img {
+        width: 120px;
+        height: auto;
+    }
+
+    #main-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        background-color: white;
+        height: 40px;
+        display: inline-flex;
+        width: 100%;
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        gap: 50px;
+        z-index: 1000;
+        position: relative;
+        text-transform: uppercase;
+    }
+
+    #main-menu li {
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    #main-menu li a {
+        color: #040711;
+        display: block;
+        padding: 20px 20px;
+        text-decoration: none;
+    }
+
+    #main-menu ul.sub-menu {
+        position: absolute;
+        background: #f4f4f4;
+        padding: 0;
+        list-style: none;
+        width: 300px;
+        display: none;
+        top: 80%;
+        left: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #main-menu li:hover > ul.sub-menu {
+        display: block;
+    }
+
+    #main-menu ul.sub-menu a {
+        padding: 12px 20px;
+        /* border-bottom: 1px solid #94968f; */
+        left: 0;
+    }
+
+    #main-menu ul.sub-menu li:hover > a {
+        background-color: #e1e4eb;
+    }
+
+    #main-menu ul.sub-menu li:last-child a {
+        border: none;
+    }
+
+    #main-menu ul.sub-menu ul.sub-menu {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        left: 300px;
+        top: 0;
+    }
+
+    /* Thiết lập border khi hover */
+    #main-menu > li > a {
+        position: relative;
+    }
+
+    #main-menu > li > a:hover {
+        color: rgb(70, 118, 168);
+    }
+
+    #main-menu .sub-menu > li > a:hover {
+        color:   rgb(70, 118, 168);
+    }
+
+    #main-menu > li:hover > a::before {
+        width: 100%;
+    }
+
+    #main-menu > li.has-child::after {
+        color: #040711;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        content: "\f107";
+    }
+
+    #main-menu .sub-menu > li.has-child::after {
+        content: "\f105";
+        color: #040711;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+    }
+
+    /* Begin update code for search and cart */
+    .search-overlay {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: -33.33%;
+        width: 100%;
+        height: 33.33%;
+        background-color: rgba(99, 95, 95, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        transition: top 0.5s ease;
+    }
+
+    .search-overlay.active {
+        top: 0;
+    }
+
+    /* The search box */
+    .search-box {
+        width: 50%;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-box input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-box button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 90px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .search-box button:hover {
+        background-color: #444;
+    }
+
+    /* The cart box */
+    .cart-box {
+        height: 100%;
+        width: 25%;
+        margin-left: 75%;
+        background-color: white;  /* Đổi màu cho background của cart */
+        display: none;
+        position: fixed;
+        flex-direction: column;
+        justify-content: space-between;
+        right: -100%;
+        z-index: 1000;
+        transition: right 0.5s ease;
+        color: rgb(0, 0, 0);
+    }
+
+    .cart-box.active {
+        right: 0;
+    }
+
+    .cart-box h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .cart-box p {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: auto;
+    }
+
+    .cart-box button {
+        padding: 15px;
+        font-size: 18px;
+        background-color: rgb(166, 168, 174);
+        color: black;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 70%;
+        margin-left: 70px;
+        position: absolute;
+        top: 50%;
+    }
+
+    .cart-box button:hover {
+        background-color: #ddd;
+    }
+
+    /* */
+    .cart-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .cart-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    /* End update code for search and cart */
+    /**/
+    .content {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+
+    .footer {
+        background-color: #1A1919;
+        color: #d3cece;
+        padding: 20px 0;
+        margin-top: 10px;
+        font-family: Arial, sans-serif;
+        width: 100%;
+    }
+
+    .grid {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .grid_row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .grid__column-2-4 {
+        width: 30%;
+    }
+
+    .footer-heading {
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .footer__list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer__list li {
+        margin-bottom: 10px;
+    }
+
+    .footer__list a {
+        color: #d3cece;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .footer__list a:hover {
+        text-decoration: underline;
+    }
+
+
+    form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    form input[type="text"] {
+        padding: 8px ;
+        width: 70%;
+        margin-right: 10px;
+        background-color: #dbdbdb;
+        border: 1px solid #ffffff;
+        color: #000000;
+        box-sizing: border-box;
+    }
+
+    form input[type="text"]::placeholder {
+        color: #000000;
+        opacity: 1;
+    }
+
+    form input[type="submit"] {
+        background-color: #888;
+        color: #000;
+        border: none;
+        padding: 8px 15px;
+        cursor: pointer;
+        text-transform: uppercase;
+        flex-shrink: 0;
+    }
+
+    form input[type="submit"]:hover {
+        background-color: #cfb0b0;
+    }
+
+    #intro p {
+        margin-bottom: -15px;
+    }
+
+    #intro .featured-image {
+        margin-top: 30px;
+    }
+</style>
+
+
 <body>
+<div class="header1">
+    <p class="phone">Phone: (+84) 123 2345 123</p>
+    <p class="center" id="center-text">hello</p>
+    <p class="address">
+        <a style="color:white;text-decoration: none" href="../login.html">Đăng nhập</a>
+    </p>
+</div>
+<div class="header">
+    <div class="header-content">
+        <div class="icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="info.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
+            <i class="fa-regular fa-heart"></i>
+            <i style="color: black;" class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
+    </div>
+</div>
+<ul id="main-menu">
+    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
+    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
+    <li><a href="">BẢNG GIÁ</a>
+        <ul class="sub-menu">
+            <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
+    <li><a href="news.html">TIN TỨC</a></li>
+    <li><a href="contact.html">LIÊN HỆ</a></li>
+</ul>
+<!-- search -->
+<div id="search-overlay" class="search-overlay">
+    <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+</div>
+<!--  -->
+<!-- cart -->
+<div id="cart-overlay" class="cart-overlay">
+    <div id="cart-box" class="cart-box">
+        <h2>Your Shopping Cart</h2>
+        <p>No items in the cart.</p>
+        <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
+    </div>
+</div>
+
+<div class="content">
+    <h1>Thương hiệu kim cương mang bản sắc Việt vươn tầm quốc tế tại Dubai cùng DMMC</h1>
+
+    <section id="intro">
+        <p>Sự kiện “Made for Trade – Bước vào thị trường kinh tế cường thịnh Dubai cùng DMCC” đã mở ra cơ hội quan trọng
+            cho các doanh nghiệp Việt Nam trên con đường hội nhập quốc tế. Goldiounes Diamond, thương hiệu kim cương Việt,
+            đã tạo nên ấn tượng mạnh mẽ với bộ sưu tập trang sức kim cương và không gian trưng bày mang đậm bản sắc văn hóa Việt Nam,
+            khẳng định giá trị toàn cầu của mình.</p>
+        <br>
+        <p>Ngày 5/6 vừa qua, DMCC (Dubai Multi Commodities Centre) – một trong những khu thương mại doanh thu khổng lồ 630 tỷ
+            với hệ sinh thái 24,000 doanh nghiệp thành viên toàn cầu đã tổ chức sự kiện xúc tiến thương mại Dubai tại Việt Nam.</p>
+        <br>
+        <p>Sự kiện này do BSC Global và Goldiounes Diamond phối hợp tổ chức, với sự tham dự đặc biệt
+            của tỷ phú Ahmed Bin Sulayem – Chủ tịch kiêm Tổng Giám đốc Điều hành DMCC và cũng là Chủ tịch
+            của Kimberley Process Certification Scheme – Hiệp hội chống nạn “Kim cương máu”. Ông Ahmed Bin Sulayem được ví như Elon Musk của Trung Đông.</p>
+        <img style="display: block;margin-left: auto;margin-right:auto; width: 670px;height: 400px;" src="/static/images/tintuc_4.png" alt="Kim Cương" class="featured-image">
+        <h6 style="display: block; text-align: center; margin-top: 10px;">Tỷ phú Dubai Ahmed Bin Sulayem cùng đại diện BSC</h6>
+    </section>
+
+    <section id="next">
+        <p>Sự kiện xúc tiến thương mại đã khơi dậy cảm hứng cho nhiều doanh nghiệp Việt Nam có tham vọng vươn ra thị trường quốc tế, trong đó có Goldiounes Diamond.
+            Thương hiệu kim cương Goldiounes với mong muốn quảng bá bản sắc văn hóa Việt Nam không chỉ trên thị trường trang sức kim cương trong nước
+            mà còn trên thế giới. Tất cả sản phẩm của Goldiounes Diamond đều mang đậm chất tinh hoa văn hóa Việt Nam.</p>
+        <img style="display: block;margin-left: auto;margin-right:auto; width: 670px;height: 400px;" src="/static/images/tintuc_5.png" alt="Kim Cương" class="featured-image">
+        <h6 style="display: block; text-align: center; margin-top: 10px;">80 doanh nghiệp Việt Nam tham gia sự kiện</h6>
+    </section>
+
+    <section id="next1">
+        <p>Tại sự kiện, Goldiounes Diamond đã gây ấn tượng mạnh mẽ với các doanh nghiệp và nhà đầu tư thông qua các bộ sưu tập trang sức kim cương
+            được lấy cảm hứng từ hoa sen, quốc hoa của Việt Nam. Các nghệ nhân Goldiounes Diamond đã thiết kế một BST tinh xảo cùng với
+            nghệ thuật chế tác chuyên nghiệp. Các khách hàng đã được chiêm ngưỡng quá trình sáng tạo kéo dài hơn 1000 giờ của các nhà thiết kế và nghệ nhân tài ba.</p>
+        <img style="display: block;margin-left: auto;margin-right:auto; width: 670px;height: 400px;" src="/static/images/tintuc_6.png" alt="Kim Cương" class="featured-image">
+        <h6 style="display: block; text-align: center; margin-top: 10px;">Các bộ sưu tập trang sức kim cương lấy cảm hứng từ quốc hoa của Goldiounes</h6>
+    </section>
+
+    <section id="next2">
+        <p>Không gian trưng bày của Goldiounes Diamond được thiết kế như một khu vườn ngập tràn hương sắc của hoa sen,
+            nơi các bộ sưu tập trang sức kim cương được sắp xếp một cách tinh tế. Ngoài ra, hai bức tranh sơn mài hoa sen
+            cũng góp phần tôn vinh vẻ đẹp thanh tao và khí chất mạnh mẽ của loài hoa này.</p>
+        <img style="display: block;margin-left: auto;margin-right:auto; width: 670px;height: 400px;" src="/static/images/tintuc_7.png" alt="Kim Cương" class="featured-image">
+        <h6 style="display: block; text-align: center; margin-top: 10px;">Chủ tịch DMCC đánh giá cao thiết kế trang sức kim cương lấy cảm hứng từ quốc hoa của Goldiounes Diamond</h6>
+    </section>
+
+    <section id="next3">
+        <p>Đại diện DMCC đã bày tỏ sự quan tâm đến việc tăng cường hợp tác với các doanh nghiệp Việt Nam, nhấn mạnh tiềm năng lớn
+            của thị trường Việt Nam và cam kết hỗ trợ các doanh nghiệp trong việc nắm bắt các cơ hội kinh doanh quốc tế.
+            DMCC đã đề xuất nhiều sáng kiến nhằm hỗ trợ các doanh nghiệp Việt Nam, từ việc phát triển các doanh nghiệp vượt trội
+            có giá trị cao đến các phương thức hợp tác cụ thể.</p>
+        <img style="display: block;margin-left: auto;margin-right:auto; width: 670px;height: 400px;" src="/static/images/tintuc_8.png" alt="Kim Cương" class="featured-image">
+        <h6 style="display: block; text-align: center; margin-top: 10px;">Tỷ phú Ahmed Bin Sulayem chia sẻ cơ hội và thách thức hợp tác của các doanh nghiệp Việt Nam</h6>
+    </section>
+
+    <section id="end">
+        <p>Sự kiện xúc tiến thương mại giữa Dubai và Việt Nam đã diễn ra thành công tốt đẹp. Điều này đã là một bước tiến quan trọng trong việc đưa các sản phẩm Việt Nam tiếp cận gần hơn với thị trường quốc tế. Sự hợp tác giữa DMCC và các doanh nghiệp Việt Nam trong tương lai hứa hẹn mang lại những thành quả tích cực, góp phần thúc đẩy sự phát triển kinh tế của cả hai bên.</p>
+    </section>
+</div>
+
+<footer class="footer">
+    <div class="grid">
+        <div class="grid_row">
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Danh mục</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="diamond_earrings.html">Bông tai kim cương</a>
+                        <a href="diamond_bracelets.html">Lắc tay kim cương</a>
+                        <a href="">Nhẫn kim cương</a>
+                        <a href="">Dây chuyền kim cương</a>
+                        <a href="diamond_pendant.html">Mặt dây chuyền kim cương</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Liên hệ </h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="/static/css/User/about_us.css">Về chúng tôi</a>
+                        <a href="">Tuyển dụng</a>
+                        <a href="">Chính sách đổi trả</a>
+                        <a href="">Chính sách bảo hành</a>
+                        <a href="">Chính sách vận chuyển</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Đăng ký ngay</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
+                        <form action="">
+                            <input type="text" id="email" name="email" placeholder="Email">
+                            <input type="submit" value="ĐĂNG KÝ NGAY">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    const textOptions = ["Giảm giá đến 16%", "Trang sức kim cương ưu đãi 40%", "Mặt dây chuyền ưu đãi 15%"];
+    const centerText = document.getElementById("center-text");
+    let textIndex = 0;
+
+    function rotateText() {
+        centerText.classList.remove('visible');
+        setTimeout(() => {
+            centerText.textContent = textOptions[textIndex];
+            centerText.classList.add('visible');
+            textIndex = (textIndex + 1) % textOptions.length;
+        }, 1000);
+    }
+
+    setInterval(rotateText, 3000);
+    rotateText(); // Initialize text
+</script>
 
 </body>
 </html>

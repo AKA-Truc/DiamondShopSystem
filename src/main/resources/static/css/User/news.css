@@ -465,3 +465,7 @@ body {
     margin: 0;
     color: #555;
 }
+
+a {
+    text-decoration: none;
+}
