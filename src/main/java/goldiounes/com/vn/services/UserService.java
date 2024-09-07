@@ -6,6 +6,7 @@ import goldiounes.com.vn.models.dtos.PointDTO;
 import goldiounes.com.vn.models.dtos.TokenDTO;
 import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.models.entities.Point;
+import goldiounes.com.vn.models.entities.Token;
 import goldiounes.com.vn.models.entities.User;
 import goldiounes.com.vn.repositories.UserRepo;
 import org.modelmapper.ModelMapper;
@@ -18,8 +19,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -32,6 +37,12 @@ public class UserService {
 
     @Autowired
     private PointService pointService;
+
+    @Autowired
+    private TokenService tokenService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -64,7 +75,13 @@ public class UserService {
         if (users.isEmpty()) {
             throw new RuntimeException("No users found");
         }
-        return modelMapper.map(users,new TypeToken<List<UserDTO>>(){}.getType());
+        List<User> userActive = new ArrayList<>();
+        for (User user : users) {
+            if (Objects.equals(user.getStatus(), "active")) {
+                userActive.add(user);
+            }
+        }
+        return modelMapper.map(userActive,new TypeToken<List<UserDTO>>(){}.getType());
     }
 
     public UserDTO getUser(int id) {
@@ -84,7 +101,7 @@ public class UserService {
     public UserDTO createUser(UserDTO userDTO) {
         User user = modelMapper.map(userDTO,User.class);
         User existingUser = userRepo.findByEmail(user.getEmail());
-        if (existingUser != null) {
+        if (existingUser != null && Objects.equals(user.getStatus(), "active")) {
             throw new RuntimeException("User already exists");
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -104,16 +121,25 @@ public class UserService {
         User existingUser = userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found"));
         existingUser.setStatus("inactive");
+        existingUser.setEmail("inactive");
         pointService.deleteById(existingUser.getPoint().getPointID());
         cartService.deleteCart(existingUser.getCart().getCartID());
+        List<Token> tokens = tokenService.getAllTokensByUser(id);
+        for (Token token : tokens) {
+            tokenService.deleteToken(token.getToken());
+        }
         userRepo.save(existingUser);
         return true;
     }
 
-    public UserDTO updateUser(int id, UserDTO userDTO) {
+    public UserDTO updateUser(int id, UserDTO userDTO, MultipartFile url) throws IOException {
         User user = modelMapper.map(userDTO,User.class);
         User existingUser = userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found"));
+        if (url != null && !url.isEmpty()) {
+            String imageURL = fileUploadService.uploadImage(url);
+            user.setUrl(imageURL);
+        }
         existingUser.setEmail(user.getEmail());
         existingUser.setUserName(user.getUserName());
         existingUser.setAddress(user.getAddress());
