@@ -35,10 +35,6 @@
         </li>
         <li class="submenu">
             <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
-            <ul>
-                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
-                <li><a href="./edit_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Chỉnh sửa giảm giá</a></li>
-            </ul>
         </li>
         <li class="submenu">
             <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
@@ -69,7 +65,7 @@
                         sessionStorage.removeItem('accessToken');
 
                         // Chuyển hướng người dùng về trang đăng nhập
-                        window.location.href = './login1.html';
+                        window.location.href = '/DiamondShopSystem/src/main/resources/templates/login.html';
                     }
                 </script>
             </ul>
@@ -103,7 +99,7 @@
 <!-- main content -->
 <div class="main-content">
     <div class="customer-management">
-        <button class="add-customer-btn" id="openpopup1">
+        <button class="add-promotion-btn" id="openpopup1">
             Thêm Mã Giảm Giá <i class="fas fa-plus"></i>
         </button>
         <input
@@ -133,7 +129,7 @@
             <!-- Popup HTML -->
             <div id="popup" class="popup-overlay">
                 <div class="popup-content">
-                    <p>Are you sure to delete product?</p>
+                    <p>Are you sure to delete promotion?</p>
                     <button id="yes-btn" class="popup-btn">Yes</button>
                     <button id="no-btn" class="popup-btn">No</button>
                 </div>

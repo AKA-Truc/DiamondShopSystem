@@ -166,7 +166,7 @@ ion-icon {
     font-size: 24px;
 }
 
-.add-customer-btn {
+.add-promotion-btn {
     background-color: #304067;
     color: #fff;
     padding: 10px 20px;
@@ -179,7 +179,7 @@ ion-icon {
     align-items: center;
 }
 
-.add-customer-btn i {
+.add-promotion-btn i {
     margin-left: 10px;
 }
 
@@ -241,7 +241,7 @@ th {
 }
 
 .delete-btn i {
-    color: #d92e3e;
+    color: #0d4160;
 }
 
 .pagination {
@@ -250,7 +250,7 @@ th {
 }
 
 .page-btn {
-    background-color: #d92e3e;
+    background-color: #0d4160;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -289,7 +289,7 @@ th {
 }
 
 #yes-btn {
-    background-color: #d92e3e;
+    background-color: #0d4160;
     color: #fff;
 }
 

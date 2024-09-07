@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isEditing = false;
     let editingVoucherId = null;
 
+    console.log('Token is: ', token);
     // Hàm lấy danh sách voucher từ API
     function fetchVouchers() {
         fetch(`${window.base_url}/promotion-management/promotions`, {
