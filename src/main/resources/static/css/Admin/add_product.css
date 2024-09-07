@@ -250,6 +250,12 @@ select:focus,
     color: #000;
 }
 
+.field.warranty input {
+    width: 100%;
+    padding: 13px;
+    box-sizing: border-box;
+}
+
 .button {
     display: flex;
     justify-content: flex-start;
