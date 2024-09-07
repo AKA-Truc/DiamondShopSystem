@@ -1,4 +1,6 @@
 package goldiounes.com.vn.controllers;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import goldiounes.com.vn.components.JwtTokenUtils;
 import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.TokenDTO;
@@ -19,7 +21,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +43,9 @@ public class UserController {
     @Autowired
     private JwtTokenUtils jwtTokenUtils;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @GetMapping("/generate-secret-key")
     public ResponseEntity<String> generateSecretKey(){
@@ -47,33 +54,33 @@ public class UserController {
 
     @PostMapping("/GoogleLogin")
     public ResponseEntity<Map<String,Object>> GoogleLogin(@RequestBody TokenDTO tokenRequest) {
-       try {
-           String token = userService.GoogleLogin(tokenRequest);
+        try {
+            String token = userService.GoogleLogin(tokenRequest);
 
-           User userDetail = userService.getUserDetailsFromToken(token);
+            User userDetail = userService.getUserDetailsFromToken(token);
 
-           Token jwt = tokenService.addToken(userDetail, token);
+            Token jwt = tokenService.addToken(userDetail, token);
 
-           // Create the response map
-           Map<String, Object> response = new HashMap<>();
-           response.put("message", "Login successfully");
-           response.put("token", jwt.getToken());
-           response.put("tokenType", jwt.getTokenType());
-           response.put("refreshToken", jwt.getRefreshToken());
-           response.put("name", userDetail.getUserName());
-           response.put("email", userDetail.getEmail());
-           response.put("roles", userDetail.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
-           response.put("id", userDetail.getUserID());
+            // Create the response map
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login successfully");
+            response.put("token", jwt.getToken());
+            response.put("tokenType", jwt.getTokenType());
+            response.put("refreshToken", jwt.getRefreshToken());
+            response.put("name", userDetail.getUserName());
+            response.put("email", userDetail.getEmail());
+            response.put("roles", userDetail.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+            response.put("id", userDetail.getUserID());
 
-           return ResponseEntity.ok(response);
-       }
-       catch (Exception e) {
-           e.printStackTrace();
+            return ResponseEntity.ok(response);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
 
-           Map<String, Object> errorResponse = new HashMap<>();
-           errorResponse.put("message", "Login with google failed");
-           return ResponseEntity.badRequest().body(errorResponse);
-       }
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Login with google failed");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
     }
 
     @PostMapping("/login")
@@ -156,16 +163,28 @@ public class UserController {
 
     @PutMapping("/users/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER') or (hasAuthority('ROLE_CUSTOMER'))")
-    public ResponseEntity<ResponseWrapper<UserDTO>> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
-        UserDTO updatedUser = userService.updateUser(id, userDTO);
-        if (updatedUser != null) {
-            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User updated successfully", updatedUser);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ResponseWrapper<UserDTO>> updateUser(
+            @PathVariable int id,
+            @RequestParam("user") String userDTOJson,
+            @RequestParam(value = "imageURL", required = false) MultipartFile imageFile) {
+        try {
+
+            UserDTO userDTO = objectMapper.readValue(userDTOJson, UserDTO.class);
+            UserDTO updatedUser = userService.updateUser(id, userDTO, imageFile);
+
+            if (updatedUser != null) {
+                ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User updated successfully", updatedUser);
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User not found", null);
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            ResponseWrapper<UserDTO> response = new ResponseWrapper<>("Error updating user: " + e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @DeleteMapping("/users/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
@@ -196,10 +215,14 @@ public class UserController {
     }
 
     @DeleteMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_SALE STAFF', 'ROLE_DELIVERY STAFF', 'ROLE_CUSTOMER')")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.startsWith("Bearer ") ? authHeader.substring(7) : authHeader;
+
         // Xóa token khi người dùng đăng xuất
         tokenService.deleteToken(token);
         return ResponseEntity.ok("Logout successful");
     }
+
 
 }
