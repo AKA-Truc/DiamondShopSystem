@@ -67,10 +67,10 @@
                 <script>
                     function logout() {
                         // Xóa token từ sessionStorage
-                        sessionStorage.removeItem('accessToken');
+                        localStorage.removeItem('authToken');
 
                         // Chuyển hướng người dùng về trang đăng nhập
-                        window.location.href = './login1.html';
+                        window.location.href = '/DiamondShopSystem/src/main/resources/templates/login.html';
                     }
                 </script>
             </ul>
@@ -105,21 +105,21 @@
 <!-- main content -->
 <div class="main-content">
     <div class="customer-management">
-        <!-- Nút thêm khách hàng mới -->
-        <button class="add-customer-btn" onclick="window.location.href ='./add_user.html'">Thêm Khách Hàng Mới <i class="fas fa-plus"></i></button>
+        <button class="add-user-btn" id="openpopup1">
+            Thêm Người Dùng Mới <i class="fas fa-plus"></i>
+        </button>
 
-        <!-- Ô tìm kiếm -->
         <input type="text" placeholder="Nhập họ tên để tìm kiếm..." class="search-bar">
 
-        <!-- Bảng danh sách khách hàng -->
         <div class="table-wrapper">
             <table>
                 <thead>
                 <tr>
                     <th>STT</th>
                     <th>Tên Khách Hàng</th>
-                    <th>SDT</th>
+                    <th>Email</th>
                     <th>Giới Tính</th>
+                    <th>Vai Trò</th>
                     <th>Lựa Chọn</th>
                 </tr>
                 </thead>
@@ -128,26 +128,108 @@
                 </tbody>
             </table>
 
-            <!-- Popup xác nhận xóa khách hàng -->
             <div id="popup" class="popup-overlay">
                 <div class="popup-content">
                     <p>Bạn có chắc chắn muốn xóa khách hàng này?</p>
-                    <button id="yes-btn" class="popup-btn">Yes</button>
-                    <button id="no-btn" class="popup-btn">No</button>
+                    <button id="yes-btn" class="popup-btn">Có</button>
+                    <button id="no-btn" class="popup-btn">Không</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="popup1-overlay" id="popup1Overlay">
+    <div class="popup1-content">
+        <span class="popup1-close" id="closepopup1">&times;</span>
+        <div class="wrapper">
+            <form id="user-form" enctype="multipart/form-data">
+                <div class="top-fields">
+                    <div class="field input">
+                        <label for="userName">Họ và Tên</label>
+                        <input type="text" id="userName" name="userName" placeholder="Vui lòng nhập họ và tên" required>
+                    </div>
+                </div>
+
+                <div class="field input">
+                    <label for="email">Email</label>
+                    <input type="tel" id="email" name="email" placeholder="Vui lòng nhập Email" required>
+                </div>
+
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="password" name="password" placeholder="Vui lòng nhập Password" required>
+                        <!-- Eye icon to toggle password visibility -->
+                        <span id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <ion-icon name="eye-outline"></ion-icon>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="field input">
+                    <label for="address">Địa chỉ</label>
+                    <input type="tel" id="address" name="address" placeholder="Vui lòng nhập địa chỉ" required>
+                </div>
+
+                <div class="field input" style="margin-bottom: 20px;">
+                    <label for="role" style="display: inline-block;">Chức Vụ</label>
+                    <select id="role" style="margin-left:2%;" name="Role">
+                        <option value="Customer">Khách Hàng</option>
+                        <option value="Manager">Quản Lý Cửa Hàng</option>
+                        <option value="Sale Staff">Nhân Viên Bán Hàng</option>
+                        <option value="Delivery Staff">Nhân Viên Vận Chuyển</option>
+                    </select>
+                </div>
+
+                <label for="gender" style="margin-left: 10px; font-weight: bold;">Giới Tính</label>
+                <input type="radio" name="gender" id = "gender" value="Nam" > Nam
+                <input type="radio" name="gender" id = "gender1" value="Nữ"> Nữ
+
+                <div class="button">
+                    <input type="submit" value="Lưu" class="save" id="saveButton">
+                    <input type="button" value="Hủy" class="cancel" id="cancelButton">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to set the form mode
+    function setFormMode(isEditMode) {
+        const passwordField = document.getElementById('password');
+        const togglePasswordCheckbox = document.getElementById('togglePassword');
+
+        if (isEditMode) {
+            // Disable the password field for editing mode
+            passwordField.disabled = true;
+            togglePasswordCheckbox.disabled = true; // Disable the toggle checkbox as well
+        } else {
+            // Enable the password field for adding new user mode
+            passwordField.disabled = false;
+            togglePasswordCheckbox.disabled = false; // Enable the toggle checkbox
+        }
+    }
+
+    const isEditMode = window.location.href.includes('edit');
+
+    // Set the form mode accordingly
+    setFormMode(isEditMode);
+
+    // Toggle Password Visibility
+    document.getElementById('togglePassword').addEventListener('change', function () {
+        const passwordField = document.getElementById('password');
+        passwordField.type = this.checked ? 'text' : 'password';
+    });
+</script>
+
+
+<script src="/static/js/url.js"></script>
 <script src="/static/js/Admin/customer_management.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>
-
-
-
-
-
