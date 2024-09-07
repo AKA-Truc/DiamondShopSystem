@@ -89,6 +89,7 @@ public class UserService {
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setStatus("active");
         User newUser =  userRepo.save(user);
         UserDTO indexUser = modelMapper.map(newUser,UserDTO.class);
         cartService.createCart(indexUser);
@@ -102,7 +103,10 @@ public class UserService {
     public boolean deleteUser(int id) {
         User existingUser = userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found"));
-        userRepo.deleteById(existingUser.getUserID());
+        existingUser.setStatus("inactive");
+        pointService.deleteById(existingUser.getPoint().getPointID());
+        cartService.deleteCart(existingUser.getCart().getCartID());
+        userRepo.save(existingUser);
         return true;
     }
 
@@ -112,7 +116,6 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("No user found"));
         existingUser.setEmail(user.getEmail());
         existingUser.setUserName(user.getUserName());
-        existingUser.setPassword(user.getPassword());
         existingUser.setRole(user.getRole());
         existingUser.setAddress(user.getAddress());
         existingUser.setGender(user.getGender());

@@ -4,8 +4,6 @@ body {
     padding: 0;
     background-color: #f4f7fb;
 }
-
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -313,13 +311,6 @@ th {
 
 #no-btn {
     background-color: #ddd;
-}
-
-/*add user*/
-.popup1-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .popup1-content {

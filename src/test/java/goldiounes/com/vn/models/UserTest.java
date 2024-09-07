@@ -9,7 +9,7 @@ public class UserTest {
 
     @Test
     void testGetterAndSetters() {
-        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer","female");
+        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer","female", "active");
 
         assertEquals("John", user.getUserName());
         assertEquals("12345", user.getPassword());
@@ -35,7 +35,7 @@ public class UserTest {
     }
 
     void testConstructor() {
-        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female");
+        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female", "active");
 
         assertNotNull(user);
 
