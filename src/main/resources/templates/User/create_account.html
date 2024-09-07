@@ -10,10 +10,11 @@
 <body>
 <div class="registration-container">
     <h2>Đăng ký</h2>
-    <form>
+    <form id = "form-register">
         <div class="form-group">
-            <label for="username">Tên tài khoản <span class="required">*</span></label>
-            <input type="text" id="username" required>
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Hãy nhập địa chỉ email hợp lệ, ví dụ: diamond@shop.vn">
+            <span class="error-message"></span>
         </div>
 
         <div class="form-group">
@@ -32,20 +33,24 @@
         </div>
 
         <div class="form-group">
-            <label for="phone">Số điện thoại <span class="required">*</span></label>
-            <input type="text" id="phone" required pattern="0[0-9]{9}" title="Số điện thoại phải có 10 chữ số">
+            <label for="address">Địa chỉ <span class="required">*</span></label>
+            <input type="address" id="address" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Email <span class="required">*</span></label>
-            <input type="email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Hãy nhập địa chỉ email hợp lệ, ví dụ: diamond@shop.vn">
-            <span class="error-message"></span>
+            <label>Giới tính <span class="required">*</span></label>
+            <select name="gender" id="genderSelect" >
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Khác">Khác</option>
+            </select>
         </div>
 
         <button type="submit" class="btn-register">Đăng ký</button>
     </form>
 </div>
 
+<script src="/static/js/url.js"></script>
 <script src="/static/js/User/create_account.js"></script>
 </body>
 

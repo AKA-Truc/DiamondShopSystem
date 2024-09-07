@@ -38,6 +38,9 @@ public class User {
     @Column(name = "Role", nullable = false)
     private String Role;
 
+    @Column(name = "Url", nullable = true)
+    private String Url;
+
     @Column(name = "Status", nullable = false)
     private String Status;
 
@@ -57,11 +60,12 @@ public class User {
     @JsonManagedReference
     private Point point;
 
+
     public User() {
         //Constructor
     }
 
-    public User(String userName, String password, String email, String address, String role, String gender, String status) {
+    public User(String userName, String password, String email, String address, String role, String gender, String status, String url) {
         UserName = userName;
         Password = password;
         Email = email;
@@ -69,6 +73,7 @@ public class User {
         Role = role;
         Gender = gender;
         Status = status;
+        Url = url;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

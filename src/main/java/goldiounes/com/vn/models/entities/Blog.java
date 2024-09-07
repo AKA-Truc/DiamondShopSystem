@@ -15,6 +15,9 @@ public class Blog {
     @Column(name = "Title", nullable = false)
     private String Title;
 
+    @Column(name = "Url", nullable = true)
+    private String Url;
+
     @Column(name = "Content", nullable = false)
     private String Content;
 
