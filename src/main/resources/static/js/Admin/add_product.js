@@ -1,102 +1,189 @@
-let addedRows = [];
+document.addEventListener('DOMContentLoaded', () => {
+    const addButton = document.querySelector('.table-add-btn');
+    const checkAllBox = document.querySelector('.table-checkAll');
+    const tableBody = document.querySelector('table.h-table tbody');
+    const token = localStorage.getItem('authToken');
 
-// Hàm xử lý gửi form
-async function submitForm(event) {
-    event.preventDefault(); // Ngăn chặn hành động mặc định của form
+    fetchCategory(token);
 
-    const form = document.getElementById('myForm');
-    const formData = new FormData(form);
-
-    try {
-        // Gửi dữ liệu form đến server
-        const response = await fetch('http://localhost:8080/api/product/createProduct', {
-            method: 'POST',
-            body: formData,
-            mode: 'cors',
+    if (checkAllBox) {
+        checkAllBox.addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            tableBody.querySelectorAll('.table-checkbox').forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
         });
-
-        // Kiểm tra phản hồi từ server
-        if (!response.ok) {
-            throw new Error('Failed to save data');
-        }
-
-        const result = await response.json();
-        console.log('Server response:', result);
-        alert('Đã thêm sản phẩm.');
-        window.location.href = "../sanpham/sp.html"; // Chuyển hướng sau khi thành công
-    } catch (error) {
-        console.error('Error saving data:', error);
-        alert('Đã xảy ra lỗi khi thêm sản phẩm: ' + error.message);
     }
-}
 
-function cancelForm(event) {
-    event.preventDefault(); // Ngăn chặn hành động mặc định của nút hủy
-
-    // Hiển thị hộp thoại xác nhận
-    if (confirm('Bạn có chắc muốn hủy không?')) {
-        // Nếu người dùng bấm "OK", chuyển hướng đến trang sản phẩm
-        window.location.href = "product.html";
-    }
-    // Nếu người dùng bấm "Cancel", không làm gì cả và ở lại trang hiện tại
-}
-
-
-// Tải dữ liệu danh mục từ API khi DOM đã tải xong
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const response = await fetch('http://localhost:8080/api/category/getAllcategory');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-
-        // Kiểm tra dữ liệu trả về
-        console.log(data);
-
-        // Đảm bảo rằng listCategory là một mảng
-        if (!Array.isArray(data.listCategory)) {
-            throw new Error('Expected an array');
-        }
-
-        const select = document.getElementById('CategoryID');
-        data.listCategory.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.CategoryID;
-            option.textContent = item.Name;
-            select.appendChild(option);
+    if (addButton) {
+        addButton.addEventListener('click', () => {
+            const newRow = createTableRow();
+            tableBody.appendChild(newRow);
         });
-    } catch (error) {
-        console.error('Error fetching roles:', error);
     }
+
+    function createTableRow() {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td class="text-center check-col"><input type="checkbox" class="table-checkbox"></td>
+            <td>
+                <select class="table-control item-control list-setting">
+                </select>
+            </td>
+            <td>
+                <div class="item-container">
+                    <select class="table-control item-control list-diamond">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                    <input type="number" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                </div>
+                <span class="toggle-quantity">+</span>
+            </td>
+            <td><input type="number" class="table-control item-control" placeholder="Nhập size"></td>
+            <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá"></td>
+            <td><input type="number" class="table-control item-control" placeholder="Nhập tiền gia công"></td>
+            <td><input type="number" class="table-control item-control" placeholder="Nhập số lượng tồn kho"></td>
+            <td>
+                <ul class="table-action">
+                    <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
+                    <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
+                </ul>
+            </td>
+        `;
+
+        // Add event listeners for the new row
+        newRow.querySelector('.row-delete').addEventListener('click', deleteRow);
+        newRow.querySelector('.toggle-quantity').addEventListener('click', handleToggleQuantity);
+        fetchDiamond(token, newRow.querySelector('.list-diamond'));
+        fetchSetting(token, newRow.querySelector('.list-setting'))
+        return newRow;
+    }
+
+    function handleToggleQuantity(e) {
+        const container = e.target.previousElementSibling;
+        const newFieldContainer = document.createElement("div");
+        newFieldContainer.classList.add("item-container");
+
+        newFieldContainer.innerHTML = `
+            <select class="table-control item-control list-diamond">
+                <!-- Options will be populated dynamically -->
+            </select>
+            <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+        `;
+
+        container.parentNode.insertBefore(newFieldContainer, e.target);
+        const diamondSelect = newFieldContainer.querySelector('.list-diamond');
+        fetchDiamond(token, diamondSelect);
+    }
+
+    function deleteRow(e) {
+        if (confirm('Bạn có chắc chắn muốn xóa dòng này không?')) {
+            e.target.closest('tr').remove();
+        }
+    }
+
+    // Initialize existing row action buttons
+    document.querySelectorAll('.row-delete').forEach(btn => {
+        btn.addEventListener('click', deleteRow);
+    });
+
+    document.querySelectorAll('.toggle-quantity').forEach(btn => {
+        btn.addEventListener('click', handleToggleQuantity);
+    });
 });
 
-function addInputFields(buttonElement) {
-    const parentTd = buttonElement.parentElement;
+function fetchCategory(token){
+    const categorySelect  = document.getElementById('loaiSanPham');
 
-    // Tạo phần tử input mới cho tên kim cương và số lượng
-    const newDiamondInput = document.createElement('input');
-    newDiamondInput.type = 'text';
-    newDiamondInput.className = 'table-control item-control';
-    newDiamondInput.placeholder = 'Nhập tên kim cương';
+    fetch(`${window.base_url}/category-management/categories`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(result =>{
+            const data = result.data;
 
-    const newQuantityInput = document.createElement('input');
-    newQuantityInput.type = 'text';
-    newQuantityInput.className = 'table-control item-control quantity-input';
-    newQuantityInput.placeholder = 'Nhập số lượng';
+            if(!Array.isArray(data)){
+                throw new Error("Category should be an array");
+            }
 
-    // Thêm các input mới vào TD hiện tại (phía dưới các input cũ)
-    parentTd.insertBefore(newDiamondInput, buttonElement);
-    parentTd.insertBefore(newQuantityInput, buttonElement);
+            categorySelect.innerHTML= '';
+
+            data.forEach(category =>{
+                const option = document.createElement('option');
+                option.value = category.categoryId;
+                option.textContent = category.categoryName;
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(error => { console.error(error); });
 }
 
-// Các hàm khác được giữ nguyên
+function fetchDiamond(token, selectElement) {
+    if (!selectElement) {
+        console.error('Select element is not defined.');
+        return;
+    }
 
-//ràng buộc token
-// document.addEventListener('DOMContentLoaded', function() {
-//     const accessToken = sessionStorage.getItem('accessToken');
-//
-//     if (!accessToken) {
-//         window.location.href = '../Login/login.html';
-//     }
-// });
+    fetch(`${window.base_url}/diamond-management/diamonds`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(result => {
+            const data = result.data;
+
+            if (!Array.isArray(data)) {
+                throw new Error("Diamonds should be an array.");
+            }
+
+            selectElement.innerHTML = '';
+
+            data.forEach(diamond => {
+                const option = document.createElement('option');
+                option.value = diamond.diamondId;
+                option.textContent = diamond.origin + diamond.carat;
+                selectElement.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching diamonds:', error);
+        });
+}
+function fetchSetting(token,selectElement){
+    if (!selectElement) {
+        console.error('Select element is not defined.');
+        return;
+    }
+
+    fetch(`${window.base_url}/setting-management/settings`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(result => {
+            const data = result.data;
+
+            if (!Array.isArray(data)) {
+                throw new Error("Diamonds should be an array.");
+            }
+
+            selectElement.innerHTML = '';
+
+            data.forEach(setiing => {
+                const option = document.createElement('option');
+                option.value = setiing.settingId;
+                option.textContent = setiing.material;
+                selectElement.appendChild(option);
+            });
+        })
+}
