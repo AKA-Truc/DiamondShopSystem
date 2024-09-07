@@ -176,8 +176,6 @@ public class OrderService {
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
-
-
     public boolean deleteOrder(int id) {
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -213,6 +211,28 @@ public class OrderService {
             throw new RuntimeException("Order not found");
         }
         return orders.stream()
+                .map(order -> modelMapper.map(order, OrderDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrderDone() {
+        List<Order> orders = orderRepo.findAll();
+        if (orders.isEmpty()) {
+            throw new RuntimeException("Order not found");
+        }
+        return orders.stream()
+                .filter(order -> order.getStatus().equals("Done"))
+                .map(order -> modelMapper.map(order, OrderDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrderNotDone() {
+        List<Order> orders = orderRepo.findAll();
+        if (orders.isEmpty()) {
+            throw new RuntimeException("Order not found");
+        }
+        return orders.stream()
+                .filter(order -> !order.getStatus().equals("Done"))
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());
     }

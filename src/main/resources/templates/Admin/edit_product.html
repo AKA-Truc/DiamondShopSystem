@@ -13,84 +13,9 @@
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>GOLDIOUNES SHOP</h2>
-    <ul class="main-menu">
-        <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
-        <li class="submenu">
-            <a href="customer_management.html"><ion-icon name="people-outline"></ion-icon> Quản lý người dùng</a>
-        </li>
-        <li class="submenu">
-            <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
-            <ul>
-                <li><a href="./product.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý sản phẩm</a></li>
-                <li><a href="./edit_product.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa sản phẩm</a></li>
-                <li><a href="add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
-            </ul>
-        </li>
-        <li class="submenu">
-            <a href="discount.html"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
-        </li>
-        <li class="submenu">
-            <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
-            <ul>
-                <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
-                <li><a href="./detail.html"><ion-icon name="add-circle-outline"></ion-icon> Chi tiết đơn hàng</a></li>
-                <li><a href="./edit_order.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa đơn hàng</a></li>
-                <li><a href="./bill.html"><ion-icon name="receipt-outline"></ion-icon> Hóa đơn</a></li>
-                <li><a href="./add_order.html"><ion-icon name="bag-add-outline"></ion-icon>Tạo đơn hàng</a></li>
-            </ul>
-        </li>
-        <li class="submenu">
-            <a href="#"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
-            <ul>
-                <li><a href="./feedback.html"><ion-icon name="receipt-outline"></ion-icon> Phản hồi khách hàng</a></li>
-            </ul>
-        </li>
-        <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
-        <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
-        <li class="submenu">
-            <a href="#"><ion-icon name="person-circle-outline"></ion-icon> Tài khoản</a>
-            <ul>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
 
-                <li><a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
-                <script>
-                    function logout() {
-                        // Xóa token từ sessionStorage
-                        sessionStorage.removeItem('accessToken');
-
-                        // Chuyển hướng người dùng về trang đăng nhập
-                        window.location.href = './login1.html';
-                    }
-                </script>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-<div class="navbar">
-    <div class="navbar__info">
-    </div>
-    <div class="navbar__cta">
-        <div class="navbar__hello">
-            <ion-icon name="notifications-outline"></ion-icon> 5 Notifications
-        </div>
-        <div class="navbar__hello">
-            <ion-icon name="settings-outline"></ion-icon> Settings
-        </div>
-        <div class="navbar__background-icon">
-            <img src="/static/Adimages/account.svg" alt="" />
-        </div>
-        <div class="navbar__hello">
-            <p>Xin chào</p>
-        </div>
-    </div>
-</div>
-<div class="navbar-separator"></div>
-<div class="main">
-    <!-- Content goes here -->
-</div>
-<!---->
 <div class="body1">
     <div class="wrapper">
         <form id="myForm" enctype="multipart/form-data">

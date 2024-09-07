@@ -60,6 +60,37 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/Bill")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF', 'ROLE_DELIVERY STAFF', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getAllOrderDone() {
+        List<OrderDTO> orders = orderService.getAllOrderDone();
+        ResponseWrapper<List<OrderDTO>> response;
+        if (!orders.isEmpty()) {
+            response = new ResponseWrapper<>("Orders Done retrieved successfully", orders);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("No orders found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/NotDone")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF', 'ROLE_DELIVERY STAFF', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<List<OrderDTO>>> getAllOrderNotDone() {
+        List<OrderDTO> orders = orderService.getAllOrderNotDone();
+        ResponseWrapper<List<OrderDTO>> response;
+
+        if (!orders.isEmpty()) {
+            response = new ResponseWrapper<>("Orders Not Done retrieved successfully", orders);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("No orders found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
     @GetMapping("/orders/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF', 'ROLE_DELIVERY STAFF', 'ROLE_MANAGER', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<OrderDTO>> getOrder(@PathVariable int id, Authentication authentication) {
