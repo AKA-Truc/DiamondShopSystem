@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý khách hàng</title>
+    <title>Quản lý bài viết</title>
     <link rel="stylesheet" href="/static/css/Admin/customer_management.css">
     <script>
         function alertFeature() {
@@ -75,21 +75,19 @@
 <div class="main-content">
     <div class="customer-management">
         <button class="add-user-btn" id="openpopup1">
-            Thêm Người Dùng Mới <i class="fas fa-plus"></i>
+            Thêm Bài Viết Mới <i class="fas fa-plus"></i>
         </button>
 
         <input type="text" placeholder="Nhập họ tên để tìm kiếm..." class="search-bar">
 
-        <div class="table-wrapper">
-            <table>
+        <div class="table-wrapper" >
+            <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Tên Khách Hàng</th>
-                    <th>Email</th>
-                    <th>Giới Tính</th>
-                    <th>Vai Trò</th>
-                    <th>Lựa Chọn</th>
+                    <th >STT</th>
+                    <th >Tiêu đề</th>
+                    <th >Nội dung</th>
+                    <th style=" text-align: center;">Lựa Chọn</th> <!-- Align to the right -->
                 </tr>
                 </thead>
                 <tbody id="customer-table-body">
@@ -115,46 +113,28 @@
             <form id="user-form" enctype="multipart/form-data">
                 <div class="top-fields">
                     <div class="field input">
-                        <label for="userName">Họ và Tên</label>
-                        <input type="text" id="userName" name="userName" placeholder="Vui lòng nhập họ và tên" required>
+                        <label for="Title">Tiêu Đề</label>
+                        <input type="text" id="Title" name="Title" placeholder="Vui lòng nhập tiêu đề" required>
                     </div>
                 </div>
 
                 <div class="field input">
-                    <label for="email">Email</label>
-                    <input type="tel" id="email" name="email" placeholder="Vui lòng nhập Email" required>
+                    <label for="image">Tải Ảnh</label>
+                    <input type="file" id="image" accept="image/*">
                 </div>
 
                 <div class="field input">
-                    <label for="password">Password</label>
-                    <div style="position: relative;">
-                        <input type="password" id="password" name="password" placeholder="Vui lòng nhập Password" required>
-                        <!-- Eye icon to toggle password visibility -->
-                        <span id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-                            <ion-icon name="eye-outline"></ion-icon>
-                        </span>
-                    </div>
+                    <label for="content">Nội Dung</label>
+                    <textarea id="content" name="Title" placeholder="Nhập nội dung" required
+                              style="text-align: start;
+                                      width: 100%;
+                                      height: 200px; /* Increase the height to make it look like a larger note */
+                                      padding: 10px;
+                                      font-size: 16px;
+                                      resize: vertical;
+                                      box-sizing: border-box; /* Ensure padding and border are included in the width *">
+                     </textarea>
                 </div>
-
-
-                <div class="field input">
-                    <label for="address">Địa chỉ</label>
-                    <input type="tel" id="address" name="address" placeholder="Vui lòng nhập địa chỉ" required>
-                </div>
-
-                <div class="field input" style="margin-bottom: 20px;">
-                    <label for="role" style="display: inline-block;">Chức Vụ</label>
-                    <select id="role" style="margin-left:2%;" name="Role">
-                        <option value="Customer">Khách Hàng</option>
-                        <option value="Manager">Quản Lý Cửa Hàng</option>
-                        <option value="Sale Staff">Nhân Viên Bán Hàng</option>
-                        <option value="Delivery Staff">Nhân Viên Vận Chuyển</option>
-                    </select>
-                </div>
-
-                <label for="gender" style="margin-left: 10px; font-weight: bold;">Giới Tính</label>
-                <input type="radio" name="gender" id = "gender" value="Nam" > Nam
-                <input type="radio" name="gender" id = "gender1" value="Nữ"> Nữ
 
                 <div class="button">
                     <input type="submit" value="Lưu" class="save" id="saveButton">
