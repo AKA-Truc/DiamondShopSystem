@@ -14,6 +14,7 @@ public class UserDTO {
     private String address;
     private String role;
     private String gender;
+    private String status;
 
     //@JsonManagedReference
     @JsonIgnore

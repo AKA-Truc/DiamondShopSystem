@@ -38,6 +38,9 @@ public class User {
     @Column(name = "Role", nullable = false)
     private String Role;
 
+    @Column(name = "Status", nullable = false)
+    private String Status;
+
     @OneToMany(mappedBy = "User")
     @JsonManagedReference
     private List<Warranty> Warranties;
@@ -58,13 +61,14 @@ public class User {
         //Constructor
     }
 
-    public User(String userName, String password, String email, String address, String role, String gender) {
+    public User(String userName, String password, String email, String address, String role, String gender, String status) {
         UserName = userName;
         Password = password;
         Email = email;
         Address = address;
         Role = role;
         Gender = gender;
+        Status = status;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
