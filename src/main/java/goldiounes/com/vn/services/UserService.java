@@ -116,7 +116,6 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("No user found"));
         existingUser.setEmail(user.getEmail());
         existingUser.setUserName(user.getUserName());
-        existingUser.setRole(user.getRole());
         existingUser.setAddress(user.getAddress());
         existingUser.setGender(user.getGender());
         userRepo.save(existingUser);

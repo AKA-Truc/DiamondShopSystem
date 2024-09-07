@@ -1,21 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Document is ready.');
 
-    const fetchAndDisplayInvoices = () => {
-        fetch('http://localhost:8080/api/invoice/getAllInvoice')
+    const searchInput = document.querySelector('.search-bar input'); // Input tìm kiếm
+
+    // Gọi hàm displayOrderNotDone khi DOM đã được tải
+    displayOrderNotDone();
+
+    // Lọc theo tên khách hàng khi nhập dữ liệu vào ô tìm kiếm
+    searchInput.addEventListener('input', () => {
+        const searchText = searchInput.value.trim().toLowerCase();
+        const rows = document.querySelectorAll('#invoice-list tr');
+
+        rows.forEach(row => {
+            const customerName = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+            row.style.display = customerName.includes(searchText) ? 'table-row' : 'none';
+        });
+    });
+
+    function displayOrderNotDone() {
+        const token = localStorage.getItem('authToken');
+
+        // Kiểm tra xem token có tồn tại không
+        if (!token) {
+            console.error('Auth token not found');
+            return;
+        }
+
+        // Gửi yêu cầu để lấy danh sách hóa đơn chưa hoàn thành
+        fetch(`${window.base_url}/order-management/NotDone`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
+                // Kiểm tra nếu phản hồi không phải là JSON hợp lệ
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Failed to fetch orders');
                 }
                 return response.json();
             })
-            .then(data => {
-                console.log('Data fetched:', data);
+            .then(result => {
+                const dataList = result.data;
+                console.log(dataList);
 
-                const invoices = data;
-
-                if (!Array.isArray(invoices)) {
-                    throw new Error('Expected an array of invoices');
+                // Kiểm tra xem dữ liệu nhận được có phải là một mảng không
+                if (!Array.isArray(dataList)) {
+                    throw new Error('Expected an array of orders');
                 }
 
                 const invoiceList = document.getElementById('invoice-list');
@@ -23,51 +55,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('Invoice list element not found');
                 }
 
-                invoiceList.innerHTML = ''; // Clear previous rows
+                // Xóa các dòng cũ trong danh sách
+                invoiceList.innerHTML = '';
 
-                invoices.forEach((invoice, index) => {
+                // Duyệt qua danh sách hóa đơn và tạo các hàng mới
+                dataList.forEach((data, index) => {
                     const row = document.createElement('tr');
-                    console.log(invoice.Voucher); // This should print voucher details
-
-                    const voucherInfo = invoice.Voucher
-                        ? `${invoice.Voucher.Name} - ${invoice.Voucher.Describes}`
-                        : 'Không Áp Dụng';
-
-                    const formattedTotalCost = invoice.Totalcost.toLocaleString(); // Format total cost
 
                     row.innerHTML = `
                         <td class="editable">${index + 1}</td>
-                        <td class="editable">${invoice.InvoiceID}</td>
-                        <td class="editable">${invoice.Customer ? invoice.Customer.Name : 'N/A'}</td>
-                        <td class="editable">${invoice.InvoiceDate}</td>
-                        <td class="editable">${voucherInfo}</td>
-                        <td class="editable">${formattedTotalCost}</td>
+                        <td class="editable">${data.orderId}</td>
+                        <td class="editable">${data.user.userName}</td>
+                        <td class="editable">${new Date(data.startDate).toISOString().slice(0, 10)}</td>
+                        <td class="editable">${data.promotion.promotionName || 'Không có'}</td>
+                        <td class="editable">${data.totalPrice}</td>
                         <td class="action-buttons">
-                            <button class="edit-btn"><ion-icon name="eye-outline"></ion-icon></button>
+                            <button class="edit-btn" onclick="showOrder(${data.orderId})">
+                                <ion-icon name="eye-outline"></ion-icon>
+                            </button>
                         </td>
                     `;
 
+                    // Thêm hàng mới vào danh sách
                     invoiceList.appendChild(row);
-
-                    // Add click event listener to edit button
-                    const editBtn = row.querySelector('.edit-btn');
-                    editBtn.addEventListener('click', () => {
-                        // Redirect to invoice detail page
-                        window.location.href = `./bill.html?InvoiceID=${invoice.InvoiceID}`;
-                    });
                 });
             })
-            .catch(error => console.error('Error fetching or displaying invoices:', error.message));
-    };
-
-    // Initial fetch and display
-    fetchAndDisplayInvoices();
+            .catch(error => {
+                // Hiển thị lỗi nếu có
+                console.error(error);
+            });
+    }
 });
-//ràng buộc token
-// document.addEventListener('DOMContentLoaded', function() {
-//     const accessToken = sessionStorage.getItem('accessToken');
-
-//     if (!accessToken) {
-//         window.location.href = '../Login/login.html';
-//     }
-// });
