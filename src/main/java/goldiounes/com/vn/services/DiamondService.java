@@ -1,7 +1,9 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.dtos.DiamondDTO;
+import goldiounes.com.vn.models.entities.Certificate;
 import goldiounes.com.vn.models.entities.Diamond;
+import goldiounes.com.vn.repositories.CertificateRepo;
 import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import org.modelmapper.ModelMapper;
@@ -16,6 +18,9 @@ public class DiamondService {
 
     @Autowired
     private DiamondRepo diamondRepo;
+
+    @Autowired
+    private CertificateRepo certificateRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -65,6 +70,9 @@ public class DiamondService {
     public boolean deleteDiamond(int id) {
         Diamond existingDiamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
+        Certificate certificate = certificateRepo.findByDiamondId(id)
+                .orElseThrow(() -> new RuntimeException("Certificate not found"));
+        certificateRepo.delete(certificate);
         diamondRepo.deleteById(existingDiamond.getDiamondID());
         return true;
     }

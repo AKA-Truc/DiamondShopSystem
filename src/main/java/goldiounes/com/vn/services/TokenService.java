@@ -29,7 +29,7 @@ public class TokenService {
 
     @Transactional
     public Token addToken(User user, String token) {
-        List<Token> userTokens = tokenRepository.findByUser(user);
+        List<Token> userTokens = tokenRepository.findByUser(user.getUserID());
         int tokenCount = userTokens.size();
 
         // Kiểm tra số lượng token và xóa token nếu vượt quá số lượng tối đa
@@ -57,6 +57,10 @@ public class TokenService {
         return newToken;
     }
 
+    public List<Token> getAllTokensByUser(int id) {
+        return tokenRepository.findByUser(id);
+    }
+
 
     public Token refreshToken(String refreshToken, User user) throws Exception {
         Token existingToken = tokenRepository.findByRefreshToken(refreshToken);
@@ -78,10 +82,10 @@ public class TokenService {
 
     public void deleteToken(String token) {
         Token tokenEntity = tokenRepository.findByToken(token);
-        if (tokenEntity != null) {
-            tokenRepository.delete(tokenEntity);
-        } else {
+        if (tokenEntity == null) {
             throw new RuntimeException("Token not found.");
+        } else {
+            tokenRepository.delete(tokenEntity);
         }
     }
 }

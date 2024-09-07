@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrderDetailTest {
     @Test
     void testGetterAndSetters() {
-        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female", "active");
+        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female", "active", "url");
         Cart cart = new Cart(user);
         Promotion promotion = new Promotion("Summer Sale", "Discount on all summer items", new Date(), new Date(), 20);
         String shippingAddress = "123 Main St";
@@ -39,7 +39,7 @@ public class OrderDetailTest {
 
     @Test
     void testConstructor() {
-        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female", "active");
+        User user = new User("John", "12345", "abc@gmail.com", "New York", "Customer", "Female", "active", "url");
         Cart cart = new Cart(user);
         Promotion promotion = new Promotion("Summer Sale", "Discount on all summer items", new Date(), new Date(), 20);
         String shippingAddress = "123 Main St";
