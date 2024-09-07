@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/css/Admin/add_product.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
     <style>
         .histaff-table {
             overflow-x: auto;
@@ -15,23 +16,26 @@
             margin-left: 200px;
         }
 
+
         .histaff-item-group {
             padding: 5px;
             border-radius: 5px;
             background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
 
         .histaff-item-group-header h3 {
             margin-bottom: 20px;
-            color: #CD2626;
+            color: #162165e7;
             font-weight: bold;
             font-size: 24px;
         }
 
+
         .hs-button.table-add-btn {
             margin-top: 0px;
         }
+
 
         .table-add-btn {
             margin-bottom: 15px;
@@ -44,15 +48,18 @@
             font-size: 14px;
         }
 
+
         .table-add-btn:hover {
             background-color: #162165e7;
         }
+
 
         table.h-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
 
         table.h-table th,
         table.h-table td {
@@ -62,18 +69,22 @@
             vertical-align: middle;
         }
 
+
         thead th {
-            background-color: #f2f2f2;
-            font-weight: bold;
+            background-color: #162165e7;
+            color: #ffffff;
         }
+
 
         tbody tr:hover {
             background-color: #f9f9f9;
         }
 
+
         input[type="checkbox"] {
             cursor: pointer;
         }
+
 
         .table-action {
             display: flex;
@@ -84,14 +95,17 @@
             margin: 0;
         }
 
+
         .table-action-control {
             cursor: pointer;
             color: #333;
         }
 
+
         .table-action-control:hover {
             color: #162165e7;
         }
+
 
         .table-control {
             width: 100%;
@@ -100,7 +114,10 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+            background-color: #ffffff;
+            color: #000;
         }
+
 
         .table-control.item-control {
             width: 175px; /* chiều dài ô input chi tiết sp*/
@@ -110,7 +127,9 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-top: 5px;
+            background-color: #ffffff;
         }
+
 
         .hidden {
             display: none;
@@ -123,17 +142,21 @@
             width: 300px;
         }
 
+
         table.h-table td:nth-child(8) .table-action li {
             padding: 6px;
         }
+
 
         .histaff-item-group-header h3 {
             margin-bottom: -10px;
         }
 
+
         .field {
             margin-bottom: 20px;
         }
+
 
         @media (max-width: 768px) {
             .h-table th,
@@ -144,6 +167,7 @@
                 padding-left: 50%;
             }
 
+
             .h-table td:before {
                 content: attr(data-label);
                 position: absolute;
@@ -152,12 +176,15 @@
                 text-align: left;
             }
 
+
             .table-action {
                 justify-content: space-around;
             }
         }
 
-    /*    */
+
+        /*    */
+
 
         .toggle-quantity {
             cursor: pointer;
@@ -167,10 +194,12 @@
             vertical-align: middle;
         }
 
+
         .quantity-input {
             display: block;
             margin-top: 5px;
         }
+
 
         .hidden {
             display: none;
@@ -179,116 +208,228 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const addButton = document.querySelector('.table-add-btn');
-            const checkAllBox = document.querySelector('.table-checkAll');
-            const tableBody = document.querySelector('table.h-table tbody');
+    document.addEventListener('DOMContentLoaded', () => {
+        const addButton = document.querySelector('.table-add-btn');
+        const checkAllBox = document.querySelector('.table-checkAll');
+        const tableBody = document.querySelector('table.h-table tbody');
 
-            if (checkAllBox) {
-                checkAllBox.addEventListener('change', (e) => {
-                    const isChecked = e.target.checked;
-                    const checkboxes = tableBody.querySelectorAll('.table-checkbox');
-                    checkboxes.forEach((checkbox) => {
-                        checkbox.checked = isChecked;
-                    });
-                });
-            }
-
-            if (addButton) {
-                addButton.addEventListener('click', () => {
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                <td class="text-center check-col"><input type="checkbox" class="table-checkbox"></td>
-                <td>
-                    <select class="table-control item-control">
-                        <option value="Vàng">Vàng</option>
-                        <option value="Bạc">Bạc</option>
-                    </select>
-                </td>
-                <td>
-                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
-                    <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
-                    <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
-                </td>
-                <td>
-                    <select class="table-control item-control">
-                        <option value="Size1">Size 1</option>
-                        <option value="Size2">Size 2</option>
-                        <option value="Size3">Size 3</option>
-                    </select>
-                </td>
-                <td><input type="text" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá"></td>
-                <td><input type="text" class="table-control item-control" placeholder="Nhập tiền gia công"></td>
-                <td><input type="text" class="table-control item-control" placeholder="Nhập số lượng tồn kho"></td>
-                <td>
-                    <ul class="table-action">
-                        <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
-<!--                        <li class="table-action-control row-edit"><i class="fa-solid fa-pencil" aria-hidden="true"></i></li>-->
-                        <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
-                    </ul>
-                </td>
-            `;
-                    tableBody.appendChild(newRow);
-
-                    newRow.querySelector('.row-edit').addEventListener('click', (e) => editRow(e));
-                    newRow.querySelector('.row-save').addEventListener('click', (e) => saveRow(e));
-                    newRow.querySelector('.row-delete').addEventListener('click', (e) => deleteRow(e));
-
-                    newRow.querySelector('.toggle-quantity').addEventListener('click', (e) => {
-                        const quantityInput = e.target.nextElementSibling;
-                        quantityInput.classList.toggle('hidden');
-                    });
-                });
-            }
-
-            function editRow(e) {
-                const row = e.target.closest('tr');
-                row.querySelectorAll('.col-val').forEach(el => el.classList.add('hidden'));
-                row.querySelectorAll('.item-control').forEach(el => el.classList.remove('hidden'));
-                row.querySelector('.row-edit').classList.add('hidden');
-                row.querySelector('.row-save').classList.remove('hidden');
-            }
-
-            function saveRow(e) {
-                const row = e.target.closest('tr');
-                row.querySelectorAll('.col-val').forEach(el => el.classList.remove('hidden'));
-                row.querySelectorAll('.item-control').forEach(el => el.classList.add('hidden'));
-                row.querySelector('.row-save').classList.add('hidden');
-                row.querySelector('.row-edit').classList.remove('hidden');
-            }
-
-            function deleteRow(e) {
-                if (confirm('Bạn có chắc chắn muốn xóa dòng này không?')) {
-                    e.target.closest('tr').remove();
-                }
-            }
-
-            document.querySelectorAll('.toggle-quantity').forEach(toggle => {
-                toggle.addEventListener('click', (e) => {
-                    const quantityInput = e.target.nextElementSibling;
-                    quantityInput.classList.toggle('hidden');
+        if (checkAllBox) {
+            checkAllBox.addEventListener('change', (e) => {
+                const isChecked = e.target.checked;
+                const checkboxes = tableBody.querySelectorAll('.table-checkbox');
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked = isChecked;
                 });
             });
+        }
 
-            document.querySelectorAll('.row-edit').forEach(editBtn => {
-                editBtn.addEventListener('click', (e) => editRow(e));
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td class="text-center check-col"><input type="checkbox" class="table-checkbox"></td>
+                    <td>
+                        <select class="table-control item-control">
+                            <option value="Vàng">Vàng</option>
+                            <option value="Bạc">Bạc</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="item-container">
+                            <select class="table-control item-control">
+                                <option value="" disabled selected>Tên kim cương</option>
+                                <option value="diamond1">Kim cương 1</option>
+                                <option value="diamond2">Kim cương 2</option>
+                                <option value="diamond3">Kim cương 3</option>
+                            </select>
+                            <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                        </div>
+                        <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
+                    </td>
+                    <td>
+                        <select class="table-control item-control">
+                            <option value="Size1">Size 1</option>
+                            <option value="Size2">Size 2</option>
+                            <option value="Size3">Size 3</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá"></td>
+                    <td><input type="text" class="table-control item-control" placeholder="Nhập tiền gia công"></td>
+                    <td><input type="text" class="table-control item-control" placeholder="Nhập số lượng tồn kho"></td>
+                    <td>
+                        <ul class="table-action">
+                            <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
+                            <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
+                        </ul>
+                    </td>
+                `;
+                tableBody.appendChild(newRow);
+
+                // Thêm sự kiện cho các nút mới
+                newRow.querySelector('.row-delete').addEventListener('click', (e) => deleteRow(e));
+                newRow.querySelector('.toggle-quantity').addEventListener('click', (e) => addInputFields(e.target));
             });
-            document.querySelectorAll('.row-save').forEach(saveBtn => {
-                saveBtn.addEventListener('click', (e) => saveRow(e));
-            });
-            document.querySelectorAll('.row-delete').forEach(deleteBtn => {
-                deleteBtn.addEventListener('click', (e) => deleteRow(e));
-            });
+        }
+
+        //  "+"
+        function addInputFields(element) {
+            const container = element.previousElementSibling;
+
+            const newFieldContainer = document.createElement("div");
+            newFieldContainer.classList.add("item-container");
+
+            // Tạo select mới
+            const newSelect = document.createElement("select");
+            newSelect.classList.add("table-control", "item-control");
+
+            const optionPlaceholder = document.createElement("option");
+            optionPlaceholder.value = "";
+            optionPlaceholder.disabled = true;
+            optionPlaceholder.selected = true;
+            optionPlaceholder.text = "Tên kim cương";
+            newSelect.appendChild(optionPlaceholder);
+
+            const option1 = document.createElement("option");
+            option1.value = "diamond1";
+            option1.text = "Kim cương 1";
+            newSelect.appendChild(option1);
+
+            const option2 = document.createElement("option");
+            option2.value = "diamond2";
+            option2.text = "Kim cương 2";
+            newSelect.appendChild(option2);
+
+            const option3 = document.createElement("option");
+            option3.value = "diamond3";
+            option3.text = "Kim cương 3";
+            newSelect.appendChild(option3);
+
+            // Tạo input mới
+            const newInput = document.createElement("input");
+            newInput.type = "text";
+            newInput.classList.add("table-control", "item-control", "quantity-input");
+            newInput.placeholder = "Nhập số lượng";
+
+            // Thêm cả select và input vào container mới
+            newFieldContainer.appendChild(newSelect);
+            newFieldContainer.appendChild(newInput);
+
+            // Chèn container mới vào trước dấu "+"
+            container.parentNode.insertBefore(newFieldContainer, element);
+        }
+
+        // Hàm xóa hàng
+        function deleteRow(e) {
+            if (confirm('Bạn có chắc chắn muốn xóa dòng này không?')) {
+                e.target.closest('tr').remove();
+            }
+        }
+
+        // Gán sự kiện cho các nút đã có sẵn
+        document.querySelectorAll('.row-delete').forEach(deleteBtn => {
+            deleteBtn.addEventListener('click', (e) => deleteRow(e));
         });
 
+        document.querySelectorAll('.toggle-quantity').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                addInputFields(e.target);
+            });
+        });
+    });
     </script>
 
-
 <body>
-<script src="/static/js/sidebar.js"></script>
-<script src="/static/js/navbar.js"></script>
+<div class="sidebar">
+    <h2>GOLDIOUNES SHOP</h2>
+    <ul class="main-menu">
+        <li><a href="./admin.html"><span class="icon"><ion-icon name="home-outline"></ion-icon></span> Trang chủ</a></li>
+        <li class="submenu"><a href="#"><ion-icon name="people-outline"></ion-icon> Quản lý</a>
+            <ul>
+                <li><a href="./customer_management.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý khách hàng </a></li>
+                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin khách </a></li>
+                <li><a href="./human_resource_management.html"><ion-icon name="person-outline"></ion-icon>  Quản lý nhân sự </a></li>
+                <li><a href="./add_user.html"><ion-icon name="create-outline"></ion-icon> Chỉnh sửa thông tin nhân sự </a></li>
+                <li><a href="./add_user.html"><ion-icon name="person-add-outline"></ion-icon> Thêm thông tin nhân sự </a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="server-outline"></ion-icon> Sản phẩm</a>
+            <ul>
+                <li><a href="./product.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý sản phẩm</a></li>
+                <li><a href="./edit_product.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa sản phẩm</a></li>
+                <li><a href="add_product.html"><ion-icon name="receipt-outline"></ion-icon> Thêm sản phẩm mới</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="pricetag-outline"></ion-icon> Mã giảm giá</a>
+            <ul>
+                <li><a href="./discount.html"><ion-icon name="receipt-outline"></ion-icon> Quản lý mã giảm giá</a></li>
+                <li><a href="./edit_discount.html"><ion-icon name="bookmark-outline"></ion-icon> Chỉnh sửa giảm giá</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
+            <ul>
+                <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
+                <li><a href="./detail.html"><ion-icon name="add-circle-outline"></ion-icon> Chi tiết đơn hàng</a></li>
+                <li><a href="./edit_order.html"><ion-icon name="clipboard-outline"></ion-icon> Chỉnh sửa đơn hàng</a></li>
+                <li><a href="./bill.html"><ion-icon name="receipt-outline"></ion-icon> Hóa đơn</a></li>
+                <li><a href="./add_order.html"><ion-icon name="bag-add-outline"></ion-icon>Tạo đơn hàng</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
+            <ul>
+                <li><a href="./feedback.html"><ion-icon name="receipt-outline"></ion-icon> Phản hồi khách hàng</a></li>
+            </ul>
+        </li>
+
+        <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
+        <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
+        <li class="submenu">
+            <a href="#"><ion-icon name="person-circle-outline"></ion-icon> Tài khoản</a>
+            <ul>
 
 
+                <li><a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a></li>
+                <script>
+                    function logout() {
+                        // Xóa token từ sessionStorage
+                        sessionStorage.removeItem('accessToken');
+
+
+                        // Chuyển hướng người dùng về trang đăng nhập
+                        window.location.href = './login1.html';
+                    }
+                </script>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="navbar">
+    <div class="navbar__info">
+    </div>
+    <div class="navbar__cta">
+        <div class="navbar__hello">
+            <ion-icon name="notifications-outline"></ion-icon> 5 Notifications
+        </div>
+        <div class="navbar__hello">
+            <ion-icon name="settings-outline"></ion-icon> Settings
+        </div>
+        <div class="navbar__background-icon">
+            <img src="/static/Adimages/account.svg" alt="" />
+        </div>
+        <div class="navbar__hello">
+            <p>Xin chào</p>
+        </div>
+    </div>
+</div>
+<div class="navbar-separator"></div>
+<div class="main">
+    <!-- Content goes here -->
+</div>
+<!---->
 
 <div class="histaff-item-group background-white border-radius-5 active" id="histaff-work-exp" style="background-color: #f4f7fb;">
     <div class="body1">
@@ -300,7 +441,7 @@
         <div class="wrapper">
             <form id="myForm" enctype="multipart/form-data">
                 <div class="top-fields">
-                    <div class="field">
+                    <div class="field" style="margin-right: 2px;">
                         <label for="loaiSanPham">Loại Sản Phẩm</label>
                         <select id="loaiSanPham" name="loaiSanPham">
                             <option value="sanPham1">Nhẫn kim cương nam</option>
@@ -317,24 +458,26 @@
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="field input">
+                <div class="form-row" style="display: flex;">
+                    <div class="field input" style="flex: 1 1 32%; margin-right: 2px;">
                         <label for="Warranty">Thời Hạn Bảo Hành</label>
-                        <input type="number" id="Warranty" name="Warranty" class="table-control item-control" placeholder="Nhập Thời Hạn Bảo Hành (Tháng)" required style="width: 100%; padding: 13px; box-sizing: border-box;" min="0">
+                        <input type="number" id="Warranty" name="Warranty" class="table-control item-control" placeholder="Nhập Thời Hạn Bảo Hành" required style="width: 100%;
+                       padding: 10px; top: -5px; margin-bottom: 6px;  position: relative; box-sizing: border-box;" min="0">
                     </div>
-                </div>
 
-                <div class="field input">
-                    <label for="image">Ảnh sản phẩm</label>
-                    <input type="file" id="image" name="image">
-                </div>
+                    <div class="field input" style="flex: 1 1 34%; margin-right: 2px;">
+                        <label for="image">Ảnh sản phẩm</label>
+                        <input type="file" id="image" name="image" style="width: 100%;">
+                    </div>
 
-                <div class="field input">
-                    <label for="image">Ảnh sản phẩm 2</label>
-                    <input type="file" id="image1" name="image">
+                    <div class="field input" style="flex: 1 1 34%;">
+                        <label for="image1">Ảnh sản phẩm 2</label>
+                        <input type="file" id="image1" name="image" style="width: 100%;">
+                    </div>
                 </div>
             </form>
         </div>
+
 
         <div class="container">
             <div class="row1">
@@ -372,11 +515,17 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
-                                    <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                                    <div class="item-container">
+                                        <select class="table-control item-control">
+                                            <option value="" disabled selected>Tên kim cương</option>
+                                            <option value="diamond1">Kim cương 1</option>
+                                            <option value="diamond2">Kim cương 2</option>
+                                            <option value="diamond3">Kim cương 3</option>
+                                        </select>
+                                        <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                                    </div>
                                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
-
                                 <td>
                                     <select class="table-control item-control">
                                         <option value="Size1">Size 1</option>
@@ -396,11 +545,10 @@
                                 <td>
                                     <ul class="table-action">
                                         <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
-<!--                                        <li class="table-action-control row-edit"><i class="fa-solid fa-pencil" aria-hidden="true"></i></li>-->
+                                        <!--                                        <li class="table-action-control row-edit"><i class="fa-solid fa-pencil" aria-hidden="true"></i></li>-->
                                         <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
                                     </ul>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td class="text-center check-col"><input type="checkbox" class="table-checkbox"></td>
@@ -411,8 +559,15 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="table-control item-control" placeholder="Nhập tên kim cương">
-                                    <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                                    <div class="item-container">
+                                        <select class="table-control item-control">
+                                            <option value="" disabled selected>Tên kim cương</option>
+                                            <option value="diamond1">Kim cương 1</option>
+                                            <option value="diamond2">Kim cương 2</option>
+                                            <option value="diamond3">Kim cương 3</option>
+                                        </select>
+                                        <input type="text" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+                                    </div>
                                     <span class="toggle-quantity" onclick="addInputFields(this)">+</span>
                                 </td>
                                 <td>
@@ -434,7 +589,6 @@
                                 <td>
                                     <ul class="table-action">
                                         <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
-<!--                                        <li class="table-action-control row-edit"><i class="fa-solid fa-pencil" aria-hidden="true"></i></li>-->
                                         <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
                                     </ul>
                                 </td>
@@ -451,6 +605,7 @@
         </div>
     </div>
 </div>
+
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
