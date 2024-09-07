@@ -1,6 +1,7 @@
 
 package goldiounes.com.vn.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import goldiounes.com.vn.models.dtos.ProductDTO;
 import goldiounes.com.vn.models.dtos.ProductDetailDTO;
@@ -35,8 +36,8 @@ public class ProductController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<ResponseWrapper<ProductDTO>> createProduct(
             @RequestParam("product") String productDTOJson,
-            @RequestParam("imageURL") MultipartFile imageFile,
-            @RequestParam("subImageURL") MultipartFile subImageURL) {
+            @RequestPart("imageURL") MultipartFile imageFile,
+            @RequestPart("subImageURL") MultipartFile subImageURL) {
 
         try {
             ProductDTO productDTO = objectMapper.readValue(productDTOJson, ProductDTO.class);
