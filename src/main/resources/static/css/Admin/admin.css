@@ -152,9 +152,9 @@ ion-icon {
 
 .container {
     background-color: white;
-    margin-top: 30px;
-    margin-left: 355px ;
-    width: 70%;
+    margin-top: 75px;
+    margin-left: 300px ;
+    width: 75%;
     height: 460px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
