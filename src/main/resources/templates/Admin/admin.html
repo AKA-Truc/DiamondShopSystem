@@ -105,10 +105,6 @@
                     <input type="text" id="last-name" value="hehe hehe" disabled>
                 </div>
                 <div>
-                    <label for="phone">Số điện thoại</label>
-                    <input type="text" id="phone" value="0345678912" disabled>
-                </div>
-                <div>
                     <label for="email1">Email</label>
                     <input type="email" id="email1" value="hehe@gmail.com" disabled>
                 </div>
@@ -116,21 +112,17 @@
                     <label for="address">Địa chỉ</label>
                     <input type="text" id="address" value="hehe" disabled>
                 </div>
+                <div>
+                    <label for="role">Chức vụ</label>
+                    <input type="text" id="role" value="Quản lý" disabled>
+                </div>
                 <select name="gender" id="genderSelect" disabled>
                     <option value="M">Nam</option>
                     <option value="F">Nữ</option>
                     <option value="K">Khác</option>
                 </select>
 
-                <script>
-                    var gender = 'M'; // Giá trị của gender
-                    document.getElementById('genderSelect').value = gender;
-                </script>
 
-                <div>
-                    <label for="role">Chức vụ</label>
-                    <input type="text" id="role" value="Quản lý" disabled>
-                </div>
                 <div class="button-group">
                     <button type="button" id="unlock_user">Chỉnh Sửa</button>
                     <button type="button" id="Update_user" style="display: none">Cập Nhật</button>
