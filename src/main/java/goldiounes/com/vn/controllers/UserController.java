@@ -132,8 +132,8 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     @PreAuthorize(
-            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER') or " +
-                    "(hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_STAFF') and #id == #authentication.principal)"
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF') or " +
+                    "(hasAnyAuthority('ROLE_CUSTOMER') and #id == #authentication.principal.getId())"
     )
     public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
@@ -162,16 +162,25 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_STAFF','ROLE_MANAGER') or (hasAuthority('ROLE_CUSTOMER'))")
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF') or " +
+                    "(hasAnyAuthority('ROLE_CUSTOMER') and #id == #authentication.principal.getId())"
+    )
     public ResponseEntity<ResponseWrapper<UserDTO>> updateUser(
             @PathVariable int id,
             @RequestParam("user") String userDTOJson,
-            @RequestParam(value = "imageURL", required = false) MultipartFile imageFile) {
+            @RequestParam(value = "imageURL", required = false) MultipartFile imageFile,
+            Authentication authentication) {
         try {
-
+            CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+            UserDTO user = userService.getUser(id);
+            if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER") || auth.getAuthority().equals("ROLE_STAFF"))) {
+                if (user.getUserId() != currentUser.getId()) {
+                    return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+                }
+            }
             UserDTO userDTO = objectMapper.readValue(userDTOJson, UserDTO.class);
             UserDTO updatedUser = userService.updateUser(id, userDTO, imageFile);
-
             if (updatedUser != null) {
                 ResponseWrapper<UserDTO> response = new ResponseWrapper<>("User updated successfully", updatedUser);
                 return new ResponseEntity<>(response, HttpStatus.OK);
@@ -187,8 +196,18 @@ public class UserController {
 
 
     @DeleteMapping("/users/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")
-    public ResponseEntity<ResponseWrapper<Void>> deleteUser(@PathVariable int id) {
+    @PreAuthorize(
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF') or " +
+                    "(hasAnyAuthority('ROLE_CUSTOMER') and #id == #authentication.principal.getId())"
+    )
+    public ResponseEntity<ResponseWrapper<Void>> deleteUser(@PathVariable int id , Authentication authentication) {
+        CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        UserDTO user = userService.getUser(id);
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER") || auth.getAuthority().equals("ROLE_STAFF"))) {
+            if (user.getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         boolean isDeleted = userService.deleteUser(id);
         ResponseWrapper<Void> response;
 

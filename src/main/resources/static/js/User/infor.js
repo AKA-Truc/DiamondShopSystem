@@ -35,7 +35,9 @@ function fetchUser(){
     })
         .then(response => response.json())
         .then(result=>{
+
             const data = result.data;
+
             // Kiểm tra sự tồn tại của các phần tử trước khi cập nhật
             const nameElement = document.getElementById('name');
             const userNameElement = document.getElementById('user-name');
@@ -62,6 +64,7 @@ function fetchUser(){
             if (roleElement) {
                 roleElement.value = data.role || 'Chưa cập nhật';
             }
+
         })
         .catch(error => {console.log(error)})
 }
@@ -91,7 +94,6 @@ function updateUser(){
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
         },
         body: formData
     })

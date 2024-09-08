@@ -8,12 +8,15 @@ function handleCredentialResponse(response) {
     })
         .then(response => {
             if (response.ok) {
-                // If the login is successful, redirect to the desired page
-                window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
+                return response.json();
             } else {
-                // Handle error cases (e.g., invalid token, server error)
                 return response.text().then(text => { throw new Error(text) });
             }
+        })
+        .then(data => {
+            // Store token in localStorage
+            localStorage.setItem('authToken', data.token);
+            window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
         })
         .catch(error => {
             console.error("Failed to log in with Google:", error);
