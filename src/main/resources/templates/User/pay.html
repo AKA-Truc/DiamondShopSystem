@@ -23,25 +23,15 @@
 
         <div class="form-row">
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email1">Email</label>
                 <input type="text" id="email1" name="email" placeholder="diamond@gmail.com" required>
                 <span id="email-error" class="error-message"></span>
-            </div>
-            <div class="form-group">
+
                 <label for="phone">Số điện thoại</label>
                 <input type="text" id="phone" name="phone" placeholder="0123456789" required>
                 <span id="phone-error" class="error-message"></span>
             </div>
         </div>
-        <style>
-            .error-message {
-                color: red;
-                font-size: 0.875em;
-                display: block;
-                margin-top: 0.5em;
-            }
-
-        </style>
 
         <div class="form-row">
             <div class="form-group">
@@ -82,23 +72,9 @@
         <hr class="divider">
 
         <h3>Phương thức thanh toán</h3>
-<!--        <div class="payment-method">-->
-<!--            <input type="radio" id="cod" name="payment" checked>-->
-<!--            <p><i class="fas fa-truck"></i> Thanh toán khi giao hàng (không áp dụng cho đơn hàng dưới 1.000.000)</p>-->
-<!--            <style>-->
-<!--                .payment-method i.fa-truck {-->
-<!--                    color: #800080;-->
-<!--                }-->
-<!--            </style>-->
-<!--        </div>-->
         <div class="payment-method">
             <input type="radio" id="credit" name="payment">
             <p><i class="fas fa-credit-card"></i> Thanh toán chuyển khoản online </p>
-            <style>
-                .payment-method i.fa-credit-card {
-                    color: #8B008B;
-                }
-            </style>
         </div>
 
         <a href="success.html"><button class="btn-order">Đặt hàng</button></a>
@@ -127,9 +103,7 @@
     </div>
 </div>
 
-<script src="/static/js/footer.js"></script>
 
-<script src="/static/js/User/promotion.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const provinces = [
@@ -343,6 +317,9 @@
         });
     });
 </script>
+<script src="/static/js/footer.js"></script>
+
+<script src="/static/js/User/promotion.js"></script>
 
 </body>
 </html>
