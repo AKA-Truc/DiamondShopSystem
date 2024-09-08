@@ -72,17 +72,30 @@ public class BlogController {
     }
 
     @PutMapping("/blogs/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<ResponseWrapper<BlogDTO>> updateBlog(@PathVariable int id, @RequestBody BlogDTO blogDTO) {
-        BlogDTO updatedBlog = blogService.updateBlog(id, blogDTO);
-        if (updatedBlog != null) {
-            ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog updated successfully", updatedBlog);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<BlogDTO>> updateBlog(
+            @PathVariable int id,
+            @RequestParam("blog") String blogDTOJson,
+            @RequestParam(value = "imageURL", required = false) MultipartFile imageFile) {
+
+        try {
+            BlogDTO blogDTO = objectMapper.readValue(blogDTOJson, BlogDTO.class);
+
+            BlogDTO updatedBlog = blogService.updateBlog(id, blogDTO, imageFile);
+
+            if (updatedBlog != null) {
+                ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog updated successfully", updatedBlog);
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Blog not found", null);
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (IOException e) {
+            ResponseWrapper<BlogDTO> response = new ResponseWrapper<>("Error updating blog: " + e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @DeleteMapping("/blogs/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')")

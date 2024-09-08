@@ -38,10 +38,11 @@ public class BlogService {
     public BlogDTO getBlogs(int id) {
         Optional<Blog> existingBlog = blogRepo.findById(id);
         if (existingBlog.isEmpty()) {
-            throw new RuntimeException("No blog found ");
+            throw new RuntimeException("No blog found");
         }
-        return modelMapper.map(existingBlog, new TypeToken<BlogDTO>() {}.getType());
+        return modelMapper.map(existingBlog.get(), new TypeToken<BlogDTO>() {}.getType());
     }
+
 
     public BlogDTO createBlog(BlogDTO blogDTO, MultipartFile url) throws IOException {
         Blog blog = modelMapper.map(blogDTO, Blog.class);
@@ -64,12 +65,16 @@ public class BlogService {
         return true;
     }
 
-    public BlogDTO updateBlog(int id, BlogDTO blogDTO) {
+    public BlogDTO updateBlog(int id, BlogDTO blogDTO, MultipartFile url) throws IOException {
         Blog blog = modelMapper.map(blogDTO, Blog.class);
         Blog existingBlog = blogRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No blog found"));
         existingBlog.setTitle(blog.getTitle());
         existingBlog.setContent(blog.getContent());
+        if (url != null && !url.isEmpty()) {
+            String imageURL = fileUploadService.uploadImage(url);
+            blog.setUrl(imageURL);
+        }
         blogRepo.save(existingBlog);
         return modelMapper.map(existingBlog, new TypeToken<BlogDTO>() {}.getType());
     }
