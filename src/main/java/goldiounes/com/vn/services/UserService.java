@@ -232,4 +232,20 @@ public class UserService {
             throw new RuntimeException("Đã xảy ra lỗi trong quá trình đăng nhập bằng Google", e);
         }
     }
+
+    public List<UserDTO> getTopUser() {
+        List<User> users = userRepo.findTopUserBuying();
+        if (users == null) {
+            throw new RuntimeException("No user found");
+        }
+        return modelMapper.map(users,new TypeToken<List<UserDTO>>(){}.getType());
+    }
+
+    public List<Object[]> getCountCustomerByGender() {
+        return userRepo.countCustomersByGender();
+    }
+
+    public Long getCountCustomer() {
+        return userRepo.countCustomers();
+    }
 }

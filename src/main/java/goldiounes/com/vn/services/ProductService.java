@@ -190,8 +190,8 @@ public class ProductService {
         return modelMapper.map(existingProduct, ProductDTO.class);
     }
 
-    public List<ProductDTO> getTopSellingProducts() {
-        List<Product> products = productRepo.findTopSellingProducts();
-        return modelMapper.map(products, new TypeToken<List<ProductDTO>>() {}.getType());
+    public List<Object[]> getTopSellingProducts() {
+        List<Object[]> products = productRepo.findTopSellingProducts();
+        return modelMapper.map(products, new TypeToken<List<Object[]>>() {}.getType());
     }
 }

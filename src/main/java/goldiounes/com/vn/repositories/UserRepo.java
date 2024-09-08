@@ -23,10 +23,10 @@ public interface UserRepo extends JpaRepository<User, Integer> {
             "ORDER BY COUNT(o) DESC")
     List<User> findTopUserBuying();
 
-    @Query("SELECT e.Gender, COUNT(e) FROM User e WHERE e.Gender = 'Admin' AND e.Gender = 'Manager' AND e.Gender = 'Sale Staff' AND e.Gender = 'Delivery Staff' GROUP BY e.Gender")
-    int countEmployeesByGender();
+    @Query("SELECT e.Gender, COUNT(e) FROM User e WHERE e.Role = 'Customer' GROUP BY e.Gender")
+    List<Object[]> countCustomersByGender();
 
-    @Query("SELECT e.Gender, COUNT(e) FROM User e WHERE e.Gender = 'Customer' GROUP BY e.Gender")
-    int countCustomersByGender();
+    @Query("SELECT COUNT(u) FROM User u WHERE u.Role = 'Customer'")
+    Long countCustomers();
 
 }

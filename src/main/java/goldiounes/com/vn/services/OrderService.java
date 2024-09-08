@@ -139,7 +139,7 @@ public class OrderService {
 
             Product product = orderDetail.getProduct();
             ProductDetail productDetail = productDetailRepo.findBySizeAndProductId(orderDetail.getSize(), product.getProductID());
-            totalPrice += productDetail.getSellingPrice() * orderDetail.getQuantity();
+            totalPrice += (int) (productDetail.getSellingPrice() * orderDetail.getQuantity());
         }
 
         if (orderDTO.getPromotion() != null) {
@@ -254,24 +254,23 @@ public class OrderService {
         return modelMapper.map(existingOrder, OrderDTO.class);
     }
 
-    public int getRevenueBySpecificMonth(int year, int month) {
+    public Long getRevenueBySpecificMonth(int year, int month) {
         return orderRepo.findRevenueBySpecificMonth(year, month);
     }
 
-    public int getRevenueBySpecificYear(int year) {
-        return orderRepo.findRevenueBySpecificYear(year);
+    public List<Object[]> getRevenue(int year) {
+        return orderRepo.findRevenue(year);
     }
 
-    public List<Object[]> getCountOrdersByDate() {
-        return orderRepo.countOrdersByDate();
+    public Long getCountOrdersToday() {
+        return orderRepo.countOrdersByToday();
     }
 
-    public List<Object[]> getCountOrdersByMonth() {
-        return orderRepo.countOrdersByMonth();
+    public Long getCountOrders() {
+        return orderRepo.countOrder();
     }
-
-    public List<Object[]> getCountOrdersByYear() {
-        return orderRepo.countOrdersByYear();
+    public List<Object[]> getCountOrdersByYear(int year) {
+        return orderRepo.countOrdersByYear(year);
     }
 
 }

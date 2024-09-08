@@ -1,7 +1,9 @@
 package goldiounes.com.vn.controllers;
 
 import goldiounes.com.vn.models.dtos.ProductDTO;
+import goldiounes.com.vn.models.dtos.UserDTO;
 import goldiounes.com.vn.responses.ResponseWrapper;
+import goldiounes.com.vn.services.OrderDetailService;
 import goldiounes.com.vn.services.OrderService;
 import goldiounes.com.vn.services.ProductService;
 import goldiounes.com.vn.services.UserService;
@@ -27,51 +29,113 @@ public class DashBoardController {
     private UserService userService;
 
     @Autowired
+    private OrderDetailService orderDetailService;
+
+    @Autowired
     private ProductService productService;
 
     @GetMapping("/product-topSelling")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getTopProductsSelling() {
-        List<ProductDTO> productDTOS = productService.getTopSellingProducts();
-        ResponseWrapper<List<ProductDTO>> response = new ResponseWrapper<>("Users retrieved successfully", productDTOS);
+    public ResponseEntity<ResponseWrapper<List<Object[]>>> getTopProductsSelling() {
+        List<Object[]> productDTOS = productService.getTopSellingProducts();
+        ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("List products retrieved successfully", productDTOS);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/products/totalSold")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<Long>> getTotalProductsSold() {
+        Long totalSold = orderDetailService.findTotalProductsSold();
+        if (totalSold != null && totalSold > 0) {
+            ResponseWrapper<Long> response = new ResponseWrapper<>("Total number of products sold retrieved successfully", totalSold);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<Long> response = new ResponseWrapper<>("No products sold", 0L);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/revenue-month")
-    public ResponseEntity<ResponseWrapper<Integer>> getRevenueByMonth(@RequestParam int month, @RequestParam int year) {
-        int revenue = orderService.getRevenueBySpecificMonth(year, month);
-        ResponseWrapper<Integer> response = new ResponseWrapper<>("Revenue retrieved successfully", revenue);
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<Long>> getRevenueByMonth(@RequestParam int month, @RequestParam int year) {
+        Long revenue = orderService.getRevenueBySpecificMonth(year, month);
+        ResponseWrapper<Long> response = new ResponseWrapper<>("Revenue retrieved successfully", revenue);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/revenue-year")
-    public ResponseEntity<ResponseWrapper<Integer>> getRevenueByYear(@RequestParam int year) {
-        int revenue = orderService.getRevenueBySpecificYear(year);
-        ResponseWrapper<Integer> response = new ResponseWrapper<>("Revenue retrieved successfully", revenue);
+    @GetMapping("/revenue")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<List<Object[]>>> getRevenue(@RequestParam int year) {
+        List<Object[]> revenue = orderService.getRevenue(year);
+        if (!revenue.isEmpty()) {
+            ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("Revenue retrieved successfully", revenue);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("No revenue found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/order")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<Long>> getTotalOrder() {
+        Long totalOrder = orderService.getCountOrders();
+        ResponseWrapper<Long> response = new ResponseWrapper<>("Total order retrieved successfully", totalOrder);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 
     @GetMapping("/order-date")
-    public ResponseEntity<ResponseWrapper<List<Object[]>>> getTotalOrderByDate() {
-        List<Object[]> totalOrder = orderService.getCountOrdersByMonth();
-        ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("Total order retrieved successfully", totalOrder);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/order-month")
-    public ResponseEntity<ResponseWrapper<List<Object[]>>> getTotalOrderByMonth() {
-        List<Object[]> totalOrder = orderService.getCountOrdersByMonth();
-        ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("Total order retrieved successfully", totalOrder);
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<Long>> getTotalOrderByDate() {
+        Long totalOrder = orderService.getCountOrdersToday();
+        ResponseWrapper<Long> response = new ResponseWrapper<>("Total order retrieved successfully", totalOrder);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
     @GetMapping("/order-year")
-    public ResponseEntity<ResponseWrapper<List<Object[]>>> getTotalOrderByYear() {
-        List<Object[]> totalOrder = orderService.getCountOrdersByYear();
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<List<Object[]>>> getTotalOrderByYear(@RequestParam int year) {
+        List<Object[]> totalOrder = orderService.getCountOrdersByYear(year);
         ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("Total order retrieved successfully", totalOrder);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/user-list")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<List<UserDTO>>> getUsers() {
+        List<UserDTO> userDTOS = userService.getTopUser();
+        if (!userDTOS.isEmpty()) {
+            ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("Users retrieved successfully", userDTOS);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("No user found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    @GetMapping("/customer/gender")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<List<Object[]>>> getCustomerGender() {
+        List<Object[]> count = userService.getCountCustomerByGender();
+
+        if (!count.isEmpty()) {
+            ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("Users retrieved successfully", count);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("No user found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/customer")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public ResponseEntity<ResponseWrapper<Long>> getTotalCustomer() {
+        Long totalCustomer = userService.getCountCustomer();
+        ResponseWrapper<Long> response = new ResponseWrapper<>("Total customer", totalCustomer);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

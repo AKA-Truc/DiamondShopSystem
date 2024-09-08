@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/css/Admin/statistical.css">
     <script>
         function alertFeature() {
-            alert('Tính năng đang được được phát triển');
+            alert('Tính năng đang được phát triển');
         }
     </script>
 </head>
@@ -15,69 +15,110 @@
 
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
+<script src="/static/js/url.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/static/js/Admin/statistical.js"></script>
 
-<div class="main">
-    <div class="cards">
-        <div class="card">
-            <div class="card-content" id="total-revenue">
-                <h3>Total Revenue</h3>
-                <p id="total-revenue-value" >Loading...</p>
-            </div>
-            <div class="icon-box1">
-                <i class="fa-solid fa-dollar-sign"></i>
-            </div>
+<!-- Select Year and Month -->
+<div class="filter-section">
+    <label for="select-year">Select Year:</label>
+    <select id="select-year">
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+    </select>
 
-        </div>
-        <!-- 2 -->
-        <div class="card">
-            <div class="card-content" id="total-orders">
-                <h3>Total Orders</h3>
-                <p id="total-orders-value">Loading...</p>
+    <label for="select-month">Select Month:</label>
+    <select id="select-month">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+</div>
+
+
+<div class="main">
+    <!-- Bố cục Dashboard -->
+    <div class="dashboard-grid">
+        <!-- Khối Today's Sales -->
+        <section id="today-sales" class="big-box">
+<!--            <h1>Today's Sales</h1>-->
+            <div class="card-small">
+                <h3 id="total-sales-value">$1k</h3>
+                <p>Total Sales</p>
+                <p id="total-sales-change"></p>
             </div>
-            <div class="icon-box1">
-                <i class="fa-solid fa-cart-plus"></i>
+            <div class="card-small">
+                <h3 id="total-order-value">300</h3>
+                <p>Total Order</p>
+                <p id="total-order-change"></p>
             </div>
-        </div>
-        <!-- 3 -->
-        <div class="card">
-            <div class="card-content" id="total-products-sold">
-                <h3>Products Sold</h3>
-                <p id="total-products-sold-value">Loading...</p>
+            <div class="card-small">
+                <h3 id="products-sold-value">5</h3>
+                <p>Product Sold</p>
+                <p id="products-sold-change"></p>
             </div>
-            <div class="icon-box1">
-                <i class="fa-solid fa-chart-simple"></i>
+            <div class="card-small">
+                <h3 id="new-customers-value">8</h3>
+                <p>Customers</p>
+                <p id="new-customers-change"></p>
             </div>
-        </div>
-        <!-- 4 -->
-        <div class="card">
-            <div class="card-content" id="total-employees">
-                <h3>Total Employees</h3>
-                <p id="total-employees-value">Loading...</p>
-            </div>
-            <div class="icon-box1">
-                <i class="fa-solid fa-users"></i>
-            </div>
-        </div>
+        </section>
+
+        <!-- Khối Visitor Insights -->
+        <section id="customer-gender" class="big-box">
+            <h2>Analyze Customer Data By Gender</h2>
+            <div id="customer-gender-chart" class="chart-placeholder"></div>
+        </section>
+
+        <!-- Khối Customer Satisfaction -->
+        <section id="order-today" class="big-box">
+            <h2>Orders Today</h2>
+            <h3 id="order-today-value">0</h3>
+        </section>
+
+        <!-- Khối Total Revenue -->
+        <section id="total-revenue" class="big-box">
+            <h2>Total Revenue</h2>
+            <div id="total-revenue-chart" class="chart-placeholder"></div>
+        </section>
+
+        <!-- Khối Target vs Reality -->
+        <section id="order-by-year" class="big-box">
+            <h2>Total Order By Year</h2>
+            <div id="order-by-year-chart" class="chart-placeholder"></div>
+        </section>
+
+        <!-- Khối Top Products -->
+        <section id="top-products" class="big-box">
+            <h2>Top Products</h2>
+            <ul id="top-products-list"></ul>
+        </section>
+
+        <!-- Khối Sales Mapping -->
+        <section id="sales-mapping" class="big-box">
+            <h2>Sales Mapping by Country</h2>
+            <div id="sales-map" class="map-placeholder"></div>
+        </section>
+
+        <section id="sales-customer" class="big-box">
+            <h2>Top Customer Selling</h2>
+            <div id="sales-customer-chart" class="chart-placeholder"></div>
+        </section>
     </div>
-    <div class="filter-container">
-        <label for="year-select">Select Year:</label>
-        <select id="year-select">
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-        </select>
-    </div>
-    <div class="charts">
-        <div class="chartLeft">
-            <canvas id="monthly-revenue-chart"></canvas>
-        </div>
-        <div class="chartRight">
-            <canvas id="top-customers-chart"></canvas>
-        </div>
-    </div>
+
 </div>
 
 </body>
