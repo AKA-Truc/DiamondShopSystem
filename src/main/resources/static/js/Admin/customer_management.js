@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isEditing = false;
     let editingUserId = null;
 
-    console.log('Token is: ', token);
-
     function fetchCustomers() {
         fetch(`${window.base_url}/user-management/users`, {
             method: 'GET',
@@ -19,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(response => response.json())
             .then(result => {
-                console.log("Fetched users data:", result);
                 const data = result.data;
 
                 if (!Array.isArray(data)) {

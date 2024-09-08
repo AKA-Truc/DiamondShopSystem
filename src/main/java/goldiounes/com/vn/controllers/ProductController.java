@@ -52,7 +52,6 @@ public class ProductController {
 
 
     @GetMapping("products/category/{keyword}/{minPrice}/{maxPrice}")
-    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getProductsByKeyword(
             @PathVariable String keyword,
             @PathVariable double minPrice,
@@ -64,7 +63,6 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<List<ProductDTO>>> getAllProducts() {
         List<ProductDTO> products = productService.getAllProducts();
         ResponseWrapper<List<ProductDTO>> response = new ResponseWrapper<>("Products retrieved successfully", products);
@@ -72,7 +70,6 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDTO>> getProduct(@PathVariable int id) {
         ProductDTO product = productService.getProduct(id);
         if (product != null) {
