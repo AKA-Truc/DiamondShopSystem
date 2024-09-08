@@ -53,7 +53,8 @@ public class WebSecurityConfig {
                                 "/forgot-password/change_password/{email}",
                                 "/product-management/products",
                                 "/product-management/products/category/{keyword}/{minPrice}/{maxPrice}",
-                                "/product-management/products/{id}"
+                                "/product-management/products/{id}",
+                                "/product-management/productdetails/min/{id}"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
