@@ -48,7 +48,6 @@
     text-decoration: underline;
 }
 
-
 form {
     display: flex;
     justify-content: space-between;
@@ -296,6 +295,18 @@ input[type="radio"] {
     border-top: 1.45px solid #dcdcdc;
     margin: 20px 0;
 }
+/**/
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    display: block;
+    margin-top: 0.5em;
+}
+
+.payment-method i.fa-credit-card {
+    color: #8B008B;
+}
+
 
 
 

@@ -469,3 +469,90 @@ body {
 a {
     text-decoration: none;
 }
+
+.footer {
+    background-color: #1A1919;
+    color: #d3cece;
+    padding: 20px 0;
+    margin-top: 60px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    bottom: 0;
+}
+
+.grid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.grid__column-2-4 {
+    width: 30%;
+}
+
+.footer-heading {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer__list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer__list li {
+    margin-bottom: 10px;
+}
+
+.footer__list a {
+    color: #d3cece;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.footer__list a:hover {
+    text-decoration: underline;
+}
+
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+form input[type="text"] {
+    padding: 8px ;
+    width: 70%;
+    margin-right: 10px;
+    background-color: #dbdbdb;
+    border: 1px solid #ffffff;
+    color: #000000;
+    box-sizing: border-box;
+}
+
+form input[type="text"]::placeholder {
+    color: #000000;
+    opacity: 1;
+}
+
+form input[type="submit"] {
+    background-color: #888;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+form input[type="submit"]:hover {
+    background-color: #cfb0b0;
+}
