@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('name').disabled = false;
         document.getElementById('address').disabled = false;
-        document.getElementById('email1').disabled = false;
+        // document.getElementById('email1').disabled = false;
         document.getElementById('genderSelect').disabled = false;
     });
 
@@ -60,7 +60,10 @@ function updateUser(){
         gender: document.getElementById('genderSelect').value,
         role: document.getElementById('role').value
     }
-    console.log(UserForm);
+
+    const formData = new FormData();
+
+    formData.append('user', JSON.stringify(UserForm));
 
     Capnhat.style.display = "none";
     Chinhsua.style.display = "inline-block";
@@ -69,15 +72,16 @@ function updateUser(){
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(UserForm)
+        body: formData
     })
         .then(response => {
             document.getElementById('name').disabled = true;
             document.getElementById('address').disabled = true;
             document.getElementById('email1').disabled = true;
             document.getElementById('genderSelect').disabled = true;
+
+            fetchUser();
         })
         .catch(error => {console.log(error)})
 }

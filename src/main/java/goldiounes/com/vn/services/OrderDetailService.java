@@ -128,9 +128,6 @@ public class OrderDetailService {
     }
     public List<OrderDetailDTO> findByProductId(int productId) {
         List<OrderDetail> orderDetails = orderDetailRepo.findByProductId(productId);
-        if (orderDetails.isEmpty()) {
-            throw new RuntimeException("No order found with product id " + productId);
-        }
         return modelMapper.map(orderDetails, new TypeToken<List<OrderDetailDTO>>() {}.getType());
     }
 }

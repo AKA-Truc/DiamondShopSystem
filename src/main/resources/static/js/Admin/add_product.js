@@ -312,3 +312,9 @@ function fetchSetting(token, selectElement) {
         })
         .catch(error => console.error('Error fetching settings:', error));
 }
+
+function  cancelForm(){
+    if(confirm('Bạn có Chắc Hủy Bỏ Không?')){
+        window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html"
+    }
+}
