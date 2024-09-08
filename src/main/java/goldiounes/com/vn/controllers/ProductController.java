@@ -130,7 +130,6 @@ public class ProductController {
     }
 
     @GetMapping("productdetails/min/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetail(@PathVariable int id) {
         ProductDetailDTO productDetailDTO = productDetailService.getMinProductDetailByProductId(id);
         if (productDetailDTO != null) {

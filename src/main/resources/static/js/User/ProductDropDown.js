@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateContentAndFetchProducts = (category, title) => {
         // Cập nhật tiêu đề khi cập nhật loại hàng
+        const token =  localStorage.getItem('authToken');
         const contentProduct = document.getElementById('content-product');
         if (contentProduct) {
             contentProduct.textContent = title;
@@ -55,18 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
             maxPrice = max ? parseFloat(max) : Number.MAX_SAFE_INTEGER;
         }
 
-        // AJAX request với các giá trị đã xử lý ở bên trên
-        $.ajax({
-            url: `/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}`,
+        fetch(`${window.base_url}/product-management/products/category/ /${minPrice}/${maxPrice}`,{
             method: 'GET',
-            dataType: 'json',
-            success: function(responseData) {
-                if (!responseData || !responseData.data || !Array.isArray(responseData.data)) {
-                    console.error('Expected an array of products but received:', responseData);
-                    throw new Error('Expected an array of products');
-                }
-
-                const products = responseData.data;
+        })
+            .then(response => response.json())
+            .then(result => {
+                const products = result.data;
 
                 if (products.length === 0) {
                     const emptyMessage = document.createElement('li');
@@ -84,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <img src="${product.subImageURL || 'https://via.placeholder.com/150'}" alt="back">
                                         </div>
                                     </a>
-                                    <a href="/static/templates/User/detail.html/${product.productId}" class="buy-now">Xem chi tiết</a>
+                                    <a onclick="detailProduct('${product.productId}')" " class="buy-now">Xem chi tiết</a>
                                 </div>
                                 <div class="product-info">
                                     <a href="#" class="product-name">${product.productName || 'Tên sản phẩm'}</a>
@@ -96,22 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Tìm giá nhỏ nhất
                         fetchMinPrice(product.productId);
-                    });
+                    })
                 }
-            },
-            error: function(error) {
-                console.error('Error fetching products:', error);
-                const errorMessage = document.createElement('li');
-                errorMessage.textContent = "Không Tìm Thấy Sản Phẩm";
-                productList.appendChild(errorMessage);
-            }
+            })
+
+            .catch(err => {
+                console.log(err)
         });
     };
 
-    // AJAX request để tìm giá nhỏ nhất của một sản phẩm
     const fetchMinPrice = (id) => {
         $.ajax({
-            url: `/product-management/productdetails/min/${id}`,
+            url: `${window.base_url}/product-management/productdetails/min/${id}`,
             method: 'GET',
             dataType: 'json',
             success: function(responseData) {
@@ -154,3 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mặc định giá trị là None và min = 0, max là giá trị lớn nhất của kiểu dữ liệu
     updateContentAndFetchProducts("None", 'Trang sức kim cương tự nhiên');
 });
+
+function detailProduct(id){
+    localStorage.setItem('productId', id);
+    window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/detail.html`
+}

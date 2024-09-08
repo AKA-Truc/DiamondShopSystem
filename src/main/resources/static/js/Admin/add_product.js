@@ -197,14 +197,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(productdetail);
                         addProductDetail(token, productdetail)
                     })
+                    alert("Create product succesfully");
+                    window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html"
                 });
             })
-            .catch(error => console.error('Error submitting product data:', error));
+            .catch(error => {
+                console.error('Error submitting product data:', error);
+                alert("Fail to create product");
+                location.reload();
+            });
     }
 
 });
 function addProductDetail(token, productdetail){
-    console.log(token);
     fetch(`${window.base_url}/product-management/productdetails`, {
         method: 'POST',
         headers: {
