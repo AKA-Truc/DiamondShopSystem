@@ -1,189 +1,179 @@
-// Global variables to store chart instances
-let monthlyRevenueChart;
-let topCustomersChart;
-
-// Function to fetch total revenue
-async function fetchTotalRevenue(year) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/report/getTotalRevenue?year=${year}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch total revenue');
-        }
-        const data = await response.json();
-        document.getElementById('total-revenue-value').textContent = (data || 0).toLocaleString();
-    } catch (error) {
-        console.error('Error fetching total revenue:', error);
-    }
-}
-
-// Function to fetch total orders
-async function fetchTotalOrders(year) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/report/getTotalOrders?year=${year}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch total orders');
-        }
-        const data = await response.json();
-        document.getElementById('total-orders-value').textContent = data || 0;
-    } catch (error) {
-        console.error('Error fetching total orders:', error);
-    }
-}
-
-// Function to fetch total products sold
-async function fetchTotalProductsSold(year) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/report/getTotalProductsSold?year=${year}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch total products sold');
-        }
-        const data = await response.json();
-        document.getElementById('total-products-sold-value').textContent = data || 0;
-    } catch (error) {
-        console.error('Error fetching total products sold:', error);
-    }
-}
-
-// Function to fetch total employees
-async function fetchTotalEmployees(year) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/report/getTotalEmployees?year=${year}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch total employees');
-        }
-        const data = await response.json();
-        document.getElementById('total-employees-value').textContent = data || 0;
-    } catch (error) {
-        console.error('Error fetching total employees:', error);
-    }
-}
-
-// Function to fetch monthly revenue data
-async function fetchMonthlyRevenue(year) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/report/getMonthlyRevenueData?year=${year}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch monthly revenue data');
-        }
-        const monthlyRevenueData = await response.json();
-        updateMonthlyRevenueChart(monthlyRevenueData, year);
-    } catch (error) {
-        console.error('Error fetching monthly revenue:', error);
-    }
-}
-
-// Function to fetch top customers
-async function fetchTopCustomers(year) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/report/getTopCustomersByOrders?year=${year}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch top customers');
-        }
-        const topCustomersData = await response.json();
-        updateTopCustomersChart(topCustomersData);
-    } catch (error) {
-        console.error('Error fetching top customers:', error);
-    }
-}
-
-// Function to update monthly revenue chart
-function updateMonthlyRevenueChart(data, year) {
-    const chartData = {
-        labels: data.map(item => item.month),
-        datasets: [{
-            label: 'Monthly Revenue',
-            data: data.map(item => item.revenue),
-            backgroundColor: 'rgba(50, 120, 122, 1)',
-            borderColor: 'rgba(50, 120, 122, 1)',
-            borderWidth: 3,
-            fill: false
-        }]
-    };
-
-    const chartOptions = {
-        responsive: true,
-        title: {
-            display: true,
-            text: `Monthly Revenue in ${year}`
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    };
-
-    const ctx = document.getElementById('monthly-revenue-chart').getContext('2d');
-    if (monthlyRevenueChart) {
-        monthlyRevenueChart.destroy();
-    }
-    monthlyRevenueChart = new Chart(ctx, {
-        type: 'line',
-        data: chartData,
-        options: chartOptions
-    });
-}
-
-function updateTopCustomersChart(data) {
-    const chartData = {
-        labels: data.map(item => item.customerName),
-        datasets: [{
-            label: 'Number of Orders',
-            data: data.map(item => item.orderCount),
-            backgroundColor: [
-                'rgba(70, 171, 142, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 205, 86, 1)',
-                'rgba(45, 94, 128, 1)',
-                'rgba(45, 94, 200, 1)',
-                'rgba(45, 94, 18, 1)',
-                'rgba(230, 126, 34, 1)'
-            ],
-            fill: true
-        }]
-    };
-
-    const chartOptions = {
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Top Customers by Number of Orders'
-        }
-    };
-
-    const ctx = document.getElementById('top-customers-chart').getContext('2d');
-    if (topCustomersChart) {
-        topCustomersChart.destroy();
-    }
-    topCustomersChart = new Chart(ctx, {
-        type: 'pie',
-        data: chartData,
-        options: chartOptions
-    });
-}
-
-const yearSelect = document.getElementById('year-select');
-yearSelect.addEventListener('change', () => {
-    const selectedYear = yearSelect.value;
-    fetchTotalRevenue(selectedYear);
-    fetchTotalOrders(selectedYear);
-    fetchTotalProductsSold(selectedYear);
-    fetchTotalEmployees(selectedYear);
-    fetchMonthlyRevenue(selectedYear);
-    fetchTopCustomers(selectedYear);
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-    const selectedYear = yearSelect.value;
-    fetchTotalRevenue(selectedYear);
-    fetchTotalOrders(selectedYear);
-    fetchTotalProductsSold(selectedYear);
-    fetchTotalEmployees(selectedYear);
-    fetchMonthlyRevenue(selectedYear);
-    fetchTopCustomers(selectedYear);
+    // Fetch and display top-selling products
+    fetchTopSellingProducts();
+    // Fetch and display total products sold
+    fetchTotalProductsSold();
+    // Fetch and display total orders for the current day
+    fetchTotalOrdersToday();
+    // Fetch and display revenue by month and year
+    fetchRevenueByMonthAndYear();
+    // Fetch and display total orders by year
+    fetchTotalOrdersByYear();
+    // Fetch and display customer data by gender
+    fetchCustomerDataByGender();
+    // Fetch and display total customers
+    fetchTotalCustomers();
+
+    fetchTotalOrder();
+
+    // Add event listeners for month and year select elements
+    document.getElementById('select-month').addEventListener('change', updateData);
+    document.getElementById('select-year').addEventListener('change', updateData);
 });
+
+function updateData() {
+    fetchRevenueByMonthAndYear();
+    fetchTotalOrdersByYear();
+}
+
+// Fetch Top Selling Products
+async function fetchTopSellingProducts() {
+    try {
+        const response = await fetch(`${window.base_url}/dashboard/product-topSelling`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}` // Add your token if needed
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        const topProductsList = document.getElementById('top-products-list');
+        topProductsList.innerHTML = ''; // Clear existing list
+
+        // Assuming the API returns an array of arrays with [ProductName, TotalQuantity]
+        data.data.forEach(product => {
+            let listItem = `<li>${product[0]} <span>${product[1]}</span></li>`;
+            topProductsList.insertAdjacentHTML('beforeend', listItem);
+        });
+    } catch (error) {
+        console.error('Error fetching top-selling products:', error);
+    }
+}
+
+// Fetch Total Products Sold
+function fetchTotalProductsSold() {
+    fetch(`${window.base_url}/dashboard/products/totalSold`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Add your token if needed
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('products-sold-value').innerText = data.data;
+        })
+        .catch(error => console.error('Error fetching total products sold:', error));
+}
+
+// Fetch Total Orders Today
+function fetchTotalOrdersToday() {
+    fetch(`${window.base_url}/dashboard/order-date`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Add your token if needed
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('order-today-value').innerText = data.data;
+        })
+        .catch(error => console.error('Error fetching total orders today:', error));
+}
+
+// Fetch Revenue by Month and Year
+function fetchRevenueByMonthAndYear() {
+    const month = document.getElementById('select-month').value;
+    const year = document.getElementById('select-year').value;
+
+    const url = `${window.base_url}/dashboard/revenue-month?month=${month}&year=${year}`;
+
+    fetch(url, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.data !== null) {
+                const revenue = data.data;
+                const revenueElement = document.getElementById('total-sales-value');
+                revenueElement.textContent = revenue.toLocaleString();
+            } else {
+                console.error('No data found');
+                document.getElementById('total-sales-value').textContent = '0'; // Handle case with no data
+            }
+        })
+        .catch(error => console.error('Error fetching revenue by month and year:', error));
+}
+
+
+// Fetch Total Orders by Year
+function fetchTotalOrdersByYear() {
+    const year = document.getElementById('select-year').value;
+
+    fetch(`${window.base_url}/dashboard/order-year?year=${year}`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Add your token if needed
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Assuming you have a chart to update with the total orders data
+            const orderChart = document.getElementById('order-by-year-chart');
+            // Update the chart or UI here
+        })
+        .catch(error => console.error('Error fetching total orders by year:', error));
+}
+
+// Fetch Customer Data by Gender
+function fetchCustomerDataByGender() {
+    fetch(`${window.base_url}/dashboard/customer/gender`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const genderChart = document.getElementById('customer-gender-chart');
+            // Use Chart.js to update the gender chart here
+        })
+        .catch(error => console.error('Error fetching customer data by gender:', error));
+}
+
+// Fetch Total Customers
+function fetchTotalCustomers() {
+    fetch(`${window.base_url}/dashboard/customer`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Add your token if needed
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('new-customers-value').innerText = data.data;
+        })
+        .catch(error => console.error('Error fetching total customers:', error));
+}
+
+function fetchTotalOrder() {
+    fetch(`${window.base_url}/dashboard/order`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Add your token if needed
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('total-order-value').innerText = data.data;
+        })
+        .catch(error => console.error('Error fetching total orders:', error));
+}
+
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {
 //   const accessToken = sessionStorage.getItem('accessToken');

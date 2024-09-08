@@ -130,4 +130,8 @@ public class OrderDetailService {
         List<OrderDetail> orderDetails = orderDetailRepo.findByProductId(productId);
         return modelMapper.map(orderDetails, new TypeToken<List<OrderDetailDTO>>() {}.getType());
     }
+
+    public Long findTotalProductsSold() {
+        return orderDetailRepo.findTotalProductsSold();
+    }
 }

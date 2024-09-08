@@ -16,4 +16,8 @@ public interface OrderDetailRepo extends JpaRepository<OrderDetail, Integer> {
 
     @Query("select od from OrderDetail od where od.Product.ProductID = :productID")
     List<OrderDetail> findByProductId(@Param("productID") int productID);
+
+    @Query("SELECT SUM(od.Quantity) FROM OrderDetail od")
+    Long findTotalProductsSold();
+
 }

@@ -148,130 +148,235 @@ ion-icon {
     background-color: #162165e7; /*thanh br*/
 }
 
+.filter-section {
+    display: flex;
+    flex-wrap: wrap; /* Đảm bảo các phần tử sẽ xuống dòng nếu không đủ không gian */
+    gap: 15px; /* Khoảng cách giữa các phần tử */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    margin-bottom: 20px;
+    margin-left: 291px;
+    padding: 10px; /* Tạo khoảng cách xung quanh phần lọc */
+}
+
+.filter-section label {
+    font-size: 16px; /* Kích thước chữ cho nhãn */
+    font-weight: 500; /* Tăng độ đậm của nhãn */
+    color: #333; /* Màu sắc nhãn */
+}
+
+.filter-section select {
+    padding: 10px; /* Tăng kích thước padding để dễ tương tác */
+    border-radius: 8px; /* Bo góc */
+    border: 1px solid #ccc; /* Đường viền nhạt */
+    font-size: 16px; /* Kích thước chữ trong dropdown */
+    background-color: #f9f9f9; /* Nền nhẹ cho dropdown */
+    color: #333; /* Màu chữ trong dropdown */
+    width: auto; /* Đảm bảo kích thước tự động */
+    transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.filter-section select:hover {
+    border-color: #4CAF50; /* Đổi màu viền khi hover */
+}
+
+@media screen and (max-width: 768px) {
+    .filter-section {
+        flex-direction: column; /* Chuyển thành cột khi màn hình nhỏ */
+        align-items: flex-start; /* Canh trái */
+    }
+
+    .filter-section select {
+        width: 100%; /* Đặt độ rộng 100% khi màn hình nhỏ */
+    }
+}
+
+
+
 /* main */
 .main {
+    overflow-x: auto; /* Kích hoạt thanh cuộn ngang */
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
     position: absolute;
-    top: 101px; /* Adjusted to be below the navbar and line */
-    width: calc(100% - 280px);
+    top: 101px; /* Điều chỉnh để nằm dưới thanh navbar */
+    width: calc(100% - 280px); /* Đặt chiều rộng trừ đi chiều ngang của sidebar */
     left: 280px;
-    min-height: calc(100vh - 10px);
+    min-height: calc(100vh - 10px); /* Đảm bảo chiếm đủ chiều cao */
 }
 
-.cards {
-    margin-left: 25px;
-    width: 96%;
-    padding-top: 4px;
+/* Lưới tổng quan Dashboard */
+.dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 45px;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột */
+    grid-gap: 20px; /* Khoảng cách giữa các khối */
+    padding: 20px;
+    width: max-content; /* Đảm bảo chiều rộng lưới đủ lớn để cuộn */
+    max-width: 100%; /* Giới hạn chiều rộng tối đa */
 }
 
-.card {
-    padding: 21px;
+/* Bố cục cho Today's Sales và Visitor Insights trên cùng một hàng */
+#today-sales {
     display: flex;
-    height: 80px;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.2);
-
+    justify-content: space-between; /* Đảm bảo khoảng cách giữa các thẻ */
+    gap: 20px;
+    grid-column: span 2; /* Khối today-sales chiếm 2 cột */
+    height: fit-content;
 }
 
-.card-content h3 {
-    color: #476730;
+#customer-gender {
+    grid-column: span 1; /* Khối visitor-insights chiếm 2 cột để hàng đầu tiên ngang nhau */
+}
+
+/* Bố cục cho Total Revenue, Customer Satisfaction, Target vs Reality trên cùng một hàng */
+#total-revenue, #order-today, #order-by-year {
+    grid-column: span 1; /* Mỗi khối chiếm 1 cột */
+}
+
+/* Bố cục cho Top Products, Sales Mapping, Volume vs Service trên cùng một hàng */
+#top-products, #sales-mapping, #sales-customer {
+    grid-column: span 1; /* Mỗi khối chiếm 1 cột trong hàng */
+}
+
+/* Bố cục thẻ nhỏ (card-small) */
+.card-small {
+    background-color: #f9f9f9;
+    padding: 20px;
     text-align: center;
-    font-weight: 790;
-    font-size: 19px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 100px; /* Kích thước tối thiểu cho mỗi thẻ */
+    height: fit-content;
 }
 
-.card-content p {
-    font-size: 22px;
-    color: rgba(0, 0, 0, 0.65);
+/* Placeholder cho biểu đồ */
+.chart-placeholder {
+    height: 240px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.card-name {
-    color: #000000;
-    font-weight: 600;
+#order-today {
+    text-align: center;
+    width: 300px;
 }
 
-.icon-box1 {
-    font-size: 35px;
-    color: #466431;
+#customer-gender  {
+    width: 400px;
+}
+
+#total-revenue {
+    width: 400px;
+}
+/* Thẻ sản phẩm */
+#top-products-list {
+    list-style: none;
+    padding: 0;
+}
+
+#top-products-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+#top-products-list li span {
+    font-weight: bold;
+    color: #476730;
+}
+
+/* Tiêu đề */
+h2 {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Tiêu đề nhỏ */
+h3 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Chữ nhỏ */
+p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Các thẻ */
+.big-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Bảng điều khiển nhỏ */
+.small-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
 }
 
 /* Biểu đồ */
-.charts {
+.chart-placeholder {
+    height: 240px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
     display: flex;
-    justify-content: space-between; /* To create space between the charts */
-    align-items: flex-start; /* Align the charts at the top */
-    width: 99%;
-    padding: 9px;
-    padding-top: 4px;
-
-}
-
-.chartLeft {
-    width: 60%;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.2);
-    margin: 0 10px; /* Add some margin between the charts */
-    padding: 20px;
-    padding-top: 80px;
-    height: 361px;
-}
-
-.chartRight {
-    width: 40%;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.2);
-    margin: 0 10px; /* Add some margin between the charts */
-    padding: 20px;
-    padding-top: 80px;
-    height: 361px;
-}
-
-/* Specific styling for chart containers */
-#monthly-revenue-chart {
-    width: 100%;
-    height: 400px;
-}
-
-#top-customers-chart {
-    width: 100%; /* Adjusted to take full width of the container */
-    height: 400px;
-}
-
-.filter-container {
     align-items: center;
-    justify-content: center; /* Center horizontally */
-    margin: 20px 0; /* Margin for spacing above and below */
-    padding: 10px 20px; /* Add some padding for spacing */
+    justify-content: center;
+    margin-top: 20px;
 }
 
-/* Style for the label */
-.filter-container label {
+/* Bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Phong cách cho map */
+.map-placeholder {
+    height: 240px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Phong cách cho nút export */
+#export {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     font-size: 16px;
-    font-weight: bold;
-    color: #141E0C; /* Dark color for better readability */
-    margin-right: 10px; /* Space between label and select */
-}
-
-/* Style for the select element */
-.filter-container select {
-    padding: 8px 12px; /* Padding inside the select box */
-    font-size: 16px;
-    border: 1px solid #ccc; /* Border color */
-    border-radius: 4px; /* Rounded corners for the select box */
-    background-color: #fff; /* Background color */
-    color: #333; /* Text color */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: border-color 0.3s ease; /* Smooth transition for border color */
-}
-
-.filter-container select:focus {
-    border-color: #3b502fe7; /* Border color on focus */
-    outline: none; /* Remove default outline */
+    margin: 4px 2px;
+    border-radius: 5px;
+    cursor: pointer;
 }
