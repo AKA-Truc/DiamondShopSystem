@@ -28,7 +28,6 @@
                     <div class="field" style="margin-right: 2px;">
                         <label for="loaiSanPham">Loại Sản Phẩm</label>
                         <select id="loaiSanPham" name="loaiSanPham">
-
                         </select>
                     </div>
 
@@ -38,6 +37,9 @@
                     </div>
                 </div>
 
+                <div class="button-group1">
+                    <button type="button" onclick="openProductTypeForm()">Thêm loại hàng</button>
+                </div>
                 <div class="form-row" style="display: flex;">
                     <div class="field input" style="flex: 1 1 32%; margin-right: 2px;">
                         <label for="Warranty">Thời Hạn Bảo Hành</label>
@@ -56,6 +58,23 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div id="add-product-type" class="overlay">
+            <div class="form-container">
+                <span class="close-btn" onclick="closeProductTypeForm()">&times;</span>
+                <h2>Thêm loại hàng</h2>
+                <form>
+                    <div>
+                        <label for="additional-product-name">Tên loại hàng</label>
+                        <input type="text" id="additional-product-name" placeholder="Nhập tên loại hàng">
+                    </div>
+                    <div class="button-group2">
+                        <button type="button" class="btn-confirm" onclick="submitProductType()">Xác nhận</button>
+                        <button type="button" class="btn-cancel" onclick="closeProductTypeForm()">Hủy</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="container">
@@ -98,4 +117,20 @@
     </div>
 </div>
 </body>
+<script>
+    function openProductTypeForm() {
+        document.getElementById('add-product-type').style.display = 'flex';
+    }
+
+    function closeProductTypeForm() {
+        document.getElementById('add-product-type').style.display = 'none';
+    }
+
+    function submitProductType() {
+        // Xử lý xác nhận đổi mật khẩu
+        // Bạn có thể thêm mã JavaScript để gửi dữ liệu đổi mật khẩu đến máy chủ
+        alert('Thêm loại hàng thành công.');
+        closeProductTypeForm(); // Đóng form sau khi xác nhận
+    }
+</script>
 </html>
