@@ -8,14 +8,58 @@
     <link rel="stylesheet" href="/static/css/User/info.css">
 </head>
 <body>
-<script src="/static/js/header.js"></script>
-<script src="/static/js/footer.js"></script>
-<script src="/static/js/url.js"></script>
-<script src="/static/js/User/infor.js"></script>
+<div class="header1">
+    <p class="phone">Phone: (+84) 123 2345 123</p>
+    <p class="center" id="center-text">hello</p>
+    <p class="address">
+        <a style="color:white;text-decoration: none" href="../login.html">Liên hệ</a>
+    </p>
+</div>
+<div class="header">
+    <div class="header-content">
+        <div class="icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="info.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
+            <i class="fa-regular fa-heart"></i>
+            <i style="color: black;" class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
+    </div>
+</div>
+<ul id="main-menu">
+    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
+    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
+    <li><a href="">BẢNG GIÁ</a>
+        <ul class="sub-menu">
+            <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
+            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+        </ul>
+    </li>
+    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
+    <li><a href="news.html">TIN TỨC</a></li>
+    <li><a href="contact.html">LIÊN HỆ</a></li>
+</ul>
+<!-- search -->
+<div id="search-overlay" class="search-overlay">
+    <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+</div>
+<!--  -->
+<!-- cart -->
+<div id="cart-overlay" class="cart-overlay">
+    <div id="cart-box" class="cart-box">
+        <h2>Your Shopping Cart</h2>
+        <p>No items in the cart.</p>
+        <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
+    </div>
+</div>
+
 <div class="container">
     <div class="sidebar">
         <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg" alt="Avatar">
-        <div class="user-name" id = "user-name"></div>
+        <div class="user-name">hehe hehe</div>
         <ul>
             <li onclick="showSection('account-info')">Thông tin tài khoản</li>
             <li onclick="showSection('order-management')">Quản lý đơn hàng</li>
@@ -58,7 +102,138 @@
                 </div>
             </form>
         </div>
+        <div id="order-management" class="section" style="display: none;">
+            <!-- Nội dung cho Quản lý đơn hàng -->
+            <h2>QUẢN LÝ ĐƠN HÀNG</h2>
+            <div class="order-list">
+                <!-- Đơn hàng mẫu -->
+                <div class="order-item" data-status="pending">
+                    <div class="order-header">
+                        <div class="order-id">Mã đơn: 123456</div>
+                        <div class="order-status">Trạng thái: Chờ xác nhận</div>
+                    </div>
+                    <div class="order-body">
+                        <div class="product-item">
+                            <img src="/static/images/bong2.png" alt="Product Image">
+                            <div class="product-info">
+                                <div class="product-name">Tên sản phẩm</div>
+                                <div class="product-quantity">Số lượng: 1</div>
+                                <div class="product-price">Giá: 38.052.000 VND</div>
+                            </div>
+                        </div>
+                        <!-- Thêm sản phẩm khác tại đây -->
+                    </div>
+                    <div class="order-footer">
+                        <button class="btn-cancel">Hủy đơn</button>
+                        <button class="btn-detail">Xác nhận</button>
+                    </div>
+                </div>
+                <!-- Thêm các đơn hàng khác ở đây -->
+
+                <div class="order-item" data-status="shipped">
+                    <div class="order-header">
+                        <div class="order-id">Mã đơn: 654321</div>
+                        <div class="order-status">Trạng thái: Đang vận chuyển</div>
+                    </div>
+                    <div class="order-body">
+                        <div class="product-item">
+                            <img src="/static/images/bong2.png" alt="Product Image">
+                            <div class="product-info">
+                                <div class="product-name">Tên sản phẩm</div>
+                                <div class="product-quantity">Số lượng: 2</div>
+                                <div class="product-price">Giá: 76,000,000 VND</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span style="margin-top: 30px ;" class="order-total">Tổng tiền: 76,000,000 VND</span>
+                    </div>
+                </div>
+
+
+                <div class="order-item" data-status="delivered">
+                    <div class="order-header">
+                        <div class="order-id">Mã đơn: 789012</div>
+                        <div class="order-status">Trạng thái: Đã giao</div>
+                    </div>
+                    <div class="order-body">
+                        <div class="product-item">
+                            <img src="/static/images/bong2.png" alt="Product Image">
+                            <div class="product-info">
+                                <div class="product-name">Tên sản phẩm</div>
+                                <div class="product-quantity">Số lượng: 3</div>
+                                <div class="product-price">Giá: 114,000,000 VND</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <button class="btn-reorder">Mua lại</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Thêm các phần khác nếu cần -->
+        </div>
     </div>
 </div>
+<footer class="footer">
+    <div class="grid">
+        <div class="grid_row">
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Danh mục</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="products.html">Bông tai kim cương</a>
+                        <a href="products.html">Lắc tay kim cương</a>
+                        <a href="products.html">Nhẫn kim cương</a>
+                        <a href="products.html">Dây chuyền kim cương</a>
+                        <a href="products.html">Mặt dây chuyền kim cương</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Liên hệ </h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="/static/css/User/about_us.css">Về chúng tôi</a>
+                        <a href="#">Tuyển dụng</a>
+                        <a href="#">Chính sách đổi trả</a>
+                        <a href="#">Chính sách bảo hành</a>
+                        <a href="#">Chính sách vận chuyển</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid__column-2-4">
+                <h3 class="footer-heading">Đăng ký ngay</h3>
+                <ul class="footer__list">
+                    <li>
+                        <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
+                        <form action="">
+                            <input type="text" id="email" name="email" placeholder="Email">
+                            <input type="submit" value="ĐĂNG KÝ NGAY">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
+<script>
+    function showSection(sectionId) {
+        // Ẩn tất cả các phần
+        var sections = document.querySelectorAll('.section');
+        sections.forEach(function (section) {
+            section.style.display = 'none';
+        });
+
+        // Hiển thị phần được chọn
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    // Mặc định, hiển thị phần thông tin tài khoản khi trang được tải
+    document.addEventListener('DOMContentLoaded', function () {
+        showSection('account-info');
+    });
+
+</script>
 </html>
