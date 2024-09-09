@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchCustomerDataByGender();
     // Fetch and display total customers
     fetchTotalCustomers();
-
     fetchTotalOrder();
-
+    fetchTotalRevenueChart()
+    fetchTopCustomerSelling()
     // Add event listeners for month and year select elements
     document.getElementById('select-month').addEventListener('change', updateData);
     document.getElementById('select-year').addEventListener('change', updateData);
@@ -274,6 +274,132 @@ function fetchTotalOrder() {
         })
         .catch(error => console.error('Error fetching total orders:', error));
 }
+
+function fetchTotalRevenueChart() {
+
+    const year = document.getElementById('select-year').value;
+
+    fetch(`${window.base_url}/dashboard/revenue?year=${year}`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+        }
+    })
+        .then(response => response.json())
+        .then(result => {
+            const data = result.data;
+
+            const revenueByMonth = Array(12).fill(0);
+
+            data.forEach(item => {
+                const month = item[0] - 1;
+                revenueByMonth[month] = item[1];
+            });
+
+            const ctx = document.getElementById('total-revenue-chart').getContext('2d');
+
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],  // Nhãn cho 12 tháng
+                    datasets: [{
+                        label: 'Số lượng đơn đặt hàng',
+                        data: revenueByMonth,  // Số lượng đơn đặt hàng theo tháng
+                        backgroundColor: 'rgba(221,50,112,0.5)',
+                        borderColor: 'rgba(221,50,112,1)',  // Màu viền
+                        borderWidth: 2.5,
+                        fill: false,
+                        tension: 0.4  // Tăng độ mềm cho đường biểu đồ
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching order data:', error));
+}
+
+function fetchTopCustomerSelling() {
+
+    fetch(`${window.base_url}/dashboard/user-list`, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+        }
+    })
+        .then(response => response.json())
+        .then(result => {
+            const data = result.data;
+
+            const customerNames = data.map(item => item[0]);  // Tên khách hàng
+            const orderCounts = data.map(item => item[1]);    // Số lượng đơn đặt hàng
+
+            const ctx = document.getElementById('sales-customer-chart').getContext('2d');
+
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: customerNames,
+                    datasets: [{
+                        label: 'Số lượng đơn đặt hàng',
+                        data: orderCounts,
+                        backgroundColor: [
+                            'rgba(75,192,192,0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(231, 74, 59, 0.8)',
+                            'rgba(153, 102, 255, 0.8)',
+                            'rgba(255, 159, 64, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(231, 74, 59, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,  // Tắt tỷ lệ khung hình để biểu đồ phù hợp với container
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            align: 'center',
+                            labels: {
+                                boxWidth: 10,
+                                padding: 20
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 10, right: 10, top: 10, bottom: 10
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+}
+
+
+
 
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {

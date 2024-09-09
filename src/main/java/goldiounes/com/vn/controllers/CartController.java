@@ -103,7 +103,7 @@ public class CartController {
     @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<CartItemDTO>> addItem(@RequestBody CartItemDTO cartItemDTO, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
-        CartDTO cart = cartService.getCart(cartItemDTO.getCart().getCartId());
+        CartDTO cart = cartService.getCartbyUser(currentUser.getId());
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
             if (cart.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
