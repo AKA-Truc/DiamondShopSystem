@@ -65,4 +65,14 @@ public class CartService {
         }
         return modelMapper.map(carts,new TypeToken<List<CartDTO>>(){}.getType());
     }
+
+    public CartDTO getCartbyUser(int id) {
+        User user = userRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("User not found"));
+        Cart cart = cartRepo.findCartByUserId(user.getUserID());
+        if (cart == null) {
+            throw new RuntimeException("Cart not found");
+        }
+        return modelMapper.map(cart,CartDTO.class);
+    }
 }
