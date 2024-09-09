@@ -17,27 +17,19 @@
     <table class="cart-table">
         <thead>
         <tr>
-            <th></th>
-            <th>SẢN PHẨM</th>
-            <th style="text-align: center;">SỐ LƯỢNG</th>
+            <th style="text-align: center"></th>
+            <th style="text-align: left">Sản Phẩm</th>
+            <th style="text-align: center;">Mã Sản Phẩm</th>
+            <th style="text-align: center;">Loại Hàng</th>
+            <th style="text-align: center;">Số Lượng</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td><button class="remove-btn">×</button></td>
-            <td>
-                <div class="product-info">
-                    <img src="https://jemmia.vn/wp-content/uploads/2024/07/1_cam_03-2-768x768.jpg"
-                         alt="Nhẫn Kim Cương" class="product-image">
-                    <span>NHẪN KIM CƯƠNG NỮ 18K WRA00293</span>
-                </div>
-            </td>
-            <td style="text-align: center;vertical-align: middle;"><input type="number" value="1" class="quantity-input"></td>
-        </tr>
+        <tbody id = "list-cart-item" class="list-cart-item">
+            <!--cartitem-->
         </tbody>
     </table>
     <div class="update-cart-container">
-        <button class="update-cart-btn">Cập nhật giỏ hàng</button>
+        <button class="update-cart-btn" onclick="updateQuantityAllCartItem()">Cập nhật giỏ hàng</button>
     </div>
 </div>
 <!--<button class="order-btn">Đặt hàng</button>-->
