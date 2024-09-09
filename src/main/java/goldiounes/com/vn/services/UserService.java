@@ -1,10 +1,7 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.components.JwtTokenUtils;
-import goldiounes.com.vn.models.dtos.ChangePasswordDTO;
-import goldiounes.com.vn.models.dtos.PointDTO;
-import goldiounes.com.vn.models.dtos.TokenDTO;
-import goldiounes.com.vn.models.dtos.UserDTO;
+import goldiounes.com.vn.models.dtos.*;
 import goldiounes.com.vn.models.entities.Point;
 import goldiounes.com.vn.models.entities.Token;
 import goldiounes.com.vn.models.entities.User;
@@ -184,6 +181,21 @@ public class UserService {
         }
 
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getPassword()));
+        userRepo.save(user);
+        return true;
+    }
+
+    public boolean changeForgotPassword(String username, ForgotPasswordDTO forgotPasswordDTO) {
+        User user = userRepo.findByEmail(username);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        if (!forgotPasswordDTO.getPassword().equals(forgotPasswordDTO.getRetypePassword())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+
+        user.setPassword(passwordEncoder.encode(forgotPasswordDTO.getPassword()));
         userRepo.save(user);
         return true;
     }

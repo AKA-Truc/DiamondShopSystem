@@ -67,14 +67,12 @@ public class ForgotPasswordService{
         if (otpData != null) {
             System.out.println("OTP từ otpStorage: " + otpData.getOtp() + " cho email: " + email);
 
-            // So sánh OTP sau khi chuyển đổi sang chuỗi
             if (otpData.getOtp().equals(otp.toString())) {
                 if (otpData.getExpirationTime().before(new Date())) {
                     throw new RuntimeException("Mã OTP đã hết hạn!");
                 }
 
-                // OTP hợp lệ và chưa hết hạn
-                otpStorage.remove(email); // Tùy chọn: Xóa OTP sau khi xác minh thành công
+                otpStorage.remove(email); //Xóa OTP sau khi xác minh thành công
                 System.out.println("Xác minh OTP thành công cho email: " + email);
             } else {
                 throw new RuntimeException("Mã OTP không hợp lệ cho email: " + email);

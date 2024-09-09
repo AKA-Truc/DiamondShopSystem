@@ -10,20 +10,17 @@
 <body>
 <div class="container">
   <div class="header">
-<!--    <span class="close-button">&times;</span>-->
     <h1>Mã xác minh</h1>
   </div>
   <hr class="header-line">
   <p>Một mã xác minh đã được gửi đến địa chỉ email của bạn. Nhập mã xác minh bên dưới và tạo mật khẩu mới.</p>
-  <form action="/verify-code" method="POST">
+  <form id="verification-form">
     <label for="code">Mã <span>*</span></label>
     <input type="text" id="code" name="code" placeholder="- - - - -" required>
     <div class="resend" id="resend-text">
       <span>Gửi lại mã (có sau 30 giây)</span>
     </div>
-    <a href="/DiamondShopSystem/src/main/resources/templates/User/resetpass.html" class="register-button">
-      <button type="button" class="send-button"><b>Tiếp Tục</b></button>
-    </a>
+    <button type="submit" class="send-button"><b>Tiếp Tục</b></button>
     <button type="button" class="back-button" onclick="history.back()"><b>Quay lại</b></button>
   </form>
 </div>

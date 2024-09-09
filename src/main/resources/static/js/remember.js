@@ -1,22 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const closeButton = document.querySelector('.close-button');
-    closeButton.addEventListener('click', function() {
-        window.location.href = 'login.html';
-    });
+    const sendButton = document.querySelector('.send-button');
+    if (sendButton) {
+        sendButton.addEventListener('click', function() {
+            const emailInput = document.getElementById('email').value;
 
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+            // Kiểm tra email hợp lệ
+            if (!isValidEmail(emailInput)) {
+                alert('Vui lòng nhập địa chỉ email hợp lệ.');
+                return;
+            }
 
-        const emailInput = document.getElementById('email').value;
+            // Gửi yêu cầu OTP
+            fetch(`${window.base_url}/forgot-password/send-otp?email=${emailInput}`, {
+                method: 'POST',
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/verification_code.html?email=${encodeURIComponent(emailInput)}`;
+                })
+                .catch(error => {
+                    console.error('Lỗi khi gửi OTP:', error);
+                    alert('Đã xảy ra lỗi khi gửi OTP.');
+                });
+        });
+    }
 
-        // Kiểm tra định dạng email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailPattern.test(emailInput)) {
-            alert("Chưa đúng định dạng, ví dụ: diamond@shop.vn");
-        } else {
-            window.location.href = 'maxacminh.html';
-        }
-    });
+    // Hàm kiểm tra email hợp lệ
+    function isValidEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
 });
