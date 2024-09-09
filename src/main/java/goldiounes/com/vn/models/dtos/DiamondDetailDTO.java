@@ -9,8 +9,7 @@ public class DiamondDetailDTO {
     private int diamondDetailId;
     private String typeDiamond;
     private int quantity;
-
-    @JsonBackReference
+    
     private DiamondDTO diamond;
 
     @JsonBackReference(value = "diamond_Product_Detail")
