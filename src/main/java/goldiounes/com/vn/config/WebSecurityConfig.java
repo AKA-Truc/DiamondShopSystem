@@ -50,7 +50,6 @@ public class WebSecurityConfig {
                                 "/user-management/update_password/**",
                                 "/forgot-password/send-otp",
                                 "/forgot-password/verify-otp",
-                                "/forgot-password/change_password/{email}",
                                 "/forgot-password/forgot_password/{email}",
                                 "/product-management/products",
                                 "/product-management/products/category/{keyword}/{minPrice}/{maxPrice}",

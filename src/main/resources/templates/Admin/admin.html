@@ -87,30 +87,13 @@
             </div>
             <div class="button-group">
                 <button type="button" class="btn-confirm" onclick="submitChangePassword()">Xác nhận</button>
-                <button type="button" class="btn-cancel" onclick="closeChangePasswordForm()">Hủy</button>
+                <button type="button" class="btn-cancel" onclick="closeChangePasswordForm()" style="color: #0c3b5a;">Hủy</button>
             </div>
         </form>
     </div>
 </div>
 
 </body>
-<script>
-    function openChangePasswordForm() {
-        document.getElementById('change-password-form').style.display = 'flex';
-    }
-
-    function closeChangePasswordForm() {
-        document.getElementById('change-password-form').style.display = 'none';
-    }
-
-    function submitChangePassword() {
-        // Xử lý xác nhận đổi mật khẩu
-        // Bạn có thể thêm mã JavaScript để gửi dữ liệu đổi mật khẩu đến máy chủ
-        alert('Đổi mật khẩu đã được xác nhận.');
-        closeChangePasswordForm(); // Đóng form sau khi xác nhận
-    }
-</script>
-
 
 </html>
 

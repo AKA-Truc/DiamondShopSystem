@@ -1,5 +1,6 @@
 package goldiounes.com.vn.controllers;
 
+import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.ChangePasswordDTO;
 import goldiounes.com.vn.models.dtos.ForgotPasswordDTO;
 import goldiounes.com.vn.services.ForgotPasswordService;
@@ -7,10 +8,13 @@ import goldiounes.com.vn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Objects;
 
 @RestController
@@ -50,21 +54,28 @@ public class ForgotPasswordController {
         }
     }
 
-    @PostMapping("/change_password/{email}")
-    public ResponseEntity<String> changePasswordHandler(@RequestBody ChangePasswordDTO changePasswordDTO,
-                                                        @PathVariable String email) {
+    @PostMapping("/change_password")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF', 'ROLE_DELIVERY STAFF')")
+    public ResponseEntity<?> changePasswordHandler(@RequestBody ChangePasswordDTO changePasswordDTO, Authentication authentication) {
         try {
+            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
             if (!Objects.equals(changePasswordDTO.getPassword(), changePasswordDTO.getRetypePassword())) {
-                return new ResponseEntity<>("Please enter the same password in both fields!", HttpStatus.EXPECTATION_FAILED);
+                return ResponseEntity
+                        .status(HttpStatus.EXPECTATION_FAILED)
+                        .body(Collections.singletonMap("message", "Please enter the same password in both fields!"));
             }
 
-            userService.changePassword(email, changePasswordDTO);
+            userService.changePassword(customUserDetails.getUsername(), changePasswordDTO);
 
-            return ResponseEntity.ok("Password has been changed!");
+            return ResponseEntity.ok(Collections.singletonMap("message", "Password has been changed!"));
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Collections.singletonMap("message", e.getMessage()));
         } catch (Exception e) {
-            return new ResponseEntity<>("An error occurred while changing the password", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("message", "An error occurred while changing the password"));
         }
     }
 
