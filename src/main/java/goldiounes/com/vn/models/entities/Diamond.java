@@ -48,14 +48,15 @@ public class Diamond {
         //constructor
     }
 
-    public Diamond(String diamondName ,Double carat, String color, String clarity, String cut, String origin, int Price) {
+    public Diamond(String diamondName ,Double carat, String color, String clarity, String cut, String origin, int price) {
         DiamondName = diamondName;
         Carat = carat;
         Color = color;
         Clarity = clarity;
         Cut = cut;
         Origin = origin;
-        this.Price = Price;
+        Price = price;
+        Status = "active";
     }
 
 }
