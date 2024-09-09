@@ -3,6 +3,7 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dtos.DiamondDTO;
 import goldiounes.com.vn.models.entities.Certificate;
 import goldiounes.com.vn.models.entities.Diamond;
+import goldiounes.com.vn.models.entities.Product;
 import goldiounes.com.vn.repositories.CertificateRepo;
 import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
@@ -11,6 +12,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,15 +26,20 @@ public class DiamondService {
 
     @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private DiamondDetailRepo diamondDetailRepo;
+
 
     public List<DiamondDTO> findAll() {
         List<Diamond> diamonds = diamondRepo.findAll();
         if (diamonds.isEmpty()) {
             throw new RuntimeException("No diamonds found");
         }
-        return modelMapper.map(diamonds, new TypeToken<List<DiamondDTO>>() {}.getType());
+        List<Diamond> activeDiamonds = new ArrayList<>();
+        for (Diamond diamond : diamonds) {
+            if(diamond.getStatus().equals("active")){
+                activeDiamonds.add(diamond);
+            }
+        }
+        return modelMapper.map(activeDiamonds, new TypeToken<List<DiamondDTO>>() {}.getType());
     }
 
     public DiamondDTO findById(int id) {
@@ -48,6 +55,7 @@ public class DiamondService {
         if (existingDiamond != null) {
             throw new RuntimeException("Diamond already exists");
         } else {
+            diamond.setStatus("active");
             Diamond newDiamond = diamondRepo.save(diamond);
             return modelMapper.map(newDiamond, DiamondDTO.class);
         }
@@ -74,7 +82,8 @@ public class DiamondService {
         Certificate certificate = certificateRepo.findByDiamondId(id)
                 .orElseThrow(() -> new RuntimeException("Certificate not found"));
         certificateRepo.delete(certificate);
-        diamondRepo.deleteById(existingDiamond.getDiamondID());
+        existingDiamond.setStatus("inactive");
+        diamondRepo.save(existingDiamond);
         return true;
     }
 }
