@@ -399,8 +399,6 @@ function fetchTopCustomerSelling() {
 }
 
 
-
-
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {
 //   const accessToken = sessionStorage.getItem('accessToken');

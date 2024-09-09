@@ -157,7 +157,7 @@
     </div>
     <hr class="header-line">
     <p>Chọn mật khẩu mới cho tài khoản <br>của bạn</p>
-    <form id="reset-password-form" action="/forgot-password" method="POST">
+    <form id="reset-password-form" action="/forgot_password" method="POST">
         <label for="new-password">Mật khẩu mới:</label>
         <input type="password" id="new-password" name="new-password" placeholder="Nhập mật khẩu mới">
 
@@ -171,26 +171,11 @@
     <div class="success-message" id="success-message">
         <span class="check-icon">&#10004;</span> Đặt Lại Mật Khẩu Thành Công
     </div>
-    <button class="login-button" id="login-button" onclick="window.location.href ='/static/templates/user/login.html'"><b>Đăng Nhập</b></button>
+    <button class="login-button" id="login-button" onclick="window.location.href = `/DiamondShopSystem/src/main/resources/templates/login.html`"><b>Đăng Nhập</b></button>
 
 </div>
 
-<script>
-    document.getElementById('submit-button').addEventListener('click', function(event) {
-        var newPassword = document.getElementById('new-password').value;
-        var confirmPassword = document.getElementById('confirm-password').value;
-
-        if (newPassword === confirmPassword) {
-            // Hiển thị thông báo thành công và nút đăng nhập
-            document.getElementById('success-message').style.display = 'block';
-            document.getElementById('login-button').style.display = 'block';
-            // Ẩn các trường nhập liệu và nút đặt lại mật khẩu
-            document.querySelector('form').style.display = 'none';
-        } else {
-            alert('Mật khẩu mới và xác nhận mật khẩu phải giống nhau.');
-        }
-    });
-</script>
-
+<script src="/static/js/User/resetPassword.js"></script>
+<script src="/static/js/url.js"></script>
 </body>
 </html>

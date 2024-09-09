@@ -10,7 +10,6 @@
 <body>
 <div class="container">
   <div class="header">
-<!--    <span class="close-button">&times;</span>-->
     <h4>Quên mật khẩu</h4>
   </div>
   <hr class="header-line">
@@ -19,14 +18,12 @@
   <form action="/forgot-password" method="POST">
     <label for="email">Email <span>*</span></label>
     <input type="text" id="email" name="email" placeholder="hello@gmail.com" required>
-    <a href="/DiamondShopSystem/src/main/resources/templates/User/checkmail.html" class="register-button">
-      <button type="button" class="send-button"><b>Gửi Đi</b></button>
-    </a>
+    <button type="button" class="send-button"><b>Gửi Đi</b></button>
     <button type="button" class="back-button" onclick="history.back()"><b>Quay lại</b></button>
-
   </form>
 </div>
 
 <script src="/static/js/remember.js"></script>
+<script src="/static/js/url.js"></script>
 </body>
 </html>
