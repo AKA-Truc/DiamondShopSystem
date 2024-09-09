@@ -126,20 +126,23 @@ public class CartController {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
         CartItemDTO cartItemDTO = cartItemService.GetCartItemById(cartItemId);
         CartDTO cart = cartService.getCart(cartItemDTO.getCart().getCartId());
+
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
             if (cart.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
             }
         }
+
         boolean removed = cartItemService.removeCartItem(cartItemId);
         if (removed) {
             ResponseWrapper<Void> response = new ResponseWrapper<>("Item removed successfully", null);
-            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(response, HttpStatus.OK);  // Trả về OK thay vì NO_CONTENT
         } else {
             ResponseWrapper<Void> response = new ResponseWrapper<>("Item not found or failed to remove", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
 
     // Cập nhật số lượng của một mặt hàng trong giỏ hàng
     @PutMapping("/cart-items/{cartItemId}")
