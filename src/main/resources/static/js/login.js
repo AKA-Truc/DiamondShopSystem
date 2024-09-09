@@ -16,7 +16,19 @@ function handleCredentialResponse(response) {
         .then(data => {
             // Store token in localStorage
             localStorage.setItem('authToken', data.token);
-            window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
+
+            const token = localStorage.getItem('authToken');
+            const tokenPayload = JSON.parse(atob(token.split('.')[1]));  // Decode the payload part of the token
+            const roles = tokenPayload.roles; // Assuming the role array is in the 'roles' field
+            const role = roles[0];  // Assuming the first role is the relevant one
+            console.log(role);
+
+            if (role === 'ROLE_CUSTOMER') {
+                window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
+
+            } else {
+                window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
+            }
         })
         .catch(error => {
             console.error("Failed to log in with Google:", error);
