@@ -34,10 +34,11 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
     Long countOrder();
 
     // Đếm số đơn hàng theo năm
-    @Query("SELECT EXTRACT(YEAR FROM o.StartDate), COUNT(o) FROM Order o " +
+    @Query("SELECT EXTRACT(MONTH FROM o.StartDate) AS month, COUNT(o) FROM Order o " +
             "WHERE EXTRACT(YEAR FROM o.StartDate) = :year " +
-            "GROUP BY EXTRACT(YEAR FROM o.StartDate)")
-    List<Object[]> countOrdersByYear(@Param("year") int year);
+            "GROUP BY EXTRACT(MONTH FROM o.StartDate) " +
+            "ORDER BY EXTRACT(MONTH FROM o.StartDate)")
+    List<Object[]> countOrdersByMonthInYear(@Param("year") int year);
 
 }
 

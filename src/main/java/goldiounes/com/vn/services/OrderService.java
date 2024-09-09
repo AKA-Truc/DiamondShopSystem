@@ -270,7 +270,7 @@ public class OrderService {
         return orderRepo.countOrder();
     }
     public List<Object[]> getCountOrdersByYear(int year) {
-        return orderRepo.countOrdersByYear(year);
+        return orderRepo.countOrdersByMonthInYear(year);
     }
 
 }

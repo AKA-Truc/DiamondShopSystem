@@ -16,6 +16,9 @@ public class DiamondDetail {
     @JoinColumn(name = "DiamondID", nullable = false)
     private Diamond Diamond;
 
+    @Column(name = "TypeDiamond", nullable = false)
+    private String TypeDiamond;
+
     @Column(name = "Quantity", nullable = false)
     private int Quantity;
 
@@ -28,9 +31,10 @@ public class DiamondDetail {
         //cstor
     }
 
-    public DiamondDetail(Diamond diamond, int quantity) {
+    public DiamondDetail(Diamond diamond, int quantity, String typeDiamond) {
         Diamond = diamond;
         Quantity = quantity;
+        TypeDiamond = typeDiamond;
     }
 
 }

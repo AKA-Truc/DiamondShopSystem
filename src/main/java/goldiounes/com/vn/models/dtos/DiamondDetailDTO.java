@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class DiamondDetailDTO {
     private int diamondDetailId;
+    private String typeDiamond;
     private int quantity;
 
     @JsonBackReference

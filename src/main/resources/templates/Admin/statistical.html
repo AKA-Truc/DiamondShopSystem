@@ -21,6 +21,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/static/js/Admin/statistical.js"></script>
 
+
 <!-- Select Year and Month -->
 <div class="filter-section">
     <label for="select-year">Select Year:</label>
@@ -48,6 +49,16 @@
     </select>
 </div>
 
+<script>
+    // Lấy ngày hiện tại
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth() + 1; // getMonth() trả về giá trị từ 0-11, nên cần +1
+
+    // Đặt giá trị mặc định cho năm và tháng
+    document.getElementById('select-year').value = currentYear;
+    document.getElementById('select-month').value = currentMonth;
+</script>
 
 <div class="main">
     <!-- Bố cục Dashboard -->
@@ -80,7 +91,7 @@
         <!-- Khối Visitor Insights -->
         <section id="customer-gender" class="big-box">
             <h2>Analyze Customer Data By Gender</h2>
-            <div id="customer-gender-chart" class="chart-placeholder"></div>
+            <canvas id="customer-gender-chart" width="400" height="200"></canvas>
         </section>
 
         <!-- Khối Customer Satisfaction -->
@@ -98,13 +109,21 @@
         <!-- Khối Target vs Reality -->
         <section id="order-by-year" class="big-box">
             <h2>Total Order By Year</h2>
-            <div id="order-by-year-chart" class="chart-placeholder"></div>
+            <canvas id="order-by-year-chart" width="400" height="200"></canvas>
         </section>
 
         <!-- Khối Top Products -->
         <section id="top-products" class="big-box">
             <h2>Top Products</h2>
-            <ul id="top-products-list"></ul>
+            <ul id="top-products-list">
+                <!-- Headers for the columns -->
+                <li class="product-header">
+                    <span class="product-index-header">#</span>
+                    <span class="product-name-header">Name</span>
+                    <span class="product-sales-header">Sales</span>
+                </li>
+                <!-- Dynamic product rows will be inserted here -->
+            </ul>
         </section>
 
         <!-- Khối Sales Mapping -->
