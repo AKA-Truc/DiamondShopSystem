@@ -21,9 +21,13 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
     Long findRevenueBySpecificMonth(@Param("year") int year, @Param("month") int month);
 
     // Truy vấn tổng doanh thu theo năm bằng chart
-    @Query("SELECT SUM(o.TotalPrice) FROM Order o " +
-            "WHERE EXTRACT(YEAR FROM o.StartDate) = :year")
-    List<Object[]> findRevenue(@Param("year") int year);
+    @Query("SELECT EXTRACT(MONTH FROM o.StartDate) AS month, SUM(o.TotalPrice) AS totalRevenue " +
+            "FROM Order o " +
+            "WHERE EXTRACT(YEAR FROM o.StartDate) = :year " +
+            "GROUP BY EXTRACT(MONTH FROM o.StartDate) " +
+            "ORDER BY EXTRACT(MONTH FROM o.StartDate)")
+    List<Object[]> findMonthlyRevenue(@Param("year") int year);
+
 
     // Đếm đơn hàng hôm nay
     @Query("SELECT COUNT(o) FROM Order o WHERE o.StartDate = CURRENT_DATE")
