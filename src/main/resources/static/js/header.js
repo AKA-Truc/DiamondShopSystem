@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="phone">Phone: (+84) 123 2345 123</p>
             <p class="center" id="center-text">hello</p>
             <p class="address">
-                <a style="color:white;text-decoration: none" href="../login.html">Đăng nhập</a>
+                <a style="color:white;text-decoration: none" href="#" id = "logic-login"></a>
             </p>
         </div>
         <div class="header">
@@ -119,4 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 200);
         }
     });
+
+    if(localStorage.getItem('authToken')){
+        document.getElementById('logic-login').textContent = "Đăng Xuất";
+        document.getElementById('logic-login').addEventListener('click',logout);
+    }
+    else{
+        document.getElementById('logic-login').textContent = "Đăng Nhập";
+        document.getElementById('logic-login').href = "../login.html"
+    }
 });
