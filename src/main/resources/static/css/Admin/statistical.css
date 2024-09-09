@@ -273,19 +273,84 @@ ion-icon {
 }
 /* Thẻ sản phẩm */
 #top-products-list {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
+    font-size: 12px; /* Make text smaller */
 }
 
+/* Header styling */
+.product-header {
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Individual product item styling */
 #top-products-list li {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
 }
 
-#top-products-list li span {
-    font-weight: bold;
-    color: #476730;
+/* Styling for product index */
+.product-index-header, .product-index {
+    width: 2%; /* Reduced from 3% to 2% */
+    text-align: center; /* Changed to center for better appearance */
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+/* Adjusted styling for product name */
+.product-name-header, .product-name {
+    width: 78%; /* Increased to take up more space */
+    text-align: left;
+    padding-left: 10px; /* Added some padding for better spacing */
+}
+
+/* Styling for sales column (assuming it exists) */
+.product-sales-header, .product-sales {
+    width: 20%; /* Allocating remaining space */
+    text-align: right;
+}
+.product-index-header, .product-index {
+    width: 5%;
+    text-align: center;
+    flex-shrink: 0;
+}
+.product-name-header, .product-name {
+    width: 75%;
+    text-align: left;
+    padding-left: 10px;
+}
+.product-sales-header, .product-sales {
+    width: 20%;
+    text-align: right;
+}
+.product-name {
+    font-weight: 500;
+}
+.product-sales {
+    color: #c54949;
+    font-weight: 500;
+}
+.color-1 { color: #4e79a7; }
+.color-2 { color: #f28e2c; }
+.color-3 { color: #e15759; }
+.color-4 { color: #76b7b2; }
+.color-5 { color: #59a14f; }
+
+/* Modify the size of the progress container for a smaller popularity bar */
+#top-products-list .progress-container {
+    width: 80px; /* Reduce the width for a smaller bar */
+    height: 8px; /* Reduce the height for a slimmer bar */
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    position: relative;
 }
 
 /* Tiêu đề */

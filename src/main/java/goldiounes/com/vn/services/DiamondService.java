@@ -57,6 +57,7 @@ public class DiamondService {
         Diamond diamond = modelMapper.map(diamondDTO, Diamond.class);
         Diamond existingDiamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
+        existingDiamond.setDiamondName(diamondDTO.getDiamondName());
         existingDiamond.setCarat(diamond.getCarat());
         existingDiamond.setColor(diamond.getColor());
         existingDiamond.setClarity(diamond.getClarity());

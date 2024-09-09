@@ -28,7 +28,7 @@ class DiamondTest {
 
     @Test
     void testDiamondConstructor() {
-        Diamond diamond = new Diamond( 0.5, "D", "IF", "Excellent", "Africa",10000000);
+        Diamond diamond = new Diamond( "Kim cương trắng",0.5, "D", "IF", "Excellent", "Africa",10000000);
 
         assertEquals(0.5, diamond.getCarat());
         assertEquals("D", diamond.getColor());

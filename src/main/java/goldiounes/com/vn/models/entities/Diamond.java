@@ -14,6 +14,9 @@ public class Diamond {
     @Column(name = "DiamondID")
     private int DiamondID;
 
+    @Column(name = "DiamondName", nullable = false)
+    private String DiamondName;
+
     @Column(name = "Carat", nullable = false)
     private Double Carat;
 
@@ -42,7 +45,8 @@ public class Diamond {
         //constructor
     }
 
-    public Diamond( Double carat, String color, String clarity, String cut, String origin, int Price) {
+    public Diamond(String diamondName ,Double carat, String color, String clarity, String cut, String origin, int Price) {
+        DiamondName = diamondName;
         Carat = carat;
         Color = color;
         Clarity = clarity;

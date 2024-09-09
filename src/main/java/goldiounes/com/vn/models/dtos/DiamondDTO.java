@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class DiamondDTO {
     private int diamondId;
+    private String diamondName;
     private double carat;
     private String color;
     private String clarity;

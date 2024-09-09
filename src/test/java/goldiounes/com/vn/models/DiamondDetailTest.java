@@ -33,7 +33,7 @@ public class DiamondDetailTest {
         Diamond diamond = new Diamond();
         int quantity = 5;
 
-        DiamondDetail diamondDetail = new DiamondDetail(diamond, quantity);
+        DiamondDetail diamondDetail = new DiamondDetail(diamond, quantity, "Kim cương chính");
 
         assertNotNull(diamondDetail);
         assertEquals(diamond, diamondDetail.getDiamond());
