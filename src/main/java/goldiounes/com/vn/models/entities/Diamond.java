@@ -29,6 +29,9 @@ public class Diamond {
     @Column(name = "Cut", nullable = false)
     private String Cut;
 
+    @Column(name = "Status", nullable = false)
+    private String Status;
+
     @Column(name = "Origin", nullable = false)
     private String Origin;
 
