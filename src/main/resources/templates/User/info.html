@@ -6,55 +6,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
     <link rel="stylesheet" href="/static/css/User/info.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/header.css">
 </head>
 <body>
-<div class="header1">
-    <p class="phone">Phone: (+84) 123 2345 123</p>
-    <p class="center" id="center-text">hello</p>
-    <p class="address">
-        <a style="color:white;text-decoration: none" href="../login.html">Liên hệ</a>
-    </p>
-</div>
-<div class="header">
-    <div class="header-content">
-        <div class="icons">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <a href="info.html"><i style="color: black;" class="fa-regular fa-user"></i></a>
-            <i class="fa-regular fa-heart"></i>
-            <i style="color: black;" class="fa-solid fa-cart-shopping"></i>
-        </div>
-        <a href="home.html" class="logo"><img src="/static/images/logo.jpg" alt="logo"></a>
-    </div>
-</div>
-<ul id="main-menu">
-    <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
-    <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
-    <li><a href="">BẢNG GIÁ</a>
-        <ul class="sub-menu">
-            <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
-            <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
-        </ul>
-    </li>
-    <li><a href="promotion.html">KHUYẾN MÃI</a></li>
-    <li><a href="news.html">TIN TỨC</a></li>
-    <li><a href="contact.html">LIÊN HỆ</a></li>
-</ul>
-<!-- search -->
-<div id="search-overlay" class="search-overlay">
-    <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <button>Search</button>
-    </div>
-</div>
-<!--  -->
-<!-- cart -->
-<div id="cart-overlay" class="cart-overlay">
-    <div id="cart-box" class="cart-box">
-        <h2>Your Shopping Cart</h2>
-        <p>No items in the cart.</p>
-        <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
-    </div>
-</div>
+<script src="/static/js/header.js"></script>
+<script src="/static/js/footer.js"></script>
 
 <div class="container">
     <div class="sidebar">
@@ -98,7 +55,7 @@
                 <div class="button-group">
                     <button type="button" id="unlock_user">Chỉnh Sửa</button>
                     <button type="button" id="Update_user" onclick="updateUser()" style="display: none">Cập Nhật</button>
-                    <button type="button">Đổi Mật Khẩu</button>
+                    <button type="button" onclick="openChangePasswordForm()">Đổi Mật Khẩu</button>
                 </div>
             </form>
         </div>
@@ -175,50 +132,47 @@
         </div>
     </div>
 </div>
-<footer class="footer">
-    <div class="grid">
-        <div class="grid_row">
-            <div class="grid__column-2-4">
-                <h3 class="footer-heading">Danh mục</h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="products.html">Bông tai kim cương</a>
-                        <a href="products.html">Lắc tay kim cương</a>
-                        <a href="products.html">Nhẫn kim cương</a>
-                        <a href="products.html">Dây chuyền kim cương</a>
-                        <a href="products.html">Mặt dây chuyền kim cương</a>
-                    </li>
-                </ul>
+
+<div id="change-password-form" class="overlay">
+    <div class="form-container">
+        <span class="close-btn" onclick="closeChangePasswordForm()">&times;</span>
+        <h2>Đổi Mật Khẩu</h2>
+        <form>
+            <div>
+                <label for="current-password">Mật khẩu hiện tại</label>
+                <input type="password" id="current-password" placeholder="Nhập mật khẩu hiện tại">
             </div>
-            <div class="grid__column-2-4">
-                <h3 class="footer-heading">Liên hệ </h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="/static/css/User/about_us.css">Về chúng tôi</a>
-                        <a href="#">Tuyển dụng</a>
-                        <a href="#">Chính sách đổi trả</a>
-                        <a href="#">Chính sách bảo hành</a>
-                        <a href="#">Chính sách vận chuyển</a>
-                    </li>
-                </ul>
+            <div>
+                <label for="new-password">Mật khẩu mới</label>
+                <input type="password" id="new-password" placeholder="Nhập mật khẩu mới">
             </div>
-            <div class="grid__column-2-4">
-                <h3 class="footer-heading">Đăng ký ngay</h3>
-                <ul class="footer__list">
-                    <li>
-                        <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
-                        <form action="">
-                            <input type="text" id="email" name="email" placeholder="Email">
-                            <input type="submit" value="ĐĂNG KÝ NGAY">
-                        </form>
-                    </li>
-                </ul>
+            <div>
+                <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                <input type="password" id="confirm-password" placeholder="Xác nhận mật khẩu mới">
             </div>
-        </div>
+            <div class="button-group">
+                <button type="button" class="btn-confirm" onclick="submitChangePassword()">Xác nhận</button>
+                <button type="button" class="btn-cancel" onclick="closeChangePasswordForm()">Hủy</button>
+            </div>
+        </form>
     </div>
-</footer>
+</div>
 </body>
 <script>
+    function openChangePasswordForm() {
+        document.getElementById('change-password-form').style.display = 'flex';
+    }
+
+    function closeChangePasswordForm() {
+        document.getElementById('change-password-form').style.display = 'none';
+    }
+
+    function submitChangePassword() {
+        // Xử lý xác nhận đổi mật khẩu
+        // Bạn có thể thêm mã JavaScript để gửi dữ liệu đổi mật khẩu đến máy chủ
+        alert('Đổi mật khẩu đã được xác nhận.');
+        closeChangePasswordForm(); // Đóng form sau khi xác nhận
+    }
     function showSection(sectionId) {
         // Ẩn tất cả các phần
         var sections = document.querySelectorAll('.section');
