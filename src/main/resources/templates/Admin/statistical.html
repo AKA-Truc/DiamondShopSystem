@@ -65,23 +65,22 @@
     <div class="dashboard-grid">
         <!-- Khối Today's Sales -->
         <section id="today-sales" class="big-box">
-<!--            <h1>Today's Sales</h1>-->
-            <div class="card-small">
+            <div class="card-small card-1">
                 <h3 id="total-sales-value">$1k</h3>
                 <p>Total Sales</p>
                 <p id="total-sales-change"></p>
             </div>
-            <div class="card-small">
+            <div class="card-small card-2">
                 <h3 id="total-order-value">300</h3>
                 <p>Total Order</p>
                 <p id="total-order-change"></p>
             </div>
-            <div class="card-small">
+            <div class="card-small card-3">
                 <h3 id="products-sold-value">5</h3>
                 <p>Product Sold</p>
                 <p id="products-sold-change"></p>
             </div>
-            <div class="card-small">
+            <div class="card-small card-4">
                 <h3 id="new-customers-value">8</h3>
                 <p>Customers</p>
                 <p id="new-customers-change"></p>
@@ -96,14 +95,14 @@
 
         <!-- Khối Customer Satisfaction -->
         <section id="order-today" class="big-box">
-            <h2>Orders Today</h2>
+            <h2>Order's Today</h2>
             <h3 id="order-today-value">0</h3>
         </section>
 
         <!-- Khối Total Revenue -->
         <section id="total-revenue" class="big-box">
             <h2>Total Revenue</h2>
-            <div id="total-revenue-chart" class="chart-placeholder"></div>
+            <canvas id="total-revenue-chart" width="400" height="200"></canvas>
         </section>
 
         <!-- Khối Target vs Reality -->
@@ -134,7 +133,7 @@
 
         <section id="sales-customer" class="big-box">
             <h2>Top Customer Selling</h2>
-            <div id="sales-customer-chart" class="chart-placeholder"></div>
+            <canvas id="sales-customer-chart" width="400" height="200"></canvas>
         </section>
     </div>
 

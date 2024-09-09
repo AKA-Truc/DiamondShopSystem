@@ -101,7 +101,7 @@ public class UserService {
     public UserDTO createUser(UserDTO userDTO) {
         User user = modelMapper.map(userDTO,User.class);
         User existingUser = userRepo.findByEmail(user.getEmail());
-        if (existingUser != null && Objects.equals(user.getStatus(), "active")) {
+        if (existingUser != null && Objects.equals(existingUser.getStatus(), "active")) {
             throw new RuntimeException("User already exists");
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -233,12 +233,12 @@ public class UserService {
         }
     }
 
-    public List<UserDTO> getTopUser() {
-        List<User> users = userRepo.findTopUserBuying();
+    public List<Object[]> getTopUser() {
+        List<Object[]> users = userRepo.findTopUserBuying();
         if (users == null) {
             throw new RuntimeException("No user found");
         }
-        return modelMapper.map(users,new TypeToken<List<UserDTO>>(){}.getType());
+        return modelMapper.map(users,new TypeToken<List<Object[]>>(){}.getType());
     }
 
     public List<Object[]> getCountCustomerByGender() {

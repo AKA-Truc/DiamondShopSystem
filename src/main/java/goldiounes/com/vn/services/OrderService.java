@@ -259,7 +259,7 @@ public class OrderService {
     }
 
     public List<Object[]> getRevenue(int year) {
-        return orderRepo.findRevenue(year);
+        return orderRepo.findMonthlyRevenue(year);
     }
 
     public Long getCountOrdersToday() {

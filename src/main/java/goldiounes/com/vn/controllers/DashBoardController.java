@@ -104,13 +104,13 @@ public class DashBoardController {
 
     @GetMapping("/user-list")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public ResponseEntity<ResponseWrapper<List<UserDTO>>> getUsers() {
-        List<UserDTO> userDTOS = userService.getTopUser();
+    public ResponseEntity<ResponseWrapper<List<Object[]>>> getUsers() {
+        List<Object[]> userDTOS = userService.getTopUser();
         if (!userDTOS.isEmpty()) {
-            ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("Users retrieved successfully", userDTOS);
+            ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("Users retrieved successfully", userDTOS);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            ResponseWrapper<List<UserDTO>> response = new ResponseWrapper<>("No user found", null);
+            ResponseWrapper<List<Object[]>> response = new ResponseWrapper<>("No user found", null);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }

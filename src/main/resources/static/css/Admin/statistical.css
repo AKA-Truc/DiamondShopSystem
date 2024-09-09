@@ -248,6 +248,31 @@ ion-icon {
     height: fit-content;
 }
 
+.card-1 {
+    background-color: rgba(219, 244, 219, 0.82); /* Màu xanh lá */
+}
+
+.card-2 {
+    background-color: rgba(239, 209, 209, 0.76); /* Màu cam */
+}
+
+.card-3 {
+    background-color: rgba(231, 215, 250, 0.82); /* Màu xanh dương */
+}
+
+.card-4 {
+    background-color: #fdf7e6; /* Màu vàng */
+}
+
+#sales-customer {
+    height: 400px;
+}
+
+#sales-customer-chart {
+    width: 300px;
+    height: 300px;
+}
+
 /* Placeholder cho biểu đồ */
 .chart-placeholder {
     height: 240px;
@@ -338,7 +363,7 @@ ion-icon {
     color: #c54949;
     font-weight: 500;
 }
-.color-1 { color: #4e79a7; }
+.color-1 { color: #213a57; }
 .color-2 { color: #f28e2c; }
 .color-3 { color: #e15759; }
 .color-4 { color: #76b7b2; }
