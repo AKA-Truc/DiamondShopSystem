@@ -10,22 +10,30 @@
 <body>
 <script src="/static/js/header.js"></script>
 <script src="/static/js/footer.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/User/detail.js"></script>
 <div class="product-container">
     <div class="image-section">
-        <img src="/static/images/bong1.png" alt="Diamond Ring">
+        <img src="/static/images/bong1.png" alt="Diamond Ring" id = "img">
+        <img src="/static/images/bong1.png" alt="Diamond Ring" id = "imgsub">
+
     </div>
     <div class="details-section">
-        <h2>NHẪN KIM CƯƠNG NỮ 18K WRA00198</h2>
+        <h2 id = "product_name"></h2>
         <p class="code">WRA00198</p>
+        <div class="size-buttons">
+            <h3>Chọn Kích Thước</h3>
+            <!-- Các nút cho kích thước -->
+            <!-- Thêm các nút khác nếu cần -->
+        </div>
         <p class="price">
-            <span class="current-price">12.800.000 ₫</span>
-            <span class="original-price">15.239.000 ₫</span>
+            <span class="current-price"></span>
         </p>
         <p class="note">* Giá trên là giá vỏ trang sức chưa bao gồm viên chủ. Giá sản phẩm thay đổi tùy theo
             trọng
             lượng thực tế của sản phẩm. Vui lòng gọi <span class="contact">0838353333</span> để được hỗ trợ.</p>
         <div class="buttons">
-            <button class="send-message">THÊM VÀO GIỎ HÀNG</button>
+            <button class="send-message" id = "add-to-cart">THÊM VÀO GIỎ HÀNG</button>
             <button class="store-location">LIÊN HỆ</button>
         </div>
         <div class="info-section">
@@ -69,11 +77,11 @@
                     </tr>
                     <tr>
                         <td>Loại sản phẩm</td>
-                        <td>Nhẫn</td>
+                        <td id = "category">Nhẫn</td>
                     </tr>
                     <tr>
                         <td>Kích thước đá chủ</td>
-                        <td>Round 5ly</td>
+                        <td id = "carat"></td>
                     </tr>
                     <tr>
                         <td>Loại đá tấm</td>
@@ -88,8 +96,8 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Loại vàng</td>
-                        <td>Vàng trắng</td>
+                        <td>Vỏ Kim Cương</td>
+                        <td id = "setiing"></td>
                     </tr>
                     <tr>
                         <td>Tuổi vàng</td>
@@ -168,68 +176,67 @@
     </div>
 </div>
 
-<div class="related-products">
-    <h2>Những Sản Phẩm Liên Quan</h2>
-    <div class="product-list">
-        <div class="product-item">
-            <div class="product-image">
-                <img src="../images/bong11.png" alt="Nhẫn Kim Cương Nữ 18K">
-                <div class="sale-badge">Giảm giá!</div>
-            </div>
-            <div class="product-info">
-                <p class="product-code">VNF2021062050</p>
-                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>
-                <p class="product-price">
-                    <span class="old-price">41.580.000 ₫</span>
-                    <span class="new-price">34.927.200 ₫</span>
-                </p>
-            </div>
-        </div>
-        <div class="product-item">
-            <div class="product-image">
-                <img src="ring2.png" alt="Nhẫn Kim Cương Nữ 18K">
-                <div class="sale-badge">Giảm giá!</div>
-            </div>
-            <div class="product-info">
-                <p class="product-code">VNF2021062073</p>
-                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>
-                <p class="product-price">
-                    <span class="old-price">48.150.000 ₫</span>
-                    <span class="new-price">40.446.000 ₫</span>
-                </p>
-            </div>
-        </div>
-        <div class="product-item">
-            <div class="product-image">
-                <img src="ring3.png" alt="Nhẫn Kim Cương Nữ 18K">
-                <div class="sale-badge">Giảm giá!</div>
-            </div>
-            <div class="product-info">
-                <p class="product-code">NF2021051842</p>
-                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>
-                <p class="product-price">
-                    <span class="old-price">71.620.000 ₫</span>
-                    <span class="new-price">60.160.800 ₫</span>
-                </p>
-            </div>
-        </div>
-        <div class="product-item">
-            <div class="product-image">
-                <img src="ring4.png" alt="Nhẫn Kim Cương Nữ 18K">
-                <div class="sale-badge">Giảm giá!</div>
-            </div>
-            <div class="product-info">
-                <p class="product-code">VNF2021062059</p>
-                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>
-                <p class="product-price">
-                    <span class="old-price">29.040.000 ₫</span>
-                    <span class="new-price">24.393.600 ₫</span>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="/static/js/User/detail.js"></script>
+<!--<div class="related-products">-->
+<!--    <h2>Những Sản Phẩm Liên Quan</h2>-->
+<!--    <div class="product-list">-->
+<!--        <div class="product-item">-->
+<!--            <div class="product-image">-->
+<!--                <img src="../images/bong11.png" alt="Nhẫn Kim Cương Nữ 18K">-->
+<!--                <div class="sale-badge">Giảm giá!</div>-->
+<!--            </div>-->
+<!--            <div class="product-info">-->
+<!--                <p class="product-code">VNF2021062050</p>-->
+<!--                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>-->
+<!--                <p class="product-price">-->
+<!--                    <span class="old-price">41.580.000 ₫</span>-->
+<!--                    <span class="new-price">34.927.200 ₫</span>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="product-item">-->
+<!--            <div class="product-image">-->
+<!--                <img src="ring2.png" alt="Nhẫn Kim Cương Nữ 18K">-->
+<!--                <div class="sale-badge">Giảm giá!</div>-->
+<!--            </div>-->
+<!--            <div class="product-info">-->
+<!--                <p class="product-code">VNF2021062073</p>-->
+<!--                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>-->
+<!--                <p class="product-price">-->
+<!--                    <span class="old-price">48.150.000 ₫</span>-->
+<!--                    <span class="new-price">40.446.000 ₫</span>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="product-item">-->
+<!--            <div class="product-image">-->
+<!--                <img src="ring3.png" alt="Nhẫn Kim Cương Nữ 18K">-->
+<!--                <div class="sale-badge">Giảm giá!</div>-->
+<!--            </div>-->
+<!--            <div class="product-info">-->
+<!--                <p class="product-code">NF2021051842</p>-->
+<!--                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>-->
+<!--                <p class="product-price">-->
+<!--                    <span class="old-price">71.620.000 ₫</span>-->
+<!--                    <span class="new-price">60.160.800 ₫</span>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="product-item">-->
+<!--            <div class="product-image">-->
+<!--                <img src="ring4.png" alt="Nhẫn Kim Cương Nữ 18K">-->
+<!--                <div class="sale-badge">Giảm giá!</div>-->
+<!--            </div>-->
+<!--            <div class="product-info">-->
+<!--                <p class="product-code">VNF2021062059</p>-->
+<!--                <p class="product-name">NHẪN KIM CƯƠNG NỮ 18K</p>-->
+<!--                <p class="product-price">-->
+<!--                    <span class="old-price">29.040.000 ₫</span>-->
+<!--                    <span class="new-price">24.393.600 ₫</span>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 </body>
 
 </html>

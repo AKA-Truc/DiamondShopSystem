@@ -147,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function detailProduct(id){
+    // Xóa productId khỏi localStorage
+    localStorage.removeItem('productId');
     localStorage.setItem('productId', id);
     window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/detail.html`
 }
