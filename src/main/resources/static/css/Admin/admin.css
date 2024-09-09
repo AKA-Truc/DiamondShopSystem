@@ -201,17 +201,17 @@ body {
 }
 
 .btn-confirm {
-    background-color: #3d84d5; /* Green */
+    background-color: #0e4163; /* Green */
 }
 
 .btn-confirm:hover {
-    background-color: #3c68f8;
+    background-color: #176397;
 }
 
 .btn-cancel {
-    background-color: #f44336; /* Red */
+    background-color: rgb(165, 204, 246); /* Red */
 }
 
 .btn-cancel:hover {
-    background-color: #e53935;
+    background-color: #78b1dc;
 }
