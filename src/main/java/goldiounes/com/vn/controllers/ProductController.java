@@ -122,7 +122,6 @@ public class ProductController {
     }
 
     @GetMapping("products/{id}/productdetails")
-    @PreAuthorize("hasAnyAuthority('ROLE_GUEST', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF', 'ROLE_DELIVERY_STAFF')")
     public ResponseEntity<ResponseWrapper<List<ProductDetailDTO>>> getAllProductDetails(@PathVariable int id) {
         List<ProductDetailDTO> productDetails = productDetailService.findAllByProductId(id);
         ResponseWrapper<List<ProductDetailDTO>> response = new ResponseWrapper<>("Product details retrieved successfully", productDetails);

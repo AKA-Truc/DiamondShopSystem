@@ -3,17 +3,13 @@ package goldiounes.com.vn.controllers;
 import goldiounes.com.vn.config.CustomUserDetails;
 import goldiounes.com.vn.models.dtos.CartDTO;
 import goldiounes.com.vn.models.dtos.CartItemDTO;
-import goldiounes.com.vn.models.entities.Cart;
-import goldiounes.com.vn.models.entities.CartItem;
 import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.CartService;
 import goldiounes.com.vn.services.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,8 +34,9 @@ public class CartController {
     )
     public ResponseEntity<ResponseWrapper<CartDTO>> getCarts(@PathVariable int cartId, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartDTO cartcheck = cartService.getCart(cartId);
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
-            if (cartId != currentUser.getId()) {
+            if (cartcheck.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
             }
         }
@@ -61,8 +58,9 @@ public class CartController {
     )
     public ResponseEntity<ResponseWrapper<Void>> removeAllCartItems(@PathVariable int cartId, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartDTO cart = cartService.getCart(cartId);
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
-            if (cartId != currentUser.getId()) {
+            if (cart.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
             }
         }
@@ -84,8 +82,9 @@ public class CartController {
     )
     public ResponseEntity<ResponseWrapper<List<CartItemDTO>>> getAllCartItems(@PathVariable int cartId, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartDTO cart = cartService.getCart(cartId);
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
-            if (cartId != currentUser.getId()) {
+            if (cart.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
             }
         }
@@ -104,6 +103,12 @@ public class CartController {
     @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<CartItemDTO>> addItem(@RequestBody CartItemDTO cartItemDTO, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartDTO cart = cartService.getCart(cartItemDTO.getCart().getCartId());
+        if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
+            if (cart.getUser().getUserId() != currentUser.getId()) {
+                return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
+            }
+        }
         CartItemDTO addedItem = cartItemService.addItem(cartItemDTO, currentUser.getId());
         if (addedItem != null) {
             ResponseWrapper<CartItemDTO> response = new ResponseWrapper<>("Item added successfully", addedItem);
@@ -120,9 +125,9 @@ public class CartController {
     public ResponseEntity<ResponseWrapper<Void>> removeCartItem(@PathVariable int cartItemId, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
         CartItemDTO cartItemDTO = cartItemService.GetCartItemById(cartItemId);
-        CartDTO cart = cartItemDTO.getCart();
+        CartDTO cart = cartService.getCart(cartItemDTO.getCart().getCartId());
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
-            if (cart.getCartId() != currentUser.getId()) {
+            if (cart.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
             }
         }
@@ -141,8 +146,10 @@ public class CartController {
     @PreAuthorize("hasAnyAuthority('ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<ResponseWrapper<CartItemDTO>> updateQuantity(@PathVariable int cartItemId, @RequestBody CartItemDTO cartItemDTO, Authentication authentication) {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+        CartItemDTO index = cartItemService.GetCartItemById(cartItemId);
+        CartDTO cart = cartService.getCart(index.getCart().getCartId());
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {
-            if (cartItemDTO.getCart().getCartId() != currentUser.getId()) {
+            if (cart.getUser().getUserId() != currentUser.getId()) {
                 return new ResponseEntity<>(new ResponseWrapper<>("Access denied", null), HttpStatus.FORBIDDEN);
             }
         }

@@ -54,6 +54,7 @@ public class WebSecurityConfig {
                                 "/product-management/products",
                                 "/product-management/products/category/{keyword}/{minPrice}/{maxPrice}",
                                 "/product-management/products/{id}",
+                                "/product-management/products/{id}/productdetails",
                                 "/product-management/productdetails/min/{id}"
                         ).permitAll()
                         .anyRequest().authenticated()
