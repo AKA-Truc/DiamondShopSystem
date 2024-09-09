@@ -236,8 +236,7 @@ button.btn-reorder {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 430px;
-    max-width: 100%;
+    width: 480px;
     position: relative;
 
 }
@@ -258,50 +257,47 @@ button.btn-reorder {
     margin-bottom: 20px;
 }
 
-.form-container label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #333;
-}
+
 
 .form-container input {
-    width: 400px;
+    width: 440px;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 30px;
 
 }
 
-.button-group {
+.button-group2{
     display: block;
-    margin-left: 240px;
+    text-align: end;
+}
+.content form .button-group2 {
+    margin: 10px;
+    grid-column: span 2;
+    display: block;
 }
 
-.button-group button {
+.content form .button-group2 button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 14px;
-    color: #fff;
-    margin: 5px;
+    cursor: pointer;
 }
 
-.btn-confirm {
+.btn-confirm2 {
     background-color: #3d84d5; /* Green */
 }
 
-.btn-confirm:hover {
+.btn-confirm2:hover {
     background-color: #3c68f8;
 }
 
-.btn-cancel {
+ .btn-cancel2 {
     background-color: #f44336; /* Red */
 }
 
-.btn-cancel:hover {
+.btn-cancel2:hover {
     background-color: #e53935;
 }
