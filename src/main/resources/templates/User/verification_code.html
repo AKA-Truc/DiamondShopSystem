@@ -10,7 +10,7 @@
 <body>
 <div class="container">
   <div class="header">
-    <span class="close-button">&times;</span>
+<!--    <span class="close-button">&times;</span>-->
     <h1>Mã xác minh</h1>
   </div>
   <hr class="header-line">
@@ -21,7 +21,10 @@
     <div class="resend" id="resend-text">
       <span>Gửi lại mã (có sau 30 giây)</span>
     </div>
-    <button type="submit" id="submit-button"><b>Gửi Đi</b></button>
+    <a href="/DiamondShopSystem/src/main/resources/templates/User/resetpass.html" class="register-button">
+      <button type="button" class="send-button"><b>Tiếp Tục</b></button>
+    </a>
+    <button type="button" class="back-button" onclick="history.back()"><b>Quay lại</b></button>
   </form>
 </div>
 

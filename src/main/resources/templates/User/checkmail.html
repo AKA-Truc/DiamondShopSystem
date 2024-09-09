@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra Email</title>
+    <style>
+        .header {
+            position: relative;
+        }
+
+        /*.close-button {*/
+        /*    position: absolute;*/
+        /*    margin-top: -10%;*/
+        /*    right: 10px;*/
+        /*    font-size: 30px;*/
+        /*    color: #333;*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+        /*.close-button:hover {*/
+        /*    color: #770e48;*/
+        /*}*/
+
+        .header-line {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .additional-text {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .centered-heading {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            margin-bottom: 2px;
+            font-size: 30px;
+            color: #333;
+        }
+
+        p {
+            font-size: 21px;
+            color: #666;
+            margin-bottom: 80px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]::placeholder {
+            color: #aaa;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #770e48;
+        }
+
+        span {
+            color: red;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #770e48;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+<!--        <span class="close-button">&times;</span>-->
+        <h4 class="centered-heading">Check your Email</h4>
+    </div>
+    <hr class="header-line">
+    <p>We have sent an email with password reset information to h***@gmail.com</p>
+    <p class="additional-text">Didn't receive the email? Check spam or promotion folder or</p>
+    <form action="/forgot-password" method="POST">
+        <a href="/DiamondShopSystem/src/main/resources/templates/User/verification_code.html" class="register-button">
+            <button type="button" class="send-button"><b>Gửi Lại</b></button>
+        </a>
+        <button type="button" class="back-button" onclick="history.back()"><b>Quay lại</b></button>
+    </form>
+</div>
+
+</body>
+</html>

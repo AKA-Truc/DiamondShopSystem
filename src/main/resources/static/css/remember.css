@@ -2,18 +2,18 @@
     position: relative;
 }
 
-.close-button {
-    position: absolute;
-    margin-top: -10%;
-    right: 10px;
-    font-size: 30px;
-    color: #333;
-    cursor: pointer;
-}
+/*.close-button {*/
+/*    position: absolute;*/
+/*    margin-top: -10%;*/
+/*    right: 10px;*/
+/*    font-size: 30px;*/
+/*    color: #333;*/
+/*    cursor: pointer;*/
+/*}*/
 
-.close-button:hover {
-    color: #770e48;
-}
+/*.close-button:hover {*/
+/*    color: #770e48;*/
+/*}*/
 
 .header-line {
     border: 0;
@@ -65,7 +65,7 @@ label {
 input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
@@ -95,4 +95,22 @@ button:hover {
 
 span {
     color: red;
+}
+
+.back-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    margin-top: 20px; /* Thêm khoảng cách giữa nút "Gửi Đi" và nút "Quay lại" */
+}
+
+.back-button:hover {
+    background-color: #770e48;
 }
