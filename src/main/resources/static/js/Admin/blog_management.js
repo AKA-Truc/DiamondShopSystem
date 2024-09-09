@@ -205,16 +205,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('closepopup1').addEventListener('click', () => {
-        popup1Overlay.style.display = 'none';
+        if(confirm("Xác Nhận Hủy?")){
+            popup1Overlay.style.display = 'none';
+        }
     });
 
     document.getElementById('cancelButton').addEventListener('click', () => {
-        popup1Overlay.style.display = 'none';
+        if(confirm("Xác Nhận Hủy?")){
+            popup1Overlay.style.display = 'none';
+        }
     });
 
     window.addEventListener('click', (event) => {
         if (event.target === popup1Overlay) {
-            popup1Overlay.style.display = 'none';
+            if(confirm("Xác Nhận Hủy?")){
+                popup1Overlay.style.display = 'none';
+            }
         }
     });
 
