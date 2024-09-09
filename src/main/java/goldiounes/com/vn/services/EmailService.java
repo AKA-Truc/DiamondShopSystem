@@ -71,7 +71,8 @@ public class EmailService {
             double sellingPrice = 0;
             for (ProductDetail productDetail : detail.getProduct().getProductDetails()) {
                 if (productDetail.getProduct().getProductName().equals(detail.getProduct().getProductName())) {
-                    sellingPrice = productDetail.getSellingPrice();
+                    sellingPrice = productDetail.getSellingPrice() * detail.getQuantity();
+                    total = (int) (total + sellingPrice);
                     break;
                 }
             }
@@ -83,11 +84,12 @@ public class EmailService {
             sb.append("</tr>");
         }
 
+        int totalPromotion = total*order.getPromotion().getDiscountPercent()/100;
         sb.append("</tbody>");
         sb.append("<tfoot>");
-        sb.append("<tr><td colspan='2'>Tổng:</td><td>").append(String.format("%,d", order.getTotalPrice())).append(" VND</td></tr>");
-        sb.append("<tr><td colspan='2'>Chiết khấu hóa đơn:</td><td>0 VND</td></tr>");
-        sb.append("<tr><td colspan='2'>Thành tiền:</td><td>").append(String.format("%,d", order.getTotalPrice())).append(" VND</td></tr>");
+        sb.append("<tr><td colspan='2'>Tổng:</td><td>").append(String.format("%,d", total)).append(" VND</td></tr>");
+        sb.append("<tr><td colspan='2'>Chiết khấu hóa đơn:</td><td>").append(String.format("%,d", totalPromotion)).append(" VND</td></tr>");
+        sb.append("<tr><td colspan='2'>Thành tiền:</td><td>").append(String.format("%,d", total - totalPromotion)).append(" VND</td></tr>");
         sb.append("</tfoot>");
         sb.append("</table>");
 

@@ -17,11 +17,12 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.Role=:role")
     List<User> findByRole(@Param("role") String role);
 
-    @Query("SELECT u " +
+    @Query("SELECT u.UserName, COUNT(o) AS orderCount " +
             "FROM User u JOIN u.Orders o " +
-            "GROUP BY u.UserID " +
+            "GROUP BY u.UserID, u.UserName " +
             "ORDER BY COUNT(o) DESC")
-    List<User> findTopUserBuying();
+    List<Object[]> findTopUserBuying();
+
 
     @Query("SELECT e.Gender, COUNT(e) FROM User e WHERE e.Role = 'Customer' GROUP BY e.Gender")
     List<Object[]> countCustomersByGender();
