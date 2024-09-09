@@ -104,33 +104,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // Xử lý sự kiện khi nhấn vào nút "THÊM VÀO GIỎ HÀNG"
+    document.getElementById('add-to-cart').addEventListener('click', () => {
+        if (!sizeNow) {
+            alert('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng.');
+            return;
+        }
+        const formItem = {
+            quantity: 1,
+            product: {
+                productId: productId
+            }
+        }
+        console.log(formItem);
+
+        fetch(`${window.base_url}/cart-management/cart-items`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formItem)
+        })
+            .then(response => response.json()
+            )
+            .then(result => {
+                if(result.message === "Item added successfully"){
+                    alert(result.message);
+                    window.location.href = "/DiamondShopSystem/src/main/resources/templates/User/cart.html";
+                }
+                else {
+                    alert(result.message);
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+            });
+    });
 });
 
 
-// // Xử lý sự kiện khi nhấn vào nút "THÊM VÀO GIỎ HÀNG"
-// document.getElementById('add-to-cart').addEventListener('click', () => {
-//     if (!sizeNow) {
-//         alert('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng.');
-//         return;
-//     }
-//
-//     fetch(`${window.base_url}/cart-management`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`
-//         },
-//         body:
-//     })
-//         .then(response => response.json())
-//         .then(result => {
-//             if (result.success) {
-//                 alert('Sản phẩm đã được thêm vào giỏ hàng.');
-//             } else {
-//                 alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error adding product to cart:', error);
-//         });
-// });
+
