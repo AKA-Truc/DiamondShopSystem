@@ -1,58 +1,85 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+    // Gọi hàm fetchBlog và chờ dữ liệu trả về
+    mainDisplay();
+});
+async function mainDisplay(){
+    const data = await fetchBlog();
+    console.log(data);
+
+    if(!localStorage.getItem('blogid')){
+        localStorage.setItem('blogid', data[0].blogId);
+    }
+
+    displayBlog(data);
+}
+
+async function fetchBlog() {
     const token = localStorage.getItem('authToken');
 
-    fetch(`${window.base_url}/blog-management/blogs`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`
+    try {
+        const response = await fetch(`${window.base_url}/blog-management/blogs`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const result = await response.json();
+        const data = result.data;
+
+        if (Array.isArray(data) && data.length > 0) {
+            return data;
+        } else {
+            console.log("No blogs found.");
+            return [];
         }
-    })
-        .then(response => response.json())
-        .then(result => {
-            const data = result.data;
-            console.log(data);
+    } catch (error) {
+        console.error('Error fetching blog list:', error);
+        return [];
+    }
+}
 
-            if (data.length > 0) {
-                const mainBanner = document.getElementById('main-banner');
-                const blogList = document.getElementById('blog-list');
+function displayBlog(data) {
+    const mainBanner = document.getElementById('main-banner');
+    const blogList = document.getElementById('blog-list');
 
-                // Lấy bài blog đầu tiên
-                const firstBlog = data[0];
+    // Xóa tất cả các phần tử trong danh sách blog trước khi thêm mới
+    blogList.innerHTML = '';
 
-                // Hiển thị bài blog đầu tiên trong phần main banner
-                mainBanner.innerHTML = `
-                <a href="/blog/${firstBlog.id}" target="_self">
-                    <img src="${firstBlog.url}" alt="Main Banner">
-                </a>
+    data.forEach(blog => {
+        if (blog.blogId == localStorage.getItem('blogid')) {
+            // Hiển thị blog được chọn trong phần main banner
+            const processedContent = blog.content.replaceAll('\n', '<br>');
+
+            mainBanner.innerHTML = `
+                <img src="${blog.url}" alt="Main Banner">
                 <div style="margin-top: 40px" class="banner-title">
-                    <a style="color: black; text-decoration: none; font-size: 30px;" href="/blog/${firstBlog.id}">
-                        ${firstBlog.title}
+                    <a style="color: black; text-decoration: none; font-size: 30px;" href="/blog/${blog.id}">
+                        ${blog.title}
                     </a>
                 </div>
                 <div style="margin-top: 30px" class="banner-content">
                     <p style="color: black; text-decoration: none; font-size: 20px;">
-                        ${firstBlog.content}
+                        ${processedContent}
                     </p>
                 </div>
             `;
+        } else {
+            // Thêm blog vào danh sách
+            const blogItem = document.createElement('div');
+            blogItem.classList.add('blog-item');
+            blogItem.innerHTML = `
+                <img src="${blog.url}" alt="${blog.title}" class="blog-image">
+                <h4><a href="#" onclick="oneBlog(${blog.blogId}); return false;">${blog.title}</a></h4>
+            `;
+            blogList.appendChild(blogItem);
+        }
+    });
+}
 
-                const remainingBlogs = data.slice(1);
+function oneBlog(id) {
+    localStorage.removeItem('blogid');
+    localStorage.setItem('blogid',id);
 
-                remainingBlogs.forEach(blog => {
-                    const blogItem = document.createElement('div');
-                    blogItem.classList.add('blog-item');
-                    blogItem.innerHTML = `
-                    <img src="${blog.url}" alt="${blog.title}" class="blog-image">
-                    <h4><a href="/blog/${blog.id}" target="_blank">${blog.title}</a></h4>
-                    <p>${blog.shortDescription}</p>
-                `;
-                    blogList.appendChild(blogItem);
-                });
-            } else {
-                console.log("No blogs found.");
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching blog list:', error);
-        });
-});
+    mainDisplay();
+}
