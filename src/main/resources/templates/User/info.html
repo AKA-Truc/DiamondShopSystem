@@ -65,72 +65,8 @@
             <!-- Nội dung cho Quản lý đơn hàng -->
             <h2>QUẢN LÝ ĐƠN HÀNG</h2>
             <div class="order-list">
-                <!-- Đơn hàng mẫu -->
-                <div class="order-item" data-status="pending">
-                    <div class="order-header">
-                        <div class="order-id">Mã đơn: 123456</div>
-                        <div class="order-status">Trạng thái: Chờ xác nhận</div>
-                    </div>
-                    <div class="order-body">
-                        <div class="product-item">
-                            <img src="/static/images/bong2.png" alt="Product Image">
-                            <div class="product-info">
-                                <div class="product-name">Tên sản phẩm</div>
-                                <div class="product-quantity">Số lượng: 1</div>
-                                <div class="product-price">Giá: 38.052.000 VND</div>
-                            </div>
-                        </div>
-                        <!-- Thêm sản phẩm khác tại đây -->
-                    </div>
-                    <div class="order-footer">
-                        <button class="btn-cancel">Hủy đơn</button>
-                        <button class="btn-detail">Xác nhận</button>
-                    </div>
-                </div>
-                <!-- Thêm các đơn hàng khác ở đây -->
-
-                <div class="order-item" data-status="shipped">
-                    <div class="order-header">
-                        <div class="order-id">Mã đơn: 654321</div>
-                        <div class="order-status">Trạng thái: Đang vận chuyển</div>
-                    </div>
-                    <div class="order-body">
-                        <div class="product-item">
-                            <img src="/static/images/bong2.png" alt="Product Image">
-                            <div class="product-info">
-                                <div class="product-name">Tên sản phẩm</div>
-                                <div class="product-quantity">Số lượng: 2</div>
-                                <div class="product-price">Giá: 76,000,000 VND</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-footer">
-                        <span style="margin-top: 30px ;" class="order-total">Tổng tiền: 76,000,000 VND</span>
-                    </div>
-                </div>
-
-
-                <div class="order-item" data-status="delivered">
-                    <div class="order-header">
-                        <div class="order-id">Mã đơn: 789012</div>
-                        <div class="order-status">Trạng thái: Đã giao</div>
-                    </div>
-                    <div class="order-body">
-                        <div class="product-item">
-                            <img src="/static/images/bong2.png" alt="Product Image">
-                            <div class="product-info">
-                                <div class="product-name">Tên sản phẩm</div>
-                                <div class="product-quantity">Số lượng: 3</div>
-                                <div class="product-price">Giá: 114,000,000 VND</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-footer">
-                        <button class="btn-reorder">Mua lại</button>
-                    </div>
-                </div>
+                <!-- Các đơn hàng sẽ được thêm vào đây bằng JavaScript -->
             </div>
-            <!-- Thêm các phần khác nếu cần -->
         </div>
 
         <div id="change-password-form" class="overlay">
@@ -161,40 +97,5 @@
         </div>
     </div>
 </div>
-
-
-
 </body>
-<script>
-    function openChangePasswordForm() {
-        document.getElementById('change-password-form').style.display = 'flex';
-    }
-
-    function closeChangePasswordForm() {
-        document.getElementById('change-password-form').style.display = 'none';
-    }
-
-    function submitChangePassword() {
-        // Xử lý xác nhận đổi mật khẩu
-        // Bạn có thể thêm mã JavaScript để gửi dữ liệu đổi mật khẩu đến máy chủ
-        alert('Đổi mật khẩu đã được xác nhận.');
-        closeChangePasswordForm(); // Đóng form sau khi xác nhận
-    }
-    function showSection(sectionId) {
-        // Ẩn tất cả các phần
-        var sections = document.querySelectorAll('.section');
-        sections.forEach(function (section) {
-            section.style.display = 'none';
-        });
-
-        // Hiển thị phần được chọn
-        document.getElementById(sectionId).style.display = 'block';
-    }
-
-    // Mặc định, hiển thị phần thông tin tài khoản khi trang được tải
-    document.addEventListener('DOMContentLoaded', function () {
-        showSection('account-info');
-    });
-
-</script>
 </html>
