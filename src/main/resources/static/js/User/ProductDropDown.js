@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             maxPrice = max ? parseFloat(max) : Number.MAX_SAFE_INTEGER;
         }
 
-        fetch(`${window.base_url}/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}`,{
+        fetch(`${window.base_url}/product-management/products/category/ /${minPrice}/${maxPrice}`,{
             method: 'GET',
         })
             .then(response => response.json())
