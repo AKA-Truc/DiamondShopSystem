@@ -293,7 +293,6 @@ select:focus,
 
 /**/
 
-
 .button input.save  {
     background-color: #304067;
     color: #fff;
@@ -358,26 +357,23 @@ select:focus,
      margin-left: 200px;
  }
 
-
 .histaff-item-group {
     padding: 5px;
     border-radius: 5px;
     background-color: #fff;
 }
 
-
 .histaff-item-group-header h3 {
-    margin-bottom: 20px;
-    color: #162165e7;
-    font-weight: bold;
-    font-size: 24px;
+    margin-left: 180px;
+    margin-top: 40px;
+        color: #162165e7;
+        font-weight: bold;
+        font-size: 24px;
 }
-
 
 .hs-button.table-add-btn {
     margin-top: 0px;
 }
-
 
 .table-add-btn {
     margin-bottom: 15px;
@@ -390,18 +386,15 @@ select:focus,
     font-size: 14px;
 }
 
-
 .table-add-btn:hover {
     background-color: #162165e7;
 }
-
 
 table.h-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
-
 
 table.h-table th,
 table.h-table td {
@@ -411,22 +404,18 @@ table.h-table td {
     vertical-align: middle;
 }
 
-
 thead th {
     background-color: #162165e7;
     color: #ffffff;
 }
 
-
 tbody tr:hover {
     background-color: #f9f9f9;
 }
 
-
 input[type="checkbox"] {
     cursor: pointer;
 }
-
 
 .table-action {
     display: flex;
@@ -437,17 +426,14 @@ input[type="checkbox"] {
     margin: 0;
 }
 
-
 .table-action-control {
     cursor: pointer;
     color: #333;
 }
 
-
 .table-action-control:hover {
     color: #162165e7;
 }
-
 
 .table-control {
     width: 100%;
@@ -460,7 +446,6 @@ input[type="checkbox"] {
     color: #000;
 }
 
-
 .table-control.item-control {
     width: 175px; /* chiều dài ô input chi tiết sp*/
     height: auto;
@@ -471,7 +456,6 @@ input[type="checkbox"] {
     margin-top: 5px;
     background-color: #ffffff;
 }
-
 
 .hidden {
     display: none;
@@ -484,21 +468,17 @@ table.h-table td:nth-child(8) {
     width: 300px;
 }
 
-
 table.h-table td:nth-child(8) .table-action li {
     padding: 6px;
 }
-
 
 .histaff-item-group-header h3 {
     margin-bottom: -10px;
 }
 
-
 .field {
     margin-bottom: 20px;
 }
-
 
 @media (max-width: 768px) {
     .h-table th,
@@ -508,7 +488,6 @@ table.h-table td:nth-child(8) .table-action li {
         position: relative;
         padding-left: 50%;
     }
-
 
     .h-table td:before {
         content: attr(data-label);
@@ -527,7 +506,6 @@ table.h-table td:nth-child(8) .table-action li {
 
 /*    */
 
-
 .toggle-quantity {
     cursor: pointer;
     font-size: 18px;
@@ -536,12 +514,10 @@ table.h-table td:nth-child(8) .table-action li {
     vertical-align: middle;
 }
 
-
 .quantity-input {
     display: block;
     margin-top: 5px;
 }
-
 
 .hidden {
     display: none;
@@ -603,7 +579,6 @@ table.h-table td:nth-child(8) .table-action li {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 30px;
-
 }
 
 .button-group2 {
