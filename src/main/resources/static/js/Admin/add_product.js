@@ -63,53 +63,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleToggleQuantity(e) {
-        const container = e.target.previousElementSibling;
-        const newFieldContainer = document.createElement("div");
+        const container = e.target.previousElementSibling;  // Get the container for the new field
+        const row = e.target.closest('tr');  // Get the current row
+        const newFieldContainer = document.createElement("div");  // Create a new container div for the new select and inputs
         newFieldContainer.classList.add("item-container");
 
+        // Create the new HTML structure
         newFieldContainer.innerHTML = `
-            <select class="table-control item-control list-diamond"></select>
-            <select class="table-control item-control type-diamond">
-                <option value="Phụ">Kim Cương Phụ</option>
-                <option value="Chủ">Kim Cương Chủ (1 viên)</option>
-            </select>
-            <input type="number" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
-        `;
+        <select class="table-control item-control list-diamond"></select>
+        <select class="table-control item-control type-diamond">
+            <option value="1">Kim Cương Phụ</option>
+            <option value="0">Kim Cương Chủ (1 viên)</option>
+        </select>
+        <input type="number" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
+    `;
 
+        // Insert the new field container before the toggle button
         container.parentNode.insertBefore(newFieldContainer, e.target);
 
-        const typeDiamondSelect = newFieldContainer.querySelector('.type-diamond');
+        // Fetch diamond options and populate the new select
         fetchDiamond(token, newFieldContainer.querySelector('.list-diamond'));
+
+        // Get the diamond type select in the newly added row
+        const typeDiamondSelect = newFieldContainer.querySelector('.type-diamond');
+
+        // Check if "Kim Cương Chủ" already exists in the row
+        const otherDiamondTypes = row.querySelectorAll('.type-diamond');
+        const existingKcChu = Array.from(otherDiamondTypes).some(select => select.value === '0');  // Check if any "Kim Cương Chủ" is already selected
+
+        if (existingKcChu) {
+            // If a "Kim Cương Chủ" already exists, disable the "Chủ" option in the new select
+            typeDiamondSelect.value = '1';  // Default to "Kim Cương Phụ"
+            typeDiamondSelect.querySelector('option[value="0"]').setAttribute('disabled', 'true');  // Disable "Chủ"
+        }
+
+        // Add the change event listener for diamond type changes
         typeDiamondSelect.addEventListener('change', handleDiamondTypeChange);
     }
 
     function handleDiamondTypeChange(e) {
-        const currentSelect = e.target;
-        const currentValue = currentSelect.value;
-        const row = currentSelect.closest('tr');
-        const quantityInput = currentSelect.parentNode.querySelector('.quantity-input');
+        const currentSelect = e.target;  // The select element that was changed
+        const currentValue = currentSelect.value;  // Get the selected value
+        const row = currentSelect.closest('tr');  // Get the current row
+        const quantityInput = currentSelect.parentNode.querySelector('.quantity-input');  // Get the quantity input field
 
-        if (currentValue === 'Chủ') {
+        // If "Chủ" is selected, disable it in other selects and set quantity to 1
+        if (currentValue === '0') {  // Assuming '0' is "Kim Cương Chủ"
+            // Disable "Chủ" in other diamond type selects within the same row
             const otherDiamondTypes = row.querySelectorAll('.type-diamond');
             otherDiamondTypes.forEach(select => {
                 if (select !== currentSelect) {
-                    select.value = 'Phụ';
-                    select.querySelector('option[value="Chủ"]').setAttribute('disabled', 'true');
+                    select.value = '1';  // Set to "Kim Cương Phụ"
+                    select.querySelector('option[value="0"]').setAttribute('disabled', 'true');  // Disable "Chủ"
                 }
             });
 
+            // Set the quantity to 1 and disable the input
             quantityInput.value = 1;
             quantityInput.setAttribute('disabled', 'true');
-        } else {
+
+        } else {  // If not "Chủ" (i.e., "Phụ"), allow changing quantity and re-enable "Chủ"
+            // Enable the quantity input
             quantityInput.removeAttribute('disabled');
-            quantityInput.value = '';
+            quantityInput.value = '';  // Clear the quantity input
 
+            // Re-enable the "Chủ" option if there is no other "Chủ" selected in the row
             const otherDiamondTypes = row.querySelectorAll('.type-diamond');
-            const existingKcChu = Array.from(otherDiamondTypes).some(select => select.value === 'Chủ');
+            const existingKcChu = Array.from(otherDiamondTypes).some(select => select.value === '0');  // Check if any other select has "Chủ"
 
-            if (!existingKcChu) {
+            if (!existingKcChu) {  // If no other "Chủ" exists, re-enable the "Chủ" option
                 otherDiamondTypes.forEach(select => {
-                    select.querySelector('option[value="Chủ"]').removeAttribute('disabled');
+                    select.querySelector('option[value="0"]').removeAttribute('disabled');
                 });
             }
         }
@@ -440,6 +464,7 @@ function closeProductTypeForm() {
         document.getElementById('add-product-type').style.display = 'none';
     }
 }
+
 function submitProductType() {
     const categoryName = document.getElementById('additional-product-name').value;
     const token = localStorage.getItem('authToken');
