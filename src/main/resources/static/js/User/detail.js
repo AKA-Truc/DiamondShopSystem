@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.sub-diamond').forEach(row => row.remove());
 
         diamonds.forEach(diamondIndex => {
-            if (diamondIndex.typeDiamond === "Chủ") {
+            if (diamondIndex.typeDiamond === "1") {
                 document.getElementById('name').textContent = diamondIndex.diamond.diamondName;
                 document.getElementById('carat').textContent = diamondIndex.diamond.carat;
-            } else if (diamondIndex.typeDiamond === "Phụ") {
+            } else if (diamondIndex.typeDiamond === "0") {
                 // Tạo các hàng mới cho kim cương phụ
                 let subDiamondRow = document.createElement('tr');
                 subDiamondRow.classList.add('sub-diamond');
