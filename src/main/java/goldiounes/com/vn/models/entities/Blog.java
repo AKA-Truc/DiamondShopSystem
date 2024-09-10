@@ -18,6 +18,7 @@ public class Blog {
     @Column(name = "Url", nullable = true)
     private String Url;
 
+    @Lob
     @Column(name = "Content", nullable = false)
     private String Content;
 
