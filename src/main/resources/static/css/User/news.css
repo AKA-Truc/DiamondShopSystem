@@ -10,151 +10,165 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-
+/* Đặt chung cho toàn bộ container */
 .container {
-    display: flex;
-    max-width: 1280px;
-    margin: 90px auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Phân chia theo tỷ lệ 3:1 */
+    gap: 20px;
     padding: 20px;
 }
 
-.main-banner {
-    flex: 2.5;
-    margin-right: 20px;
-    padding-right: 20px;
+
+/* Định dạng cho phần contentside */
+.contentside {
+    background-color: #fff;
+    padding: 20px;
+    border-left: 1px solid #ddd;
 }
-.main-banner:hover{
+
+.contentside h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#blog-list {
+    list-style: none;
+    padding: 0;
+}
+
+#blog-list div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#blog-list img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+#blog-list p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Định dạng cho phần main-banner */
+.main-banner {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+.main-banner:hover {
     transform: translateY(-5px);
 }
 
 .main-banner img {
     width: 100%;
-    height: calc(3 * 150px + 2 * 10px);
+    height: 550px;
     object-fit: cover;
     border-radius: 8px;
 }
 
-.banner-title{
+.banner-title {
     margin-top: 10px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 24px;
 }
 
-.side-content {
+.banner-title a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.banner-title a:hover {
+    color: #007BFF;
+}
+
+.banner-content {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Sidebar with the latest blogs */
+.contentside {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-.side-item:hover{
-    transform: translateY(-5px);
 
-}
-
-.side-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.side-item img {
+#blog-list {
     margin-top: 15px;
+}
+
+.blog-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.blog-item:hover {
+    transform: translateY(-5px);
+}
+
+.blog-image {
     width: 130px;
-    height: auto;
+    height: 80px;
     object-fit: cover;
     border-radius: 8px;
     margin-right: 15px;
 }
 
-
-.side-item-text a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.side-item-text a:hover {
-    text-decoration: underline;
-}
-
-.side-item:last-child {
-    margin-bottom: 0;
-}
-
-.container-news {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-}
-
-.nav-bar ul {
-    display: flex;
-    list-style: none;
-    justify-content: center;
-    padding: 0;
-    margin: 0 0 20px 0;
-    border-bottom: 1px solid #ccc;
-}
-
-.nav-bar ul li {
-    margin-right: 20px;
-}
-
-.nav-bar ul li a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    padding: 10px 0;
-    display: block;
-    cursor: pointer;
-    border-bottom: 3px solid transparent; /* Add this line */
-    transition: border-bottom 0.3s ease; /* Optional: Smooth transition */
-}
-
-.nav-bar ul li a:hover {
-    border-bottom: 3px solid black;
-}
-
-.content {
-    display: none;
-    flex-direction: column;
-}
-
-.content.active {
-    display: flex;
-}
-
-.article {
-    display: flex;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-}
-
-.article img {
-    width: 200px;
-    height: auto;
-    border-radius: 8px;
-    margin-right: 20px;
-}
-
-.article .text {
-    max-width: 700px;
-}
-
-.article .text h3 {
-    margin: 0 0 10px 0;
+.blog-item h4 {
     font-size: 18px;
-    color: black;
+    margin: 0;
 }
 
-.article .text p {
-    margin: 0;
-    color: #555;
+.blog-item h4 a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.blog-item h4 a:hover {
+    color: #007BFF;
+}
+
+.blog-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0 0;
 }
 
 a {
     text-decoration: none;
 }
 
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .main-banner img {
+        height: 300px;
+    }
+
+    .blog-image {
+        width: 100px;
+        height: 60px;
+    }
+
+    .banner-title {
+        font-size: 20px;
+    }
+
+    .banner-content {
+        font-size: 16px;
+    }
+}
