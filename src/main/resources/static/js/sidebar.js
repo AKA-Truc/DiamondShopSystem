@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <a href="blog_management.html"><ion-icon name="newspaper-outline"></ion-icon> Quản lý bài viết</a>
                 </li>
                 <li class="submenu">
+                    <a href="add_diamond.html"><ion-icon name="diamond-outline"></ion-icon> Quản lý kim Cương</a>
+                </li>
+                <li class="submenu">
                     <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
                     <ul>
                         <li><a href="./detail.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý đơn hàng</a></li>
