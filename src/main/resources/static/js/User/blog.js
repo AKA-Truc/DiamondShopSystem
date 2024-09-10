@@ -1,21 +1,27 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    // Gọi hàm fetchBlog và chờ dữ liệu trả về
-    mainDisplay();
-});
-async function mainDisplay(){
-    const data = await fetchBlog();
-    console.log(data);
+    localStorage.setItem('contentVisible', 'false')
+    mainDisplay(); // Gọi hàm fetchBlog và hiển thị
 
-    if(!localStorage.getItem('blogid')){
-        localStorage.setItem('blogid', data[0].blogId);
+    if (document.referrer !== window.location.href) {
+        localStorage.removeItem('blogid');
     }
+});
 
-    displayBlog(data);
+async function mainDisplay() {
+    const data = await fetchBlog();
+
+    if (data.length === 0) {
+        displayNoBlogs();
+    } else {
+        if (!localStorage.getItem('blogid')) {
+            localStorage.setItem('blogid', data[data.length - 1].blogId);
+        }
+        displayBlog(data);
+    }
 }
 
 async function fetchBlog() {
     const token = localStorage.getItem('authToken');
-
     try {
         const response = await fetch(`${window.base_url}/blog-management/blogs`, {
             method: 'GET',
@@ -23,10 +29,8 @@ async function fetchBlog() {
                 'Authorization': `Bearer ${token}`
             }
         });
-
         const result = await response.json();
         const data = result.data;
-
         if (Array.isArray(data) && data.length > 0) {
             return data;
         } else {
@@ -45,11 +49,12 @@ function displayBlog(data) {
 
     // Xóa tất cả các phần tử trong danh sách blog trước khi thêm mới
     blogList.innerHTML = '';
+    mainBanner.innerHTML = '';
 
     data.forEach(blog => {
-        if (blog.blogId == localStorage.getItem('blogid')) {
-            // Hiển thị blog được chọn trong phần main banner
+        if (blog.blogId === Number(localStorage.getItem('blogid'))){
             const processedContent = blog.content.replaceAll('\n', '<br>');
+            const isContentVisible = localStorage.getItem('contentVisible') === 'true'; // Kiểm tra trạng thái mở
 
             mainBanner.innerHTML = `
                 <img src="${blog.url}" alt="Main Banner">
@@ -58,28 +63,61 @@ function displayBlog(data) {
                         ${blog.title}
                     </a>
                 </div>
-                <div style="margin-top: 30px" class="banner-content">
+                <div id="banner-content" style="margin-top: 30px; ${isContentVisible ? 'display: block;' : 'display: none;'}" class="banner-content">
                     <p style="color: black; text-decoration: none; font-size: 20px;">
                         ${processedContent}
                     </p>
                 </div>
             `;
+
+            const newMainBanner = mainBanner.cloneNode(true);
+            mainBanner.parentNode.replaceChild(newMainBanner, mainBanner);
+
+            newMainBanner.addEventListener('click', function () {
+                const content = document.getElementById('banner-content');
+                if (content.style.display === 'none' || content.style.display === '') {
+                    content.style.display = 'flex';
+                    localStorage.setItem('contentVisible', 'true');
+                }
+            });
         } else {
             // Thêm blog vào danh sách
             const blogItem = document.createElement('div');
             blogItem.classList.add('blog-item');
             blogItem.innerHTML = `
                 <img src="${blog.url}" alt="${blog.title}" class="blog-image">
-                <h4><a href="#" onclick="oneBlog(${blog.blogId}); return false;">${blog.title}</a></h4>
+                <h4 id = "blog-title">${blog.title}</h4>
             `;
+            // Gắn sự kiện click vào toàn bộ phần tử blog-item
+            blogItem.addEventListener('click', function() {
+                oneBlog(blog.blogId);
+            });
             blogList.appendChild(blogItem);
         }
     });
 }
 
-function oneBlog(id) {
-    localStorage.removeItem('blogid');
-    localStorage.setItem('blogid',id);
 
+function displayNoBlogs() {
+    const mainBanner = document.getElementById('main-banner');
+    const blogList = document.getElementById('blog-list');
+
+    // Hiển thị thông báo "Không có blog nào" trong phần chính
+    mainBanner.innerHTML = `
+        <div style="margin-top: 40px; text-align: center;">
+            <h2>Hiện không có blog nào</h2>
+        </div>
+    `;
+
+    // Hiển thị thông báo "Không có blog nào" trong danh sách blog
+    blogList.innerHTML = `
+        <div style="text-align: center;">
+            <p>Hiện không có blog nào.</p>
+        </div>
+    `;
+}
+
+function oneBlog(id) {
+    localStorage.setItem('blogid', id); // Cập nhật blog ID
     mainDisplay();
 }
