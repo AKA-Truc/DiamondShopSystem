@@ -45,7 +45,6 @@ public class BlogController {
 
 
     @GetMapping("/blogs/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<BlogDTO>> getBlogs(@PathVariable int id) {
         BlogDTO blog = blogService.getBlogs(id);
         if (blog != null) {
@@ -58,7 +57,6 @@ public class BlogController {
     }
 
     @GetMapping("/blogs")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<List<BlogDTO>>> getAllBlogs() {
         List<BlogDTO> blogs = blogService.getAllBlogs();
         if (!blogs.isEmpty()) {

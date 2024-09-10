@@ -17,18 +17,7 @@ function handleCredentialResponse(response) {
             // Store token in localStorage
             localStorage.setItem('authToken', data.token);
 
-            const token = localStorage.getItem('authToken');
-            const tokenPayload = JSON.parse(atob(token.split('.')[1]));  // Decode the payload part of the token
-            const roles = tokenPayload.roles; // Assuming the role array is in the 'roles' field
-            const role = roles[0];  // Assuming the first role is the relevant one
-            console.log(role);
-
-            if (role === 'ROLE_CUSTOMER') {
-                window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
-
-            } else {
-                window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
-            }
+            checkRole();
         })
         .catch(error => {
             console.error("Failed to log in with Google:", error);
@@ -37,6 +26,10 @@ function handleCredentialResponse(response) {
         });
 }
 document.addEventListener('DOMContentLoaded', function () {
+
+    if(localStorage.getItem('authToken')){
+        checkRole();
+    }
 
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', function (event) {
@@ -65,18 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 localStorage.setItem('authToken', data.token);
 
                 // Decode JWT to get roles
-                const token = localStorage.getItem('authToken');
-                const tokenPayload = JSON.parse(atob(token.split('.')[1]));  // Decode the payload part of the token
-                const roles = tokenPayload.roles; // Assuming the role array is in the 'roles' field
-                const role = roles[0];  // Assuming the first role is the relevant one
-                console.log(role);
-
-                if (role === 'ROLE_CUSTOMER') {
-                    window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
-
-                } else {
-                    window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
-                }
+                checkRole();
             })
             .catch(error => {
                 console.error("Đăng nhập thất bại:", error);
@@ -86,4 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function checkRole(){
+    // Decode JWT to get roles
+    const token = localStorage.getItem('authToken');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));  // Decode the payload part of the token
+    const roles = tokenPayload.roles; // Assuming the role array is in the 'roles' field
+    const role = roles[0];  // Assuming the first role is the relevant one
+    console.log(role);
 
+    if (role === 'ROLE_CUSTOMER') {
+        window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
+
+    } else {
+        window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
+    }
+}

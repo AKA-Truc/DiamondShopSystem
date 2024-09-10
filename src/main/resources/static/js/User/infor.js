@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    if(!localStorage.getItem('authToken')){
+        alert("Bạn Cần Đăng Nhập");
+        window.location.href = "/DiamondShopSystem/src/main/resources/templates/login.html";
+    }
     document.getElementById('unlock_user').addEventListener('click', function (event) {
         event.preventDefault();
 
@@ -124,14 +128,32 @@ function fetchOrders() {
         }
     })
         .then(response => response.json())
-        .then(data => {
+        .then(result => {
+            const data = result.data;
             console.log('Fetched orders:', data);
-            displayOrders(data.data); // Access the 'data' field from the response
+            displayOrders(data);
         })
         .catch(error => {
             console.error('Error fetching orders:', error);
-            alert('Failed to load orders.');
+            const emptyRow = document.createElement('span');
+            emptyRow.innerHTML = `
+                <h2  style="text-align: center; font-size: 18px; color: #888;">
+                    <img src="/static/images/donhang.png" style="width: 40%; height: 40%; float: right" alt="Image">
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; 
+                            height: 300px; width: 300px; margin: 0 auto; font-size: 20px">
+                            Bạn Chưa Có Đơn Hàng Nào
+                            <button style="margin-top: 20px; font-size: 20px; color: white; background: #007bff; border-radius: 50px"
+                            onclick="goToProduct()">Tạo Đơn Hàng Mới + </button>
+                    </div>   
+                </h2>
+
+            `;
+            document.querySelector('.order-list').appendChild(emptyRow);
         });
+}
+
+function goToProduct(){
+    window.location.href = "/DiamondShopSystem/src/main/resources/templates/User/products.html";
 }
 
 function displayOrders(orders) {
@@ -173,6 +195,8 @@ function displayOrders(orders) {
         orderList.appendChild(orderItem);
     });
 }
+
+
 
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
@@ -276,4 +300,3 @@ function resetChangePasswordForm() {
     document.getElementById('confirm-password').value = '';
     closeChangePasswordForm();
 }
-
