@@ -416,9 +416,57 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching settings:', error));
     }
 
+    window.addEventListener('click', (event) => {
+        if (event.target === document.getElementById('add-product-type')) {
+            if(confirm("Xác Nhận Hủy?")){
+                document.getElementById('add-product-type').style.display = 'none';
+            }
+        }
+    });
+
 });
 function cancelForm() {
     if (confirm('Bạn có Chắc Hủy Bỏ Không?')) {
         window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
     }
+}
+
+function openProductTypeForm() {
+    document.getElementById('add-product-type').style.display = 'flex';
+}
+
+function closeProductTypeForm() {
+    if (confirm("Xác Nhận Hủy?")) {
+        document.getElementById('add-product-type').style.display = 'none';
+    }
+}
+function submitProductType() {
+    const categoryName = document.getElementById('additional-product-name').value;
+    const token = localStorage.getItem('authToken');
+
+    fetch(`${window.base_url}/category-management/categories`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ categoryName: categoryName })
+    })
+        .then(response => {
+            if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
+                return response.json();
+            } else {
+                throw new Error('Invalid response from server');
+            }
+        })
+        .then(result => {
+            const data = result.data;
+            console.log(data);
+            document.getElementById('add-product-type').style.display = 'none';
+            location.reload();
+        })
+        .catch(error => {
+            alert('Error add categories' + error);
+            console.error('Error fetching categories:', error);
+        });
 }
