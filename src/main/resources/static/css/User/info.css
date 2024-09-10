@@ -185,10 +185,33 @@ body {
 
 .order-status {
     font-weight: 500;
-    color: rgba(115, 124, 205, 0.82);
     padding: 4px 8px;
     border-radius: 4px;
-    background-color: rgba(204, 210, 253, 0.4);
+}
+
+.status-new {
+    color: #eac457;
+    background-color: #faf0c3;
+}
+
+.status-confirmed {
+    color: #3c8ccc;
+    background-color: rgba(203, 221, 253, 0.82);
+}
+
+.status-shipping {
+    color: #1c851c;
+    background-color: #d9ffd9;
+}
+
+.status-delivered {
+    color: #7788f3;
+    background-color: #c3cbff;
+}
+
+.status-unknown {
+    color: #972c2c;
+    background-color: #fdd7d7;
 }
 
 .order-body {
