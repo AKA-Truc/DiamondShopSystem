@@ -7,24 +7,22 @@ import lombok.Data;
 @Entity
 @Table(name = "BLOGS")
 public class Blog {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Tùy chỉnh lại nếu bạn sử dụng AUTO_INCREMENT
+    @GeneratedValue(strategy = GenerationType.AUTO)//auto_increment
     @Column(name = "BlogID")
     private int BlogID;
 
     @Column(name = "Title", nullable = false)
     private String Title;
 
-    @Column(name = "Url")
+    @Column(name = "Url", nullable = true)
     private String Url;
 
-    @Lob
-    @Column(name = "Content", nullable = false, columnDefinition = "Text") // Explicitly define as CLOB for text content
+    @Column(name = "Content", nullable = false, columnDefinition = "TEXT")
     private String Content;
 
     public Blog() {
-        // Default constructor
+        //constructor
     }
 
     public Blog(String Title, String Content) {

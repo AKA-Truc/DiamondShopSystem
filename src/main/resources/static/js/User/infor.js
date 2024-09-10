@@ -165,6 +165,7 @@ function displayOrders(orders) {
         const orderItem = document.createElement('div');
         orderItem.className = 'order-item';
         orderItem.setAttribute('data-status', order.status);
+        orderItem.setAttribute('data-order-id', order.orderId);
 
         // Populate order details
         orderItem.innerHTML = `
@@ -192,11 +193,15 @@ function displayOrders(orders) {
             </div>
         `;
 
+        // Add click event to redirect to order details page
+        orderItem.addEventListener('click', function() {
+            const orderId = orderItem.getAttribute('data-order-id');
+            window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/orderDetail.html?orderId=${orderId}`;
+        });
+
         orderList.appendChild(orderItem);
     });
 }
-
-
 
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
