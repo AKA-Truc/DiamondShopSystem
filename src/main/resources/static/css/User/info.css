@@ -135,86 +135,159 @@ body {
 .order-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-height: 420px; /* Chiều cao cố định cho phần danh sách đơn hàng */
-    overflow-y: auto;  /* Cho phép cuộn theo chiều dọc */
-    padding-right: 15px; /* Khoảng cách bên phải để hiển thị thanh cuộn */
+    gap: 16px;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.order-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.order-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.order-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
 }
 
 .order-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.order-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .order-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
-    font-weight: bold;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.order-id {
+    font-weight: 600;
+    color: #333;
+}
+
+.order-status {
+    font-weight: 500;
+    color: rgba(115, 124, 205, 0.82);
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: rgba(204, 210, 253, 0.4);
 }
 
 .order-body {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .product-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
+    padding: 8px 0;
 }
 
 .product-item img {
-    max-width: 100px;
-    height: auto;
-    margin-right: 30px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .product-info {
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+}
+
+.product-name {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.product-quantity {
+    color: #666;
+    font-size: 0.9em;
 }
 
 .order-footer {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: -70px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
 }
 
 button {
-    background-color: #4CAF50; /* Màu xanh lá cây */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    padding: 8px 16px;
     font-size: 14px;
-    margin: 4px 2px;
-    cursor: pointer;
+    font-weight: 500;
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-button.btn-cancel {
-    background-color: #f44336; /* Màu đỏ */
+button:hover {
+    transform: translateY(-1px);
 }
 
-button.btn-detail {
-    background-color: #2196F3; /* Màu xanh dương */
+button:active {
+    transform: translateY(1px);
 }
-button.btn-reorder {
-    background-color: #ff9800; /* Màu cam */
+
+.btn-reorder {
+    background-color: #0a3e68;
+    color: white;
 }
+
+.btn-cancel {
+    background-color: #61082a;
+    color: #ffffff;
+    margin-left: 580px;
+}
+
+.btn-detail {
+    background-color: #19408a;
+    color: #ffffff;
+}
+
 .order-total {
-    font-weight: bold;
-    color: #4CAF50;
+    font-weight: 600;
+    color: #0c0909;
+    font-size: 1.1em;
+    margin-left: 580px;
 }
+
 @media (max-width: 768px) {
-    .reviews {
-        width: 95%;
+    .order-item {
+        padding: 12px;
+    }
+
+    .product-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .order-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
 }
 
@@ -225,7 +298,7 @@ button.btn-reorder {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 1000;
