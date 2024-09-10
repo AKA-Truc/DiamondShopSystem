@@ -2,19 +2,6 @@
     position: relative;
 }
 
-/*.close-button {*/
-/*    position: absolute;*/
-/*    margin-top: -10%;*/
-/*    right: 10px;*/
-/*    font-size: 30px;*/
-/*    color: #333;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.close-button:hover {*/
-/*    color: #770e48;*/
-/*}*/
-
 .header-line {
     border: 0;
     height: 1px;
@@ -108,7 +95,7 @@ span {
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-sizing: border-box;
-    margin-top: 20px; /* Thêm khoảng cách giữa nút "Gửi Đi" và nút "Quay lại" */
+    margin-top: 20px;
 }
 
 .back-button:hover {

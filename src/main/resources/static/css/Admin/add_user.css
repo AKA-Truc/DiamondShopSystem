@@ -62,7 +62,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ebf0f8;  /*comment* menu con*/
+    background-color: #ebf0f8;
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -189,23 +189,23 @@ ion-icon {
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Hiệu ứng khi focus */
+    transition: border-color 0.3s ease;
 }
 
 .field.input select {
     width: 25%;
     padding: 8px;
-    border: 1px solid #ccc; /* Light gray border */
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff; /* White background */
+    background-color: #fff;
     font-size: 14px;
-    color: #333; /* Dark gray text color */
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    color: #333;
+    box-sizing: border-box;
 
 }
 .field input:focus {
-    border-color: #000; /* Đổi màu viền khi focus */
-    outline: none; /* Bỏ viền outline mặc định */
+    border-color: #000;
+    outline: none;
 }
 .button {
     display: flex;
@@ -213,12 +213,12 @@ ion-icon {
     margin: 30px 10px;
 }
 .button input {
-    padding: 10px 30px; /* Kích thước nhỏ hơn của nút */
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    font-size: 14px;
     cursor: pointer;
-    margin-right: 10px; /* Khoảng cách giữa các nút */
+    margin-right: 10px;
 }
 .button input.save  {
     background-color: #304067;

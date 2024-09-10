@@ -10,9 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-
-
-
 /**/
 .container {
     max-width: 1200px;
@@ -20,7 +17,6 @@ body {
     text-align: center;
     background-color: white;
     padding: 20px;
-
 }
 
  .logo1 img {
@@ -67,8 +63,6 @@ button:hover {
     color: #d78a29;
     font-weight: bold;
 }
-
-
 
 /* 6ly,7ly */
 .buttons {

@@ -87,8 +87,8 @@
     justify-content: center; /* Căn giữa theo chiều ngang */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     gap: 50px;
-    z-index: 1000; /* Đảm bảo menu nằm trên cùng */
-    position: relative; /* Để sử dụng z-index */
+    z-index: 1000;
+    position: relative;
     text-transform: uppercase;
 }
 
@@ -137,7 +137,7 @@
 
 #main-menu ul.sub-menu ul.sub-menu {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    left: 300px; /*chỉnh menu*/
+    left: 300px;
     top: 0;
 }
 
@@ -235,12 +235,11 @@
     background-color: #444;
 }
 
-/* The cart box */
 .cart-box {
     height: 100%;
     width: 25%;
     margin-left: 75%;
-    background-color: white;  /* Đổi màu cho background của cart */
+    background-color: white;
     display: none;
     position: fixed;
     flex-direction: column;
