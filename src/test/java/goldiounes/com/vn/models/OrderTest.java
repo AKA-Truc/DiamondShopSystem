@@ -24,11 +24,14 @@ public class OrderTest {
         String status = "Pending";
         Date startDate = new GregorianCalendar(2024, Calendar.MAY, 1).getTime(); //2024/5/1
         String typePayment = "Banking";
+        String phoneNumber = "123456789";
 
-        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment,phoneNumber);
         order.setTotalPrice(totalPrice);
         order.setStatus(status);
 
+
+        assertEquals(phoneNumber, order.getPhone());
         assertEquals(user, order.getUser());
         assertEquals(cart, order.getCart());
         assertEquals(promotion, order.getPromotion());
@@ -71,11 +74,14 @@ public class OrderTest {
 
         Date startDate = new GregorianCalendar(2024, Calendar.MAY, 1).getTime(); //2024/5/1
         String typePayment = "Banking";
+        String phoneNumber = "123456789";
 
-        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment);
+        Order order = new Order(user, cart, promotion, shippingAddress, startDate, typePayment,phoneNumber);
 
         assertNotNull(order);
 
+
+        assertEquals(phoneNumber, order.getPhone());
         assertEquals(user, order.getUser());
         assertEquals(cart, order.getCart());
         assertEquals(promotion, order.getPromotion());

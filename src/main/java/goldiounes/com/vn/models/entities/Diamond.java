@@ -14,8 +14,8 @@ public class Diamond {
     @Column(name = "DiamondID")
     private int DiamondID;
 
-    @Column(name = "DiamondName", nullable = false)
-    private String DiamondName;
+    @Column(name = "Measurement", nullable = false)
+    private Double Measurement;
 
     @Column(name = "Carat", nullable = false)
     private Double Carat;
@@ -32,30 +32,31 @@ public class Diamond {
     @Column(name = "Status", nullable = false)
     private String Status;
 
-    @Column(name = "Origin", nullable = false)
-    private String Origin;
+    @Column(name = "Shape", nullable = false)
+    private String Shape;
 
     @Column(name = "Price", nullable = false)
     private int Price;
 
+    @Column(name = "GIACode",nullable = false,unique = true)
+    private String GIACode;
+
     @OneToMany(mappedBy = "Diamond")
     private List<DiamondDetail> diamondDetails;
-
-    @OneToOne(mappedBy = "Diamond")
-    private Certificate certificate;
 
     public Diamond() {
         //constructor
     }
 
-    public Diamond(String diamondName ,Double carat, String color, String clarity, String cut, String origin, int price) {
-        DiamondName = diamondName;
+    public Diamond(Double measurement ,Double carat, String color, String clarity, String cut, String origin, int price, String giaCode) {
+        Measurement = measurement;
         Carat = carat;
         Color = color;
         Clarity = clarity;
         Cut = cut;
-        Origin = origin;
+        Shape = origin;
         Price = price;
+        GIACode = giaCode;
         Status = "active";
     }
 

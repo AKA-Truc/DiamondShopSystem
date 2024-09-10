@@ -1,11 +1,7 @@
 package goldiounes.com.vn.services;
 
 import goldiounes.com.vn.models.dtos.DiamondDTO;
-import goldiounes.com.vn.models.entities.Certificate;
 import goldiounes.com.vn.models.entities.Diamond;
-import goldiounes.com.vn.models.entities.Product;
-import goldiounes.com.vn.repositories.CertificateRepo;
-import goldiounes.com.vn.repositories.DiamondDetailRepo;
 import goldiounes.com.vn.repositories.DiamondRepo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -20,9 +16,6 @@ public class DiamondService {
 
     @Autowired
     private DiamondRepo diamondRepo;
-
-    @Autowired
-    private CertificateRepo certificateRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -45,13 +38,16 @@ public class DiamondService {
     public DiamondDTO findById(int id) {
         Diamond diamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found"));
+        if(!diamond.getStatus().equals("active")){
+            throw new RuntimeException("Diamond not found");
+        }
         return modelMapper.map(diamond, DiamondDTO.class);
     }
 
     public DiamondDTO createDiamond(DiamondDTO diamondDTO) {
         Diamond diamond = modelMapper.map(diamondDTO, Diamond.class);
         Diamond existingDiamond = diamondRepo.findDiamond(diamondDTO.getCarat(),diamondDTO.getClarity(),diamondDTO.getColor()
-                                                 ,diamondDTO.getCut(),diamondDTO.getOrigin());
+                                                 ,diamondDTO.getCut(),diamondDTO.getShape(),diamondDTO.getMeasurement());
         if (existingDiamond != null) {
             throw new RuntimeException("Diamond already exists");
         } else {
@@ -65,12 +61,13 @@ public class DiamondService {
         Diamond diamond = modelMapper.map(diamondDTO, Diamond.class);
         Diamond existingDiamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
-        existingDiamond.setDiamondName(diamondDTO.getDiamondName());
+        existingDiamond.setGIACode(diamondDTO.getGIACode());
+        existingDiamond.setMeasurement(diamond.getMeasurement());
         existingDiamond.setCarat(diamond.getCarat());
         existingDiamond.setColor(diamond.getColor());
         existingDiamond.setClarity(diamond.getClarity());
         existingDiamond.setCut(diamond.getCut());
-        existingDiamond.setOrigin(diamond.getOrigin());
+        existingDiamond.setShape(diamond.getShape());
         existingDiamond.setPrice(diamond.getPrice());
         diamondRepo.save(existingDiamond);
         return modelMapper.map(existingDiamond, DiamondDTO.class);
@@ -79,9 +76,6 @@ public class DiamondService {
     public boolean deleteDiamond(int id) {
         Diamond existingDiamond = diamondRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diamond not found with ID: " + id));
-        Certificate certificate = certificateRepo.findByDiamondId(id)
-                .orElseThrow(() -> new RuntimeException("Certificate not found"));
-        certificateRepo.delete(certificate);
         existingDiamond.setStatus("inactive");
         diamondRepo.save(existingDiamond);
         return true;
