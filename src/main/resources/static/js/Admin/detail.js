@@ -1,149 +1,131 @@
-'use strict';
-
-const fetchOrderDetailsAndUpdateHTML = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('id');
-
-    try {
-        const orderResponse = await fetch(`http://localhost:8080/api/order/getOrder/${orderId}`);
-        if (!orderResponse.ok) {
-            throw new Error('Failed to fetch order details');
-        }
-        const order = await orderResponse.json();
-
-        // Log the order object to check its structure
-        console.log(order);
-
-        // Update HTML elements with order details
-        if (order.Customer) {
-            document.getElementById('customerName').innerText = order.Customer.Name || 'N/A';
-            document.getElementById('customerPhone').innerText = order.Customer.Phone || 'N/A';
-        }
-        document.getElementById('orderID').innerText = order.OrderID || 'N/A';
-        document.getElementById('orderDate').innerText = order.OrderDate ? new Date(order.OrderDate).toLocaleString() : 'N/A';
-        document.getElementById('orderStatus').innerText = order.Status || 'N/A';
-
-        // Example: Updating a product table (adjust based on your actual table structure)
-        const productTableBody = document.getElementById('product-table-body');
-        productTableBody.innerHTML = ''; // Clear existing content
-
-        if (order.OrderDetail && Array.isArray(order.OrderDetail)) {
-            order.OrderDetail.forEach(detail => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${detail.Product?.Name || 'N/A'}</td>
-                    <td>${detail.Product?.Price.toLocaleString() || 'N/A'}</td>
-                    <td>${detail.Quantity || 'N/A'}</td>
-                `;
-                productTableBody.appendChild(row);
-            });
-        }
-
-    } catch (error) {
-        console.error('Error fetching or updating order details:', error);
-        alert('Failed to fetch or update order details');
-    }
-};
-
-const fetchVouchersAndUpdateSelect = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('id');
-
-    try {
-        // Fetch order details to get the OrderDate
-        const orderResponse = await fetch(`http://localhost:8080/api/order/getOrder/${orderId}`);
-        if (!orderResponse.ok) {
-            throw new Error('Failed to fetch order details');
-        }
-        const order = await orderResponse.json();
-        const orderDate = new Date(order.OrderDate); // Order date
-
-        // Fetch all vouchers with EXDate
-        const voucherResponse = await fetch('http://localhost:8080/api/voucher/getAllVouchers'); // Adjust URL if needed
-        if (!voucherResponse.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await voucherResponse.json();
-
-        // Filter vouchers based on EXDate > OrderDate
-        const validVouchers = data.listVoucher.filter(item => {
-            const exDate = new Date(item.EXDate); // EXDate of the voucher
-            return exDate > orderDate;
-        });
-
-        // Log filtered vouchers
-        console.log('Valid vouchers:', validVouchers);
-
-        const select = document.getElementById('VoucherID');
-        select.innerHTML = ''; // Clear existing options
-
-        validVouchers.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.VoucherID; // Adjust field based on actual data
-            option.textContent = `${item.Name} - ${item.Describes}`; // Adjust field based on actual data
-            select.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Error fetching or updating vouchers:', error);
-    }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
-    fetchOrderDetailsAndUpdateHTML();
-    fetchVouchersAndUpdateSelect();
+    console.log('Document is ready.');
 
-    document.getElementById('confirm-btn').addEventListener('click', async () => {
-        const orderId = document.getElementById('orderID').innerText.trim();
-        const voucherId = document.getElementById('VoucherID').value.trim();
+    let deleteOrderId; // Biến lưu trữ ID đơn hàng để xóa
+    let currentRow; // Biến lưu trữ dòng hiện tại của đơn hàng
 
-        try {
-            // Thực hiện tạo hóa đơn bằng cách gọi API createInvoice
-            const formInvoice = {
-                OrderID: orderId,
-                VoucherID: voucherId,
-            };
+    const fetchAndDisplayOrders = () => {
+        fetch('http://localhost:8080/api/order/getAllOrder')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data fetched:', data);
 
-            const invoiceResponse = await fetch('http://localhost:8080/api/invoice/createInvoice', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formInvoice)
-            });
+                const orders = data;
 
-            if (!invoiceResponse.ok) {
-                throw new Error('Không thể tạo hóa đơn: ' + (await invoiceResponse.text()));
+                if (!Array.isArray(orders)) {
+                    throw new Error('Expected an array of orders');
+                }
+
+                const orderList = document.getElementById('order-List');
+                orderList.innerHTML = ''; // Xóa các hàng trước
+
+                orders.forEach((order, index) => {
+                    if (order.Status === "Chưa Xác Nhận") {
+                        const row = document.createElement('tr');
+
+                        row.innerHTML = `
+                            <td class="editable">${index + 1}</td>
+                            <td class="editable">${order.OrderID}</td>
+                            <td class="editable">${order.Customer.Name}</td>
+                            <td class="editable">${order.OrderDate}</td>
+                            <td class="editable">${order.Status}</td>
+                            <td class="action-buttons">
+                                <button class="view-btn"><ion-icon name="eye"></ion-icon></button>
+                                <button class="edit-btn"><ion-icon name="create-outline"></button>
+                                <button class="delete-btn" data-id="${order.OrderID}"><ion-icon name="trash-outline"></ion-icon></button>
+                            </td>
+                        `;
+
+                        orderList.appendChild(row);
+
+                        // Sự kiện khi nhấn nút view
+                        const viewBtn = row.querySelector('.view-btn');
+                        viewBtn.addEventListener('click', () => {
+                            // Chuyển hướng đến trang chi tiết đơn hàng với ID tương ứng
+                            window.location.href = `../order/detail.html?id=${order.OrderID}`;
+                        });
+                        // Sự kiện khi nhấn nút edit
+                        const editBtn = row.querySelector('.edit-btn');
+                        editBtn.addEventListener('click', () => {
+                            // Chuyển hướng đến trang chi tiết đơn hàng với ID tương ứng
+                            window.location.href = `../order/chinhsuaorder.html?id=${order.OrderID}`;
+                        });
+                        // Sự kiện khi nhấn nút delete
+                        const deleteBtn = row.querySelector('.delete-btn');
+                        deleteBtn.addEventListener('click', () => {
+                            // Lưu ID đơn hàng và hiển thị popup
+                            deleteOrderId = order.OrderID;
+                            currentRow = row;
+                            showPopup();
+                        });
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching orders:', error));
+    };
+
+    // Hàm hiển thị popup
+    const showPopup = () => {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'flex';
+    };
+
+    // Event listener cho nút OK trong popup
+    const popupOk = document.getElementById('popupOk');
+    if (popupOk) {
+        popupOk.addEventListener('click', async () => {
+            if (deleteOrderId) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/order/deleteOrder/${deleteOrderId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to delete order');
+                    }
+
+                    // Xóa dòng từ bảng khi xóa thành công
+                    if (currentRow) {
+                        currentRow.remove();
+                    }
+
+                    console.log('Order deleted successfully');
+                } catch (error) {
+                    console.error('Error deleting order:', error);
+                    // Xử lý lỗi hoặc hiển thị thông báo lỗi
+                    alert('Failed to delete order');
+                } finally {
+                    // Đóng popup sau khi thực hiện xóa
+                    const popup = document.getElementById('popup');
+                    popup.style.display = 'none';
+                }
             }
+        });
+    } else {
+        console.error('OK button not found in popup');
+    }
 
-            const invoice = await invoiceResponse.json();
-            console.log('Chi tiết hóa đơn:', invoice);
+    // Event listener cho nút Cancel trong popup
+    const popupCancel = document.getElementById('popupCancel');
+    if (popupCancel) {
+        popupCancel.addEventListener('click', () => {
+            // Đóng popup mà không làm gì thêm
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        });
+    } else {
+        console.error('Cancel button not found in popup');
+    }
 
-            // Xác nhận đơn hàng sau khi tạo hóa đơn thành công
-            const confirmResponse = await fetch(`http://localhost:8080/api/order/confirmOrder/${orderId}`, {
-                method: 'PUT'
-            });
-
-            if (!confirmResponse.ok) {
-                throw new Error('Không thể xác nhận đơn hàng: ' + (await confirmResponse.text()));
-            }
-
-            // Chuyển hướng người dùng đến trang bill.html sau khi tạo hóa đơn thành công
-            window.location.href = `bill.html?InvoiceID=${invoice.invoice.InvoiceID}`;
-
-        } catch (error) {
-            console.error('Lỗi khi xác nhận đơn hàng:', error);
-            alert('Đã xảy ra lỗi khi xác nhận đơn hàng: ' + error.message);
-        }
-    });
-
-    document.getElementById('back-btn').addEventListener('click', () => {
-        // Construct the new URL
-        const newUrl = `../menu/menu.html`;
-
-        // Redirect to the new page
-        window.location.href = newUrl;
-    });
+    // Gọi hàm fetch và hiển thị đơn hàng khi trang được tải lần đầu
+    fetchAndDisplayOrders();
 });
+
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {
 //     const accessToken = sessionStorage.getItem('accessToken');
@@ -152,3 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
 //         window.location.href = '../Login/login.html';
 //     }
 // });
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('logoutBtn').addEventListener('click', function(event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
+
+        // Chuyển hướng đến trang logout.js
+        window.location.href = '../Login/logout.js';
+    });
+});

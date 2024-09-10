@@ -1,39 +1,4 @@
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-size: cover;
-}
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.confirm-btn, .back-btn {
-    background-color: #304067;
-    font-size: 17px;
-    padding: 9px 19px;
-    margin: 0 10px;
-    border: none;
-    cursor: pointer;
-    color: white;
-    border-radius: 10px;
-}
-select {
-    font-size: 14px;
-    padding: 6px;
-    width: 20%;
-    margin-left: 20px;
-    border-radius: 5px;
-}
-
-
-option {
-    font-size: 18px;
-    padding: 10px;
-}
-body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -52,7 +17,7 @@ body {
     padding-top: 20px;
 }
 
-
+/* Tiêu đề sidebar */
 .sidebar h2 {
     color: #0d0e1c; /*chỉnh chữ*/
     text-align: center;
@@ -85,6 +50,8 @@ body {
 .main-menu li a:hover {
     background-color: #cbd0dd; /*click menu*/
 }
+
+/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -182,88 +149,151 @@ ion-icon {
 }
 
 
+/* main */
 
-.body1 {
-    font-family: Arial, sans-serif;
+.main-content {
     margin-left: 280px;
-    margin-top: 2%;
+    padding: 20px;
+    width: calc(100% - 280px);
+}
+.customer-management {
+    margin-top: 20px;
 }
 
-.contain {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-    border-radius:2% 2%;
-    border: #000000 solid 0.5px;
-}
 
-.header{
-    background: #fff;
-    color: #333;
-    padding-top: 3px;
-    min-height: 70px;
-    border-bottom: #264d27 3px solid;
-}
-
-.header h1 {
-    text-align: center;
-    text-transform: uppercase;
-    padding-top: 5px;
+.customer-management h3 {
+    margin: 0 0 20px 0;
+    color: #000;
     font-size: 24px;
 }
 
-.main-content {
-    padding: 20px;
-    background: #f4f4f4;
+.add-customer-btn {
+    background-color: #304067;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
 }
 
-.main-content h2 {
-    text-align: center;
+.add-customer-btn i {
+    margin-left: 10px;
 }
 
-.order-info, .product-info {
-    background: #fff;
-    padding: 20px;
-    margin: 20px 0;
+.search-bar {
+    padding: 15px;
+    width: calc(50% - 280px);
+    margin-bottom: 20px;
+    border-radius: 20px;
     border: 1px solid #ddd;
+    margin-left: 830px
 }
 
-.order-info h3, .product-info h3 {
-    margin: 0 0 10px;
+/* table */
+.table-wrapper {
+    width: 93%;
+    padding: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #e4e7ef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-.order-info p, .product-info p {
-    margin: 5px 0;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 10px;
+    padding: 23px;
     text-align: left;
 }
 
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
 th {
-    background: #f4f4f4;
+    background-color: #f9f9f9;
+    color: black;
 }
 
-.status {
-    color: white;
-    background-color: #007bff;
-    padding: 5px 10px;
+/*  */
+
+.edit-btn,
+.delete-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit-btn i {
+    color: #0d62fc;
+}
+
+.delete-btn i {
+    color: #d92e3e;
+}
+
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page-btn {
+    background-color: #d92e3e;
+    color: #fff;
+    border: none;
     border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.form-role {
-    display: grid;
-    justify-content: left;
-    height: 10vh;
+/* popup */
+/* Popup styles */
+.popup-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#yes-btn {
+    background-color: #d92e3e;
+    color: #fff;
+}
+
+#no-btn {
+    background-color: #ddd;
+}
