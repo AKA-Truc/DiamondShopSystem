@@ -61,24 +61,25 @@ function updateUser() {
     const token = localStorage.getItem('authToken');
     const updateButton = document.getElementById('Update_user');
     const editButton = document.getElementById('unlock_user');
-    const user = JSON.parse(atob(localStorage.getItem('authToken').split('.')[1]));
+    const userToken = JSON.parse(atob(localStorage.getItem('authToken').split('.')[1]));
 
-    const UserForm = {
+    const User = new FormData();
+    User.append('user', JSON.stringify({
         email: document.getElementById('email1').value,
         userName: document.getElementById('name').value,
         address: document.getElementById('address').value,
         gender: document.getElementById('genderSelect').value,
         role: document.getElementById('role').value
-    };
+    }));
 
-    fetch(`${window.base_url}/user-management/users/${user.userId}`, {
+    fetch(`${window.base_url}/user-management/users/${userToken.userId}`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(UserForm)
+        body: User
     })
+
         .then(response => {
             if (response.ok) {
                 document.getElementById('name').disabled = true;

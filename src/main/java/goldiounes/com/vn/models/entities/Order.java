@@ -26,6 +26,9 @@ public class Order {
     @Column(name = "TotalPrice", nullable = false)
     private int TotalPrice;
 
+    @Column(name = "Phone", nullable = false)
+    private String Phone;
+
     @Column(name = "Status", nullable = false)
     private String Status;
 
@@ -49,12 +52,13 @@ public class Order {
         //cstor
     }
 
-    public Order(User user, Cart cart, Promotion promotion, String shippingAddress, Date startDate, String typePayment) {
+    public Order(User user, Cart cart, Promotion promotion, String shippingAddress, Date startDate, String typePayment, String phone) {
         User = user;
         Cart = cart;
         Promotion = promotion;
         ShippingAddress = shippingAddress;
         StartDate = startDate;
         TypePayment = typePayment;
+        Phone = phone;
     }
 }

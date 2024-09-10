@@ -19,11 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(result => {
                 const data = result.data;
 
-                if (!Array.isArray(data)) {
-                    throw new Error("Expected an array but got something else");
-                }
+                if (!Array.isArray(data)) throw new Error("Expected an array but got something else");
 
-                voucherList.innerHTML = '';  // Clear previous data
+                voucherList.innerHTML = '';
                 data.forEach((voucher, index) => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
@@ -40,24 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                     voucherList.appendChild(row);
                 });
-
                 addDeleteEventListeners();
             })
             .catch(error => console.error("Error fetching vouchers:", error));
     }
 
     function addOrUpdateVoucher(voucherData) {
-        let url ;
-        let method;
+        let url = isEditing
+            ? `${window.base_url}/promotion-management/promotions/${editingVoucherId}`
+            : `${window.base_url}/promotion-management/promotions`;
 
-        if (isEditing === true) {
-            url = `${window.base_url}/promotion-management/promotions/${editingVoucherId}`;
-            method = 'PUT';
-        }
-        else{
-            url = `${window.base_url}/promotion-management/promotions`;
-            method = 'POST';
-        }
+        let method = isEditing ? 'PUT' : 'POST';
 
         fetch(url, {
             method: method,
@@ -74,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return response.json();
             })
-            .then(data => {
+            .then(() => {
                 alert(isEditing ? "Voucher updated successfully!" : "Voucher added successfully!");
                 fetchVouchers();
                 popup1Overlay.style.display = 'none';
@@ -83,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error("Error adding/updating voucher:", error));
     }
 
-    // Hàm xử lý sự kiện delete voucher
     function addDeleteEventListeners() {
         const popup = document.getElementById('popup');
         const yesBtn = document.getElementById('yes-btn');
@@ -130,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Hàm xử lý sự kiện submit form
     voucherForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const formData = new FormData(voucherForm);
@@ -144,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addOrUpdateVoucher(voucherData);
     });
 
-    // Hàm xử lý tìm kiếm
     searchInput.addEventListener('input', () => {
         const searchText = searchInput.value.trim().toLowerCase();
         const rows = document.querySelectorAll('#voucher-List tr');
@@ -155,11 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hàm xử lý chỉnh sửa voucher
     window.editVoucher = function(voucherId) {
         isEditing = true;
         editingVoucherId = voucherId;
-        console.log(isEditing, editingVoucherId);
 
         fetch(`${window.base_url}/promotion-management/promotions/${voucherId}`, {
             method: 'GET',
@@ -169,11 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
             .then(response => {
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        alert('Bạn không có quyền truy cập');
-                    }
-                    return Promise.reject(new Error('Phản hồi không hợp lệ'));
+                if (!response.ok && response.status === 401) {
+                    alert('You do not have permission');
+                    return Promise.reject(new Error('Unauthorized'));
                 }
                 return response.json();
             })
@@ -184,13 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("StartDate").value = new Date(data.startDate).toISOString().slice(0, 16);
                 document.getElementById("EXDate").value = new Date(data.endDate).toISOString().slice(0, 16);
                 document.getElementById("Describes").value = data.description;
-
                 popup1Overlay.style.display = 'flex';
             })
-            .catch(error => console.error("Lỗi khi lấy chi tiết voucher:", error));
+            .catch(error => console.error("Error fetching voucher details:", error));
     };
 
-    // Các sự kiện mở/đóng popup
     document.getElementById('openpopup1').addEventListener('click', () => {
         voucherForm.reset();
         popup1Overlay.style.display = 'flex';
@@ -198,31 +180,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('closepopup1').addEventListener('click', () => {
-        if(confirm("Xác Nhận Hủy?")){
+        if (confirm("Confirm cancellation?")) {
             popup1Overlay.style.display = 'none';
         }
     });
 
     document.getElementById('cancelButton').addEventListener('click', () => {
-        if(confirm("Xác Nhận Hủy?")){
+        if (confirm("Confirm cancellation?")) {
             popup1Overlay.style.display = 'none';
         }
     });
 
     window.addEventListener('click', (event) => {
-        if (event.target === popup1Overlay) {
-            if(confirm("Xác Nhận Hủy?")){
-                popup1Overlay.style.display = 'none';
-            }
+        if (event.target === popup1Overlay && confirm("Confirm cancellation?")) {
+            popup1Overlay.style.display = 'none';
         }
     });
 
-    // Hàm reset trạng thái form
     function resetFormState() {
         isEditing = false;
         editingVoucherId = null;
     }
 
-    // Lấy danh sách voucher khi trang load
     fetchVouchers();
 });

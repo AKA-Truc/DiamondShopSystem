@@ -15,6 +15,7 @@ public class OrderDTO {
     private String shippingAddress;
     private Date startDate;
     private String typePayment;
+    private String phone;
 
     // @JsonBackReference
     private UserDTO user;

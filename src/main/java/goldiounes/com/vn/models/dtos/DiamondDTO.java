@@ -9,17 +9,15 @@ import java.util.List;
 @Data
 public class DiamondDTO {
     private int diamondId;
-    private String diamondName;
+    private String GIACode;
+    private double measurement;
     private double carat;
     private String color;
     private String clarity;
     private String cut;
-    private String origin;
+    private String shape;
     private int price;
 
     @JsonIgnore
     private List<DiamondDetailDTO> diamondDetails;
-
-    //@JsonManagedReference
-    private CertificateDTO certificate;
 }

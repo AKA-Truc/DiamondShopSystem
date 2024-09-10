@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <a href="blog_management.html"><ion-icon name="newspaper-outline"></ion-icon> Quản lý bài viết</a>
                 </li>
                 <li class="submenu">
-                    <a href="add_diamond.html"><ion-icon name="diamond-outline"></ion-icon> Quản lý kim Cương</a>
+                    <a href="diamond.html"><ion-icon name="diamond-outline"></ion-icon> Quản lý kim Cương</a>
                 </li>
                 <li class="submenu">
                     <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <li class="submenu">
                     <a href="./feedback.html"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
                 </li>
-                <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>
-                <li><a href="./mail.html"><span class="icon"><ion-icon name="mail-outline"></ion-icon></span> Hộp thư</a></li>
+                <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>               
                 <li class="submenu">
                     <a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a>
                 </li>
