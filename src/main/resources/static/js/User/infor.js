@@ -148,7 +148,9 @@ function displayOrders(orders) {
         orderItem.innerHTML = `
             <div class="order-header">
                 <div class="order-id">Mã đơn: ${order.orderId}</div>
-                <div class="order-status">Trạng thái: ${getStatusText(order.status)}</div>
+                <div class="order-status ${getStatusClass(order.status)}">
+                    Trạng thái: ${getStatusText(order.status)}
+                </div>
             </div>
             <div class="order-body">
                 ${order.orderDetails.map(detail => `
@@ -194,6 +196,16 @@ function getStatusText(status) {
     }
 }
 
+
+function getStatusClass(status) {
+    switch (status) {
+        case 'New': return 'status-new';
+        case 'Đã xác nhận': return 'status-confirmed';
+        case 'Đang vận chuyển': return 'status-shipping';
+        case 'Đã giao': return 'status-delivered';
+        default: return 'status-unknown';
+    }
+}
 function formatCurrency(amount) {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 }
