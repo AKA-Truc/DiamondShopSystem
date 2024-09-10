@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f7fb;
+    overflow-x: hidden;
 }
 
 
@@ -194,44 +195,44 @@ ion-icon {
 
 /* main */
 .main {
-    overflow-x: auto; /* Kích hoạt thanh cuộn ngang */
-    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+    overflow-x: auto;
+    white-space: nowrap;
     position: absolute;
-    top: 101px; /* Điều chỉnh để nằm dưới thanh navbar */
-    width: calc(100% - 280px); /* Đặt chiều rộng trừ đi chiều ngang của sidebar */
+    top: 101px;
+    width: calc(100% - 280px);
     left: 280px;
-    min-height: calc(100vh - 10px); /* Đảm bảo chiếm đủ chiều cao */
+    min-height: calc(100vh - 10px);
 }
 
 /* Lưới tổng quan Dashboard */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cột */
-    grid-gap: 20px; /* Khoảng cách giữa các khối */
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
     padding: 20px;
-    width: max-content; /* Đảm bảo chiều rộng lưới đủ lớn để cuộn */
-    max-width: 100%; /* Giới hạn chiều rộng tối đa */
+    width: max-content;
+    max-width: 98%;
 }
 
-/* Bố cục cho Today's Sales và Visitor Insights trên cùng một hàng */
+
 #today-sales {
     display: flex;
-    justify-content: space-between; /* Đảm bảo khoảng cách giữa các thẻ */
+    justify-content: space-between;
     gap: 20px;
-    grid-column: span 2; /* Khối today-sales chiếm 2 cột */
+    grid-column: span 2;
     height: fit-content;
+
 }
 
 #customer-gender {
     grid-column: span 1; /* Khối visitor-insights chiếm 2 cột để hàng đầu tiên ngang nhau */
 }
 
-/* Bố cục cho Total Revenue, Customer Satisfaction, Target vs Reality trên cùng một hàng */
 #total-revenue, #order-today, #order-by-year {
     grid-column: span 1; /* Mỗi khối chiếm 1 cột */
 }
 
-/* Bố cục cho Top Products, Sales Mapping, Volume vs Service trên cùng một hàng */
+
 #top-products, #sales-mapping, #sales-customer {
     grid-column: span 1; /* Mỗi khối chiếm 1 cột trong hàng */
 }
@@ -300,7 +301,8 @@ ion-icon {
 }
 
 #total-revenue {
-    width: 400px;
+    width: 450px;
+    height: 300px;
 }
 /* Thẻ sản phẩm */
 #top-products-list {
