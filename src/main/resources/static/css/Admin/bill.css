@@ -2,7 +2,7 @@
 .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px; /* Optional: to add some spacing from the top */
+    margin-top: 20px;
 }
 
 .confirm-btn {
@@ -72,7 +72,7 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #cbd0dd; /*click menu*/
+    background-color: #cbd0dd;
 }
 
 /* Submenu sổ xuống */
@@ -86,7 +86,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ebf0f8;  /*comment* menu con*/
+    background-color: #ebf0f8;
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -112,7 +112,7 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #cbd0dd;/* comment*/
+    background-color: #cbd0dd;
 }
 
 ion-icon {
@@ -169,7 +169,7 @@ ion-icon {
     width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #162165e7; /*thanh br*/
+    background-color: #162165e7;
 }
 
 
@@ -255,6 +255,6 @@ th {
 .form-role {
     display: grid;
     justify-content: left;
-    height: 10vh; /* Chiều cao của form, có thể sửa đổi theo ý muốn */
+    height: 10vh; /* Chiều cao của form */
 }
 

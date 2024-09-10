@@ -62,7 +62,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ebf0f8;  /*comment* menu con*/
+    background-color: #ebf0f8;
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -88,7 +88,7 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #cbd0dd;/* comment*/
+    background-color: #cbd0dd;
 }
 
 ion-icon {

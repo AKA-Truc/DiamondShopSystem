@@ -98,7 +98,6 @@ body {
     text-decoration: none;
 }
 
-/* coupon section */
 .cart-page {
     display: flex;
     justify-content: space-between;
@@ -147,8 +146,6 @@ body {
 .apply-coupon-btn:hover {
     background-color: #083a3a;
 }
-
-
 
 .cart-summary {
     width: 32%;

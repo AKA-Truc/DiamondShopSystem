@@ -284,9 +284,15 @@ ion-icon {
     margin-top: 20px;
 }
 
+/*#order-today {*/
+/*    text-align: center;*/
+/*    width: 300px;*/
+/*}*/
+
 #order-today {
     text-align: center;
-    width: 300px;
+    width: 150px; /* Điều chỉnh chiều rộng */
+    height: 100px; /* Điều chỉnh chiều cao */
 }
 
 #customer-gender  {

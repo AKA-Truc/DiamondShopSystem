@@ -10,13 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-
-
-/* The cart box */
-
-
-
-
 /**/
 
 .wrapper {
@@ -199,7 +192,6 @@ body {
 .footer__list a:hover {
     text-decoration: underline;
 }
-
 
 form {
     display: flex;

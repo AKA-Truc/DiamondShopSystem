@@ -23,19 +23,6 @@ body {
     position: relative;
 }
 
-/*.close-button {*/
-/*    position: absolute;*/
-/*    margin-top: -5%;*/
-/*    right: 10px;*/
-/*    font-size: 30px;*/
-/*    color: #333;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.close-button:hover {*/
-/*    color: #770e48;*/
-/*}*/
-
 .header-line {
     border: 0;
     height: 1px;

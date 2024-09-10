@@ -10,8 +10,6 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-
-/* End update code for search and cart */
 /**/
 .content {
     max-width: 800px;
@@ -78,7 +76,6 @@ h1, h2 {
     color: #0056b3;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .toc-container {
         max-width: 100%;

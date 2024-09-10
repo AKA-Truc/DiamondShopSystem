@@ -137,7 +137,6 @@ body {
 
 #main-menu ul.sub-menu a {
     padding: 12px 20px;
-    /* border-bottom: 1px solid #94968f; */
     left: 0;
 }
 
@@ -195,7 +194,6 @@ body {
 }
 
 /**/
-/* Begin update code for search and cart */
 .search-overlay {
     display: none;
     position: fixed;
@@ -256,7 +254,7 @@ body {
     height: 100%;
     width: 25%;
     margin-left: 75%;
-    background-color: white;  /* Đổi màu cho background của cart */
+    background-color: white;
     display: none;
     position: fixed;
     flex-direction: column;
@@ -323,7 +321,6 @@ body {
 
 
 /**/
-/*select*/
 .category-select {
     display: inline-block;
     position: relative;
@@ -378,7 +375,6 @@ body {
     border-color: #aaa;
 }
 
-/*select*/
 /**/
 .wrapper {
     position: relative;

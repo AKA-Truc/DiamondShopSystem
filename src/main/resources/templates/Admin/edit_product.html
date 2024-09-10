@@ -4,85 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa sản phẩm</title>
-    <link rel="stylesheet" href="/static/css/Admin/edit_product.css">
-    <script>
-        function alertFeature() {
-            alert('Tính năng đang được được phát triển');
-        }
-    </script>
-</head>
-<body>
+    <link rel="stylesheet" href="/static/css/Admin/add_product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<body>
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
-
-<div class="body1">
-    <div class="wrapper">
-        <form id="myForm" enctype="multipart/form-data">
-            <div class="top-fields">
-                <div class="field input">
-                    <label for="CategoryID">Loại Sản Phẩm</label>
-                    <select id="CategoryID" name="CategoryID" class="styled-select">
-                        <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
-                    </select>
-                </div>
-                <div class="field input">
-                    <label for="Name">Tên Sản Phẩm</label>
-                    <input type="text" id="Name" name="Name" placeholder="Nhập Tên Sản Phẩm" required>
-                </div>
-            </div>
-
-            <div class="middle-fields">
-                <!--                <div class="field input">-->
-                <!--                    <label for="Brand">Thương Hiệu</label>-->
-                <!--                    <input type="text" id="Brand" name="Brand" placeholder="Nhập Tên Thương Hiệu" required>-->
-                <!--                </div>-->
-
-                <div class="field input">
-                    <label for="Price">Giá</label>
-                    <input type="number" id="Price" name="Price" placeholder="Nhập Giá Tiền" required>
-                </div>
-
-                                <div class="field input">
-                                    <label for="Inventory">Số Lượng Tồn Kho</label>
-                                    <input type="number" id="Inventory" name="Inventory" placeholder="Nhập Số Lượng" required>
-                                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="field input">
-                    <label for="Warranty">Thời hạn bảo hành</label>
-                    <input type="date" id="Warranty" name="Warranty" required>
-                </div>
-            </div>
-
-            <div class="field input">
-                <label for="image">Ảnh sản phẩm</label>
-                <input type="file" id="image" name="image">
-            </div>
-
-            <div class="field input">
-                <label for="image">Ảnh sản phẩm 2</label>
-                <input type="file" id="image2" name="image">
-            </div>
-
-            <div class="field input">
-                <label for="Description">Mô Tả</label>
-                <input type="text" id="Description" name="Description" placeholder="Nhập Mô Tả Của Sản Phẩm" required>
-            </div>
-
-            <div class="button-group">
-                <input type="submit" value="Chỉnh Sửa Sản Phẩm" class="save">
-                <input type="button" value="Hủy" class="cancel">
-            </div>
-        </form>
-    </div>
-
-</div>
-<!---->
+<script src="/static/js/url.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="/static/js/Admin/edit_product.js"></script>
+<script src="/static/js/Admin/add_product.js"></script>
 
+<div class="histaff-item-group background-white border-radius-5 active" id="histaff-work-exp" style="background-color: #f4f7fb;">
+    <div class="body1">
+        <div class="row">
+            <div class="col-sm-12 histaff-item-group-header">
+                <h3 style="margin-left: 180px">Sản phẩm </h3>
+            </div>
+        </div>
+        <div class="wrapper">
+            <form id="myForm" enctype="multipart/form-data">
+                <div class="top-fields">
+                    <div class="field" style="margin-right: 2px;">
+                        <label for="loaiSanPham">Loại Sản Phẩm</label>
+                        <select id="loaiSanPham" name="loaiSanPham">
+                        </select>
+                    </div>
+
+                    <div class="field input">
+                        <label for="Name">Tên Sản Phẩm</label>
+                        <input type="text" id="Name" name="Name" placeholder="Nhập Tên Sản Phẩm" required>
+                    </div>
+                </div>
+
+                <div class="form-row" style="display: flex;">
+                    <div class="field input" style="flex: 1 1 32%; margin-right: 2px;">
+                        <label for="Warranty">Thời Hạn Bảo Hành</label>
+                        <input type="number" id="Warranty" name="Warranty" class="table-control item-control" placeholder="Nhập Thời Hạn Bảo Hành" required style="width: 100%;
+                       padding: 10px; top: -5px; margin-bottom: 6px;  position: relative; box-sizing: border-box;" min="0">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="add-product-type" class="overlay">
+            <div class="form-container">
+                <span class="close-btn" onclick="closeProductTypeForm()">&times;</span>
+                <h2>Thêm loại hàng</h2>
+                <form>
+                    <div>
+                        <label for="additional-product-name">Tên loại hàng</label>
+                        <input type="text" id="additional-product-name" placeholder="Nhập tên loại hàng">
+                    </div>
+                    <div class="button-group2">
+                        <button type="button" class="btn-confirm" onclick="submitProductType()">Xác nhận</button>
+                        <button type="button" class="btn-cancel" onclick="closeProductTypeForm()">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row1">
+                <div class="col-sm-12 histaff-item-group-header">
+                    <h3 style="margin-left: 180px">Chi tiết sản phẩm </h3>
+                </div>
+            </div>
+            <div class="row padding-tb-15 margin-b-15">
+                <div class="col-md-12">
+                    <div class="histaff-table">
+                        <div class="hs-button table-add-btn">
+                            <span><i class="fa fa-plus" aria-hidden="true"></i> Thêm</span>
+                        </div>
+                        <table class="h-table">
+                            <thead>
+                            <tr>
+                                <th class="text-center f-weight-4" style="width: 50px;"><input type="checkbox" class="table-checkAll"></th>
+                                <th class="text-center f-weight-4" style="width: 250px;">Vỏ kim cương</th>
+                                <th class="text-center f-weight-4" style="width: 300px;">Tên kim cương</th>
+                                <th class="text-center f-weight-4" style="width: 300px;">Size</th>
+                                <th class="text-center f-weight-4" style="width: 130px;">Tỉ lệ áp giá</th>
+                                <th class="text-center f-weight-4" style="width: 250px;">Tiền gia công</th>
+                                <th class="text-center f-weight-4" style="width: 350px;">Số lượng tồn kho</th>
+                                <th class="text-center f-weight-4" style="width: 250px;">Thao tác</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <input type="submit" value="Thêm Sản Phẩm" class="save">
+                <input type="button" value="Hủy" class="cancel" onclick="cancelForm()">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+
+</script>
 </html>

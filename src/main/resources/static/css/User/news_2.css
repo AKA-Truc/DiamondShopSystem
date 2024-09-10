@@ -3,13 +3,11 @@ body {
     margin: 0;
 }
 
-
 * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
-
 
 /* The search box */
 .search-box {
@@ -48,12 +46,11 @@ body {
     background-color: #444;
 }
 
-/* The cart box */
 .cart-box {
     height: 100%;
     width: 25%;
     margin-left: 75%;
-    background-color: white;  /* Đổi màu cho background của cart */
+    background-color: white;
     display: none;
     position: fixed;
     flex-direction: column;
@@ -117,7 +114,6 @@ body {
     display: block;
     opacity: 1;
 }
-/* End update code for search and cart */
 /**/
 .content {
     max-width: 800px;
@@ -166,7 +162,6 @@ h1, h2 {
     color: #0056b3;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .toc-container {
         max-width: 100%;
