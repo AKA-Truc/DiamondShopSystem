@@ -30,7 +30,7 @@ public class PromotionController {
     }
 
     @GetMapping("/promotions")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_SALE STAFF')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_SALE STAFF', 'ROLE_CUSTOMER')")
     public ResponseEntity<ResponseWrapper<List<PromotionDTO>>> getAllPromotions() {
         List<PromotionDTO> promotions = promotionService.findAll();
         ResponseWrapper<List<PromotionDTO>> response = new ResponseWrapper<>("Promotions retrieved successfully", promotions);
