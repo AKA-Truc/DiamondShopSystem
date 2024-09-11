@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 diamondMap.set(diamondId, { quantity: 0, typeDiamond: diamondType });
                             }
 
-                            if (diamondType === 'Chủ') {
+                            if (diamondType === '1') {
                                 diamondMap.get(diamondId).quantity = 1;
                             } else {
                                 diamondMap.get(diamondId).quantity += quantity;
