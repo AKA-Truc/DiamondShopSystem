@@ -18,6 +18,6 @@ public interface DiamondRepo extends JpaRepository<Diamond, Integer> {
                         @Param("shape") String shape,
                         @Param("measurement") Double measurement);
 
-    @Query("select d from Diamond d where d.GIACode =: giaCode")
+    @Query("select d from Diamond d where d.GIACode=:giaCode")
     Diamond findDiamondByGIACode(@Param("giaCode") String giaCode);
 }
