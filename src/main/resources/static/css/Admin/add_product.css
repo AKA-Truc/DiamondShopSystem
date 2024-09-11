@@ -25,7 +25,13 @@ header {
     box-sizing: border-box;
 }
 
-
+.wrapper1 {
+    display: flex;
+    margin-left: 192px;
+    margin-top: 18px;
+    padding: 10px;
+    box-sizing: border-box;
+}
 * {
     box-sizing: border-box;
 }
@@ -202,6 +208,7 @@ option {
     color: #000;
     box-sizing: border-box;
 }
+
 
 select{
     font-size: 18px;

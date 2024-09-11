@@ -596,3 +596,18 @@ function submitProductType() {
             console.error('Error fetching categories:', error);
         });
 }
+
+
+function openDiamondShellForm() {
+    document.getElementById('add-diamond-shell').style.display = 'flex';
+}
+
+function closeDiamondShellForm() {
+    if (confirm("Xác Nhận Hủy?")) {
+        document.getElementById('add-diamond-shell').style.display = 'none';
+    }
+}
+
+function submitDiamondShell() {
+
+}
