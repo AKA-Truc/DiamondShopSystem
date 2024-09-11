@@ -5,45 +5,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/Admin/detail.css">
+    <title>Quản Lý Hóa Đơn</title>
+    <link rel="stylesheet" href="/static/css/Admin/order.css">
     <script>
         function alertFeature() {
             alert('Tính năng đang được được phát triển');
         }
     </script>
-    <script>
-        function updateSelectColor(selectElement) {
-            // Xóa tất cả các class màu trước đó
-            selectElement.classList.remove('status-confirmed', 'status-delivered', 'status-pending', 'status-shipping', 'status-canceled');
-
-            // Thêm class màu tương ứng với trạng thái được chọn
-            var selectedValue = selectElement.value;
-            selectElement.classList.add('status-' + selectedValue);
-        }
-
-        // Gọi hàm để cập nhật màu ban đầu khi trang được tải
-        document.addEventListener('DOMContentLoaded', function () {
-            var selectElement = document.getElementById('statusSelect');
-            updateSelectColor(selectElement);  // Thiết lập màu ban đầu
-        });
-
-
-    </script>
 </head>
-
 <body>
+
+
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/static/js/url.js"></script>
 <script src="/static/js/Admin/detail.js"></script>
-<script
-        type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-></script>
-<script
-        nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-></script>
+
 <main class="main-content">
     <section class="orders">
         <div class="search-bar" style="width: 400px; margin-left:1070px; align-items: center;border-radius: 100px;">
@@ -55,119 +34,12 @@
                 <th>Mã Đơn Hàng</th>
                 <th>Người Đặt</th>
                 <th>Ngày Đặt</th>
-                <th>Trạng Thái</th>
+                <th>Mã Giảm Giá Đã Sử Dụng</th>
+                <th>Tổng Tiền</th>
                 <th>Thao Tác</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>62890b236e5af14abcf87c2</td>
-                <td>Thanh Trúc</td>
-                <td>15:51:43 09-11-2023</td>
-                <td>
-                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                        <option value="delivered">ĐÃ GIAO HÀNG</option>
-                        <option value="pending">CHƯA XÁC NHẬN</option>
-                        <option value="shipping">ĐANG GIAO</option>
-                        <option value="canceled">ĐÃ HỦY</option>
-                    </select>
-                </td>
-                <td><button class="view-btn">Xem</button></td>
-            </tr>
-            <tr>
-                <td>62890b236e5af14abcf87c2</td>
-                <td>Thanh Trúc</td>
-                <td>15:51:43 09-11-2023</td>
-                <td>
-                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                        <option value="delivered">ĐÃ GIAO HÀNG</option>
-                        <option value="pending">CHƯA XÁC NHẬN</option>
-                        <option value="shipping">ĐANG GIAO</option>
-                        <option value="canceled">ĐÃ HỦY</option>
-                    </select>
-                </td>
-                <td><button class="view-btn">Xem</button></td>
-            </tr>
-
-
-            <td>62890b236e5af14abcf87c2</td>
-            <td>Thanh Trúc</td>
-            <td>15:51:43 09-11-2023</td>
-            <td>
-                <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                    <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                    <option value="delivered">ĐÃ GIAO HÀNG</option>
-                    <option value="pending">CHƯA XÁC NHẬN</option>
-                    <option value="shipping">ĐANG GIAO</option>
-                    <option value="canceled">ĐÃ HỦY</option>
-                </select>
-            </td>
-            <td><button class="view-btn">Xem</button></td>
-            </tr>
-
-
-            <tr>
-                <td>62890b236e5af14abcf87c2</td>
-                <td>Thanh Trúc</td>
-                <td>15:51:43 09-11-2023</td>
-                <td>
-                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                        <option value="delivered">ĐÃ GIAO HÀNG</option>
-                        <option value="pending">CHƯA XÁC NHẬN</option>
-                        <option value="shipping">ĐANG GIAO</option>
-                        <option value="canceled">ĐÃ HỦY</option>
-                    </select>
-                </td>
-                <td><button class="view-btn">Xem</button></td>
-            </tr>
-            <tr>
-                <td>62890b236e5af14abcf87c2</td>
-                <td>Thanh Trúc</td>
-                <td>15:51:43 09-11-2023</td>
-                <td>
-                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                        <option value="delivered">ĐÃ GIAO HÀNG</option>
-                        <option value="pending">CHƯA XÁC NHẬN</option>
-                        <option value="shipping">ĐANG GIAO</option>
-                        <option value="canceled">ĐÃ HỦY</option>
-                    </select>
-                </td>
-                <td><button class="view-btn">Xem</button></td>
-            </tr>
-            <tr>
-                <td>62890b236e5af14abcf87c2</td>
-                <td>Thanh Trúc</td>
-                <td>15:51:43 09-11-2023</td>
-                <td>
-                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                        <option value="delivered">ĐÃ GIAO HÀNG</option>
-                        <option value="pending">CHƯA XÁC NHẬN</option>
-                        <option value="shipping">ĐANG GIAO</option>
-                        <option value="canceled">ĐÃ HỦY</option>
-                    </select>
-                </td>
-                <td><button class="view-btn">Xem</button></td>
-            </tr>
-            <tr>
-                <td>62890b236e5af14abcf87c2</td>
-                <td>Thanh Trúc</td>
-                <td>15:51:43 09-11-2023</td>
-                <td>
-                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
-                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
-                        <option value="delivered">ĐÃ GIAO HÀNG</option>
-                        <option value="pending">CHƯA XÁC NHẬN</option>
-                        <option value="shipping">ĐANG GIAO</option>
-                        <option value="canceled">ĐÃ HỦY</option>
-                    </select>
-                </td>
-                <td><button class="view-btn">Xem</button></td>
-            </tr>
+            <tbody id="order-list">
             </tbody>
         </table>
     </section>
@@ -257,41 +129,8 @@
         background-color: #c9302c;
     }
 </style>
-<!--  -->
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="order.js"></script>
-
-<script>
-    function updateSelectColor(selectElement) {
-        // Xóa tất cả các class màu trước đó
-        selectElement.classList.remove('role-tester', 'role-developer', 'role-ba', 'role-default');
-
-        // Lấy giá trị được chọn
-        var selectedValue = selectElement.value;
-
-        // Thêm class tương ứng dựa trên giá trị được chọn
-        if (selectedValue === 'tester') {
-            selectElement.classList.add('role-tester');
-        } else if (selectedValue === 'developer') {
-            selectElement.classList.add('role-developer');
-        } else if (selectedValue === 'ba') {
-            selectElement.classList.add('role-ba');
-        } else {
-            selectElement.classList.add('role-default'); // Trạng thái mặc định
-        }
-    }
-
-    // Đặt trạng thái ban đầu là màu trắng khi trang được tải
-    document.addEventListener('DOMContentLoaded', function () {
-        var selectElement = document.getElementById('roleSelect');
-        selectElement.classList.add('role-default'); // Màu mặc định
-    });
-
-</script>
 </body>
-
 </html>
 
 
