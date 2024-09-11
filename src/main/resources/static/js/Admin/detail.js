@@ -75,6 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     orderList.appendChild(row);
                 });
+                document.querySelectorAll('.edit-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const orderId = event.target.closest('button').getAttribute('data-order-id');
+                        window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/orderDetailAdmin.html?orderId=${orderId}`;
+                    });
+                });
             })
             .catch(error => {
                 console.error('Error fetching orders:', error);
