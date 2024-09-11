@@ -452,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('Error submitting product data:', error);
                 alert("Fail to create product");
-               // location.reload();
+                // location.reload();
             });
     }
 

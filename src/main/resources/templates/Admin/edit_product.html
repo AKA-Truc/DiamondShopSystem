@@ -112,11 +112,62 @@
                 </form>
             </div>
         </div>
-
         <div class="container">
             <div class="row1">
                 <div class="col-sm-12 histaff-item-group-header">
                     <h3 style="margin-left: 180px">Chi tiết sản phẩm </h3>
+                </div>
+            </div>
+            <div class="row padding-tb-15 margin-b-15">
+                <div class="col-md-12">
+                    <div class="histaff-table">
+                        <div class="hs-button table-add-btn">
+                            <span><i class="fa fa-plus" aria-hidden="true"></i> Thêm</span>
+                        </div>
+                        <table class="h-table">
+                            <thead>
+                            <tr>
+                                <th class="text-center f-weight-4" style="width: 250px;">Vỏ kim cương</th>
+                                <th class="text-center f-weight-4" style="width: 300px;">Tên kim cương</th>
+                                <th class="text-center f-weight-4" style="width: 300px;">Size</th>
+                                <th class="text-center f-weight-4" style="width: 130px;">Tỉ lệ áp giá</th>
+                                <th class="text-center f-weight-4" style="width: 250px;">Tiền gia công</th>
+                                <th class="text-center f-weight-4" style="width: 350px;">Số lượng tồn kho</th>
+                                <th class="text-center f-weight-4" style="width: 250px;">Thao tác</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <td>
+                                <select class="table-control item-control list-setting"></select>
+                            </td>
+                            <td>
+                                <div class="item-container">
+                                    <div id = "diamond-select"></div>
+                                </div>
+                                <button class="toggle-quantity">+</button>
+                            </td>
+                            <td><input type="number" class="table-control item-control" placeholder="Nhập size" required></td>
+                            <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá" required></td>
+                            <td><input type="number" class="table-control item-control" placeholder="Nhập tiền gia công" required></td>
+                            <td><input type="number" class="table-control item-control" placeholder="Nhập số lượng tồn kho" required></td>
+                            <td>
+                                <ul class="table-action">
+                                    <li class="table-action-control row-save "><i class="fa-solid fa-check" aria-hidden="true"></i></li>
+                                    <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
+                                </ul>
+                            </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="container">
+            <div class="row1">
+                <div class="col-sm-12 histaff-item-group-header">
+                    <h3 style="margin-left: 180px">Thêm chi tiết sản phẩm </h3>
                 </div>
             </div>
             <div class="row padding-tb-15 margin-b-15">
