@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error("Expected an array but got something else");
                 }
 
-                const customerTableBody = document.getElementById('customer-table-body');
                 customerTableBody.innerHTML = '';
                 data.forEach((user, index) => {
                     const row = document.createElement("tr");
@@ -47,23 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error("Error fetching users:", error));
     }
 
-    function addOrUpdateCustomer(customerData) {
-        let url;
-        let method;
-
-        if (isEditing === true) {
-            url = `${window.base_url}/user-management/users/${editingUserId}`;
-            method = 'PUT';
-            if (!customerData.password) {
-                delete customerData.password;
-            }
-        } else {
-            url = `${window.base_url}/user-management/register`;
-            method = 'POST';
-        }
-
-        fetch(url, {
-            method: method,
+    function addCustomer(customerData) {
+        fetch(`${window.base_url}/user-management/register`, {
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -78,12 +63,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                alert(isEditing ? "Customer updated successfully!" : "Customer added successfully!");
+                alert("Customer added successfully!");
                 fetchCustomers();
                 popup1Overlay.style.display = 'none';
                 resetFormState();
             })
-            .catch(error => console.error("Error adding/updating customer:", error));
+            .catch(error => console.error("Error adding customer:", error));
+    }
+
+    function updateCustomer(customerData) {
+        fetch(`${window.base_url}/user-management/users/${editingUserId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: customerData
+        })
+            .then(response => {
+                if (response.status === 401) {
+                    alert('Your access is denied');
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert("Customer updated successfully!");
+                fetchCustomers();
+                popup1Overlay.style.display = 'none';
+                resetFormState();
+            })
+            .catch(error => console.error("Error updating customer:", error));
+    }
+
+    function updateUser() {
+        const formData = new FormData(customerForm);
+
+        if (isEditing) {
+            const user = new FormData();
+            user.append('user', JSON.stringify({
+                userName: formData.get("userName"),
+                email: formData.get("email"),
+                address: formData.get("address"),
+                role: formData.get("Role"),
+                gender: formData.get("gender")
+            }))
+            updateCustomer(user);
+        } else {
+            const customerData = {
+                userName: formData.get("userName"),
+                email: formData.get("email"),
+                address: formData.get("address"),
+                role: formData.get("Role"),
+                gender: formData.get("gender")
+            };
+            addCustomer(customerData);
+        }
     }
 
     function addDeleteEventListeners() {
@@ -144,16 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     customerForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const formData = new FormData(customerForm);
-        const customerData = {
-            userName: formData.get("userName"),
-            email: formData.get("email"),
-            password: formData.get("password"),
-            address: formData.get("address"),
-            role: formData.get("Role"),
-            gender: formData.get("gender")
-        };
-        addOrUpdateCustomer(customerData);
+        updateUser();
     });
 
     searchInput.addEventListener('input', () => {
@@ -167,9 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.editCustomer = function(userId) {
+        removeAdminOption();
         isEditing = true;
         editingUserId = userId;
-        console.log(isEditing, editingUserId);
 
         fetch(`${window.base_url}/user-management/users/${userId}`, {
             method: 'GET',
@@ -189,6 +214,28 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(user => {
                 const data = user.data;
+
+                const passwordField = document.getElementById("password");
+                if (passwordField) {
+                    passwordField.value = data.password;
+                }
+
+
+                if(data.role === "Admin"){
+                    const roleSelect = document.getElementById('role');
+                    const admin = document.createElement('option');
+                    admin.value = data.role;
+                    admin.textContent = data.role;
+                    roleSelect.append(admin);
+                    roleSelect.disabled = true;
+                    document.getElementById("userName").disabled = true;
+                    document.getElementById("email").disabled = true;
+                    document.getElementById("address").disabled = true;
+                    document.getElementById("role").disabled = true;
+                    document.getElementById("password").disabled = true;
+                    document.getElementById("gender").disabled = true;
+                    document.getElementById("gender1").disabled = true;
+                }
                 document.getElementById("userName").value = data.userName;
                 document.getElementById("email").value = data.email;
                 document.getElementById("address").value = data.address;
@@ -202,44 +249,57 @@ document.addEventListener('DOMContentLoaded', () => {
                     genderFemale.checked = true;
                 }
 
-                const passwordField = document.getElementById("password");
-                if (passwordField) {
-                    passwordField.value = data.password;
-                    passwordField.disabled = false;
-                }
                 popup1Overlay.style.display = 'flex';
             })
             .catch(error => console.error("Error fetching customer details:", error));
     };
 
+    function removeAdminOption() {
+        const roleSelect = document.getElementById('role');
+        const adminOption = roleSelect.querySelector('option[value="Admin"]');
+        if (adminOption) {
+            adminOption.remove();
+        }
+        roleSelect.disabled =false;
+        document.getElementById("userName").disabled = false;
+        document.getElementById("email").disabled = false;
+        document.getElementById("address").disabled = false;
+        document.getElementById("role").disabled = false;
+        document.getElementById("password").disabled = false;
+        document.getElementById("gender").disabled = false;
+        document.getElementById("gender1").disabled = false;
+    }
 
     document.getElementById('openpopup1').addEventListener('click', () => {
         customerForm.reset();
         popup1Overlay.style.display = 'flex';
         resetFormState();
+        removeAdminOption();
     });
 
     document.getElementById('closepopup1').addEventListener('click', () => {
-        if(confirm("Xác Nhận Hủy?")){
+        if (confirm("Xác Nhận Hủy?")) {
             popup1Overlay.style.display = 'none';
+            removeAdminOption();
         }
     });
 
     document.getElementById('cancelButton').addEventListener('click', () => {
-        if(confirm("Xác Nhận Hủy?")){
+        if (confirm("Xác Nhận Hủy?")) {
             popup1Overlay.style.display = 'none';
+            removeAdminOption();
         }
     });
 
     window.addEventListener('click', (event) => {
         if (event.target === popup1Overlay) {
-            if(confirm("Xác Nhận Hủy?")){
+            if (confirm("Xác Nhận Hủy?")) {
                 popup1Overlay.style.display = 'none';
+                removeAdminOption();
             }
         }
     });
 
-    // Toggle Password Visibility with Eye Icon
     document.getElementById('togglePassword').addEventListener('click', function () {
         const passwordField = document.getElementById('password');
         const eyeIcon = this.querySelector('ion-icon');
@@ -253,8 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
             eyeIcon.name = 'eye-off-outline';
         }
     });
-
-
 
     function resetFormState() {
         isEditing = false;

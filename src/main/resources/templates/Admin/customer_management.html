@@ -19,6 +19,7 @@
 <script src="/static/js/Admin/customer_management.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
 
 <div class="main-content">
     <div class="customer-management">
@@ -93,6 +94,7 @@
                 <div class="field input" style="margin-bottom: 20px;">
                     <label for="role" style="display: inline-block;">Chức Vụ</label>
                     <select id="role" style="margin-left:2%;" name="Role">
+                        <option value="Admin">Admin</option>
                         <option value="Customer">Khách Hàng</option>
                         <option value="Manager">Quản Lý Cửa Hàng</option>
                         <option value="Sale Staff">Nhân Viên Bán Hàng</option>
