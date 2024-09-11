@@ -2,7 +2,6 @@
     position: relative;
 }
 
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f1f9ff;
@@ -22,7 +21,10 @@ body {
     max-width: 550px;
     box-sizing: border-box;
 }
-
+.container form{
+    width: 80%;
+    margin-left: 50px;
+}
 .container h2 {
     font-size: 30px;
     color: #333;
@@ -36,10 +38,6 @@ body {
     margin-left:20px;
 }
 
-.container form{
-    width: 80%;
-    margin-left: 50px;
-}
 
 label {
     display: block;
@@ -48,7 +46,8 @@ label {
     color: #333;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -58,7 +57,8 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-input[type="text"]::placeholder {
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
     color: #aaa;
 }
 
@@ -95,6 +95,36 @@ button:hover {
 }
 
 .back-button:hover {
+    background-color: #8597b1;
+}
+
+.success-message {
+    display: none;
+    text-align: center;
+    color: green;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.success-message .check-icon {
+    font-size: 40px;
+    color: green;
+}
+
+.login-button {
+    display: none;
+    width: 100%;
+    padding: 10px;
     background-color: #333;
     color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.login-button:hover {
+    background-color: #8597b1;
 }

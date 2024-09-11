@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #f1f9ff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,44 +8,45 @@ body {
     margin: 0;
 }
 
-.container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    box-sizing: border-box;
-}
 
 .header {
     position: relative;
 }
 
-.header-line {
-    border: 0;
-    height: 1px;
-    background-color: #ddd;
-    margin-bottom: 20px;
-}
 
-h1 {
-    margin-bottom: 10px;
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 550px;
+    box-sizing: border-box;
+}
+.container form{
+    width: 80%;
+    margin-left: 50px;
+}
+.container h2 {
     font-size: 30px;
     color: #333;
+    margin-bottom: 10px;
+    margin-left:20px;
 }
 
-p {
-    font-size: 20px;
+.container p {
     color: #666;
+    margin-bottom: 50px;
+    margin-left:20px;
+}
+.resend{
+    text-align: center;
     margin-bottom: 20px;
 }
-
 label {
     display: block;
     text-align: left;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     color: #333;
 }
 
@@ -66,7 +67,7 @@ input[type="text"]::placeholder {
 button {
     width: 100%;
     padding: 12px;
-    background-color: #333;
+    background-color: #1a5393;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -77,33 +78,28 @@ button {
 }
 
 button:hover {
-    background-color: #770e48;
-}
-
-.resend {
-    font-size: 14px;
-    color: #007bff;
-    margin-bottom: 20px;
-}
-
-span {
-    color: red;
+    background-color: #8597b1;
 }
 
 .back-button {
     width: 100%;
     padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-sizing: border-box;
+    margin-bottom: 40px;
     margin-top: 20px;
 }
 
 .back-button:hover {
-    background-color: #770e48;
+    background-color: #333;
+    color: #fff;
+}
+span {
+    color: red;
 }

@@ -17,22 +17,25 @@
     </div>
 
     <div class="login-section">
-        <h2>Tôi Đã Có Tài Khoản</h2>
-        <p><b>Vui lòng nhập email và mật khẩu của bạn</b></p>
-
+        <h2>Welcom Back</h2>
+        <p>Don't have an account?
+        <a href="/DiamondShopSystem/src/main/resources/templates/User/create_account.html" >Sign Up</a></p>
         <form action="#" method="POST" id="loginForm">
-            <label for="email">Email <span>*</span></label>
-            <input type="email" id="email" name="email" placeholder="hello@gmail.com" required>
+            <label for="email"></label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
 
-            <label for="password">Mật khẩu <span>*</span></label>
-            <input type="password" id="password" name="password" required>
+            <label for="password"></label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
 
             <div class="forgot-password">
                 <div class="forgot-password-container">
-                    <a href="remember.html"><b>Quên mật khẩu?</b></a>
+                    <a href="remember.html"><b>Forgot Password</b></a>
                 </div>
             </div>
-            <button type="submit"><b>Đăng Nhập</b></button>
+            <button type="submit"><b>Login</b></button>
+            <div class="hr-or">
+                <span>or</span>
+            </div>
         </form>
 
         <div id="g_id_onload"
@@ -52,15 +55,29 @@
 
     </div>
 
-    <div class="register-section">
-        <h2>Tôi Chưa Có Tài Khoản</h2>
-        <p>Tạo một tài khoản cá nhân để tận hưởng những lợi ích bổ sung và có trải nghiệm phong phú.</p>
-        <a href="/DiamondShopSystem/src/main/resources/templates/User/create_account.html" class="register-button">
-            <b>Tạo Tài Khoản Của Tôi</b>
-        </a>
-    </div>
 </div>
 <style>
+    .hr-or {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .hr-or::before,
+    .hr-or::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .hr-or::before {
+        margin-right: 10px;
+    }
+
+    .hr-or::after {
+        margin-left: 10px;
+    }
     /* CSS cho nút đăng nhập bằng Google */
     .g_id_signin {
         margin: 20px 0; /* Khoảng cách trên và dưới nút */
@@ -79,6 +96,8 @@
         transition: background-color 0.3s, border-color 0.3s; /* Hiệu ứng chuyển đổi */
         width: 100px; /* Chiều rộng của nút chiếm toàn bộ không gian chứa */
         max-width: 400px; /* Chiều rộng tối đa của nút */
+        margin-bottom: 40px;
+        margin-top: 20px;
     }
 
     .g_id_signin button:hover {
@@ -86,23 +105,7 @@
         border-color: #c1c1c1; /* Màu đường viền khi di chuột qua nút */
     }
 
-    /* CSS cho nút đăng nhập thông thường */
-    button {
-        width: 100%;
-        padding: 12px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-sizing: border-box;
-    }
 
-    button:hover {
-        background-color: #8597b1;
-    }
 
 </style>
 <script src="../static/js/url.js"></script>

@@ -10,18 +10,18 @@
 <body>
 <div class="container">
   <div class="header">
-    <h1>Mã xác minh</h1>
+    <h2>Verification code</h2>
+    <p>A verification code has been sent to your email address. Enter the verification code below and create a new password.</p>
   </div>
-  <hr class="header-line">
-  <p>Một mã xác minh đã được gửi đến địa chỉ email của bạn. Nhập mã xác minh bên dưới và tạo mật khẩu mới.</p>
+
   <form id="verification-form">
-    <label for="code">Mã <span>*</span></label>
+    <label for="code">Code <span>*</span></label>
     <input type="text" id="code" name="code" placeholder="- - - - -" required>
     <div class="resend" id="resend-text">
-      <span>Gửi lại mã (có sau 30 giây)</span>
+      <span>Resend code (Available after 30 s)</span>
     </div>
-    <button type="submit" class="send-button"><b>Tiếp Tục</b></button>
-    <button type="button" class="back-button" onclick="history.back()"><b>Quay lại</b></button>
+    <button type="submit" class="send-button"><b>Continue</b></button>
+    <button type="button" class="back-button" onclick="history.back()"><b>Come back</b></button>
   </form>
 </div>
 
