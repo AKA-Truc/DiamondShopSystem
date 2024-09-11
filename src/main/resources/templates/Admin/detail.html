@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Hóa Đơn</title>
+    <title>Quản Lý Đơn Hàng</title>
     <link rel="stylesheet" href="/static/css/Admin/order.css">
     <script>
         function alertFeature() {
@@ -15,7 +14,6 @@
 </head>
 <body>
 
-
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -24,32 +22,34 @@
 <script src="/static/js/Admin/detail.js"></script>
 
 <main class="main-content">
-    <section class="orders">
-        <div class="search-bar" style="width: 400px; margin-left:1070px; align-items: center;border-radius: 100px;">
-            <input type="text" placeholder="Tra cứu đơn hàng...">
+    <section class="detail">
+        <div class="search-bar" style="width: 400px; margin-left:995px; align-items: center;">
+            <input type="text" style="border-radius: 20px 20px;" placeholder="Tra cứu đơn hàng...">
         </div>
-        <table style="width: 1200px; margin-left:290px; align-items: center;">
-            <thead>
-            <tr>
-                <th>Mã Đơn Hàng</th>
-                <th>Người Đặt</th>
-                <th>Ngày Đặt</th>
-                <th>Mã Giảm Giá Đã Sử Dụng</th>
-                <th>Tổng Tiền</th>
-                <th>Thao Tác</th>
-            </tr>
-            </thead>
-            <tbody id="order-list">
-            </tbody>
-        </table>
+
+        <div class="table-wrapper">
+            <table id="requests-table" style="width: 1200px; margin-left:290px; align-items: center; background-color: #e4e7ef">
+                <thead>
+                <tr>
+                    <th class="center-heading">Mã Đơn Hàng</th>
+                    <th class="center-heading">Người Đặt</th>
+                    <th class="center-heading">Ngày Đặt</th>
+                    <th class="center-heading">Mã Giảm Giá Đã Sử Dụng</th>
+                    <th class="center-heading">Tổng Tiền</th>
+                    <th class="center-heading">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody id="order-list">
+                </tbody>
+            </table>
+        </div>
     </section>
 </main>
 
-<!--  -->
 <style>
     .main-content {
         flex-grow: 1;
-        padding: 20px;
+        padding: 30px;
     }
 
     .orders h2 {
@@ -62,9 +62,10 @@
 
     .search-bar input {
         width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
+        padding: 15px;
+        border: 1px solid #f1eeee;
         border-radius: 4px;
+        margin-left: 40px;
     }
 
     table {
@@ -72,62 +73,15 @@
         border-collapse: collapse;
     }
 
-    table th,
-    table td {
-        border: 1px solid #ccc;
-        padding: 10px;
+    table th, table td {
+        padding: 25px;
         text-align: left;
     }
 
     table th {
-        background-color: #f0f0f0;
+        background-color:white;
     }
 
-    .status {
-        padding: 5px 10px;
-        border-radius: 4px;
-        color: white;
-        text-align: center;
-        display: inline-block;
-    }
-
-    .status.confirmed {
-        background-color: #5cb85c;
-        border-radius: 30px;
-    }
-
-    .status.delivered {
-        background-color: #5bc0de;
-        border-radius: 30px;
-    }
-
-    .status.pending {
-        background-color: #f0ad4e;
-        border-radius: 30px;
-    }
-
-    .status.shipping {
-        background-color: #39994b;
-        border-radius: 30px;
-    }
-
-    .status.cancelled {
-        background-color: #d9534f;
-        border-radius: 30px;
-    }
-
-    .view-btn {
-        background-color: #d9534f;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .view-btn:hover {
-        background-color: #c9302c;
-    }
 </style>
 
 </body>
