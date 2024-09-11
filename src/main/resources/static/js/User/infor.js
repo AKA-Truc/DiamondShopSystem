@@ -223,7 +223,7 @@ function showSection(sectionId) {
 
 function getStatusText(status) {
     switch (status) {
-        case 'New': return 'Chờ xác nhận';
+        case 'New': return 'Chưa xác nhận';
         case 'Đã xác nhận': return 'Đã xác nhận';
         case 'Đang vận chuyển': return 'Đang vận chuyển';
         case 'Đã giao': return 'Đã giao';
@@ -236,7 +236,7 @@ function getStatusClass(status) {
     switch (status) {
         case 'New': return 'status-new';
         case 'Đã xác nhận': return 'status-confirmed';
-        case 'Đang vận chuyển': return 'status-shipping';
+        case 'Đang giao': return 'status-shipping';
         case 'Đã giao': return 'status-delivered';
         default: return 'status-unknown';
     }
