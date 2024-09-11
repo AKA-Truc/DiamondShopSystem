@@ -188,6 +188,8 @@ ion-icon {
     margin-left: 820px
 }
 
+
+
 .table-wrapper {
     width: 93%;
     padding: 16px;
@@ -238,7 +240,6 @@ th {
     color: #d92e3e;
 }
 
-
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -253,6 +254,7 @@ th {
     cursor: pointer;
     font-size: 16px;
 }
+
 
 /* Popup styles */
 .popup-overlay {

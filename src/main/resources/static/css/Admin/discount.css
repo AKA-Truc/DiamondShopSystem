@@ -227,7 +227,6 @@ th {
 
 /*  */
 
-
 .edit-btn,
 .delete-btn {
     background-color: transparent;
@@ -241,7 +240,7 @@ th {
 }
 
 .delete-btn i {
-    color: #0d4160;
+    color: #d92e3e;
 }
 
 .pagination {
@@ -250,7 +249,7 @@ th {
 }
 
 .page-btn {
-    background-color: #0d4160;
+    background-color: #d92e3e;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -258,6 +257,7 @@ th {
     cursor: pointer;
     font-size: 16px;
 }
+
 
 /* popup */
 /* Popup styles */

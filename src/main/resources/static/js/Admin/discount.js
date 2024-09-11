@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${voucher.description}</td>
                     <td>${new Date(voucher.startDate).toLocaleString()}</td>
                     <td>${new Date(voucher.endDate).toLocaleString()}</td>
-                    <td>
-                        <button onclick="editVoucher(${voucher.promotionId})">Edit</button>
-                        <button class="delete-btn" data-id="${voucher.promotionId}">Delete</button>
-                    </td>
+                    <td class="action-buttons">
+                            <button class="edit-btn" onclick="editVoucher(${voucher.promotionId})"><ion-icon name="create-outline"></ion-icon></button>
+                            <button class="delete-btn" data-id="${voucher.promotionId}"><ion-icon name="trash-outline"></ion-icon></button>
+                        </td>
                 `;
                     voucherList.appendChild(row);
                 });

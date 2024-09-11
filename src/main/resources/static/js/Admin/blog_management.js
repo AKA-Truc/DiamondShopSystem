@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${index + 1}</td>
                         <td>${blog.title}</td>
                         <td>${blog.content.substring(0, 50)}...</td>
-                        <td>
-                            <button onclick="editBlog('${blog.blogId}')">Edit</button>
-                            <button class="delete-btn" data-id="${blog.blogId}">Delete</button>
+                        <td class="action-buttons">
+                            <button class="edit-btn" onclick="editBlog('${blog.blogId}')"><ion-icon name="create-outline"></ion-icon></button>
+                            <button class="delete-btn" data-id="${blog.blogId}"><ion-icon name="trash-outline"></ion-icon></button>
                         </td>
                     `;
                     blogTableBody.appendChild(row);

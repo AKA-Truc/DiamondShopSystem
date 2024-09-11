@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${user.email}</td>
                 <td>${user.gender}</td>
                 <td>${user.role}</td>
-                <td>
-                    <button onclick="editCustomer('${user.userId}')">Edit</button>
-                    <button class="delete-btn" data-id="${user.userId}">Delete</button>
+                <td class="action-buttons">
+                    <button class="edit-btn" onclick="editCustomer('${user.userId}')"><ion-icon name="create-outline"></ion-icon></button>
+                    <button class="delete-btn" data-id="${user.userId}"><ion-icon name="trash-outline"></ion-icon></button>
                 </td>
             `;
                     customerTableBody.appendChild(row);

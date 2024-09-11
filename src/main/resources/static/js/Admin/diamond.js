@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${diamond.clarity}</td>
                         <td>${diamond.giacode}</td>
                         <td>${diamond.price}</td>
-                        <td>
-                            <button onclick="editDiamond(${diamond.diamondId})">Edit</button>
-                            <button class="delete-btn" data-id="${diamond.diamondId}">Delete</button>
+                        <td class="action-buttons">
+                            <button class="edit-btn" onclick="editDiamond(${diamond.diamondId})"><ion-icon name="create-outline"></ion-icon></button>
+                            <button class="delete-btn" data-id="${diamond.diamondId}" ><ion-icon name="trash-outline"></ion-icon></button>
                         </td>
                     `;
                     diamondList.appendChild(row);
