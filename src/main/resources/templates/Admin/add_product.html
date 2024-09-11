@@ -92,10 +92,7 @@
                     <div class="form-row">
                         <div class="field" >
                             <label for="material">Chất Liệu Vỏ</label>
-                            <select id="material" name="material" required >
-                                <option value="gold">Vàng</option>
-                                <option value="silver">Bạc</option>
-                            </select>
+                            <input  type="text" id="material" name="material" placeholder="Nhập chất liệu" required>
                         </div>
                     </div>
 
@@ -154,7 +151,6 @@
         </div>
         <!-- Box nổi để thêm kim cương -->
         <!-- Box nổi để thêm kim cương -->
-
             <div id="diamond-modal" class="modal">
                 <div class="modal-content">
                     <!-- Container for the close button and search elements -->
@@ -166,29 +162,32 @@
                     <ul id="diamond-list"></ul>
                 </div>
             </div>
-
     </div>
+
+
 </div>
 </body>
 
 <style>
     .modal {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-        width: 80%;
-        max-width: 540px;
-        height: auto;
-        padding: 20px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        border: 1px solid #ccc;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        display: flex; /* Flexbox for centering contents */
-        flex-direction: column; /* Stack children vertically */
-        align-items: center; /* Center children horizontally */
+        display: none; /* Hidden by default */
+        z-index: 1000;
+    }
+    .modal-content{
+        top:30%;
+        left: 45%;
+        background-color: rgb(182, 217, 251);
+        padding: 20px;
+        border-radius: 10px;
+        width: 400px;
+        max-width: 100%;
+        position: relative;
     }
 
     .search-container {
@@ -197,14 +196,13 @@
         align-items: center;
         gap: 10px; /* Space between elements */
         margin-bottom: 20px;
-        position: relative;
     }
 
 
     #diamond-search {
-        width: 60%;
+        width: 57%;
         font-size: 18px;
-        padding: 10px;
+        padding: 10px 0;
         text-align: center;
         border: none;
         border-radius: 8px;
@@ -213,7 +211,7 @@
     #search-diamond-btn {
         padding: 10px 20px;
         font-size: 18px;
-        background-color: #3d84d5;
+        background-color: #004085;
         color: white;
         border: none;
         border-radius: 5px;
@@ -225,7 +223,7 @@
     }
 
     .close-button {
-        color: #aaa;
+        color: black;
         font-size: 28px;
         font-weight: bold;
         cursor: pointer;
@@ -233,36 +231,25 @@
 
     .close-button:hover,
     .close-button:focus {
-        color: black;
+        color: #aaa;
         text-decoration: none;
     }
 
     #diamond-list {
         list-style-type: none;
         padding: 0;
-        margin: 0;
+        margin: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
+        width: 96%;
     }
 
-    #diamond-list li {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin: 5px 0;
-        padding: 10px;
-        width: 90%;
-        max-width: 1300px;
-        text-align: center;
-    }
     /* Styles for the list items */
     #diamond-list li {
         background-color: #f9f9f9;
-        border: 1px solid #ddd;
         border-radius: 8px;
-        margin: 10px 0;
+        margin: 14px 0;
         padding: 15px;
         width: 90%;
         max-width: 1200px;
@@ -270,7 +257,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     /* Styles for the spans inside list items */
@@ -283,16 +269,16 @@
 
     /* Styles for the strong tags inside spans */
     #diamond-list li span strong {
-        color: #3d84d5;
+        color: #004085;
         font-weight: bold;
     }
 
     /* Styles for the button inside list items */
     #diamond-list li button {
-        margin-top: 10px;
+        margin-top: 30px;
         padding: 10px 20px;
         font-size: 16px;
-        background-color: #3d84d5;
+        background-color: #004085;
         color: white;
         border: none;
         border-radius: 5px;
@@ -303,10 +289,6 @@
     #diamond-list li button:hover {
         background-color: #0056b3;
     }
-
-
 </style>
-<script>
 
-</script>
 </html>

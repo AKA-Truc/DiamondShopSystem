@@ -345,18 +345,33 @@ select:focus,
     font-size: 18px;
 }
 
-.toggle-quantity {
-    font-size: 28px;
-    color: #004085;
-    margin-left: 15px;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
 
+.toggle-quantity {
+    cursor: pointer;
+    font-size: 18px;
+    color: #e0e0e0;
+    background-color:#002752 ;
+    margin: 20px;
+}
 .toggle-quantity:hover {
     color: #002752;
-    transform: scale(1.2);
+    background-color:#e0e0e0 ;
 }
+
+
+.remove-item-btn {
+    font-size: 20px;
+    color: #e0e0e0;
+    background-color: #002752;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.remove-item-btn:hover {
+    color: #002752;
+    background-color: #e0e0e0;
+}
+
  .histaff-table {
      overflow-x: auto;
      max-width: 110%;
@@ -513,13 +528,7 @@ table.h-table td:nth-child(8) .table-action li {
 
 /*    */
 
-.toggle-quantity {
-    cursor: pointer;
-    font-size: 18px;
-    color: #162165e7;
-    margin-left: 10px;
-    vertical-align: middle;
-}
+
 
 .quantity-input {
     display: block;
@@ -553,7 +562,6 @@ table.h-table td:nth-child(8) .table-action li {
     width: 450px;
     max-width: 100%;
     position: relative;
-
 }
 
 /* Close button */

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="item-container">
                     <div id = "diamond-select"></div>
                 </div>
-                <span class="toggle-quantity">+</span>
+                <button class="toggle-quantity">+</button>
             </td>
             <td><input type="number" class="table-control item-control" placeholder="Nhập size" required></td>
             <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá" required></td>
@@ -446,13 +446,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     addProductDetail(token, productdetail);
                 });
 
-                // alert("Create product successfully");
-                // window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
+                alert("Create product successfully");
+                window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
             })
             .catch(error => {
                 console.error('Error submitting product data:', error);
-                // alert("Fail to create product");
-                // location.reload();
+                alert("Fail to create product");
+               // location.reload();
             });
     }
 
