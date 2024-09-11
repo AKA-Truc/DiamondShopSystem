@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <li class="submenu">
                     <a href="#"><ion-icon name="cart-outline"></ion-icon> Bán hàng</a>
                     <ul>
-                        <li><a href="./detail.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý đơn hàng</a></li>
                         <li><a href="./order.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
+                        <li><a href="./detail.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý đơn hàng</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
