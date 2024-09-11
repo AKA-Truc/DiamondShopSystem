@@ -221,10 +221,11 @@ public class OrderService {
             throw new RuntimeException("Order not found");
         }
         return orders.stream()
-                .filter(order -> order.getStatus().equals("Done"))
+                .filter(order -> order.getStatus().equals("Đã giao"))
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());
     }
+
 
     public List<OrderDTO> getAllOrderNotDone() {
         List<Order> orders = orderRepo.findAll();
@@ -232,7 +233,7 @@ public class OrderService {
             throw new RuntimeException("Order not found");
         }
         return orders.stream()
-                .filter(order -> !order.getStatus().equals("Done"))
+                .filter(order -> !order.getStatus().equals("Đã giao"))
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());
     }
@@ -251,7 +252,8 @@ public class OrderService {
         Order existingOrder = orderRepo.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         existingOrder.setStatus(status);
-        return modelMapper.map(existingOrder, OrderDTO.class);
+        Order savedOrder = orderRepo.save(existingOrder);
+        return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
     public Long getRevenueBySpecificMonth(int year, int month) {
