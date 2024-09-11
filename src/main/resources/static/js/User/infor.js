@@ -193,8 +193,6 @@ function displayOrders(orders) {
                 `).join('')}
             </div>
             <div class="order-footer">
-                ${order.status === 'Đã giao' ? '<button class="btn-reorder">Mua lại</button>' : ''}
-                ${order.status === 'New' ? '<button class="btn-cancel">Hủy đơn</button><button class="btn-detail">Xác nhận</button>' : ''}
                 ${order.status === 'Đã xác nhận' ? `<span class="order-total">Tổng tiền: ${formatCurrency(order.totalPrice)}</span>` : ''}
             </div>
         `;
