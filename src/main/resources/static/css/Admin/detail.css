@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-color: #f4f7fb;
 }
+
 .sidebar {
     height: 100%;
     width: 280px;
@@ -17,7 +18,7 @@ body {
 
 /* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c;
+    color: #0d0e1c; /*chỉnh chữ*/
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -146,77 +147,45 @@ ion-icon {
     background-color: #162165e7;
 }
 
-
-/* Trạng thái ban đầu của select là màu trắng */
-.status-select {
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    color: black; /* Màu chữ ban đầu là đen */
-    width: 200px;
-    background-color: white; /* Màu nền ban đầu là trắng */
-    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt */
+/* table */
+.table-wrapper {
+    padding: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #e4e7ef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 1110px;
+    margin-left:320px;
+    align-items: center;
 }
 
-/* Các màu sắc cho từng trạng thái */
-.status-confirmed {
-    background-color: #5cb85c; /* Màu xanh lá cho "ĐÃ XÁC NHẬN" */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-.status-delivered {
-    background-color: #5bc0de; /* Màu xanh dương nhạt cho "ĐÃ GIAO HÀNG" */
+th, td {
+    padding: 15px;
+    text-align: left;
 }
 
-.status-pending {
-    background-color: #f0ad4e; /* Màu cam cho "CHƯA XÁC NHẬN" */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-.status-shipping {
-    background-color: #2ecc71; /* Màu xanh lá nhạt cho "ĐANG GIAO" */
+tr:hover {
+    background-color: #f1f1f1;
 }
 
-.status-canceled {
-    background-color: #d9534f; /* Màu đỏ cho "ĐÃ HỦY" */
-}
-
-.status-default {
-    background-color: white; /* Màu trắng mặc định */
+th {
+    background-color: #f9f9f9;
+    color: black;
 }
 
 
-/* thu */
-/* Định dạng chung cho select */
-.role-select {
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    color: black; /* Màu chữ ban đầu là đen */
-    width: 200px;
-    background-color: white; /* Màu nền ban đầu là trắng */
-    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt */
-}
 
-/* Chỉ thay đổi màu nền của khung select (không áp dụng cho options) */
-.role-tester {
-    background-color: #5bc0de; /* Màu xanh dương nhạt cho "Tester" */
-}
 
-.role-developer {
-    background-color: #d291e4; /* Màu tím nhạt cho "Developer" */
-}
 
-.role-ba {
-    background-color: #f7c972; /* Màu vàng nhạt cho "BA" */
-}
 
-.role-default {
-    background-color: white; /* Màu trắng mặc định */
-}
 
-/* Màu nền của các tùy chọn (options) không bị ảnh hưởng */
-.role-select option {
-    background-color: white; /* Giữ các options có màu trắng */
-    color: black; /* Màu chữ của options */
-}

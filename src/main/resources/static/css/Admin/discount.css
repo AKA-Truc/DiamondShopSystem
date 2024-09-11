@@ -19,7 +19,7 @@ body {
 
 /* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c; /*chỉnh chữ*/
+    color: #0d0e1c;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -31,7 +31,6 @@ body {
     color: #141E0C;
 }
 
-/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -48,7 +47,7 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #cbd0dd; /*click menu*/
+    background-color: #cbd0dd;
 }
 
 /* Submenu sổ xuống */
@@ -62,7 +61,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ebf0f8;  /*comment* menu con*/
+    background-color: #ebf0f8;
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -88,7 +87,7 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #cbd0dd;/* comment*/
+    background-color: #cbd0dd;
 }
 
 ion-icon {
@@ -145,11 +144,8 @@ ion-icon {
     width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #162165e7; /*thanh br*/
+    background-color: #162165e7;
 }
-
-
-/* main */
 
 .main-content {
     margin-left: 280px;
@@ -225,7 +221,6 @@ th {
     color: black;
 }
 
-/*  */
 
 .edit-btn,
 .delete-btn {
@@ -258,11 +253,8 @@ th {
     font-size: 16px;
 }
 
-
-/* popup */
-/* Popup styles */
 .popup-overlay {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
