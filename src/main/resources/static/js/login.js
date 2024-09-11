@@ -78,7 +78,6 @@ function checkRole(){
 
     if (role === 'ROLE_CUSTOMER') {
         window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
-
     } else {
         window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
     }

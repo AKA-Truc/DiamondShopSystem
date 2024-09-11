@@ -141,6 +141,7 @@ public class UserService {
         existingUser.setUserName(user.getUserName());
         existingUser.setAddress(user.getAddress());
         existingUser.setGender(user.getGender());
+        existingUser.setRole(user.getRole());
         userRepo.save(existingUser);
         return modelMapper.map(existingUser,UserDTO.class);
     }
@@ -232,7 +233,7 @@ public class UserService {
                 userDTO.setEmail(email);
                 userDTO.setUserName(name);
                 userDTO.setPassword("GOOGLE_USER"); // You might want to handle this more securely
-                userDTO.setRole("customer"); // Fixed role typo
+                userDTO.setRole("Customer"); // Fixed role typo
 
                 UserDTO newUser = createUser(userDTO);
                 return login(newUser.getEmail(), "GOOGLE_USER", newUser.getRole());

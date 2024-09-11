@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.forEach(diamond => {
                     const option = document.createElement('option');
                     option.value = diamond.diamondId;
-                    option.textContent = `${diamond.diamondName}`;
+                    option.textContent = `${diamond.giacode}`;
                     selectElement.appendChild(option);
                 });
             })
