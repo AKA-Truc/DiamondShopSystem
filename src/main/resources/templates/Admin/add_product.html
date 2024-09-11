@@ -16,7 +16,16 @@
     <script src="/static/js/Admin/add_product.js"></script>
 
     <div class="histaff-item-group background-white border-radius-5 active" id="histaff-work-exp" style="background-color: #f4f7fb;">
+
         <div class="body1">
+            <div class="wrapper1">
+                <div class="button-group1">
+                    <button type="button" onclick="openProductTypeForm()">Thêm loại hàng</button>
+                </div>
+                <div class="button-group1">
+                    <button type="button" onclick="openDiamondShellForm()">Thêm vỏ kim cương</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 histaff-item-group-header">
                     <h3 style="margin-left: 180px">Sản phẩm </h3>
@@ -37,9 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="button-group1">
-                        <button type="button" onclick="openProductTypeForm()">Thêm loại hàng</button>
-                    </div>
+
                     <div class="form-row" style="display: flex;">
                         <div class="field input" style="flex: 1 1 32%; margin-right: 2px;">
                             <label for="Warranty">Thời Hạn Bảo Hành</label>
@@ -59,6 +66,37 @@
                     </div>
                 </form>
             </div>
+
+            <div id="add-diamond-shell" class="overlay">
+                <div class="form-container">
+                    <span class="close-btn" onclick="closeDiamondShellForm()">&times;</span>
+                    <h2>Thêm Vỏ Kim Cươn</h2>
+                    <form id="diamondForm" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="field" >
+                                <label for="material">Chất Liệu Vỏ</label>
+                                <select id="material" name="material" required >
+                                    <option value="gold">Vàng</option>
+                                    <option value="silver">Bạc</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="price">Giá</label>
+                                <input type="text" id="price" name="price" placeholder="Nhập giá" required>
+                            </div>
+                        </div>
+
+                        <div class="button-group2">
+                            <button style=" background-color: #304067;width: 100px;" type="button" class="btn-confirm" onclick="submitDiamondShell()">Xác nhận</button>
+                            <button style="width: 100px" type="button" class="btn-cancel" onclick="closeDiamondShellForm()">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
 
             <div id="add-product-type" class="overlay">
                 <div class="form-container">
@@ -116,6 +154,7 @@
             </div>
             <!-- Box nổi để thêm kim cương -->
             <!-- Box nổi để thêm kim cương -->
+
             <div id="diamond-modal" class="modal">
                 <div class="modal-content">
                     <!-- Container for the close button and search elements -->
@@ -133,91 +172,4 @@
     </div>
     </body>
 
-    <style>
-        #diamond-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            width: 80%;
-            max-width: 1300px;
-            height: auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center children horizontally */
-        }
-
-        .search-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px; /* Space between elements */
-            margin-bottom: 20px;
-        }
-
-        #diamond-search {
-            width: 60%;
-            font-size: 18px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        #search-diamond-btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #search-diamond-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .close-button {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-        }
-
-        #diamond-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        #diamond-list li {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 5px 0;
-            padding: 10px;
-            width: 90%;
-            max-width: 1300px;
-            text-align: center;
-        }
-
-    </style>
-    <script>
-
-    </script>
     </html>
