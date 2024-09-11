@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log(email);
         if (!email) {
-            alert('Không tìm thấy email.');
+            alert('Email not found.');
             return;
         }
 
@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Lỗi khi xác minh mã:', error);
-                alert('Đã xảy ra lỗi khi xác minh mã.');
+                console.error('Error verifying code:', error);
+                alert('An error occurred while verifying the code.');
             });
     });
 
     let resendCountdown = 30;
     const interval = setInterval(() => {
         resendCountdown--;
-        resendText.textContent = `Gửi lại mã (có sau ${resendCountdown} giây)`;
+        resendText.textContent = `Resend code (Available after ${resendCountdown} s)`;
 
         if (resendCountdown <= 0) {
             clearInterval(interval);
-            resendText.innerHTML = '<a href="#" id="resend-link">Gửi lại mã</a>';
+            resendText.innerHTML = '<a href="#" id="resend-link">Resend code</a>';
 
             const urlParams = new URLSearchParams(window.location.search);
             const email = urlParams.get('email');
@@ -55,12 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                     .then(response => response.text())
                     .then(data => {
-                        alert('Mã xác minh mới đã được gửi!');
+                        alert('New verification code has been sent!');
                         resendCountdown = 30; // Reset lại đếm ngược
                     })
                     .catch(error => {
-                        console.error('Lỗi khi gửi lại mã:', error);
-                        alert('Đã xảy ra lỗi khi gửi lại mã.');
+                        console.error('Error verifying code', error);
+                        alert('An error occurred while verifying the code.');
                     });
             });
         }

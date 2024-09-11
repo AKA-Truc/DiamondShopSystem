@@ -18,7 +18,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #f1f9ff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,23 +32,27 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 100%;
-    max-width: 500px;
-    text-align: center;
+    max-width: 550px;
     box-sizing: border-box;
 }
-
-h2 {
-    margin-bottom: 10px;
+.container form{
+    width: 80%;
+    margin-left: 50px;
+}
+.container h2 {
     font-size: 30px;
     color: #333;
+    margin-bottom: 10px;
+    margin-left:20px;
 }
 
-p {
+.container p {
     color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    margin-left:20px;
 }
 
-label {
+.container label {
     display: block;
     text-align: left;
     margin-bottom: 5px;
@@ -56,34 +60,27 @@ label {
 }
 
 input[type="email"],
-input[type="password"],
-select {
+input[type="password"]{
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+
+    margin-bottom: 25px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
     box-sizing: border-box;
 }
 
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: #fff;
-    cursor: pointer;
-}
 
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {
     color: #aaa;
 }
 
-button {
+.container button {
     width: 100%;
     padding: 12px;
-    background-color: #333;
+    background-color: #1a5393;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -128,7 +125,7 @@ button:hover {
 }
 
 .forgot-password a {
-    color: #333;
+    color: #298cfd;
     text-decoration: none;
     font-size: 14px;
     transition: color 0.3s ease;
@@ -144,13 +141,6 @@ button:hover {
 .forgot-password a:hover {
     color: #8597b1;
 }
-
-
-span {
-    color: red;
-}
-
-/**/
 
 
 

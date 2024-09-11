@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f1f9ff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,16 +54,19 @@ body {
     opacity: 1;
 }
 
+
 .registration-container {
-    background-color: #f9f9f9;
+    width: 100%;
+    max-width: 550px;
     padding: 20px;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 550px;
+    box-shadow: 2px 2px 190px rgba(0, 0, 0, 0.1);
 }
 
+
 .btn-register {
-    background-color: #333;
+    background-color: #1a5393;
     color: #fff;
     padding: 15px;
     border: none;
@@ -71,6 +74,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     width: 100%;
+    margin-bottom: 40px;
+    margin-top: 20px;
 }
 
 .btn-register:hover {
@@ -79,13 +84,43 @@ body {
 
 .registration-container h2 {
     text-align: left;
-    margin-bottom: 20px;
+    color: #1a5393;
+    margin-bottom: 40px;
+    margin-left:20px;
 }
-
+.registration-container form{
+    width: 80%;
+    margin-left: 50px;
+}
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 25px;
+}
+.form-group1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Khoảng cách giữa các trường */
     margin-bottom: 15px;
+}
+
+.form-group1 .name,
+.form-group1 .gioitinh {
+    width: 48%; /* Chia đều không gian giữa các input */
+}
+
+.form-group1 label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group1 input[type="text"],
+.form-group1 select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 label {

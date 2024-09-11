@@ -10,16 +10,16 @@
 <body>
 <div class="container">
   <div class="header">
-    <h4>Quên mật khẩu</h4>
+    <h2>Forgot Password</h2>
+    <p>Enter the email you used to create your account, so we can send you instructions on how to reset your password. </p>
   </div>
-  <hr class="header-line">
 
-  <p>Vui lòng nhập địa chỉ email của bạn dưới đây và nhấp vào "Gửi". Chúng tôi sẽ gửi một email hướng dẫn về cách đặt lại mật khẩu cho bạn.</p>
+
   <form action="/forgot-password" method="POST">
-    <label for="email">Email <span>*</span></label>
-    <input type="text" id="email" name="email" placeholder="hello@gmail.com" required>
-    <button type="button" class="send-button"><b>Gửi Đi</b></button>
-    <button type="button" class="back-button" onclick="history.back()"><b>Quay lại</b></button>
+    <label for="email"></label>
+    <input type="text" id="email" name="email" placeholder="Email" required>
+    <button type="button" class="send-button"><b>Send</b></button>
+    <button type="button" class="back-button" onclick="history.back()"><b>Back to Login </b></button>
   </form>
 </div>
 
