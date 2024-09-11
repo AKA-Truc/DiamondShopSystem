@@ -167,12 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-
     function selectDiamond(diamond) {
         const newFieldContainer = document.createElement("div");
         newFieldContainer.classList.add("item-container");
         newFieldContainer.innerHTML = `
-        <input class="table-control item-control list-diamond" value="${diamond.giacode}" disabled>
+        <input class="table-control item-control list-diamond" value="${diamond.giacode}" data-diamond-id="${diamond.diamondId}"" disabled>
         <select class="table-control item-control type-diamond">
             <option value="1">Kim Cương Phụ</option>
             <option value="0">Kim Cương Chủ (1 viên)</option>
@@ -398,11 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 rows.forEach(row => {
                     const checkBox = row.querySelector('.table-checkbox');
                     if (checkBox && checkBox.checked) {
-                        const settingId = row.querySelector('.list-setting').value;
-                        const size = parseFloat(row.querySelector('input[placeholder="Nhập size"]').value);
-                        const markupRate = parseFloat(row.querySelector('input[placeholder="Nhập tỉ lệ áp giá"]').value);
-                        const laborCost = parseFloat(row.querySelector('input[placeholder="Nhập tiền gia công"]').value);
-                        const inventory = parseFloat(row.querySelector('input[placeholder="Nhập số lượng tồn kho"]').value);
 
                         const diamonds = row.querySelectorAll('.list-diamond');
                         const quantities = row.querySelectorAll('.quantity-input');
@@ -411,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const diamondMap = new Map();
 
                         diamonds.forEach((diamondElement, index) => {
-                            const diamondId = diamondElement.value;
+                            const diamondId = diamondElement.getAttribute('data-diamond-id');
                             const quantity = parseInt(quantities[index].value) || 0;
                             const diamondType = diamondTypes[index].value;
 
@@ -448,19 +442,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         Detailsl.push(rowData);
                     }
                 });
+                console.log(Detailsl);
 
                 Detailsl.forEach(productdetail => {
                     console.log(productdetail);
                     addProductDetail(token, productdetail);
                 });
 
-                alert("Create product successfully");
-                window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
+                // alert("Create product successfully");
+                // window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
             })
             .catch(error => {
                 console.error('Error submitting product data:', error);
-                alert("Fail to create product");
-                location.reload();
+                // alert("Fail to create product");
+                // location.reload();
             });
     }
 
@@ -598,6 +593,42 @@ function submitProductType() {
 }
 
 
+function submitDiamondShell() {
+    const material = document.getElementById('material').value;
+    const price = document.getElementById('price').value;
+    const token = localStorage.getItem('authToken');
+
+    fetch(`${window.base_url}/setting-management/settings`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            material: material,
+            price: price
+        })
+    })
+        .then(response => {
+            if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
+                return response.json();
+            } else {
+                throw new Error('Invalid response from server');
+            }
+        })
+        .then(result => {
+            const data = result.data;
+            console.log(data);
+            document.getElementById('add-diamond-shell').style.display = 'none';
+            location.reload();
+        })
+        .catch(error => {
+            alert('Error add Setting' + error);
+            console.error('Error fetching Setting:', error);
+        });
+}
+
+
 function openDiamondShellForm() {
     document.getElementById('add-diamond-shell').style.display = 'flex';
 }
@@ -606,8 +637,4 @@ function closeDiamondShellForm() {
     if (confirm("Xác Nhận Hủy?")) {
         document.getElementById('add-diamond-shell').style.display = 'none';
     }
-}
-
-function submitDiamondShell() {
-
 }
