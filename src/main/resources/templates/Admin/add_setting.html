@@ -12,40 +12,24 @@
             padding: 0;
             background-color: #f4f7fb;
         }
-
         .body1 {
             margin: auto;
             width: 90%;
             max-width: 1200px;
             background-color: #f4f7fb;
         }
-
         .wrapper {
             padding: 20px;
             box-sizing: border-box;
         }
-
         .form-row {
             display: flex;
             margin-bottom: 15px;
             gap: 10px;
         }
-
-        .field {
-            flex: 1;
-            margin: 10px;
-            box-sizing: border-box;
-        }
-
-        .field label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
         .field input,
         .field select {
-            width: 100%;
+            width: 40%;
             padding: 10px;
             font-size: 18px;
             border: 2px solid #ccc;
@@ -54,58 +38,32 @@
             color: #000;
             box-sizing: border-box;
         }
-
-        .field textarea {
-            font-family: Arial, sans-serif;
-            width: 100%;
-            height: 70px;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 7px;
-            box-sizing: border-box;
-            resize: vertical;
-        }
-
         .field input:focus,
         .field select:focus {
             border-color: #004085;
             outline: none;
         }
-
+        .button-group{
+            display: block;
+        }
         .button-group input {
             padding: 10px 30px;
-            border: none;
             border-radius: 5px;
             font-size: 14px;
             cursor: pointer;
             margin: 8px 8px;
         }
-
         .button-group input[type="submit"] {
             background-color: #304067;
             color: #fff;
         }
-
         .button-group input[type="button"] {
             background-color: #c2c8cd;
             color: #304067;
             font-weight: 600;
         }
-
         .button-group input[type="button"]:hover {
             background-color: #b7bec1;
-        }
-
-        .histaff-item-group {
-            padding: 5px;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-
-        .histaff-item-group-header h3 {
-            margin-left: 180px;
-            margin-top: 40px;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -122,57 +80,23 @@
         <div class="wrapper">
             <form id="diamondForm" enctype="multipart/form-data">
                 <div class="form-row">
-                    <div class="field" style="flex: 1 1 33%;">
-                        <label for="settingType">Loại Vỏ Kim Cương</label>
-                        <select id="settingType" name="settingType" required>
-                            <option value="1">Loại 1</option>
-                            <option value="2">Loại 2</option>
-                            <option value="3">Loại 3</option>
-                        </select>
-                    </div>
-
-                    <div class="field" style="flex: 1 1 33%;">
+                    <div class="field" >
                         <label for="material">Chất Liệu Vỏ</label>
-                        <select id="material" name="material" required>
+                        <select id="material" name="material" required >
                             <option value="gold">Vàng</option>
                             <option value="silver">Bạc</option>
                         </select>
                     </div>
-
-                    <div class="field" style="flex: 1 1 33%;">
-                        <label for="productCode">Mã Sản Phẩm</label>
-                        <input type="text" id="productCode" name="productCode" placeholder="Nhập mã sản phẩm" required>
-                    </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="field" style="flex: 1 1 25%; margin-right: 10px;">
-                        <label for="size">Size</label>
-                        <select id="size" name="size" required>
-                            <option value="1">Size 1</option>
-                            <option value="2">Size 2</option>
-                            <option value="3">Size 3</option>
-                            <option value="3">Size 4</option>
-                        </select>
-                    </div>
-
-                    <div class="field" style="flex: 1 1 25%; margin-right: 10px;">
+                    <div class="field">
                         <label for="price">Giá</label>
                         <input type="text" id="price" name="price" placeholder="Nhập giá" required>
                     </div>
-
-                    <div class="field" style="flex: 1 1 25%; margin-right: 10px;">
-                        <label for="image">Hình Ảnh</label>
-                        <input type="file" id="image" name="image" accept="image/*" required>
-                    </div>
                 </div>
 
-                <div class="field">
-                    <label for="description">Mô Tả:</label>
-                    <textarea id="description" name="description" placeholder="Nhập mô tả"></textarea>
-                </div>
-
-                <div class="button-group">
+                <div class="button-group" >
                     <input type="submit" value="Thêm Vỏ Kim Cương">
                     <input type="button" value="Hủy" onclick="cancelDiamondForm()">
                 </div>
