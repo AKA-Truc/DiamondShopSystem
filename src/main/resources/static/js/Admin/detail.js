@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 orderList.innerHTML = '';
 
                 dataList.forEach((data, index) => {
+                    const promotionName = data.promotion ? data.promotion.promotionName : 'Không có'; // Handle null promotion
+
                     const row = document.createElement('tr');
 
                     row.innerHTML = `
@@ -64,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td class="editable">${data.user.userName}</td>
                         <td class="editable">${new Date(data.startDate).toISOString().slice(0, 10)}</td>
                         <td class="editable">${data.status}</td>
-                        <td class="editable">${data.promotion.promotionName || 'Không có'}</td>
+                        <td class="editable">${promotionName}</td>
                         <td class="editable">${data.totalPrice}</td>
                         <td class="action-buttons">
-                            <button class="edit-btn" onclick="showOrder(${data.orderId})">
+                            <button class="edit-btn" data-order-id="${data.orderId}">
                                 <ion-icon name="eye-outline"></ion-icon>
                             </button>
                         </td>
@@ -75,10 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     orderList.appendChild(row);
                 });
+
                 document.querySelectorAll('.edit-btn').forEach(button => {
                     button.addEventListener('click', (event) => {
-                        const orderId = event.target.closest('button').getAttribute('data-order-id');
-                        window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/orderDetailAdmin.html?orderId=${orderId}`;
+                        const orderId = event.currentTarget.getAttribute('data-order-id');
+                        if (orderId) {
+                            window.location.href = `/DiamondShopSystem/src/main/resources/templates/Admin/orderDetailAdmin.html?orderId=${orderId}`;
+                        } else {
+                            console.error('Order ID is null or undefined');
+                        }
                     });
                 });
             })

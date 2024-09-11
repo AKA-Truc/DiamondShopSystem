@@ -117,6 +117,7 @@ public class OrderService {
         existingOrder.setStatus(order.getStatus());
         existingOrder.setShippingAddress(order.getShippingAddress());
         existingOrder.setTypePayment(order.getTypePayment());
+        existingOrder.setPhone(order.getPhone());
 
         int totalPrice = 0;
 
