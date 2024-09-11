@@ -6,7 +6,6 @@ body {
     overflow-x: hidden;
 }
 
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -18,9 +17,8 @@ body {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c; /*chỉnh chữ*/
+    color: #0d0e1c;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -32,7 +30,6 @@ body {
     color: #141E0C;
 }
 
-/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -49,7 +46,7 @@ body {
 }
 
 .main-menu li a:hover {
-    background-color: #cbd0dd; /*click menu*/
+    background-color: #cbd0dd;
 }
 
 /* Submenu sổ xuống */
@@ -63,7 +60,7 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ebf0f8;  /*comment* menu con*/
+    background-color: #ebf0f8;
     list-style-type: none;
     padding: 0;
     transition: all 0.3s ease;
@@ -80,7 +77,6 @@ body {
     transform: translateY(0);
 }
 
-/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -89,7 +85,7 @@ body {
 }
 
 .submenu ul li a:hover {
-    background-color: #cbd0dd;/* comment*/
+    background-color: #cbd0dd;
 }
 
 ion-icon {
@@ -146,54 +142,51 @@ ion-icon {
     width: calc(100% - 280px);
     margin-left: 280px;
     height: 1px;
-    background-color: #162165e7; /*thanh br*/
+    background-color: #162165e7;
 }
 
 .filter-section {
     display: flex;
-    flex-wrap: wrap; /* Đảm bảo các phần tử sẽ xuống dòng nếu không đủ không gian */
-    gap: 15px; /* Khoảng cách giữa các phần tử */
-    align-items: center; /* Canh giữa theo chiều dọc */
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
     margin-bottom: 20px;
     margin-left: 291px;
-    padding: 10px; /* Tạo khoảng cách xung quanh phần lọc */
+    padding: 10px;
 }
 
 .filter-section label {
-    font-size: 16px; /* Kích thước chữ cho nhãn */
-    font-weight: 500; /* Tăng độ đậm của nhãn */
-    color: #333; /* Màu sắc nhãn */
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
 }
 
 .filter-section select {
-    padding: 10px; /* Tăng kích thước padding để dễ tương tác */
-    border-radius: 8px; /* Bo góc */
-    border: 1px solid #ccc; /* Đường viền nhạt */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
     font-size: 16px; /* Kích thước chữ trong dropdown */
-    background-color: #f9f9f9; /* Nền nhẹ cho dropdown */
-    color: #333; /* Màu chữ trong dropdown */
-    width: auto; /* Đảm bảo kích thước tự động */
-    transition: all 0.3s ease; /* Hiệu ứng khi hover */
+    background-color: #f9f9f9;
+    color: #333;
+    width: auto;
+    transition: all 0.3s ease;
 }
 
 .filter-section select:hover {
-    border-color: #4CAF50; /* Đổi màu viền khi hover */
+    border-color: #4CAF50;
 }
 
 @media screen and (max-width: 768px) {
     .filter-section {
-        flex-direction: column; /* Chuyển thành cột khi màn hình nhỏ */
-        align-items: flex-start; /* Canh trái */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .filter-section select {
-        width: 100%; /* Đặt độ rộng 100% khi màn hình nhỏ */
+        width: 100%;
     }
 }
 
-
-
-/* main */
 .main {
     overflow-x: auto;
     white-space: nowrap;
@@ -225,7 +218,7 @@ ion-icon {
 }
 
 #customer-gender {
-    grid-column: span 1; /* Khối visitor-insights chiếm 2 cột để hàng đầu tiên ngang nhau */
+    grid-column: span 1;
 }
 
 #total-revenue, #order-today, #order-by-year {
@@ -237,7 +230,6 @@ ion-icon {
     grid-column: span 1; /* Mỗi khối chiếm 1 cột trong hàng */
 }
 
-/* Bố cục thẻ nhỏ (card-small) */
 .card-small {
     background-color: #f9f9f9;
     padding: 20px;
@@ -245,7 +237,7 @@ ion-icon {
     border-radius: 10px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
     flex: 1;
-    min-width: 100px; /* Kích thước tối thiểu cho mỗi thẻ */
+    min-width: 100px;
     height: fit-content;
 }
 
@@ -292,8 +284,8 @@ ion-icon {
 
 #order-today {
     text-align: center;
-    width: 150px; /* Điều chỉnh chiều rộng */
-    height: 100px; /* Điều chỉnh chiều cao */
+    width: 150px;
+    height: 100px;
 }
 
 #customer-gender  {
@@ -304,15 +296,14 @@ ion-icon {
     width: 450px;
     height: 300px;
 }
-/* Thẻ sản phẩm */
+
 #top-products-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    font-size: 12px; /* Make text smaller */
+    font-size: 12px;
 }
 
-/* Header styling */
 .product-header {
     font-weight: bold;
     color: #333;
@@ -322,7 +313,6 @@ ion-icon {
     border-bottom: 1px solid #ddd;
 }
 
-/* Individual product item styling */
 #top-products-list li {
     display: flex;
     justify-content: space-between;
@@ -331,23 +321,20 @@ ion-icon {
     align-items: center;
 }
 
-/* Styling for product index */
 .product-index-header, .product-index {
-    width: 2%; /* Reduced from 3% to 2% */
-    text-align: center; /* Changed to center for better appearance */
-    flex-shrink: 0; /* Prevents shrinking */
+    width: 2%;
+    text-align: center;
+    flex-shrink: 0;
 }
 
-/* Adjusted styling for product name */
 .product-name-header, .product-name {
-    width: 78%; /* Increased to take up more space */
+    width: 78%;
     text-align: left;
-    padding-left: 10px; /* Added some padding for better spacing */
+    padding-left: 10px;
 }
 
-/* Styling for sales column (assuming it exists) */
 .product-sales-header, .product-sales {
-    width: 20%; /* Allocating remaining space */
+    width: 20%;
     text-align: right;
 }
 .product-index-header, .product-index {
@@ -377,16 +364,14 @@ ion-icon {
 .color-4 { color: #76b7b2; }
 .color-5 { color: #59a14f; }
 
-/* Modify the size of the progress container for a smaller popularity bar */
 #top-products-list .progress-container {
-    width: 80px; /* Reduce the width for a smaller bar */
-    height: 8px; /* Reduce the height for a slimmer bar */
+    width: 80px;
+    height: 8px;
     background-color: #f2f2f2;
     border-radius: 5px;
     position: relative;
 }
 
-/* Tiêu đề */
 h2 {
     font-weight: 500;
     font-size: 18px;
@@ -394,7 +379,6 @@ h2 {
     color: #333;
 }
 
-/* Tiêu đề nhỏ */
 h3 {
     font-weight: 700;
     font-size: 24px;
@@ -402,7 +386,6 @@ h3 {
     color: #333;
 }
 
-/* Chữ nhỏ */
 p {
     font-weight: 400;
     font-size: 14px;
@@ -410,7 +393,6 @@ p {
     margin-bottom: 10px;
 }
 
-/* Các thẻ */
 .big-box {
     background-color: #fff;
     border-radius: 10px;
@@ -418,7 +400,6 @@ p {
     padding: 20px;
 }
 
-/* Bảng điều khiển nhỏ */
 .small-box {
     background-color: #fff;
     border-radius: 10px;
@@ -438,7 +419,6 @@ p {
     margin-top: 20px;
 }
 
-/* Bảng */
 table {
     width: 100%;
     border-collapse: collapse;

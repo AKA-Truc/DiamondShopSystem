@@ -180,19 +180,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('closepopup1').addEventListener('click', () => {
-        if (confirm("Confirm cancellation?")) {
+        if (confirm("Xác Nhận Hủy?")) {
             popup1Overlay.style.display = 'none';
         }
     });
 
     document.getElementById('cancelButton').addEventListener('click', () => {
-        if (confirm("Confirm cancellation?")) {
+        if (confirm("Xác Nhận Hủy?")) {
             popup1Overlay.style.display = 'none';
         }
     });
 
     window.addEventListener('click', (event) => {
-        if (event.target === popup1Overlay && confirm("Confirm cancellation?")) {
+        if (event.target === popup1Overlay && confirm("Xác Nhận Hủy?")) {
             popup1Overlay.style.display = 'none';
         }
     });
