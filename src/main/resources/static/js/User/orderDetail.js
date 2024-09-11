@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     const token = localStorage.getItem('authToken');
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('orderId');
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.querySelector('h2').textContent = `Order #${data.orderId}`;
         document.getElementById('item-count').textContent = `You have ${data.orderDetails.length} item(s) in your order`;
         document.getElementById('name-order').textContent = `${data.user.userName}'s Order`;
+        document.getElementById("totalPrice").textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalPrice)}`;
         const cartItems = document.getElementById('cart-items');
 
         // Fetch and display valid promotions
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             itemDiv.classList.add('card', 'mb-3');
 
             const sizeSelectId = `size-product-${detail.orderDetailId}`;
+            const priceId = `price-product-${detail.orderDetailId}`;
 
             itemDiv.innerHTML = `
             <div class="row g-0">
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         <p class="card-text">Quantity: ${detail.quantity}</p>
                         <p class="card-text">Category: ${product.category.categoryName}</p>
                         <p class="card-text">Warranty Period: ${product.warrantyPeriod} months</p>
-                        
+                        <p class="card-text">Price: <span id="${priceId}">${detail.totalPrice} VNĐ</span></p>
                         <!-- Size Selector -->
                         <div class="form-group">
                             <label for="${sizeSelectId}">Select Size:</label>
@@ -92,20 +94,48 @@ document.addEventListener('DOMContentLoaded', async function() {
             cartItems.appendChild(itemDiv);
 
             const sizeOfProduct = document.getElementById(sizeSelectId);
+            const priceElement = document.getElementById(priceId);
+
             if (sizeOfProduct) {
                 if (data.status === "New") {
-                    for (let i = 0; i < productDetails.length; i++) {
+                    document.getElementById('address').disabled = false;
+                    document.getElementById('phone').disabled = false;
+
+
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.textContent = 'Select a size';
+                    sizeOfProduct.appendChild(defaultOption);
+
+                    productDetails.forEach(detail => {
                         const option = document.createElement('option');
-                        option.value = productDetails[i].size;
-                        option.textContent = productDetails[i].size;
+                        option.value = detail.size;
+                        option.textContent = detail.size;
                         sizeOfProduct.appendChild(option);
-                    }
+                    });
+
+                    sizeOfProduct.addEventListener('change', async function () {
+                        const selectedSize = sizeOfProduct.value;
+                        const selectedDetail = await getProductDetailBySize(product, selectedSize);
+                        console.log(selectedDetail);
+                        if (selectedDetail) {
+                            // Format price in VND
+                            priceElement.textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(selectedDetail.sellingPrice * detail.quantity)}`;
+                        }
+                    });
                 } else {
+                    document.getElementById('address').value = `${data.shippingAddress}`;
+                    document.getElementById('phone').value = `${data.phone}`;
+
                     sizeOfProduct.disabled = true;
                     const option = document.createElement('option');
                     option.value = detail.size;
                     option.textContent = detail.size;
                     sizeOfProduct.appendChild(option);
+
+                    const productDetail = await getProductDetailBySize(product, detail.size);
+                    // Format total price in VND
+                    priceElement.textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productDetail.sellingPrice * detail.quantity)}`;
                 }
             }
         }
@@ -134,6 +164,14 @@ document.addEventListener('DOMContentLoaded', async function() {
                     });
 
                     const selectedPromotion = document.getElementById('promotion') ? document.getElementById('promotion').value : null;
+                    const address = document.getElementById('address').value;
+                    const phone = document.getElementById('phone').value;
+
+                    console.log(address, phone);
+                    if (phone === null || address === null) {
+                        alert('Please enter a phone number and address');
+                        return false;
+                    }
 
                     const confirmResponse = await fetch(`${window.base_url}/order-management/orders/${orderId}`, {
                         method: 'PUT',
@@ -153,7 +191,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                                 promotionId: selectedPromotion
                             },
                             startDate: data.startDate,
-                            shippingAddress: data.shippingAddress,
+                            phone: phone,
+                            shippingAddress: address,
                             status: "Đã xác nhận"
                         })
                     });
@@ -228,6 +267,30 @@ async function getAllPromotion() {
     } catch (error) {
         console.error('Error fetching promotions:', error);
         return [];
+    }
+}
+
+async function getProductDetailBySize(product, size) {
+    try {
+        const response = await fetch(`${window.base_url}/product-management/productDetailSize/${size}`, {
+            method: 'POST', // Change to POST
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: product.productId
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error fetching product detail by size');
+        }
+
+        const result = await response.json();
+        return result.data;
+    } catch (error) {
+        console.error(`Error fetching product detail by size for productId ${product.productId}:`, error);
+        return null;
     }
 }
 

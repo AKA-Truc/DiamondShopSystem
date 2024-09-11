@@ -146,7 +146,7 @@ public class OrderService {
             Promotion promotion = promotionRepo.findById(orderDTO.getPromotion().getPromotionId())
                     .orElseThrow(() -> new RuntimeException("Promotion not found"));
 
-            totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
+            totalPrice = totalPrice - (orderDTO.getPromotion().getDiscountPercent() * totalPrice) / 100;
             existingOrder.setPromotion(promotion);
         }
 
