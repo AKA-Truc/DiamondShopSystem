@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="grid__column-2-4">
                         <h3 class="footer-heading">Đăng ký ngay</h3>
                         <ul class="footer__list">
-                            <li>
+                            <li class="form1">
                                 <a href="">Để nhận được các tin tức thời trang mới nhất cùng với ưu đãi khuyến mãi.</a>
                                 <form action="">
                                     <input type="text" id="email" name="email" placeholder="Email">
