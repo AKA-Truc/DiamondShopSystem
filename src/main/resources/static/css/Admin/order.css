@@ -183,3 +183,39 @@ th {
     color: black;
 }
 /*  */
+
+/* Status colors */
+.status-chua-xac-nhan,
+.status-da-xac-nhan,
+.status-dang-giao,
+.status-da-giao {
+    border-radius: 8px; /* Bo góc tròn với bán kính 8px */
+    padding: 5px 10px;   /* Thêm khoảng cách bên trong */
+    text-align: center;  /* Canh giữa nội dung */
+    border-color: white;
+}
+
+/* Pastel colors */
+.status-chua-xac-nhan {
+    background-color: #f3de89; /* Màu vàng pastel */
+    color: #333;              /* Màu chữ đen nhạt */
+}
+
+.status-da-xac-nhan {
+    background-color: #7abc96; /* Màu xanh lá cây pastel */
+    color: #fff;              /* Màu chữ trắng */
+}
+
+.status-dang-giao {
+    background-color: #6ab1ca; /* Màu xanh dương pastel */
+    color: #fff;              /* Màu chữ trắng */
+}
+
+.status-da-giao {
+    background-color: #87a9df; /* Màu xanh dương pastel nhạt */
+    color: #fff;              /* Màu chữ trắng */
+}
+
+
+
+
