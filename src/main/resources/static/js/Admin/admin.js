@@ -111,45 +111,60 @@ function closeChangePasswordForm() {
 
 function submitChangePassword() {
     const token = localStorage.getItem('authToken');
-    const currentPassword = document.getElementById('current-password').value;
-    const newPassword = document.getElementById('new-password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
+    const currentPassword = document.getElementById('current-password').value.trim();
+    const newPassword = document.getElementById('new-password').value.trim();
+    const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+        alert('All fields are required!');
+        return;
+    }
 
     if (newPassword === confirmPassword) {
+        const requestBody = {
+            oldPassword: String(currentPassword),
+            password: String(newPassword),
+            retypePassword: String(confirmPassword)
+        };
+
+
         fetch(`${window.base_url}/forgot-password/change_password`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                oldPassword: currentPassword,
-                password: newPassword,
-                retypePassword: confirmPassword
-            })
+            body: JSON.stringify(requestBody)
         })
-            .then(response => response.text())
+            .then(response => {
+                return response.json().then(result => ({
+                    status: response.status,
+                    body: result
+                }));
+            })
             .then(result => {
                 if (result.status === 200) {
-                    alert('Đổi mật khẩu thành công');
+                    alert('Password changed successfully!');
+                    resetChangePasswordForm();
                 } else {
-                    alert('Đổi mật khẩu không thành công');
+                    alert('Password change failed: ' + (result.body.message || 'Unknown error'));
                 }
-                resetChangePasswordForm();
             })
             .catch(error => {
-                console.error('Lỗi khi đổi mật khẩu:', error);
-                alert('Đã xảy ra lỗi khi đổi mật khẩu');
+                console.error('Error occurred during password change:', error);
+                alert(`Error: ${error.message}`);
             });
     } else {
-        alert('Mật khẩu mới và xác nhận mật khẩu không khớp');
+        alert('New password and confirmation do not match!');
     }
 }
+
 
 function resetChangePasswordForm() {
     document.getElementById('current-password').value = '';
     document.getElementById('new-password').value = '';
     document.getElementById('confirm-password').value = '';
     closeChangePasswordForm();
-
 }
+
+

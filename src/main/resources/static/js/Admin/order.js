@@ -74,11 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <option value="Đã giao" ${data.status === 'Đã giao' ? 'selected' : ''}>Đã giao</option>
                 </select>
             </td>
-            <td>
-                <button class="edit-btn" onclick="showOrder(${data.orderId})">
-                    <ion-icon name="eye-outline"></ion-icon>
-                </button>
-            </td>
             `;
 
                     invoiceList.appendChild(row);
