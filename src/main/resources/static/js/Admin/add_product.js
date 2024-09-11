@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="item-container">
                     <div id = "diamond-select"></div>
                 </div>
-                <span class="toggle-quantity">+</span>
+                <button class="toggle-quantity">+</button>
             </td>
             <td><input type="number" class="table-control item-control" placeholder="Nhập size" required></td>
             <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá" required></td>
