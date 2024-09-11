@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         slides[slideIndex - 1].style.display = "block";  // Hiển thị slide hiện tại
-        setTimeout(showSlides, 2000); // Đổi slide sau 2 giây
+        setTimeout(showSlides, 4000); // Đổi slide sau 2 giây
     }
 
     function plusSlides(n) {
