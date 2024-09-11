@@ -168,7 +168,7 @@ body {
 }
 
 .item-small:nth-child(1):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1_cam_03-2-600x600.jpg');
+    background-image: url('https://jemmia.vn/wp-content/uploads/2024/08/1_cam_01-6-150x150.jpg');
 }
 
 .item-small:nth-child(2):hover::before {
@@ -287,7 +287,7 @@ body {
 }
 
 .cta-button {
-    background-color: #004d40;
+    background-color: #304067;
     color: #fff;
     padding: 12px 24px;
     border: none;
@@ -298,7 +298,7 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #00796b;
+    background-color: #304067;
 }
 
 @media (max-width: 768px) {
