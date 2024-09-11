@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fetchUser();
 });
+
+
 function fetchUser(){
     const token = localStorage.getItem('authToken');
     const user = JSON.parse(atob(localStorage.getItem('authToken').split('.')[1]));
@@ -41,10 +43,10 @@ function fetchUser(){
         .then(result=>{
 
             const data = result.data;
-
             // Kiểm tra sự tồn tại của các phần tử trước khi cập nhật
             const nameElement = document.getElementById('name');
             const userNameElement = document.getElementById('user-name');
+            const pointElement = document.getElementById('point');
             const addressElement = document.getElementById('address');
             const emailElement = document.getElementById('email1');
             const genderSelectElement = document.getElementById('genderSelect');
@@ -66,7 +68,11 @@ function fetchUser(){
                 genderSelectElement.value = data.gender || 'Khác';
             }
             if (roleElement) {
+                console.log(roleElement.value);
                 roleElement.value = data.role || 'Chưa cập nhật';
+            }
+            if (pointElement) {
+                pointElement.textContent = data.point.points;
             }
 
         })

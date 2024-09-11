@@ -116,7 +116,7 @@ public class DiamondController {
     }
 
 
-    @GetMapping("/diamond-details")
+    @GetMapping("/diamondGIACODE")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<DiamondDTO>> getDiamondByGIACode(@Param("giaCode") String giaCode) {
         DiamondDTO existingDiamond = diamondService.getDiamondByGIACode(giaCode);
