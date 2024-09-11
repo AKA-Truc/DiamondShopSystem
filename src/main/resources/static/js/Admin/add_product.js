@@ -7,25 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModalBtn = document.getElementById('close-modal');
     const searchInput = document.getElementById('diamond-search');
     const diamondList = document.getElementById('diamond-list');
-    const searchButton = document.getElementById('search-diamond-btn');  // New search button
+    const searchButton = document.getElementById('search-diamond-btn');
     let currentDiamondSelect = null;
 
-    // Event listener for the close button
     closeModalBtn.addEventListener('click', () => {
         modal.style.display = 'none';
-        searchInput.value = '';  // Clear the search input
-        diamondList.innerHTML = '';  // Clear the diamond list
+        searchInput.value = '';
+        diamondList.innerHTML = '';
     });
 
-    // Event listener for clicking outside the modal content
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
             modal.style.display = 'none';
-            searchInput.value = '';  // Clear the search input
-            diamondList.innerHTML = '';  // Clear the diamond list
+            searchInput.value = '';
+            diamondList.innerHTML = '';
         }
     });
-
 
     fetchCategory(token);
 
