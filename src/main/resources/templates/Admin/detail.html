@@ -1,132 +1,41 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang chủ</title>
-    <link rel="stylesheet" href="/static/css/Admin/detail.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/Admin/detail.css">
     <script>
         function alertFeature() {
-            alert("Tính năng đang được được phát triển");
+            alert('Tính năng đang được được phát triển');
         }
     </script>
+    <script>
+        function updateSelectColor(selectElement) {
+            // Xóa tất cả các class màu trước đó
+            selectElement.classList.remove('status-confirmed', 'status-delivered', 'status-pending', 'status-shipping', 'status-canceled');
+
+            // Thêm class màu tương ứng với trạng thái được chọn
+            var selectedValue = selectElement.value;
+            selectElement.classList.add('status-' + selectedValue);
+        }
+
+        // Gọi hàm để cập nhật màu ban đầu khi trang được tải
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectElement = document.getElementById('statusSelect');
+            updateSelectColor(selectElement);  // Thiết lập màu ban đầu
+        });
+
+
+    </script>
 </head>
+
 <body>
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
-<!-- main content -->
-<div class="main-content">
-    <div class="customer-management">
-        <!-- Ô tìm kiếm -->
-        <input
-                type="text"
-                placeholder="Nhập họ tên để tìm kiếm..."
-                class="search-bar"
-        />
-        <h2>Đơn hàng cần xác nhận</h2>
-        <!-- Bảng danh sách khách hàng -->
-        <div class="table-wrapper">
-            <table id="requests-table">
-                <thead>
-                <tr>
-                    <th class="center-heading">STT</th>
-                    <th class="center-heading">Mã Đơn Hàng</th>
-                    <th class="center-heading">Khách hàng</th>
-                    <th class="center-heading">Ngày đặt hàng</th>
-                    <th class="center-heading">
-                        <select
-                                style="
-                      font-weight: bold;
-                      font-size: 12pt;
-                      border: none;
-                      outline: none;
-                      background-color: #f9f9f9;
-                    "
-                        >
-                            <option style="background-color: green">Mặc định</option>
-                            <option>Chờ xác nhận</option>
-                            <option>Đã xác nhận</option>
-                            <option>Đang Vận Chuyển</option>
-                            <option>Đã Giao Hàng</option>
-                            <option>Hủy</option>
-                        </select>
-                    </th>
-                    <th class="center-heading">Thao tác</th>
-                </tr>
-                </thead>
-                <tbody id="order-List">
-                <!-- Các dòng đơn hàng sẽ được thêm bởi JavaScript -->
-                </tbody>
-            </table>
-
-            <!-- Popup xác nhận xóa khách hàng -->
-            <div id="popup" class="popup-overlay">
-                <div class="popup-content">
-                    <p>Bạn có chắc chắn muốn xóa đơn hàng này?</p>
-                    <button id="popupOk" class="okbtn">Ok</button>
-                    <button id="popupCancel" class="cancelbtn">Hủy</button>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            /* Notification (popup) */
-            .popup {
-                display: none; /* Ẩn ban đầu */
-                position: fixed; /* Giữ nguyên ở vị trí */
-                z-index: 1000; /* Hiển thị lớn hơn */
-                left: 0;
-                top: 0;
-                width: 100%; /* Full width */
-                height: 100%; /* Full height */
-                background-color: rgba(0, 0, 0, 0.4); /* Đen với độ trong suốt */
-            }
-
-            /* Nội dung của Popup */
-            .popup-content {
-                background-color: #fefefe;
-                margin: 15% auto; /* 15% từ phía trên và căn giữa */
-                padding: 20px;
-                border: 1px solid #888;
-                width: 300px; /* Chiều rộng */
-                text-align: center;
-                border-radius: 10px;
-            }
-
-            /* Nút OK */
-            .okbtn {
-                background-color: #4caf50;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-right: 10px;
-            }
-
-            .okbtn:hover {
-                background-color: #45a049;
-            }
-
-            /* Nút Hủy */
-            .cancelbtn {
-                background-color: #f44336;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            .cancelbtn:hover {
-                background-color: #da190b;
-            }
-        </style>
-        <!-- Thêm đoạn mã JavaScript trước thẻ đóng body -->
-    </div>
-</div>
-
-<script src="menu.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/Admin/detail.js"></script>
 <script
         type="module"
         src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -135,5 +44,257 @@
         nomodule
         src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
 ></script>
+<main class="main-content">
+    <section class="orders">
+        <div class="search-bar" style="width: 400px; margin-left:1070px; align-items: center;border-radius: 100px;">
+            <input type="text" placeholder="Tra cứu đơn hàng...">
+        </div>
+        <table style="width: 1200px; margin-left:290px; align-items: center;">
+            <thead>
+            <tr>
+                <th>Mã Đơn Hàng</th>
+                <th>Người Đặt</th>
+                <th>Ngày Đặt</th>
+                <th>Trạng Thái</th>
+                <th>Thao Tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>62890b236e5af14abcf87c2</td>
+                <td>Thanh Trúc</td>
+                <td>15:51:43 09-11-2023</td>
+                <td>
+                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                        <option value="delivered">ĐÃ GIAO HÀNG</option>
+                        <option value="pending">CHƯA XÁC NHẬN</option>
+                        <option value="shipping">ĐANG GIAO</option>
+                        <option value="canceled">ĐÃ HỦY</option>
+                    </select>
+                </td>
+                <td><button class="view-btn">Xem</button></td>
+            </tr>
+            <tr>
+                <td>62890b236e5af14abcf87c2</td>
+                <td>Thanh Trúc</td>
+                <td>15:51:43 09-11-2023</td>
+                <td>
+                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                        <option value="delivered">ĐÃ GIAO HÀNG</option>
+                        <option value="pending">CHƯA XÁC NHẬN</option>
+                        <option value="shipping">ĐANG GIAO</option>
+                        <option value="canceled">ĐÃ HỦY</option>
+                    </select>
+                </td>
+                <td><button class="view-btn">Xem</button></td>
+            </tr>
+
+
+            <td>62890b236e5af14abcf87c2</td>
+            <td>Thanh Trúc</td>
+            <td>15:51:43 09-11-2023</td>
+            <td>
+                <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                    <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                    <option value="delivered">ĐÃ GIAO HÀNG</option>
+                    <option value="pending">CHƯA XÁC NHẬN</option>
+                    <option value="shipping">ĐANG GIAO</option>
+                    <option value="canceled">ĐÃ HỦY</option>
+                </select>
+            </td>
+            <td><button class="view-btn">Xem</button></td>
+            </tr>
+
+
+            <tr>
+                <td>62890b236e5af14abcf87c2</td>
+                <td>Thanh Trúc</td>
+                <td>15:51:43 09-11-2023</td>
+                <td>
+                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                        <option value="delivered">ĐÃ GIAO HÀNG</option>
+                        <option value="pending">CHƯA XÁC NHẬN</option>
+                        <option value="shipping">ĐANG GIAO</option>
+                        <option value="canceled">ĐÃ HỦY</option>
+                    </select>
+                </td>
+                <td><button class="view-btn">Xem</button></td>
+            </tr>
+            <tr>
+                <td>62890b236e5af14abcf87c2</td>
+                <td>Thanh Trúc</td>
+                <td>15:51:43 09-11-2023</td>
+                <td>
+                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                        <option value="delivered">ĐÃ GIAO HÀNG</option>
+                        <option value="pending">CHƯA XÁC NHẬN</option>
+                        <option value="shipping">ĐANG GIAO</option>
+                        <option value="canceled">ĐÃ HỦY</option>
+                    </select>
+                </td>
+                <td><button class="view-btn">Xem</button></td>
+            </tr>
+            <tr>
+                <td>62890b236e5af14abcf87c2</td>
+                <td>Thanh Trúc</td>
+                <td>15:51:43 09-11-2023</td>
+                <td>
+                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                        <option value="delivered">ĐÃ GIAO HÀNG</option>
+                        <option value="pending">CHƯA XÁC NHẬN</option>
+                        <option value="shipping">ĐANG GIAO</option>
+                        <option value="canceled">ĐÃ HỦY</option>
+                    </select>
+                </td>
+                <td><button class="view-btn">Xem</button></td>
+            </tr>
+            <tr>
+                <td>62890b236e5af14abcf87c2</td>
+                <td>Thanh Trúc</td>
+                <td>15:51:43 09-11-2023</td>
+                <td>
+                    <select id="statusSelect" class="status-select" onchange="updateSelectColor(this)">
+                        <option value="confirmed">ĐÃ XÁC NHẬN</option>
+                        <option value="delivered">ĐÃ GIAO HÀNG</option>
+                        <option value="pending">CHƯA XÁC NHẬN</option>
+                        <option value="shipping">ĐANG GIAO</option>
+                        <option value="canceled">ĐÃ HỦY</option>
+                    </select>
+                </td>
+                <td><button class="view-btn">Xem</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!--  -->
+<style>
+    .main-content {
+        flex-grow: 1;
+        padding: 20px;
+    }
+
+    .orders h2 {
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    table th {
+        background-color: #f0f0f0;
+    }
+
+    .status {
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .status.confirmed {
+        background-color: #5cb85c;
+        border-radius: 30px;
+    }
+
+    .status.delivered {
+        background-color: #5bc0de;
+        border-radius: 30px;
+    }
+
+    .status.pending {
+        background-color: #f0ad4e;
+        border-radius: 30px;
+    }
+
+    .status.shipping {
+        background-color: #39994b;
+        border-radius: 30px;
+    }
+
+    .status.cancelled {
+        background-color: #d9534f;
+        border-radius: 30px;
+    }
+
+    .view-btn {
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .view-btn:hover {
+        background-color: #c9302c;
+    }
+</style>
+<!--  -->
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="order.js"></script>
+
+<script>
+    function updateSelectColor(selectElement) {
+        // Xóa tất cả các class màu trước đó
+        selectElement.classList.remove('role-tester', 'role-developer', 'role-ba', 'role-default');
+
+        // Lấy giá trị được chọn
+        var selectedValue = selectElement.value;
+
+        // Thêm class tương ứng dựa trên giá trị được chọn
+        if (selectedValue === 'tester') {
+            selectElement.classList.add('role-tester');
+        } else if (selectedValue === 'developer') {
+            selectElement.classList.add('role-developer');
+        } else if (selectedValue === 'ba') {
+            selectElement.classList.add('role-ba');
+        } else {
+            selectElement.classList.add('role-default'); // Trạng thái mặc định
+        }
+    }
+
+    // Đặt trạng thái ban đầu là màu trắng khi trang được tải
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectElement = document.getElementById('roleSelect');
+        selectElement.classList.add('role-default'); // Màu mặc định
+    });
+
+</script>
 </body>
+
 </html>
+
+
+
+
+
