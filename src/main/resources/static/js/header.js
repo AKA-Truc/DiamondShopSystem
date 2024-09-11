@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem('authToken');
+    const user = JSON.parse(atob(localStorage.getItem('authToken').split('.')[1]));
+
     const header = `
         <div class="header1">
             <p class="phone">Phone: (+84) 123 2345 123</p>
             <p class="center" id="center-text">hello</p>
             <p class="address">
-                <a style="color:white;text-decoration: none" href="#" id = "logic-login"></a>
+                <a style="color:white;text-decoration: none" href="#" id="logic-login"></a>
             </p>
         </div>
         <div class="header">
@@ -19,15 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         </div>
         <ul id="main-menu">
-            <li><a href="about_us.html">VỀ CHÚNG TÔI </a></li>
-            <li><a href="products.html">TRANG SỨC KIM CƯƠNG </a></li>
-            <li><a href="">BẢNG GIÁ</a>
+            <li><a href="about_us.html">VỀ CHÚNG TÔI</a></li>
+            <li><a href="products.html">TRANG SỨC KIM CƯƠNG</a></li>
+            <li><a href="#">BẢNG GIÁ</a>
                 <ul class="sub-menu">
                     <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
-                    <li><a href="">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+                    <li><a href="#">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
                 </ul>
             </li>
-            <li><a href="promotion.html">KHUYẾN MÃI</a></li>
             <li><a href="news.html">TIN TỨC</a></li>
             <li><a href="contact.html">LIÊN HỆ</a></li>
         </ul>
@@ -42,12 +44,74 @@ document.addEventListener('DOMContentLoaded', function () {
         <div id="cart-overlay" class="cart-overlay">
             <div id="cart-box" class="cart-box">
                 <h2>Your Shopping Cart</h2>
-                <p>No items in the cart.</p>
+                <div id="cart-items">
+                </div>
                 <button onclick="window.location.href='./cart.html'">XEM GIỎ HÀNG</button>
             </div>
         </div>
     `;
     document.body.insertAdjacentHTML('afterbegin', header);
+
+    function loadCartItems() {
+        console.log('Token:', token);
+        fetch(`${window.base_url}/cart-management/cart-items/${user.userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(result => {
+                const data = result.data;
+                const cartItemsContainer = document.getElementById('cart-items');
+                cartItemsContainer.innerHTML = ''; // Clear previous content
+
+                if (data.length === 0) {
+                    cartItemsContainer.innerHTML = '<p>No items in the cart.</p>';
+                } else {
+                    // Limit to 5 items
+                    const itemsToShow = data.slice(0, 5);
+                    itemsToShow.forEach(cartItem => {
+                        const cartItemDiv = document.createElement('div');
+                        cartItemDiv.innerHTML = `
+                        <div class="cart-item-content" onclick="window.location.href='./cart.html'">
+                            <img src="${cartItem.product.imageURL}" alt="${cartItem.product.productName}" class="cart-item-image">
+                            <div class="cart-item-info">
+                                <p class="cart-item-name">${cartItem.product.productName}</p>
+                                <p class="cart-item-quantity">Số lượng: ${cartItem.quantity}</p>
+                            </div>
+                        </div>
+                    `;
+                        cartItemsContainer.append(cartItemDiv);
+                    });
+
+                    // Show message if there are more than 5 items
+                    if (data.length > 5) {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.innerHTML = '<p>Vui lòng vào giỏ hàng để xem đầy đủ.</p>';
+                        cartItemsContainer.append(messageDiv);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching cart items:', error);
+            });
+    }
+
+    // Gọi lại loadCartItems khi click vào icon giỏ hàng
+    const cartIcon = document.querySelector(".fa-cart-shopping");
+    cartIcon.addEventListener("click", function () {
+        loadCartItems();  // Ensure the latest cart data is fetched
+        const cartBox = document.getElementById("cart-box");
+        const cartOverlay = document.getElementById("cart-overlay");
+        cartBox.style.display = "flex";
+        cartOverlay.style.display = "block"; // Ensure overlay is displayed
+        setTimeout(() => {
+            cartBox.classList.add("active");
+            cartOverlay.classList.add("active");
+        }, 10);
+    });
 
     const textOptions = ["Giảm giá đến 16%", "Trang sức kim cương ưu đãi 40%", "Mặt dây chuyền ưu đãi 15%"];
     const centerText = document.getElementById("center-text");
@@ -65,28 +129,17 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(rotateText, 2000);
     rotateText();
 
-    // icon click
+    // Search icon click event
     const searchIcon = document.querySelector(".fa-magnifying-glass");
     const searchOverlay = document.getElementById("search-overlay");
-    const cartIcon = document.querySelector(".fa-cart-shopping");
-    const cartBox = document.getElementById("cart-box");
     const cartOverlay = document.getElementById("cart-overlay");
+    const cartBox = document.getElementById("cart-box");
 
     // Show the search overlay with transition
     searchIcon.addEventListener("click", function () {
         searchOverlay.style.display = "flex";
         setTimeout(() => {
             searchOverlay.classList.add("active");
-        }, 10); // Slight delay to allow display to take effect
-    });
-
-    // Show the cart overlay with transition
-    cartIcon.addEventListener("click", function () {
-        cartBox.style.display = "flex";
-        cartOverlay.style.display = "block"; // Ensure overlay is displayed
-        setTimeout(() => {
-            cartBox.classList.add("active");
-            cartOverlay.classList.add("active");
         }, 10);
     });
 
@@ -96,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
             searchOverlay.classList.remove("active");
             setTimeout(() => {
                 searchOverlay.style.display = "none";
-            }, 500); // Matches the transition duration
+            }, 500);
         }
         if (e.target === cartBox || !cartBox.contains(e.target) && e.target !== cartIcon) {
             cartBox.classList.remove("active");
@@ -120,12 +173,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    if(localStorage.getItem('authToken')){
+    if (localStorage.getItem('authToken')) {
         document.getElementById('logic-login').textContent = "Đăng Xuất";
-        document.getElementById('logic-login').addEventListener('click',logout);
-    }
-    else{
+        document.getElementById('logic-login').addEventListener('click', logout);
+    } else {
         document.getElementById('logic-login').textContent = "Đăng Nhập";
-        document.getElementById('logic-login').href = "../login.html"
+        document.getElementById('logic-login').href = "../login.html";
     }
 });

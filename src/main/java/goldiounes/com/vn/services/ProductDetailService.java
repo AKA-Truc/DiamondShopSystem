@@ -121,7 +121,7 @@ public class ProductDetailService {
         Product product = modelMapper.map(productDTO, Product.class);
         ProductDetail existingProductDetail = productDetailRepo.findBySizeAndProductId(size, product.getProductID());
         if (existingProductDetail == null) {
-            throw new RuntimeException("No ProductDetail found with size: " + size);
+            throw new RuntimeException("No ProductDetail found with size: " + size + " and productID: " + product.getProductID());
         }
         return modelMapper.map(existingProductDetail, ProductDetailDTO.class);
     }

@@ -26,7 +26,7 @@ public class Order {
     @Column(name = "TotalPrice", nullable = false)
     private int TotalPrice;
 
-    @Column(name = "Phone", nullable = false)
+    @Column(name = "Phone")
     private String Phone;
 
     @Column(name = "Status", nullable = false)
@@ -36,10 +36,10 @@ public class Order {
     private String TypePayment;
 
     @ManyToOne
-    @JoinColumn(name = "PromotionID")
+    @JoinColumn(name = "PromotionID", nullable = true)
     private Promotion Promotion;
 
-    @Column(name = "ShippingAddress", nullable = false)
+    @Column(name = "ShippingAddress")
     private String ShippingAddress;
 
     @Column(name = "StartDate", nullable = false)

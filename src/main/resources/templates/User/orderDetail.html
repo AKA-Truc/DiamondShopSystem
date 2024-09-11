@@ -15,9 +15,18 @@
 <script src="/static/js/url.js"></script>
 <script src="/static/js/User/orderDetail.js"></script>
 
+
 <div class="container mt-5">
     <h2 id="name-order">Your order</h2>
     <p id="item-count">You have 0 item(s) in your cart</p>
+    <div class="form-group">
+        <label for="address">Địa chỉ:</label>
+        <input type="text" id="address" value="" disabled>
+    </div>
+    <div class="form-group">
+        <label for="phone">SĐT:</label>
+        <input type="text" id="phone" value="" disabled>
+    </div>
 
     <div id="cart-items"> <!-- This is where items will be inserted dynamically --></div>
     <div class="form-group">
@@ -25,6 +34,7 @@
         <select id="promotion" class="form-select promotion">
         </select>
     </div>
+    <p class="text">Total Price: <span id="totalPrice">VNĐ</span></p>
 </div>
 </body>
 </html>

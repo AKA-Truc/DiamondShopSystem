@@ -153,6 +153,18 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/productDetailSize/{size}")
+    public ResponseEntity<ResponseWrapper<ProductDetailDTO>> getProductDetailBySize(@PathVariable int size, @RequestBody ProductDTO productDTO) {
+        ProductDetailDTO productDetail = productDetailService.getProductDetailBySize(size, productDTO);
+        if (productDetail != null) {
+            ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail retrieved successfully", productDetail);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail not found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/productdetails")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
     public ResponseEntity<ResponseWrapper<ProductDetailDTO>> createProductDetail(@RequestBody ProductDetailDTO productDetailDTO) {

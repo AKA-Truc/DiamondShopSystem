@@ -3,29 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkAllBox = document.querySelector('.table-checkAll');
     const tableBody = document.querySelector('table.h-table tbody');
     const token = localStorage.getItem('authToken');
-    const modal = document.getElementById('diamond-modal');
-    const closeModalBtn = document.getElementById('close-modal');
-    const searchInput = document.getElementById('diamond-search');
-    const diamondList = document.getElementById('diamond-list');
-    const searchButton = document.getElementById('search-diamond-btn');  // New search button
-    let currentDiamondSelect = null;
-
-    // Event listener for the close button
-    closeModalBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        searchInput.value = '';  // Clear the search input
-        diamondList.innerHTML = '';  // Clear the diamond list
-    });
-
-    // Event listener for clicking outside the modal content
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            searchInput.value = '';  // Clear the search input
-            diamondList.innerHTML = '';  // Clear the diamond list
-        }
-    });
-
 
     fetchCategory(token);
 
@@ -38,10 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.querySelector('.save').addEventListener('click', handleSubmit);
-
-    if (searchButton) {
-        searchButton.addEventListener('click', handleSearchButtonClick);
-    }
 
     initializeExistingRows();
 
@@ -59,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
             <td>
                 <div class="item-container">
-                    <div id = "diamond-select"></div>
                 </div>
                 <span class="toggle-quantity">+</span>
             </td>
@@ -77,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         newRow.querySelector('.row-delete').addEventListener('click', handleDeleteRow);
         newRow.querySelector('.toggle-quantity').addEventListener('click', handleToggleQuantity);
+        fetchDiamond(token, newRow.querySelector('.list-diamond'));
         fetchSetting(token, newRow.querySelector('.list-setting'));
 
         return newRow;
@@ -90,177 +63,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleToggleQuantity(e) {
-        currentDiamondSelect = e.target.previousElementSibling;
-        modal.style.display = 'block';
-        searchInput.focus();
-        fetchDiamondList();
-    }
-
-    closeModalBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-
-    function fetchDiamondList() {
-        const giaCode = searchInput.value.trim();
-        if (!giaCode) {
-            return;
-        }
-
-        fetch(`${window.base_url}/diamond-management/diamondGIACODE/${giaCode}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(text);
-                    });
-                }
-                return response.json();
-            })
-            .then(result => {
-                const data = result.data;
-                diamondList.innerHTML = '';
-
-                if (!data) {
-                    diamondList.innerHTML = 'Không có kim cương hợp lệ.';
-                } else {
-                    // Create a list item with all the required details
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                <span><strong>GIA Code:</strong> ${data.giacode}</span>
-                <span><strong>Hình Dạng:</strong> ${data.shape}</span>
-                <span><strong>Màu:</strong> ${data.color}</span>
-                <span><strong>Giác Cắt:</strong> ${data.cut}</span>
-                <span><strong>Khối Lượng:</strong> ${data.carat}</span>
-                <span><strong>Kích Thước:</strong> ${data.size}</span>
-                <span><strong>Độ Tinh Khiết:</strong> ${data.clarity}</span>
-                <button>Chọn</button>
-            `;
-
-                    listItem.dataset.diamondId = data.diamondId;
-
-                    // Add event listener to the "Chọn" button
-                    listItem.querySelector('button').addEventListener('click', () => {
-                        selectDiamond(data);
-                        document.getElementById('diamond-modal').style.display = 'none';
-                        searchInput.value = '';
-                        diamondList.innerHTML = '';
-                    });
-
-                    diamondList.appendChild(listItem);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching diamonds:', error);
-                diamondList.innerHTML = 'Lỗi khi lấy thông tin kim cương.';
-            });
-    }
-
-
-    function selectDiamond(diamond) {
-        const newFieldContainer = document.createElement("div");
+        const container = e.target.previousElementSibling;  // Get the container for the new field
+        const row = e.target.closest('tr');  // Get the current row
+        const newFieldContainer = document.createElement("div");  // Create a new container div for the new select and inputs
         newFieldContainer.classList.add("item-container");
+
+        // Create the new HTML structure
         newFieldContainer.innerHTML = `
-        <input class="table-control item-control list-diamond" value="${diamond.giacode}" disabled>
+        <select class="table-control item-control list-diamond"></select>
         <select class="table-control item-control type-diamond">
             <option value="1">Kim Cương Phụ</option>
             <option value="0">Kim Cương Chủ (1 viên)</option>
         </select>
         <input type="number" class="table-control item-control quantity-input" placeholder="Nhập số lượng">
-        <button class="remove-item-btn">-</button> <!-- Nút xóa thêm vào đây -->
     `;
 
-        // Chèn `newFieldContainer` vào vị trí hiện tại của `currentDiamondSelect`
-        currentDiamondSelect.parentNode.insertBefore(newFieldContainer, currentDiamondSelect.nextElementSibling);
+        // Insert the new field container before the toggle button
+        container.parentNode.insertBefore(newFieldContainer, e.target);
 
+        // Fetch diamond options and populate the new select
+        fetchDiamond(token, newFieldContainer.querySelector('.list-diamond'));
+
+        // Get the diamond type select in the newly added row
         const typeDiamondSelect = newFieldContainer.querySelector('.type-diamond');
 
-        // Event khi thay đổi loại kim cương
-        typeDiamondSelect.addEventListener('change', () => {
-            updateDiamondTypes(typeDiamondSelect);
-        });
+        // Check if "Kim Cương Chủ" already exists in the row
+        const otherDiamondTypes = row.querySelectorAll('.type-diamond');
+        const existingKcChu = Array.from(otherDiamondTypes).some(select => select.value === '0');  // Check if any "Kim Cương Chủ" is already selected
 
-        // Khởi tạo sự kiện cho các select đã có sẵn
-        updateDiamondTypes(typeDiamondSelect);
-
-        // Thêm sự kiện cho nút xóa
-        newFieldContainer.querySelector('.remove-item-btn').addEventListener('click', () => {
-            newFieldContainer.remove();
-        });
-    }
-
-    function updateDiamondTypes(currentSelect) {
-        const allTypeSelects = document.querySelectorAll('.type-diamond');
-        const row = currentSelect.closest('tr');
-        const diamonds = row.querySelectorAll('.list-diamond');
-        const quantities = row.querySelectorAll('.quantity-input');
-        const diamondTypes = row.querySelectorAll('.type-diamond');
-        let mainDiamondSelected = false;
-
-        // Check if there's at least one "Kim Cương Chủ" in the current row
-        diamondTypes.forEach((select, index) => {
-            const quantityInput = quantities[index];
-
-            if (select.value === '0') {
-                mainDiamondSelected = true;
-                quantityInput.value = '1';
-                quantityInput.disabled = true;
-            } else {
-                quantityInput.disabled = false;
-            }
-        });
-
-        // Update all type select elements in the current row based on the presence of a main diamond
-        diamondTypes.forEach(select => {
-            const option = select.querySelector('option[value="0"]');
-            if (mainDiamondSelected && select.value !== '0') {
-                option.disabled = true; // Disable the "Kim Cương Chủ" option if there's already one in the row
-            } else {
-                option.disabled = false; // Enable the "Kim Cương Chủ" option if no main diamond is selected
-            }
-        });
-
-        // Update the row validity based on the presence of a main diamond
-        updateRowValidity(row, mainDiamondSelected);
-    }
-
-    function updateRowValidity(row, hasMainDiamond) {
-        // Find the action controls in the row
-        const actionControls = row.querySelectorAll('.row-save, .row-delete');
-        if (!hasMainDiamond) {
-            // Disable action controls if there's no main diamond
-            actionControls.forEach(control => control.classList.add('hidden'));
-            row.classList.add('invalid');
-        } else {
-            // Enable action controls if there's at least one main diamond
-            actionControls.forEach(control => control.classList.remove('hidden'));
-            row.classList.remove('invalid');
+        if (existingKcChu) {
+            // If a "Kim Cương Chủ" already exists, disable the "Chủ" option in the new select
+            typeDiamondSelect.value = '1';  // Default to "Kim Cương Phụ"
+            typeDiamondSelect.querySelector('option[value="0"]').setAttribute('disabled', 'true');  // Disable "Chủ"
         }
+
+        // Add the change event listener for diamond type changes
+        typeDiamondSelect.addEventListener('change', handleDiamondTypeChange);
     }
 
-    searchInput.addEventListener('input', (event) => {
-        const filter = event.target.value.toLowerCase();
-        const items = diamondList.querySelectorAll('li');
+    function handleDiamondTypeChange(e) {
+        const currentSelect = e.target;  // The select element that was changed
+        const currentValue = currentSelect.value;  // Get the selected value
+        const row = currentSelect.closest('tr');  // Get the current row
+        const quantityInput = currentSelect.parentNode.querySelector('.quantity-input');  // Get the quantity input field
 
-        items.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            item.style.display = text.includes(filter) ? '' : 'none';
-        });
-    });
+        // If "Chủ" is selected, disable it in other selects and set quantity to 1
+        if (currentValue === '0') {  // Assuming '0' is "Kim Cương Chủ"
+            // Disable "Chủ" in other diamond type selects within the same row
+            const otherDiamondTypes = row.querySelectorAll('.type-diamond');
+            otherDiamondTypes.forEach(select => {
+                if (select !== currentSelect) {
+                    select.value = '1';  // Set to "Kim Cương Phụ"
+                    select.querySelector('option[value="0"]').setAttribute('disabled', 'true');  // Disable "Chủ"
+                }
+            });
 
-    function handleSearchButtonClick() {
-        fetchDiamondList();
+            // Set the quantity to 1 and disable the input
+            quantityInput.value = 1;
+            quantityInput.setAttribute('disabled', 'true');
+
+        } else {  // If not "Chủ" (i.e., "Phụ"), allow changing quantity and re-enable "Chủ"
+            // Enable the quantity input
+            quantityInput.removeAttribute('disabled');
+            quantityInput.value = '';  // Clear the quantity input
+
+            // Re-enable the "Chủ" option if there is no other "Chủ" selected in the row
+            const otherDiamondTypes = row.querySelectorAll('.type-diamond');
+            const existingKcChu = Array.from(otherDiamondTypes).some(select => select.value === '0');  // Check if any other select has "Chủ"
+
+            if (!existingKcChu) {  // If no other "Chủ" exists, re-enable the "Chủ" option
+                otherDiamondTypes.forEach(select => {
+                    select.querySelector('option[value="0"]').removeAttribute('disabled');
+                });
+            }
+        }
     }
 
     function handleDeleteRow(e) {
@@ -276,17 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.toggle-quantity').forEach(btn => {
             btn.addEventListener('click', handleToggleQuantity);
-        });
-
-        // Update diamond types for all rows
-        document.querySelectorAll('table.h-table tbody tr').forEach(row => {
-            const typeSelects = row.querySelectorAll('.type-diamond');
-            typeSelects.forEach(select => {
-                select.addEventListener('change', () => {
-                    updateDiamondTypes(select);
-                });
-            });
-            updateDiamondTypes(typeSelects[0]); // Initialize validation for each row
         });
     }
 
@@ -323,6 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('imageURL', imageURL);
         formData.append('subImageURL', subImageURL);
 
+        console.log('Main Form Data:', product);
+
         let isValid = true;
         let hasMainDiamond = false;
         const rows = Array.from(document.querySelectorAll('table.h-table tbody tr'));
@@ -357,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
 
-                    if (diamondType === '0') {
+                    if (diamondType === 'Chủ') {
                         hasMainDiamond = true;
                     }
                 });
@@ -507,6 +374,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             })
             .catch(error => console.error('Error fetching categories:', error));
+    }
+
+    function fetchDiamond(token, selectElement) {
+        if (!selectElement) {
+            console.error('Select element is not defined.');
+            return;
+        }
+
+        fetch(`${window.base_url}/diamond-management/diamonds`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(result => {
+                const data = result.data;
+
+                if (!Array.isArray(data)) {
+                    throw new Error("Diamonds should be an array.");
+                }
+
+                selectElement.innerHTML = '';
+                data.forEach(diamond => {
+                    const option = document.createElement('option');
+                    option.value = diamond.diamondId;
+                    option.textContent = `${diamond.giacode}`;
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching diamonds:', error));
     }
 
     function fetchSetting(token, selectElement) {

@@ -92,6 +92,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 Pair.of("/product-management/products/{id}", "GET"),
                 Pair.of("/product-management/products/{id}/productdetails", "GET"),
                 Pair.of("/product-management/productdetails/min/{id}", "GET"),
+                Pair.of("/product-management/productDetailSize/{size}", "POST"),
                 Pair.of("/forgot-password/send-otp", "POST"),
                 Pair.of("/forgot-password/verify-otp", "POST"),
                 Pair.of("/forgot-password/forgot_password/{email}", "POST"),
