@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('item-count').textContent = `You have ${data.orderDetails.length} item(s) in your order`;
         document.getElementById('name-order').textContent = `${data.user.userName}'s Order`;
         document.getElementById("totalPrice").textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalPrice)}`;
-        const cartItems = document.getElementById('cart-items');
+        const cartItems = document.getElementById('product-items');
 
         // Fetch and display valid promotions
         const validPromotions = await getAllPromotion();
@@ -293,4 +293,3 @@ async function getProductDetailBySize(product, size) {
         return null;
     }
 }
-
