@@ -87,3 +87,38 @@ h2 {
         padding: 15px;
     }
 }
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: right;
+    gap: 10px; /* Space between buttons */
+}
+
+.button-container .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-container .btn-success {
+    background-color: #0e4163;
+    color: white;
+}
+
+.button-container .btn-success:hover {
+    background-color: #11537a;
+}
+
+.button-container .btn-danger {
+    background-color: #d2ebff;
+    color: #092d43;
+}
+
+.button-container .btn-danger:hover {
+    background-color: #a9d2f1;
+}
+

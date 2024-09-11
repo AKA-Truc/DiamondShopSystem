@@ -6,6 +6,7 @@ import goldiounes.com.vn.responses.ResponseWrapper;
 import goldiounes.com.vn.services.DiamondDetailService;
 import goldiounes.com.vn.services.DiamondService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -114,6 +115,21 @@ public class DiamondController {
         }
     }
 
+
+    @GetMapping("/diamond-details")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
+    public ResponseEntity<ResponseWrapper<DiamondDTO>> getDiamondByGIACode(@Param("giaCode") String giaCode) {
+        DiamondDTO existingDiamond = diamondService.getDiamondByGIACode(giaCode);
+        ResponseWrapper<DiamondDTO> response;
+        if (existingDiamond != null) {
+            response =  new ResponseWrapper<>("Diamond retrieved successfully", existingDiamond);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response = new ResponseWrapper<>("No diamond details found", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/diamond-details/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_CUSTOMER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<DiamondDetailDTO>> getDiamondDetail(@PathVariable int id) {
@@ -158,4 +174,5 @@ public class DiamondController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
 }

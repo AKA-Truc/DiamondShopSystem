@@ -80,4 +80,13 @@ public class DiamondService {
         diamondRepo.save(existingDiamond);
         return true;
     }
+
+    public DiamondDTO getDiamondByGIACode(String GIACode) {
+        Diamond existingDiamond = diamondRepo.findDiamondByGIACode(GIACode);
+        if (existingDiamond != null) {
+            return modelMapper.map(existingDiamond, DiamondDTO.class);
+        } else {
+            throw new RuntimeException("Diamond not found with GIACode: " + GIACode);
+        }
+    }
 }
