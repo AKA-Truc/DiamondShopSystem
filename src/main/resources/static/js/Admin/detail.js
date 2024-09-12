@@ -60,14 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const row = document.createElement('tr');
 
+                    const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalPrice);
+
                     row.innerHTML = `
-                        <td class="editable">${index + 1}</td>
                         <td class="editable">${data.orderId}</td>
                         <td class="editable">${data.user.userName}</td>
                         <td class="editable">${new Date(data.startDate).toISOString().slice(0, 10)}</td>
-                        <td class="editable">${data.status}</td>
                         <td class="editable">${promotionName}</td>
-                        <td class="editable">${data.totalPrice}</td>
+                        <td class="editable">${formattedPrice}</td>
                         <td class="action-buttons">
                             <button class="edit-btn" data-order-id="${data.orderId}">
                                 <ion-icon name="eye-outline"></ion-icon>
@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     orderList.appendChild(row);
                 });
+
 
                 document.querySelectorAll('.edit-btn').forEach(button => {
                     button.addEventListener('click', (event) => {
