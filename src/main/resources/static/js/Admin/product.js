@@ -74,3 +74,8 @@ function fetchAndDisplayProducts(){
         })
 }
 
+function editProduct(id){
+    localStorage.setItem('edit',id);
+    window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/edit_product.html";
+}
+

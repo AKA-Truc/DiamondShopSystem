@@ -51,10 +51,16 @@ public class ProductDetailService {
 
     public List<ProductDetailDTO> findAllByProductId(int productId) {
         List<ProductDetail> productDetails = productDetailRepo.findByProductId(productId);
+        List<ProductDetail> active = new ArrayList<>();
         if (productDetails.isEmpty()) {
             throw new RuntimeException("No ProductDetail found for the given product ID");
         }
-        return modelMapper.map(productDetails, new TypeToken<List<ProductDetailDTO>>() {}.getType());
+        for (ProductDetail product : productDetails) {
+            if(product.getStatus().equals("active")){
+                active.add(product);
+            }
+        }
+        return modelMapper.map(active, new TypeToken<List<ProductDetailDTO>>() {}.getType());
     }
 
     public boolean checkProductDetail(int productId) {
@@ -64,6 +70,9 @@ public class ProductDetailService {
     public ProductDetailDTO findById(int id) {
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No ProductDetail found with ID: " + id));
+        if(existingProductDetail.getStatus().equals("inactive")){
+            throw new RuntimeException("ProductDetail is already inactive");
+        }
         return modelMapper.map(existingProductDetail, ProductDetailDTO.class);
     }
 
@@ -84,7 +93,7 @@ public class ProductDetailService {
             existingProductDetail.setInventory(existingProductDetail.getInventory() + productDetail.getInventory());
             return modelMapper.map(productDetailRepo.save(existingProductDetail), ProductDetailDTO.class);
         }
-
+        productDetail.setStatus("active");
         productDetailRepo.save(productDetail);
 
         List<DiamondDetail> newDiamondDetails = new ArrayList<>();
@@ -110,10 +119,8 @@ public class ProductDetailService {
     public boolean deleteById(int id) {
         ProductDetail existingProductDetail = productDetailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No ProductDetail found with ID: " + id));
-        existingProductDetail.getDiamondDetails().forEach(diamondDetail ->
-                diamondDetailService.deleteById(diamondDetail.getDiamond().getDiamondID())
-        );
-        productDetailRepo.deleteById(id);
+        existingProductDetail.setStatus("inactive");
+        productDetailRepo.save(existingProductDetail);
         return true;
     }
 
@@ -134,6 +141,7 @@ public class ProductDetailService {
         Product product = productRepo.findById(productDetail.getProduct().getProductID())
                 .orElseThrow(() -> new RuntimeException("No Product found with ID: " + productDetail.getProduct().getProductID()));
 
+
         productDetailUpdate.setProduct(product);
         productDetailUpdate.setInventory(productDetail.getInventory());
         productDetailUpdate.setSize(productDetail.getSize());
@@ -152,6 +160,7 @@ public class ProductDetailService {
 
         ProductDetail minProductDetail = productDetails.stream()
                 .min(Comparator.comparingDouble(ProductDetail::getSellingPrice))
+                .filter(p -> p.getProduct().getStatus().equals("active"))
                 .orElseThrow(() -> new RuntimeException("No ProductDetail found with minimum selling price"));
 
         return modelMapper.map(minProductDetail, ProductDetailDTO.class);

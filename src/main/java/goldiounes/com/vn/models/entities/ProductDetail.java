@@ -38,6 +38,9 @@ public class ProductDetail {
     @Column(name = "Inventory", nullable = false)
     private int Inventory;
 
+    @Column(name = "status", nullable = false)
+    private String status;
+
     @OneToMany(mappedBy = "ProductDetail")
     private List<DiamondDetail> DiamondDetails;
 
@@ -53,6 +56,7 @@ public class ProductDetail {
         MarkupRate = markupRate;
         Size = size;
         Inventory = inventory;
+        status = "active";
     }
 
 }

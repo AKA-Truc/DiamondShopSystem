@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span><strong>Màu:</strong> ${data.color}</span>
                 <span><strong>Giác Cắt:</strong> ${data.cut}</span>
                 <span><strong>Khối Lượng:</strong> ${data.carat}</span>
-                <span><strong>Kích Thước:</strong> ${data.size}</span>
+                <span><strong>Kích Thước:</strong> ${data.measurement}</span>
                 <span><strong>Độ Tinh Khiết:</strong> ${data.clarity}</span>
                 <button>Chọn</button>
             `;
@@ -540,7 +540,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
 });
 function cancelForm() {
     if (confirm('Bạn có Chắc Hủy Bỏ Không?')) {
