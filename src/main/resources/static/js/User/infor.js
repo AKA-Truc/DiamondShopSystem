@@ -14,19 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('name').disabled = false;
         document.getElementById('address').disabled = false;
-        // document.getElementById('email1').disabled = false;
         document.getElementById('genderSelect').disabled = false;
     });
 
     fetchUser();
+    fetchOrders();
 });
-
 
 function fetchUser(){
     const token = localStorage.getItem('authToken');
     const user = JSON.parse(atob(localStorage.getItem('authToken').split('.')[1]));
 
-    // Kiểm tra xem token có tồn tại không
     if (!token) {
         console.error('Auth token not found');
         return;
@@ -43,7 +41,6 @@ function fetchUser(){
         .then(result=>{
 
             const data = result.data;
-            // Kiểm tra sự tồn tại của các phần tử trước khi cập nhật
             const nameElement = document.getElementById('name');
             const userNameElement = document.getElementById('user-name');
             const pointElement = document.getElementById('point');
@@ -94,7 +91,6 @@ function updateUser(){
     }
 
     const formData = new FormData();
-
     formData.append('user', JSON.stringify(UserForm));
 
     Capnhat.style.display = "none";
@@ -117,10 +113,6 @@ function updateUser(){
         })
         .catch(error => {console.log(error)})
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetchOrders();
-});
 
 function fetchOrders() {
     const token = localStorage.getItem('authToken');
@@ -197,7 +189,6 @@ function displayOrders(orders) {
             </div>
         `;
 
-        // Add click event to redirect to order details page
         orderItem.addEventListener('click', function() {
             const orderId = orderItem.getAttribute('data-order-id');
             window.location.href = `/DiamondShopSystem/src/main/resources/templates/User/orderDetail.html?orderId=${orderId}`;
@@ -211,9 +202,9 @@ function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
         if (section.id === sectionId) {
-            section.style.display = 'block'; // Show the selected section
+            section.style.display = 'block';
         } else {
-            section.style.display = 'none'; // Hide other sections
+            section.style.display = 'none';
         }
     });
 }
@@ -301,7 +292,6 @@ function submitChangePassword() {
         alert('New password and confirmation do not match!');
     }
 }
-
 
 function resetChangePasswordForm() {
     document.getElementById('current-password').value = '';
