@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('phone').value = data.phone;
         document.getElementById('address').value = data.shippingAddress;
         document.querySelector('h2').textContent = `Order #${data.orderId}`;
-        document.getElementById('item-count').textContent = `You have ${data.orderDetails.length} item(s) in your order`;
+        document.getElementById('item-count').textContent = `Have ${data.orderDetails.length} item(s) in order`;
         document.getElementById('name-yourOrder').textContent = `${data.user.userName}'s Order`;
         document.getElementById("totalPrice").textContent = `${new Intl.NumberFormat('vi-VN', {
             style: 'currency',
