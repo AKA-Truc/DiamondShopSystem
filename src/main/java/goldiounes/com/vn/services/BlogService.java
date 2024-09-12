@@ -66,16 +66,30 @@ public class BlogService {
     }
 
     public BlogDTO updateBlog(int id, BlogDTO blogDTO, MultipartFile url) throws IOException {
+        System.out.println("Entering updateBlog method");
         Blog blog = modelMapper.map(blogDTO, Blog.class);
+        System.out.println("Mapped input DTO to Blog: " + blog);
+
         Blog existingBlog = blogRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("No blog found"));
+        System.out.println("Found existing blog: " + existingBlog);
+
         existingBlog.setTitle(blog.getTitle());
         existingBlog.setContent(blog.getContent());
+        System.out.println("Updated existing blog: " + existingBlog);
+
         if (url != null && !url.isEmpty()) {
             String imageURL = fileUploadService.uploadImage(url);
-            blog.setUrl(imageURL);
+            existingBlog.setUrl(imageURL);
+            System.out.println("Updated blog URL: " + imageURL);
         }
-        blogRepo.save(existingBlog);
-        return modelMapper.map(existingBlog, new TypeToken<BlogDTO>() {}.getType());
+
+        Blog savedBlog = blogRepo.save(existingBlog);
+        System.out.println("Saved blog: " + savedBlog);
+
+        BlogDTO resultDTO = modelMapper.map(savedBlog, BlogDTO.class);
+        System.out.println("Mapped saved blog to DTO: " + resultDTO);
+
+        return resultDTO;
     }
 }
