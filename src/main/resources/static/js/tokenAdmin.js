@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function (){
     const role = roles[0];
     console.log(role);
 
-    if (token && role !== 'ROLE_CUSTOMER') {
-        window.location.href = '/DiamondShopSystem/src/main/resources/templates/User/about_us.html';
+    if (role === 'ROLE_CUSTOMER') {
+        window.location.href = '/DiamondShopSystem/src/main/resources/templates/login.html';
     }
 })
