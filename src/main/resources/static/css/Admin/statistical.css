@@ -211,7 +211,7 @@ ion-icon {
 #today-sales {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 40px;
     grid-column: span 2;
     height: fit-content;
 

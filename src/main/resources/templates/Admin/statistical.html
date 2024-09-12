@@ -64,7 +64,7 @@
     <!-- Bố cục Dashboard -->
     <div class="dashboard-grid">
         <!-- Khối Today's Sales -->
-        <section style="height: 250px" id="today-sales" class="big-box">
+        <section style="height: 250px; width: 100%" id="today-sales" class="big-box">
             <h2>Total Sale</h2>
             <div style="margin-top: 100px; margin-left: -100px" class="card-small card-1">
                 <h3 id="total-sales-value">$1k</h3>
@@ -89,7 +89,7 @@
         </section>
 
         <!-- Khối Visitor Insights -->
-        <section id="customer-gender" class="big-box">
+        <section style="margin-left: 30px" id="customer-gender" class="big-box">
             <h2>Analyze Customer Data By Gender</h2>
             <canvas id="customer-gender-chart" width="400" height="200"></canvas>
         </section>
@@ -101,19 +101,19 @@
         </section>
 
         <!-- Khối Total Revenue -->
-        <section style="margin-left: -180px;" id="total-revenue" class="big-box">
+        <section style="margin-left: -100px;" id="total-revenue" class="big-box">
             <h2>Total Revenue</h2>
             <canvas id="total-revenue-chart" ></canvas>
         </section>
 
         <!-- Khối Target vs Reality -->
-        <section  style="margin-left: -50px;" id="order-by-year" class="big-box">
+        <section  style="margin-left: -10px;" id="order-by-year" class="big-box">
             <h2>Total Order By Year</h2>
-            <canvas id="order-by-year-chart" width="200" height="200"></canvas>
+            <canvas id="order-by-year-chart" width="200" height="400"></canvas>
         </section>
 
         <!-- Khối Top Products -->
-        <section style="height: 300px;" id="top-products" class="big-box">
+        <section style="height: 300px;width: 97%;" id="top-products" class="big-box">
             <h2>Top Products</h2>
             <ul id="top-products-list">
                 <!-- Headers for the columns -->
@@ -127,7 +127,7 @@
         </section>
 
         <!-- Khối Sales Mapping -->
-        <section style="height: 300px;" id="sales-mapping" class="big-box">
+        <section style="height: 300px;margin-left: 29px" id="sales-mapping" class="big-box">
             <h2>Sales Mapping by Country</h2>
             <div id="sales-map" class="map-placeholder"></div>
         </section>
