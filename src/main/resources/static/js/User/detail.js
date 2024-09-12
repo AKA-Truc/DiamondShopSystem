@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
+                alert("Sản Phẩm Hiện Chưa Được Cập Nhật");
+                window.location.href = "/DiamondShopSystem/src/main/resources/templates/User/products.html";
             });
     } else {
         console.log('No productId found in localStorage');
@@ -53,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('product_name').textContent =
             sizeDetail.product.productName + " ( size hiện tại: " + sizeNow + " ) "|| "Không Xác Định";
 
+        document.getElementById('warranty').textContent = sizeDetail.product.warrantyPeriod;
+        document.getElementById('inventory').textContent = sizeDetail.inventory;
+        document.getElementById('labor').textContent = sizeDetail.laborCost;
         // Hiển thị giá sản phẩm
         document.querySelector('.current-price').textContent = sizeDetail.sellingPrice.toLocaleString('vi-VN', {
             style: 'currency',
@@ -67,14 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const table = document.querySelector('table');
 
         // Tìm hàng chứa kim cương chủ
-        let masterRow = document.getElementById('carat').closest('tr');
+        // let masterRow = document.getElementById('carat').closest('tr');
 
         // Xóa các hàng kim cương phụ cũ (nếu có) để tránh trùng lặp
         document.querySelectorAll('.sub-diamond').forEach(row => row.remove());
 
         diamonds.forEach(diamondIndex => {
+            const product = diamondIndex.diamond.product
+            document.getElementById('name').textContent = product.warrantyPeriod;
+            console.log(diamondIndex.diamond.product.warrantyPeriod);
             if (diamondIndex.typeDiamond === "1") {
-                document.getElementById('name').textContent = diamondIndex.diamond.diamondName;
+
                 document.getElementById('carat').textContent = diamondIndex.diamond.carat;
             } else if (diamondIndex.typeDiamond === "0") {
                 // Tạo các hàng mới cho kim cương phụ
