@@ -23,6 +23,12 @@ public class PointService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public PointService(PointRepo pointRepo, UserRepo userRepo, ModelMapper modelMapper) {
+        this.pointRepo = pointRepo;
+        this.userRepo = userRepo;
+        this.modelMapper = modelMapper;
+    }
+
     public List<PointDTO> findAll() {
         List<Point> points = pointRepo.findAll();
         if (points.isEmpty()) {

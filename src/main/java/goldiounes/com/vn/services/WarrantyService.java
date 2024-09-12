@@ -36,6 +36,14 @@ public class WarrantyService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public WarrantyService(WarrantyRepo warrantyRepo, ProductRepo productRepo, UserRepo userRepo, OrderRepo orderRepo, ModelMapper modelMapper) {
+        this.warrantyRepo = warrantyRepo;
+        this.productRepo = productRepo;
+        this.userRepo = userRepo;
+        this.orderRepo = orderRepo;
+        this.modelMapper = modelMapper;
+    }
+
     public List<WarrantyDTO> getAllWarranties() {
         List<Warranty> warranties = warrantyRepo.findAll();
         if (warranties.isEmpty()) {
