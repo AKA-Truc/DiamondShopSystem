@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const orderId = urlParams.get('orderId');
 
     try {
-        // Fetch order details
         const response = await fetch(`${window.base_url}/order-management/orders/${orderId}`, {
             method: 'GET',
             headers: {
@@ -21,15 +20,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById("totalPrice").textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalPrice)}`;
         const cartItems = document.getElementById('product-items');
 
-        // Fetch and display valid promotions
         const validPromotions = await getAllPromotion();
         const promotionSelect = document.getElementById('promotion');
 
         if (promotionSelect) {
-            // Clear previous options
             promotionSelect.innerHTML = '';
 
-            // Check if the order status is "New"
             if (data.status === "New") {
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
@@ -42,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     option.textContent = promotion.promotionName;
                     promotionSelect.appendChild(option);
                 });
-
             } else {
                 promotionSelect.disabled = true;
                 if (data.promotion) {
@@ -134,8 +129,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     sizeOfProduct.appendChild(option);
 
                     const productDetail = await getProductDetailBySize(product, detail.size);
-                    // Format total price in VND
-                    priceElement.textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productDetail.sellingPrice * detail.quantity)}`;
+                    priceElement.textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).
+                    format(productDetail.sellingPrice * detail.quantity)}`;
                 }
             }
         }
@@ -211,7 +206,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             };
 
-            // Hủy button
             const cancelButton = document.createElement('button');
             cancelButton.textContent = "Hủy";
             cancelButton.classList.add('btn', 'btn-danger');
@@ -273,7 +267,7 @@ async function getAllPromotion() {
 async function getProductDetailBySize(product, size) {
     try {
         const response = await fetch(`${window.base_url}/product-management/productDetailSize/${size}`, {
-            method: 'POST', // Change to POST
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },

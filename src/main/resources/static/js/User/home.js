@@ -1,25 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     let slideIndex = 0;
 
-    // Khởi động slide chỉ sau khi DOM đã sẵn sàng
     showSlides();
 
     function showSlides() {
         let slides = document.getElementsByClassName("slide");
 
-        if (slides.length === 0) return; // Kiểm tra xem có slide nào không
+        if (slides.length === 0) return;
 
         for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  // Ẩn tất cả các slide
+            slides[i].style.display = "none";
         }
 
         slideIndex++;
         if (slideIndex > slides.length) {
-            slideIndex = 1;  // Nếu vượt quá số slide, quay lại slide đầu tiên
+            slideIndex = 1;
         }
 
-        slides[slideIndex - 1].style.display = "block";  // Hiển thị slide hiện tại
-        setTimeout(showSlides, 4000); // Đổi slide sau 2 giây
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 4000);
     }
 
     function plusSlides(n) {
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const slides = document.querySelectorAll('.slide');
         const slideshowContainers = document.querySelectorAll('.slideshow-container');
 
-        if (slides.length === 0) return;  // Kiểm tra nếu không có slide nào
+        if (slides.length === 0) return;
 
         slideshowContainers.forEach(container => {
             let index = 0;
@@ -42,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.querySelector('.item-grid').style.transform = `translateX(${-index * 100 / 5.95}%)`;
             }
 
-            setInterval(showSlide, 2500); // Đổi slide sau 2.5 giây
+            setInterval(showSlide, 2500);
         });
     }
 
-    startSlideshow();  // Khởi động slideshow khi DOM đã sẵn sàng
+    startSlideshow();
 });

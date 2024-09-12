@@ -1,4 +1,3 @@
-// Kiểm tra email hợp lệ
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 function validateEmail() {
@@ -15,7 +14,6 @@ function validateEmail() {
     return true;
 }
 
-// Kiểm tra form hợp lệ
 function validateForm() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
@@ -32,7 +30,6 @@ function validateForm() {
     return true;
 }
 
-// Hiển thị thông báo
 function showMessage(message, isError = false) {
     const messageElement = document.getElementById('message');
     if (messageElement) {
@@ -45,7 +42,6 @@ function showMessage(message, isError = false) {
     }
 }
 
-// Thêm sự kiện submit cho form
 document.addEventListener("DOMContentLoaded", function() {
     const registerForm = document.getElementById('form-register');
     if (!registerForm) {
@@ -87,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                return response.json(); // Thay đổi này vì chúng ta biết server trả về JSON
+                return response.json();
             })
             .then(data => {
                 console.log('Server response:', data);

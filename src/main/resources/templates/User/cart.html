@@ -10,24 +10,28 @@
 </head>
 
 <body>
+
 <script src="/static/js/header.js"></script>
 <script src="/static/js/footer.js"></script>
 <script src="/static/js/url.js"></script>
 <script src="/static/js/tokenUser.js"></script>
+<script src="/static/js/User/cart.js"></script>
+
 <div class="cart-container">
     <table class="cart-table">
         <thead>
         <tr>
-            <th style="text-align: center"><input type="checkbox" id="select-all"></th> <!-- Checkbox cho tiêu đề -->
+            <!-- Checkbox cho tiêu đề -->
+            <th style="text-align: center"><input type="checkbox" id="select-all"></th>
             <th style="text-align: left">Sản Phẩm</th>
             <th style="text-align: center;">Mã Sản Phẩm</th>
             <th style="text-align: center;">Loại Hàng</th>
             <th style="text-align: center;">Số Lượng</th>
-            <th style="text-align: center;">Xóa</th> <!-- Thay x bằng icon thùng rác -->
+            <th style="text-align: center;">Xóa</th>
         </tr>
         </thead>
         <tbody id="list-cart-item" class="list-cart-item">
-        <!--cartitem-->
+            <!--cartitem-->
         </tbody>
     </table>
     <div class="update-cart-container">
@@ -36,6 +40,5 @@
 </div>
 <!--<button class="order-btn">Đặt hàng</button>-->
 <a href="#" class="order-btn">Đặt hàng</a>
-<script src="/static/js/User/cart.js"></script>
 </body>
 </html>
