@@ -72,7 +72,7 @@ function fetchUser(){
                 roleElement.value = data.role || 'Chưa cập nhật';
             }
             if (pointElement) {
-                pointElement.textContent = data.point.points;
+                pointElement.textContent = "Điểm Tích Lũy: " + data.point.points;
             }
 
         })
