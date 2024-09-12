@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('orderId');
 
+    if (orderId == null || orderId === '') {
+        console.error('No orderId found');
+        return;
+    }
+
     try {
         const response = await fetch(`${window.base_url}/order-management/orders/${orderId}`, {
             method: 'GET',

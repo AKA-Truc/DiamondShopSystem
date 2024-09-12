@@ -17,6 +17,20 @@ function validateEmail() {
 function validateForm() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
+    const email = document.getElementById('email').value;
+    const fullName = document.getElementById('fullname').value;
+    const gender = document.getElementById('genderSelect').value;
+    const address = document.getElementById('address').value;
+
+    if (password === undefined || confirmPassword === undefined || email === undefined || fullName === undefined || gender === undefined) {
+        alert("Vui lòng nhập đầy đủ thông tin");
+        return false;
+    }
+
+    if (password.length < 8) {
+        alert("Mật khẩu phải có ít nhất 8 ký tự.");
+        return false;
+    }
 
     if (!validateEmail()) {
         return false;

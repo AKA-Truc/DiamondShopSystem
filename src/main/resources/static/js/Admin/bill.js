@@ -4,9 +4,11 @@ const fetchOrderDetailsAndUpdateHTML = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const InvoiceID = urlParams.get('InvoiceID');
 
-    console.log(InvoiceID);
+    if (InvoiceID === undefined) {
+        alert("Invoice ID is missing");
+    }
 
-    let totalAmount = 0; // Declare totalAmount and initialize it to 0
+    let totalAmount = 0;
 
     try {
         const invoiceResponse = await fetch(`http://localhost:8080/api/invoice/getInvoice/${InvoiceID}`);
@@ -16,7 +18,6 @@ const fetchOrderDetailsAndUpdateHTML = async () => {
         }
 
         const invoice = await invoiceResponse.json();
-        console.log('Chi tiet hoa don:', invoice);
 
         // Cập nhật các phần tử HTML với chi tiết đơn hàng
         if (invoice.Customer) {
@@ -94,6 +95,8 @@ document.getElementById('confirmButton').addEventListener('click', async functio
         alert('Đã xảy ra lỗi khi xác nhận đơn hàng');
     }
 });
+
+
 //ràng buộc token
 // document.addEventListener('DOMContentLoaded', function() {
 //     const accessToken = sessionStorage.getItem('accessToken');
