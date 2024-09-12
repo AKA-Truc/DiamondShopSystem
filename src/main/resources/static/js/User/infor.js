@@ -209,27 +209,6 @@ function showSection(sectionId) {
     });
 }
 
-
-function getStatusText(status) {
-    switch (status) {
-        case 'New': return 'Chưa xác nhận';
-        case 'Đã xác nhận': return 'Đã xác nhận';
-        case 'Đang vận chuyển': return 'Đang vận chuyển';
-        case 'Đã giao': return 'Đã giao';
-        default: return 'Không xác định';
-    }
-}
-
-
-function getStatusClass(status) {
-    switch (status) {
-        case 'New': return 'status-new';
-        case 'Đã xác nhận': return 'status-confirmed';
-        case 'Đang giao': return 'status-shipping';
-        case 'Đã giao': return 'status-delivered';
-        default: return 'status-unknown';
-    }
-}
 function formatCurrency(amount) {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 }
@@ -298,4 +277,25 @@ function resetChangePasswordForm() {
     document.getElementById('new-password').value = '';
     document.getElementById('confirm-password').value = '';
     closeChangePasswordForm();
+}
+
+function getStatusText(status) {
+    switch (status) {
+        case 'New': return 'Chưa xác nhận';
+        case 'Đã xác nhận': return 'Đã xác nhận';
+        case 'Đang vận chuyển': return 'Đang vận chuyển';
+        case 'Đã giao': return 'Đã giao';
+        default: return 'Không xác định';
+    }
+}
+
+
+function getStatusClass(status) {
+    switch (status) {
+        case 'New': return 'status-new';
+        case 'Đã xác nhận': return 'status-confirmed';
+        case 'Đang giao': return 'status-shipping';
+        case 'Đã giao': return 'status-delivered';
+        default: return 'status-unknown';
+    }
 }
