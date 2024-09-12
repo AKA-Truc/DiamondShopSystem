@@ -131,9 +131,7 @@ function changeData(diamondType) {
     const tbody = table.querySelector('tbody');
     const introText = document.getElementById('intro-text');
 
-    // Clear existing table data
     tbody.innerHTML = '';
-
 
     if (diamondType === '4 Ly') {
         introText.innerHTML = 'Liên hệ chuyên gia kim cương Jemmia để có mức giá tốt nhất.';
@@ -158,7 +156,12 @@ function changeData(diamondType) {
         const data = diamondData[diamondType];
         data.forEach(item => {
             const row = document.createElement('tr');
-            row.innerHTML = `<td>${item.ly}</td><td>${item.color}</td><td>${item.sach}</td><td>${item.price}</td><td>${item.discount}</td>`;
+            row.innerHTML = `
+                <td>${item.ly}</td>
+                <td>${item.color}</td>
+                <td>${item.sach}</td>
+                <td>${item.price}</td>
+                <td>${item.discount}</td>`;
             tbody.appendChild(row);
         });
         table.style.display = 'table';
