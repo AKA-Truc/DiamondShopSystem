@@ -154,8 +154,7 @@ ion-icon {
     border-radius: 8px;
     background-color: #e4e7ef;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 1110px;
-    margin-left:320px;
+    margin-left: 420px;
     align-items: center;
 }
 
@@ -168,6 +167,7 @@ table {
 th, td {
     padding: 15px;
     text-align: left;
+    margin-left: -400px;
 }
 
 tr:nth-child(even) {
@@ -182,6 +182,8 @@ th {
     background-color: #f9f9f9;
     color: black;
 }
+
+
 
 
 

@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`${window.base_url}/user-management/register`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(customerData)
@@ -112,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const customerData = {
                 userName: formData.get("userName"),
                 email: formData.get("email"),
+                password: formData.get('password'),
                 address: formData.get("address"),
                 role: formData.get("Role"),
                 gender: formData.get("gender")
