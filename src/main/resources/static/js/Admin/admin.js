@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Sự kiện khi người dùng nhấn nút chỉnh sửa
     document.getElementById('unlock_user').addEventListener('click', function(event) {
         event.preventDefault();
 
-        // Hiển thị nút cập nhật và ẩn nút chỉnh sửa
         const updateButton = document.getElementById('Update_user');
         const editButton = document.getElementById('unlock_user');
 
@@ -17,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('genderSelect').disabled = false;
     });
 
-    // Tải thông tin người dùng khi trang được tải
     fetchUser();
 });
 
@@ -87,11 +84,9 @@ function updateUser() {
                 document.getElementById('email1').disabled = true;
                 document.getElementById('genderSelect').disabled = true;
 
-                // Ẩn nút cập nhật và hiển thị nút chỉnh sửa
                 updateButton.style.display = 'none';
                 editButton.style.display = 'inline-block';
 
-                // Tải lại thông tin người dùng
                 fetchUser();
             } else {
                 console.error('Error updating user:', response.statusText);
@@ -144,10 +139,10 @@ function submitChangePassword() {
             })
             .then(result => {
                 if (result.status === 200) {
-                    alert('Password changed successfully!');
+                    alert('Đổi mật khẩu thành công!');
                     resetChangePasswordForm();
                 } else {
-                    alert('Password change failed: ' + (result.body.message || 'Unknown error'));
+                    alert('Đổi mật khẩu thất bại, chi tiết: ' + (result.body.message || 'Unknown error'));
                 }
             })
             .catch(error => {
@@ -155,7 +150,7 @@ function submitChangePassword() {
                 alert(`Error: ${error.message}`);
             });
     } else {
-        alert('New password and confirmation do not match!');
+        alert('Mât khẩu mới và nhập lại mật khẩu không trùng khớp!');
     }
 }
 

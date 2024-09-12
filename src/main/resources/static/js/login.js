@@ -27,7 +27,7 @@ function handleCredentialResponse(response) {
 }
 document.addEventListener('DOMContentLoaded', function () {
 
-    if(localStorage.getItem('authToken')){
+    if (localStorage.getItem('authToken')) {
         checkRole();
     }
 
@@ -38,7 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = document.querySelector('#email').value;
         const password = document.querySelector('#password').value;
 
-        // Thực hiện yêu cầu fetch
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Vui lòng nhập đúng định dạng email.");
+            return;
+        }
+
+        // Thực hiện yêu cầu fetch nếu email và mật khẩu hợp lệ
         fetch(`${window.base_url}/user-management/login`, {
             method: 'POST',
             headers: {
@@ -54,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .then(data => {
-                // Store token in localStorage
+                // Lưu token vào localStorage
                 localStorage.setItem('authToken', data.token);
 
                 // Decode JWT to get roles

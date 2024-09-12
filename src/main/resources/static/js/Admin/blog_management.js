@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    alert('Blog updated successfully!');
+                    alert('Cập nhật bài viết thành công!');
                     fetchBlogs();
                     popup1Overlay.style.display = 'none';
                     resetFormState();
@@ -86,12 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    alert('Blog created successfully!');
+                    alert('Cập nhật bài viết thành công!');
                     fetchBlogs();
                     popup1Overlay.style.display = 'none';
                     resetFormState();
                 })
-                .catch(error => console.error("Error creating blog:", error));
+                .catch(error => console.error("Cập nhật bài viết thất bại: ", error));
         }
     }
 
@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(response => {
                         if (response.ok) {
                             currentRow.remove();
-                            alert('Blog deleted successfully');
+                            alert('Xóa bài viết thành công');
                         } else {
-                            alert('Failed to delete blog');
+                            alert('Xóa bài viết thất bại');
                         }
                         popup.style.display = 'none';
                     })
@@ -189,12 +189,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Show the form
                     popup1Overlay.style.display = 'flex';
                 } else {
-                    alert('Blog data is undefined');
+                    alert('Không tìm thấy bài viết này');
                 }
             })
             .catch(error => {
                 console.error("Error fetching blog details:", error);
-                alert('Failed to load blog details. Please try again.');
+                alert('Không thể truy cập chi tiết bài viết. Hãy thử lại.');
             });
     };
 

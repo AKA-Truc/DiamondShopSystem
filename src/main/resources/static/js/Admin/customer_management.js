@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isEditing = false;
     let editingUserId = null;
 
-    function fetchCustomers() {
+    const fetchCustomers = () => {
         fetch(`${window.base_url}/user-management/users`, {
             method: 'GET',
             headers: {
@@ -18,59 +18,54 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(result => {
                 const data = result.data;
-
-                if (!Array.isArray(data)) {
-                    throw new Error("Expected an array but got something else");
-                }
+                if (!Array.isArray(data)) throw new Error("Kết quả không phải là mảng");
 
                 customerTableBody.innerHTML = '';
                 data.forEach((user, index) => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${user.userName}</td>
-                <td>${user.email}</td>
-                <td>${user.gender}</td>
-                <td>${user.role}</td>
-                <td class="action-buttons">
-                    <button class="edit-btn" onclick="editCustomer('${user.userId}')"><ion-icon name="create-outline"></ion-icon></button>
-                    <button class="delete-btn" data-id="${user.userId}"><ion-icon name="trash-outline"></ion-icon></button>
-                </td>
-            `;
+                    <td>${index + 1}</td>
+                    <td>${user.userName}</td>
+                    <td>${user.email}</td>
+                    <td>${user.gender}</td>
+                    <td>${user.role}</td>
+                    <td class="action-buttons">
+                        <button class="edit-btn" onclick="editCustomer('${user.userId}')"><ion-icon name="create-outline"></ion-icon></button>
+                        <button class="delete-btn" data-id="${user.userId}"><ion-icon name="trash-outline"></ion-icon></button>
+                    </td>
+                `;
                     customerTableBody.appendChild(row);
                 });
 
                 addEditEventListeners();
                 addDeleteEventListeners();
             })
-            .catch(error => console.error("Error fetching users:", error));
-    }
+            .catch(error => console.error("Lỗi khi lấy thông tin:", error));
+    };
 
-    function addCustomer(customerData) {
+    const addCustomer = (customerData) => {
         fetch(`${window.base_url}/user-management/register`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(customerData)
         })
             .then(response => {
                 if (response.status === 401) {
-                    alert('Your access is denied');
+                    alert('Bạn không có quyền truy cập');
                     return;
                 }
                 return response.json();
             })
-            .then(data => {
-                alert("Customer added successfully!");
+            .then(() => {
+                alert("Thêm người dùng thành công!");
                 fetchCustomers();
                 popup1Overlay.style.display = 'none';
                 resetFormState();
             })
-            .catch(error => console.error("Error adding customer:", error));
-    }
+            .catch(error => console.error("Lỗi khi thêm người dùng:", error));
+    };
 
-    function updateCustomer(customerData) {
+    const updateCustomer = (customerData) => {
         fetch(`${window.base_url}/user-management/users/${editingUserId}`, {
             method: 'PUT',
             headers: {
@@ -80,47 +75,41 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(response => {
                 if (response.status === 401) {
-                    alert('Your access is denied');
+                    alert('Bạn không có quyền truy cập');
                     return;
                 }
                 return response.json();
             })
-            .then(data => {
-                alert("Customer updated successfully!");
+            .then(() => {
+                alert("Cập nhật người dùng thành công!");
                 fetchCustomers();
                 popup1Overlay.style.display = 'none';
                 resetFormState();
             })
-            .catch(error => console.error("Error updating customer:", error));
-    }
+            .catch(error => console.error("Lỗi khi cập nhật người dùng:", error));
+    };
 
-    function updateUser() {
+    const updateUser = () => {
         const formData = new FormData(customerForm);
+        const userData = {
+            userName: formData.get("userName"),
+            email: formData.get("email"),
+            address: formData.get("address"),
+            role: formData.get("Role"),
+            gender: formData.get("gender")
+        };
 
         if (isEditing) {
             const user = new FormData();
-            user.append('user', JSON.stringify({
-                userName: formData.get("userName"),
-                email: formData.get("email"),
-                address: formData.get("address"),
-                role: formData.get("Role"),
-                gender: formData.get("gender")
-            }))
+            user.append('user', JSON.stringify(userData));
             updateCustomer(user);
         } else {
-            const customerData = {
-                userName: formData.get("userName"),
-                email: formData.get("email"),
-                password: formData.get('password'),
-                address: formData.get("address"),
-                role: formData.get("Role"),
-                gender: formData.get("gender")
-            };
-            addCustomer(customerData);
+            userData.password = formData.get('password');
+            addCustomer(userData);
         }
-    }
+    };
 
-    function addDeleteEventListeners() {
+    const addDeleteEventListeners = () => {
         const popup = document.getElementById('popup');
         const yesBtn = document.getElementById('yes-btn');
         const noBtn = document.getElementById('no-btn');
@@ -129,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let customerIdToDelete;
 
         deleteBtns.forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', () => {
                 popup.style.display = 'flex';
-                currentRow = this.closest('tr');
-                customerIdToDelete = this.getAttribute('data-id');
+                currentRow = button.closest('tr');
+                customerIdToDelete = button.getAttribute('data-id');
             });
         });
 
@@ -148,14 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(response => {
                         if (response.ok) {
                             currentRow.remove();
-                            alert('Customer deleted successfully');
+                            alert('Xóa người dùng thành công!');
                         } else {
-                            alert('Failed to delete customer');
+                            alert('Lỗi khi xóa người dùng');
                         }
                         popup.style.display = 'none';
                     })
                     .catch(error => {
-                        console.error('Error deleting customer:', error);
+                        console.error('Lỗi khi xóa người dùng:', error);
                         popup.style.display = 'none';
                     });
             }
@@ -164,9 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         noBtn.addEventListener('click', () => {
             popup.style.display = 'none';
         });
-    }
+    };
 
-    function addEditEventListeners() {
+    const addEditEventListeners = () => {
         const editButtons = document.querySelectorAll('button[onclick^="editCustomer"]');
         editButtons.forEach(button => {
             button.addEventListener('click', function () {
@@ -174,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 editCustomer(userId);
             });
         });
-    }
+    };
 
     customerForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -206,36 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 if (!response.ok) {
                     if (response.status === 401) {
-                        alert('You do not have access rights');
+                        alert('Bạn không có quyền truy cập');
                     }
-                    return Promise.reject(new Error('Invalid response'));
+                    return Promise.reject(new Error('Lỗi phản hồi'));
                 }
                 return response.json();
             })
             .then(user => {
                 const data = user.data;
 
-                const passwordField = document.getElementById("password");
-                if (passwordField) {
-                    passwordField.value = data.password;
-                }
-
-
-                if(data.role === "Admin"){
-                    const roleSelect = document.getElementById('role');
-                    const admin = document.createElement('option');
-                    admin.value = data.role;
-                    admin.textContent = data.role;
-                    roleSelect.append(admin);
-                    roleSelect.disabled = true;
-                    document.getElementById("userName").disabled = true;
-                    document.getElementById("email").disabled = true;
-                    document.getElementById("address").disabled = true;
-                    document.getElementById("role").disabled = true;
-                    document.getElementById("password").disabled = true;
-                    document.getElementById("gender").disabled = true;
-                    document.getElementById("gender1").disabled = true;
-                }
                 document.getElementById("userName").value = data.userName;
                 document.getElementById("email").value = data.email;
                 document.getElementById("address").value = data.address;
@@ -249,83 +217,76 @@ document.addEventListener('DOMContentLoaded', () => {
                     genderFemale.checked = true;
                 }
 
+                if (data.role === "Admin") {
+                    disableAdminFields(data.role);
+                }
+
                 popup1Overlay.style.display = 'flex';
             })
-            .catch(error => console.error("Error fetching customer details:", error));
+            .catch(error => console.error("Lỗi khi lấy thông tin người dùng:", error));
     };
 
-    function removeAdminOption() {
+    const disableAdminFields = (role) => {
+        const roleSelect = document.getElementById('role');
+        const admin = document.createElement('option');
+        admin.value = role;
+        admin.textContent = role;
+        roleSelect.append(admin);
+        roleSelect.disabled = true;
+
+        ["userName", "email", "address", "password", "gender", "gender1"].forEach(id => {
+            document.getElementById(id).disabled = true;
+        });
+    };
+
+    const removeAdminOption = () => {
         const roleSelect = document.getElementById('role');
         const adminOption = roleSelect.querySelector('option[value="Admin"]');
-        if (adminOption) {
-            adminOption.remove();
-        }
-        roleSelect.disabled =false;
-        document.getElementById("userName").disabled = false;
-        document.getElementById("email").disabled = false;
-        document.getElementById("address").disabled = false;
-        document.getElementById("role").disabled = false;
-        document.getElementById("password").disabled = false;
-        document.getElementById("gender").disabled = false;
-        document.getElementById("gender1").disabled = false;
-    }
+        if (adminOption) adminOption.remove();
+
+        ["userName", "email", "address", "password", "gender", "gender1"].forEach(id => {
+            document.getElementById(id).disabled = false;
+        });
+    };
+
+    const resetFormState = () => {
+        isEditing = false;
+        editingUserId = null;
+        customerForm.reset();
+    };
 
     document.getElementById('openpopup1').addEventListener('click', () => {
-        customerForm.reset();
-        popup1Overlay.style.display = 'flex';
         resetFormState();
-        removeAdminOption();
+        popup1Overlay.style.display = 'flex';
     });
 
     document.getElementById('closepopup1').addEventListener('click', () => {
-        if (confirm("Xác Nhận Hủy?")) {
+        if (confirm("Xác nhận hủy?")) {
             popup1Overlay.style.display = 'none';
             removeAdminOption();
         }
     });
 
     document.getElementById('cancelButton').addEventListener('click', () => {
-        if (confirm("Xác Nhận Hủy?")) {
+        if (confirm("Xác nhận hủy?")) {
             popup1Overlay.style.display = 'none';
             removeAdminOption();
         }
     });
 
     window.addEventListener('click', (event) => {
-        if (event.target === popup1Overlay) {
-            if (confirm("Xác Nhận Hủy?")) {
-                popup1Overlay.style.display = 'none';
-                removeAdminOption();
-            }
+        if (event.target === popup1Overlay && confirm("Xác nhận hủy?")) {
+            popup1Overlay.style.display = 'none';
+            removeAdminOption();
         }
     });
 
     document.getElementById('togglePassword').addEventListener('click', function () {
         const passwordField = document.getElementById('password');
         const eyeIcon = this.querySelector('ion-icon');
-
-        // Toggle the type attribute
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            eyeIcon.name = 'eye-outline';
-        } else {
-            passwordField.type = 'password';
-            eyeIcon.name = 'eye-off-outline';
-        }
+        passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+        eyeIcon.name = passwordField.type === 'password' ? 'eye-off-outline' : 'eye-outline';
     });
-
-    function resetFormState() {
-        isEditing = false;
-        editingUserId = null;
-        customerForm.reset();
-
-        const passwordField = document.getElementById("password");
-        if (passwordField) {
-            passwordField.style.display = '';
-            passwordField.removeAttribute('disabled'); // Enable the field back
-            passwordField.setAttribute('required', 'required');
-        }
-    }
 
     fetchCustomers();
 });

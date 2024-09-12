@@ -64,11 +64,17 @@ document.addEventListener('DOMContentLoaded', () => {
             currency: 'VND'
         }).replace('₫', 'vnđ') || "Không Xác Định";
 
+        // Gán giá trị vào trường HTML cho phần thiết lập vỏ kim cương
         document.getElementById('setiing').textContent = sizeDetail.setting.material || "Không Xác Định";
 
+        // Xử lý các viên kim cương
         const diamonds = sizeDetail.diamondDetails;
         const table = document.querySelector('table');
 
+        // Tìm hàng chứa kim cương chủ
+        // let masterRow = document.getElementById('carat').closest('tr');
+
+        // Xóa các hàng kim cương phụ cũ (nếu có) để tránh trùng lặp
         document.querySelectorAll('.sub-diamond').forEach(row => row.remove());
 
         diamonds.forEach(diamondIndex => {
@@ -79,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.getElementById('carat').textContent = diamondIndex.diamond.carat;
             } else if (diamondIndex.typeDiamond === "0") {
+                // Tạo các hàng mới cho kim cương phụ
                 let subDiamondRow = document.createElement('tr');
                 subDiamondRow.classList.add('sub-diamond');
                 let subDiamondName = document.createElement('td');
@@ -97,12 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 subQuantityRow.appendChild(subQuantityLabel);
                 subQuantityRow.appendChild(subQuantityValue);
 
+                // Chèn sau hàng chứa kim cương chủ
                 masterRow.after(subDiamondRow, subQuantityRow);
+
+                // Cập nhật hàng chứa kim cương chủ để các hàng tiếp theo chèn đúng chỗ
                 masterRow = subQuantityRow;
             }
         });
     }
-
+    // Xử lý sự kiện khi nhấn vào nút "THÊM VÀO GIỎ HÀNG"
     document.getElementById('add-to-cart').addEventListener('click', () => {
         if (!sizeNow) {
             alert('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng.');
@@ -141,3 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 });
+
+
+

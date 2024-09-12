@@ -3,13 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const searchInput = document.querySelector('.search-bar input');
 
-    // Ensure base_url is defined
-    window.base_url = window.base_url || 'http://localhost:8080';
-
-    // Display initial orders
     displayOrderNotDone();
 
-    // Search functionality
     searchInput.addEventListener('input', () => {
         const searchText = searchInput.value.trim().toLowerCase();
         const rows = document.querySelectorAll('#invoice-list tr');
@@ -62,19 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     const statusClass = getStatusClass(data.status);
 
                     row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${data.orderId}</td>
-            <td>${data.user.userName}</td>
-            <td>${new Date(data.startDate).toISOString().slice(0, 10)}</td>
-            <td>
-                <select class="status-select ${statusClass}" data-order-id="${data.orderId}">
-                    <option value="Chưa xác nhận" ${data.status === 'New' ? 'selected' : ''}>Chưa xác nhận</option>
-                    <option value="Đã xác nhận" ${data.status === 'Đã xác nhận' ? 'selected' : ''}>Đã xác nhận</option>
-                    <option value="Đang giao" ${data.status === 'Đang giao' ? 'selected' : ''}>Đang giao</option>
-                    <option value="Đã giao" ${data.status === 'Đã giao' ? 'selected' : ''}>Đã giao</option>
-                </select>
-            </td>
-            `;
+                    <td>${index + 1}</td>
+                    <td>${data.orderId}</td>
+                    <td>${data.user.userName}</td>
+                    <td>${new Date(data.startDate).toISOString().slice(0, 10)}</td>
+                    <td>
+                        <select class="status-select ${statusClass}" data-order-id="${data.orderId}">
+                            <option value="Chưa xác nhận" ${data.status === 'New' ? 'selected' : ''}>Chưa xác nhận</option>
+                            <option value="Đã xác nhận" ${data.status === 'Đã xác nhận' ? 'selected' : ''}>Đã xác nhận</option>
+                            <option value="Đang giao" ${data.status === 'Đang giao' ? 'selected' : ''}>Đang giao</option>
+                            <option value="Đã giao" ${data.status === 'Đã giao' ? 'selected' : ''}>Đã giao</option>
+                        </select>
+                    </td>
+                    `;
 
                     invoiceList.appendChild(row);
 
@@ -83,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Apply styles to the select element and its options
                     applySelectStyles(selectElement);
 
-                    // Add change event listener
                     selectElement.addEventListener('change', (event) => {
                         const orderId = event.target.getAttribute('data-order-id');
                         const newStatus = event.target.value;
@@ -102,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-// Function to apply styles to the select and its options
+
     function applySelectStyles(selectElement) {
         const options = selectElement.options;
 
@@ -111,24 +105,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             switch (option.value) {
                 case 'Chưa xác nhận':
-                    option.style.backgroundColor = '#f3de89'; // Yellow for 'Chưa xác nhận'
-                    option.style.color = '#333'; // Black text
+                    option.style.backgroundColor = '#f3de89';
+                    option.style.color = '#333';
                     break;
                 case 'Đã xác nhận':
-                    option.style.backgroundColor = '#7abc96'; // Green for 'Đã xác nhận'
+                    option.style.backgroundColor = '#7abc96';
                     option.style.color = '#fff'; // White text
                     break;
                 case 'Đang giao':
-                    option.style.backgroundColor = '#6ab1ca'; // Cyan for 'Đang giao'
-                    option.style.color = '#fff'; // White text
+                    option.style.backgroundColor = '#6ab1ca';
+                    option.style.color = '#fff';
                     break;
                 case 'Đã giao':
-                    option.style.backgroundColor = '#87a9df'; // Blue for 'Đã giao'
-                    option.style.color = '#fff'; // White text
+                    option.style.backgroundColor = '#87a9df';
+                    option.style.color = '#fff';
                     break;
                 default:
-                    option.style.backgroundColor = ''; // Default
-                    option.style.color = ''; // Default
+                    option.style.backgroundColor = '';
+                    option.style.color = '';
             }
         }
     }
@@ -146,18 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json' // Đảm bảo định dạng đúng
+                'Content-Type': 'application/json'
             }
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Failed to update order status'); // Ném lỗi nếu yêu cầu không thành công
+                    throw new Error('Failed to update order status');
                 }
-                alert('Order status updated successfully'); // Hiển thị thông báo thành công
+                alert('Order status updated successfully');
             })
             .catch(error => {
                 console.error('Error updating order status:', error);
-                alert(`Error: ${error.message}`); // Hiển thị lỗi nếu yêu cầu thất bại
+                alert(`Error: ${error.message}`);
             });
     }
 
@@ -174,7 +168,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function showOrder(orderId) {
-    // Logic to show order details
-    console.log(`Showing details for order ${orderId}`);
-}

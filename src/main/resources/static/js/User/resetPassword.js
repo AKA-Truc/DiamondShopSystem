@@ -1,7 +1,11 @@
 document.getElementById('submit-button').addEventListener('click', function(event) {
-    var newPassword = document.getElementById('new-password').value;
-    var confirmPassword = document.getElementById('confirm-password').value;
+    const newPassword = document.getElementById('new-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
 
+    if (newPassword === undefined || confirmPassword === undefined) {
+        alert("Please enter new password or confirm password");
+        return false;
+    }
     if (newPassword === confirmPassword) {
         const urlParams = new URLSearchParams(window.location.search);
         const email = urlParams.get('email');

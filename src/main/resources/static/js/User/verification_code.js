@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = urlParams.get('email');
         const verificationCode = document.getElementById('code').value;
 
-        console.log(email);
+        if (verificationCode === undefined || verificationCode === '') {
+            alert('Verification Code is required');
+        }
+
         if (!email) {
             alert('Email not found.');
             return;

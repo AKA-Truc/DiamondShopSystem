@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // cập nhật lại tên loại hàng để đưa vào link
             if (category === "None") {
-                categoryIndex = "Kim Cương";
+                categoryIndex = "KIM CƯƠNG";
             } else {
-                categoryIndex = category;
+                categoryIndex = category.toUpperCase();
             }
         } else {
             console.error('Wrapper image element not found');
@@ -55,8 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             minPrice = parseFloat(min);
             maxPrice = max ? parseFloat(max) : Number.MAX_SAFE_INTEGER;
         }
+        console.log(categoryIndex);
 
-        fetch(`${window.base_url}/product-management/products/category/ /${minPrice}/${maxPrice}`,{
+        fetch(`${window.base_url}/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}`,{
             method: 'GET',
         })
             .then(response => response.json())

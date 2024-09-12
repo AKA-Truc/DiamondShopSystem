@@ -21,11 +21,23 @@ public class EmailService {
 
     public void sendSizeSelectionEmail(String to) {
         String url = "http://localhost:8080/size-selection.html";
+        String guideContent =
+                "I. Hướng dẫn đo size nhẫn\n\n" +
+                        "Bước 1: Dùng thước kẻ (có chia milimet) đo đường kính 1 chiếc nhẫn bạn đang đeo.\n" +
+                        "Bước 2: So sánh và đối chiếu với Bảng size nhẫn phổ biến của Goldiounes bên dưới.\n" +
+                        "Lưu ý:\n" +
+                        "Size nhẫn phổ biến đối với nhẫn nữ là size 8 - 12 và nhẫn nam là size 14 – 18.\n" +
+                        "Trong trường hợp không có size phù hợp, Goldiounes sẽ đặt làm trong tối đa 2 tuần.\n\n" +
+                        "II. Hướng dẫn đo size dây chuyền\n\n" +
+                        "Dây chuyền dài từ 35 – 70cm có nhiều kích thước khác nhau phù hợp với từng loại trang phục.\n" +
+                        "Goldiounes sẽ hỗ trợ nếu không có size phù hợp.";
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject("Please select your ring size");
-        message.setText("Thank you for the order. Below is a guide to measuring the size of all kinds of jewellery. After selecting the size, please return to our website: " + url + "\nGo to your order to re-select the size for the ordered products");
+        message.setSubject("Hướng dẫn đo size trang sức");
+        message.setText("Cảm ơn bạn đã đặt hàng. Dưới đây là hướng dẫn đo size trang sức:\n\n" + guideContent +
+                "\nSau khi đo, vui lòng chọn size tại trang web: " + url +
+                "\nVui lòng quay lại đơn hàng để chọn lại kích cỡ cho sản phẩm đã đặt.");
         emailSender.send(message);
     }
 
@@ -84,7 +96,7 @@ public class EmailService {
             sb.append("</tr>");
         }
 
-        int totalPromotion = total*order.getPromotion().getDiscountPercent()/100;
+        int totalPromotion = total * order.getPromotion().getDiscountPercent() / 100;
         sb.append("</tbody>");
         sb.append("<tfoot>");
         sb.append("<tr><td colspan='2'>Tổng:</td><td>").append(String.format("%,d", total)).append(" VND</td></tr>");
@@ -101,20 +113,15 @@ public class EmailService {
         return sb.toString();
     }
 
-
-
-
     public void sendInvoiceEmail(String to, Order order) {
         String invoiceHtml = generateInvoiceHTML(order);
 
         MimeMessage mimeMessage = emailSender.createMimeMessage();
 
         try {
-
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setTo(to);
             helper.setSubject("Invoice for Your Order #" + order.getOrderID());
-
             helper.setText(invoiceHtml, true);
 
             emailSender.send(mimeMessage);
