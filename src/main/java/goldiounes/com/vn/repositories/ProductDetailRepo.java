@@ -14,6 +14,6 @@ public interface ProductDetailRepo extends JpaRepository<ProductDetail, Integer>
     @Query("select p from ProductDetail p where p.product.ProductID=:productId")
     List<ProductDetail> findByProductId(@Param("productId") int productId);
 
-    @Query("select p from ProductDetail p where p.Size=:size and p.product.ProductID=:productId")
+    @Query("select p from ProductDetail p where p.Size=:size and p.product.ProductID=:productId and p.status = 'active'")
     ProductDetail findBySizeAndProductId(@Param("size") Integer size, @Param("productId") int productId);
 }

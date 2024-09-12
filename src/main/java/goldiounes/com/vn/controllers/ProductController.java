@@ -102,8 +102,8 @@ public class ProductController {
     public ResponseEntity<ResponseWrapper<ProductDTO>> updateProduct(
             @PathVariable int id,
             @RequestParam("product") String productDTOJson,
-            @RequestParam("imageURL") MultipartFile imageFile,
-            @RequestParam("subImageURL") MultipartFile subImageURL) {
+            @RequestParam(value = "imageURL" ,required = false) MultipartFile imageFile,
+            @RequestParam(value = "subImageURL", required = false) MultipartFile subImageURL) {
 
         try {
             ProductDTO productDTO = objectMapper.readValue(productDTOJson, ProductDTO.class);
@@ -187,4 +187,26 @@ public class ProductController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/productdetails/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALES_STAFF')")
+    public ResponseEntity<ResponseWrapper<ProductDetailDTO>> updateProductDetail(
+            @PathVariable int id,
+            @RequestBody ProductDetailDTO productDetailDTO) {
+
+        try {
+            ProductDetailDTO updatedProductDetail = productDetailService.updateProduct(id, productDetailDTO);
+            if (updatedProductDetail != null) {
+                ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail updated successfully", updatedProductDetail);
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Product detail not found", null);
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            ResponseWrapper<ProductDetailDTO> response = new ResponseWrapper<>("Error updating product detail: " + e.getMessage(), null);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

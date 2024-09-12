@@ -21,7 +21,7 @@
             border: 1px solid #ccc;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            display: flex; /* Flexbox for centering contents */
+            display: none; /* Flexbox for centering contents */
             flex-direction: column; /* Stack children vertically */
             align-items: center; /* Center children horizontally */
         }
@@ -173,6 +173,7 @@
             margin-bottom: 20px;
         }
     </style>
+
 </head>
 <body>
 <script src="/static/js/sidebar.js"></script>
@@ -189,7 +190,6 @@
                 <h3 style="margin-left: 180px">Chỉnh sửa sản phẩm</h3>
             </div>
         </div>
-
         <div class="wrapper">
             <div class="form-section">
                 <!-- Trái -->
@@ -197,7 +197,7 @@
                     <label for="productImage"><b>Hình ảnh sản phẩm</b></label>
                     <input type="file" id="productImage" name="productImage" accept="image/*" onchange="previewImage(event)">
                     <div class="image-preview" id="imagePreview">
-                        <img src="" alt="Preview Image" id="previewImg" style="display: none;">
+                        <img src="" alt="Preview Image" id="previewImg">
                     </div>
                 </div>
 
@@ -205,7 +205,7 @@
                     <label for="productImage1"><b>Hình ảnh sản phẩm 2</b></label>
                     <input type="file" id="productImage1" name="productImage" accept="image/*" onchange="previewImage(event)">
                     <div class="image-preview" id="imagePreview1">
-                        <img src="" alt="Preview Image" id="previewImg1" style="display: none;">
+                        <img src="#" alt="Preview Image" id="previewImg1" >
                     </div>
                 </div>
 
@@ -230,9 +230,15 @@
                         </div>
                     </div>
                 </form>
+
+                <div class="hs-button" id = "update-product">
+                    <span><i class="fa fa-plus" aria-hidden="true"></i> Update</span>
+                </div>
             </div>
         </div>
-        <div class="container">
+
+        <!-- Phần container dùng để hiển thị thông tin chi tiết sản phẩm -->
+        <div class="container container-detail">
             <div class="row1">
                 <div class="col-sm-12 histaff-item-group-header">
                     <h3 style="margin-left: 180px">Chi tiết sản phẩm</h3>
@@ -241,7 +247,7 @@
             <div class="row padding-tb-15 margin-b-15">
                 <div class="col-md-12">
                     <div class="histaff-table">
-                        <div class="hs-button table-add-btn">
+                        <div class="hs-button table-add-btn" id = "detail-container" style="display: none">
                             <span><i class="fa fa-plus" aria-hidden="true"></i> Thêm</span>
                         </div>
                         <table class="h-table">
@@ -257,26 +263,8 @@
                             </tr>
                             </thead>
 
-                            <tbody>
-                            <td>
-                                <select class="table-control item-control list-setting"></select>
-                            </td>
-                            <td>
-                                <div class="item-container">
-                                    <div id = "diamond-select"></div>
-                                </div>
-                                <button class="toggle-quantity">+</button>
-                            </td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập size" required></td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá" required></td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập tiền gia công" required></td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập số lượng tồn kho" required></td>
-                            <td>
-                                <ul class="table-action">
-                                    <li class="table-action-control row-save "><i class="fa-solid fa-check" aria-hidden="true"></i></li>
-                                    <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
-                                </ul>
-                            </td>
+                            <tbody id = "body-detail">
+
                             </tbody>
                         </table>
                     </div>
@@ -284,16 +272,18 @@
             </div>
             <br>
         </div>
-        <div class="container">
+
+        <!-- Phần container dùng để thêm chi tiết sản phẩm mới -->
+        <div class="container container-add">
             <div class="row1">
                 <div class="col-sm-12 histaff-item-group-header">
-                    <h3 style="margin-left: 180px">Thêm chi tiết sản phẩm </h3>
+                    <h3 style="margin-left: 180px">Thêm chi tiết sản phẩm</h3>
                 </div>
             </div>
             <div class="row padding-tb-15 margin-b-15">
                 <div class="col-md-12">
                     <div class="histaff-table">
-                        <div class="hs-button table-add-btn">
+                        <div class="hs-button table-add-btn " id = "add-container">
                             <span><i class="fa fa-plus" aria-hidden="true"></i> Thêm</span>
                         </div>
                         <table class="h-table">
@@ -309,19 +299,20 @@
                                 <th class="text-center f-weight-4" style="width: 250px;">Thao tác</th>
                             </tr>
                             </thead>
-                            <tbody>
+
+                            <tbody id="body-add">
                             </tbody>
                         </table>
+                        <div class="button-group">
+                            <input type="submit" value="Thêm Sản Phẩm" class="save" id = "add-productdetail">
+                            <input type="button" value="Hủy" class="cancel" onclick="cancelForm()">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="button-group">
-                <input type="submit" value="Thêm Sản Phẩm" class="save">
-                <input type="button" value="Hủy" class="cancel" onclick="cancelForm()">
-            </div>
+            <br>
         </div>
     </div>
-
     <div id="diamond-modal" class="modal">
         <div class="modal-content">
             <div class="search-container">
