@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log(categoryIndex);
 
-        fetch(`${window.base_url}/product-management/products/category/${categoryIndex}/${minPrice}/${maxPrice}`,{
+        fetch(`${window.base_url}/product-management/products/category/ /${minPrice}/${maxPrice}`,{
             method: 'GET',
         })
             .then(response => response.json())

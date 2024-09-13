@@ -58,59 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('warranty').textContent = sizeDetail.product.warrantyPeriod;
         document.getElementById('inventory').textContent = sizeDetail.inventory;
         document.getElementById('labor').textContent = sizeDetail.laborCost;
-        // Hiển thị giá sản phẩm
         document.querySelector('.current-price').textContent = sizeDetail.sellingPrice.toLocaleString('vi-VN', {
             style: 'currency',
             currency: 'VND'
         }).replace('₫', 'vnđ') || "Không Xác Định";
 
-        // Gán giá trị vào trường HTML cho phần thiết lập vỏ kim cương
         document.getElementById('setiing').textContent = sizeDetail.setting.material || "Không Xác Định";
 
         // Xử lý các viên kim cương
         const diamonds = sizeDetail.diamondDetails;
         const table = document.querySelector('table');
-
-        // Tìm hàng chứa kim cương chủ
-        // let masterRow = document.getElementById('carat').closest('tr');
-
-        // Xóa các hàng kim cương phụ cũ (nếu có) để tránh trùng lặp
-        document.querySelectorAll('.sub-diamond').forEach(row => row.remove());
+        let quantitySubDiamond = 0;
 
         diamonds.forEach(diamondIndex => {
             const product = diamondIndex.diamond.product
-            document.getElementById('name').textContent = product.warrantyPeriod;
-            console.log(diamondIndex.diamond.product.warrantyPeriod);
-            if (diamondIndex.typeDiamond === "1") {
-
-                document.getElementById('carat').textContent = diamondIndex.diamond.carat;
-            } else if (diamondIndex.typeDiamond === "0") {
-                // Tạo các hàng mới cho kim cương phụ
-                let subDiamondRow = document.createElement('tr');
-                subDiamondRow.classList.add('sub-diamond');
-                let subDiamondName = document.createElement('td');
-                subDiamondName.textContent = 'Tên Kim Cương Phụ';
-                let subDiamondValue = document.createElement('td');
-                subDiamondValue.textContent = diamondIndex.diamond.diamondName || "Không xác định";
-                subDiamondRow.appendChild(subDiamondName);
-                subDiamondRow.appendChild(subDiamondValue);
-
-                let subQuantityRow = document.createElement('tr');
-                subQuantityRow.classList.add('sub-diamond');
-                let subQuantityLabel = document.createElement('td');
-                subQuantityLabel.textContent = 'Số Lượng Kim Cương Phụ';
-                let subQuantityValue = document.createElement('td');
-                subQuantityValue.textContent = diamondIndex.quantity || "Không xác định";
-                subQuantityRow.appendChild(subQuantityLabel);
-                subQuantityRow.appendChild(subQuantityValue);
-
-                // Chèn sau hàng chứa kim cương chủ
-                masterRow.after(subDiamondRow, subQuantityRow);
-
-                // Cập nhật hàng chứa kim cương chủ để các hàng tiếp theo chèn đúng chỗ
-                masterRow = subQuantityRow;
+            if (diamondIndex.typeDiamond === "0") {
+                document.getElementById('GIA-code').textContent = diamondIndex.diamond.giacode;
+            } else if (diamondIndex.typeDiamond === "1") {
+                quantitySubDiamond += diamondIndex.quantity;
             }
         });
+
+        document.getElementById('SubDiamond').textContent = quantitySubDiamond;
     }
     // Xử lý sự kiện khi nhấn vào nút "THÊM VÀO GIỎ HÀNG"
     document.getElementById('add-to-cart').addEventListener('click', () => {
@@ -151,6 +120,3 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 });
-
-
-
