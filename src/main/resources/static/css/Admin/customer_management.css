@@ -265,7 +265,16 @@ th {
     justify-content: center;
     align-items: center;
 }
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center ;
+}
 
+.popup-content p{
+    font-size: 18px;
+}
 .popup-btn {
     margin: 10px;
     padding: 10px 20px;
@@ -316,12 +325,7 @@ th {
     position: relative;
 }
 
-.popup-content {
-    background: #fff;
-    padding: 0;
-    border-radius: 10px;
-    text-align: left;
-}
+
 
 .wrapper {
     width: 100%;
