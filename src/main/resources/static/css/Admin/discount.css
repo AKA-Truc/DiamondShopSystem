@@ -264,14 +264,16 @@ th {
     justify-content: center;
     align-items: center;
 }
-
 .popup-content {
     background: #fff;
     padding: 20px;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 10px;
+    text-align: center ;
 }
 
+.popup-content p{
+    font-size: 18px;
+}
 .popup-btn {
     margin: 10px;
     padding: 10px 20px;
@@ -279,7 +281,6 @@ th {
     border-radius: 5px;
     cursor: pointer;
 }
-
 #yes-btn {
     background-color: #0d4160;
     color: #fff;

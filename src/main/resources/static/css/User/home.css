@@ -533,3 +533,113 @@ body {
     opacity: 1;
 }
 
+/*card hover*/
+ul.products{
+    list-style: none;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+ul.products li{
+    flex-basis: 33%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 40px;
+}
+u.products li img {
+    max-width: 100%;
+    height: auto;
+}
+ul.products li .product-item{
+    text-align: center;
+}
+
+ul.products li .product-top{
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+ul.products li .product-top .product-thumb{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul.products li .product-top .product-thumb img{
+    display: block;
+}
+
+/*.card {*/
+/*    width: 180px;*/
+/*    height: 195px;*/
+/*    background-size: cover;*/
+/*    display: inline-block;*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.card img {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*    opacity: 0; !* Ẩn ảnh gốc, hiện ảnh hover *!*/
+/*    transition: opacity 0.7s ease;*/
+/*}*/
+
+/*.card img:first-child {*/
+/*    opacity: 1; !* ban đầu *!*/
+/*}*/
+
+/*.card img:last-child {*/
+/*    opacity: 0; !* ẩn ban đầu *!*/
+/*}*/
+
+
+/*.card:hover img:first-child {*/
+/*    opacity: 0; !* Ẩn hình ảnh đầu tiên khi hover *!*/
+/*}*/
+
+/*.card:hover img:last-child {*/
+/*    opacity: 1; !* Hiện hình ảnh thứ hai khi hover *!*/
+/*}*/
+.card {
+    width: 180px;
+    height: 195px;
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    z-index: 1; /* Đảm bảo cả hai hình ảnh nằm chồng lên nhau */
+}
+
+.card img:first-child {
+    opacity: 1;
+    z-index: 1; /* Hình ảnh đầu tiên nằm dưới */
+}
+
+.card img:last-child {
+    opacity: 0;
+    z-index: 2; /* Hình ảnh thứ hai nằm trên khi hover */
+}
+
+.card:hover img:first-child {
+    opacity: 0; /* Ẩn hình ảnh đầu tiên khi hover */
+}
+
+.card:hover img:last-child {
+    opacity: 1; /* Hiện hình ảnh thứ hai khi hover */
+}
