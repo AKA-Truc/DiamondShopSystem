@@ -348,10 +348,11 @@ select:focus,
 
 .toggle-quantity {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px;
+    padding: 5px;
     color: #e0e0e0;
     background-color:#002752 ;
-    margin: 20px;
+    margin-bottom: 20px;
 }
 .toggle-quantity:hover {
     color: #002752;

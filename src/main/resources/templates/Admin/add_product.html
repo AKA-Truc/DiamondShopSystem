@@ -173,23 +173,21 @@
 <style>
     .modal {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: none; /* Hidden by default */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 1000;
-    }
-    .modal-content{
-        top:30%;
-        left: 45%;
-        background-color: rgb(182, 217, 251);
+        width: 100%;
+        max-width: 400px;
+        height: auto;
         padding: 20px;
-        border-radius: 10px;
-        width: 400px;
-        max-width: 100%;
-        position: relative;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: none; /* Flexbox for centering contents */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center children horizontally */
     }
 
     .search-container {
@@ -198,13 +196,15 @@
         align-items: center;
         gap: 10px; /* Space between elements */
         margin-bottom: 20px;
+        margin-top: 20px;
+        position: relative;
     }
 
 
     #diamond-search {
-        width: 57%;
+        width: 60%;
         font-size: 18px;
-        padding: 10px 0;
+        padding: 10px;
         text-align: center;
         border: none;
         border-radius: 8px;
@@ -213,7 +213,7 @@
     #search-diamond-btn {
         padding: 10px 20px;
         font-size: 18px;
-        background-color: #004085;
+        background-color:  #004085;
         color: white;
         border: none;
         border-radius: 5px;
@@ -225,7 +225,7 @@
     }
 
     .close-button {
-        color: black;
+        color: #aaa;
         font-size: 28px;
         font-weight: bold;
         cursor: pointer;
@@ -233,7 +233,7 @@
 
     .close-button:hover,
     .close-button:focus {
-        color: #aaa;
+        color: black;
         text-decoration: none;
     }
 
