@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <input type="number" value="${cartItem.quantity}" class="quantity-input" data-cart-item-id="${cartItem.cartItemId}">
                         </td>
                         <td style="text-align: center">
-                            <button class="remove-btn" style="font-size: 24px; color: red;" onclick="deleteCartItem(${cartItem.cartItemId})">
+                            <button class="remove-btn" style="font-size: 24px; color: black;" onclick="deleteCartItem(${cartItem.cartItemId})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>

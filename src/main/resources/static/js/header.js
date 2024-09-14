@@ -65,28 +65,32 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(result => {
                 const data = result.data;
                 const cartItemsContainer = document.getElementById('cart-items');
-                cartItemsContainer.innerHTML = ''; // Clear previous content
+                cartItemsContainer.innerHTML = ''; // Đảm bảo xóa sạch trước khi thêm các mục mới
+                console.log(data);
 
                 if (data.length === 0) {
                     cartItemsContainer.innerHTML = '<p>No items in the cart.</p>';
                 } else {
-                    // Limit to 5 items
-                    const itemsToShow = data.slice(0, 5);
-                    itemsToShow.forEach(cartItem => {
+                    // Hiển thị tất cả các item (hoặc giới hạn 5 item)
+                    data.slice(0, 5).forEach(cartItem => {
                         const cartItemDiv = document.createElement('div');
+                        cartItemDiv.className = 'cart-item-content';
+                        cartItemDiv.onclick = () => window.location.href = './cart.html'; // Điều hướng đến giỏ hàng khi click
+
+                        // Tạo nội dung HTML cho item
                         cartItemDiv.innerHTML = `
-                        <div class="cart-item-content" onclick="window.location.href='./cart.html'">
-                            <img src="${cartItem.product.imageURL}" alt="${cartItem.product.productName}" class="cart-item-image">
-                            <div class="cart-item-info">
-                                <p class="cart-item-name">${cartItem.product.productName}</p>
-                                <p class="cart-item-quantity">Số lượng: ${cartItem.quantity}</p>
-                            </div>
-                        </div>
-                    `;
-                        cartItemsContainer.append(cartItemDiv);
+                    <img src="${cartItem.product.imageURL}" alt="${cartItem.product.productName}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <p class="cart-item-name">${cartItem.product.productName}</p>
+                        <p class="cart-item-quantity">Số lượng: ${cartItem.quantity}</p>
+                    </div>
+                `;
+
+                        console.log('Appending Cart Item:', cartItemDiv);
+                        cartItemsContainer.append(cartItemDiv);  // Thêm mục vào container
                     });
 
-                    // Show message if there are more than 5 items
+                    // Thêm thông báo nếu có nhiều hơn 5 mục
                     if (data.length > 5) {
                         const messageDiv = document.createElement('div');
                         messageDiv.innerHTML = '<p>Vui lòng vào giỏ hàng để xem đầy đủ.</p>';
@@ -98,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error fetching cart items:', error);
             });
     }
+
 
     // Gọi lại loadCartItems khi click vào icon giỏ hàng
     const cartIcon = document.querySelector(".fa-cart-shopping");
@@ -113,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 10);
     });
 
+    // Text rotation for center message
     const textOptions = ["Giảm giá đến 16%", "Trang sức kim cương ưu đãi 40%", "Mặt dây chuyền ưu đãi 15%"];
     const centerText = document.getElementById("center-text");
     let textIndex = 0;
@@ -173,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Login/Logout logic
     if (localStorage.getItem('authToken')) {
         document.getElementById('logic-login').textContent = "Đăng Xuất";
         document.getElementById('logic-login').addEventListener('click', logout);
