@@ -167,19 +167,18 @@ ion-icon {
     margin-bottom: 5px;
     font-weight: bold;
     color: #2c3e50;
-    height: 40px;
 }
 
 /* Input field styling inside form-item */
 .form-group input[type="text"] {
     width: 100%;
-    padding: 10px 60px;
+    padding: 8px 12px;
     border: 1px solid #eef5ff;
-    border-radius: 7px;
+    border-radius: 4px;
     font-size: 14px;
-    color: #3b536c;
+    color: #2c3e50;
     background-color: #ecf0f1;
-    cursor: not-allowed;
+    cursor: not-allowed; /* Indicate the input is disabled */
 }
 
 /* Existing styles for other elements */

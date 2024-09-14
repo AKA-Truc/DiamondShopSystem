@@ -1,111 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('authToken');
-    const isedit = localStorage.getItem('edit');
-    const addButton = document.getElementById('add-container');
-    const detailButton = document.getElementById('detail-container');
+    const addButton = document.querySelector('.table-add-btn');
     const checkAllBox = document.querySelector('.table-checkAll');
-    const closeModalBtn = document.getElementById('close-modal');
-    const tableBodyadd = document.getElementById('body-add');
-    const tableBodydetail = document.getElementById('body-detail');
+    const tableBody = document.querySelector('table.h-table tbody');
+    const token = localStorage.getItem('authToken');
     const modal = document.getElementById('diamond-modal');
+    const closeModalBtn = document.getElementById('close-modal');
     const searchInput = document.getElementById('diamond-search');
     const diamondList = document.getElementById('diamond-list');
     const searchButton = document.getElementById('search-diamond-btn');
     let currentDiamondSelect = null;
 
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        searchInput.value = '';
+        diamondList.innerHTML = '';
+    });
 
-
-    if(!isedit){
-        window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
-    }else {
-        displayProduct();
-    }
-
-    document.getElementById('update-product').addEventListener('click',handleSubmit)
-    document.getElementById('add-productdetail').addEventListener('click',addDetail)
-
-
-    function displayProduct() {
-        fetchProduct().then(data => {
-            console.log(data);
-
-            // Hiển thị thông tin sản phẩm
-            document.getElementById('previewImg').src = data.imageURL;
-            document.getElementById('previewImg1').src = data.subImageURL;
-            document.getElementById('Name').value = data.productName;
-            document.getElementById('loaiSanPham').value = data.category.categoryId;
-            document.getElementById('Warranty').value = data.warrantyPeriod;
-
-            const productId = localStorage.getItem('edit');
-
-            // Fetch product details
-            fetch(`${window.base_url}/product-management/products/${productId}/productdetails`, { method: 'GET' })
-                .then(response => response.json())
-                .then(result => {
-                    const productDetails = result.data;
-
-                    if (productDetails.length > 0) {
-                        // Lấy bảng và reset nội dung bảng
-                        const tableDetail = document.getElementById('body-detail');
-                        tableDetail.innerHTML = ''; // Xóa các hàng cũ nếu có
-
-                        // Tạo các hàng mới cho từng product detail
-                        productDetails.forEach(detail => {
-                            const newRow = document.createElement('tr');
-                            newRow.innerHTML = `
-                            <td>
-                                <select class="table-control item-control list-setting">
-                                    <option value="${detail.setting.settingId}">${detail.setting.material}</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div class="item-container" id="diamond-select-${detail.setting.settingId}">
-                                </div>
-                            </td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập size" value="${detail.size}" required></td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá" value="${detail.markupRate}" required></td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập tiền gia công" value="${detail.laborCost}" required></td>
-                            <td><input type="number" class="table-control item-control" placeholder="Nhập số lượng tồn kho" value="${detail.inventory}" required></td>
-                            <td>
-                                <ul class="table-action">
-                                    <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
-                                </ul>
-                            </td>
-                        `;
-
-                            // Thêm sự kiện vào nút xóa và nút thêm kim cương
-                            localStorage.setItem('editdetail', detail.productDetailId);
-                            newRow.querySelector('.row-delete').addEventListener('click', handleDeleteDetail);
-                            // Gọi hàm fetchSetting để điền các tùy chọn cho select (nếu cần)
-                            fetchSetting(token, newRow.querySelector('.list-setting'));
-
-                            const diamondSelectContainer = newRow.querySelector(`#diamond-select-${detail.setting.settingId}`);
-                            detail.diamondDetails.forEach(diamondDetail => {
-                                const diamondDiv = document.createElement('div');
-                                diamondDiv.innerHTML = `
-                                <input class="table-control item-control list-diamond" disabled value="${diamondDetail.diamond.giacode}" data-diamond-id="${diamondDetail.diamond.diamondId}"" disabled>
-                                <select class="table-control item-control type-diamond" disabled>
-                                    <<option value="0" ${diamondDetail.typeDiamond === '0' ? 'selected' : ''}>Kim Cương Chủ (1 viên)</option>
-                                    <option value="1" ${diamondDetail.typeDiamond === '1' ? 'selected' : ''}>Kim Cương Phụ</option>
-                                </select>
-                                <input type="number" class="table-control item-control quantity-input" value="${diamondDetail.quantity}" disabled placeholder="Số lượng">
-                            `;
-                                diamondSelectContainer.appendChild(diamondDiv);
-
-                            });
-
-                            // Thêm hàng mới vào bảng
-                            tableDetail.appendChild(newRow);
-                        });
-                    } else {
-                        console.log('No product details found.');
-                    }
-                })
-                .catch(err => console.error('Error fetching product details:', err));
-        }).catch(err => {
-            console.error('Error displaying product:', err);
-        });
-    }
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            searchInput.value = '';
+            diamondList.innerHTML = '';
+        }
+    });
 
     fetchCategory(token);
 
@@ -114,12 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (addButton) {
-        addButton.addEventListener('click', handleAddButtonClickAdd);
+        addButton.addEventListener('click', handleAddButtonClick);
     }
 
-    if (detailButton){
-        detailButton.addEventListener("click", handleAddButtonClickDetail);
-    }
+    document.querySelector('.save').addEventListener('click', handleSubmit);
 
     if (searchButton) {
         searchButton.addEventListener('click', handleSearchButtonClick);
@@ -127,16 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeExistingRows();
 
-    function handleAddButtonClickAdd() {
-        const newRow = createTableRowAdd();
-        tableBodyadd.appendChild(newRow);
-    }
-    function handleAddButtonClickDetail() {
-        const newRow = createTableRowDetail();
-        tableBodydetail.appendChild(newRow);
+    function handleAddButtonClick() {
+        const newRow = createTableRow();
+        tableBody.appendChild(newRow);
     }
 
-    function createTableRowAdd() {
+    function createTableRow() {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
             <td class="text-center check-col"><input type="checkbox" class="table-checkbox"></td>
@@ -155,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td><input type="number" class="table-control item-control" placeholder="Nhập số lượng tồn kho" required></td>
             <td>
                 <ul class="table-action">
+                    <li class="table-action-control row-save hidden"><i class="fa-solid fa-check" aria-hidden="true"></i></li>
                     <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
                 </ul>
             </td>
@@ -166,40 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return newRow;
     }
-    function createTableRowDetail() {
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td>
-                <select class="table-control item-control list-setting"></select>
-            </td>
-            <td>
-                <div class="item-container">
-                    <div id = "diamond-select"></div>
-                </div>
-                <button class="toggle-quantity">+</button>
-            </td>
-            <td><input type="number" class="table-control item-control" placeholder="Nhập size" required></td>
-            <td><input type="number" class="table-control item-control" placeholder="Nhập tỉ lệ áp giá" required></td>
-            <td><input type="number" class="table-control item-control" placeholder="Nhập tiền gia công" required></td>
-            <td><input type="number" class="table-control item-control" placeholder="Nhập số lượng tồn kho" required></td>
-            <td>
-                <ul class="table-action">
-                    <li class="table-action-control row-save "><i class="fa-solid fa-check" aria-hidden="true"></i></li>
-                    <li class="table-action-control row-delete"><i class="fa-solid fa-trash" aria-hidden="true"></i></li>
-                </ul>
-            </td>
-            `;
-
-        newRow.querySelector('.row-delete').addEventListener('click', handleDeleteRow);
-        newRow.querySelector('.toggle-quantity').addEventListener('click', handleToggleQuantity);
-        fetchSetting(token, newRow.querySelector('.list-setting'));
-
-        return newRow;
-    }
 
     function handleCheckAllChange(e) {
         const isChecked = e.target.checked;
-        tableBodyadd.querySelectorAll('.table-checkbox').forEach(checkbox => {
+        tableBody.querySelectorAll('.table-checkbox').forEach(checkbox => {
             checkbox.checked = isChecked;
         });
     }
@@ -220,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
         }
     });
+
 
     function fetchDiamondList() {
         const giaCode = searchInput.value.trim();
@@ -257,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span><strong>Màu:</strong> ${data.color}</span>
                 <span><strong>Giác Cắt:</strong> ${data.cut}</span>
                 <span><strong>Khối Lượng:</strong> ${data.carat}</span>
-                <span><strong>Kích Thước:</strong> ${data.measurement}</span>
+                <span><strong>Kích Thước:</strong> ${data.size}</span>
                 <span><strong>Độ Tinh Khiết:</strong> ${data.clarity}</span>
                 <button>Chọn</button>
             `;
@@ -382,24 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function handleDeleteDetail(e) {
-        if (confirm('Bạn có chắc chắn muốn xóa chi tiết sản phẩm này không?')) {
-            fetch(`${window.base_url}/product-management/productdetails/${localStorage.getItem('editdetail')}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(result => {
-                    alert("Xóa Thành Công");
-                    location.reload();
-                })
-                .catch(err => alert(err))
-        }
-    }
-
     function initializeExistingRows() {
         document.querySelectorAll('.row-delete').forEach(btn => {
             btn.addEventListener('click', handleDeleteRow);
@@ -433,8 +298,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const imageURL = document.getElementById('productImage').files[0];
-        const subImageURL = document.getElementById('productImage1').files[0];
+        const imageURL = document.getElementById('image').files[0];
+        const subImageURL = document.getElementById('image1').files[0];
+
+        if (!imageURL || !subImageURL) {
+            alert("Vui lòng tải lên đầy đủ cả hai ảnh sản phẩm.");
+            return;
+        }
 
         const product = {
             productName,
@@ -444,15 +314,68 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        console.log(product);
-
         const formData = new FormData();
         formData.append('product', JSON.stringify(product));
-        formData.append('imageURL', imageURL || null);
+        formData.append('imageURL', imageURL);
         formData.append('subImageURL', subImageURL);
 
-        fetch(`${window.base_url}/product-management/products/${localStorage.getItem('edit')}`, {
-            method: 'PUT',
+        let isValid = true;
+        let hasMainDiamond = false;
+        const rows = Array.from(document.querySelectorAll('table.h-table tbody tr'));
+
+        rows.forEach(row => {
+            const checkBox = row.querySelector('.table-checkbox');
+            if (checkBox && checkBox.checked) {
+                const settingId = row.querySelector('.list-setting').value;
+                const size = parseFloat(row.querySelector('input[placeholder="Nhập size"]').value);
+                const markupRate = parseFloat(row.querySelector('input[placeholder="Nhập tỉ lệ áp giá"]').value);
+                const laborCost = parseFloat(row.querySelector('input[placeholder="Nhập tiền gia công"]').value);
+                const inventory = parseFloat(row.querySelector('input[placeholder="Nhập số lượng tồn kho"]').value);
+
+                if (!settingId || size <= 0 || markupRate <= 0 || laborCost <= 0 || inventory <= 0) {
+                    alert("Vui lòng nhập thông tin hợp lệ cho các trường số (lớn hơn 0).");
+                    isValid = false;
+                    return;
+                }
+
+                const diamonds = row.querySelectorAll('.list-diamond');
+                const quantities = row.querySelectorAll('.quantity-input');
+                const diamondTypes = row.querySelectorAll('.type-diamond');
+
+                diamonds.forEach((diamondElement, index) => {
+                    const diamondId = diamondElement.value;
+                    const quantity = parseInt(quantities[index].value) || 0;
+                    const diamondType = diamondTypes[index].value;
+
+                    if (!diamondId || quantity <= 0) {
+                        alert("Vui lòng chọn kim cương và nhập số lượng hợp lệ.");
+                        isValid = false;
+                        return;
+                    }
+
+                    if (diamondType === '0') {
+                        hasMainDiamond = true;
+                    }
+                });
+            }
+        });
+
+        if (!hasMainDiamond) {
+            alert("Phải có ít nhất một 'Kim Cương Chủ'.");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        submitData(formData);
+    }
+
+    function submitData(formData) {
+        const token = localStorage.getItem('authToken');
+        fetch(`${window.base_url}/product-management/product`, {
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -460,70 +383,77 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(response => response.json())
             .then(result => {
-                console.log("ok");
-                location.reload();
+                const data = result.data;
+                console.log('Product data submitted:', result);
+
+                let rows = document.querySelectorAll('table.h-table tbody tr');
+                rows = Array.from(rows);
+
+                const Detailsl = [];
+
+                rows.forEach(row => {
+                    const checkBox = row.querySelector('.table-checkbox');
+                    if (checkBox && checkBox.checked) {
+
+                        const diamonds = row.querySelectorAll('.list-diamond');
+                        const quantities = row.querySelectorAll('.quantity-input');
+                        const diamondTypes = row.querySelectorAll('.type-diamond');
+
+                        const diamondMap = new Map();
+
+                        diamonds.forEach((diamondElement, index) => {
+                            const diamondId = diamondElement.getAttribute('data-diamond-id');
+                            const quantity = parseInt(quantities[index].value) || 0;
+                            const diamondType = diamondTypes[index].value;
+
+                            if (!diamondMap.has(diamondId)) {
+                                diamondMap.set(diamondId, { quantity: 0, typeDiamond: diamondType });
+                            }
+
+                            if (diamondType === '1') {
+                                diamondMap.get(diamondId).quantity = 1;
+                            } else {
+                                diamondMap.get(diamondId).quantity += quantity;
+                            }
+                        });
+
+                        const diamondDetails = Array.from(diamondMap, ([diamondId, { quantity, typeDiamond }]) => ({
+                            diamond: { diamondId },
+                            quantity,
+                            typeDiamond
+                        }));
+
+                        const rowData = {
+                            product: {
+                                productId: data.productId
+                            },
+                            setting: {
+                                settingId: row.querySelector('.list-setting').value
+                            },
+                            diamondDetails: diamondDetails,
+                            size: row.querySelector('input[placeholder="Nhập size"]').value,
+                            markupRate: row.querySelector('input[placeholder="Nhập tỉ lệ áp giá"]').value,
+                            laborCost: row.querySelector('input[placeholder="Nhập tiền gia công"]').value,
+                            inventory: row.querySelector('input[placeholder="Nhập số lượng tồn kho"]').value
+                        };
+                        Detailsl.push(rowData);
+                    }
+                });
+                console.log(Detailsl);
+
+                Detailsl.forEach(productdetail => {
+                    console.log(productdetail);
+                    addProductDetail(token, productdetail);
+                });
+
+                // alert("Create product successfully");
+                // window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
             })
-            .catch(err => console.error(err));
-    }
-
-    function addDetail() {
-            let rows = document.querySelectorAll('table.h-table tbody tr');
-            rows = Array.from(rows);
-
-            const Detailsl = [];
-
-            rows.forEach(row => {
-                const checkBox = row.querySelector('.table-checkbox');
-                if (checkBox && checkBox.checked) {
-
-                    const diamonds = row.querySelectorAll('.list-diamond');
-                    const quantities = row.querySelectorAll('.quantity-input');
-                    const diamondTypes = row.querySelectorAll('.type-diamond');
-
-                    const diamondMap = new Map();
-
-                    diamonds.forEach((diamondElement, index) => {
-                        const diamondId = diamondElement.getAttribute('data-diamond-id');
-                        const quantity = parseInt(quantities[index].value) || 0;
-                        const diamondType = diamondTypes[index].value;
-
-                        if (!diamondMap.has(diamondId)) {
-                            diamondMap.set(diamondId, { quantity: 0, typeDiamond: diamondType });
-                        }
-
-                        if (diamondType === '1') {
-                            diamondMap.get(diamondId).quantity = 1;
-                        } else {
-                            diamondMap.get(diamondId).quantity += quantity;
-                        }
-                    });
-
-                    const diamondDetails = Array.from(diamondMap, ([diamondId, { quantity, typeDiamond }]) => ({
-                        diamond: { diamondId },
-                        quantity,
-                        typeDiamond
-                    }));
-
-                    const rowData = {
-                        product: {
-                            productId: localStorage.getItem('edit')
-                        },
-                        setting: {
-                            settingId: row.querySelector('.list-setting').value
-                        },
-                        diamondDetails: diamondDetails,
-                        size: row.querySelector('input[placeholder="Nhập size"]').value,
-                        markupRate: row.querySelector('input[placeholder="Nhập tỉ lệ áp giá"]').value,
-                        laborCost: row.querySelector('input[placeholder="Nhập tiền gia công"]').value,
-                        inventory: row.querySelector('input[placeholder="Nhập số lượng tồn kho"]').value
-                    };
-                    Detailsl.push(rowData);
-                }
+            .catch(error => {
+                console.error('Error submitting product data:', error);
+                // alert("Fail to create product");
+                // location.reload();
             });
-            Detailsl.forEach(detail =>{
-                addProductDetail(token, detail);
-            })
-            location.reload();
     }
 
     function addProductDetail(token, productdetail) {
@@ -617,30 +547,3 @@ function cancelForm() {
         window.location.href = "/DiamondShopSystem/src/main/resources/templates/Admin/product.html";
     }
 }
-
-function fetchProduct() {
-    const productId = localStorage.getItem('edit');
-    const productDetailsUrl = `${window.base_url}/product-management/products/${productId}/productdetails`;
-    const productUrl = `${window.base_url}/product-management/products/${productId}`;
-
-    return fetch(productUrl, { method: 'GET' })
-        .then(response => response.json())
-        .then(result => {
-            const data = result.data;
-
-            if (data.length === 0) {
-                // If no product details found, fetch them
-                return fetch(productDetailsUrl, { method: 'GET' })
-                    .then(response => response.json())
-                    .then(result => {
-                        const ProductDetails = result.data;
-                        return ProductDetails[0].product;  // Return the product from product details
-                    })
-                    .catch(err => console.error('Error fetching product details:', err));
-            } else {
-                return data;  // Return the product data
-            }
-        })
-        .catch(err => console.error('Error fetching product:', err));
-}
-
