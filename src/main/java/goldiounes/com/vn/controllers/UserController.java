@@ -132,7 +132,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     @PreAuthorize(
-            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF') or " +
+            "hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF', 'ROLE_DELIVERY STAFF') or " +
                     "(hasAnyAuthority('ROLE_CUSTOMER') and #id == #authentication.principal.getId())"
     )
     public ResponseEntity<ResponseWrapper<UserDTO>> getUser(@PathVariable int id, Authentication authentication) {

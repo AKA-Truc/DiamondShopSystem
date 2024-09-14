@@ -20,8 +20,8 @@
 <script src="/static/js/url.js"></script>
 <script src="/static/js/Admin/orderDetailAdmin.js"></script>
 
-<div style=" background-color: white; border-radius: 7px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; margin-left: 35% " class="container mt-5">
-    <h2 id="name-yourOrder">Your order</h2>
+<div style=" background-color: white; max-width: 1050px ;border-radius: 7px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; margin-left: 23% " class="container mt-5">
+    <h3 id="name-yourOrder">Your order</h3>
     <p id="item-count">You have 0 item(s) in your cart</p>
     <div class="form-group">
         <label for="address">Địa chỉ:</label>
@@ -36,9 +36,26 @@
     <div id="product-list"></div>
     <div class="form-group">
         <label for="promotion">Select Promotion:</label>
-        <select id="promotion" class="form-select promotion">
+        <select id="promotion" class="form-select promotion" disabled >
         </select>
     </div>
+
+    <div class="form-group mt-3">
+        <label>Select Payment Method:</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typePayment" id="paymentBank" value="Bank Transfer">
+            <label class="form-check-label" for="paymentBank">
+                Chuyển khoản
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typePayment" id="paymentCash" value="Cash">
+            <label class="form-check-label" for="paymentCash">
+                Tiền mặt
+            </label>
+        </div>
+    </div>
+
     <p class="text">Total Price: <span id="totalPrice">VNĐ</span></p>
 </div>
 

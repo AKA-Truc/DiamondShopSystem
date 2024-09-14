@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         };
                     });
 
-                    const selectedPromotion = document.getElementById('promotion') ? document.getElementById('promotion').value : null;
+                    const selectedPromotion = document.getElementById('promotion').value ;
                     const address = document.getElementById('address').value;
                     const phone = document.getElementById('phone').value;
                     const typePayment = document.querySelector('input[name="typePayment"]:checked')?.value;
@@ -192,6 +192,29 @@ document.addEventListener('DOMContentLoaded', async function () {
                         alert('Please enter a phone number, address, and select a payment method');
                         return false;
                     }
+                    const a = {
+                        user: {
+                            userId: data.user.userId
+                        },
+                        cart: {
+                            cartId: data.user.userId
+                        },
+                        orderDetails: orderDetailsWithSizes,
+                        startDate: data.startDate,
+                        phone: phone,
+                        shippingAddress: address,
+                        typePayment: typePayment,
+                        status: "Đã xác nhận"
+                    }
+                    let aIndex;
+                    if(selectedPromotion) {
+                        aIndex = {
+                            promotionId: selectedPromotion
+                        }
+                    }
+                    console.log(aIndex);
+                    a.promotion = aIndex;
+                    console.log(a);
 
                     const confirmResponse = await fetch(`${window.base_url}/order-management/orders/${orderId}`, {
                         method: 'PUT',
@@ -199,23 +222,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({
-                            user: {
-                                userId: data.user.userId
-                            },
-                            cart: {
-                                cartId: data.user.userId
-                            },
-                            orderDetails: orderDetailsWithSizes,
-                            promotion: {
-                                promotionId: selectedPromotion
-                            },
-                            startDate: data.startDate,
-                            phone: phone,
-                            shippingAddress: address,
-                            typePayment: typePayment,
-                            status: "Đã xác nhận"
-                        })
+                        body: JSON.stringify(a)
                     });
 
                     if (confirmResponse.ok) {

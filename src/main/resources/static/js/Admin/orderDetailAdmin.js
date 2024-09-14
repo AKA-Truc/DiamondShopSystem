@@ -19,10 +19,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         const result = await response.json();
         const data = result.data;
 
+        console.log(data);
+
         // Update order details on the page
         document.getElementById('phone').value = data.phone;
         document.getElementById('address').value = data.shippingAddress;
-        document.querySelector('h2').textContent = `Order #${data.orderId}`;
         document.getElementById('item-count').textContent = `Have ${data.orderDetails.length} item(s) in order`;
         document.getElementById('name-yourOrder').textContent = `${data.user.userName}'s Order`;
         document.getElementById("totalPrice").textContent = `${new Intl.NumberFormat('vi-VN', {
@@ -30,13 +31,25 @@ document.addEventListener('DOMContentLoaded', async function () {
             currency: 'VND'
         }).format(data.totalPrice)}`;
 
+        if (data.typePayment) {
+            console.log(data.typePayment);
+            const radioButton = document.querySelector(`input[name="typePayment"][value="${data.typePayment}"]`);
+            if (radioButton) {
+                console.log("aaaa");
+                radioButton.checked = true;
+                document.querySelectorAll('input[name="typePayment"]').forEach(radio => {
+                    radio.disabled = true;
+                });
+            }
+        }
+
+
         const cartItems = document.getElementById('product-list');
 
         // Handle promotions if available
         const promotionSelect = document.getElementById('promotion');
         if (promotionSelect && data.promotion) {
             promotionSelect.innerHTML = ''; // Clear previous options
-            promotionSelect.disabled = true;
             const option = document.createElement('option');
             option.value = data.promotion.promotionId;
             option.textContent = data.promotion.promotionName;

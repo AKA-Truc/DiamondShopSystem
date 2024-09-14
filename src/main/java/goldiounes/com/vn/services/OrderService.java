@@ -30,6 +30,9 @@ public class OrderService {
     private PromotionRepo promotionRepo;
 
     @Autowired
+    private PromotionService promotionService;
+
+    @Autowired
     private ProductRepo productRepo;
 
     @Autowired
@@ -109,8 +112,17 @@ public class OrderService {
     }
 
 
-    public OrderDTO updateOrder(int id, OrderDTO orderDTO){
+    public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
+        // Ánh xạ từ orderDTO sang order
         Order order = modelMapper.map(orderDTO, Order.class);
+
+        // Kiểm tra xem promotion trong orderDTO có bị null không
+        if (orderDTO.getPromotion() == null) {
+            System.out.println("OrderDTO promotion is null, skipping promotion update");
+        } else {
+            System.out.println("OrderDTO promotion exists: " + orderDTO.getPromotion());
+        }
+
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
@@ -125,11 +137,8 @@ public class OrderService {
             OrderDetail existingOrderDetail = existingOrder.getOrderDetails().stream()
                     .filter(od -> od.getOrderDetailID() == orderDetail.getOrderDetailID())
                     .findFirst()
-                    .orElse(null);
+                    .orElseThrow(() -> new RuntimeException("OrderDetail not found"));
 
-            if (existingOrderDetail == null) {
-                throw new RuntimeException("OrderDetail not found");
-            }
             existingOrderDetail.setSize(orderDetail.getSize());
             existingOrderDetail.setQuantity(orderDetail.getQuantity());
 
@@ -143,29 +152,26 @@ public class OrderService {
             totalPrice += (int) (productDetail.getSellingPrice() * orderDetail.getQuantity());
         }
 
-        if (orderDTO.getPromotion() != null) {
-            Promotion promotion = promotionRepo.findById(orderDTO.getPromotion().getPromotionId())
-                    .orElseThrow(() -> new RuntimeException("Promotion not found"));
+        System.out.println("Promotion of order: " + order.getPromotion());
+        Promotion promotion = order.getPromotion();
 
-            totalPrice = totalPrice - (orderDTO.getPromotion().getDiscountPercent() * totalPrice) / 100;
+        // Kiểm tra promotion của order có null không
+        if (promotion != null) {
+            int discountPercent = promotion.getDiscountPercent();
+            totalPrice = totalPrice - (discountPercent * totalPrice) / 100;
             existingOrder.setPromotion(promotion);
+        } else {
+            System.out.println("No promotion applied");
+            existingOrder.setPromotion(null);
         }
 
         User existingUser = existingOrder.getUser();
         Point point = existingUser.getPoint();
 
         if (totalPrice >= 10000000) {
-            int discountAmount = (int) (totalPrice * 0.1);
-            if (point.getPoints() >= discountAmount) {
-                totalPrice -= discountAmount;
-                point.setPoints(point.getPoints() - discountAmount);
-            }
+            applyPointDiscount(totalPrice, point, 0.1);
         } else if (totalPrice >= 5000000) {
-            int discountAmount = (int) (totalPrice * 0.05);
-            if (point.getPoints() >= discountAmount) {
-                totalPrice -= discountAmount;
-                point.setPoints(point.getPoints() - discountAmount);
-            }
+            applyPointDiscount(totalPrice, point, 0.05);
         }
 
         existingOrder.setTotalPrice(totalPrice);
@@ -175,6 +181,14 @@ public class OrderService {
         Order savedOrder = orderRepo.save(existingOrder);
         emailService.sendInvoiceEmail(existingUser.getEmail(), savedOrder);
         return modelMapper.map(savedOrder, OrderDTO.class);
+    }
+
+    private void applyPointDiscount(int totalPrice, Point point, double discountRate) {
+        int discountAmount = (int) (totalPrice * discountRate);
+        if (point.getPoints() >= discountAmount) {
+            totalPrice -= discountAmount;
+            point.setPoints(point.getPoints() - discountAmount);
+        }
     }
 
     public boolean deleteOrder(int id) {

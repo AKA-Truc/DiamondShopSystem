@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    alert('Cập nhật bài viết thành công!');
+                    alert('Tạo bài viết thành công!');
                     fetchBlogs();
                     popup1Overlay.style.display = 'none';
                     resetFormState();

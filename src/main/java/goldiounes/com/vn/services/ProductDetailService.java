@@ -148,7 +148,7 @@ public class ProductDetailService {
         productDetailUpdate.setLaborCost(productDetail.getLaborCost());
         productDetailUpdate.setMarkupRate(productDetail.getMarkupRate());
         productDetailUpdate.setSellingPrice(productDetail.getLaborCost() * productDetail.getMarkupRate());
-
+        productDetailUpdate.setStatus("active");
         return modelMapper.map(productDetailRepo.save(productDetailUpdate), ProductDetailDTO.class);
     }
 
