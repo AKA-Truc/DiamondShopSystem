@@ -3,6 +3,7 @@ package goldiounes.com.vn.services;
 import goldiounes.com.vn.models.dtos.*;
 import goldiounes.com.vn.models.entities.*;
 import goldiounes.com.vn.repositories.*;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -57,7 +58,7 @@ public class OrderService {
     private EmailService emailService;
 
     @Transactional
-    public OrderDTO createOrder(OrderDTO orderDTO) {
+    public OrderDTO createOrder(OrderDTO orderDTO) throws MessagingException {
         Order order = modelMapper.map(orderDTO, Order.class);
         User user = userRepo.findById(order.getUser().getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -112,24 +113,14 @@ public class OrderService {
     }
 
 
-    public OrderDTO updateOrder(int id, OrderDTO orderDTO) {
-        // Ánh xạ từ orderDTO sang order
+    public OrderDTO updateOrder(int id, OrderDTO orderDTO){
         Order order = modelMapper.map(orderDTO, Order.class);
-
-        // Kiểm tra xem promotion trong orderDTO có bị null không
-        if (orderDTO.getPromotion() == null) {
-            System.out.println("OrderDTO promotion is null, skipping promotion update");
-        } else {
-            System.out.println("OrderDTO promotion exists: " + orderDTO.getPromotion());
-        }
-
         Order existingOrder = orderRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
         existingOrder.setStatus(order.getStatus());
         existingOrder.setShippingAddress(order.getShippingAddress());
         existingOrder.setTypePayment(order.getTypePayment());
-        existingOrder.setPhone(order.getPhone());
 
         int totalPrice = 0;
 
@@ -137,8 +128,11 @@ public class OrderService {
             OrderDetail existingOrderDetail = existingOrder.getOrderDetails().stream()
                     .filter(od -> od.getOrderDetailID() == orderDetail.getOrderDetailID())
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("OrderDetail not found"));
+                    .orElse(null);
 
+            if (existingOrderDetail == null) {
+                throw new RuntimeException("OrderDetail not found");
+            }
             existingOrderDetail.setSize(orderDetail.getSize());
             existingOrderDetail.setQuantity(orderDetail.getQuantity());
 
@@ -152,27 +146,30 @@ public class OrderService {
             totalPrice += (int) (productDetail.getSellingPrice() * orderDetail.getQuantity());
         }
 
-        System.out.println("Promotion of order: " + order.getPromotion());
-        Promotion promotion = order.getPromotion();
+        if (order.getPromotion() != null) {
+            Promotion promotion = promotionRepo.findById(orderDTO.getPromotion().getPromotionId())
+                    .orElseThrow(() -> new RuntimeException("Promotion not found"));
 
-        // Kiểm tra promotion của order có null không
-        if (promotion != null) {
-            int discountPercent = promotion.getDiscountPercent();
-            totalPrice = totalPrice - (discountPercent * totalPrice) / 100;
+            totalPrice = totalPrice - (promotion.getDiscountPercent() * totalPrice) / 100;
             existingOrder.setPromotion(promotion);
-        } else {
-            System.out.println("No promotion applied");
-            existingOrder.setPromotion(null);
         }
 
         User existingUser = existingOrder.getUser();
         Point point = existingUser.getPoint();
 
-        if (totalPrice >= 10000000) {
+        if (totalPrice >=25000000) {
+            applyPointDiscount(totalPrice, point, 0.5);
+        }
+        else if(totalPrice >= 15000000) {
+            applyPointDiscount(totalPrice, point, 0.3);
+        }
+        else if (totalPrice >= 10000000) {
             applyPointDiscount(totalPrice, point, 0.1);
-        } else if (totalPrice >= 5000000) {
+        }
+        else if (totalPrice >= 5000000) {
             applyPointDiscount(totalPrice, point, 0.05);
         }
+
 
         existingOrder.setTotalPrice(totalPrice);
         point.setPoints(point.getPoints() + totalPrice / 100);
@@ -186,7 +183,6 @@ public class OrderService {
     private void applyPointDiscount(int totalPrice, Point point, double discountRate) {
         int discountAmount = (int) (totalPrice * discountRate);
         if (point.getPoints() >= discountAmount) {
-            totalPrice -= discountAmount;
             point.setPoints(point.getPoints() - discountAmount);
         }
     }

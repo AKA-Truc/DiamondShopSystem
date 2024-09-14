@@ -13,6 +13,6 @@ public class PromotionDTO {
     private Date endDate;
     private int discountPercent;
 
-    @JsonBackReference(value = "promotions")
+//    @JsonBackReference(value = "promotions")
     private OrderDTO order;
 }

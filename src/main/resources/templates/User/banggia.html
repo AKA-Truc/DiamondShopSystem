@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Materials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/User/banggia.css">
+</head>
+
+<body>
+
+<script src="/static/js/header.js"></script>
+<script src="/static/js/footer.js"></script>
+<script src="/static/js/User/banggia.js"></script>
+<script src="/static/js/url.js"></script>
+
+<div class="container">
+    <p>Show data with material and price</p>
+    <select id="material-select">
+        <option value="none">Material</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="platinum">Platinum</option>
+    </select>
+
+    <select id="price-select">
+        <option value="all">Price</option>
+        <option value="under-1m">Dưới 1 triệu</option>
+        <option value="1m-3m">1 đến 3 triệu</option>
+        <option value="above-3m">Trên 3 triệu</option>
+    </select>
+
+    <table id="material-table" class="hidden">
+        <thead>
+            <tr>
+                <th>Material</th>
+                <th>Price (VND)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table data will be injected here -->
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+
+</html>
