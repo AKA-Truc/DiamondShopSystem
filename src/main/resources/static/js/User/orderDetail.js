@@ -23,6 +23,25 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('item-count').textContent = `You have ${data.orderDetails.length} item(s) in your order`;
         document.getElementById('name-order').textContent = `${data.user.userName}'s Order`;
         document.getElementById("totalPrice").textContent = `${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalPrice)}`;
+        // Set the correct radio button based on saved typePayment
+        if (data.typePayment) {
+            const radioButton = document.querySelector(`input[name="typePayment"][value="${data.typePayment}"]`);
+            if (radioButton) {
+                radioButton.checked = true;
+            }
+        }
+
+        // Disable radio buttons and inputs if order status is not "New"
+        if (data.status !== "New") {
+            document.querySelectorAll('input[name="typePayment"]').forEach(radio => {
+                radio.disabled = true;
+            });
+            document.getElementById('address').disabled = true;
+            document.getElementById('phone').disabled = true;
+        } else {
+            document.getElementById('address').disabled = false;
+            document.getElementById('phone').disabled = false;
+        }
         const cartItems = document.getElementById('product-items');
 
         const validPromotions = await getAllPromotion();
@@ -166,10 +185,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const selectedPromotion = document.getElementById('promotion') ? document.getElementById('promotion').value : null;
                     const address = document.getElementById('address').value;
                     const phone = document.getElementById('phone').value;
+                    const typePayment = document.querySelector('input[name="typePayment"]:checked')?.value;
 
-                    console.log(address, phone);
-                    if (phone === null || address === null) {
-                        alert('Please enter a phone number and address');
+                    console.log(address, phone, typePayment);
+                    if (!phone || !address || !typePayment) {
+                        alert('Please enter a phone number, address, and select a payment method');
                         return false;
                     }
 
@@ -193,6 +213,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             startDate: data.startDate,
                             phone: phone,
                             shippingAddress: address,
+                            typePayment: typePayment,
                             status: "Đã xác nhận"
                         })
                     });
@@ -211,6 +232,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             };
 
+
             const cancelButton = document.createElement('button');
             cancelButton.textContent = "Hủy";
             cancelButton.classList.add('btn', 'btn-danger');
@@ -228,6 +250,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
+//hàm get productDetail để lấy tất cả size
 async function getProductDetail(productId) {
     try {
         const response = await fetch(`${window.base_url}/product-management/products/${productId}/productdetails`, {
@@ -241,6 +264,7 @@ async function getProductDetail(productId) {
     }
 }
 
+//get tất cả promotion để chọn ưu đãi
 async function getAllPromotion() {
     try {
         const response = await fetch(`${window.base_url}/promotion-management/promotions`, {
@@ -269,6 +293,7 @@ async function getAllPromotion() {
     }
 }
 
+//lấy size nhẫn khi đã câp nhật size
 async function getProductDetailBySize(product, size) {
     try {
         const response = await fetch(`${window.base_url}/product-management/productDetailSize/${size}`, {

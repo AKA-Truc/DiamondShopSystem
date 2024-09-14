@@ -159,3 +159,34 @@ h2 {
 .button-container .btn-danger:hover {
     background-color: #a9d2f1;
 }
+
+.form-check-input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-check-input:checked {
+    background-color: #0c0909; /* Thay đổi màu nền khi được chọn */
+    border-color: #0c0909; /* Thay đổi màu viền khi được chọn */
+}
+
+.form-check-input:checked::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: whitesmoke;
+    border-radius: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
