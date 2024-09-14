@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#">BẢNG GIÁ</a>
                 <ul class="sub-menu">
                     <li><a href="list_price.html">BẢNG GIÁ KIM CƯƠNG VIÊN</a></li>
-                    <li><a href="#">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
+                    <li><a href="banggia.html">BẢNG GIÁ VỎ KIM CƯƠNG</a></li>
                 </ul>
             </li>
             <li><a href="news.html">TIN TỨC</a></li>

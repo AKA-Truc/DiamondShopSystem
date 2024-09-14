@@ -27,12 +27,14 @@ body {
 
 
 .image-detail img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    margin-left: 43%;
+    opacity: 0.5;
 }
 
 .image-detail img:hover {
@@ -53,7 +55,7 @@ body {
 }
 
 .image-section img {
-    width: 300px;
+    width: 490px;
     height: auto;
     border-radius: 5px;
 }
@@ -305,6 +307,7 @@ summary:hover {
 
 .product-price {
     font-size: 16px;
+    max-width: 400px;
 }
 
 .old-price {
