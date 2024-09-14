@@ -1,86 +1,83 @@
 document.addEventListener('DOMContentLoaded', function () {
-    populateTable('none', 'all');
-});
-
-document.getElementById('material-select').addEventListener('change', function () {
-    const selectedMaterial = this.value;
-    const selectedPrice = document.getElementById('price-select').value;
-    populateTable(selectedMaterial, selectedPrice);
-});
-
-document.getElementById('price-select').addEventListener('change', function () {
-    const selectedPrice = this.value;
-    const selectedMaterial = document.getElementById('material-select').value;
-    populateTable(selectedMaterial, selectedPrice);
-});
-
-function populateTable(selectedMaterial, selectedPrice) {
+    const materialSelect = document.getElementById('material-select');
+    const priceSelect = document.getElementById('price-select');
     const table = document.getElementById('material-table');
     const tbody = table.querySelector('tbody');
+    let jewelryData = [];
 
-    // Data sets for Gold, Silver, and Platinum
-    const data = {
-        'gold': [
-            { material: 'White Gold 18K', price: 2500000 },
-            { material: 'Yellow Gold 18K', price: 3000000 },
-            { material: 'Rose Gold 18K', price: 2700000 },
-            { material: 'White Gold 10K', price: 1300000 },
-            { material: 'Yellow Gold 10K', price: 1400000 },
-            { material: 'White Gold 9K', price: 1000000 },
-            { material: '14K Gold-Plated Silver', price: 1500000 },
-            { material: '18K Gold-Plated Silver', price: 1800000 }
-        ],
-        'silver': [
-            { material: 'Silver', price: 1000000 },
-            { material: 'Rhodium Plated Silver', price: 1200000 },
-            { material: '14K Gold-Plated Silver', price: 1500000 },
-            { material: '18K Gold-Plated Silver', price: 1800000 }
-        ],
-        'platinum': [
-            { material: 'Platinum', price: 3500000 },
-            { material: 'Platinum 950', price: 4000000 }
-        ]
-    };
+    async function fetchData() {
+        try {
+            const response = await fetch(`${window.base_url}/setting-management/settings`);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
 
-    // Function to filter by price range
-    function filterByPrice(item, priceRange) {
-        switch (priceRange) {
-            case 'under-1m':
-                return item.price < 1000000;
-            case '1m-3m':
-                return item.price >= 1000000 && item.price <= 3000000;
-            case 'above-3m':
-                return item.price > 3000000;
-            default:
-                return true;
+            // Đảm bảo chỉ lấy phần data từ object
+            const responseData = await response.json();
+            jewelryData = responseData.data; // Lấy mảng từ thuộc tính data
+            console.log(jewelryData); // Kiểm tra xem jewelryData đã là mảng chưa
+
+            filterAndDisplayData();
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
     }
 
-    // Clear previous table data
-    tbody.innerHTML = '';
+    function filterAndDisplayData() {
+        const selectedMaterial = materialSelect.value;
+        const selectedPriceRange = priceSelect.value;
 
-    // If "none" is selected, show all data
-    if (selectedMaterial === 'none') {
-        const allData = [...data.gold, ...data.silver, ...data.platinum].filter(item => filterByPrice(item, selectedPrice));
-        allData.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `<td>${item.material}</td><td>${item.price.toLocaleString()} VND</td>`;
-            tbody.appendChild(row);
+        let filteredData = jewelryData.filter(item => {
+            // Lọc material theo keyword (Gold, Silver, Platinum)
+            let matchesMaterial = true;
+            if (selectedMaterial !== 'none') {
+                const materialKeywords = {
+                    'gold': ['gold', 'vàng'],
+                    'silver': ['silver', 'bạc'],
+                    'platinum': ['platinum', 'bạch kim']
+                };
+
+                const material = item.material.toLowerCase();
+                matchesMaterial = materialKeywords[selectedMaterial].some(keyword => material.includes(keyword));
+            }
+
+            // Lọc theo price range
+            const price = item.price;
+            let matchesPrice = true;
+            if (selectedPriceRange === 'under-1m') {
+                matchesPrice = price < 1000000;
+            } else if (selectedPriceRange === '1m-3m') {
+                matchesPrice = price >= 1000000 && price <= 3000000;
+            } else if (selectedPriceRange === 'above-3m') {
+                matchesPrice = price > 3000000;
+            }
+
+            return matchesMaterial && matchesPrice;
         });
-        table.classList.remove('hidden'); // Show table
+
+        tbody.innerHTML = '';
+
+        // Populate the table with filtered data
+        if (filteredData.length > 0) {
+            table.classList.remove('hidden');
+            filteredData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${item.material}</td>
+                <td>${item.price.toLocaleString('vi-VN')} VND</td>
+            `;
+                tbody.appendChild(row);
+            });
+        } else {
+            table.classList.add('hidden');
+        }
     }
-    // If a valid material is selected, show only relevant data
-    else if (data[selectedMaterial]) {
-        const filteredData = data[selectedMaterial].filter(item => filterByPrice(item, selectedPrice));
-        filteredData.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `<td>${item.material}</td><td>${item.price.toLocaleString()} VND</td>`;
-            tbody.appendChild(row);
-        });
-        table.classList.remove('hidden'); // Show table
-    }
-    // If nothing valid is selected, hide the table
-    else {
-        table.classList.add('hidden'); // Hide table
-    }
-}
+
+
+    // Event listeners for the select elements
+    materialSelect.addEventListener('change', filterAndDisplayData);
+    priceSelect.addEventListener('change', filterAndDisplayData);
+
+    // Fetch data on page load
+    fetchData();
+});

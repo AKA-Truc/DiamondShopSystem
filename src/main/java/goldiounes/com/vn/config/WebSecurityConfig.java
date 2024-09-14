@@ -58,7 +58,8 @@ public class WebSecurityConfig {
                                 "/product-management/products/{id}/productdetails",
                                 "/product-management/productdetails/min/{id}",
                                 "/blog-management/blogs",
-                                "/blog-management/blogs/{id}"
+                                "/blog-management/blogs/{id}",
+                                "/setting-management/settings"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
