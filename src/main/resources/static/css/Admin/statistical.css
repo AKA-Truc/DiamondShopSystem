@@ -198,15 +198,14 @@ ion-icon {
 }
 
 /* Lưới tổng quan Dashboard */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    padding: 20px;
-    width: max-content;
-    max-width: 98%;
-}
-
+/*.dashboard-grid {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(3, 1fr);*/
+/*    grid-gap: 20px;*/
+/*    padding: 20px;*/
+/*    width: max-content;*/
+/*    max-width: 98%;*/
+/*}*/
 
 #today-sales {
     display: flex;
@@ -219,10 +218,6 @@ ion-icon {
 
 #customer-gender {
     grid-column: span 1;
-}
-
-#total-revenue, #order-today, #order-by-year {
-    grid-column: span 1; /* Mỗi khối chiếm 1 cột */
 }
 
 
@@ -294,8 +289,30 @@ ion-icon {
 
 #total-revenue {
     width: 450px;
-    height: 300px;
+    height: 450px;
 }
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equally spaced columns */
+    grid-gap: 40px; /* Increase the gap between grid items */
+    padding: 20px;
+    width: max-content;
+    max-width: 101%;
+}
+
+#total-revenue {
+    width: 480px; /* Increase the width if needed */
+    height: 300px;
+    margin-left: 0; /* Remove the negative margin */
+}
+
+#order-by-year {
+    width: 400px; /* Adjust width */
+    height: 400px;
+    margin-left: 20px; /* Adjust to space it away from other sections */
+}
+
 
 #top-products-list {
     list-style-type: none;
@@ -458,3 +475,4 @@ th {
     border-radius: 5px;
     cursor: pointer;
 }
+
