@@ -97,7 +97,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 Pair.of("/forgot-password/verify-otp", "POST"),
                 Pair.of("/forgot-password/forgot_password/{email}", "POST"),
                 Pair.of("/blog-management/blogs","GET"),
-                Pair.of("/blog-management/blogs/{id}","GET")
+                Pair.of("/blog-management/blogs/{id}","GET"),
+                Pair.of("/setting-management/settings","GET")
         );
 
         String requestPath = request.getServletPath();

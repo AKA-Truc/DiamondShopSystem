@@ -19,7 +19,6 @@ public class SettingController {
     private SettingService settingService;
 
     @GetMapping("/settings")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_SALE STAFF')")
     public ResponseEntity<ResponseWrapper<List<SettingDTO>>> getAllSettings() {
         List<SettingDTO> settings = settingService.getAllSettings();
         ResponseWrapper<List<SettingDTO>> response = new ResponseWrapper<>("Settings retrieved successfully", settings);
