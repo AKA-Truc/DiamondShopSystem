@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('SubDiamond').textContent = quantitySubDiamond;
     }
+
     // Xử lý sự kiện khi nhấn vào nút "THÊM VÀO GIỎ HÀNG"
     document.getElementById('add-to-cart').addEventListener('click', () => {
         if (!sizeNow) {
@@ -119,4 +120,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error adding product to cart:', error);
             });
     });
-});
+});x
