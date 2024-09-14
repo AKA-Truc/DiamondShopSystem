@@ -295,7 +295,8 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: -450px;
+    margin-top: -570px;
+    margin-left: 50px;
 }
 .cart-box button:hover {
     background-color: #ddd;
