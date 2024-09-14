@@ -16,8 +16,6 @@
 <script src="/static/js/User/orderDetail.js"></script>
 <script src="/static/js/tokenUser.js"></script>
 
-
-
 <div class="container mt-5">
     <h2 id="name-order">Your order</h2>
     <p id="item-count">You have 0 item(s) in your cart</p>
@@ -31,11 +29,30 @@
     </div>
 
     <div id="product-items"> <!-- This is where items will be inserted dynamically --></div>
+
+    <!-- Promotion Dropdown -->
     <div class="form-group">
         <label for="promotion">Select Promotion:</label>
-        <select id="promotion" class="form-select promotion">
-        </select>
+        <select id="promotion" class="form-select promotion"></select>
     </div>
+
+    <div class="form-group mt-3">
+        <label>Select Payment Method:</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typePayment" id="paymentBank" value="Bank Transfer">
+            <label class="form-check-label" for="paymentBank">
+                Chuyển khoản
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typePayment" id="paymentCash" value="Cash">
+            <label class="form-check-label" for="paymentCash">
+                Tiền mặt
+            </label>
+        </div>
+    </div>
+
+
     <p class="text">Total Price: <span id="totalPrice">VNĐ</span></p>
 </div>
 </body>
