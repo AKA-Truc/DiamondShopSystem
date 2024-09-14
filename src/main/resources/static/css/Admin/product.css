@@ -5,7 +5,6 @@ body {
     background-color: #f4f7fb;
 }
 
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -185,7 +184,6 @@ ion-icon {
     margin-left: 820px
 }
 
-/* table */
 .table-wrapper {
     width: 93%;
     padding: 16px;
@@ -194,6 +192,7 @@ ion-icon {
     background-color: #e4e7ef;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -217,8 +216,6 @@ th {
     background-color: #f9f9f9;
     color: black;
 }
-
-/*  */
 
 .edit-btn,
 .delete-btn {
