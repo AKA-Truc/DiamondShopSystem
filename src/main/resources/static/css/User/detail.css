@@ -17,19 +17,50 @@ body {
     width: 100%;
 
 }
+.product-container .all-image{
+    display:block;
+}
+.product-container .all-image .image-detail{
+    display: block;
+    margin-right: 100px;
+}
+
+
+.image-detail img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.image-detail img:hover {
+    transform: scale(1.1);
+    border: 2px solid #00aaff;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
 .image-section {
-    margin-left:30px;
-    padding: 10px;
-    max-width: 700px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .image-section img {
-    max-width: 40%;
+    width: 300px;
     height: auto;
     border-radius: 5px;
-
 }
+
+
+
+
 .details-section {
     margin-left: 40px;
     padding: 10px;
