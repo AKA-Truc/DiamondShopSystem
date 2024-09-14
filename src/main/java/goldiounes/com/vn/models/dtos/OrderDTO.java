@@ -23,7 +23,7 @@ public class OrderDTO {
     @JsonBackReference
     private CartDTO cart;
 
-    //@JsonManagedReference
+    @JsonManagedReference(value = "promotions")
     private PromotionDTO promotion;
 
     @JsonManagedReference(value = "order-detail")

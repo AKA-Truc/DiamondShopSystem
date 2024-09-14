@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const addCustomer = (customerData) => {
+        console.log(customerData.password.length.toString());
+        if (customerData.password.length.toString() < "8") {
+            alert("Mật khẩu tối thiểu 8 ký tự");
+            return;
+        }
         fetch(`${window.base_url}/user-management/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -208,6 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("email").value = data.email;
                 document.getElementById("address").value = data.address;
                 document.getElementById("role").value = data.role;
+                document.getElementById("password").value = data.password;
+                document.getElementById("password").disabled = true;
 
                 const genderMale = document.getElementById("gender");
                 const genderFemale = document.getElementById("gender1");

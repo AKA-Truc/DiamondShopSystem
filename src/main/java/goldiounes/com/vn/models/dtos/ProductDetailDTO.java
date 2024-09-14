@@ -13,6 +13,7 @@ public class ProductDetailDTO {
     private double sellingPrice;
     private Integer Size;
     private int inventory;
+    private String status;
 
     //@JsonManagedReference
     private SettingDTO setting;

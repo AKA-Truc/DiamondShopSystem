@@ -69,8 +69,11 @@ function fetchUser(){
                 roleElement.value = data.role || 'Chưa cập nhật';
             }
             if (pointElement) {
-                pointElement.textContent = "Điểm Tích Lũy: " + data.point.points;
+                const formattedPoints = data.point.points.toLocaleString();
+                pointElement.innerHTML = `<i class="fas fa-coins"></i> Điểm: ${formattedPoints}`;
             }
+
+
 
         })
         .catch(error => {console.log(error)})

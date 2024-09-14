@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(index.toUpperCase(),count);
         Product(index.toUpperCase(),count);
     })
-
 });
 
 function plusSlides(n) {
@@ -69,28 +68,29 @@ function Product(category,count) {
             const data = result.data;
 
             if (data) {
-                const dataDisplay = data.slice(0, 4); // Lấy 4 sản phẩm đầu tiên
+                const dataDisplay = data.slice(0, 4);
                 console.log(dataDisplay);
                 if(count === 0){
                     dataDisplay.forEach(index => {
                         const ProductList = document.getElementById('rings-section');
-
+                        const productId = index.productId;
                         const productHTML = `
-                        <div class="item-small">
+                        <div onclick="detail(${productId})" class="item-small" id = "item-detail">
                             <img src="${index.imageURL}" alt="font">
                             <img src="${index.subImageURL}" alt="back">
                             <span class="badge">Giảm giá</span>
                         </div>
                     `;
+
                         ProductList.insertAdjacentHTML('beforeend', productHTML);
                     });
                 }
                 else {
                     dataDisplay.forEach(index => {
-                        const ProductList = document.getElementById('earrings-item');
+                        const ProductList = document.getElementById('earrings-section');
 
                         const productHTML = `
-                        <div onclick="productdetail(${index.productId})" class="item-small">
+                        <div onclick="detail(${index.productId})" class="item-small" id = "item-detail">
                             <img src="${index.imageURL}" alt="font">
                             <img src="${index.subImageURL}" alt="back">
                             <span class="badge">Giảm giá</span>
@@ -107,9 +107,8 @@ function Product(category,count) {
             console.error(err);
         });
 }
-
-function productdetail(id){
-    localStorage.setItem('productId',id);
+function detail(id){
+    localStorage.removeItem('productId');
+    localStorage.setItem('productId', id);
     window.location.href ="/DiamondShopSystem/src/main/resources/templates/User/detail.html"
 }
-

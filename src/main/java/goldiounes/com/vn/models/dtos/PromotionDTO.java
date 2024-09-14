@@ -1,6 +1,6 @@
 package goldiounes.com.vn.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import java.util.Date;
 
@@ -13,6 +13,6 @@ public class PromotionDTO {
     private Date endDate;
     private int discountPercent;
 
-    @JsonIgnore
+    @JsonBackReference(value = "promotions")
     private OrderDTO order;
 }
