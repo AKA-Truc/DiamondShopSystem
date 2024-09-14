@@ -13,7 +13,7 @@ body {
 /* Đặt chung cho toàn bộ container */
 .container {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 4fr 2fr;
     gap: 20px;
     padding: 20px;
 }
@@ -25,6 +25,7 @@ body {
     border-left: 1px solid #ddd;
     position: sticky;
     top: 0; /* Đảm bảo phần tử dính từ đầu của phần tử chứa nó */
+
 }
 
 
@@ -45,8 +46,8 @@ body {
 }
 
 #blog-list img {
-    width: 50px;
-    height: 50px;
+    width: 200px;
+    height: 100px;
     margin-right: 10px;
     object-fit: cover;
 }
@@ -58,16 +59,17 @@ body {
 
 /* Định dạng cho phần main-banner */
 .main-banner {
-    background-color: #f4f4f4;
+    background-color: rgba(255, 253, 243, 0.5);
     padding: 20px;
+    width: 100%;
 }
 .main-banner:hover {
     transform: translateY(-5px);
 }
 
 .main-banner img {
-    width: 100%; /* Chiều rộng ảnh bao phủ toàn bộ chiều rộng của phần banner */
-    height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ của ảnh */
+    width: 100%;
+    height: auto;
     object-fit: cover; /* Đảm bảo ảnh bao phủ đầy đủ vùng chứa mà không bị méo */
     border-radius: 8px;
 }
@@ -96,11 +98,7 @@ body {
     color: #333;
 }
 
-.contentside {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+
 
 #blog-list {
     margin-top: 15px;

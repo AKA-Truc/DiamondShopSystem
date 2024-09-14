@@ -59,7 +59,7 @@ function displayBlog(data) {
             mainBanner.innerHTML = `
                 <img src="${blog.url}" alt="Main Banner">
                 <div style="margin-top: 40px" class="banner-title">
-                    <a style="color: black; text-decoration: none; font-size: 30px;" href="/blog/${blog.id}">
+                    <a style="color: black; text-decoration: none; font-size: 30px;" href="#}">
                         ${blog.title}
                     </a>
                 </div>
