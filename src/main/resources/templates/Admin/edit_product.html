@@ -21,21 +21,20 @@
             border: 1px solid #ccc;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            display: none; /* Flexbox for centering contents */
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center children horizontally */
+            display: none;
+            flex-direction: column;
+            align-items: center;
         }
 
         .search-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px; /* Space between elements */
+            gap: 10px;
             margin-bottom: 20px;
             margin-top: 20px;
             position: relative;
         }
-
 
         #diamond-search {
             width: 60%;
@@ -93,7 +92,7 @@
             max-width: 1300px;
             text-align: center;
         }
-        /* Styles for the list items */
+
         #diamond-list li {
             background-color: #f9f9f9;
             border: 1px solid #ddd;
@@ -109,7 +108,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles for the spans inside list items */
         #diamond-list li span {
             display: block;
             margin: 5px 0;
@@ -117,13 +115,11 @@
             color: #333;
         }
 
-        /* Styles for the strong tags inside spans */
         #diamond-list li span strong {
             color: #3d84d5;
             font-weight: bold;
         }
 
-        /* Styles for the button inside list items */
         #diamond-list li button {
             margin-top: 10px;
             padding: 10px 20px;
@@ -139,21 +135,26 @@
         #diamond-list li button:hover {
             background-color: #0056b3;
         }
+
         .form-section {
             display: flex;
             justify-content: space-between;
         }
+
         .image-upload {
             position: relative;
             margin-right: -90px;
         }
+
         .image-upload img {
             display: block;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
+
         .image-upload img:hover {
             transform: scale(1.20);
         }
+
         .image-preview {
             width: 250px;
             height: 250px;
@@ -162,20 +163,23 @@
             align-items: center;
             justify-content: center;
         }
+
         .image-preview img {
             max-width: 100%;
             max-height: 100%;
         }
+
         .top-fields {
             flex: 1;
             margin-top: 50px;
         }
+
         .field {
             margin-bottom: 20px;
         }
     </style>
-
 </head>
+
 <body>
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
@@ -240,7 +244,7 @@
             </div>
         </div>
 
-        <!-- Phần container dùng để hiển thị thông tin chi tiết sản phẩm -->
+        <!-- Thông tin chi tiết sản phẩm -->
         <div class="container container-detail">
             <div class="row1">
                 <div class="col-sm-12 histaff-item-group-header">
@@ -265,9 +269,7 @@
                                 <th class="text-center f-weight-4" style="width: 250px;">Thao tác</th>
                             </tr>
                             </thead>
-
                             <tbody id = "body-detail">
-
                             </tbody>
                         </table>
                     </div>
@@ -276,7 +278,7 @@
             <br>
         </div>
 
-        <!-- Phần container dùng để thêm chi tiết sản phẩm mới -->
+        <!-- Thêm chi tiết sản phẩm mới -->
         <div class="container container-add">
             <div class="row1">
                 <div class="col-sm-12 histaff-item-group-header">
@@ -302,7 +304,6 @@
                                 <th class="text-center f-weight-4" style="width: 250px;">Thao tác</th>
                             </tr>
                             </thead>
-
                             <tbody id="body-add">
                             </tbody>
                         </table>
@@ -316,6 +317,7 @@
             <br>
         </div>
     </div>
+
     <div id="diamond-modal" class="modal">
         <div class="modal-content">
             <div class="search-container">
@@ -327,5 +329,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

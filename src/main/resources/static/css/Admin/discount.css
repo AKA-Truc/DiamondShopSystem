@@ -5,7 +5,6 @@ body {
     background-color: #f4f7fb;
 }
 
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -17,7 +16,6 @@ body {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
     color: #0d0e1c;
     text-align: center;
@@ -50,7 +48,6 @@ body {
     background-color: #cbd0dd;
 }
 
-/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -78,7 +75,6 @@ body {
     transform: translateY(0);
 }
 
-/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -152,6 +148,7 @@ ion-icon {
     padding: 20px;
     width: calc(100% - 280px);
 }
+
 .customer-management {
     margin-top: 20px;
 }
@@ -188,7 +185,6 @@ ion-icon {
     margin-left: 820px;
 }
 
-/* table */
 .table-wrapper {
     width: 93%;
     padding: 16px;
@@ -197,6 +193,7 @@ ion-icon {
     background-color: #e4e7ef;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -221,7 +218,6 @@ th {
     color: black;
 }
 
-
 .edit-btn,
 .delete-btn {
     background-color: transparent;
@@ -238,21 +234,6 @@ th {
     color: #d92e3e;
 }
 
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.page-btn {
-    background-color: #d92e3e;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
 .popup-overlay {
     display: none;
     position: fixed;
@@ -264,6 +245,7 @@ th {
     justify-content: center;
     align-items: center;
 }
+
 .popup-content {
     background: #fff;
     padding: 20px;
@@ -274,6 +256,7 @@ th {
 .popup-content p{
     font-size: 18px;
 }
+
 .popup-btn {
     margin: 10px;
     padding: 10px 20px;
@@ -281,6 +264,7 @@ th {
     border-radius: 5px;
     cursor: pointer;
 }
+
 #yes-btn {
     background-color: #0d4160;
     color: #fff;
@@ -290,7 +274,6 @@ th {
     background-color: #ddd;
 }
 
-/* Add discount */
 .form {
     display: flex;
 }

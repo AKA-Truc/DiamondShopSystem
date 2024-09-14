@@ -5,7 +5,6 @@ body {
     background-color: #f4f7fb;
 }
 
-
 .sidebar {
     height: 100%;
     width: 280px;
@@ -17,7 +16,6 @@ body {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
     color: #0d0e1c;
     text-align: center;
@@ -145,7 +143,6 @@ ion-icon {
     background-color: #162165e7;
 }
 
-
 .body1 {
     display: flex;
     justify-content: center;
@@ -154,6 +151,7 @@ ion-icon {
     margin-left: 362px;
     align-items: center;
 }
+
 .wrapper {
     width: 120%;
     max-width: 900px;
@@ -171,15 +169,18 @@ ion-icon {
     margin: 10px;
     position: relative;
 }
+
 .top-fields {
     display: flex;
     justify-content:space-around;
 }
+
 .field label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 .field input {
     width: 100%;
     padding: 12px;
@@ -189,15 +190,18 @@ ion-icon {
     box-sizing: border-box;
     transition: border-color 0.3s ease;
 }
+
 .field input:focus {
     border-color: #000;
     outline: none;
 }
+
 .button {
     display: flex;
     justify-content: flex-start;
     margin: 25px 10px;
 }
+
 .button input {
     padding: 10px 30px;
     border: none;
@@ -206,14 +210,17 @@ ion-icon {
     cursor: pointer;
     margin-right: 10px;
 }
+
 .button input.save  {
     background-color: #e90a0a;
     color: #fff;
 }
+
 .button input.cancel  {
     background-color: #9d9495;
     color: #fff;
 }
+
 .button input.save:hover,
 .button input.cancel:hover {
     background-color: #898d94;

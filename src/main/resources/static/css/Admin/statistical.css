@@ -49,7 +49,6 @@ body {
     background-color: #cbd0dd;
 }
 
-/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -165,7 +164,7 @@ ion-icon {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
-    font-size: 16px; /* Kích thước chữ trong dropdown */
+    font-size: 16px;
     background-color: #f9f9f9;
     color: #333;
     width: auto;
@@ -222,7 +221,7 @@ ion-icon {
 
 
 #top-products, #sales-mapping, #sales-customer {
-    grid-column: span 1; /* Mỗi khối chiếm 1 cột trong hàng */
+    grid-column: span 1;
 }
 
 .card-small {
@@ -294,25 +293,24 @@ ion-icon {
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 equally spaced columns */
-    grid-gap: 40px; /* Increase the gap between grid items */
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
     padding: 20px;
     width: max-content;
     max-width: 101%;
 }
 
 #total-revenue {
-    width: 480px; /* Increase the width if needed */
+    width: 480px;
     height: 300px;
-    margin-left: 0; /* Remove the negative margin */
+    margin-left: 0;
 }
 
 #order-by-year {
-    width: 400px; /* Adjust width */
+    width: 400px;
     height: 400px;
-    margin-left: 20px; /* Adjust to space it away from other sections */
+    margin-left: 20px;
 }
-
 
 #top-products-list {
     list-style-type: none;
@@ -354,27 +352,33 @@ ion-icon {
     width: 20%;
     text-align: right;
 }
+
 .product-index-header, .product-index {
     width: 5%;
     text-align: center;
     flex-shrink: 0;
 }
+
 .product-name-header, .product-name {
     width: 75%;
     text-align: left;
     padding-left: 10px;
 }
+
 .product-sales-header, .product-sales {
     width: 20%;
     text-align: right;
 }
+
 .product-name {
     font-weight: 500;
 }
+
 .product-sales {
     color: #c54949;
     font-weight: 500;
 }
+
 .color-1 { color: #213a57; }
 .color-2 { color: #f28e2c; }
 .color-3 { color: #e15759; }
@@ -461,8 +465,6 @@ th {
     justify-content: center;
     margin-top: 20px;
 }
-
-/* Phong cách cho nút export */
 #export {
     background-color: #4CAF50;
     color: white;
@@ -475,4 +477,5 @@ th {
     border-radius: 5px;
     cursor: pointer;
 }
+
 

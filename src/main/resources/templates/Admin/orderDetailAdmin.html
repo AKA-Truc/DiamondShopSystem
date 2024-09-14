@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
     <link rel="stylesheet" href="/static/css/Admin/orderDetailAdmin.css">
 </head>
+
 <body>
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
@@ -17,7 +18,6 @@
 <script src="/static/js/url.js"></script>
 <script src="/static/js/Admin/orderDetailAdmin.js"></script>
 
-
 <div style=" background-color: white; border-radius: 7px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; margin-left: 35% " class="container mt-5">
     <h2 id="name-yourOrder">Your order</h2>
     <p id="item-count">You have 0 item(s) in your cart</p>
@@ -25,12 +25,13 @@
         <label for="address">Địa chỉ:</label>
         <input type="text" id="address" value="" disabled>
     </div>
+
     <div class="form-group">
         <label for="phone">SĐT:</label>
         <input type="text" id="phone" value="" disabled>
     </div>
 
-    <div id="product-list"> <!-- This is where items will be inserted dynamically --></div>
+    <div id="product-list"></div>
     <div class="form-group">
         <label for="promotion">Select Promotion:</label>
         <select id="promotion" class="form-select promotion">
@@ -38,5 +39,6 @@
     </div>
     <p class="text">Total Price: <span id="totalPrice">VNĐ</span></p>
 </div>
+
 </body>
 </html>
