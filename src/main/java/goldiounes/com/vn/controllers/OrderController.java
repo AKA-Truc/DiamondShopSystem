@@ -31,7 +31,7 @@ public class OrderController {
 
     @PostMapping("/orders")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALE STAFF','ROLE_CUSTOMER')")
-    public ResponseEntity<ResponseWrapper<OrderDTO>> createOrder(@RequestBody OrderDTO orderDTO, Authentication authentication) {
+    public ResponseEntity<ResponseWrapper<OrderDTO>> createOrder(@RequestBody OrderDTO orderDTO, Authentication authentication) throws MessagingException {
         CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
 
         if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_CUSTOMER"))) {

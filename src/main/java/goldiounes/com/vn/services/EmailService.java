@@ -19,15 +19,52 @@ public class EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
-    public void sendSizeSelectionEmail(String to) {
+    public void sendSizeSelectionEmail(String to) throws MessagingException {
         String url = "http://localhost:8080/size-selection.html";
+        String imageUrl = "https://locphuc.com.vn/Content/Images/Event/4_2.jpg";
+        String imageUrl1 = "https://locphuc.com.vn/Content/Images/Event/4_3.jpg";
+        String imageUrl2 = "https://locphuc.com.vn/Content/Images/Event/4_4.jpg";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("Please select your ring size");
-        message.setText("Thank you for the order. Below is a guide to measuring the size of all kinds of jewellery. After selecting the size, please return to our website: " + url + "\nGo to your order to re-select the size for the ordered products");
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        String subject = "Please select your ring size";
+        String content = "<div style='font-family: Arial, sans-serif;'>"
+                + "<h2 style='color: #d9534f;'>Thank you for the order</h2>"
+                + "<p>Below is a guide to measuring the size of all kinds of jewellery. "
+                + "After selecting the size, please return to our website: "
+                + "<a href='" + url + "' style='color: #5bc0de;'>Click here</a></p>"
+
+                + "<h3>I. Cách đo size nhẫn</h3>"
+                + "<strong>Cách 1: Đo đường kính chiếc nhẫn bạn đang đeo</strong>"
+                + "<ul>"
+                + "<li>Bước 1: Dùng thước kẻ đo đường kính nhẫn.</li>"
+                + "<li>Bước 2: So sánh với Bảng size nhẫn phổ biến của Goldiounes Jewelry.</li>"
+                + "<img src='" + imageUrl + "' alt='Jewellery Size Guide' style='width: 100%; max-width: 600px;' />"
+                + "</ul>"
+                + "<p>Lưu ý: Kích thước phổ biến cho nhẫn nữ là size 8-12, cho nhẫn nam là size 14-18. "
+                + "Nếu kích thước của bạn không có sẵn, chúng tôi sẽ đặt làm trong vòng 2 tuần.</p>"
+
+                + "<h3>II. Cách đo size dây chuyền</h3>"
+                + "<strong>Cách 1: Đo từ dây chuyền bạn đang đeo</strong>"
+                + "<p>Đo chiều dài dây chuyền và đối chiếu với các kích thước phổ biến: "
+                + "35-40cm, 45cm, 50-55cm, 60cm, 70cm trở lên.</p>"
+                + "<img src='" + imageUrl1 + "' alt='Jewellery Size Guide' style='width: 100%; max-width: 600px;' />"
+
+                + "<h3>III. Cách đo size lắc/vòng tay</h3>"
+                + "<strong>Cách 1: Đo từ lắc/vòng tay có sẵn</strong>"
+                + "<p>Đo chiều dài lắc/vòng tay hoặc đường kính vòng tay và đối chiếu với bảng kích thước.</p>"
+                + "<img src='" + imageUrl2 + "' alt='Jewellery Size Guide' style='width: 100%; max-width: 600px;' />"
+                + "<p><em>Trong trường hợp bạn cần hỗ trợ thêm, hãy liên hệ với Goldiounes Jewelry để được tư vấn chi tiết.</em></p>"
+                + "</div>";
+
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
         emailSender.send(message);
     }
+
 
     public static String generateInvoiceHTML(Order order) {
         StringBuilder sb = new StringBuilder();
@@ -93,7 +130,7 @@ public class EmailService {
         sb.append("</tfoot>");
         sb.append("</table>");
 
-        sb.append("<div class='payment-method'>Loại TT: Ví MOMO</div>");
+        sb.append("<div class='payment-method'>Loại TT: ").append(order.getTypePayment()).append("</div>");
         sb.append("</div>");
 
         sb.append("</body></html>");
