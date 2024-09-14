@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startSlideshow();
 
-    document.getElementById('rings-section').innerHTML = ``;
+    //document.getElementById('rings-section').innerHTML = ``;
 
     categories.forEach((index,count) => {
         console.log(index.toUpperCase(),count);
@@ -90,12 +90,13 @@ function Product(category,count) {
                         const ProductList = document.getElementById('earrings-item');
 
                         const productHTML = `
-                        <div class="item-small">
+                        <div onclick="productdetail(${index.productId})" class="item-small">
                             <img src="${index.imageURL}" alt="font">
                             <img src="${index.subImageURL}" alt="back">
                             <span class="badge">Giảm giá</span>
                         </div>
                     `;
+
                         ProductList.insertAdjacentHTML('beforeend', productHTML);
                     });
                 }
@@ -105,5 +106,10 @@ function Product(category,count) {
         .catch(err => {
             console.error(err);
         });
+}
+
+function productdetail(id){
+    localStorage.setItem('productId',id);
+    window.location.href ="/DiamondShopSystem/src/main/resources/templates/User/detail.html"
 }
 

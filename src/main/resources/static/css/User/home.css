@@ -124,101 +124,6 @@ body {
     gap: 10px;
 }
 
-.item-small {
-    position: relative;
-    overflow: hidden;
-}
-
-.item-small img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(255, 0, 0, 0.8);
-    color: white;
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 5px;
-}
-
-/* Hover Effect */
-.item-small:hover img {
-    opacity: 0;
-}
-
-.item-small:hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1_cam_03-2-600x600.jpg');
-    background-size: cover;
-    background-position: center;
-    transition: opacity 0.3s ease-in-out;
-    opacity: 1;
-    z-index: 1;
-}
-
-.item-small:nth-child(1):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/08/1_cam_01-6-150x150.jpg');
-}
-
-.item-small:nth-child(2):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1_cam_01-3-1-600x600.jpg');
-}
-
-.item-small:nth-child(3):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1_cam_03-2-600x600.jpg');
-}
-
-.item-small:nth-child(4):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1_cam_01-3-1-600x600.jpg');
-}
-
-.earrings-section .item-small:hover img {
-    transform: scale(1.1);
-    opacity: 0.7;
-}
-
-.earrings-section .item-small:hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.9;
-    z-index: 1;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    transform: scale(1.05);
-}
-
-.earrings-section .item-small:nth-child(1):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/05/1-600x600.jpg');
-}
-
-.earrings-section .item-small:nth-child(2):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1-2-600x600.jpg');
-}
-
-.earrings-section .item-small:nth-child(3):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/06/1-1-1-600x600.jpg');
-}
-
-.earrings-section .item-small:nth-child(4):hover::before {
-    background-image: url('https://jemmia.vn/wp-content/uploads/2024/07/1-2-600x600.jpg');
-}
-
 @media (max-width: 768px) {
     .banner-section, .section-content {
         flex-direction: column;
@@ -316,7 +221,6 @@ body {
         align-items: center;
     }
 }
-
 
 .jewelry-showcase {
     margin: 20px;
@@ -533,113 +437,54 @@ body {
     opacity: 1;
 }
 
-/*card hover*/
-ul.products{
-    list-style: none;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-}
-ul.products li{
-    flex-basis: 33%;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 40px;
-}
-u.products li img {
-    max-width: 100%;
-    height: auto;
-}
-ul.products li .product-item{
-    text-align: center;
-}
+/*hover*/
 
-ul.products li .product-top{
-    display: block;
-    position: relative;
-    overflow: hidden;
-}
-
-ul.products li .product-top .product-thumb{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-ul.products li .product-top .product-thumb img{
-    display: block;
-}
-
-/*.card {*/
-/*    width: 180px;*/
-/*    height: 195px;*/
-/*    background-size: cover;*/
-/*    display: inline-block;*/
-/*    position: relative;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*.card img {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*    opacity: 0; !* Ẩn ảnh gốc, hiện ảnh hover *!*/
-/*    transition: opacity 0.7s ease;*/
-/*}*/
-
-/*.card img:first-child {*/
-/*    opacity: 1; !* ban đầu *!*/
-/*}*/
-
-/*.card img:last-child {*/
-/*    opacity: 0; !* ẩn ban đầu *!*/
-/*}*/
-
-
-/*.card:hover img:first-child {*/
-/*    opacity: 0; !* Ẩn hình ảnh đầu tiên khi hover *!*/
-/*}*/
-
-/*.card:hover img:last-child {*/
-/*    opacity: 1; !* Hiện hình ảnh thứ hai khi hover *!*/
-/*}*/
-.card {
-    width: 180px;
-    height: 195px;
-    background-size: cover;
+.item-small {
+    height: 355px;
     display: inline-block;
     position: relative;
     overflow: hidden;
 }
 
-.card img {
+.item-small img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
     transition: opacity 0.7s ease;
-    z-index: 1; /* Đảm bảo cả hai hình ảnh nằm chồng lên nhau */
 }
 
-.card img:first-child {
+.item-small img:first-child {
     opacity: 1;
-    z-index: 1; /* Hình ảnh đầu tiên nằm dưới */
+    z-index: 1;
 }
 
-.card img:last-child {
+.item-small img:last-child {
     opacity: 0;
-    z-index: 2; /* Hình ảnh thứ hai nằm trên khi hover */
+    z-index: 2;
 }
 
-.card:hover img:first-child {
-    opacity: 0; /* Ẩn hình ảnh đầu tiên khi hover */
+.item-small:hover img:first-child {
+    opacity: 0;
 }
 
-.card:hover img:last-child {
-    opacity: 1; /* Hiện hình ảnh thứ hai khi hover */
+.item-small:hover img:last-child {
+    opacity: 1;
 }
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+
+
+
