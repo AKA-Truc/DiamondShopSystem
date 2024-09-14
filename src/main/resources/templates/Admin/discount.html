@@ -6,8 +6,8 @@
     <title>Quản Lý Mã Giảm Giá</title>
     <link rel="stylesheet" href="/static/css/Admin/discount.css" />
 </head>
-<body>
 
+<body>
 <script src="/static/js/sidebar.js"></script>
 <script src="/static/js/navbar.js"></script>
 <script src="/static/js/url.js"></script>
@@ -16,25 +16,28 @@
 
 <script
         type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-></script>
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+</script>
+
 <script
         nomodule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-></script>
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
 
-<!-- main content -->
+</script>
+
 <div class="main-content">
     <div class="customer-management">
         <button class="add-promotion-btn" id="openpopup1">
             Thêm Mã Giảm Giá <i class="fas fa-plus"></i>
         </button>
+
         <input
                 type="text"
                 id="search-bar"
                 placeholder="Nhập Tên Mã Giảm Giá..."
                 class="search-bar"
         />
+
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -53,7 +56,6 @@
                 </tbody>
             </table>
 
-
             <!-- Popup HTML -->
             <div id="popup" class="popup-overlay">
                 <div class="popup-content">
@@ -65,6 +67,7 @@
         </div>
     </div>
 </div>
+
 <div class="popup1-overlay" id="popup1Overlay">
     <div class="popup1-content">
         <span class="popup1-close" id="closepopup1">&times;</span>
@@ -139,5 +142,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
