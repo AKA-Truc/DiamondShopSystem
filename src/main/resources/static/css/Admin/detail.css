@@ -16,9 +16,8 @@ body {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c; /*chỉnh chữ*/
+    color: #0d0e1c;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -30,7 +29,6 @@ body {
     color: #141E0C;
 }
 
-/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -50,7 +48,6 @@ body {
     background-color: #cbd0dd;
 }
 
-/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -78,7 +75,6 @@ body {
     transform: translateY(0);
 }
 
-/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -147,7 +143,6 @@ ion-icon {
     background-color: #162165e7;
 }
 
-/* table */
 .table-wrapper {
     padding: 16px;
     border: 2px solid #ddd;

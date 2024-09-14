@@ -14,8 +14,7 @@ header {
     margin: auto;
     width: 90%;
     background-color: #f4f7fb;
-    max-width: 1200px; // căn lề trái
-
+    max-width: 1200px;
 }
 
 .wrapper {
@@ -32,9 +31,11 @@ header {
     padding: 10px;
     box-sizing: border-box;
 }
+
 * {
     box-sizing: border-box;
 }
+
 .sidebar {
     height: 100%;
     width: 280px;
@@ -46,7 +47,6 @@ header {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
     color: #0d0e1c;
     text-align: center;
@@ -79,7 +79,6 @@ header {
     background-color: #cbd0dd;
 }
 
-/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -107,7 +106,6 @@ header {
     transform: translateY(0);
 }
 
-/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -193,7 +191,7 @@ option {
     box-sizing: border-box;
 }
 
-.top-fields, .middle-fields {
+.top-fields {
     display: flex;
     justify-content: space-between;
 }
@@ -208,7 +206,6 @@ option {
     color: #000;
     box-sizing: border-box;
 }
-
 
 select{
     font-size: 18px;
@@ -345,7 +342,6 @@ select:focus,
     font-size: 18px;
 }
 
-
 .toggle-quantity {
     cursor: pointer;
     font-size: 18px;
@@ -353,11 +349,11 @@ select:focus,
     background-color:#002752 ;
     margin: 20px;
 }
+
 .toggle-quantity:hover {
     color: #002752;
     background-color:#e0e0e0 ;
 }
-
 
 .remove-item-btn {
     font-size: 20px;
@@ -525,21 +521,10 @@ table.h-table td:nth-child(8) .table-action li {
     }
 }
 
-
-/*    */
-
-
-
 .quantity-input {
     display: block;
     margin-top: 5px;
 }
-
-.hidden {
-    display: none;
-}
-
-/* */
 
 .overlay {
     position: fixed;
@@ -554,7 +539,6 @@ table.h-table td:nth-child(8) .table-action li {
     z-index: 1000;
 }
 
-/* Form container */
 .form-container {
     background-color: #fff;
     padding: 20px;
@@ -564,7 +548,6 @@ table.h-table td:nth-child(8) .table-action li {
     position: relative;
 }
 
-/* Close button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -574,7 +557,6 @@ table.h-table td:nth-child(8) .table-action li {
     color: #333;
 }
 
-/* Form elements */
 .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -612,7 +594,7 @@ table.h-table td:nth-child(8) .table-action li {
 }
 
 .btn-confirm {
-    background-color: #3d84d5; /* Green */
+    background-color: #3d84d5;
 }
 
 .btn-confirm:hover {
@@ -620,7 +602,7 @@ table.h-table td:nth-child(8) .table-action li {
 }
 
 .btn-cancel {
-    background-color: #f44336; /* Red */
+    background-color: #f44336;
 }
 
 .btn-cancel:hover {

@@ -16,9 +16,8 @@ body {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
-    color: #0d0e1c; /*chỉnh chữ*/
+    color: #0d0e1c;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -30,7 +29,6 @@ body {
     color: #141E0C;
 }
 
-/* Menu chính - Loại bỏ bullet */
 .main-menu {
     list-style-type: none;
     padding: 0;
@@ -50,7 +48,6 @@ body {
     background-color: #cbd0dd;
 }
 
-/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -78,7 +75,6 @@ body {
     transform: translateY(0);
 }
 
-/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -147,7 +143,6 @@ ion-icon {
     background-color: #162165e7;
 }
 
-/* table */
 .table-wrapper {
     padding: 16px;
     border: 2px solid #ddd;
@@ -158,6 +153,7 @@ ion-icon {
     margin-left:320px;
     align-items: center;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -181,38 +177,35 @@ th {
     background-color: #f9f9f9;
     color: black;
 }
-/*  */
 
-/* Status colors */
 .status-chua-xac-nhan,
 .status-da-xac-nhan,
 .status-dang-giao,
 .status-da-giao {
-    border-radius: 8px; /* Bo góc tròn với bán kính 8px */
-    padding: 5px 10px;   /* Thêm khoảng cách bên trong */
-    text-align: center;  /* Canh giữa nội dung */
+    border-radius: 8px;
+    padding: 5px 10px;
+    text-align: center;
     border-color: white;
 }
 
-/* Pastel colors */
 .status-chua-xac-nhan {
-    background-color: #f3de89; /* Màu vàng pastel */
-    color: #333;              /* Màu chữ đen nhạt */
+    background-color: #f3de89;
+    color: #333;
 }
 
 .status-da-xac-nhan {
-    background-color: #7abc96; /* Màu xanh lá cây pastel */
-    color: #fff;              /* Màu chữ trắng */
+    background-color: #7abc96;
+    color: #fff;
 }
 
 .status-dang-giao {
-    background-color: #6ab1ca; /* Màu xanh dương pastel */
-    color: #fff;              /* Màu chữ trắng */
+    background-color: #6ab1ca;
+    color: #fff;
 }
 
 .status-da-giao {
-    background-color: #87a9df; /* Màu xanh dương pastel nhạt */
-    color: #fff;              /* Màu chữ trắng */
+    background-color: #87a9df;
+    color: #fff;
 }
 
 

@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-color: #f4f7fb;
 }
+
 .sidebar {
     height: 100%;
     width: 280px;
@@ -15,7 +16,6 @@ body {
     padding-top: 20px;
 }
 
-/* Tiêu đề sidebar */
 .sidebar h2 {
     color: #0d0e1c;
     text-align: center;
@@ -48,7 +48,6 @@ body {
     background-color: #cbd0dd;
 }
 
-/* Submenu sổ xuống */
 .submenu {
     position: relative;
     display: block;
@@ -76,7 +75,6 @@ body {
     transform: translateY(0);
 }
 
-/* Submenu link */
 .submenu ul li a {
     padding: 15px 25px;
     color: #000000;
@@ -150,10 +148,10 @@ ion-icon {
     padding: 20px;
     width: calc(100% - 280px);
 }
+
 .customer-management {
     margin-top: 20px;
 }
-
 
 .customer-management h3 {
     margin: 0 0 20px 0;
@@ -187,7 +185,6 @@ ion-icon {
     margin-left: 820px
 }
 
-/* table */
 .table-wrapper {
     width: 93%;
     padding: 16px;
@@ -196,6 +193,7 @@ ion-icon {
     background-color: #e4e7ef;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -220,8 +218,6 @@ th {
     color: black;
 }
 
-/*  */
-
 .edit-btn,
 .delete-btn {
     background-color: transparent;
@@ -238,22 +234,6 @@ th {
     color: #d92e3e;
 }
 
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.page-btn {
-    background-color: #d92e3e;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* Popup styles */
 .popup-overlay {
     display: none;
     position: fixed;
@@ -265,6 +245,7 @@ th {
     justify-content: center;
     align-items: center;
 }
+
 .popup-content {
     background: #fff;
     padding: 20px;
@@ -275,6 +256,7 @@ th {
 .popup-content p{
     font-size: 18px;
 }
+
 .popup-btn {
     margin: 10px;
     padding: 10px 20px;
@@ -295,7 +277,6 @@ th {
     align-items: center;
     z-index: 1000;
 }
-
 
 .popup1-close {
     position: absolute;
@@ -325,8 +306,6 @@ th {
     position: relative;
 }
 
-
-
 .wrapper {
     width: 100%;
     max-width: 600px;
@@ -344,15 +323,18 @@ th {
     margin: 10px;
     position: relative;
 }
+
 .top-fields {
     display: flex;
     justify-content:space-around;
 }
+
 .field label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 .field input {
     width: 100%;
     padding: 12px;
@@ -372,8 +354,8 @@ th {
     font-size: 14px;
     color: #333;
     box-sizing: border-box;
-
 }
+
 .field input:focus {
     border-color: #000;
     outline: none;
@@ -384,6 +366,7 @@ th {
     justify-content: flex-start;
     margin: 30px 10px;
 }
+
 .button input {
     padding: 10px 30px;
     border: none;
@@ -392,14 +375,17 @@ th {
     cursor: pointer;
     margin-right: 10px;
 }
+
 .button input.save  {
     background-color: #304067;
     color: #fff;
 }
+
 .button input.cancel  {
     background-color: #9d9495;
     color: #fff;
 }
+
 .button input.save:hover,
 .button input.cancel:hover {
     background-color: #797d97;
