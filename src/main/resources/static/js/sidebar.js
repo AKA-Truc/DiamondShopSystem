@@ -26,9 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         <li><a href="./detail.html"><ion-icon name="clipboard-outline"></ion-icon> Quản lý hóa đơn</a></li>
                     </ul>
                 </li>
-                <li class="submenu">
-                    <a href="./feedback.html"><ion-icon name="notifications-outline"></ion-icon> Phản hồi</a>
-                </li>
                 <li><a href="./statistical.html"><span class="icon"><ion-icon name="analytics"></ion-icon></span> Thống kê</a></li>               
                 <li class="submenu">
                     <a href="#" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Đăng xuất</a>
