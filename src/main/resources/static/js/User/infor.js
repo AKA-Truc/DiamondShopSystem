@@ -286,7 +286,7 @@ function getStatusText(status) {
     switch (status) {
         case 'New': return 'Chưa xác nhận';
         case 'Đã xác nhận': return 'Đã xác nhận';
-        case 'Đang vận chuyển': return 'Đang vận chuyển';
+        case 'Đang giao': return 'Đang giao';
         case 'Đã giao': return 'Đã giao';
         default: return 'Không xác định';
     }

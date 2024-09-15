@@ -22,6 +22,7 @@
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/static/js/Admin/statistical.js"></script>
 
@@ -69,6 +70,7 @@
         <section style="height: 250px; width: 100%" id="today-sales" class="big-box">
             <h2>Total Sale</h2>
             <div style="margin-top: 100px; margin-left: -100px" class="card-small card-1">
+                <i class="fa-solid fa-money-bill-transfer"></i>
                 <h3 id="total-sales-value">$1k</h3>
                 <p>Total Sales</p>
                 <p id="total-sales-change"></p>
@@ -124,12 +126,6 @@
                     <span class="product-sales-header">Sales</span>
                 </li>
             </ul>
-        </section>
-
-        <!-- Khối Sales Mapping -->
-        <section style="height: 300px;margin-left: 29px" id="sales-mapping" class="big-box">
-            <h2>Sales Mapping by Country</h2>
-            <div id="sales-map" class="map-placeholder"></div>
         </section>
 
         <section style="height: 300px;" id="sales-customer" class="big-box">
