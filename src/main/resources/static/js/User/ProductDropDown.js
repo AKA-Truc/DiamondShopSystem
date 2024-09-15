@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "NHẪN KIM CƯƠNG NAM": "/static/images/Nhẫn_Nam.png",
         "NHẪN KIM CƯƠNG NỮ": "/static/images/NHAN-KIM-CUONG-NU-qq4mh7dqwwqfbwiobx4vm2j4kgef7s87on8dkal568 1.png",
         "BÔNG TAI KIM CƯƠNG": "/static/images/BONG-TAI-KIM-CUONG-TU-NHIEN-qq4mgmpaqjy48hcpoo7337qzhz8cify49svp07fsz4%201.png",
-        "LẮC/VÒNG KIM CƯƠNG": "/static/images/VONG-TAY-KCTN-qq4mhewgfl0pws7r40dw60mtbjdcxd22dog9ei9zsg%201.png",
+        "LẮC/VÒNG TAY KIM CƯƠNG": "/static/images/VONG-TAY-KCTN-qq4mhewgfl0pws7r40dw60mtbjdcxd22dog9ei9zsg%201.png",
         "MẶT DÂY CHUYỀN KIM CƯƠNG": "/static/images/DAY-CHUYEN-KIM-CUONG-TU-NHIEN-qq4mgv5ug29p4z0fb9uq7nm4ug2nfpvpayr2bp39f4%201.png",
         "DEFAULT": "/static/images/default-image.jpg"
     };
