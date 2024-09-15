@@ -81,8 +81,14 @@ body {
     grid-column: span 1;
 }
 
+#top-products{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    grid-column: span 2;
+}
 
-#top-products, #sales-mapping, #sales-customer {
+ #sales-mapping, #sales-customer {
     grid-column: span 1;
 }
 
@@ -114,7 +120,8 @@ body {
 }
 
 #sales-customer {
-    height: 400px;
+    height: 300px;
+    margin-left: 10px;
 }
 
 #sales-customer-chart {
@@ -170,15 +177,16 @@ body {
 
 #order-by-year {
     width: 400px;
-    height: 400px;
-    margin-left: 20px;
+    height: 300px;
+    margin-left: 15px;
 }
 
 #top-products-list {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 200px;
     font-size: 12px;
+
 }
 
 .product-header {
