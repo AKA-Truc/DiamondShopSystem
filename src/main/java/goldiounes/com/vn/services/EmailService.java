@@ -121,7 +121,7 @@ public class EmailService {
             sb.append("</tr>");
         }
 
-        int totalPromotion = total*order.getPromotion().getDiscountPercent()/100;
+        int totalPromotion = total * order.getPromotion().getDiscountPercent()/100;
         sb.append("</tbody>");
         sb.append("<tfoot>");
         sb.append("<tr><td colspan='2'>Tổng:</td><td>").append(String.format("%,d", total)).append(" VND</td></tr>");

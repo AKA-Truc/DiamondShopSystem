@@ -30,7 +30,7 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
 
 
     // Đếm đơn hàng hôm nay
-    @Query("SELECT COUNT(o) FROM Order o WHERE o.StartDate = CURRENT_DATE")
+    @Query("SELECT COUNT(o) FROM Order o WHERE FUNCTION('DATE', o.StartDate) = CURRENT_DATE")
     Long countOrdersByToday();
 
     // Đếm tổng số đơn hàng

@@ -51,11 +51,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             promotionSelect.innerHTML = '';
 
             if (data.status === "New") {
-                const defaultOption = document.createElement('option');
-                defaultOption.value = '';
-                defaultOption.textContent = 'Select a promotion';
-                promotionSelect.appendChild(defaultOption);
-
                 validPromotions.forEach(promotion => {
                     const option = document.createElement('option');
                     option.value = promotion.promotionId;

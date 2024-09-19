@@ -61,9 +61,7 @@ function fetchAndDisplayProducts(){
                         <td>${index + 1}</td>
                         <td>${product.productName}</td>
                         <td>${product.category.categoryName}</td>
-                        <td>${product.Description}</td>
                         <td>${product.warrantyPeriod}</td>
-                        <td>${product.Inventory}</td>
                         <td class="action-buttons">
                             <button class="edit-btn" onclick="editProduct('${product.productId}')"><ion-icon name="create-outline"></ion-icon></button>
                             <button class="delete-btn" onclick="deleteProduct('${product.productId}')" "><ion-icon name="trash-outline"></ion-icon></button>

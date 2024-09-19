@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function (){
     const role = roles[0];
     console.log(role);
 
-    if (role !== 'ROLE_DELIVERY') {
+    if (role === 'ROLE_DELIVERY STAFF') {
         alert("Bạn Không Có Quyền Truy Cập Vào Trang Này");
         window.location.href = '/DiamondShopSystem/src/main/resources/templates/Admin/admin.html';
     }

@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateData() {
     fetchRevenueByMonthAndYear();
     fetchTotalOrdersByYear();
+    fetchTotalRevenueChart()
 }
 
 // Fetch Top Selling Products
@@ -94,6 +95,7 @@ function fetchTotalOrdersToday() {
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             document.getElementById('order-today-value').innerText = data.data;
         })
         .catch(error => console.error('Error fetching total orders today:', error));

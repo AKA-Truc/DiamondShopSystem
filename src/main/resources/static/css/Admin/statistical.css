@@ -58,15 +58,14 @@ body {
     min-height: calc(100vh - 10px);
 }
 
-/* Lưới tổng quan Dashboard */
-/*.dashboard-grid {*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(3, 1fr);*/
-/*    grid-gap: 20px;*/
-/*    padding: 20px;*/
-/*    width: max-content;*/
-/*    max-width: 98%;*/
-/*}*/
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    width: max-content;
+    max-width: 98%;
+}
 
 #today-sales {
     display: flex;
@@ -82,9 +81,6 @@ body {
 }
 
 #top-products{
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
     grid-column: span 2;
 }
 
@@ -140,10 +136,6 @@ body {
     margin-top: 20px;
 }
 
-/*#order-today {*/
-/*    text-align: center;*/
-/*    width: 300px;*/
-/*}*/
 
 #order-today {
     text-align: center;
