@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quên Mật Khẩu</title>
+  <link rel="stylesheet" href="/static/css/remember.css">
+</head>
+
+<body>
+<div class="container">
+  <div class="header">
+    <h2>Forgot Password</h2>
+    <p>Enter the email you used to create your account, so we can send you instructions on how to reset your password. </p>
+  </div>
+
+
+  <form action="/forgot-password" method="POST">
+    <label for="email"></label>
+    <input type="text" id="email" name="email" placeholder="Email" required>
+    <button type="button" class="send-button"><b>Send</b></button>
+    <button type="button" class="back-button" onclick="history.back()"><b>Back to Login </b></button>
+  </form>
+</div>
+
+<script src="/static/js/remember.js"></script>
+<script src="/static/js/url.js"></script>
+</body>
+</html>

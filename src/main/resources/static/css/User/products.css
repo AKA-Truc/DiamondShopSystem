@@ -1,0 +1,232 @@
+
+/**/
+.category-select {
+    display: inline-block;
+    position: relative;
+    margin-left: 31%;
+    margin-top: 60px;
+}
+
+.category-select select {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+.category-select select:focus {
+    outline: none;
+    border-color: #aaa;
+}
+/*  */
+
+.list-price{
+    display: inline-block;
+    position: relative;
+    margin-left: 50%;
+    top: -100px;
+}
+
+.list-price select{
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+.list-price select:focus {
+    outline: none;
+    border-color: #aaa;
+}
+
+/**/
+.wrapper {
+    position: relative;
+    text-align: left;
+    margin-top: 45px;
+    z-index: 1;
+}
+
+.headline img {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 60%;
+    left: 12%;
+    transform: translateY(-50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.overlay-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.overlay-text h4 {
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+#body1{
+    max-width: 1170px;
+    margin: 0 auto;
+
+}
+.body-text{
+    text-align: center;
+    margin: 40px 0;
+}
+.body-text>h2{
+    font-size: 18px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000 ;
+    display: inline-block;
+}
+ul.products{
+    list-style: none;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+ul.products li{
+    flex-basis: 33%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 40px;
+}
+u.products li img {
+    max-width: 100%;
+    height: auto;
+}
+ul.products li .product-item{
+    text-align: center;
+}
+ul.products li .product-info{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+ul.products li .product-top{
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+
+}
+ul.products li:hover a.buy-now{
+    bottom: 30px;
+}
+ul.products li .product-top .product-thumb{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul.products li .product-top .product-thumb img{
+    display: block;
+
+}
+
+ul.products li .product-top a.buy-now{
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color:#000000;
+    padding: 10px 0;
+    position: absolute;
+    left: 30%;
+    opacity: 0.75;
+    border:1px solid #373737;
+    border-radius: 20px;
+    width: 40%;
+    font-size: 13px;
+}
+ul.products li a.buy-now:hover {
+    background-color: rgb(52, 52, 51);
+    color:#ffffff
+}
+ul.products li .product-info a{
+    display: block;
+    text-decoration: none;
+
+}
+ul.products li .product-info a.product-cart{
+    text-transform: uppercase;
+    color: rgb(0, 71, 0);
+    font-size: 14px;
+    padding: 3px 0px;
+
+}
+ul.products li .product-info a.product-name{
+    padding: 3px 0px;
+    color:#000;
+}
+ul.products li .product-info .list-price{
+    margin-top: 5px;
+    display: flex;
+    gap: 30px;
+}
+
+/* hover */
+.card {
+    width: 200px;
+    height: 195px;
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Ẩn ảnh gốc, hiện ảnh hover */
+    transition: opacity 0.7s ease;
+}
+
+.card img:first-child {
+    opacity: 1; /* ban đầu */
+}
+
+.card img:last-child {
+    opacity: 0; /* ẩn ban đầu */
+}
+
+
+.card:hover img:first-child {
+    opacity: 0; /* Ẩn hình ảnh đầu tiên khi hover */
+}
+
+.card:hover img:last-child {
+    opacity: 1; /* Hiện hình ảnh thứ hai khi hover */
+}

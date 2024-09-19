@@ -1,0 +1,219 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+}
+
+.sidebar {
+    height: 100%;
+    width: 280px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+}
+
+/* Tiêu đề sidebar */
+.sidebar h2 {
+    color: #0d0e1c; /*chỉnh chữ*/
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar ul li a ion-icon{
+    font-size: 26px;
+    color: #141E0C;
+}
+
+/* Menu chính - Loại bỏ bullet */
+.main-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.main-menu li a {
+    font-size: 16px;
+    display: block;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: #000000;
+    transition: background-color 0.3s ease;
+    line-height: 1.5px;
+}
+
+.main-menu li a:hover {
+    background-color: #cbd0dd;
+}
+
+/* Submenu sổ xuống */
+.submenu {
+    position: relative;
+    display: block;
+}
+
+.submenu ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ebf0f8;
+    list-style-type: none;
+    padding: 0;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    z-index: 1000;
+}
+
+.submenu:hover ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Submenu link */
+.submenu ul li a {
+    padding: 15px 25px;
+    color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.submenu ul li a:hover {
+    background-color: #cbd0dd;
+}
+
+ion-icon {
+    font-size: 20px;
+    line-height: 1.5px;
+    vertical-align: middle;
+}
+
+.navbar {
+    margin-left: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 58px;
+    color: #000000;
+    background-color: #f4f7fb;
+    padding: 0 20px;
+}
+
+.navbar__info {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #000000;
+}
+
+.navbar__cta {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.navbar__background-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+.navbar__hello {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.navbar__show {
+    cursor: pointer;
+}
+
+.navbar-separator {
+    width: calc(100% - 280px);
+    margin-left: 280px;
+    height: 1px;
+    background-color: #162165e7;
+}
+
+/* table */
+.table-wrapper {
+    padding: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #e4e7ef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 1110px;
+    margin-left:320px;
+    align-items: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 23px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+th {
+    background-color: #f9f9f9;
+    color: black;
+}
+/*  */
+
+/* Status colors */
+.status-chua-xac-nhan,
+.status-da-xac-nhan,
+.status-dang-giao,
+.status-da-giao {
+    border-radius: 8px; /* Bo góc tròn với bán kính 8px */
+    padding: 5px 10px;   /* Thêm khoảng cách bên trong */
+    text-align: center;  /* Canh giữa nội dung */
+    border-color: white;
+}
+
+/* Pastel colors */
+.status-chua-xac-nhan {
+    background-color: #f3de89; /* Màu vàng pastel */
+    color: #333;              /* Màu chữ đen nhạt */
+}
+
+.status-da-xac-nhan {
+    background-color: #7abc96; /* Màu xanh lá cây pastel */
+    color: #fff;              /* Màu chữ trắng */
+}
+
+.status-dang-giao {
+    background-color: #6ab1ca; /* Màu xanh dương pastel */
+    color: #fff;              /* Màu chữ trắng */
+}
+
+.status-da-giao {
+    background-color: #87a9df; /* Màu xanh dương pastel nhạt */
+    color: #fff;              /* Màu chữ trắng */
+}
+
+
+

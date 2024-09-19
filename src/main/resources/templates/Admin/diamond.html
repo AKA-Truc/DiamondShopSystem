@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lý Mã Giảm Giá</title>
+    <link rel="stylesheet" href="/static/css/Admin/discount.css" />
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+</head>
+<body>
+
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/Admin/diamond.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+<script src="/static/js/tokenDelivery.js"></script>
+
+
+<script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
+
+<!-- main content -->
+<div class="main-content">
+    <div class="customer-management">
+        <button class="add-promotion-btn" id="openpopup1">
+            Thêm Kim Cương Mới<i class="fas fa-plus"></i>
+        </button>
+        <input
+                type="text"
+                id="search-bar"
+                placeholder="Nhập Tên Kim Cương..."
+                class="search-bar"
+        />
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Hình Dạng</th>
+                    <th>Màu</th>
+                    <th>Giác Cắt</th>
+                    <th>Khối Lượng</th>
+                    <th>Kích Thước</th>
+                    <th>Độ Tinh Khiết</th>
+                    <th>GIA Code</th>
+                    <th>Giá</th>
+                    <th>Thao Tác</th>
+                </tr>
+                </thead>
+                <tbody id="diamond-List">
+                <!-- Các hàng sẽ được thêm bằng JavaScript -->
+                </tbody>
+            </table>
+
+
+            <!-- Popup HTML -->
+            <div id="popup" class="popup-overlay">
+                <div class="popup-content">
+                    <p>Are you sure to delete Diamond?</p>
+                    <button id="yes-btn" class="popup-btn">Yes</button>
+                    <button id="no-btn" class="popup-btn">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup1-overlay" id="popup1Overlay">
+    <div class="popup1-content">
+        <span class="popup1-close" id="closepopup1">&times;</span>
+        <div class="wrapper">
+            <form id="diamondForm" enctype="multipart/form-data">
+                <div class="top-fields">
+                    <div class="field input">
+                        <label for="shape">Hình Dạng</label>
+                        <input
+                                type="text"
+                                id="shape"
+                                name="shape"
+                                placeholder="Nhập Hình Dạng"
+                                required
+                        />
+                    </div>
+                    <div class="field input">
+                        <label for="measurement">Kích Thước(Ly)</label>
+                        <input
+                                type="text"
+                                id="measurement"
+                                name="measurement"
+                                placeholder="Nhập Kích Thước"
+                                required
+                        />
+                    </div>
+                </div>
+                <div class="middle-fields">
+                    <div class="field input">
+                        <label for="color">	Màu</label>
+                        <input
+                                type="text"
+                                id="color"
+                                name="color"
+                                placeholder="Nhập Màu"
+                                required
+                        />
+                    </div>
+                    <div class="field input">
+                        <label for="clarity">Độ Tinh Khiết</label>
+                        <select style="width: 100%;height: 42px;padding: 0 13px;border-radius: 4px" id="clarity" name="clarity" required>
+                            <option value="FL">FL (Flawless)</option>
+                            <option value="IF">IF (Internally Flawless)</option>
+                            <option value="VVS1">VVS1 (Very, Very Slightly Included 1)</option>
+                            <option value="VVS2">VVS2 (Very, Very Slightly Included 2)</option>
+                            <option value="VS1">VS1 (Very Slightly Included 1)</option>
+                            <option value="VS2">VS2 (Very Slightly Included 2)</option>
+                            <option value="SI1">SI1 (Slightly Included 1)</option>
+                            <option value="SI2">SI2 (Slightly Included 2)</option>
+                            <option value="I1">I1 (Included 1)</option>
+                            <option value="I2">I2 (Included 2)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="middle-fields">
+                    <div class="field input">
+                        <label for="carat">Khối Lượng</label>
+                        <input
+                                type="text"
+                                id="carat"
+                                name="carat"
+                                placeholder="Nhập Khối Lượng"
+                                required
+                        />
+                    </div>
+                    <div class="field input">
+                        <label for="cut">Giác Cắt</label>
+                        <select style="width: 100%;height: 42px;padding: 0 13px;border-radius: 4px" id="cut" name="cut" required>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Very Good">Very Good</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Poor">Poor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="middle-fields">
+                    <div class="field input">
+                        <label for="price">Giá</label>
+                        <input
+                                type="text"
+                                id="price"
+                                name="price"
+                                placeholder="Nhập Giá"
+                                required
+                        />
+                    </div>
+                    <div class="field input">
+                        <label for="GIA">GIA Code</label>
+                        <input
+                                type="text"
+                                id="GIA"
+                                name="GIA"
+                                placeholder="Nhập GIA Code"
+                                required
+                        />
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Xác Nhận" class="save"/>
+                    <input
+                            type="button"
+                            value="Hủy"
+                            class="cancel"
+                            id="cancelButton"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

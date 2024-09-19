@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê</title>
+    <link rel="stylesheet" href="/static/css/Admin/statistical.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+</head>
+
+<body>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+<script src="/static/js/tokenDelivery.js"></script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/Admin/statistical.js"></script>
+
+<div class="filter-section">
+    <label for="select-year">Select Year:</label>
+    <select id="select-year">
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+    </select>
+
+    <label for="select-month">Select Month:</label>
+    <select id="select-month">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+</div>
+
+<script>
+    // Lấy ngày hiện tại
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth() + 1; // getMonth() trả về giá trị từ 0-11, nên cần +1
+
+    // Đặt giá trị mặc định cho năm và tháng
+    document.getElementById('select-year').value = currentYear;
+    document.getElementById('select-month').value = currentMonth;
+</script>
+
+<div class="main">
+    <!-- Bố cục Dashboard -->
+    <div class="dashboard-grid">
+        <!-- Khối Today's Sales -->
+        <section style="height: 250px; width: 100%" id="today-sales" class="big-box">
+            <h2>Total Sale</h2>
+            <div style="margin-top: 100px; margin-left: -100px; height: 100px" class="card-small card-1">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <h3 style="margin-top: 5px" id="total-sales-value">$1k</h3>
+                <p>Total Sales</p>
+                <p id="total-sales-change"></p>
+            </div>
+            <div style="margin-top: 100px" class="card-small card-2">
+                <h3 id="total-order-value">300</h3>
+                <p>Total Order</p>
+                <p id="total-order-change"></p>
+            </div>
+            <div style="margin-top: 100px" class="card-small card-3">
+                <h3 id="products-sold-value">5</h3>
+                <p>Product Sold</p>
+                <p id="products-sold-change"></p>
+            </div>
+            <div style="margin-top: 100px" class="card-small card-4">
+                <h3 id="new-customers-value">8</h3>
+                <p>Customers</p>
+                <p id="new-customers-change"></p>
+            </div>
+        </section>
+
+        <!-- Khối Visitor Insights -->
+        <section style="margin-left: 20px" id="customer-gender" class="big-box">
+            <h2>Analyze Customer Data By Gender</h2>
+            <canvas id="customer-gender-chart" width="400" height="200"></canvas>
+        </section>
+
+        <!-- Khối Customer Satisfaction -->
+        <section style="height: 300px; width: 200px" id="order-today" class="big-box">
+            <h2>Order's Today</h2>
+            <h3 id="order-today-value">0</h3>
+        </section>
+
+        <!-- Khối Total Revenue -->
+        <section style="margin-left: 0px;" id="total-revenue" class="big-box">
+            <h2>Total Revenue</h2>
+            <canvas id="total-revenue-chart" ></canvas>
+        </section>
+
+        <!-- Khối Target vs Reality -->
+        <section id="order-by-year" class="big-box">
+            <h2>Total Order By Year</h2>
+            <canvas id="order-by-year-chart" width="400" height="250"></canvas>
+        </section>
+
+        <!-- Khối Top Products -->
+        <section id="top-products" class="big-box">
+            <h2>Top Products</h2>
+            <ul id="top-products-list">
+                <li class="product-header">
+                    <span class="product-index-header">#</span>
+                    <span class="product-name-header">Name</span>
+                    <span class="product-sales-header">Sales</span>
+                </li>
+            </ul>
+        </section>
+
+        <section id="sales-customer" class="big-box">
+            <h2>Top Customer Selling</h2>
+            <canvas id="sales-customer-chart"></canvas>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

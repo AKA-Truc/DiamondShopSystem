@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+}
+
+.body1 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 90px;
+    height: 50vh;
+    margin-left: 260px;
+}
+
+.wrapper {
+    width: 80%;
+    max-width: 1430px;
+    padding: 30px;
+    height:400px;
+    margin: 30px;
+}
+.form {
+    display: flex;
+}
+.field {
+    flex: 1;
+    margin: 20px;
+
+}
+.top-fields, .middle-fields {
+    display: flex;
+    justify-content:space-around;
+
+}
+.field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+.field input:focus {
+    border-color: #000;
+    outline: none;
+}
+.button {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 20px;
+}
+.button input {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.button input.save  {
+    background-color: #304067;
+    color: #fff;
+}
+.button input.cancel  {
+    background-color: #e0e6ea;
+    color: #304c67;
+    font-weight: 600;
+}
+.button input.save:hover {
+    background-color: #223449;
+}
+.button input.cancel:hover {
+    background-color: #bfc5d3;
+}

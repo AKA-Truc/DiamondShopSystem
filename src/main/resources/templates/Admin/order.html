@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Hóa Đơn</title>
+    <link rel="stylesheet" href="/static/css/Admin/order.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <!-- Thêm Choices.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script>
+        function alertFeature() {
+            alert('Tính năng đang được phát triển');
+        }
+    </script>
+</head>
+
+<body>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/static/js/url.js"></script>
+
+<!-- Thêm Choices.js từ CDN -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="/static/js/Admin/order.js"></script>
+
+<main class="main-content">
+    <section class="orders">
+        <div class="search-bar" style="width: 400px; margin-left:995px; align-items: center;">
+            <input type="text" style="border-radius: 20px 20px;" placeholder="Tra cứu đơn hàng...">
+        </div>
+
+        <div class="table-wrapper">
+            <table id="requests-table">
+                <thead>
+                <tr>
+                    <th class="center-heading">STT</th>
+                    <th class="center-heading">Mã đơn hàng</th>
+                    <th class="center-heading">Khách hàng</th>
+                    <th class="center-heading">Ngày đặt hàng</th>
+                    <th class="center-heading">Trạng Thái</th>
+                </tr>
+                </thead>
+                <tbody id="invoice-list">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<style>
+    .main-content {
+        flex-grow: 1;
+        padding: 30px;
+    }
+
+    .orders h2 {
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #f1eeee;
+        border-radius: 4px;
+        margin-left: 40px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th, table td {
+        padding: 25px;
+        text-align: left;
+    }
+
+    table th {
+        background-color:white;
+    }
+</style>
+
+</body>
+</html>

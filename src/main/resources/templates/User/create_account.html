@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="/static/css/User/create_account.css">
+</head>
+
+<body>
+
+<script src="/static/js/url.js"></script>
+<script src="/static/js/User/create_account.js"></script>
+
+<div class="registration-container">
+    <h2>Sign Up</h2>
+    <form id = "form-register">
+        <div class="form-group1">
+            <div class="name">
+                <label for="fullname"></span></label>
+                <input type="text" id="fullname" placeholder="Full Name" required>
+            </div>
+            <div class="gioitinh">
+                <label></label>
+                <select name="gender" id="genderSelect" >
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email"></label>
+            <input type="email" id="email" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                   title="Hãy nhập địa chỉ email hợp lệ, ví dụ: diamond@shop.vn">
+            <span class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password"></label>
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm-password"></label>
+            <input type="password" id="confirm-password" placeholder="confirm Password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address"></label>
+            <input type="text" id="address" placeholder="Address" required>
+        </div>
+
+
+        <a href="/DiamondShopSystem/src/main/resources/templates/User/verify_mail" class="register-button">
+        <button type="submit" class="btn-register">Sign Up</button>
+         </a>
+    </form>
+</div>
+</body>
+</html>

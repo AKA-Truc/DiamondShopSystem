@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sản Phẩm</title>
+    <link rel="stylesheet" href="/static/css/Admin/product.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+</head>
+
+<body>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+<script src="/static/js/tokenDelivery.js"></script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/static/js/Admin/product.js"></script>
+
+<div class="main-content">
+    <div class="customer-management">
+        <button class="add-customer-btn" onclick="window.location.href ='./add_product.html'">Thêm Sản Phẩm Mới +<i class="fas fa-plus"></i></button>
+        <input  type="text" placeholder="Nhập tên sản phẩm để tìm kiếm..." class="search-bar">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Tên Loại Hàng</th>
+                    <th>Thời Hạn Bảo Hành</th>
+                    <th>Lựa Chọn</th>
+                </tr>
+                </thead>
+                <tbody id="product-table-body">
+                <!-- Data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+
+            <!-- Popup HTML -->
+            <div id="popup" class="popup-overlay">
+                <div class="popup-content">
+                    <p>Are you sure to delete product?</p>
+                    <button id="yes-btn" class="popup-btn">Yes</button>
+                    <button id="no-btn" class="popup-btn">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
