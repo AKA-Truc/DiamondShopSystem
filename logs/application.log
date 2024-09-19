@@ -1,0 +1,33 @@
+2024-08-02T10:07:33.528+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] g.com.vn.DiamondShopSystemApplication    : Starting DiamondShopSystemApplication using Java 22.0.1 with PID 12496 (D:\Java\DiamondShopSystem\target\classes started by Len in D:\Java\DiamondShopSystem)
+2024-08-02T10:07:33.541+07:00 DEBUG 12496 --- [DiamondShopSystem] [restartedMain] g.com.vn.DiamondShopSystemApplication    : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-08-02T10:07:33.542+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] g.com.vn.DiamondShopSystemApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-08-02T10:07:33.604+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-02T10:07:33.604+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-02T10:07:34.359+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-02T10:07:34.449+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 17 JPA repository interfaces.
+2024-08-02T10:07:34.984+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-02T10:07:34.996+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-02T10:07:34.996+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-02T10:07:35.050+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-02T10:07:35.051+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1446 ms
+2024-08-02T10:07:35.201+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-02T10:07:35.284+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-02T10:07:35.317+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-02T10:07:35.616+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-02T10:07:35.642+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] com.zaxxer.hikari.HikariDataSource       : DiamondShopDB - Starting...
+2024-08-02T10:07:35.854+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : DiamondShopDB - Added connection org.postgresql.jdbc.PgConnection@6df1a3f9
+2024-08-02T10:07:35.855+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] com.zaxxer.hikari.HikariDataSource       : DiamondShopDB - Start completed.
+2024-08-02T10:07:35.902+07:00  WARN 12496 --- [DiamondShopSystem] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-02T10:07:37.124+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-02T10:07:37.378+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-02T10:07:37.647+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-08-02T10:07:38.264+07:00  WARN 12496 --- [DiamondShopSystem] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-02T10:07:38.610+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-02T10:07:38.658+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-02T10:07:38.667+07:00  INFO 12496 --- [DiamondShopSystem] [restartedMain] g.com.vn.DiamondShopSystemApplication    : Started DiamondShopSystemApplication in 5.611 seconds (process running for 6.591)
+2024-08-02T10:08:54.528+07:00  INFO 12496 --- [DiamondShopSystem] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-02T10:08:54.529+07:00  INFO 12496 --- [DiamondShopSystem] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-02T10:08:54.533+07:00  INFO 12496 --- [DiamondShopSystem] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-08-02T10:11:30.448+07:00  INFO 12496 --- [DiamondShopSystem] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-02T10:11:30.452+07:00  INFO 12496 --- [DiamondShopSystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : DiamondShopDB - Shutdown initiated...
+2024-08-02T10:11:30.456+07:00  INFO 12496 --- [DiamondShopSystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : DiamondShopDB - Shutdown completed.

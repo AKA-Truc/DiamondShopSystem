@@ -1,0 +1,254 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+}
+
+.main-content {
+    margin-left: 280px;
+    padding: 20px;
+    width: calc(100% - 280px);
+}
+
+.customer-management {
+    margin-top: 20px;
+}
+
+.customer-management h3 {
+    margin: 0 0 20px 0;
+    color: #000;
+    font-size: 24px;
+}
+
+.add-user-btn {
+    background-color: #304067;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.add-user-btn i {
+    margin-left: 10px;
+}
+
+.search-bar {
+    padding: 15px;
+    width: calc(50% - 280px);
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    margin-left: 820px
+}
+
+.table-wrapper {
+    width: 93%;
+    padding: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #e4e7ef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 23px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+th {
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.edit-btn,
+.delete-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit-btn i {
+    color: #0d62fc;
+}
+
+.delete-btn i {
+    color: #d92e3e;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center ;
+}
+
+.popup-content p{
+    font-size: 18px;
+}
+
+.popup-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup1-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup1-close {
+    position: absolute;
+    top: 10px;
+    right: 1px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}
+
+#yes-btn {
+    background-color: #0d4160;
+    color: #fff;
+}
+
+#no-btn {
+    background-color: #ddd;
+}
+
+.popup1-content {
+    background-color: #fff;
+    padding: 0;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    padding: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.field {
+    flex: 1;
+    margin: 10px;
+    position: relative;
+}
+
+.top-fields {
+    display: flex;
+    justify-content:space-around;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.field.input select {
+    width: 25%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.field input:focus {
+    border-color: #000;
+    outline: none;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-start;
+    margin: 30px 10px;
+}
+
+.button input {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.button input.save  {
+    background-color: #304067;
+    color: #fff;
+}
+
+.button input.cancel  {
+    background-color: #9d9495;
+    color: #fff;
+}
+
+.button input.save:hover,
+.button input.cancel:hover {
+    background-color: #797d97;
+}

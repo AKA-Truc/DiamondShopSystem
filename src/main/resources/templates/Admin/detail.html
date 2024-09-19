@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Đơn Hàng</title>
+    <link rel="stylesheet" href="/static/css/Admin/detail.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+</head>
+
+<body>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/Admin/detail.js"></script>
+
+<main class="main-content">
+    <section class="detail">
+        <div class="search-bar" style="width: 400px; margin-left:995px; align-items: center;">
+            <input type="text" style="border-radius: 20px 20px;" placeholder="Tra cứu đơn hàng...">
+        </div>
+
+        <div style="width: 1250px;margin-left: 220px;" class="table-wrapper">
+            <table id="requests-table" style="width: 1200px; align-items: center; background-color: #e4e7ef; margin-left: 55px">
+                <thead>
+                <tr>
+                    <th class="center-heading">Mã Hóa Đơn</th>
+                    <th class="center-heading">Người Đặt</th>
+                    <th class="center-heading">Ngày Đặt</th>
+                    <th class="center-heading">Mã Giảm Giá Đã Sử Dụng</th>
+                    <th class="center-heading">Tổng Tiền</th>
+                    <th class="center-heading">Thao tác</th>
+                </tr>
+                </thead>
+                <tbody id="order-list">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<style>
+    .main-content {
+        flex-grow: 1;
+        padding: 30px;
+    }
+
+    .orders h2 {
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #f1eeee;
+        border-radius: 4px;
+        margin-left: 40px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th, table td {
+        padding: 25px;
+        text-align: left;
+    }
+
+    table th {
+        background-color:white;
+    }
+</style>
+
+</body>
+</html>

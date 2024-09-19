@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+
+    <!-- Google API script -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <span class="close-button">&times;</span>
+    </div>
+
+    <div class="login-section">
+        <h2>Welcom Back</h2>
+        <p>Don't have an account?
+        <a href="/DiamondShopSystem/src/main/resources/templates/User/create_account.html" >Sign Up</a></p>
+        <form action="#" method="POST" id="loginForm">
+            <label for="email"></label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+
+            <label for="password"></label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+
+            <div class="forgot-password">
+                <div class="forgot-password-container">
+                    <a href="remember.html"><b>Forgot Password</b></a>
+                </div>
+            </div>
+            <button type="submit"><b>Login</b></button>
+            <div class="hr-or">
+                <span>or</span>
+            </div>
+        </form>
+
+        <div id="g_id_onload"
+             data-client_id="619533343671-0vbjc3umdk8o58ic2i908s0mn7qc9sjt.apps.googleusercontent.com"
+             data-auto_prompt="false"
+             data-callback="handleCredentialResponse">
+        </div>
+
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../static/js/url.js"></script>
+<script src="/static/js/login.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,117 @@
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.column {
+    flex: 1;
+    box-sizing: border-box;
+    text-align: center;
+    padding: -500px;
+}
+
+.left-column {
+    width: 30%;
+    padding-right: 10px;
+    margin-top: 11%;
+    margin-left: 10%;
+}
+
+.middle-column {
+    width: 30%;
+    text-align: center;
+}
+
+.middle-column img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6%;
+    width: 400px;
+    height: 400px;
+    margin-top: 22%;
+    margin-left: -30%;
+}
+
+.right-column {
+    width: 30%;
+    padding-left: 10px;
+    margin-top: 7%;
+}
+
+.right-column h3 {
+    font-size: 1.5em;
+    margin: 20px 0 10px;
+}
+
+.quality-section {
+    text-align: center;
+    margin-top: 160px;
+}
+
+.quality-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.quality-features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.feature-item {
+    width: 30%;
+    text-align: center;
+}
+
+.feature-item .icon {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.feature-item h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* review */
+
+.row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+.main-container {
+    margin-top: 90px;
+}
+
+
+.img-container {
+    overflow: hidden;
+    flex-basis: 100%;
+}
+
+.img-container img {
+    width:410px;
+    height: 500px;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.img-container img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .reviews {
+        width: 95%;
+    }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mã Xác Minh</title>
+  <link rel="stylesheet" href="/static/css/User/verification_code.css">
+</head>
+
+<body>
+<div class="container">
+  <div class="header">
+    <h2>Verification code</h2>
+    <p>A verification code has been sent to your email address. Enter the verification code below and create a new password.</p>
+  </div>
+
+  <form id="verification-form">
+    <label for="code">Code <span>*</span></label>
+    <input type="text" id="code" name="code" placeholder="- - - - -" required>
+    <div class="resend" id="resend-text">
+      <span>Resend code (Available after 30 s)</span>
+    </div>
+    <button type="submit" class="send-button"><b>Continue</b></button>
+    <button type="button" class="back-button" onclick="history.back()"><b>Come back</b></button>
+  </form>
+</div>
+
+<script src="/static/js/User/verification_code.js"></script>
+<script src="/static/js/url.js"></script>
+</body>
+</html>

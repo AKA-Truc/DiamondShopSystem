@@ -1,0 +1,320 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+/**/
+.product-container{
+    display: flex;
+    padding: 5px;
+    width: 100%;
+
+}
+.product-container .all-image{
+    display:block;
+}
+.product-container .all-image .image-detail{
+    display: block;
+    margin-right: 100px;
+}
+
+
+.image-detail img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.image-detail img:hover {
+    transform: scale(1.1);
+    border: 2px solid #00aaff;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.image-section {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.image-section img {
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+
+
+.details-section {
+    margin-left: 40px;
+    padding: 10px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.code {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.current-price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 10px;
+}
+
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.contact {
+    color: #b7bbbf;
+    font-weight: bold;
+}
+
+.buttons {
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    background-color: #1f3578;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    color: rgb(163, 142, 22);
+}
+
+.info-section {
+    font-size: 16px;
+    max-width: 430px;
+}
+
+details {
+    margin-bottom: 10px;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+summary:hover {
+    color: #bdc5cd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #dddddd;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+td:first-child {
+    font-weight: bold;
+    width: 40%;
+}
+
+td:last-child {
+    width: 60%;
+}
+
+.commitment-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.commitment, .purchase-guide {
+    width: 45%;
+}
+
+h3 {
+    font-size: 18px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+h3 img {
+    width: 24px;
+    margin-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+ul li strong {
+    color: #333;
+}
+
+/*  */
+.faq-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+details {
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: bold;
+    padding: 10px 20px;
+}
+.faq-content{
+    padding: 10px 15px;
+}
+.faq-section .faq-content ul li{
+    margin-left: 18px;
+    list-style-type:disc;
+}
+summary:hover {
+    color: #abb3bc;
+
+}
+
+
+.related-products {
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.related-products h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    width: 23%;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-image {
+    position: relative;
+}
+
+.product-image img {
+    width: 60%;
+    height: 50%;
+}
+
+.sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #004d40;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-code {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 16px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 10px;
+}
+
+.new-price {
+    color: #d78a29;
+    font-weight: bold;
+}
+

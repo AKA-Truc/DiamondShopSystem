@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lại mật khẩu</title>
+    <link rel="stylesheet" href="/static/css/User/resetpass.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h2 >Reset Password</h2>
+        <p>choose a new password for your account</p>
+    </div>
+
+    <form id="reset-password-form" action="/forgot_password" method="POST">
+        <label for="new-password"></label>
+        <input type="password" id="new-password" name="new-password" placeholder="Your new password">
+
+        <label for="confirm-password"></label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your new password">
+
+        <button type="button" id="submit-button"><b>Reset Password</b></button>
+        <button type="button" class="back-button" onclick="history.back()"><b>Back to Login</b></button>
+    </form>
+
+    <div class="success-message" id="success-message">
+        <span class="check-icon">&#10004;</span> Đặt Lại Mật Khẩu Thành Công
+    </div>
+    <button class="login-button" id="login-button" onclick="window.location.href = `/DiamondShopSystem/src/main/resources/templates/login.html`"><b>Đăng Nhập</b></button>
+</div>
+
+
+<script>
+    function validatePasswords() {
+        const newPassword = document.getElementById('new-password');
+        const confirmPassword = document.getElementById('confirm-password');
+        const successMessage = document.getElementById('success-message');
+
+        // Kiểm tra nếu mật khẩu mới và xác nhận mật khẩu giống nhau
+        if (newPassword.value !== confirmPassword.value) {
+            alert('Mật khẩu và xác nhận mật khẩu không khớp!');
+            return false;
+        }
+
+        // Nếu mật khẩu hợp lệ
+        successMessage.style.display = 'block';
+        return true;
+    }
+
+    document.getElementById('submit-button').addEventListener('click', function() {
+        if (validatePasswords()) {
+            document.getElementById('reset-password-form').submit();
+        }
+    });
+</script>
+
+<script src="/static/js/User/resetPassword.js"></script>
+<script src="/static/js/url.js"></script>
+</body>
+</html>

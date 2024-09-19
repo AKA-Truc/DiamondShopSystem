@@ -1,0 +1,165 @@
+
+
+/* Đặt chung cho toàn bộ container */
+.container {
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Định dạng cho phần contentside */
+.contentside {
+    background-color: #fff;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    position: sticky;
+    top: 0; /* Đảm bảo phần tử dính từ đầu của phần tử chứa nó */
+
+}
+
+
+.contentside h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#blog-list {
+    list-style: none;
+    padding: 0;
+}
+
+#blog-list div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#blog-list img {
+    width: 200px;
+    height: 100px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+#blog-list p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Định dạng cho phần main-banner */
+.main-banner {
+    background-color: rgba(255, 253, 243, 0.5);
+    padding: 20px;
+    width: 100%;
+}
+.main-banner:hover {
+    transform: translateY(-5px);
+}
+
+.main-banner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Đảm bảo ảnh bao phủ đầy đủ vùng chứa mà không bị méo */
+    border-radius: 8px;
+}
+
+
+
+.banner-title {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.banner-title a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.banner-title a:hover {
+    color: #007BFF;
+}
+
+.banner-content {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+
+
+#blog-list {
+    margin-top: 15px;
+}
+
+.blog-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.blog-item:hover {
+    color: #3c8ccc;
+    transform: translateY(-5px);
+}
+
+.blog-image {
+    max-width: 130px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.blog-item h4 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.blog-item h4 a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.blog-item h4 a:hover {
+    color: #007BFF;
+}
+
+.blog-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .main-banner img {
+        height: 300px;
+    }
+
+    .blog-image {
+        width: 100px;
+        height: 60px;
+    }
+
+    .banner-title {
+        font-size: 20px;
+    }
+
+    .banner-content {
+        font-size: 16px;
+    }
+}

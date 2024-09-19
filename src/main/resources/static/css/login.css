@@ -1,0 +1,193 @@
+.header {
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #8597b1;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 550px;
+    box-sizing: border-box;
+}
+.container form{
+    width: 80%;
+    margin-left: 50px;
+}
+.container h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 10px;
+    margin-left:20px;
+}
+
+.container p {
+    color: #666;
+    margin-bottom: 50px;
+    margin-left:20px;
+}
+
+.container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="email"],
+input[type="password"]{
+    width: 100%;
+    padding: 10px;
+
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #aaa;
+}
+
+.container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a5393;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #8597b1;
+}
+
+.register-section {
+    margin-top: 40px;
+}
+
+.register-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.register-button:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.forgot-password-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.forgot-password a {
+    color: #298cfd;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    margin-left: 257px;
+    margin-bottom: 20px;
+}
+
+.forgot-password input[type="radio"] {
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+.forgot-password a:hover {
+    color: #8597b1;
+}
+.hr-or {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hr-or::before,
+.hr-or::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.hr-or::before {
+    margin-right: 10px;
+}
+
+.hr-or::after {
+    margin-left: 10px;
+}
+/* CSS cho nút đăng nhập bằng Google */
+.g_id_signin {
+    margin: 20px 0; /* Khoảng cách trên và dưới nút */
+    display: flex;
+    justify-content: center; /* Canh giữa nút */
+}
+
+.g_id_signin button {
+    background-color: #ffffff; /* Màu nền của nút */
+    color: #333333; /* Màu chữ trên nút */
+    border: 1px solid #dcdcdc; /* Đường viền của nút */
+    border-radius: 4px; /* Bo tròn các góc của nút */
+    padding: 15px 30px; /* Khoảng cách trong nút */
+    font-size: 25px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ khi di chuột qua nút */
+    transition: background-color 0.3s, border-color 0.3s; /* Hiệu ứng chuyển đổi */
+    width: 100px; /* Chiều rộng của nút chiếm toàn bộ không gian chứa */
+    max-width: 400px; /* Chiều rộng tối đa của nút */
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.g_id_signin button:hover {
+    background-color: #f5f5f5; /* Màu nền khi di chuột qua nút */
+    border-color: #c1c1c1; /* Màu đường viền khi di chuột qua nút */
+}
+
+
+

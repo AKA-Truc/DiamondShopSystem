@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hóa Đơn</title>
+    <link rel="stylesheet" href="/static/css/Admin/bill.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+</head>
+<body>
+<!--JS-->
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/static/js/Admin/bill.js"></script>
+
+<div class="body1">
+    <div class="contain">
+        <div class="header">
+            <h1>Thông Tin Hóa Đơn</h1>
+        </div>
+
+        <div class="main-content">
+            <div class="order-info">
+                <h3>Thông Tin Khách Hàng</h3>
+                <p><strong>Tên: </strong><span id="customerName"></span></p>
+                <p><strong>Số Điện Thoại: </strong><span id="customerPhone"></span></p>
+                <p><strong>Mã Hóa Đơn: </strong><span id="InvoiceID"></span></p>
+                <p><strong>Ngày Đặt Hàng: </strong><span id="InvoiceDate"></span></p>
+                <p><strong>Trạng Thái Đơn Hàng: </strong><span id="orderStatus"></span></p>
+            </div>
+
+            <div class="product-info">
+                <h3>Thông Tin Sản Phẩm</h3>
+                <table id="product-table">
+                    <thead>
+                    <tr>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                    </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                    <!-- Dữ liệu sản phẩm sẽ được thêm vào đây -->
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Tổng cộng</strong></td>
+                        <td id="totalAmount">0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Voucher Giảm Giá<p><strong>Mã Giảm Giá Đã Áp Dụng: </strong><span id="voucherName"></span></p></strong></td>
+                        <td id="discountAmount">0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Tổng Thanh Toán</strong></td>
+                        <td id="totalPaymentAmount">0</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button id="confirmButton" style="padding: 10px 20px;border-radius : 10px; margin: 30px 3%;">Back</button>
+</div>
+
+</body>
+</html>
+

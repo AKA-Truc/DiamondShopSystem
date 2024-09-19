@@ -1,0 +1,343 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+    overflow-x: hidden;
+}
+
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 291px;
+    padding: 10px;
+}
+
+.filter-section label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.filter-section select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+.filter-section select:hover {
+    border-color: #4CAF50;
+}
+
+@media screen and (max-width: 768px) {
+    .filter-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-section select {
+        width: 100%;
+    }
+}
+
+.main {
+    overflow-x: auto;
+    white-space: nowrap;
+    position: absolute;
+    top: 101px;
+    width: calc(100% - 280px);
+    left: 280px;
+    min-height: calc(100vh - 10px);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    width: max-content;
+    max-width: 98%;
+}
+
+#today-sales {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    grid-column: span 2;
+    height: fit-content;
+
+}
+
+#customer-gender {
+    grid-column: span 1;
+}
+
+#top-products{
+    grid-column: span 2;
+}
+
+ #sales-mapping, #sales-customer {
+    grid-column: span 1;
+}
+
+.card-small {
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 100px;
+    height: fit-content;
+}
+
+.card-1 {
+    background-color: rgba(219, 244, 219, 0.82); /* Màu xanh lá */
+}
+
+.card-2 {
+    background-color: rgba(239, 209, 209, 0.76); /* Màu cam */
+}
+
+.card-3 {
+    background-color: rgba(231, 215, 250, 0.82); /* Màu xanh dương */
+}
+
+.card-4 {
+    background-color: #fdf7e6; /* Màu vàng */
+}
+
+#sales-customer {
+    height: 300px;
+    margin-left: 10px;
+}
+
+#sales-customer-chart {
+    width: 300px;
+    height: 300px;
+}
+
+/* Placeholder cho biểu đồ */
+.chart-placeholder {
+    height: 240px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+#order-today {
+    text-align: center;
+    width: 150px;
+    height: 100px;
+}
+
+#customer-gender  {
+    width: 400px;
+}
+
+#total-revenue {
+    width: 450px;
+    height: 450px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    padding: 20px;
+    width: max-content;
+    max-width: 101%;
+}
+
+#total-revenue {
+    width: 480px;
+    height: 300px;
+    margin-left: 0;
+}
+
+#order-by-year {
+    width: 400px;
+    height: 300px;
+    margin-left: 15px;
+}
+
+#top-products-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 200px;
+    font-size: 12px;
+
+}
+
+.product-header {
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+#top-products-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+}
+
+.product-index-header, .product-index {
+    width: 2%;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.product-name-header, .product-name {
+    width: 78%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.product-sales-header, .product-sales {
+    width: 20%;
+    text-align: right;
+}
+
+.product-index-header, .product-index {
+    width: 5%;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.product-name-header, .product-name {
+    width: 75%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.product-sales-header, .product-sales {
+    width: 20%;
+    text-align: right;
+}
+
+.product-name {
+    font-weight: 500;
+}
+
+.product-sales {
+    color: #c54949;
+    font-weight: 500;
+}
+
+.color-1 { color: #213a57; }
+.color-2 { color: #f28e2c; }
+.color-3 { color: #e15759; }
+.color-4 { color: #76b7b2; }
+.color-5 { color: #59a14f; }
+
+#top-products-list .progress-container {
+    width: 80px;
+    height: 8px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    position: relative;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.big-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.small-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+}
+
+/* Biểu đồ */
+.chart-placeholder {
+    height: 240px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Phong cách cho map */
+.map-placeholder {
+    height: 240px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+#export {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+

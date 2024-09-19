@@ -1,0 +1,44 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về chúng tôi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/css/User/cart.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+</head>
+
+<body>
+
+<script src="/static/js/header.js"></script>
+<script src="/static/js/footer.js"></script>
+<script src="/static/js/url.js"></script>
+<script src="/static/js/tokenUser.js"></script>
+<script src="/static/js/User/cart.js"></script>
+
+<div class="cart-container">
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <!-- Checkbox cho tiêu đề -->
+            <th style="text-align: center"><input type="checkbox" id="select-all"></th>
+            <th style="text-align: left">Sản Phẩm</th>
+            <th style="text-align: center;">Mã Sản Phẩm</th>
+            <th style="text-align: center;">Loại Hàng</th>
+            <th style="text-align: center;">Số Lượng</th>
+            <th style="text-align: center;">Xóa</th>
+        </tr>
+        </thead>
+        <tbody id="list-cart-item" class="list-cart-item">
+            <!--cartitem-->
+        </tbody>
+    </table>
+    <div class="update-cart-container">
+        <button class="update-cart-btn" onclick="updateQuantityAllCartItem()">Cập nhật giỏ hàng</button>
+    </div>
+</div>
+<!--<button class="order-btn">Đặt hàng</button>-->
+<a href="#" class="order-btn">Đặt hàng</a>
+</body>
+</html>

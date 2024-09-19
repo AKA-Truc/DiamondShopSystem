@@ -1,0 +1,182 @@
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+}
+
+ .logo1 img {
+    width: 400px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.highlight {
+    color: red;
+    font-weight: bold;
+}
+
+button {
+    background-color: #ccc;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #bbb;
+}
+
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 20px;
+}
+
+.contact {
+    color: #d78a29;
+    font-weight: bold;
+}
+
+/* 6ly,7ly */
+.buttons {
+    margin: 20px 0;
+}
+
+.diamond-btn {
+    background-color: #ffecd0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.diamond-btn:hover {
+    background-color: #ffc107;
+}
+
+#diamond-info {
+    margin-top: 30px;
+}
+
+#diamond-info h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.wpb_wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.wpb_wrapper p {
+    padding-left: 40px;
+}
+
+.wpb_wrapper p strong {
+    font-weight: bold;
+}
+
+.wpb_wrapper p span {
+    font-weight: normal;
+}
+
+
+.wpb_wrapper ul {
+    list-style-type: none;
+    padding-left: 40px;
+}
+
+.wpb_wrapper ul li {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+
+.wpb_wrapper img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+}
+
+
+.wpb_wrapper a {
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.wpb_wrapper a:hover {
+    text-decoration: underline;
+}
+
+
+.wpb_wrapper span[style*="color: #ff0000;"] {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.wpb_wrapper p[style*="font-weight: 400;"] {
+    font-weight: normal;
+    padding-left: 40px;
+}
+
+.wpb_wrapper .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .wpb_wrapper {
+        padding: 10px;
+    }
+
+    .wpb_wrapper p {
+        padding-left: 20px;
+    }
+
+    .wpb_wrapper ul {
+        padding-left: 20px;
+    }
+}

@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.registration-container {
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 2px 2px 190px rgba(0, 0, 0, 0.1);
+}
+
+
+.btn-register {
+    background-color: #1a5393;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.btn-register:hover {
+    background-color: #8597b1;
+}
+
+.registration-container h2 {
+    text-align: left;
+    color: #1a5393;
+    margin-bottom: 40px;
+    margin-left:20px;
+}
+.registration-container form{
+    width: 80%;
+    margin-left: 50px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+.form-group1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Khoảng cách giữa các trường */
+    margin-bottom: 15px;
+}
+
+.form-group1 .name,
+.form-group1 .gioitinh {
+    width: 48%; /* Chia đều không gian giữa các input */
+}
+
+.form-group1 label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group1 input[type="text"],
+.form-group1 select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.required {
+    color: red;
+}
+
+input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+/**/
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #333;
+    outline: none;
+}

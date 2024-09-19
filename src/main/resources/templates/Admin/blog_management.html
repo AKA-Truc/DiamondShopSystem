@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý bài viết</title>
+    <link rel="stylesheet" href="/static/css/Admin/blog_management.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+</head>
+
+<body>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/navbar.js"></script>
+<script src="/static/js/tokenAdmin.js"></script>
+<script src="/static/js/tokenDelivery.js"></script>
+
+
+<div class="main-content">
+    <div class="blog-management">
+        <button class="add-blog-btn" id="openpopup1">
+            Thêm Bài Viết Mới <i class="fas fa-plus"></i>
+        </button>
+
+        <input type="text" placeholder="Nhập tiêu đề bài viết để tìm kiếm..." class="search-bar">
+
+        <div class="table-wrapper" >
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                <tr>
+                    <th >STT</th>
+                    <th >Tiêu đề</th>
+                    <th >Nội dung</th>
+                    <th style=" text-align: center;">Lựa Chọn</th>
+                </tr>
+                </thead>
+                <tbody id="blog-table-body">
+                <!-- Dữ liệu khách hàng sẽ được thêm bằng JavaScript -->
+                </tbody>
+            </table>
+
+            <div id="popup" class="popup-overlay">
+                <div class="popup-content">
+                    <p>Are you sure you want to delete this post?</p>
+                    <button id="yes-btn" class="popup-btn">Yes</button>
+                    <button id="no-btn" class="popup-btn">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup1-overlay" id="popup1Overlay">
+    <div class="popup1-content">
+        <span class="popup1-close" id="closepopup1">&times;</span>
+        <div class="wrapper" id = "addUser">
+            <form id="blog-form" enctype="multipart/form-data">
+                <div class="top-fields">
+                    <div class="field input">
+                        <label for="Title">Tiêu Đề</label>
+                        <input type="text" id="Title" name="Title" placeholder="Vui lòng nhập tiêu đề" required>
+                    </div>
+                </div>
+
+                <div class="field input">
+                    <label for="image">Tải Ảnh</label>
+                    <input type="file" id="image" accept="image/*">
+                </div>
+
+                <div class="field input">
+                    <label for="content">Nội Dung</label>
+                    <textarea id="content" name="content" placeholder="Nhập nội dung" required
+                        style="text-align: start; width: 100%; height: 200px; padding: 10px; font-size: 16px; resize: vertical; box-sizing: border-box;"></textarea>
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Lưu" class="save" id="saveButton">
+                    <input type="button" value="Hủy" class="cancel" id="cancelButton">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/url.js"></script>
+<script src="/static/js/Admin/blog_management.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

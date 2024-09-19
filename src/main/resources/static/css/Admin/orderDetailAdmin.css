@@ -1,0 +1,309 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+}
+.sidebar {
+    height: 100%;
+    width: 280px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+}
+
+/* Tiêu đề sidebar */
+.sidebar h2 {
+    color: #0d0e1c;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar ul li a ion-icon{
+    font-size: 26px;
+    color: #141E0C;
+}
+
+/* Menu chính - Loại bỏ bullet */
+.main-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.main-menu li a {
+    font-size: 16px;
+    display: block;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: #000000;
+    transition: background-color 0.3s ease;
+    line-height: 1.5px;
+}
+
+.main-menu li a:hover {
+    background-color: #cbd0dd;
+}
+
+/* Submenu sổ xuống */
+.submenu {
+    position: relative;
+    display: block;
+}
+
+.submenu ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ebf0f8;
+    list-style-type: none;
+    padding: 0;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    z-index: 1000;
+}
+
+.submenu:hover ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Submenu link */
+.submenu ul li a {
+    padding: 15px 25px;
+    color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.submenu ul li a:hover {
+    background-color: #cbd0dd;
+}
+
+ion-icon {
+    font-size: 20px;
+    line-height: 1.5px;
+    vertical-align: middle;
+}
+
+.navbar {
+    margin-left: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 58px;
+    color: #000000;
+    background-color: #f4f7fb;
+    padding: 0 20px;
+}
+
+.navbar__info {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #000000;
+}
+
+.navbar__cta {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.navbar__background-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+.navbar__hello {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.navbar__show {
+    cursor: pointer;
+}
+
+.navbar-separator {
+    width: calc(100% - 280px);
+    margin-left: 280px;
+    height: 1px;
+    background-color: #162165e7;
+}
+
+/* Container to hold address and phone fields */
+.form-details-box {
+    background-color: #ffffff; /* White background for the box */
+    border: 1px solid #dee2e6; /* Light border */
+    border-radius: 8px; /* Rounded corners for the box */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow to create a "lifted" effect */
+    margin-bottom: 20px; /* Space below the box */
+}
+
+/* General form-group styling */
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+/* Label styling inside form-item */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Input field styling inside form-item */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #eef5ff;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    cursor: not-allowed; /* Indicate the input is disabled */
+}
+
+/* Existing styles for other elements */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+#item-count {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.card-text {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #34495e;
+}
+
+.img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #eef5ff;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3e50;
+    background-color: #ecf0f1;
+}
+
+.text {
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    padding-top: 20px;
+    text-align: right;
+}
+
+#totalPrice {
+    font-size: 20px;
+    color: #d9534f;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .col-md-4, .col-md-8 {
+        width: 100%;
+    }
+
+    .img-fluid {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 0;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: right;
+    gap: 10px; /* Space between buttons */
+}
+
+.button-container .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-container .btn-success {
+    background-color: #0e4163;
+    color: white;
+}
+
+.button-container .btn-success:hover {
+    background-color: #11537a;
+}
+
+.button-container .btn-danger {
+    background-color: #d2ebff;
+    color: #092d43;
+}
+
+.button-container .btn-danger:hover {
+    background-color: #a9d2f1;
+}

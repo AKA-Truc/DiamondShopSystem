@@ -1,0 +1,131 @@
+
+.wrapper {
+    position: relative;
+    text-align: left;
+    margin-top: 45px;
+    margin-bottom: 45px;
+    z-index: 1;
+}
+
+.headline img {
+    width: 100%; /* Thu nhỏ chiều rộng xuống 80% của container */
+    height: auto; /* Đảm bảo tỉ lệ khung hình của ảnh */
+    margin: 0 auto; /* Căn giữa ảnh trong container */
+    display: block; /* Đảm bảo ảnh là khối và margin auto hoạt động */
+}
+
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.contact-form, .contact-info {
+    width: 40%;
+}
+
+.contact-form h3, .contact-info h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.contact-form .form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.contact-form .form-group input[type="text"],
+.contact-form .form-group input[type="email"],
+.contact-form .form-group textarea {
+    width: calc(50% - 10px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f0e7e7;
+}
+
+.contact-form .form-group textarea {
+    width: 100%;
+    height: 80px;
+    resize: none;
+}
+
+.contact-form .form-group button {
+    width: 25%;
+    padding: 10px;
+    background-color: #b07030;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.contact-form .form-group button:hover {
+    background-color: #8a5525;
+}
+.contact-info .top{
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-info {
+    font-family: Arial, sans-serif;
+}
+
+.contact-info h3 {
+    margin-bottom: 55px;
+    font-size: 24px;
+}
+
+.contact-info .top,
+.contact-info .last {
+    display: flex;
+
+    margin-bottom: 50px;
+}
+
+.contact-info .top p,
+.contact-info .last p {
+    margin: 0;
+    flex: 1;
+    padding-right: 10px;
+}
+
+.contact-info .top p:first-child,
+.contact-info .last p:first-child {
+    margin-right: 20px;
+}
+
+.contact-info .top p i,
+.contact-info .last p i {
+    margin-right: 10px;
+}
+
+.contact-info .top p br,
+.contact-info .last p br {
+    display: none; /* Removes the line break to keep content on one line */
+}
+
+.map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.map-container iframe {
+    width: 100%; /* Hoặc tùy chỉnh theo ý bạn */
+    max-width: 600px; /* Tùy chỉnh */
+    height: 450px; /* Tùy chỉnh */
+    border: 1px solid #ddd; /* Tùy chỉnh */
+}
