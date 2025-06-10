@@ -1,6 +1,12 @@
 package goldiounes.com.vn.responses;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class ResponseWrapper<T> {
+    // Getters and setters
     private String message;
     private T data;
 
@@ -9,20 +15,4 @@ public class ResponseWrapper<T> {
         this.data = data;
     }
 
-    // Getters and setters
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }
